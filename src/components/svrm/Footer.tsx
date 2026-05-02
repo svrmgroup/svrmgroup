@@ -1,9 +1,11 @@
+import Wordmark from "./Wordmark";
+
 const Footer = () => (
   <footer className="bg-background border-t border-border/60">
     <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-4 gap-10">
       <div className="md:col-span-2">
-        <p className="font-serif text-3xl tracking-[0.4em] text-gold">SVRM</p>
-        <p className="mt-4 text-muted-foreground text-sm max-w-sm leading-relaxed">
+        <Wordmark size="lg" />
+        <p className="mt-6 text-muted-foreground text-sm max-w-sm leading-relaxed">
           A lifestyle management service for those who would rather live the moment than
           arrange it. Cape Town — and wherever you are next.
         </p>
