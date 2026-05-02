@@ -9,18 +9,7 @@ import Footer from "@/components/svrm/Footer";
 
 const Index = () => {
   return (
-    <>
-      {/* SEO */}
-      <head>
-        <title>SVRM — Lifestyle Management in Cape Town</title>
-        <meta
-          name="description"
-          content="SVRM is a Cape Town lifestyle management service curating tours, chauffeured transport, and accommodation — and anything else life requires."
-        />
-        <link rel="canonical" href="/" />
-      </head>
-
-      <main className="bg-background text-foreground">
+    <main className="bg-background text-foreground">
         <Nav />
         <Hero />
         <Promise />
@@ -28,9 +17,8 @@ const Index = () => {
         <Bespoke />
         <Testimonials />
         <ClosingCTA />
-        <Footer />
-      </main>
-    </>
+      <Footer />
+    </main>
   );
 };
 
