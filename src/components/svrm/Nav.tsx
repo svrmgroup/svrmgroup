@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Wordmark from "./Wordmark";
 
 const Nav = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -17,8 +18,8 @@ const Nav = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-10 h-20">
-        <a href="#top" className="font-serif text-2xl tracking-[0.4em] text-gold">
-          SVRM
+        <a href="#top" aria-label="SVRM home" className="block">
+          <Wordmark />
         </a>
         <a
           href="#enquire"

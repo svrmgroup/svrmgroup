@@ -8,47 +8,47 @@
 
 @layer base {
   :root {
-    /* Core — deep charcoal canvas */
-    --background: 30 8% 6%;
-    --foreground: 36 25% 92%;
+    /* Core — warm graphite canvas */
+    --background: 32 10% 12%;
+    --foreground: 36 22% 94%;
 
-    --card: 30 8% 8%;
-    --card-foreground: 36 25% 92%;
+    --card: 32 10% 14%;
+    --card-foreground: 36 22% 94%;
 
-    --popover: 30 8% 8%;
-    --popover-foreground: 36 25% 92%;
+    --popover: 32 10% 14%;
+    --popover-foreground: 36 22% 94%;
 
-    /* Primary — brushed gold */
-    --primary: 40 55% 60%;
-    --primary-foreground: 30 10% 8%;
-    --primary-glow: 42 70% 70%;
+    /* Primary — soft champagne gold */
+    --primary: 40 48% 66%;
+    --primary-foreground: 32 12% 12%;
+    --primary-glow: 42 55% 78%;
 
-    --secondary: 30 8% 12%;
-    --secondary-foreground: 36 25% 92%;
+    --secondary: 32 9% 18%;
+    --secondary-foreground: 36 22% 94%;
 
-    --muted: 30 6% 14%;
-    --muted-foreground: 36 12% 65%;
+    --muted: 32 8% 20%;
+    --muted-foreground: 36 14% 72%;
 
-    --accent: 40 55% 60%;
-    --accent-foreground: 30 10% 8%;
+    --accent: 40 48% 66%;
+    --accent-foreground: 32 12% 12%;
 
     --destructive: 0 70% 45%;
-    --destructive-foreground: 36 25% 92%;
+    --destructive-foreground: 36 22% 94%;
 
-    --border: 36 12% 18%;
-    --input: 36 12% 18%;
-    --ring: 40 55% 60%;
+    --border: 36 14% 26%;
+    --input: 36 14% 26%;
+    --ring: 40 48% 66%;
 
     --radius: 0.25rem;
 
     /* Surfaces */
-    --surface-deep: 30 10% 4%;
-    --surface-raised: 30 8% 10%;
+    --surface-deep: 32 10% 9%;
+    --surface-raised: 32 9% 16%;
 
     /* Gradients */
-    --gradient-hero-overlay: linear-gradient(180deg, hsl(30 10% 4% / 0.55) 0%, hsl(30 10% 4% / 0.35) 45%, hsl(30 10% 4% / 0.85) 100%);
-    --gradient-gold: linear-gradient(135deg, hsl(40 55% 60%) 0%, hsl(42 70% 70%) 100%);
-    --gradient-band: linear-gradient(180deg, hsl(30 10% 4%) 0%, hsl(30 8% 7%) 100%);
+    --gradient-hero-overlay: linear-gradient(180deg, hsl(32 10% 9% / 0.4) 0%, hsl(32 10% 9% / 0.2) 45%, hsl(32 10% 9% / 0.7) 100%);
+    --gradient-gold: linear-gradient(135deg, hsl(40 48% 66%) 0%, hsl(42 55% 78%) 100%);
+    --gradient-band: linear-gradient(180deg, hsl(32 10% 9%) 0%, hsl(32 9% 13%) 100%);
 
     /* Shadows */
     --shadow-gold: 0 20px 60px -20px hsl(40 55% 60% / 0.35);
