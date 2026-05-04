@@ -50,10 +50,10 @@ const Hero = () => {
         </h1>
 
         <p
-          className="mt-8 max-w-xl text-base md:text-lg text-muted-foreground font-light animate-fade-up"
+          className="mt-8 max-w-xl text-base md:text-lg text-muted-foreground font-light animate-fade-up font-mono"
           style={{ animationDelay: "0.55s" }}
         >
-          Experiences, transport, and stays — precisely arranged.
+          Experiences, uniquely curated for you — precisely arranged.
         </p>
 
         <div
