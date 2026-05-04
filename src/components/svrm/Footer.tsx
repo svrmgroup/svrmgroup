@@ -1,4 +1,13 @@
+import { Link } from "react-router-dom";
 import Wordmark from "./Wordmark";
+import { buildWhatsAppUrl, WHATSAPP_NUMBER } from "@/lib/whatsapp";
+
+const navLinks = [
+  { to: "/services", label: "Services" },
+  { to: "/business", label: "Business" },
+  { to: "/concierge", label: "Concierge" },
+  { to: "/about", label: "About" },
+];
 
 const Footer = () => (
   <footer className="bg-background border-t border-border/60">
@@ -11,15 +20,31 @@ const Footer = () => (
         </p>
       </div>
       <div>
-        <p className="eyebrow">Contact</p>
+        <p className="eyebrow">Explore</p>
         <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-          <li><a href="mailto:concierge@svrm.co.za" className="hover:text-gold transition-colors">concierge@svrm.co.za</a></li>
-          <li><a href="https://wa.me/27000000000" className="hover:text-gold transition-colors">WhatsApp concierge</a></li>
+          {navLinks.map((l) => (
+            <li key={l.to}>
+              <Link to={l.to} className="hover:text-gold transition-colors">{l.label}</Link>
+            </li>
+          ))}
         </ul>
       </div>
       <div>
-        <p className="eyebrow">Based in</p>
-        <p className="mt-4 text-sm text-muted-foreground">Cape Town<br />South Africa</p>
+        <p className="eyebrow">Contact</p>
+        <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
+          <li><a href="mailto:concierge@svrm.co.za" className="hover:text-gold transition-colors">concierge@svrm.co.za</a></li>
+          <li>
+            <a
+              href={buildWhatsAppUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-gold transition-colors"
+            >
+              WhatsApp concierge
+            </a>
+          </li>
+          <li className="text-muted-foreground/70">Cape Town, South Africa</li>
+        </ul>
       </div>
     </div>
     <div className="border-t border-border/60">

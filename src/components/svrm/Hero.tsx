@@ -1,4 +1,6 @@
+import { Link } from "react-router-dom";
 import heroPoster from "@/assets/hero-poster.jpg";
+import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
 const Hero = () => {
   return (
@@ -61,17 +63,19 @@ const Hero = () => {
           style={{ animationDelay: "0.8s" }}
         >
           <a
-            href="#enquire"
+            href={buildWhatsAppUrl()}
+            target="_blank"
+            rel="noopener noreferrer"
             className="px-8 py-4 bg-primary text-primary-foreground text-xs uppercase tracking-[0.28em] font-medium hover:bg-primary-glow transition-colors duration-500 shadow-[var(--shadow-gold)]"
           >
             Make an enquiry
           </a>
-          <a
-            href="#services"
+          <Link
+            to="/services"
             className="px-8 py-4 border border-primary/70 text-gold text-xs uppercase tracking-[0.28em] font-medium hover:bg-primary hover:text-primary-foreground transition-colors duration-500"
           >
             Explore services
-          </a>
+          </Link>
         </div>
       </div>
 
