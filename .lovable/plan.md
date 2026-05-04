@@ -1,57 +1,107 @@
-## Refinements — lighter palette + new SVRM mark
+## Goal
 
-Two goals: make the site feel less "AI-default dark template" and refine the brand mark per your direction.
+Expand SVRM from a single homepage into a small multi-page site with proper navigation, a tabbed Services hub, individual service detail pages, and an editorial structure for Business, Concierge, and About — all wired to a single WhatsApp booking handler.
 
-### 1. SVRM wordmark — new treatment
-
-Applied in both `Nav.tsx` (top-left) and `Footer.tsx`.
-
-- Letters **SVRM** in pure off-white (not gold), keep the wide serif letter-spacing
-- Directly below the wordmark: a short horizontal **gold line that tapers to a sharp point** on the right (and softens on the left), roughly the width of the letter "S"
-- Built with a thin SVG (or a styled div using a gradient that fades to 100% opacity then ends at a clipped triangular tip) so the end is genuinely sharp, not just a fade
-- Sits centered under the wordmark with tight spacing (~4px gap)
+## Routes
 
 ```text
-  S V R M
-  ──────▶   (gold, thin, sharp tip)
+/                           Homepage (existing)
+/services                   Services hub (4 tabs)
+/services/:category/:slug   Service detail page
+/business                   Business page (placeholder copy)
+/concierge                  Concierge page (placeholder copy)
+/about                      About page (placeholder copy)
 ```
 
-### 2. Lighter, less "AI-dark" palette
+`App.tsx` gets new routes above the catch-all.
 
-Currently the background is almost pure black (`30 8% 6%`), which reads as the default Lovable dark template. We'll lift it to a warm, deep stone — still luxurious, but with daylight in it.
+## Navigation
 
-Token changes in `src/index.css`:
+Update `Nav.tsx`:
+- Replace the single anchor link with primary nav: Services · Business · Concierge · About
+- Keep the gold "Enquire" button on the right (now opens WhatsApp)
+- Mobile: collapse links into a hamburger sheet (using existing shadcn `Sheet`)
+- Active route gets a thin gold underline
+- Logo links to `/`
 
-| Token | Before | After |
-|---|---|---|
-| `--background` | `30 8% 6%` (near black) | `32 10% 12%` (warm graphite) |
-| `--surface-deep` | `30 10% 4%` | `32 10% 9%` |
-| `--surface-raised` | `30 8% 10%` | `32 9% 16%` |
-| `--card` | `30 8% 8%` | `32 10% 14%` |
-| `--muted` | `30 6% 14%` | `32 8% 20%` |
-| `--border` | `36 12% 18%` | `36 14% 26%` (more visible, softer) |
-| `--foreground` | `36 25% 92%` | `36 22% 94%` (slightly warmer white) |
-| `--muted-foreground` | `36 12% 65%` | `36 14% 72%` (more readable) |
-| `--primary` (gold) | `40 55% 60%` | `40 48% 66%` (softer champagne gold, less neon) |
-| `--primary-glow` | `42 70% 70%` | `42 55% 78%` |
+`Footer.tsx` mirrors the same links.
 
-Hero overlay also lightened so the video shows through more:
-- `--gradient-hero-overlay` top stop `0.55 → 0.4`, mid `0.35 → 0.2`, bottom `0.85 → 0.7`
+## Services hub (`/services`)
 
-Result: warmer, lighter, more editorial — closer to a hospitality brand site than a default dark dashboard.
+Layout:
+1. Slim hero — eyebrow "Our world", serif headline, gold divider
+2. Tab bar (4 tabs): **Lifestyle**, **Transport**, **Stays**, **Experiences**
+   - Built with shadcn `Tabs`, restyled to fit the dark/gold system (uppercase, letter-spaced labels, gold underline on active)
+   - Selected tab is reflected in the URL via `?tab=transport` so tabs are linkable
+3. For each active tab, render a grid of service cards **side-by-side** with images:
+   - 2 columns on desktop, 1 on mobile
+   - Each card: landscape image left / copy right (alternating on larger screens for editorial rhythm), title, one-line teaser, "Discover →"
+   - Whole card links to `/services/:category/:slug`
 
-### 3. Small de-AI touches (low risk)
+Example data shape (single source of truth in `src/data/services.ts`):
+```text
+Lifestyle: Personal Shopping, Private Chef, Wellness & Spa
+Transport: Chauffeur, Airport Transfers, Helicopter & Charter
+Stays:     Boutique Villas, Private Estates, Signature Hotels
+Experiences: Wine Routes, Yacht Days, Safari Add-ons
+```
+(Placeholder names — easy to edit later.)
 
-- Bespoke section: remove the radial gold blob background (it reads very "AI gradient"). Replace with a single thin gold hairline above the heading.
-- Slightly reduce the heaviness of section paddings on mobile so the page breathes more on your 714px viewport.
+## Service detail page (`/services/:category/:slug`)
 
-### Files touched
+Editorial layout:
+- Full-width hero image with title overlay
+- Two-column body: left = long-form description, right = sticky "What's included" + "Book on WhatsApp" gold button
+- "Related signatures" strip at the bottom linking to other services in the same tab
+- Breadcrumb back to `/services`
 
-- `src/index.css` — color tokens + hero overlay
-- `src/components/svrm/Nav.tsx` — new SVRM mark with tapered gold underline
-- `src/components/svrm/Footer.tsx` — same mark treatment
-- `src/components/svrm/Bespoke.tsx` — drop radial gradient, add hairline
+Reuses placeholder copy until real content arrives.
 
-### Out of scope
+## WhatsApp booking
 
-No structural/layout changes to Hero, Services, Testimonials or page order — only color and the wordmark.
+Single helper `src/lib/whatsapp.ts`:
+```text
+WHATSAPP_NUMBER = "27000000000"  // placeholder, swap in one place later
+buildWhatsAppUrl(serviceTitle) => https://wa.me/27000000000?text=...
+```
+
+Used by:
+- Nav "Enquire" button
+- Each service detail "Book on WhatsApp" CTA (pre-fills message: "Hi SVRM, I'd like to enquire about {service}.")
+- Homepage hero + ClosingCTA buttons (replace existing `#enquire` anchors)
+
+## Business / Concierge / About
+
+Each gets its own page component with the same shell (Nav + Footer) and a clean structural skeleton ready for your copy:
+- Hero (eyebrow, headline, divider)
+- Two or three content sections with placeholder lorem
+- Closing WhatsApp CTA
+
+Marked with a `{/* TODO: replace placeholder copy */}` comment so it's easy to find later.
+
+## Files
+
+New:
+- `src/pages/Services.tsx`
+- `src/pages/ServiceDetail.tsx`
+- `src/pages/Business.tsx`
+- `src/pages/Concierge.tsx`
+- `src/pages/About.tsx`
+- `src/data/services.ts` (categories, services, slugs, copy, image refs)
+- `src/lib/whatsapp.ts`
+- `src/components/svrm/ServicesTabs.tsx` (tab bar + grid)
+- `src/components/svrm/ServiceCard.tsx` (side-by-side image card)
+- A handful of new placeholder service images in `src/assets/` (generated to match the existing luxe palette)
+
+Edited:
+- `src/App.tsx` — register new routes
+- `src/components/svrm/Nav.tsx` — primary nav + mobile sheet, WhatsApp enquire
+- `src/components/svrm/Footer.tsx` — mirror nav links
+- `src/components/svrm/Hero.tsx`, `ClosingCTA.tsx` — point CTAs at WhatsApp helper
+- `src/components/svrm/Services.tsx` (homepage section) — keep as a 3-card teaser, "View all services" link to `/services`
+
+## Notes
+
+- Placeholder WhatsApp number lives in one constant — swap when you have the real one.
+- Business / Concierge / About ship with structural placeholder copy; send your text and I'll drop it in.
+- Tabs categories chosen: Lifestyle / Transport / Stays / Experiences.
