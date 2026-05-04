@@ -1,11 +1,12 @@
+import { Link } from "react-router-dom";
 import tours from "@/assets/service-tours.jpg";
 import chauffeur from "@/assets/service-chauffeur.jpg";
 import stays from "@/assets/service-stays.jpg";
 
 const services = [
-  { img: tours, title: "Tours", body: "Curated Cape Town and beyond — itineraries shaped to a life, not a checklist." },
-  { img: chauffeur, title: "Chauffeur", body: "Discreet, on-demand transport. Wherever the day takes you, arrive without thinking about it." },
-  { img: stays, title: "Accommodation", body: "Stays selected, not searched. Boutique villas, private estates, signature hotels." },
+  { img: tours, title: "Experiences", body: "Curated Cape Town and beyond — itineraries shaped to a life, not a checklist.", to: "/services?tab=experiences" },
+  { img: chauffeur, title: "Transport", body: "Discreet, on-demand transport. Wherever the day takes you, arrive without thinking about it.", to: "/services?tab=transport" },
+  { img: stays, title: "Stays", body: "Stays selected, not searched. Boutique villas, private estates, signature hotels.", to: "/services?tab=stays" },
 ];
 
 const Services = () => (
@@ -19,9 +20,9 @@ const Services = () => (
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10">
         {services.map((s) => (
-          <a
+          <Link
             key={s.title}
-            href="#enquire"
+            to={s.to}
             className="group block"
           >
             <div className="relative overflow-hidden aspect-[4/5] bg-surface-raised">
@@ -43,8 +44,17 @@ const Services = () => (
                 </span>
               </div>
             </div>
-          </a>
+          </Link>
         ))}
+      </div>
+
+      <div className="mt-16 text-center">
+        <Link
+          to="/services"
+          className="inline-block px-8 py-4 border border-primary/70 text-gold text-xs uppercase tracking-[0.28em] font-medium hover:bg-primary hover:text-primary-foreground transition-colors duration-500"
+        >
+          View all services
+        </Link>
       </div>
     </div>
   </section>
