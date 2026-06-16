@@ -1,28 +1,34 @@
 import { Link } from "react-router-dom";
-import Wordmark from "./Wordmark";
-import { buildWhatsAppUrl, WHATSAPP_NUMBER } from "@/lib/whatsapp";
+import Logo from "./Logo";
+import { buildWhatsAppUrl, CONCIERGE_EMAIL } from "@/lib/whatsapp";
 
-const navLinks = [
-  { to: "/services", label: "Services" },
-  { to: "/business", label: "Business" },
-  { to: "/concierge", label: "Concierge" },
-  { to: "/about", label: "About" },
+const explore = [
+  { to: "/travel", label: "Travel" },
+  { to: "/lifestyle", label: "Lifestyle" },
+  { to: "/stays", label: "Stays & Residences" },
+  { to: "/tours", label: "Tours" },
+  { to: "/experiences", label: "Custom Experiences" },
+  { to: "/blog", label: "Journal" },
+  { to: "/contact", label: "Contact" },
 ];
 
 const Footer = () => (
   <footer className="bg-background border-t border-border/60">
     <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-4 gap-10">
       <div className="md:col-span-2">
-        <Wordmark size="lg" />
+        <div className="flex items-center gap-4">
+          <Logo size="md" />
+          <span className="font-serif text-2xl text-foreground tracking-wide">SVRM Group</span>
+        </div>
         <p className="mt-6 text-muted-foreground text-sm max-w-sm leading-relaxed">
-          A lifestyle management service for those who would rather live the moment than
-          arrange it. Cape Town — and wherever you are next.
+          Curated luxury across South Africa. Lifestyle management for those who would rather
+          live the moment than arrange it.
         </p>
       </div>
       <div>
         <p className="eyebrow">Explore</p>
         <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-          {navLinks.map((l) => (
+          {explore.map((l) => (
             <li key={l.to}>
               <Link to={l.to} className="hover:text-gold transition-colors">{l.label}</Link>
             </li>
@@ -30,9 +36,13 @@ const Footer = () => (
         </ul>
       </div>
       <div>
-        <p className="eyebrow">Contact</p>
+        <p className="eyebrow">Concierge</p>
         <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-          <li><a href="mailto:concierge@svrm.co.za" className="hover:text-gold transition-colors">concierge@svrm.co.za</a></li>
+          <li>
+            <a href={`mailto:${CONCIERGE_EMAIL}`} className="hover:text-gold transition-colors break-all">
+              {CONCIERGE_EMAIL}
+            </a>
+          </li>
           <li>
             <a
               href={buildWhatsAppUrl()}
@@ -40,7 +50,7 @@ const Footer = () => (
               rel="noopener noreferrer"
               className="hover:text-gold transition-colors"
             >
-              WhatsApp concierge
+              WhatsApp the concierge
             </a>
           </li>
           <li className="text-muted-foreground/70">Cape Town, South Africa</li>
@@ -48,8 +58,8 @@ const Footer = () => (
       </div>
     </div>
     <div className="border-t border-border/60">
-      <div className="max-w-7xl mx-auto px-6 py-6 text-xs uppercase tracking-[0.28em] text-muted-foreground/70 flex justify-between">
-        <span>© {new Date().getFullYear()} SVRM</span>
+      <div className="max-w-7xl mx-auto px-6 py-6 text-xs uppercase tracking-[0.28em] text-muted-foreground/70 flex flex-col sm:flex-row gap-2 justify-between">
+        <span>© {new Date().getFullYear()} SVRM Group</span>
         <span className="text-gold/60">Curated, without compromise.</span>
       </div>
     </div>

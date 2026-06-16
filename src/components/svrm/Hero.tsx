@@ -8,7 +8,6 @@ const Hero = () => {
       id="top"
       className="relative h-screen min-h-[640px] w-full overflow-hidden bg-surface-deep"
     >
-      {/* Background video with poster fallback */}
       <video
         className="absolute inset-0 w-full h-full object-cover motion-reduce:hidden"
         autoPlay
@@ -31,14 +30,12 @@ const Hero = () => {
         className="absolute inset-0 w-full h-full object-cover hidden motion-reduce:block"
       />
 
-      {/* Gradient overlay */}
       <div
         className="absolute inset-0"
         style={{ background: "var(--gradient-hero-overlay)" }}
         aria-hidden="true"
       />
 
-      {/* Content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
         <p className="eyebrow animate-fade-up" style={{ animationDelay: "0.1s" }}>
           Cape Town · Lifestyle Management
@@ -48,14 +45,14 @@ const Hero = () => {
           className="font-serif text-foreground mt-8 text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.05] max-w-5xl animate-fade-up"
           style={{ animationDelay: "0.3s" }}
         >
-          Curated, without compromise.
+          Curated luxury across South Africa.
         </h1>
 
         <p
           className="mt-8 max-w-xl text-base md:text-lg text-muted-foreground font-light animate-fade-up font-mono"
           style={{ animationDelay: "0.55s" }}
         >
-          Experiences, uniquely curated for you — precisely arranged.
+          Your life, precisely arranged.
         </p>
 
         <div
@@ -63,23 +60,20 @@ const Hero = () => {
           style={{ animationDelay: "0.8s" }}
         >
           <a
-            href={buildWhatsAppUrl()}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#services"
             className="px-8 py-4 bg-primary text-primary-foreground text-xs uppercase tracking-[0.28em] font-medium hover:bg-primary-glow transition-colors duration-500 shadow-[var(--shadow-gold)]"
           >
-            Make an enquiry
+            Discover SVRM
           </a>
           <Link
-            to="/services"
+            to="/contact"
             className="px-8 py-4 border border-primary/70 text-gold text-xs uppercase tracking-[0.28em] font-medium hover:bg-primary hover:text-primary-foreground transition-colors duration-500"
           >
-            Explore services
+            Enquire
           </Link>
         </div>
       </div>
 
-      {/* Scroll cue */}
       <div className="absolute bottom-10 inset-x-0 flex justify-center z-10" aria-hidden="true">
         <div className="w-px h-12 bg-gradient-to-b from-transparent via-primary/60 to-transparent" />
       </div>

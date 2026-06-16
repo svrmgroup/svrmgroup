@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
 const ClosingCTA = () => (
@@ -11,14 +12,22 @@ const ClosingCTA = () => (
         From a single transfer to a complete itinerary — share what you have in mind and we
         will respond, personally, within hours.
       </p>
-      <a
-        href={buildWhatsAppUrl()}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-block mt-12 px-10 py-5 bg-primary text-primary-foreground text-xs uppercase tracking-[0.32em] font-medium hover:bg-primary-glow transition-colors duration-500 shadow-[var(--shadow-gold)]"
-      >
-        Begin on WhatsApp
-      </a>
+      <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href={buildWhatsAppUrl()}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="px-10 py-5 bg-primary text-primary-foreground text-xs uppercase tracking-[0.32em] font-medium hover:bg-primary-glow transition-colors duration-500 shadow-[var(--shadow-gold)]"
+        >
+          Begin on WhatsApp
+        </a>
+        <Link
+          to="/contact"
+          className="px-10 py-5 border border-primary/60 text-gold text-xs uppercase tracking-[0.32em] hover:bg-primary hover:text-primary-foreground transition-colors duration-500"
+        >
+          Send an enquiry
+        </Link>
+      </div>
     </div>
   </section>
 );
