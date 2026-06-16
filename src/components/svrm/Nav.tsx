@@ -1,19 +1,23 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Menu } from "lucide-react";
-import Wordmark from "./Wordmark";
+import Logo from "./Logo";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
 const links = [
-  { to: "/services", label: "Services" },
-  { to: "/business", label: "Business" },
-  { to: "/concierge", label: "Concierge" },
-  { to: "/about", label: "About" },
+  { to: "/", label: "Home" },
+  { to: "/travel", label: "Travel" },
+  { to: "/lifestyle", label: "Lifestyle" },
+  { to: "/stays", label: "Stays" },
+  { to: "/tours", label: "Tours" },
+  { to: "/experiences", label: "Custom" },
+  { to: "/blog", label: "Journal" },
+  { to: "/contact", label: "Contact" },
 ];
 
 const linkClass = ({ isActive }: { isActive: boolean }) =>
-  `text-xs uppercase tracking-[0.28em] transition-colors duration-300 pb-1 border-b ${
+  `text-[11px] uppercase tracking-[0.24em] transition-colors duration-300 pb-1 border-b ${
     isActive
       ? "text-foreground border-primary"
       : "text-muted-foreground border-transparent hover:text-foreground"
@@ -33,18 +37,18 @@ const Nav = () => {
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-[background,backdrop-filter,border-color] duration-500 ${
         scrolled
-          ? "bg-surface-deep/80 backdrop-blur-md border-b border-border/60"
+          ? "bg-surface-deep/85 backdrop-blur-md border-b border-border/60"
           : "bg-transparent border-b border-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 lg:px-10 h-20">
         <Link to="/" aria-label="SVRM home" className="block">
-          <Wordmark />
+          <Logo size="sm" />
         </Link>
 
-        <nav className="hidden md:flex items-center gap-10">
+        <nav className="hidden lg:flex items-center gap-7">
           {links.map((l) => (
-            <NavLink key={l.to} to={l.to} className={linkClass} end>
+            <NavLink key={l.to} to={l.to} className={linkClass} end={l.to === "/"}>
               {l.label}
             </NavLink>
           ))}
@@ -55,7 +59,7 @@ const Nav = () => {
             href={buildWhatsAppUrl()}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden sm:inline-block text-xs uppercase tracking-[0.28em] text-gold border border-primary/60 px-5 py-3 hover:bg-primary hover:text-primary-foreground transition-colors duration-500"
+            className="hidden sm:inline-block text-[11px] uppercase tracking-[0.28em] text-gold border border-primary/60 px-4 py-2.5 hover:bg-primary hover:text-primary-foreground transition-colors duration-500"
           >
             Enquire
           </a>
@@ -63,14 +67,18 @@ const Nav = () => {
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
               <button
-                className="md:hidden p-2 text-foreground"
+                className="lg:hidden p-2 text-foreground"
                 aria-label="Open menu"
               >
                 <Menu className="h-5 w-5" />
               </button>
             </SheetTrigger>
-            <SheetContent side="right" className="bg-surface-deep border-l border-border/60 w-72">
-              <div className="mt-12 flex flex-col gap-8">
+            <SheetContent side="right" className="bg-surface-deep border-l border-border/60 w-80">
+              <div className="flex items-center gap-4 mt-2">
+                <Logo size="sm" />
+                <span className="font-serif text-xl text-foreground">SVRM Group</span>
+              </div>
+              <div className="mt-12 flex flex-col gap-7">
                 {links.map((l) => (
                   <NavLink
                     key={l.to}
@@ -81,7 +89,7 @@ const Nav = () => {
                         isActive ? "text-gold" : "text-foreground"
                       }`
                     }
-                    end
+                    end={l.to === "/"}
                   >
                     {l.label}
                   </NavLink>
@@ -92,7 +100,7 @@ const Nav = () => {
                   rel="noopener noreferrer"
                   className="mt-4 text-center text-xs uppercase tracking-[0.28em] text-primary-foreground bg-primary px-5 py-4"
                 >
-                  Enquire
+                  Enquire on WhatsApp
                 </a>
               </div>
             </SheetContent>
