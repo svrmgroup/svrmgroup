@@ -1,107 +1,78 @@
-## Goal
+# SVRM Full Restructure
 
-Expand SVRM from a single homepage into a small multi-page site with proper navigation, a tabbed Services hub, individual service detail pages, and an editorial structure for Business, Concierge, and About — all wired to a single WhatsApp booking handler.
+## New IA & Routes
+- `/` Home — hero video, intro, 5 featured service cards, testimonials
+- `/travel` — Chauffeuring & Car Rentals, Private Jets & Helicopters, Luxury Car Rentals (sectioned, anchored)
+- `/lifestyle` — Yachting & day charters + add-ons
+- `/stays` — Short-Stay, Long-Term, Buy & Sell (renamed from Properties)
+- `/tours` — hub with 5 subpages:
+  - `/tours/safari` (3/5/7/14-day pricing)
+  - `/tours/hunting` (7-day pkg)
+  - `/tours/cultural` (3/5/7-day)
+  - `/tours/adventure` (3/5/7-day)
+  - `/tours/builder` — **interactive visual picker** with live USD estimate
+- `/experiences` — Custom Experiences + enquiry form
+- `/blog` — hub with placeholder posts + category filter
+- `/contact` — form, email, WhatsApp
 
-## Routes
+Old `/services`, `/services/:cat/:slug`, `/business`, `/concierge`, `/about` routes are removed (Concierge messaging folds into Home + Contact; About folds into Home intro). Existing service images get remapped into the new pages (transport→travel, stays→stays, experiences/wine/safari/yacht→tours/lifestyle).
 
-```text
-/                           Homepage (existing)
-/services                   Services hub (4 tabs)
-/services/:category/:slug   Service detail page
-/business                   Business page (placeholder copy)
-/concierge                  Concierge page (placeholder copy)
-/about                      About page (placeholder copy)
-```
+## Logo & Brand
+- Upload the cream-circle SVRM logo via Lovable Assets.
+- Place in `Nav` (replaces wordmark) and `Footer` (smaller). Cream circle on dark nav is accepted.
+- Keep deep-black / off-white / brushed-gold palette already in `index.css`.
 
-`App.tsx` gets new routes above the catch-all.
+## Tours Builder (`/tours/builder`)
+- Visual icon picker: activities (Safari, Cultural, Adventure, Yacht, Helicopter, Spa, Chef), duration slider (3/5/7/10/14 days), travellers (1–8), accommodation tier (Premium/Luxury/Ultra).
+- Live indicative range in USD per person computed from a transparent table:
+  - Base/day by tier (Premium 350, Luxury 650, Ultra 1100)
+  - Activity adders (Safari +400/day, Heli +900 one-off, Yacht +800 one-off, etc.)
+  - Range shown as ±15% band, with "Indicative only — every itinerary personalised" caveat.
+- CTA: "Request bespoke itinerary" → opens Enquiry form pre-filled with selections; also a WhatsApp shortcut.
 
-## Navigation
+## Enquiry System (requires Lovable Cloud)
+- Enable Cloud.
+- Table `enquiries` (id, name, email, phone, subject, message, source_page, created_at) with RLS: INSERT for `anon`, SELECT only for `service_role`. Explicit GRANTs.
+- Reusable `<EnquiryForm subject="..." />` (zod validated: name 1–100, email, phone optional, message 1–2000).
+- Every service/tour page ends with `<EnquiryForm>` + WhatsApp button.
+- `/contact` is the canonical form, shows concierge@svrm.group and WhatsApp.
+- (Email-to-concierge can be added later via Resend; this pass stores submissions in DB so nothing is lost.)
 
-Update `Nav.tsx`:
-- Replace the single anchor link with primary nav: Services · Business · Concierge · About
-- Keep the gold "Enquire" button on the right (now opens WhatsApp)
-- Mobile: collapse links into a hamburger sheet (using existing shadcn `Sheet`)
-- Active route gets a thin gold underline
-- Logo links to `/`
+## Components (new / reused)
+- `Nav` — new links: Home / Travel / Lifestyle / Stays / Tours / Experiences / Blog / Contact (collapse to drawer on mobile, 8 items is tight).
+- `Footer` — updated link columns, logo.
+- `PageHero` (reuse, exists)
+- `SectionBlock` — full-bleed image + copy block, used heavily on Travel/Stays/Lifestyle.
+- `PricingCard` — for tour packages (duration, from-price, inclusions, Enquire).
+- `EnquiryForm` — shared.
+- `TourBuilder` — the interactive picker.
+- `TestimonialsCarousel` — already partial; ensure carousel behavior.
 
-`Footer.tsx` mirrors the same links.
+## Data files
+- `src/data/tours.ts` — packages with price ranges per the brief.
+- `src/data/travel.ts`, `src/data/stays.ts`, `src/data/lifestyle.ts` — section content + images.
+- `src/data/blog.ts` — 5–6 placeholder posts.
+- `src/lib/whatsapp.ts` — keep, add `concierge@svrm.group` constant alongside.
 
-## Services hub (`/services`)
+## Imagery
+Reuse current assets where they map cleanly (chauffeur, airport, heli, villas, estate, hotel, wine→remove/replace, yacht, safari). Generate new images only where missing:
+- Travel: S-Class interior, jet exterior, luxury car lineup
+- Stays: long-term penthouse interior, Buy&Sell hero
+- Tours: cultural/Robben Island, adventure/shark cage (tasteful), hunting (landscape, no graphic content)
+- Custom Experiences hero
+- Blog cover placeholders (2–3 reused per category)
+No nightlife, no wine-focused imagery (per brief).
 
-Layout:
-1. Slim hero — eyebrow "Our world", serif headline, gold divider
-2. Tab bar (4 tabs): **Lifestyle**, **Transport**, **Stays**, **Experiences**
-   - Built with shadcn `Tabs`, restyled to fit the dark/gold system (uppercase, letter-spaced labels, gold underline on active)
-   - Selected tab is reflected in the URL via `?tab=transport` so tabs are linkable
-3. For each active tab, render a grid of service cards **side-by-side** with images:
-   - 2 columns on desktop, 1 on mobile
-   - Each card: landscape image left / copy right (alternating on larger screens for editorial rhythm), title, one-line teaser, "Discover →"
-   - Whole card links to `/services/:category/:slug`
+## Out of scope this pass
+- Google Workspace MX/DNS setup (no code change needed; instructions only at end).
+- Real email-send (Resend) — deferred; submissions land in DB and WhatsApp.
+- Real blog CMS — placeholder posts only.
 
-Example data shape (single source of truth in `src/data/services.ts`):
-```text
-Lifestyle: Personal Shopping, Private Chef, Wellness & Spa
-Transport: Chauffeur, Airport Transfers, Helicopter & Charter
-Stays:     Boutique Villas, Private Estates, Signature Hotels
-Experiences: Wine Routes, Yacht Days, Safari Add-ons
-```
-(Placeholder names — easy to edit later.)
-
-## Service detail page (`/services/:category/:slug`)
-
-Editorial layout:
-- Full-width hero image with title overlay
-- Two-column body: left = long-form description, right = sticky "What's included" + "Book on WhatsApp" gold button
-- "Related signatures" strip at the bottom linking to other services in the same tab
-- Breadcrumb back to `/services`
-
-Reuses placeholder copy until real content arrives.
-
-## WhatsApp booking
-
-Single helper `src/lib/whatsapp.ts`:
-```text
-WHATSAPP_NUMBER = "27000000000"  // placeholder, swap in one place later
-buildWhatsAppUrl(serviceTitle) => https://wa.me/27000000000?text=...
-```
-
-Used by:
-- Nav "Enquire" button
-- Each service detail "Book on WhatsApp" CTA (pre-fills message: "Hi SVRM, I'd like to enquire about {service}.")
-- Homepage hero + ClosingCTA buttons (replace existing `#enquire` anchors)
-
-## Business / Concierge / About
-
-Each gets its own page component with the same shell (Nav + Footer) and a clean structural skeleton ready for your copy:
-- Hero (eyebrow, headline, divider)
-- Two or three content sections with placeholder lorem
-- Closing WhatsApp CTA
-
-Marked with a `{/* TODO: replace placeholder copy */}` comment so it's easy to find later.
-
-## Files
-
-New:
-- `src/pages/Services.tsx`
-- `src/pages/ServiceDetail.tsx`
-- `src/pages/Business.tsx`
-- `src/pages/Concierge.tsx`
-- `src/pages/About.tsx`
-- `src/data/services.ts` (categories, services, slugs, copy, image refs)
-- `src/lib/whatsapp.ts`
-- `src/components/svrm/ServicesTabs.tsx` (tab bar + grid)
-- `src/components/svrm/ServiceCard.tsx` (side-by-side image card)
-- A handful of new placeholder service images in `src/assets/` (generated to match the existing luxe palette)
-
-Edited:
-- `src/App.tsx` — register new routes
-- `src/components/svrm/Nav.tsx` — primary nav + mobile sheet, WhatsApp enquire
-- `src/components/svrm/Footer.tsx` — mirror nav links
-- `src/components/svrm/Hero.tsx`, `ClosingCTA.tsx` — point CTAs at WhatsApp helper
-- `src/components/svrm/Services.tsx` (homepage section) — keep as a 3-card teaser, "View all services" link to `/services`
-
-## Notes
-
-- Placeholder WhatsApp number lives in one constant — swap when you have the real one.
-- Business / Concierge / About ship with structural placeholder copy; send your text and I'll drop it in.
-- Tabs categories chosen: Lifestyle / Transport / Stays / Experiences.
+## Order of execution
+1. Enable Lovable Cloud + create `enquiries` table & policies.
+2. Upload logo asset.
+3. Generate missing images (parallel).
+4. Build data files + shared components (`EnquiryForm`, `SectionBlock`, `PricingCard`, `TourBuilder`).
+5. Build pages + subpages.
+6. Update `Nav`, `Footer`, `App.tsx` routes, `Index.tsx` home composition. Delete obsolete pages/components.
+7. Verify routes load, builder math sane, form submits.
