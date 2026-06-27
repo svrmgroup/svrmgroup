@@ -28,21 +28,21 @@ export interface Vehicle {
 
 export const vehicles: Vehicle[] = [
   // Signature
-  { slug: "rolls-royce-cullinan", name: "Rolls-Royce Cullinan", tagline: "The summit of the SVRM fleet.", fromZAR: 27500, image: cullinan, tier: "Signature", selfDrive: false },
-  { slug: "rolls-royce-ghost", name: "Rolls-Royce Ghost", tagline: "Silent presence, chauffeured.", fromZAR: 25000, image: ghost, tier: "Signature", selfDrive: false },
+  { slug: "rolls-royce-cullinan", name: "Rolls-Royce Cullinan", tagline: "The summit of the SVRM fleet.", fromZAR: 57500, image: cullinan, tier: "Signature", selfDrive: false },
+  { slug: "rolls-royce-ghost", name: "Rolls-Royce Ghost", tagline: "Silent presence, chauffeured.", fromZAR: 55000, image: ghost, tier: "Signature", selfDrive: false },
   { slug: "bentley-bentayga", name: "Bentley Bentayga", tagline: "British craft, African horizon.", fromZAR: 23000, image: bentayga, tier: "Signature", selfDrive: false },
-  { slug: "lamborghini-urus", name: "Lamborghini Urus", tagline: "Performance, refined.", fromZAR: 23500, image: urus, tier: "Signature", selfDrive: true },
+  { slug: "lamborghini-urus", name: "Lamborghini Urus", tagline: "Performance, refined.", fromZAR: 33500, image: urus, tier: "Signature", selfDrive: true },
 
   // Premium SUV
-  { slug: "mercedes-amg-g63", name: "Mercedes-AMG G63", tagline: "The icon. Cape Town's roads, conquered.", fromZAR: 14500, image: g63, tier: "Premium SUV", selfDrive: true },
-  { slug: "range-rover-autobiography", name: "Range Rover Autobiography", tagline: "Quiet authority, every terrain.", fromZAR: 13500, image: rangerover, tier: "Premium SUV", selfDrive: true },
+  { slug: "mercedes-amg-g63", name: "Mercedes-AMG G63", tagline: "The icon. Cape Town's roads, conquered.", fromZAR: 21500, image: g63, tier: "Premium SUV", selfDrive: true },
+  { slug: "range-rover-autobiography", name: "Range Rover Autobiography", tagline: "Quiet authority, every terrain.", fromZAR: 20500, image: rangerover, tier: "Premium SUV", selfDrive: true },
   { slug: "range-rover-sport", name: "Range Rover Sport", tagline: "Athletic Range, dynamic stance.", fromZAR: 8500, image: rrsport, tier: "Premium SUV", selfDrive: true },
   { slug: "porsche-cayenne", name: "Porsche Cayenne", tagline: "Sport SUV with a Stuttgart accent.", fromZAR: 11500, image: cayenne, tier: "Premium SUV", selfDrive: true },
   { slug: "bmw-x5", name: "BMW X5", tagline: "Family-sized, executive-grade.", fromZAR: 8500, image: bmwx5, tier: "Premium SUV", selfDrive: true },
 
   // Executive
   { slug: "mercedes-s-class", name: "Mercedes-Benz S-Class", tagline: "The benchmark sedan, chauffeured.", fromZAR: 14000, image: sclass, tier: "Executive", selfDrive: false },
-  { slug: "bmw-7-series", name: "BMW 7 Series", tagline: "Executive transfer, understated.", fromZAR: 13500, image: bmw7, tier: "Executive", selfDrive: true },
+  { slug: "bmw-7-series", name: "BMW 7 Series", tagline: "Executive transfer, understated.", fromZAR: 20500, image: bmw7, tier: "Executive", selfDrive: true },
   { slug: "mercedes-v-class", name: "Mercedes V-Class", tagline: "Up to seven, in lounge comfort.", fromZAR: 8500, image: vclass, tier: "Executive", selfDrive: false },
 
   // Everyday / Budget
