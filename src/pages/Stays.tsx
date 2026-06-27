@@ -10,6 +10,7 @@ import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import { Seo } from "@/components/Seo";
 import { MessageCircle } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import heroVideo from "@/assets/videos/stays.mp4.asset.json";
 
 const TYPES: StayType[] = ["villa", "apartment", "hotel"];
 
@@ -46,6 +47,7 @@ const Stays = () => {
         eyebrow="Stays & Residences"
         title="Villas, apartments & hotel rooms."
         subtitle="Across Camps Bay, Clifton, Bantry Bay, V&A, Llandudno, Bishopscourt, Constantia and more — walked, vetted and run by SVRM."
+        videoSrc={heroVideo.url}
       />
 
       <section className="pb-12 md:pb-20">

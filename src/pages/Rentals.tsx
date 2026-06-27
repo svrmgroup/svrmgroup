@@ -8,6 +8,7 @@ import { vehicles, Vehicle } from "@/data/vehicles";
 import { Seo } from "@/components/Seo";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import { MessageCircle } from "lucide-react";
+import heroVideo from "@/assets/videos/rentals.mp4.asset.json";
 
 const Rentals = () => {
   const [selected, setSelected] = useState<Vehicle | null>(null);
@@ -49,6 +50,7 @@ const Rentals = () => {
         eyebrow="Car Rentals"
         title="Self-drive, on your dates."
         subtitle="Pick a vehicle, pick your dates, add what you need — we confirm availability and deliver to you."
+        videoSrc={heroVideo.url}
       />
 
       <section className="pb-24">

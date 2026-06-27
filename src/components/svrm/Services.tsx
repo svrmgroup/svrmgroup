@@ -4,12 +4,16 @@ import lifestyle from "@/assets/svc-exp-yacht.jpg";
 import stays from "@/assets/svc-stays-villa.jpg";
 import tours from "@/assets/svc-exp-safari.jpg";
 import custom from "@/assets/svc-custom.jpg";
+import rentals from "@/assets/vehicles/rangerover.jpg";
+import security from "@/assets/security/close-protection.jpg";
 
 const services = [
   { img: travel, title: "Travel", body: "Chauffeured cars, private jets and helicopters — orchestrated end to end.", to: "/travel" },
-  { img: lifestyle, title: "Lifestyle", body: "Yachting and day charters along the South African coast, in confidence.", to: "/lifestyle" },
-  { img: stays, title: "Stays & Residences", body: "Curated villas, long-term residences and luxury real estate.", to: "/stays" },
+  { img: rentals, title: "Car Rentals", body: "Self-drive the fleet — Range Rover, AMG, BMW, Mercedes. Book your dates.", to: "/rentals" },
+  { img: stays, title: "Stays & Residences", body: "Curated villas, apartments and hotel rooms across the Cape's best addresses.", to: "/stays" },
   { img: tours, title: "Tours", body: "Safari, cultural, adventure — or build your own bespoke itinerary.", to: "/tours" },
+  { img: lifestyle, title: "Lifestyle", body: "Yachting and day charters along the South African coast, in confidence.", to: "/lifestyle" },
+  { img: security, title: "Security", body: "Armoured transport, close protection and residential security. Price on request.", to: "/security" },
   { img: custom, title: "Custom Experiences", body: "Whatever life requires — beyond the categories, on request.", to: "/experiences" },
 ];
 
@@ -18,7 +22,7 @@ const Services = () => (
     <div className="max-w-7xl mx-auto px-6">
       <div className="text-center mb-20">
         <p className="eyebrow">Our signatures</p>
-        <h2 className="font-serif text-4xl md:text-6xl mt-6 text-foreground">Five disciplines.</h2>
+        <h2 className="font-serif text-4xl md:text-6xl mt-6 text-foreground">Every discipline.</h2>
         <div className="gold-divider w-16 mx-auto mt-8" />
       </div>
 
@@ -34,7 +38,7 @@ const Services = () => (
                 src={s.img}
                 alt={s.title}
                 loading="lazy"
-                className={`w-full h-full object-cover ${["kb-a","kb-b","kb-c","kb-d","kb-a"][i]}`}
+                className={`w-full h-full object-cover ${["kb-a","kb-b","kb-c","kb-d","kb-a","kb-b","kb-c"][i]}`}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-surface-deep via-surface-deep/30 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-8">
