@@ -52,7 +52,14 @@ const Stays = () => {
         videoSrc={heroVideo.url}
       />
 
-      <section className="pb-12 md:pb-20">
+      <section className="pt-10 md:pt-14">
+        <div className="max-w-7xl mx-auto px-6 space-y-6">
+          <StaySearchBar />
+          <CustomStayBar />
+        </div>
+      </section>
+
+      <section className="py-12 md:py-20">
         <div className="max-w-7xl mx-auto px-6">
           <Tabs value={tab} onValueChange={(v) => setTab(v as StayType)} className="w-full">
             <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
