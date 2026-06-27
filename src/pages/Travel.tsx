@@ -7,9 +7,11 @@ import sclass from "@/assets/svc-travel-sclass.jpg";
 import jet from "@/assets/svc-travel-jet.jpg";
 import fleet from "@/assets/svc-travel-fleet.jpg";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
+import { Seo } from "@/components/Seo";
 
 const Travel = () => (
   <main className="bg-background text-foreground min-h-screen">
+    <Seo title={"Travel — Chauffeurs, Jets & Car Hire | SVRM"} description={"Chauffeured cars, private aviation and luxury car hire — vetted, briefed and orchestrated by SVRM across Cape Town and South Africa."} path="/travel" />
     <Nav />
     <PageHero
       eyebrow="Travel"
