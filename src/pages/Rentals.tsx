@@ -20,7 +20,6 @@ const Rentals = () => {
   const [tab, setTab] = useState<TabKey>("All");
 
   const fleet = vehicles.filter((v) => v.selfDrive);
-  const visible = tab === "All" || tab === "Custom" ? fleet : fleet.filter((v) => v.tier === tab);
 
   const openSheet = (v: Vehicle) => {
     setSelected(v);
