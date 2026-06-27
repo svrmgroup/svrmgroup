@@ -17,6 +17,7 @@ import CustomExperiences from "./pages/CustomExperiences.tsx";
 import Blog from "./pages/Blog.tsx";
 import Contact from "./pages/Contact.tsx";
 import Rentals from "./pages/Rentals.tsx";
+import Security from "./pages/Security.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -33,6 +34,7 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/travel" element={<Travel />} />
             <Route path="/rentals" element={<Rentals />} />
+            <Route path="/security" element={<Security />} />
             <Route path="/lifestyle" element={<Lifestyle />} />
             <Route path="/stays" element={<Stays />} />
             <Route path="/tours" element={<Tours />} />

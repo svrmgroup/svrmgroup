@@ -12,6 +12,7 @@ const links = [
   { to: "/rentals", label: "Rentals" },
   { to: "/stays", label: "Stays" },
   { to: "/tours", label: "Tours" },
+  { to: "/security", label: "Security" },
   { to: "/experiences", label: "Custom" },
   { to: "/blog", label: "Journal" },
   { to: "/contact", label: "Contact" },
