@@ -3,6 +3,7 @@ import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
 import PricingCard from "@/components/svrm/PricingCard";
 import EnquiryForm from "@/components/svrm/EnquiryForm";
+import { Seo } from "@/components/Seo";
 import { findTour } from "@/data/tours";
 
 const TourDetail = () => {
@@ -10,8 +11,18 @@ const TourDetail = () => {
   const tour = slug ? findTour(slug) : null;
   if (!tour) return <Navigate to="/tours" replace />;
 
+  const title = `${tour.label} — SVRM Tour`;
+  const description = (tour as { summary?: string; subtitle?: string }).summary
+    ?? (tour as { subtitle?: string }).subtitle
+    ?? `Bespoke ${tour.label} tour in South Africa, curated end-to-end by SVRM.`;
+
   return (
     <main className="bg-background text-foreground min-h-screen">
+      <Seo
+        title={title.length > 60 ? `${tour.label} | SVRM` : title}
+        description={String(description).slice(0, 158)}
+        path={`/tours/${slug}`}
+      />
       <Nav />
       <section className="relative h-[60vh] min-h-[420px] w-full overflow-hidden">
         <img src={tour.image} alt={tour.label} className="absolute inset-0 w-full h-full object-cover" />
