@@ -50,6 +50,8 @@ const PricingCard = ({ duration, fromZAR, title, inclusions, subject, onEnquire 
       </a>
     )}
   </article>
-);
+  );
+};
+
 
 export default PricingCard;
