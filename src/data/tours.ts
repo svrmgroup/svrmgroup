@@ -10,7 +10,8 @@ export type TourSlug = "safari" | "hunting" | "cultural" | "adventure" | "builde
 export interface TourPackage {
   duration: string;
   title: string;
-  fromPrice: string;
+  /** ZAR per person. Use null for "On request". */
+  fromZAR: number | null;
   inclusions: string[];
 }
 
@@ -32,30 +33,10 @@ export const tours: TourCategory[] = [
       "Premium safaris in South Africa's most considered private concessions — Sabi Sand, Madikwe, Kruger. Game drives, luxury lodges, internal flights and ground transfers handled end to end.",
     image: safariImg,
     packages: [
-      {
-        duration: "3 days",
-        title: "Kruger essentials",
-        fromPrice: "US$1,020",
-        inclusions: ["2 nights luxury lodge", "Twice-daily game drives", "All meals", "Private transfers"],
-      },
-      {
-        duration: "5 days",
-        title: "Sabi Sand signature",
-        fromPrice: "US$1,500",
-        inclusions: ["4 nights premium lodge", "Twice-daily game drives", "All meals & house drinks", "Internal flights"],
-      },
-      {
-        duration: "7 days",
-        title: "Madikwe & Kruger",
-        fromPrice: "US$3,000",
-        inclusions: ["Two-lodge itinerary", "Private guide & vehicle", "All flights & transfers", "Spa treatments"],
-      },
-      {
-        duration: "14 days",
-        title: "Bespoke grand safari",
-        fromPrice: "On request",
-        inclusions: ["Multi-region itinerary", "Private villa stays", "Helicopter add-ons", "Curated, end to end"],
-      },
+      { duration: "3 days", title: "Kruger essentials", fromZAR: 19000, inclusions: ["2 nights luxury lodge", "Twice-daily game drives", "All meals", "Private transfers"] },
+      { duration: "5 days", title: "Sabi Sand signature", fromZAR: 28000, inclusions: ["4 nights premium lodge", "Twice-daily game drives", "All meals & house drinks", "Internal flights"] },
+      { duration: "7 days", title: "Madikwe & Kruger", fromZAR: 55000, inclusions: ["Two-lodge itinerary", "Private guide & vehicle", "All flights & transfers", "Spa treatments"] },
+      { duration: "14 days", title: "Bespoke grand safari", fromZAR: null, inclusions: ["Multi-region itinerary", "Private villa stays", "Helicopter add-ons", "Curated, end to end"] },
     ],
   },
   {
@@ -66,12 +47,7 @@ export const tours: TourCategory[] = [
       "Conducted, ethical plains-game hunting in established private reserves. Lodging, professional hunters, trophy preparation and export coordination — handled with the same precision as our safaris.",
     image: huntingImg,
     packages: [
-      {
-        duration: "7 days",
-        title: "5-star plains game package",
-        fromPrice: "US$5,230",
-        inclusions: ["Per hunter, all-inclusive", "5-star lodge accommodation", "Professional hunter & tracker", "Trophy fees & preparation"],
-      },
+      { duration: "7 days", title: "5-star plains game package", fromZAR: 97000, inclusions: ["Per hunter, all-inclusive", "5-star lodge accommodation", "Professional hunter & tracker", "Trophy fees & preparation"] },
     ],
   },
   {
@@ -82,24 +58,9 @@ export const tours: TourCategory[] = [
       "Robben Island, Table Mountain, the District Six Museum, township and heritage walks led by historians — built into measured, comfortable itineraries.",
     image: culturalImg,
     packages: [
-      {
-        duration: "3 days",
-        title: "Cape heritage",
-        fromPrice: "US$1,500",
-        inclusions: ["Robben Island & Table Mountain", "District Six & city tour", "Private guide", "Boutique stay"],
-      },
-      {
-        duration: "5 days",
-        title: "Cape & national parks",
-        fromPrice: "US$2,400",
-        inclusions: ["Cape Town heritage", "Cape Point & Boulders", "National park visits", "All transfers"],
-      },
-      {
-        duration: "7 days",
-        title: "Heritage grand tour",
-        fromPrice: "US$3,500",
-        inclusions: ["Cape Town + Garden Route", "Museums & heritage sites", "Private historian guide", "Premium accommodation"],
-      },
+      { duration: "3 days", title: "Cape heritage", fromZAR: 28000, inclusions: ["Robben Island & Table Mountain", "District Six & city tour", "Private guide", "Boutique stay"] },
+      { duration: "5 days", title: "Cape & national parks", fromZAR: 44000, inclusions: ["Cape Town heritage", "Cape Point & Boulders", "National park visits", "All transfers"] },
+      { duration: "7 days", title: "Heritage grand tour", fromZAR: 65000, inclusions: ["Cape Town + Garden Route", "Museums & heritage sites", "Private historian guide", "Premium accommodation"] },
     ],
   },
   {
@@ -110,24 +71,9 @@ export const tours: TourCategory[] = [
       "Helicopter flips over the Cape Peninsula, Big Five game drives, shark-cage diving in Gansbaai, horseback trails through the Winelands — assembled into balanced multi-day experiences.",
     image: adventureImg,
     packages: [
-      {
-        duration: "3 days",
-        title: "Cape adventure short",
-        fromPrice: "US$1,800",
-        inclusions: ["Helicopter scenic flip", "Shark-cage diving", "Boutique accommodation", "All transfers"],
-      },
-      {
-        duration: "5 days",
-        title: "Cape & bush",
-        fromPrice: "US$3,200",
-        inclusions: ["Cape adventure + safari", "Helicopter + game drives", "Internal flights", "Luxury lodging"],
-      },
-      {
-        duration: "7 days",
-        title: "Land, sea & sky",
-        fromPrice: "US$4,800",
-        inclusions: ["Heli, yacht & safari", "Horseback Winelands trail", "Private guides throughout", "Premium accommodation"],
-      },
+      { duration: "3 days", title: "Cape adventure short", fromZAR: 33000, inclusions: ["Helicopter scenic flip", "Shark-cage diving", "Boutique accommodation", "All transfers"] },
+      { duration: "5 days", title: "Cape & bush", fromZAR: 59000, inclusions: ["Cape adventure + safari", "Helicopter + game drives", "Internal flights", "Luxury lodging"] },
+      { duration: "7 days", title: "Land, sea & sky", fromZAR: 89000, inclusions: ["Heli, yacht & safari", "Horseback Winelands trail", "Private guides throughout", "Premium accommodation"] },
     ],
   },
 ];

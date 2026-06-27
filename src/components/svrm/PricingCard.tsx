@@ -1,23 +1,28 @@
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
+import { useCurrency } from "@/lib/currency";
 
 interface Props {
   duration: string;
-  fromPrice: string;
+  /** ZAR base price, or null for "On request". */
+  fromZAR: number | null;
   title: string;
   inclusions: string[];
   subject: string;
   onEnquire?: () => void;
 }
 
-const PricingCard = ({ duration, fromPrice, title, inclusions, subject, onEnquire }: Props) => (
+const PricingCard = ({ duration, fromZAR, title, inclusions, subject, onEnquire }: Props) => {
+  const { format } = useCurrency();
+  return (
   <article className="bg-surface-raised border border-border/40 p-8 flex flex-col">
     <p className="eyebrow">{duration}</p>
     <h3 className="font-serif text-2xl md:text-3xl mt-4 text-foreground">{title}</h3>
     <div className="mt-6">
       <p className="text-xs uppercase tracking-[0.24em] text-muted-foreground">From</p>
-      <p className="font-serif text-3xl text-gold mt-2">{fromPrice}</p>
+      <p className="font-serif text-3xl text-gold mt-2">{fromZAR === null ? "On request" : format(fromZAR)}</p>
       <p className="text-xs text-muted-foreground/60 mt-1">per person · indicative</p>
     </div>
+
     <ul className="mt-6 space-y-2 text-sm text-foreground/85 flex-1">
       {inclusions.map((i) => (
         <li key={i} className="flex gap-3">
