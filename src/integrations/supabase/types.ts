@@ -47,6 +47,57 @@ export type Database = {
         }
         Relationships: []
       }
+      rental_requests: {
+        Row: {
+          created_at: string
+          currency: string
+          email: string
+          estimated_total: number | null
+          extras: string[]
+          id: string
+          message: string | null
+          name: string
+          phone: string | null
+          pickup_date: string
+          pickup_location: string
+          return_date: string
+          vehicle_name: string
+          vehicle_slug: string
+        }
+        Insert: {
+          created_at?: string
+          currency?: string
+          email: string
+          estimated_total?: number | null
+          extras?: string[]
+          id?: string
+          message?: string | null
+          name: string
+          phone?: string | null
+          pickup_date: string
+          pickup_location: string
+          return_date: string
+          vehicle_name: string
+          vehicle_slug: string
+        }
+        Update: {
+          created_at?: string
+          currency?: string
+          email?: string
+          estimated_total?: number | null
+          extras?: string[]
+          id?: string
+          message?: string | null
+          name?: string
+          phone?: string | null
+          pickup_date?: string
+          pickup_location?: string
+          return_date?: string
+          vehicle_name?: string
+          vehicle_slug?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
