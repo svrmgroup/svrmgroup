@@ -5,6 +5,7 @@ import EnquiryForm from "@/components/svrm/EnquiryForm";
 import VehicleCard from "@/components/svrm/VehicleCard";
 import { vehicles, vehicleTiers } from "@/data/vehicles";
 import { Seo } from "@/components/Seo";
+import heroVideo from "@/assets/videos/travel.mp4.asset.json";
 
 const tierBlurbs: Record<string, string> = {
   "Signature": "The top of the SVRM fleet — Rolls-Royce, Bentley, Lamborghini. Chauffeur-led.",
@@ -25,6 +26,7 @@ const Travel = () => (
       eyebrow="Travel"
       title="Arrive without thinking about it."
       subtitle="A full fleet across four tiers — Signature, Premium SUV, Executive and Everyday. Chauffeured or self-drive."
+      videoSrc={heroVideo.url}
     />
 
     <section className="pb-12 md:pb-16">
