@@ -20,7 +20,7 @@ const VehicleCard = ({ vehicle, index }: { vehicle: Vehicle; index: number }) =>
         <div className="mt-5 flex items-end justify-between gap-4">
           <div>
             <p className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground/70">From</p>
-            <p className="font-serif text-2xl text-gold">{format(vehicle.fromZAR)}<span className="text-xs text-muted-foreground/80 tracking-wider"> / day</span></p>
+            <p className="font-serif text-2xl text-gold">{format(vehicle.fromZAR)}<span className="text-xs text-muted-foreground/80 tracking-wider">&nbsp;/ day</span></p>
           </div>
           <a
             href={buildWhatsAppUrl(`${vehicle.name} chauffeur / hire`)}
