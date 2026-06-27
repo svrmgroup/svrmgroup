@@ -1,7 +1,8 @@
 // Single source of truth for SVRM contact endpoints.
-// Replace WHATSAPP_NUMBER with the real number when ready (digits only, country code, no +).
-export const WHATSAPP_NUMBER = "27000000000";
+export const WHATSAPP_NUMBER = "27730641481";
 export const CONCIERGE_EMAIL = "concierge@svrm.group";
+export const INSTAGRAM_URL = "https://instagram.com/svrmcpt";
+export const TIKTOK_URL = "https://tiktok.com/@svrmcpt";
 
 export const buildWhatsAppUrl = (subject?: string) => {
   const base = `https://wa.me/${WHATSAPP_NUMBER}`;

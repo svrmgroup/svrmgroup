@@ -115,3 +115,18 @@
 }
 
 .animate-fade-up { animation: fade-up 1.2s var(--ease-luxe) both; }
+
+/* Ken Burns motion — slow cinematic pan/zoom for stills */
+@keyframes kb-a { 0% { transform: scale(1.05) translate(0%, 0%); } 100% { transform: scale(1.18) translate(-3%, -2%); } }
+@keyframes kb-b { 0% { transform: scale(1.18) translate(-3%, 1%); } 100% { transform: scale(1.05) translate(0%, 0%); } }
+@keyframes kb-c { 0% { transform: scale(1.05) translate(2%, 0%); } 100% { transform: scale(1.18) translate(-1%, -2%); } }
+@keyframes kb-d { 0% { transform: scale(1.18) translate(0%, -2%); } 100% { transform: scale(1.05) translate(2%, 1%); } }
+
+.kb-a { animation: kb-a 22s var(--ease-luxe) infinite alternate; will-change: transform; }
+.kb-b { animation: kb-b 24s var(--ease-luxe) infinite alternate; will-change: transform; }
+.kb-c { animation: kb-c 20s var(--ease-luxe) infinite alternate; will-change: transform; }
+.kb-d { animation: kb-d 26s var(--ease-luxe) infinite alternate; will-change: transform; }
+
+@media (prefers-reduced-motion: reduce) {
+  .kb-a, .kb-b, .kb-c, .kb-d { animation: none; transform: scale(1.05); }
+}

@@ -1,114 +1,59 @@
 import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
 import PageHero from "@/components/svrm/PageHero";
-import SectionBlock from "@/components/svrm/SectionBlock";
 import EnquiryForm from "@/components/svrm/EnquiryForm";
-import villaImg from "@/assets/svc-stays-villa.jpg";
-import penthouseImg from "@/assets/svc-stays-penthouse.jpg";
-import buysellImg from "@/assets/svc-stays-buysell.jpg";
+import StayCard from "@/components/svrm/StayCard";
+import { stays } from "@/data/stays";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import { Seo } from "@/components/Seo";
+import { MessageCircle } from "lucide-react";
 
 const Stays = () => (
   <main className="bg-background text-foreground min-h-screen">
-    <Seo title={"Stays & Residences — Villas & Apartments | SVRM"} description={"Short stays, long-term residences and buy/sell guidance in Cape Town — selected by SVRM, not searched."} path="/stays" />
+    <Seo
+      title={"Stays — Villas & Apartments in Cape Town | SVRM"}
+      description={"Five hand-picked Cape Town residences — Camps Bay, Clifton, Bantry Bay, V&A Waterfront and Sea Point. Selected by SVRM, not searched."}
+      path="/stays"
+    />
     <Nav />
+
+    {/* Sticky WhatsApp pill at the top of the page */}
+    <div className="sticky top-20 z-30 bg-background/90 backdrop-blur border-b border-border/40">
+      <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
+        <p className="text-xs uppercase tracking-[0.24em] text-muted-foreground">5 residences · Cape Town</p>
+        <a
+          href={buildWhatsAppUrl("a stay in Cape Town")}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.24em] px-4 py-2 bg-primary text-primary-foreground hover:bg-primary-glow transition-colors"
+        >
+          <MessageCircle className="h-3.5 w-3.5" />
+          WhatsApp
+        </a>
+      </div>
+    </div>
+
     <PageHero
       eyebrow="Stays & Residences"
       title="Selected, not searched."
-      subtitle="Short stays, long-term residences and the guidance to buy or sell — handled by people who've walked every room."
+      subtitle="Five Cape Town residences across Camps Bay, Clifton, Bantry Bay, V&A Waterfront and Sea Point — walked, vetted and run by SVRM."
     />
 
-    <SectionBlock
-      id="short-stay"
-      eyebrow="Short-Stay Accommodation"
-      title="One night to thirty."
-      image={villaImg}
-      imageAlt="A modern luxury villa with pool overlooking the ocean"
-      body={
-        <>
-          <p>
-            A short, considered list of villas and penthouses in Camps Bay, Bantry Bay, Clifton and
-            Constantia — each one walked, vetted and matched to how you actually intend to use it.
+    <section className="pb-12 md:pb-20">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
+          <p className="eyebrow">The Residences</p>
+          <p className="text-xs text-muted-foreground/80 tracking-wide max-w-xs">
+            Indicative per-night rates. Switch currency in the top nav. Final quote on enquiry.
           </p>
-          <p>
-            Housekeeping, pre-arrival provisioning and a concierge on call are part of the rate, not
-            an extra.
-          </p>
-        </>
-      }
-    >
-      <a
-        href={buildWhatsAppUrl("short-stay residences")}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-block px-8 py-4 border border-primary/60 text-gold text-xs uppercase tracking-[0.28em] hover:bg-primary hover:text-primary-foreground transition-colors duration-500"
-      >
-        Enquire about residences
-      </a>
-    </SectionBlock>
-
-    <div className="border-t border-border/40">
-      <SectionBlock
-        id="long-term"
-        eyebrow="Long-Term Residences"
-        title="A month, a season, a year."
-        image={penthouseImg}
-        imageAlt="Long-term luxury penthouse with floor-to-ceiling windows"
-        reverse
-        body={
-          <>
-            <p>
-              High-end apartments and homes available for monthly leases — paired with full property
-              management, so the residence runs itself in your absence and is ready when you return.
-            </p>
-            <p>
-              Furnished or unfurnished. Cape Town, Stellenbosch and select coastal locations.
-            </p>
-          </>
-        }
-      >
-        <a
-          href={buildWhatsAppUrl("long-term residences")}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block px-8 py-4 border border-primary/60 text-gold text-xs uppercase tracking-[0.28em] hover:bg-primary hover:text-primary-foreground transition-colors duration-500"
-        >
-          Enquire about residences
-        </a>
-      </SectionBlock>
-    </div>
-
-    <div className="border-t border-border/40">
-      <SectionBlock
-        id="buy-sell"
-        eyebrow="Buy & Sell"
-        title="Quietly, through SVRM Real Estate."
-        image={buysellImg}
-        imageAlt="A contemporary luxury Cape Town villa at twilight"
-        body={
-          <>
-            <p>
-              Guidance on purchasing or selling luxury real estate, handled through the SVRM Real
-              Estate division. Off-market introductions, valuations, viewings and the legal team —
-              with the privacy our clients expect.
-            </p>
-            <p>
-              Speak to us before you speak to the market.
-            </p>
-          </>
-        }
-      >
-        <a
-          href={buildWhatsAppUrl("real estate")}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block px-8 py-4 border border-primary/60 text-gold text-xs uppercase tracking-[0.28em] hover:bg-primary hover:text-primary-foreground transition-colors duration-500"
-        >
-          Enquire about residences
-        </a>
-      </SectionBlock>
-    </div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {stays.map((s, i) => (
+            <StayCard key={s.slug} stay={s} index={i} />
+          ))}
+        </div>
+      </div>
+    </section>
 
     <section className="bg-surface-deep py-24 md:py-32 border-t border-border/40">
       <div className="max-w-3xl mx-auto px-6">

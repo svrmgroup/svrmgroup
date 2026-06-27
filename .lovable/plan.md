@@ -1,78 +1,61 @@
-# SVRM Full Restructure
+## Overview
 
-## New IA & Routes
-- `/` Home — hero video, intro, 5 featured service cards, testimonials
-- `/travel` — Chauffeuring & Car Rentals, Private Jets & Helicopters, Luxury Car Rentals (sectioned, anchored)
-- `/lifestyle` — Yachting & day charters + add-ons
-- `/stays` — Short-Stay, Long-Term, Buy & Sell (renamed from Properties)
-- `/tours` — hub with 5 subpages:
-  - `/tours/safari` (3/5/7/14-day pricing)
-  - `/tours/hunting` (7-day pkg)
-  - `/tours/cultural` (3/5/7-day)
-  - `/tours/adventure` (3/5/7-day)
-  - `/tours/builder` — **interactive visual picker** with live USD estimate
-- `/experiences` — Custom Experiences + enquiry form
-- `/blog` — hub with placeholder posts + category filter
-- `/contact` — form, email, WhatsApp
+A focused upgrade to SVRM across Travel, Stays, Tours, Home and the global layout — adding cinematic Ken Burns motion on photos, 5 luxury vehicles and 5 villas with indicative pricing in ZAR/GBP/USD, your real WhatsApp number, and social links.
 
-Old `/services`, `/services/:cat/:slug`, `/business`, `/concierge`, `/about` routes are removed (Concierge messaging folds into Home + Contact; About folds into Home intro). Existing service images get remapped into the new pages (transport→travel, stays→stays, experiences/wine/safari/yacht→tours/lifestyle).
+## 1. Contact & global
 
-## Logo & Brand
-- Upload the cream-circle SVRM logo via Lovable Assets.
-- Place in `Nav` (replaces wordmark) and `Footer` (smaller). Cream circle on dark nav is accepted.
-- Keep deep-black / off-white / brushed-gold palette already in `index.css`.
+- Update `src/lib/whatsapp.ts` → `WHATSAPP_NUMBER = "27730641481"`.
+- Add `INSTAGRAM = "https://instagram.com/svrmcpt"` and `TIKTOK = "https://tiktok.com/@svrmcpt"`.
+- Add a **floating WhatsApp button** (bottom-right, gold circle, persistent) on every page via a new `WhatsAppFab.tsx` mounted in `App.tsx`. Includes a top-of-page sticky "WhatsApp" pill on Stays as requested.
+- Footer: add Instagram + TikTok icon links.
 
-## Tours Builder (`/tours/builder`)
-- Visual icon picker: activities (Safari, Cultural, Adventure, Yacht, Helicopter, Spa, Chef), duration slider (3/5/7/10/14 days), travellers (1–8), accommodation tier (Premium/Luxury/Ultra).
-- Live indicative range in USD per person computed from a transparent table:
-  - Base/day by tier (Premium 350, Luxury 650, Ultra 1100)
-  - Activity adders (Safari +400/day, Heli +900 one-off, Yacht +800 one-off, etc.)
-  - Range shown as ±15% band, with "Indicative only — every itinerary personalised" caveat.
-- CTA: "Request bespoke itinerary" → opens Enquiry form pre-filled with selections; also a WhatsApp shortcut.
+## 2. Currency switcher (ZAR default, GBP, USD)
 
-## Enquiry System (requires Lovable Cloud)
-- Enable Cloud.
-- Table `enquiries` (id, name, email, phone, subject, message, source_page, created_at) with RLS: INSERT for `anon`, SELECT only for `service_role`. Explicit GRANTs.
-- Reusable `<EnquiryForm subject="..." />` (zod validated: name 1–100, email, phone optional, message 1–2000).
-- Every service/tour page ends with `<EnquiryForm>` + WhatsApp button.
-- `/contact` is the canonical form, shows concierge@svrm.group and WhatsApp.
-- (Email-to-concierge can be added later via Resend; this pass stores submissions in DB so nothing is lost.)
+- New `src/lib/currency.tsx` — React context + `useCurrency()` hook, persisted to localStorage. Static FX rates table (ZAR base) with a note "Indicative — final quote on enquiry."
+- `<CurrencySwitch />` component (small segmented control: R · £ · $) placed in the top nav (desktop + mobile sheet).
+- `formatPrice(zar)` helper returns the converted, symbol-prefixed string.
 
-## Components (new / reused)
-- `Nav` — new links: Home / Travel / Lifestyle / Stays / Tours / Experiences / Blog / Contact (collapse to drawer on mobile, 8 items is tight).
-- `Footer` — updated link columns, logo.
-- `PageHero` (reuse, exists)
-- `SectionBlock` — full-bleed image + copy block, used heavily on Travel/Stays/Lifestyle.
-- `PricingCard` — for tour packages (duration, from-price, inclusions, Enquire).
-- `EnquiryForm` — shared.
-- `TourBuilder` — the interactive picker.
-- `TestimonialsCarousel` — already partial; ensure carousel behavior.
+## 3. Travel page — 5 luxury vehicles in the sun
 
-## Data files
-- `src/data/tours.ts` — packages with price ranges per the brief.
-- `src/data/travel.ts`, `src/data/stays.ts`, `src/data/lifestyle.ts` — section content + images.
-- `src/data/blog.ts` — 5–6 placeholder posts.
-- `src/lib/whatsapp.ts` — keep, add `concierge@svrm.group` constant alongside.
+Replace the current 3 long blocks with a **vehicle grid** of 5 cards (image, name, "from R X,XXX / day", Enquire on WhatsApp). Vehicles:
 
-## Imagery
-Reuse current assets where they map cleanly (chauffeur, airport, heli, villas, estate, hotel, wine→remove/replace, yacht, safari). Generate new images only where missing:
-- Travel: S-Class interior, jet exterior, luxury car lineup
-- Stays: long-term penthouse interior, Buy&Sell hero
-- Tours: cultural/Robben Island, adventure/shark cage (tasteful), hunting (landscape, no graphic content)
-- Custom Experiences hero
-- Blog cover placeholders (2–3 reused per category)
-No nightlife, no wine-focused imagery (per brief).
+1. Rolls-Royce Cullinan — from R 24,500/day
+2. Rolls-Royce Ghost — from R 22,000/day
+3. Mercedes-AMG G63 — from R 14,500/day
+4. BMW 7 Series — from R 9,500/day
+5. Lamborghini Urus — from R 19,500/day
 
-## Out of scope this pass
-- Google Workspace MX/DNS setup (no code change needed; instructions only at end).
-- Real email-send (Resend) — deferred; submissions land in DB and WhatsApp.
-- Real blog CMS — placeholder posts only.
+- Generate 5 new AI hero images (each car parked in Cape Town golden-hour sunlight, mountain/coast backdrop).
+- Each card uses a new `<KenBurnsImage>` component (slow CSS `transform: scale + translate` over 18–22s, alternating direction) for the "moving picture" feel — no video credits, smooth, works on mobile.
+- Keep the existing Jets / Chauffeur intro blocks above the grid, condensed.
 
-## Order of execution
-1. Enable Lovable Cloud + create `enquiries` table & policies.
-2. Upload logo asset.
-3. Generate missing images (parallel).
-4. Build data files + shared components (`EnquiryForm`, `SectionBlock`, `PricingCard`, `TourBuilder`).
-5. Build pages + subpages.
-6. Update `Nav`, `Footer`, `App.tsx` routes, `Index.tsx` home composition. Delete obsolete pages/components.
-7. Verify routes load, builder math sane, form submits.
+## 4. Stays page — 5 villas/apartments
+
+Replace the 3 blocks with a 5-card grid of properties in Camps Bay, Clifton, Bantry Bay, Sea Point, V&A Waterfront:
+
+1. Camps Bay Cliff Villa — from R 38,000/night
+2. Clifton Beachfront Penthouse — from R 28,000/night
+3. Bantry Bay Ocean Villa — from R 32,000/night
+4. V&A Marina Apartment — from R 12,000/night
+5. Sea Point Sky Residence — from R 9,500/night
+
+- Generate 5 original AI villa images (we cannot scrape noxrentals.com — copyright; you confirmed AI imagery).
+- Each card uses `<KenBurnsImage>` and an "Enquire on WhatsApp" button pre-filled with the property name.
+- Sticky **"WhatsApp the concierge"** button at the top of the Stays page.
+
+## 5. Tours page + Home
+
+- Convert tour cards and home hero secondary imagery to `<KenBurnsImage>` so the page feels alive.
+- Home hero video stays. Add a Ken Burns "experience strip" below the services preview with 3 motion stills (safari, coast drive, villa).
+
+## 6. Files touched
+
+- New: `src/lib/currency.tsx`, `src/components/svrm/CurrencySwitch.tsx`, `src/components/svrm/WhatsAppFab.tsx`, `src/components/svrm/KenBurnsImage.tsx`, `src/components/svrm/VehicleCard.tsx`, `src/components/svrm/StayCard.tsx`, `src/data/vehicles.ts`, `src/data/stays.ts`.
+- Edit: `src/lib/whatsapp.ts`, `src/App.tsx`, `src/components/svrm/Nav.tsx`, `src/components/svrm/Footer.tsx`, `src/pages/Travel.tsx`, `src/pages/Stays.tsx`, `src/pages/Tours.tsx`, `src/pages/Index.tsx`, `src/components/svrm/Services.tsx`, `src/index.css` (Ken Burns keyframes).
+- Assets: 5 vehicle JPGs + 5 villa JPGs + 1–2 tour/home motion stills generated via `imagegen`.
+
+## Notes
+
+- **noxrentals.com**: their property photos are copyrighted and watermarked — using them on a commercial site is a legal risk. Per your selection, we'll generate original luxury imagery in the same style.
+- All prices marked "Indicative · final quote on enquiry" — booking stays request-only.
+- Currency rates are hardcoded constants; we can wire a live FX API later if you want.

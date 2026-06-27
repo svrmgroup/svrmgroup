@@ -1,119 +1,67 @@
 import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
 import PageHero from "@/components/svrm/PageHero";
-import SectionBlock from "@/components/svrm/SectionBlock";
 import EnquiryForm from "@/components/svrm/EnquiryForm";
-import sclass from "@/assets/svc-travel-sclass.jpg";
-import jet from "@/assets/svc-travel-jet.jpg";
-import fleet from "@/assets/svc-travel-fleet.jpg";
-import { buildWhatsAppUrl } from "@/lib/whatsapp";
+import VehicleCard from "@/components/svrm/VehicleCard";
+import { vehicles } from "@/data/vehicles";
 import { Seo } from "@/components/Seo";
 
 const Travel = () => (
   <main className="bg-background text-foreground min-h-screen">
-    <Seo title={"Travel — Chauffeurs, Jets & Car Hire | SVRM"} description={"Chauffeured cars, private aviation and luxury car hire — vetted, briefed and orchestrated by SVRM across Cape Town and South Africa."} path="/travel" />
+    <Seo
+      title={"Travel — Chauffeurs, Jets & Luxury Vehicles | SVRM"}
+      description={"Rolls-Royce, Lamborghini, Mercedes-AMG and BMW — chauffeured or self-drive across Cape Town. Private aviation on request."}
+      path="/travel"
+    />
     <Nav />
     <PageHero
       eyebrow="Travel"
       title="Arrive without thinking about it."
-      subtitle="Chauffeured cars, private aviation, luxury hire — vetted, briefed and orchestrated from the first call to the last door."
+      subtitle="Five vehicles, in the sun. Chauffeured or self-drive — daily rates indicative, every booking arranged personally."
     />
 
-    <SectionBlock
-      id="chauffeuring"
-      eyebrow="Chauffeuring & Car Rentals"
-      title="Star-lit interiors. Quiet drivers. The SVRM plate."
-      image={sclass}
-      imageAlt="Luxury Mercedes S-Class interior with starlit ceiling"
-      body={
-        <>
-          <p>
-            A discreet, professionally chauffeured fleet — Mercedes S-Class and V-Class,
-            Mercedes-AMG G-Wagon, Lamborghini Urus and Range Rover — finished with quilted leather,
-            ambient star-lit ceilings and the SVRM plate.
+    <section className="pb-12 md:pb-20">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
+          <div>
+            <p className="eyebrow">The Fleet</p>
+            <h2 className="font-serif text-3xl md:text-4xl mt-3 text-foreground">Five vehicles, on request.</h2>
+          </div>
+          <p className="text-xs text-muted-foreground/80 tracking-wide max-w-xs">
+            Indicative daily rates. Switch currency in the top nav. Final quote confirmed on enquiry.
           </p>
-          <p>
-            For airport transfers, hourly hire, inter-city journeys or a chauffeur on call for the
-            length of your stay. English-speaking, NDA-bound, route-briefed.
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {vehicles.map((v, i) => (
+            <VehicleCard key={v.slug} vehicle={v} index={i} />
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section className="bg-surface-deep py-20 border-t border-border/40">
+      <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div>
+          <p className="eyebrow">Private Aviation</p>
+          <h3 className="font-serif text-3xl mt-4 text-foreground">Jets & helicopters.</h3>
+          <p className="text-muted-foreground mt-4">
+            Private jet charter, helicopter transfers and scenic flights — sourced through trusted
+            operators. Every flight quoted on request.
           </p>
-        </>
-      }
-    >
-      <a
-        href={buildWhatsAppUrl("chauffeuring")}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-block px-8 py-4 border border-primary/60 text-gold text-xs uppercase tracking-[0.28em] hover:bg-primary hover:text-primary-foreground transition-colors duration-500"
-      >
-        Request your journey
-      </a>
-    </SectionBlock>
+        </div>
+        <div>
+          <p className="eyebrow">Chauffeur</p>
+          <h3 className="font-serif text-3xl mt-4 text-foreground">English-speaking, NDA-bound.</h3>
+          <p className="text-muted-foreground mt-4">
+            Hourly hire, airport transfers and inter-city journeys with a discreet chauffeur on call
+            for the length of your stay.
+          </p>
+        </div>
+      </div>
+    </section>
 
-    <div className="border-t border-border/40">
-      <SectionBlock
-        id="aviation"
-        eyebrow="Private Jets & Helicopters"
-        title="Routes opened. Quotes on request."
-        image={jet}
-        imageAlt="Private jet on the runway at sunset with Table Mountain backdrop"
-        reverse
-        body={
-          <>
-            <p>
-              Private jet charter, helicopter transfers and scenic flights — sourced through trusted
-              operators, with routing, briefing and ground transport coordinated end to end.
-            </p>
-            <p>
-              Because routes, aircraft and timing vary, every flight is quoted on request. Send the
-              brief and we'll return options within hours.
-            </p>
-          </>
-        }
-      >
-        <a
-          href={buildWhatsAppUrl("aviation")}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block px-8 py-4 border border-primary/60 text-gold text-xs uppercase tracking-[0.28em] hover:bg-primary hover:text-primary-foreground transition-colors duration-500"
-        >
-          Request a quote
-        </a>
-      </SectionBlock>
-    </div>
-
-    <div className="border-t border-border/40">
-      <SectionBlock
-        id="luxury-rentals"
-        eyebrow="Luxury Car Rentals"
-        title="The car you wanted, on the day you wanted it."
-        image={fleet}
-        imageAlt="Lineup of luxury cars at sunset on a coastal road"
-        body={
-          <>
-            <p>
-              Premium self-drive hire — Range Rover, G-Wagon, Urus, Bentayga and more. Delivered to
-              your residence or hotel, with concierge handover and 24-hour support throughout.
-            </p>
-            <p>
-              Daily, weekly and longer terms. Pricing on request, against the specific vehicle and
-              window you have in mind.
-            </p>
-          </>
-        }
-        reverse
-      >
-        <a
-          href={buildWhatsAppUrl("luxury car rental")}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block px-8 py-4 border border-primary/60 text-gold text-xs uppercase tracking-[0.28em] hover:bg-primary hover:text-primary-foreground transition-colors duration-500"
-        >
-          Request a vehicle
-        </a>
-      </SectionBlock>
-    </div>
-
-    <section className="bg-surface-deep py-24 md:py-32 border-t border-border/40">
+    <section className="bg-background py-24 md:py-32 border-t border-border/40">
       <div className="max-w-3xl mx-auto px-6">
         <div className="text-center mb-12">
           <p className="eyebrow">Enquire · Travel</p>

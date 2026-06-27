@@ -34,7 +34,7 @@ const Services = () => (
                 src={s.img}
                 alt={s.title}
                 loading="lazy"
-                className="w-full h-full object-cover transition-transform duration-[1400ms] ease-[var(--ease-luxe)] group-hover:scale-105"
+                className={`w-full h-full object-cover ${["kb-a","kb-b","kb-c","kb-d","kb-a"][i]}`}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-surface-deep via-surface-deep/30 to-transparent" />
               <div className="absolute inset-x-0 bottom-0 p-8">

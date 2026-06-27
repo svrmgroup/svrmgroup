@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { CurrencyProvider } from "@/lib/currency";
+import WhatsAppFab from "@/components/svrm/WhatsAppFab";
 import Index from "./pages/Index.tsx";
 import Travel from "./pages/Travel.tsx";
 import Lifestyle from "./pages/Lifestyle.tsx";
@@ -19,26 +21,29 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/travel" element={<Travel />} />
-          <Route path="/lifestyle" element={<Lifestyle />} />
-          <Route path="/stays" element={<Stays />} />
-          <Route path="/tours" element={<Tours />} />
-          <Route path="/tours/builder" element={<TourBuilderPage />} />
-          <Route path="/tours/:slug" element={<TourDetail />} />
-          <Route path="/experiences" element={<CustomExperiences />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/contact" element={<Contact />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
+    <CurrencyProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/travel" element={<Travel />} />
+            <Route path="/lifestyle" element={<Lifestyle />} />
+            <Route path="/stays" element={<Stays />} />
+            <Route path="/tours" element={<Tours />} />
+            <Route path="/tours/builder" element={<TourBuilderPage />} />
+            <Route path="/tours/:slug" element={<TourDetail />} />
+            <Route path="/experiences" element={<CustomExperiences />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/contact" element={<Contact />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+          <WhatsAppFab />
+        </BrowserRouter>
+      </TooltipProvider>
+    </CurrencyProvider>
   </QueryClientProvider>
 );
 

@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { Menu } from "lucide-react";
 import Logo from "./Logo";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import CurrencySwitch from "./CurrencySwitch";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
 const links = [
@@ -54,7 +55,8 @@ const Nav = () => {
           ))}
         </nav>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
+          <CurrencySwitch className="hidden md:inline-flex" />
           <a
             href={buildWhatsAppUrl()}
             target="_blank"
@@ -94,6 +96,7 @@ const Nav = () => {
                     {l.label}
                   </NavLink>
                 ))}
+                <div className="pt-2"><CurrencySwitch /></div>
                 <a
                   href={buildWhatsAppUrl()}
                   target="_blank"
