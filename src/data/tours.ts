@@ -37,6 +37,7 @@ export const tours: TourCategory[] = [
     description:
       "Premium safaris in South Africa's most considered private concessions — Sabi Sand, Madikwe, Kruger. Game drives, luxury lodges, internal flights and ground transfers handled end to end.",
     image: safariImg,
+    video: safariVid.url,
     packages: [
       { duration: "3 days", title: "Kruger essentials", fromZAR: 19000, inclusions: ["2 nights luxury lodge", "Twice-daily game drives", "All meals", "Private transfers"] },
       { duration: "5 days", title: "Sabi Sand signature", fromZAR: 28000, inclusions: ["4 nights premium lodge", "Twice-daily game drives", "All meals & house drinks", "Internal flights"] },
@@ -51,6 +52,7 @@ export const tours: TourCategory[] = [
     description:
       "Conducted, ethical plains-game hunting in established private reserves. Lodging, professional hunters, trophy preparation and export coordination — handled with the same precision as our safaris.",
     image: huntingImg,
+    video: huntingVid.url,
     packages: [
       { duration: "7 days", title: "5-star plains game package", fromZAR: 97000, inclusions: ["Per hunter, all-inclusive", "5-star lodge accommodation", "Professional hunter & tracker", "Trophy fees & preparation"] },
     ],
@@ -62,6 +64,7 @@ export const tours: TourCategory[] = [
     description:
       "Robben Island, Table Mountain, the District Six Museum, township and heritage walks led by historians — built into measured, comfortable itineraries.",
     image: culturalImg,
+    video: culturalVid.url,
     packages: [
       { duration: "3 days", title: "Cape heritage", fromZAR: 28000, inclusions: ["Robben Island & Table Mountain", "District Six & city tour", "Private guide", "Boutique stay"] },
       { duration: "5 days", title: "Cape & national parks", fromZAR: 44000, inclusions: ["Cape Town heritage", "Cape Point & Boulders", "National park visits", "All transfers"] },
@@ -75,6 +78,7 @@ export const tours: TourCategory[] = [
     description:
       "Helicopter flips over the Cape Peninsula, Big Five game drives, shark-cage diving in Gansbaai, horseback trails through the Winelands — assembled into balanced multi-day experiences.",
     image: adventureImg,
+    video: adventureVid.url,
     packages: [
       { duration: "3 days", title: "Cape adventure short", fromZAR: 33000, inclusions: ["Helicopter scenic flip", "Shark-cage diving", "Boutique accommodation", "All transfers"] },
       { duration: "5 days", title: "Cape & bush", fromZAR: 59000, inclusions: ["Cape adventure + safari", "Helicopter + game drives", "Internal flights", "Luxury lodging"] },
