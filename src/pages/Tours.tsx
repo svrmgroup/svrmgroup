@@ -4,9 +4,11 @@ import Footer from "@/components/svrm/Footer";
 import PageHero from "@/components/svrm/PageHero";
 import { tours } from "@/data/tours";
 import { Wand2 } from "lucide-react";
+import { Seo } from "@/components/Seo";
 
 const Tours = () => (
   <main className="bg-background text-foreground min-h-screen">
+    <Seo title={"Tours — Safari, Cultural & Adventure | SVRM"} description={"Exclusive South African tours — safari, hunting, cultural and adventure itineraries assembled by SVRM, or composed entirely around you."} path="/tours" />
     <Nav />
     <PageHero
       eyebrow="Tours"

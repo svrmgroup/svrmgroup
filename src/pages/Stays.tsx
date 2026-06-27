@@ -7,9 +7,11 @@ import villaImg from "@/assets/svc-stays-villa.jpg";
 import penthouseImg from "@/assets/svc-stays-penthouse.jpg";
 import buysellImg from "@/assets/svc-stays-buysell.jpg";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
+import { Seo } from "@/components/Seo";
 
 const Stays = () => (
   <main className="bg-background text-foreground min-h-screen">
+    <Seo title={"Stays & Residences — Villas & Apartments | SVRM"} description={"Short stays, long-term residences and buy/sell guidance in Cape Town — selected by SVRM, not searched."} path="/stays" />
     <Nav />
     <PageHero
       eyebrow="Stays & Residences"

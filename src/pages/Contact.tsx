@@ -3,9 +3,11 @@ import Footer from "@/components/svrm/Footer";
 import PageHero from "@/components/svrm/PageHero";
 import EnquiryForm from "@/components/svrm/EnquiryForm";
 import { buildWhatsAppUrl, CONCIERGE_EMAIL } from "@/lib/whatsapp";
+import { Seo } from "@/components/Seo";
 
 const Contact = () => (
   <main className="bg-background text-foreground min-h-screen">
+    <Seo title={"Contact SVRM — Enquire by Form or WhatsApp"} description={"Begin a conversation with SVRM. Booking is by request — tell us what you need and we'll respond personally within hours."} path="/contact" />
     <Nav />
     <PageHero
       eyebrow="Contact"

@@ -5,9 +5,11 @@ import SectionBlock from "@/components/svrm/SectionBlock";
 import EnquiryForm from "@/components/svrm/EnquiryForm";
 import yachtImg from "@/assets/svc-exp-yacht.jpg";
 import chefImg from "@/assets/svc-lifestyle-chef.jpg";
+import { Seo } from "@/components/Seo";
 
 const Lifestyle = () => (
   <main className="bg-background text-foreground min-h-screen">
+    <Seo title={"Lifestyle — Private Yachts & Charters | SVRM"} description={"Private yachting and day charters along the South African coast, curated with the discretion that defines SVRM lifestyle management."} path="/lifestyle" />
     <Nav />
     <PageHero
       eyebrow="Lifestyle"

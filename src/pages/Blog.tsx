@@ -3,6 +3,7 @@ import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
 import PageHero from "@/components/svrm/PageHero";
 import { posts, categories, type BlogCategory } from "@/data/blog";
+import { Seo } from "@/components/Seo";
 
 const Blog = () => {
   const [active, setActive] = useState<BlogCategory | "All">("All");
@@ -10,7 +11,8 @@ const Blog = () => {
 
   return (
     <main className="bg-background text-foreground min-h-screen">
-      <Nav />
+      <Seo title={"Journal — Notes from the Concierge | SVRM"} description={"Field notes, recommendations and observations from SVRM's Cape Town concierge team — published when we have something worth saying."} path="/blog" />
+    <Nav />
       <PageHero
         eyebrow="Journal"
         title="Notes from the concierge."

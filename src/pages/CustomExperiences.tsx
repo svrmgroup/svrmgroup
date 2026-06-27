@@ -3,6 +3,7 @@ import Footer from "@/components/svrm/Footer";
 import PageHero from "@/components/svrm/PageHero";
 import EnquiryForm from "@/components/svrm/EnquiryForm";
 import customImg from "@/assets/svc-custom.jpg";
+import { Seo } from "@/components/Seo";
 
 const cards = [
   { title: "Last-minute essentials", body: "Cleaners, private chefs, a tailor at the door, the gift you forgot." },
@@ -15,6 +16,7 @@ const cards = [
 
 const CustomExperiences = () => (
   <main className="bg-background text-foreground min-h-screen">
+    <Seo title={"Custom Experiences — Chefs, Events & More | SVRM"} description={"Private chefs, cleaners, events, sourcing and bespoke requests — if it can be arranged in Cape Town, SVRM arranges it."} path="/experiences" />
     <Nav />
     <PageHero
       eyebrow="Custom Experiences"

@@ -2,9 +2,11 @@ import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
 import PageHero from "@/components/svrm/PageHero";
 import TourBuilder from "@/components/svrm/TourBuilder";
+import { Seo } from "@/components/Seo";
 
 const TourBuilderPage = () => (
   <main className="bg-background text-foreground min-h-screen">
+    <Seo title={"Build Your Tour — Custom Itinerary | SVRM"} description={"Design a bespoke South African tour with indicative pricing. SVRM arranges the rest and quotes against your exact brief."} path="/tours/builder" />
     <Nav />
     <PageHero
       eyebrow="Create your own"
