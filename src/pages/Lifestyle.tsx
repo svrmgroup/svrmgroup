@@ -6,6 +6,7 @@ import EnquiryForm from "@/components/svrm/EnquiryForm";
 import yachtImg from "@/assets/svc-exp-yacht.jpg";
 import chefImg from "@/assets/svc-lifestyle-chef.jpg";
 import { Seo } from "@/components/Seo";
+import heroVideo from "@/assets/videos/lifestyle.mp4.asset.json";
 
 const Lifestyle = () => (
   <main className="bg-background text-foreground min-h-screen">
@@ -15,6 +16,7 @@ const Lifestyle = () => (
       eyebrow="Lifestyle"
       title="A day on the water. A table no-one else has."
       subtitle="Private yachting and day charters along the South African coast, with the discretion and curation that defines SVRM."
+      videoSrc={heroVideo.url}
     />
 
     <SectionBlock

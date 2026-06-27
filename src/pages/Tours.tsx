@@ -5,6 +5,7 @@ import PageHero from "@/components/svrm/PageHero";
 import { tours } from "@/data/tours";
 import { Wand2 } from "lucide-react";
 import { Seo } from "@/components/Seo";
+import heroVideo from "@/assets/videos/tours.mp4.asset.json";
 
 const Tours = () => (
   <main className="bg-background text-foreground min-h-screen">
@@ -14,6 +15,7 @@ const Tours = () => (
       eyebrow="Tours"
       title="South Africa, taken seriously."
       subtitle="Exclusive, alcohol-free itineraries — assembled by theme and duration, or composed entirely around you."
+      videoSrc={heroVideo.url}
     />
 
     <section className="pb-12 md:pb-20">

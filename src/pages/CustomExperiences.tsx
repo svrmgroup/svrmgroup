@@ -4,6 +4,7 @@ import PageHero from "@/components/svrm/PageHero";
 import EnquiryForm from "@/components/svrm/EnquiryForm";
 import customImg from "@/assets/svc-custom.jpg";
 import { Seo } from "@/components/Seo";
+import heroVideo from "@/assets/videos/experiences.mp4.asset.json";
 
 const cards = [
   { title: "Last-minute essentials", body: "Cleaners, private chefs, a tailor at the door, the gift you forgot." },
@@ -22,6 +23,7 @@ const CustomExperiences = () => (
       eyebrow="Custom Experiences"
       title="Whatever life requires."
       subtitle="Beyond the signatures, SVRM handles the requests that don't fit a category — for individuals and businesses alike."
+      videoSrc={heroVideo.url}
     />
 
     <section className="py-20 md:py-28 bg-surface-deep">

@@ -6,6 +6,7 @@ import { Seo } from "@/components/Seo";
 import { securityOfferings, securityCategories } from "@/data/security";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import { ShieldCheck, MessageCircle } from "lucide-react";
+import heroVideo from "@/assets/videos/security.mp4.asset.json";
 
 const Security = () => {
   return (
@@ -21,6 +22,7 @@ const Security = () => {
         eyebrow="Security"
         title="Protection, quietly arranged."
         subtitle="Armoured vehicles, vetted close protection officers, residential and event security — coordinated end-to-end by SVRM."
+        videoSrc={heroVideo.url}
       />
 
       <section className="pb-8">
