@@ -1,61 +1,64 @@
 ## Overview
 
-A focused upgrade to SVRM across Travel, Stays, Tours, Home and the global layout — adding cinematic Ken Burns motion on photos, 5 luxury vehicles and 5 villas with indicative pricing in ZAR/GBP/USD, your real WhatsApp number, and social links.
+Expand SVRM beyond the current 5-item limits: many more vehicles and stays across budget tiers, hotel rooms, stay extras (chauffeur/chef/etc.), a new Car Rental page with a booking calendar, a drone-style cinematic home hero, and a global scroll-to-top on every route change.
 
-## 1. Contact & global
+## 1. Scroll to top on navigation
 
-- Update `src/lib/whatsapp.ts` → `WHATSAPP_NUMBER = "27730641481"`.
-- Add `INSTAGRAM = "https://instagram.com/svrmcpt"` and `TIKTOK = "https://tiktok.com/@svrmcpt"`.
-- Add a **floating WhatsApp button** (bottom-right, gold circle, persistent) on every page via a new `WhatsAppFab.tsx` mounted in `App.tsx`. Includes a top-of-page sticky "WhatsApp" pill on Stays as requested.
-- Footer: add Instagram + TikTok icon links.
+New `src/components/ScrollToTop.tsx` — listens to React Router's `pathname` and scrolls the window to (0,0) on every change. Mounted once inside `<BrowserRouter>` in `App.tsx`. Fixes the issue where new pages open scrolled to wherever the previous page was.
 
-## 2. Currency switcher (ZAR default, GBP, USD)
+## 2. Fleet — ~14 vehicles, grouped by tier
 
-- New `src/lib/currency.tsx` — React context + `useCurrency()` hook, persisted to localStorage. Static FX rates table (ZAR base) with a note "Indicative — final quote on enquiry."
-- `<CurrencySwitch />` component (small segmented control: R · £ · $) placed in the top nav (desktop + mobile sheet).
-- `formatPrice(zar)` helper returns the converted, symbol-prefixed string.
+Expand `src/data/vehicles.ts` and split the Travel page into tier sections:
 
-## 3. Travel page — 5 luxury vehicles in the sun
+- **Signature**: Rolls-Royce Cullinan, Rolls-Royce Ghost, Lamborghini Urus, Bentley Bentayga
+- **Premium SUV**: Mercedes-AMG G63, Range Rover Autobiography, Range Rover Sport, Porsche Cayenne, BMW X5
+- **Executive**: Mercedes-Benz S-Class, BMW 7 Series, Mercedes V-Class (chauffeur van)
+- **Everyday / Budget**: BMW X3, Mercedes C-Class, Audi Q5
 
-Replace the current 3 long blocks with a **vehicle grid** of 5 cards (image, name, "from R X,XXX / day", Enquire on WhatsApp). Vehicles:
+Each card keeps Ken Burns motion, ZAR/day price (currency-switch aware), and Enquire-on-WhatsApp.
 
-1. Rolls-Royce Cullinan — from R 24,500/day
-2. Rolls-Royce Ghost — from R 22,000/day
-3. Mercedes-AMG G63 — from R 14,500/day
-4. BMW 7 Series — from R 9,500/day
-5. Lamborghini Urus — from R 19,500/day
+## 3. Stays — ~12 properties + Hotel Rooms tab
 
-- Generate 5 new AI hero images (each car parked in Cape Town golden-hour sunlight, mountain/coast backdrop).
-- Each card uses a new `<KenBurnsImage>` component (slow CSS `transform: scale + translate` over 18–22s, alternating direction) for the "moving picture" feel — no video credits, smooth, works on mobile.
-- Keep the existing Jets / Chauffeur intro blocks above the grid, condensed.
+Expand `src/data/stays.ts` across tiers and split Stays into three tabs:
 
-## 4. Stays page — 5 villas/apartments
+- **Villas**: Camps Bay, Clifton, Bantry Bay, Llandudno, Bishopscourt, Constantia
+- **Apartments**: V&A Waterfront, Sea Point, De Waterkant, Green Point, Woodstock loft
+- **Hotel Rooms** (new): Cape Grace, One&Only, Mount Nelson, Silo, Table Bay, The Bay Hotel — indicative rates, booked through SVRM concierge
 
-Replace the 3 blocks with a 5-card grid of properties in Camps Bay, Clifton, Bantry Bay, Sea Point, V&A Waterfront:
+Adds `type: 'villa' | 'apartment' | 'hotel'` to the stay record.
 
-1. Camps Bay Cliff Villa — from R 38,000/night
-2. Clifton Beachfront Penthouse — from R 28,000/night
-3. Bantry Bay Ocean Villa — from R 32,000/night
-4. V&A Marina Apartment — from R 12,000/night
-5. Sea Point Sky Residence — from R 9,500/night
+### Stay extras
 
-- Generate 5 original AI villa images (we cannot scrape noxrentals.com — copyright; you confirmed AI imagery).
-- Each card uses `<KenBurnsImage>` and an "Enquire on WhatsApp" button pre-filled with the property name.
-- Sticky **"WhatsApp the concierge"** button at the top of the Stays page.
+Each stay enquiry includes an Extras chip selector:
+add chauffeur · add private chef · add daily housekeeping · add airport transfer · add yacht day · add tour package. Selections are appended to the WhatsApp message and to the enquiry record.
 
-## 5. Tours page + Home
+## 4. New page — Car Rental with booking calendar
 
-- Convert tour cards and home hero secondary imagery to `<KenBurnsImage>` so the page feels alive.
-- Home hero video stays. Add a Ken Burns "experience strip" below the services preview with 3 motion stills (safari, coast drive, villa).
+New route `/rentals` + nav link.
+
+- Grid of self-drive rentals (a subset of the fleet flagged `selfDrive: true`).
+- Each card opens a booking sheet with:
+  - shadcn `Calendar` (range mode) for pickup → return
+  - Pickup location (CT International / V&A Waterfront / Custom)
+  - Add-ons (child seat, additional driver, delivery)
+  - Estimated total in the selected currency (days × daily rate)
+  - "Request booking" → writes to `rental_requests` and opens WhatsApp pre-filled.
+
+Backend: new `public.rental_requests` table (vehicle, date range, pickup, extras, contact, currency, estimated_total) — insert-only for anon, full access for service_role, same pattern as `enquiries`.
+
+## 5. Home — drone-style cinematic hero
+
+Replace the current single stock clip in `Hero.tsx` with a generated drone-style video of a luxury car on a Cape Town coastal road (Chapman's Peak vibe), ~8s loop with poster fallback. Add a second motion still lower on the page.
 
 ## 6. Files touched
 
-- New: `src/lib/currency.tsx`, `src/components/svrm/CurrencySwitch.tsx`, `src/components/svrm/WhatsAppFab.tsx`, `src/components/svrm/KenBurnsImage.tsx`, `src/components/svrm/VehicleCard.tsx`, `src/components/svrm/StayCard.tsx`, `src/data/vehicles.ts`, `src/data/stays.ts`.
-- Edit: `src/lib/whatsapp.ts`, `src/App.tsx`, `src/components/svrm/Nav.tsx`, `src/components/svrm/Footer.tsx`, `src/pages/Travel.tsx`, `src/pages/Stays.tsx`, `src/pages/Tours.tsx`, `src/pages/Index.tsx`, `src/components/svrm/Services.tsx`, `src/index.css` (Ken Burns keyframes).
-- Assets: 5 vehicle JPGs + 5 villa JPGs + 1–2 tour/home motion stills generated via `imagegen`.
+- New: `src/components/ScrollToTop.tsx`, `src/pages/Rentals.tsx`, `src/components/svrm/RentalCard.tsx`, `src/components/svrm/RentalBookingSheet.tsx`, `src/components/svrm/ExtrasPicker.tsx`, `src/data/extras.ts`.
+- Edit: `src/data/vehicles.ts`, `src/data/stays.ts`, `src/pages/Travel.tsx` (tier sections), `src/pages/Stays.tsx` (tabs + extras), `src/components/svrm/StayCard.tsx`, `src/components/svrm/EnquiryForm.tsx` (extras prop), `src/components/svrm/Hero.tsx` (drone clip), `src/components/svrm/Nav.tsx` (Rentals link), `src/App.tsx` (route + ScrollToTop).
+- Assets: ~9 new vehicle images (already generated this turn), ~6 villa images, ~6 hotel images, 1 drone-style video.
+- DB migration: `rental_requests` table (already applied this turn).
 
-## Notes
+## Trade-offs
 
-- **noxrentals.com**: their property photos are copyrighted and watermarked — using them on a commercial site is a legal risk. Per your selection, we'll generate original luxury imagery in the same style.
-- All prices marked "Indicative · final quote on enquiry" — booking stays request-only.
-- Currency rates are hardcoded constants; we can wire a live FX API later if you want.
+- **Drone footage**: generated via the AI video tool — styled as aerial Cape Town. Real licensed drone footage can be dropped in later.
+- **Hotel rooms**: request-only, no live inventory.
+- **Calendar**: captures requested dates only; availability is confirmed by the concierge.
