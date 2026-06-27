@@ -4,6 +4,10 @@ import yachtImg from "@/assets/svc-exp-yacht.jpg";
 import culturalImg from "@/assets/svc-tours-cultural.jpg";
 import adventureImg from "@/assets/svc-tours-adventure.jpg";
 import huntingImg from "@/assets/svc-tours-hunting.jpg";
+import safariVid from "@/assets/videos/tour-safari.mp4.asset.json";
+import huntingVid from "@/assets/videos/tour-hunting.mp4.asset.json";
+import culturalVid from "@/assets/videos/tour-cultural.mp4.asset.json";
+import adventureVid from "@/assets/videos/tour-adventure.mp4.asset.json";
 
 export type TourSlug = "safari" | "hunting" | "cultural" | "adventure" | "builder";
 
@@ -21,6 +25,7 @@ export interface TourCategory {
   blurb: string;
   description: string;
   image: string;
+  video?: string;
   packages: TourPackage[];
 }
 
