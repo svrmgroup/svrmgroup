@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
-import { Vehicle } from "@/data/vehicles";
+import { Vehicle, rentalRate } from "@/data/vehicles";
 import { rentalExtras, pickupLocations } from "@/data/extras";
 import { useCurrency } from "@/lib/currency";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
@@ -38,7 +38,7 @@ const RentalBookingSheet = ({ vehicle, open, onOpenChange }: Props) => {
 
   const days =
     range?.from && range?.to ? Math.max(1, differenceInCalendarDays(range.to, range.from)) : 0;
-  const estimatedZAR = vehicle && days > 0 ? vehicle.fromZAR * days : 0;
+  const estimatedZAR = vehicle && days > 0 ? rentalRate(vehicle) * days : 0;
 
   const toggleExtra = (id: string) =>
     setExtras((s) => (s.includes(id) ? s.filter((x) => x !== id) : [...s, id]));

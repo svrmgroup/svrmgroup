@@ -1,5 +1,5 @@
 import KenBurnsImage from "./KenBurnsImage";
-import { Vehicle } from "@/data/vehicles";
+import { Vehicle, rentalRate } from "@/data/vehicles";
 import { useCurrency } from "@/lib/currency";
 
 interface Props {
@@ -26,7 +26,7 @@ const RentalCard = ({ vehicle, index, onBook }: Props) => {
           <div>
             <p className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground/70">From</p>
             <p className="font-serif text-2xl text-gold">
-              {format(vehicle.fromZAR)}
+              {format(rentalRate(vehicle))}
               <span className="text-xs text-muted-foreground/80 tracking-wider"> / day</span>
             </p>
           </div>
