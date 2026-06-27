@@ -59,7 +59,7 @@ const TourDetail = () => {
                 key={p.duration + p.title}
                 duration={p.duration}
                 title={p.title}
-                fromPrice={p.fromPrice}
+                fromZAR={p.fromZAR}
                 inclusions={p.inclusions}
                 subject={`${tour.label} — ${p.duration} ${p.title}`}
               />

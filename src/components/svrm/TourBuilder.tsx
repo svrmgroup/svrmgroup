@@ -1,6 +1,8 @@
 import { useMemo, useState } from "react";
 import { Compass, Landmark, Mountain, Ship, Plane, Sparkles, ChefHat } from "lucide-react";
 import EnquiryForm from "./EnquiryForm";
+import { useCurrency } from "@/lib/currency";
+
 
 type ActivityId = "safari" | "cultural" | "adventure" | "yacht" | "helicopter" | "spa" | "chef";
 
@@ -13,25 +15,26 @@ interface Activity {
 }
 
 const ACTIVITIES: Activity[] = [
-  { id: "safari", label: "Safari", icon: Compass, perDay: 400, oneOff: 0 },
-  { id: "cultural", label: "Cultural", icon: Landmark, perDay: 120, oneOff: 0 },
-  { id: "adventure", label: "Adventure", icon: Mountain, perDay: 180, oneOff: 0 },
-  { id: "yacht", label: "Yacht day", icon: Ship, perDay: 0, oneOff: 800 },
-  { id: "helicopter", label: "Helicopter", icon: Plane, perDay: 0, oneOff: 900 },
-  { id: "spa", label: "Spa & wellness", icon: Sparkles, perDay: 80, oneOff: 0 },
-  { id: "chef", label: "Private chef", icon: ChefHat, perDay: 220, oneOff: 0 },
+  { id: "safari", label: "Safari", icon: Compass, perDay: 7400, oneOff: 0 },
+  { id: "cultural", label: "Cultural", icon: Landmark, perDay: 2200, oneOff: 0 },
+  { id: "adventure", label: "Adventure", icon: Mountain, perDay: 3300, oneOff: 0 },
+  { id: "yacht", label: "Yacht day", icon: Ship, perDay: 0, oneOff: 14800 },
+  { id: "helicopter", label: "Helicopter", icon: Plane, perDay: 0, oneOff: 16650 },
+  { id: "spa", label: "Spa & wellness", icon: Sparkles, perDay: 1500, oneOff: 0 },
+  { id: "chef", label: "Private chef", icon: ChefHat, perDay: 4100, oneOff: 0 },
 ];
 
 type Tier = "premium" | "luxury" | "ultra";
 const TIERS: { id: Tier; label: string; perDay: number }[] = [
-  { id: "premium", label: "Premium", perDay: 350 },
-  { id: "luxury", label: "Luxury", perDay: 650 },
-  { id: "ultra", label: "Ultra", perDay: 1100 },
+  { id: "premium", label: "Premium", perDay: 6500 },
+  { id: "luxury", label: "Luxury", perDay: 12000 },
+  { id: "ultra", label: "Ultra", perDay: 20400 },
 ];
 
 const DURATIONS = [3, 5, 7, 10, 14];
 
 const TourBuilder = () => {
+  const { format } = useCurrency();
   const [selected, setSelected] = useState<Set<ActivityId>>(new Set(["safari", "cultural"]));
   const [duration, setDuration] = useState(5);
   const [travellers, setTravellers] = useState(2);
@@ -54,14 +57,15 @@ const TourBuilder = () => {
       activityCost += a.perDay * duration + a.oneOff;
     });
     const perPerson = base + activityCost;
-    const low = Math.round((perPerson * 0.85) / 50) * 50;
-    const high = Math.round((perPerson * 1.15) / 50) * 50;
+    const low = Math.round((perPerson * 0.85) / 500) * 500;
+    const high = Math.round((perPerson * 1.15) / 500) * 500;
     const activityLabels = Array.from(selected).map((id) => ACTIVITIES.find((a) => a.id === id)!.label);
     const summary = `${duration}-day ${tierData.label.toLowerCase()} tour for ${travellers} traveller${travellers > 1 ? "s" : ""} including ${activityLabels.join(", ") || "no activities selected yet"}.`;
     return { low, high, summary };
   }, [selected, duration, travellers, tier]);
 
-  const fmt = (n: number) => `US$${n.toLocaleString()}`;
+  const fmt = (n: number) => format(n);
+
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
