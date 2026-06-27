@@ -9,7 +9,7 @@ import { buildWhatsAppUrl } from "@/lib/whatsapp";
 const links = [
   { to: "/", label: "Home" },
   { to: "/travel", label: "Travel" },
-  { to: "/lifestyle", label: "Lifestyle" },
+  { to: "/rentals", label: "Rentals" },
   { to: "/stays", label: "Stays" },
   { to: "/tours", label: "Tours" },
   { to: "/experiences", label: "Custom" },
