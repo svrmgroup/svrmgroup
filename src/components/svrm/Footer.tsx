@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
-import { buildWhatsAppUrl, CONCIERGE_EMAIL } from "@/lib/whatsapp";
+import { Instagram } from "lucide-react";
+import { buildWhatsAppUrl, CONCIERGE_EMAIL, INSTAGRAM_URL, TIKTOK_URL } from "@/lib/whatsapp";
 
 const explore = [
   { to: "/travel", label: "Travel" },
@@ -11,6 +12,13 @@ const explore = [
   { to: "/blog", label: "Journal" },
   { to: "/contact", label: "Contact" },
 ];
+
+// Lucide doesn't ship a TikTok icon — small inline SVG instead.
+const TikTokIcon = ({ className = "" }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" className={className} fill="currentColor" aria-hidden="true">
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5.8 20.1a6.34 6.34 0 0 0 10.86-4.43V8.69a8.16 8.16 0 0 0 4.77 1.52V6.79a4.85 4.85 0 0 1-1.84-.1z"/>
+  </svg>
+);
 
 const Footer = () => (
   <footer className="bg-background border-t border-border/60">
@@ -24,6 +32,26 @@ const Footer = () => (
           Curated luxury across South Africa. Lifestyle management for those who would rather
           live the moment than arrange it.
         </p>
+        <div className="mt-6 flex items-center gap-3">
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="SVRM on Instagram"
+            className="h-10 w-10 border border-border/60 flex items-center justify-center text-muted-foreground hover:text-gold hover:border-primary transition-colors"
+          >
+            <Instagram className="h-4 w-4" />
+          </a>
+          <a
+            href={TIKTOK_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="SVRM on TikTok"
+            className="h-10 w-10 border border-border/60 flex items-center justify-center text-muted-foreground hover:text-gold hover:border-primary transition-colors"
+          >
+            <TikTokIcon className="h-4 w-4" />
+          </a>
+        </div>
       </div>
       <div>
         <p className="eyebrow">Explore</p>
