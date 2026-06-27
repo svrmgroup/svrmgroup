@@ -28,7 +28,7 @@ const Tours = () => (
               src={t.image}
               alt={t.label}
               loading="lazy"
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1400ms] ease-[var(--ease-luxe)] group-hover:scale-105"
+              className="absolute inset-0 w-full h-full object-cover kb-a"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-surface-deep via-surface-deep/40 to-transparent" />
             <div className="absolute inset-x-0 bottom-0 p-8">
