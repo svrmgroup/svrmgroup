@@ -3,40 +3,56 @@ import Footer from "@/components/svrm/Footer";
 import PageHero from "@/components/svrm/PageHero";
 import EnquiryForm from "@/components/svrm/EnquiryForm";
 import VehicleCard from "@/components/svrm/VehicleCard";
-import { vehicles } from "@/data/vehicles";
+import { vehicles, vehicleTiers } from "@/data/vehicles";
 import { Seo } from "@/components/Seo";
+
+const tierBlurbs: Record<string, string> = {
+  "Signature": "The top of the SVRM fleet — Rolls-Royce, Bentley, Lamborghini. Chauffeur-led.",
+  "Premium SUV": "Off-the-grid capability without compromise. Range Rover, AMG G-Class, Porsche, BMW.",
+  "Executive": "Discreet sedans and lounge vans for transfers, meetings and small parties.",
+  "Everyday": "Smart everyday vehicles for longer stays — budget-friendly, fully insured.",
+};
 
 const Travel = () => (
   <main className="bg-background text-foreground min-h-screen">
     <Seo
       title={"Travel — Chauffeurs, Jets & Luxury Vehicles | SVRM"}
-      description={"Rolls-Royce, Lamborghini, Mercedes-AMG and BMW — chauffeured or self-drive across Cape Town. Private aviation on request."}
+      description={"Rolls-Royce, Bentley, Range Rover, Mercedes, BMW, Porsche, Audi — chauffeured or self-drive across Cape Town. Private aviation on request."}
       path="/travel"
     />
     <Nav />
     <PageHero
       eyebrow="Travel"
       title="Arrive without thinking about it."
-      subtitle="Five vehicles, in the sun. Chauffeured or self-drive — daily rates indicative, every booking arranged personally."
+      subtitle="A full fleet across four tiers — Signature, Premium SUV, Executive and Everyday. Chauffeured or self-drive."
     />
 
-    <section className="pb-12 md:pb-20">
+    <section className="pb-12 md:pb-16">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
-          <div>
-            <p className="eyebrow">The Fleet</p>
-            <h2 className="font-serif text-3xl md:text-4xl mt-3 text-foreground">Five vehicles, on request.</h2>
-          </div>
-          <p className="text-xs text-muted-foreground/80 tracking-wide max-w-xs">
-            Indicative daily rates. Switch currency in the top nav. Final quote confirmed on enquiry.
-          </p>
-        </div>
+        <p className="text-xs text-muted-foreground/80 tracking-wide max-w-2xl mb-12">
+          Indicative daily rates. Switch currency in the top nav. Final quote confirmed on enquiry.
+        </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {vehicles.map((v, i) => (
-            <VehicleCard key={v.slug} vehicle={v} index={i} />
-          ))}
-        </div>
+        {vehicleTiers.map((tier) => {
+          const list = vehicles.filter((v) => v.tier === tier);
+          if (list.length === 0) return null;
+          return (
+            <div key={tier} className="mb-16 md:mb-20">
+              <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-8">
+                <div>
+                  <p className="eyebrow">{tier}</p>
+                  <h2 className="font-serif text-3xl md:text-4xl mt-3 text-foreground">{tier}</h2>
+                </div>
+                <p className="text-sm text-muted-foreground max-w-md">{tierBlurbs[tier]}</p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                {list.map((v, i) => (
+                  <VehicleCard key={v.slug} vehicle={v} index={i} />
+                ))}
+              </div>
+            </div>
+          );
+        })}
       </div>
     </section>
 

@@ -4,6 +4,8 @@ import { useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
+import ExtrasPicker from "./ExtrasPicker";
+import { Extra } from "@/data/extras";
 
 const schema = z.object({
   name: z.string().trim().min(1, "Required").max(100),
@@ -16,17 +18,29 @@ interface Props {
   subject: string;
   defaultMessage?: string;
   compact?: boolean;
+  extras?: Extra[];
+  extrasLabel?: string;
 }
 
-const EnquiryForm = ({ subject, defaultMessage = "", compact = false }: Props) => {
+const EnquiryForm = ({ subject, defaultMessage = "", compact = false, extras, extrasLabel }: Props) => {
   const location = useLocation();
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: defaultMessage });
+  const [selectedExtras, setSelectedExtras] = useState<string[]>([]);
   const [errors, setErrors] = useState<Partial<Record<keyof typeof form, string>>>({});
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
 
   const update = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm((f) => ({ ...f, [k]: e.target.value }));
+  };
+
+  const toggleExtra = (id: string) =>
+    setSelectedExtras((s) => (s.includes(id) ? s.filter((x) => x !== id) : [...s, id]));
+
+  const extrasSummary = () => {
+    if (!extras || selectedExtras.length === 0) return "";
+    const labels = extras.filter((e) => selectedExtras.includes(e.id)).map((e) => e.label);
+    return `\n\nExtras requested: ${labels.join(", ")}`;
   };
 
   const onSubmit = async (e: React.FormEvent) => {
@@ -43,12 +57,13 @@ const EnquiryForm = ({ subject, defaultMessage = "", compact = false }: Props) =
     }
     setErrors({});
     setSubmitting(true);
+    const fullMessage = parsed.data.message + extrasSummary();
     const { error } = await supabase.from("enquiries").insert({
       name: parsed.data.name,
       email: parsed.data.email,
       phone: parsed.data.phone || null,
       subject,
-      message: parsed.data.message,
+      message: fullMessage,
       source_page: location.pathname,
     });
     setSubmitting(false);
@@ -75,42 +90,24 @@ const EnquiryForm = ({ subject, defaultMessage = "", compact = false }: Props) =
   const inputBase =
     "w-full bg-transparent border-b border-border/60 px-0 py-3 text-foreground placeholder:text-muted-foreground/60 focus:border-primary focus:outline-none transition-colors";
 
+  const waSubject = extras && selectedExtras.length > 0
+    ? `${subject} (${extras.filter((e) => selectedExtras.includes(e.id)).map((e) => e.label).join(", ")})`
+    : subject;
+
   return (
     <form onSubmit={onSubmit} className={compact ? "space-y-5" : "space-y-6"}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <input
-            className={inputBase}
-            placeholder="Name"
-            value={form.name}
-            onChange={update("name")}
-            maxLength={100}
-            aria-label="Name"
-          />
+          <input className={inputBase} placeholder="Name" value={form.name} onChange={update("name")} maxLength={100} aria-label="Name" />
           {errors.name && <p className="mt-1 text-xs text-destructive">{errors.name}</p>}
         </div>
         <div>
-          <input
-            className={inputBase}
-            placeholder="Email"
-            type="email"
-            value={form.email}
-            onChange={update("email")}
-            maxLength={255}
-            aria-label="Email"
-          />
+          <input className={inputBase} placeholder="Email" type="email" value={form.email} onChange={update("email")} maxLength={255} aria-label="Email" />
           {errors.email && <p className="mt-1 text-xs text-destructive">{errors.email}</p>}
         </div>
       </div>
       <div>
-        <input
-          className={inputBase}
-          placeholder="Phone (optional)"
-          value={form.phone}
-          onChange={update("phone")}
-          maxLength={40}
-          aria-label="Phone"
-        />
+        <input className={inputBase} placeholder="Phone (optional)" value={form.phone} onChange={update("phone")} maxLength={40} aria-label="Phone" />
       </div>
       <div>
         <textarea
@@ -123,6 +120,16 @@ const EnquiryForm = ({ subject, defaultMessage = "", compact = false }: Props) =
         />
         {errors.message && <p className="mt-1 text-xs text-destructive">{errors.message}</p>}
       </div>
+
+      {extras && extras.length > 0 && (
+        <ExtrasPicker
+          extras={extras}
+          selected={selectedExtras}
+          onToggle={toggleExtra}
+          label={extrasLabel ?? "Add extras"}
+        />
+      )}
+
       <div className="flex flex-col sm:flex-row gap-4 pt-2">
         <button
           type="submit"
@@ -132,7 +139,7 @@ const EnquiryForm = ({ subject, defaultMessage = "", compact = false }: Props) =
           {submitting ? "Sending…" : "Send enquiry"}
         </button>
         <a
-          href={buildWhatsAppUrl(subject)}
+          href={buildWhatsAppUrl(waSubject)}
           target="_blank"
           rel="noopener noreferrer"
           className="px-8 py-4 border border-primary/60 text-gold text-xs uppercase tracking-[0.32em] text-center hover:bg-primary hover:text-primary-foreground transition-colors duration-500"

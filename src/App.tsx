@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { CurrencyProvider } from "@/lib/currency";
 import WhatsAppFab from "@/components/svrm/WhatsAppFab";
+import ScrollToTop from "@/components/ScrollToTop";
 import Index from "./pages/Index.tsx";
 import Travel from "./pages/Travel.tsx";
 import Lifestyle from "./pages/Lifestyle.tsx";
@@ -15,6 +16,7 @@ import TourBuilderPage from "./pages/TourBuilderPage.tsx";
 import CustomExperiences from "./pages/CustomExperiences.tsx";
 import Blog from "./pages/Blog.tsx";
 import Contact from "./pages/Contact.tsx";
+import Rentals from "./pages/Rentals.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -26,9 +28,11 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/travel" element={<Travel />} />
+            <Route path="/rentals" element={<Rentals />} />
             <Route path="/lifestyle" element={<Lifestyle />} />
             <Route path="/stays" element={<Stays />} />
             <Route path="/tours" element={<Tours />} />

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import heroPoster from "@/assets/hero-poster.jpg";
-import { buildWhatsAppUrl } from "@/lib/whatsapp";
+import droneVideo from "@/assets/hero-drone.mp4.asset.json";
 
 const Hero = () => {
   return (
@@ -18,10 +18,7 @@ const Hero = () => {
         poster={heroPoster}
         aria-hidden="true"
       >
-        <source
-          src="https://cdn.coverr.co/videos/coverr-driving-on-a-coastal-road-2633/1080p.mp4"
-          type="video/mp4"
-        />
+        <source src={droneVideo.url} type="video/mp4" />
       </video>
       <img
         src={heroPoster}
