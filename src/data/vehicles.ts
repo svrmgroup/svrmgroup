@@ -1,5 +1,6 @@
 import cullinan from "@/assets/vehicles/cullinan.jpg";
 import ghost from "@/assets/vehicles/ghost.jpg";
+import phantom from "@/assets/vehicles/phantom.jpg";
 import g63 from "@/assets/vehicles/g63.jpg";
 import bmw7 from "@/assets/vehicles/bmw7.jpg";
 import urus from "@/assets/vehicles/urus.jpg";
@@ -7,6 +8,7 @@ import bmwx5 from "@/assets/vehicles/bmwx5.jpg";
 import bmwx3 from "@/assets/vehicles/bmwx3.jpg";
 import sclass from "@/assets/vehicles/sclass.jpg";
 import vclass from "@/assets/vehicles/vclass.jpg";
+import staria from "@/assets/vehicles/staria.jpg";
 import rangerover from "@/assets/vehicles/rangerover.jpg";
 import rrsport from "@/assets/vehicles/rrsport.jpg";
 import cayenne from "@/assets/vehicles/cayenne.jpg";
@@ -16,6 +18,8 @@ import audiq5 from "@/assets/vehicles/audiq5.jpg";
 import bmw3 from "@/assets/vehicles/bmw3.jpg";
 import bmw5 from "@/assets/vehicles/bmw5.jpg";
 import eclass from "@/assets/vehicles/eclass.jpg";
+import corolla from "@/assets/vehicles/corolla.jpg";
+import polo from "@/assets/vehicles/polo.jpg";
 
 export type VehicleTier = "Signature" | "Premium SUV" | "Executive" | "Everyday" | "Budget";
 
@@ -34,6 +38,7 @@ export interface Vehicle {
 
 export const vehicles: Vehicle[] = [
   // Signature
+  { slug: "rolls-royce-phantom", name: "Rolls-Royce Phantom", tagline: "The pinnacle of motoring, chauffeured.", fromZAR: 62500, image: phantom, tier: "Signature", selfDrive: false },
   { slug: "rolls-royce-cullinan", name: "Rolls-Royce Cullinan", tagline: "The summit of the SVRM fleet.", fromZAR: 57500, image: cullinan, tier: "Signature", selfDrive: false },
   { slug: "rolls-royce-ghost", name: "Rolls-Royce Ghost", tagline: "Silent presence, chauffeured.", fromZAR: 55000, image: ghost, tier: "Signature", selfDrive: false },
   { slug: "bentley-bentayga", name: "Bentley Bentayga", tagline: "British craft, African horizon.", fromZAR: 23000, rentalZAR: 18500, image: bentayga, tier: "Signature", selfDrive: true },
