@@ -4,12 +4,35 @@ import yachtImg from "@/assets/svc-exp-yacht.jpg";
 import culturalImg from "@/assets/svc-tours-cultural.jpg";
 import adventureImg from "@/assets/svc-tours-adventure.jpg";
 import huntingImg from "@/assets/svc-tours-hunting.jpg";
+import marineImg from "@/assets/tours/marine.jpg";
+import gardenRouteImg from "@/assets/tours/garden-route.jpg";
+import aerialImg from "@/assets/tours/aerial.jpg";
+import culinaryImg from "@/assets/tours/culinary.jpg";
+import wellnessImg from "@/assets/tours/wellness.jpg";
+import photographyImg from "@/assets/tours/photography.jpg";
 import safariVid from "@/assets/videos/tour-safari.mp4.asset.json";
 import huntingVid from "@/assets/videos/tour-hunting.mp4.asset.json";
 import culturalVid from "@/assets/videos/tour-cultural.mp4.asset.json";
 import adventureVid from "@/assets/videos/tour-adventure.mp4.asset.json";
+import marineVid from "@/assets/videos/tour-marine.mp4.asset.json";
+import gardenRouteVid from "@/assets/videos/tour-garden-route.mp4.asset.json";
+import aerialVid from "@/assets/videos/tour-aerial.mp4.asset.json";
+import culinaryVid from "@/assets/videos/tour-culinary.mp4.asset.json";
+import wellnessVid from "@/assets/videos/tour-wellness.mp4.asset.json";
+import photographyVid from "@/assets/videos/tour-photography.mp4.asset.json";
 
-export type TourSlug = "safari" | "hunting" | "cultural" | "adventure" | "builder";
+export type TourSlug =
+  | "safari"
+  | "hunting"
+  | "cultural"
+  | "adventure"
+  | "marine"
+  | "garden-route"
+  | "aerial"
+  | "culinary"
+  | "wellness"
+  | "photography"
+  | "builder";
 
 export interface TourPackage {
   duration: string;
@@ -83,6 +106,89 @@ export const tours: TourCategory[] = [
       { duration: "3 days", title: "Cape adventure short", fromZAR: 33000, inclusions: ["Helicopter scenic flip", "Shark-cage diving", "Boutique accommodation", "All transfers"] },
       { duration: "5 days", title: "Cape & bush", fromZAR: 59000, inclusions: ["Cape adventure + safari", "Helicopter + game drives", "Internal flights", "Luxury lodging"] },
       { duration: "7 days", title: "Land, sea & sky", fromZAR: 89000, inclusions: ["Heli, yacht & safari", "Horseback Winelands trail", "Private guides throughout", "Premium accommodation"] },
+    ],
+  {
+    slug: "marine",
+    label: "Marine & Wildlife",
+    blurb: "Whales, penguins, and great whites.",
+    description:
+      "Boat-based whale watching out of Hermanus and Gansbaai (June–November), the African penguin colony at Boulders Beach, shark-cage diving with great whites, and seal snorkelling at Duiker Island — sequenced into measured day trips or multi-day coastal itineraries.",
+    image: marineImg,
+    video: marineVid.url,
+    packages: [
+      { duration: "1 day", title: "Boulders penguins & Cape Point", fromZAR: 6500, inclusions: ["Private chauffeur", "Boulders Beach entry", "Cape Point funicular", "Picnic lunch"] },
+      { duration: "2 days", title: "Hermanus whale weekend", fromZAR: 18500, inclusions: ["Boat-based whale watching", "Coastal cliff walk", "1 night boutique stay", "All transfers"] },
+      { duration: "3 days", title: "Marine grand circuit", fromZAR: 32000, inclusions: ["Whale watching + shark cage diving", "Seal snorkelling at Duiker Island", "2 nights luxury accommodation", "Private guide throughout"] },
+    ],
+  },
+  {
+    slug: "garden-route",
+    label: "Garden Route Road Trip",
+    blurb: "Cape Town to Knysna, taken slowly.",
+    description:
+      "The classic Garden Route from Cape Town along the southern coast — Mossel Bay, Wilderness, Knysna lagoons, Tsitsikamma forests and suspension bridges, ending at Plettenberg Bay beaches. Private chauffeur or self-drive, with hand-picked boutique stays.",
+    image: gardenRouteImg,
+    video: gardenRouteVid.url,
+    packages: [
+      { duration: "4 days", title: "Garden Route essentials", fromZAR: 38000, inclusions: ["Private chauffeur or rental car", "3 nights boutique stays", "Tsitsikamma suspension bridge", "Knysna lagoon cruise"] },
+      { duration: "6 days", title: "Coast & forest signature", fromZAR: 62000, inclusions: ["Extended coastal itinerary", "Robberg nature reserve hike", "Plettenberg Bay beach time", "All meals & transfers"] },
+      { duration: "10 days", title: "Cape to Addo grand tour", fromZAR: null, inclusions: ["Garden Route + Addo Elephant Park", "Private guide & vehicle", "Premium lodging throughout", "Curated, end to end"] },
+    ],
+  },
+  {
+    slug: "aerial",
+    label: "Aerial & Scenic Flights",
+    blurb: "Cape Town from above.",
+    description:
+      "Helicopter scenic flips over the Twelve Apostles and Cape Point, tandem paragliding off Signal Hill, and hot-air balloon flights over the Winelands valley floor at sunrise. Short, high-impact experiences slotted into any itinerary.",
+    image: aerialImg,
+    video: aerialVid.url,
+    packages: [
+      { duration: "30 min", title: "Atlantic seaboard heli flip", fromZAR: 4500, inclusions: ["Helicopter scenic flight", "Camps Bay & Twelve Apostles", "V&A Waterfront departure", "Private transfers"] },
+      { duration: "45 min", title: "Two Oceans aerial tour", fromZAR: 7200, inclusions: ["Cape Point & Cape of Good Hope", "Hout Bay & Chapman's Peak", "Pilot narration", "Private transfers"] },
+      { duration: "Half day", title: "Sunrise hot-air balloon", fromZAR: 8900, inclusions: ["Hot-air balloon flight", "Light breakfast on landing", "Private pickup", "Photographer on request"] },
+    ],
+  },
+  {
+    slug: "culinary",
+    label: "Culinary Experiences",
+    blurb: "Cape flavours, no alcohol required.",
+    description:
+      "Cape Malay cooking classes in Bo-Kaap, private chef-led market walks through Neighbourgoods and Oranjezicht, specialty coffee roastery tours, biltong & dried-fruit tastings, and tea ceremonies at heritage estates — all alcohol-free.",
+    image: culinaryImg,
+    video: culinaryVid.url,
+    packages: [
+      { duration: "Half day", title: "Bo-Kaap cooking class", fromZAR: 3200, inclusions: ["Private Cape Malay cooking class", "Heritage walk through Bo-Kaap", "Shared lunch", "Private transfers"] },
+      { duration: "1 day", title: "Markets, coffee & spice", fromZAR: 5800, inclusions: ["Two artisan markets", "Specialty coffee roastery", "Spice route walking tour", "Private guide"] },
+      { duration: "3 days", title: "Cape culinary signature", fromZAR: 22000, inclusions: ["Cooking class + market tours", "Heritage tea ceremony", "Chef-led tastings", "2 nights boutique accommodation"] },
+    ],
+  },
+  {
+    slug: "wellness",
+    label: "Wellness & Retreat",
+    blurb: "Reset, in serious quiet.",
+    description:
+      "Sunrise yoga on Camps Bay deck, hot mineral spring soaks in the Cederberg, forest bathing in Tsitsikamma, and full spa days at the Cape's leading wellness sanctuaries. Built for travellers who want to come home better than they arrived.",
+    image: wellnessImg,
+    video: wellnessVid.url,
+    packages: [
+      { duration: "1 day", title: "Spa day signature", fromZAR: 5500, inclusions: ["Full-day spa access", "Two treatments", "Healthy lunch", "Private transfers"] },
+      { duration: "3 days", title: "Mountain wellness retreat", fromZAR: 28000, inclusions: ["2 nights wellness lodge", "Daily yoga & meditation", "Two spa treatments", "Plant-based dining"] },
+      { duration: "5 days", title: "Cederberg hot springs", fromZAR: 46000, inclusions: ["Hot mineral spring soaks", "Guided hikes & stargazing", "4 nights boutique lodge", "All wellness inclusions"] },
+    ],
+  },
+  {
+    slug: "photography",
+    label: "Photography Tours",
+    blurb: "Sunrise on Lion's Head, with a guide.",
+    description:
+      "Led by a working Cape Town photographer — pre-dawn shoots on Lion's Head, blue-hour at the V&A Waterfront, Bo-Kaap colour studies, Cape Point lighthouses and Boulders penguins. Suits both phone shooters and full-frame travellers.",
+    image: photographyImg,
+    video: photographyVid.url,
+    packages: [
+      { duration: "Half day", title: "Sunrise Lion's Head shoot", fromZAR: 3800, inclusions: ["Pre-dawn private hike", "Photographer mentor", "Coffee on summit", "Edits delivered"] },
+      { duration: "1 day", title: "Cape Town in a day", fromZAR: 6800, inclusions: ["Bo-Kaap, V&A, Sea Point", "Sunset at Signal Hill", "Private photographer guide", "Curated edits"] },
+      { duration: "3 days", title: "Cape photographic signature", fromZAR: 28000, inclusions: ["City + Cape Point + Boulders", "Sunrise & sunset shoots", "Private guide & transport", "Boutique accommodation"] },
     ],
   },
 ];
