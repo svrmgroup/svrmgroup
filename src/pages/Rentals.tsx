@@ -81,7 +81,7 @@ const Rentals = () => {
               return (
                 <TabsContent key={t} value={t} className="mt-0">
                   <p className="text-xs text-muted-foreground/80 tracking-wide max-w-2xl mb-8">
-                    Daily self-drive rates indicative — calendar shows pickup → return dates. Switch currency in the top nav.
+                    All self-drive rates on request — calendar shows pickup → return dates. Final quote confirmed on enquiry.
                   </p>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                     {list.map((v, i) => (

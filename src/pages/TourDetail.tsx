@@ -175,8 +175,8 @@ const TourDetail = () => {
             ))}
           </div>
           <p className="text-center text-xs text-muted-foreground/60 mt-10 max-w-2xl mx-auto">
-            All prices indicative, per person, excluding international flights. Every itinerary is
-            personalised and quoted on request.
+            Every itinerary is personalised. Pricing is on request — per person, excluding
+            international flights.
           </p>
         </div>
       </section>
