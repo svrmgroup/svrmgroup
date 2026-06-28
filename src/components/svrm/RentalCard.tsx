@@ -1,6 +1,5 @@
 import KenBurnsImage from "./KenBurnsImage";
-import { Vehicle, rentalRate } from "@/data/vehicles";
-import { useCurrency } from "@/lib/currency";
+import { Vehicle } from "@/data/vehicles";
 
 interface Props {
   vehicle: Vehicle;
@@ -9,7 +8,6 @@ interface Props {
 }
 
 const RentalCard = ({ vehicle, index, onBook }: Props) => {
-  const { format } = useCurrency();
   return (
     <article className="group bg-surface-raised border border-border/40 flex flex-col">
       <KenBurnsImage
@@ -24,11 +22,8 @@ const RentalCard = ({ vehicle, index, onBook }: Props) => {
         <p className="text-sm text-muted-foreground mt-2 flex-1">{vehicle.tagline}</p>
         <div className="mt-5 flex items-end justify-between gap-4">
           <div>
-            <p className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground/70">From</p>
-            <p className="font-serif text-2xl text-gold">
-              {format(rentalRate(vehicle))}
-              <span className="text-xs text-muted-foreground/80 tracking-wider"> / day</span>
-            </p>
+            <p className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground/70">Rates</p>
+            <p className="font-serif text-xl text-gold">On request</p>
           </div>
           <button
             type="button"

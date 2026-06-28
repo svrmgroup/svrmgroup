@@ -160,19 +160,19 @@ const TourBuilder = () => {
       </div>
 
       <aside className="lg:sticky lg:top-32 self-start bg-surface-raised border border-border/40 p-8">
-        <p className="eyebrow">Indicative range</p>
+        <p className="eyebrow">Rough estimate</p>
         <p className="font-serif text-3xl md:text-4xl text-gold mt-4 leading-tight">
           {fmt(low)}<span className="text-muted-foreground/70 mx-2">–</span>{fmt(high)}
         </p>
-        <p className="text-xs text-muted-foreground/70 mt-2 tracking-wide">per person, excl. international flights</p>
+        <p className="text-xs text-muted-foreground/70 mt-2 tracking-wide">per person, excl. international flights · rough only</p>
         <p className="text-sm text-foreground/85 mt-6 leading-relaxed">{summary}</p>
         <p className="text-xs text-muted-foreground/60 mt-4 italic">
-          Indicative only — every itinerary is personalised and quoted on request.
+          A rough guide — the final price is on request and personalised to your brief.
         </p>
         <div className="mt-8">
           <EnquiryForm
             subject="Bespoke tour"
-            defaultMessage={`I'd like to enquire about a bespoke tour:\n\n${summary}\n\nIndicative range: ${fmt(low)} – ${fmt(high)} per person.`}
+            defaultMessage={`I'd like to enquire about a bespoke tour:\n\n${summary}\n\nRough estimate: ${fmt(low)} – ${fmt(high)} per person (final quote on request).`}
             compact
           />
         </div>

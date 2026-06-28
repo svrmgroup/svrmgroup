@@ -1,9 +1,14 @@
+import { useState } from "react";
 import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
 import PageHero from "@/components/svrm/PageHero";
 import EnquiryForm from "@/components/svrm/EnquiryForm";
 import VehicleCard from "@/components/svrm/VehicleCard";
+import CategoryCard from "@/components/svrm/CategoryCard";
 import { vehicles, vehicleTiers } from "@/data/vehicles";
+import { jets, helicopters } from "@/data/aviation";
+import { yachts } from "@/data/yachts";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Seo } from "@/components/Seo";
 import heroVideo from "@/assets/videos/travel.mp4.asset.json";
 
@@ -14,83 +19,149 @@ const tierBlurbs: Record<string, string> = {
   "Everyday": "Smart everyday vehicles for longer stays — budget-friendly, fully insured.",
 };
 
-const Travel = () => (
-  <main className="bg-background text-foreground min-h-screen">
-    <Seo
-      title={"Travel — Chauffeurs, Jets & Luxury Vehicles | SVRM"}
-      description={"Rolls-Royce, Bentley, Range Rover, Mercedes, BMW, Porsche, Audi — chauffeured or self-drive across Cape Town. Private aviation on request."}
-      path="/travel"
-    />
-    <Nav />
-    <PageHero
-      eyebrow="Travel"
-      title="Arrive without thinking about it."
-      subtitle="A full fleet across four tiers — Signature, Premium SUV, Executive and Everyday. Chauffeured or self-drive."
-      videoSrc={heroVideo.url}
-    />
+type Mode = "cars" | "jets" | "helicopters" | "yachts";
 
-    <section className="pb-12 md:pb-16">
-      <div className="max-w-7xl mx-auto px-6">
-        <p className="text-xs text-muted-foreground/80 tracking-wide max-w-2xl mb-12">
-          Indicative daily rates. Switch currency in the top nav. Final quote confirmed on enquiry.
-        </p>
+const Travel = () => {
+  const [mode, setMode] = useState<Mode>("cars");
 
-        {vehicleTiers.map((tier) => {
-          const list = vehicles.filter((v) => v.tier === tier);
-          if (list.length === 0) return null;
-          return (
-            <div key={tier} className="mb-16 md:mb-20">
-              <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-8">
-                <div>
-                  <p className="eyebrow">{tier}</p>
-                  <h2 className="font-serif text-3xl md:text-4xl mt-3 text-foreground">{tier}</h2>
-                </div>
-                <p className="text-sm text-muted-foreground max-w-md">{tierBlurbs[tier]}</p>
+  return (
+    <main className="bg-background text-foreground min-h-screen">
+      <Seo
+        title={"Travel — Cars, Jets, Helicopters & Yachts | SVRM"}
+        description={"Chauffeured cars, private jet & helicopter charter, and luxury yacht charter across South Africa. Every quote on request."}
+        path="/travel"
+      />
+      <Nav />
+      <PageHero
+        eyebrow="Travel"
+        title="Arrive without thinking about it."
+        subtitle="Cars, private jets, helicopters and yachts — switch the category and send the brief."
+        videoSrc={heroVideo.url}
+      />
+
+      <section className="pb-12 md:pb-16">
+        <div className="max-w-7xl mx-auto px-6">
+          <Tabs value={mode} onValueChange={(v) => setMode(v as Mode)} className="w-full">
+            <TabsList className="flex flex-wrap h-auto bg-transparent justify-start gap-2 p-0 mb-10">
+              {(["cars", "jets", "helicopters", "yachts"] as Mode[]).map((m) => (
+                <TabsTrigger
+                  key={m}
+                  value={m}
+                  className="text-[11px] uppercase tracking-[0.24em] px-4 py-2 border border-border/60 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary rounded-none"
+                >
+                  {m === "cars" ? "Cars" : m === "jets" ? "Private Jets" : m === "helicopters" ? "Helicopters" : "Yachts"}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+
+            <TabsContent value="cars" className="mt-0">
+              <p className="text-xs text-muted-foreground/80 tracking-wide max-w-2xl mb-12">
+                Every chauffeured rate is quoted on request once we know route, hours and add-ons.
+              </p>
+              {vehicleTiers.map((tier) => {
+                const list = vehicles.filter((v) => v.tier === tier);
+                if (list.length === 0) return null;
+                return (
+                  <div key={tier} className="mb-16 md:mb-20">
+                    <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-8">
+                      <div>
+                        <p className="eyebrow">{tier}</p>
+                        <h2 className="font-serif text-3xl md:text-4xl mt-3 text-foreground">{tier}</h2>
+                      </div>
+                      <p className="text-sm text-muted-foreground max-w-md">{tierBlurbs[tier]}</p>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                      {list.map((v, i) => (
+                        <VehicleCard key={v.slug} vehicle={v} index={i} />
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+            </TabsContent>
+
+            <TabsContent value="jets" className="mt-0">
+              <div className="mb-10">
+                <p className="eyebrow">Private Jets</p>
+                <h2 className="font-serif text-3xl md:text-4xl mt-3 text-foreground">Jets, sourced on demand.</h2>
+                <p className="text-sm text-muted-foreground mt-3 max-w-2xl">
+                  Light, midsize and heavy jets through trusted operators. Every charter quoted on request.
+                </p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-                {list.map((v, i) => (
-                  <VehicleCard key={v.slug} vehicle={v} index={i} />
+                {jets.map((j, i) => (
+                  <CategoryCard key={j.slug} eyebrow="Private Jet" name={j.name} tagline={j.tagline} meta={j.capacity} image={j.image} index={i} enquirySubject={`Private jet — ${j.name}`} />
                 ))}
               </div>
-            </div>
-          );
-        })}
-      </div>
-    </section>
+            </TabsContent>
 
-    <section className="bg-surface-deep py-20 border-t border-border/40">
-      <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-10">
-        <div>
-          <p className="eyebrow">Private Aviation</p>
-          <h3 className="font-serif text-3xl mt-4 text-foreground">Jets & helicopters.</h3>
-          <p className="text-muted-foreground mt-4">
-            Private jet charter, helicopter transfers and scenic flights — sourced through trusted
-            operators. Every flight quoted on request.
-          </p>
-        </div>
-        <div>
-          <p className="eyebrow">Chauffeur</p>
-          <h3 className="font-serif text-3xl mt-4 text-foreground">English-speaking, NDA-bound.</h3>
-          <p className="text-muted-foreground mt-4">
-            Hourly hire, airport transfers and inter-city journeys with a discreet chauffeur on call
-            for the length of your stay.
-          </p>
-        </div>
-      </div>
-    </section>
+            <TabsContent value="helicopters" className="mt-0">
+              <div className="mb-10">
+                <p className="eyebrow">Helicopters</p>
+                <h2 className="font-serif text-3xl md:text-4xl mt-3 text-foreground">Heli transfers & scenic flips.</h2>
+                <p className="text-sm text-muted-foreground mt-3 max-w-2xl">
+                  Robinson, AS350, EC130 — from a 20-minute scenic flip over the Twelve Apostles to a Winelands transfer.
+                </p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                {helicopters.map((h, i) => (
+                  <CategoryCard key={h.slug} eyebrow="Helicopter" name={h.name} tagline={h.tagline} meta={h.capacity} image={h.image} index={i} enquirySubject={`Helicopter — ${h.name}`} />
+                ))}
+              </div>
+            </TabsContent>
 
-    <section className="bg-background py-24 md:py-32 border-t border-border/40">
-      <div className="max-w-3xl mx-auto px-6">
-        <div className="text-center mb-12">
-          <p className="eyebrow">Enquire · Travel</p>
-          <h2 className="font-serif text-4xl md:text-5xl mt-6 text-foreground">Send us the brief.</h2>
+            <TabsContent value="yachts" className="mt-0">
+              <div className="mb-10">
+                <p className="eyebrow">Yachts</p>
+                <h2 className="font-serif text-3xl md:text-4xl mt-3 text-foreground">Day & overnight charter.</h2>
+                <p className="text-sm text-muted-foreground mt-3 max-w-2xl">
+                  Sailing, motor and superyacht charters out of the V&A Waterfront — crewed, catered and curated.
+                </p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                {yachts.map((y, i) => (
+                  <CategoryCard key={y.slug} eyebrow="Yacht" name={y.name} tagline={y.tagline} meta={y.capacity} image={y.image} index={i} enquirySubject={`Yacht charter — ${y.name}`} />
+                ))}
+              </div>
+            </TabsContent>
+          </Tabs>
         </div>
-        <EnquiryForm subject="Travel" />
-      </div>
-    </section>
+      </section>
 
-    <Footer />
-  </main>
-);
+      <section className="bg-surface-deep py-20 border-t border-border/40">
+        <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div>
+            <p className="eyebrow">Chauffeur</p>
+            <h3 className="font-serif text-3xl mt-4 text-foreground">English-speaking, NDA-bound.</h3>
+            <p className="text-muted-foreground mt-4">
+              Hourly hire, airport transfers and inter-city journeys with a discreet chauffeur on call
+              for the length of your stay.
+            </p>
+          </div>
+          <div>
+            <p className="eyebrow">Crew</p>
+            <h3 className="font-serif text-3xl mt-4 text-foreground">Pilots, captains, hosts.</h3>
+            <p className="text-muted-foreground mt-4">
+              Jets, helicopters and yachts are sourced through vetted operators — fully crewed, fully
+              compliant, fully briefed.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-background py-24 md:py-32 border-t border-border/40">
+        <div className="max-w-3xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <p className="eyebrow">Enquire · Travel</p>
+            <h2 className="font-serif text-4xl md:text-5xl mt-6 text-foreground">Send us the brief.</h2>
+          </div>
+          <EnquiryForm subject="Travel" />
+        </div>
+      </section>
+
+      <Footer />
+    </main>
+  );
+};
 
 export default Travel;

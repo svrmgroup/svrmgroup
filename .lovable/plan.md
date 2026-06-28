@@ -1,64 +1,52 @@
-## Overview
+## 1. Social handles → @SVRMGROUP
 
-Expand SVRM beyond the current 5-item limits: many more vehicles and stays across budget tiers, hotel rooms, stay extras (chauffeur/chef/etc.), a new Car Rental page with a booking calendar, a drone-style cinematic home hero, and a global scroll-to-top on every route change.
+Only one file references the old handle. Update it; every component (Footer icons, mobile + desktop) reads from this constant, so nothing else needs touching.
 
-## 1. Scroll to top on navigation
+- `src/lib/whatsapp.ts`
+  - `INSTAGRAM_URL` → `https://www.instagram.com/svrmgroup/`
+  - `TIKTOK_URL` → `https://www.tiktok.com/@svrmgroup`
+  - Add `SOCIAL_HANDLE = "@SVRMGROUP"`
+- `src/components/svrm/Footer.tsx`: add a small `@SVRMGROUP` label next to the IG/TikTok icons (currently icon-only). Keep layout/colour the same.
+- `aria-label`s updated to "SVRM Group on Instagram / TikTok".
 
-New `src/components/ScrollToTop.tsx` — listens to React Router's `pathname` and scrolls the window to (0,0) on every change. Mounted once inside `<BrowserRouter>` in `App.tsx`. Fixes the issue where new pages open scrolled to wherever the previous page was.
+No other files mention `svrmcpt`. Header has no social icons today — leaving as-is (not adding new UI you didn't have).
 
-## 2. Fleet — ~14 vehicles, grouped by tier
+## 2. Pricing → "On request" everywhere
 
-Expand `src/data/vehicles.ts` and split the Travel page into tier sections:
+Hide all numeric prices on the four commercial pages while keeping the underlying data (so we can restore later without re-typing).
 
-- **Signature**: Rolls-Royce Cullinan, Rolls-Royce Ghost, Lamborghini Urus, Bentley Bentayga
-- **Premium SUV**: Mercedes-AMG G63, Range Rover Autobiography, Range Rover Sport, Porsche Cayenne, BMW X5
-- **Executive**: Mercedes-Benz S-Class, BMW 7 Series, Mercedes V-Class (chauffeur van)
-- **Everyday / Budget**: BMW X3, Mercedes C-Class, Audi Q5
+- **Tours** (`PricingCard`, `TourBuilder`, `TourDetail`): replace ZAR/GBP/USD numbers with the gold label **"Price on request"**. Per-person / duration / inclusions stay.
+- **Tours → Custom builder**: instead of a live total, show a **"Rough estimate: from R X,XXX pp"** band that updates as options change, with a clear note that the final quote is on request. Uses the existing builder maths, just relabeled.
+- **Stays** (`StayCard`, enquiry sheets): remove `fromZAR / per night`; show **"Rates on request"**.
+- **Rentals** (`RentalCard`, `RentalBookingSheet`, `CustomRentalRequest`): remove daily rates; show **"Rates on request"**. Calendar + tier picker stay.
+- **Travel** (`VehicleCard`, tier sections): remove daily rates; show **"Rates on request"**.
+- `CurrencySwitch` stays mounted (still used by the rough-estimate band in the tour builder) but is hidden on pages where no prices remain.
 
-Each card keeps Ken Burns motion, ZAR/day price (currency-switch aware), and Enquire-on-WhatsApp.
+## 3. Travel — add category switcher
 
-## 3. Stays — ~12 properties + Hotel Rooms tab
+Add a top-level tab row on `/travel`: **Cars · Private Jets · Helicopters · Yachts**.
 
-Expand `src/data/stays.ts` across tiers and split Stays into three tabs:
+- Refactor `src/pages/Travel.tsx` to wrap the current fleet view in a `Tabs` (matching the Rentals page styling).
+- New data file `src/data/aviation.ts` for jets/helicopters and `src/data/yachts.ts` for yachts. Each entry: name, tagline, image, capacity, "Price on request", Enquire-via-WhatsApp CTA.
+- Seed 3–4 cards per new category (e.g. Light Jet / Midsize / Heavy; Robinson R44 / AS350 / EC130; 60ft Sailing / 80ft Motor / Superyacht charter). Generate matching cinematic images.
 
-- **Villas**: Camps Bay, Clifton, Bantry Bay, Llandudno, Bishopscourt, Constantia
-- **Apartments**: V&A Waterfront, Sea Point, De Waterkant, Green Point, Woodstock loft
-- **Hotel Rooms** (new): Cape Grace, One&Only, Mount Nelson, Silo, Table Bay, The Bay Hotel — indicative rates, booked through SVRM concierge
+## 4. Stays — add category switcher
 
-Adds `type: 'villa' | 'apartment' | 'hotel'` to the stay record.
+Replace the current Villa / Apartment / Hotel tab with a two-level structure:
 
-### Stay extras
+- **Top tabs**: Short-term · Long-term · Buy & Sell
+  - **Short-term** keeps the existing Villa / Apartment / Hotel sub-tabs and the StaySearchBar + CustomStayBar.
+  - **Long-term** shows a brief intro + a lead form (months, area, budget bracket → WhatsApp). New small section, no listings yet.
+  - **Buy & Sell** shows an intro + lead form (buy or sell, area, bedroom count, budget) → WhatsApp. New small section, no listings yet.
 
-Each stay enquiry includes an Extras chip selector:
-add chauffeur · add private chef · add daily housekeeping · add airport transfer · add yacht day · add tour package. Selections are appended to the WhatsApp message and to the enquiry record.
+## 5. Publish
 
-## 4. New page — Car Rental with booking calendar
+After you approve the above, publish to https://svrm.group and https://www.svrm.group. Head metadata is already accurate; I'll verify the title/description/OG tags before clicking publish.
 
-New route `/rentals` + nav link.
+## What is NOT being changed
 
-- Grid of self-drive rentals (a subset of the fleet flagged `selfDrive: true`).
-- Each card opens a booking sheet with:
-  - shadcn `Calendar` (range mode) for pickup → return
-  - Pickup location (CT International / V&A Waterfront / Custom)
-  - Add-ons (child seat, additional driver, delivery)
-  - Estimated total in the selected currency (days × daily rate)
-  - "Request booking" → writes to `rental_requests` and opens WhatsApp pre-filled.
+Design, layout, colours, logo, services list, phone, email, domain, WhatsApp button. Pricing data is kept in source (just hidden) so it can be re-enabled later.
 
-Backend: new `public.rental_requests` table (vehicle, date range, pickup, extras, contact, currency, estimated_total) — insert-only for anon, full access for service_role, same pattern as `enquiries`.
+## Open question
 
-## 5. Home — drone-style cinematic hero
-
-Replace the current single stock clip in `Hero.tsx` with a generated drone-style video of a luxury car on a Cape Town coastal road (Chapman's Peak vibe), ~8s loop with poster fallback. Add a second motion still lower on the page.
-
-## 6. Files touched
-
-- New: `src/components/ScrollToTop.tsx`, `src/pages/Rentals.tsx`, `src/components/svrm/RentalCard.tsx`, `src/components/svrm/RentalBookingSheet.tsx`, `src/components/svrm/ExtrasPicker.tsx`, `src/data/extras.ts`.
-- Edit: `src/data/vehicles.ts`, `src/data/stays.ts`, `src/pages/Travel.tsx` (tier sections), `src/pages/Stays.tsx` (tabs + extras), `src/components/svrm/StayCard.tsx`, `src/components/svrm/EnquiryForm.tsx` (extras prop), `src/components/svrm/Hero.tsx` (drone clip), `src/components/svrm/Nav.tsx` (Rentals link), `src/App.tsx` (route + ScrollToTop).
-- Assets: ~9 new vehicle images (already generated this turn), ~6 villa images, ~6 hotel images, 1 drone-style video.
-- DB migration: `rental_requests` table (already applied this turn).
-
-## Trade-offs
-
-- **Drone footage**: generated via the AI video tool — styled as aerial Cape Town. Real licensed drone footage can be dropped in later.
-- **Hotel rooms**: request-only, no live inventory.
-- **Calendar**: captures requested dates only; availability is confirmed by the concierge.
+For **Long-term stays** and **Buy & Sell properties** — do you want me to keep them as lead-capture forms only (recommended for launch), or seed a few placeholder listings now? If you want listings, please send a source (rough property list, or a site to model them on like the noxrentals stays).

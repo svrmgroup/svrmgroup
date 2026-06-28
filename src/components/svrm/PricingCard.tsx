@@ -1,9 +1,8 @@
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
-import { useCurrency } from "@/lib/currency";
 
 interface Props {
   duration: string;
-  /** ZAR base price, or null for "On request". */
+  /** ZAR base price, or null for "On request". Currently hidden — kept for future use. */
   fromZAR: number | null;
   title: string;
   inclusions: string[];
@@ -11,16 +10,16 @@ interface Props {
   onEnquire?: () => void;
 }
 
-const PricingCard = ({ duration, fromZAR, title, inclusions, subject, onEnquire }: Props) => {
-  const { format } = useCurrency();
+const PricingCard = ({ duration, title, inclusions, subject, onEnquire }: Props) => {
   return (
+
   <article className="bg-surface-raised border border-border/40 p-8 flex flex-col">
     <p className="eyebrow">{duration}</p>
     <h3 className="font-serif text-2xl md:text-3xl mt-4 text-foreground">{title}</h3>
     <div className="mt-6">
-      <p className="text-xs uppercase tracking-[0.24em] text-muted-foreground">From</p>
-      <p className="font-serif text-3xl text-gold mt-2">{fromZAR === null ? "On request" : format(fromZAR)}</p>
-      <p className="text-xs text-muted-foreground/60 mt-1">per person · indicative</p>
+      <p className="text-xs uppercase tracking-[0.24em] text-muted-foreground">Pricing</p>
+      <p className="font-serif text-3xl text-gold mt-2">On request</p>
+      <p className="text-xs text-muted-foreground/60 mt-1">per person · personalised quote</p>
     </div>
 
     <ul className="mt-6 space-y-2 text-sm text-foreground/85 flex-1">

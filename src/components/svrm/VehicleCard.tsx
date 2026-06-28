@@ -1,10 +1,8 @@
 import KenBurnsImage from "./KenBurnsImage";
 import { Vehicle } from "@/data/vehicles";
-import { useCurrency } from "@/lib/currency";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
 const VehicleCard = ({ vehicle, index }: { vehicle: Vehicle; index: number }) => {
-  const { format } = useCurrency();
   return (
     <article className="group bg-surface-raised border border-border/40 flex flex-col">
       <KenBurnsImage
@@ -19,8 +17,8 @@ const VehicleCard = ({ vehicle, index }: { vehicle: Vehicle; index: number }) =>
         <p className="text-sm text-muted-foreground mt-2 flex-1">{vehicle.tagline}</p>
         <div className="mt-5 flex items-end justify-between gap-4">
           <div>
-            <p className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground/70">From</p>
-            <p className="font-serif text-2xl text-gold">{format(vehicle.fromZAR)}<span className="text-xs text-muted-foreground/80 tracking-wider">&nbsp;/ day</span></p>
+            <p className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground/70">Rates</p>
+            <p className="font-serif text-xl text-gold">On request</p>
           </div>
           <a
             href={buildWhatsAppUrl(`${vehicle.name} chauffeur / hire`)}

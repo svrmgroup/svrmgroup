@@ -29,7 +29,7 @@ interface Props {
 }
 
 const RentalBookingSheet = ({ vehicle, open, onOpenChange }: Props) => {
-  const { format: formatPrice, currency } = useCurrency();
+  const { currency } = useCurrency();
   const [range, setRange] = useState<DateRange | undefined>();
   const [pickup, setPickup] = useState(pickupLocations[0]);
   const [extras, setExtras] = useState<string[]>([]);
@@ -191,13 +191,11 @@ const RentalBookingSheet = ({ vehicle, open, onOpenChange }: Props) => {
 
             <div className="border border-border/60 p-4 flex items-end justify-between">
               <div>
-                <p className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Estimated</p>
-                <p className="font-serif text-2xl text-gold mt-1">
-                  {days > 0 ? formatPrice(estimatedZAR) : "—"}
-                </p>
+                <p className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Pricing</p>
+                <p className="font-serif text-2xl text-gold mt-1">On request</p>
               </div>
               <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground/80 text-right max-w-[180px]">
-                Indicative. Final quote on confirmation.
+                {days > 0 ? `${days} day${days > 1 ? "s" : ""} · quote sent back personally.` : "Quote sent back personally."}
               </p>
             </div>
 

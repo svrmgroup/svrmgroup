@@ -4,6 +4,8 @@ import Footer from "@/components/svrm/Footer";
 import PageHero from "@/components/svrm/PageHero";
 import EnquiryForm from "@/components/svrm/EnquiryForm";
 import StayCard from "@/components/svrm/StayCard";
+import LongTermStayForm from "@/components/svrm/LongTermStayForm";
+import BuySellPropertyForm from "@/components/svrm/BuySellPropertyForm";
 import { stays, stayTypeLabels, StayType } from "@/data/stays";
 import { stayExtras } from "@/data/extras";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
@@ -14,16 +16,18 @@ import heroVideo from "@/assets/videos/stays.mp4.asset.json";
 import StaySearchBar from "@/components/svrm/StaySearchBar";
 import CustomStayBar from "@/components/svrm/CustomStayBar";
 
-const TYPES: StayType[] = ["villa", "apartment", "hotel"];
+const SUB_TYPES: StayType[] = ["villa", "apartment", "hotel"];
+type TopMode = "short" | "long" | "buysell";
 
 const Stays = () => {
-  const [tab, setTab] = useState<StayType>("villa");
+  const [mode, setMode] = useState<TopMode>("short");
+  const [sub, setSub] = useState<StayType>("villa");
 
   return (
     <main className="bg-background text-foreground min-h-screen">
       <Seo
-        title={"Stays — Villas, Apartments & Hotel Rooms in Cape Town | SVRM"}
-        description={"Hand-picked Cape Town villas, apartments and hotel rooms — Camps Bay, Clifton, V&A, Constantia and more. Add chauffeur, chef and concierge extras."}
+        title={"Stays — Short-term, Long-term & Property | SVRM"}
+        description={"Cape Town short-term villas, apartments and hotel rooms, long-term furnished residences, and buy/sell property — handled by SVRM."}
         path="/stays"
       />
       <Nav />
@@ -31,7 +35,7 @@ const Stays = () => {
       <div className="sticky top-20 z-30 bg-background/90 backdrop-blur border-b border-border/40">
         <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
           <p className="text-xs uppercase tracking-[0.24em] text-muted-foreground">
-            {stays.length} residences & rooms · Cape Town
+            Stays · Cape Town
           </p>
           <a
             href={buildWhatsAppUrl("a stay in Cape Town")}
@@ -46,46 +50,68 @@ const Stays = () => {
       </div>
 
       <PageHero
-        eyebrow="Stays & Residences"
-        title="Villas, apartments & hotel rooms."
-        subtitle="Across Camps Bay, Clifton, Bantry Bay, V&A, Llandudno, Bishopscourt, Constantia and more — walked, vetted and run by SVRM."
+        eyebrow="Stays & Property"
+        title="Short-term, long-term, or your own."
+        subtitle="Hand-picked nightly stays, furnished long-term residences, and discreet buy & sell — across Camps Bay, Clifton, Bantry Bay, V&A, Constantia and the Winelands."
         videoSrc={heroVideo.url}
       />
 
       <section className="pt-10 md:pt-14">
-        <div className="max-w-7xl mx-auto px-6 space-y-6">
-          <StaySearchBar />
-          <CustomStayBar />
-        </div>
-      </section>
-
-      <section className="py-12 md:py-20">
         <div className="max-w-7xl mx-auto px-6">
-          <Tabs value={tab} onValueChange={(v) => setTab(v as StayType)} className="w-full">
-            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
-              <TabsList className="bg-surface-raised">
-                {TYPES.map((t) => (
-                  <TabsTrigger key={t} value={t} className="text-[11px] uppercase tracking-[0.24em] data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                    {stayTypeLabels[t]}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-              <p className="text-xs text-muted-foreground/80 tracking-wide max-w-xs">
-                Indicative rates. Switch currency in the top nav. Final quote on enquiry.
-              </p>
-            </div>
+          <Tabs value={mode} onValueChange={(v) => setMode(v as TopMode)} className="w-full">
+            <TabsList className="flex flex-wrap h-auto bg-transparent justify-start gap-2 p-0 mb-8">
+              {(["short", "long", "buysell"] as TopMode[]).map((m) => (
+                <TabsTrigger
+                  key={m}
+                  value={m}
+                  className="text-[11px] uppercase tracking-[0.24em] px-4 py-2 border border-border/60 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary rounded-none"
+                >
+                  {m === "short" ? "Short-term" : m === "long" ? "Long-term" : "Buy & Sell"}
+                </TabsTrigger>
+              ))}
+            </TabsList>
 
-            {TYPES.map((t) => (
-              <TabsContent key={t} value={t} className="mt-0">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-                  {stays
-                    .filter((s) => s.type === t)
-                    .map((s, i) => (
-                      <StayCard key={s.slug} stay={s} index={i} />
+            <TabsContent value="short" className="mt-0">
+              <div className="space-y-6 mb-12">
+                <StaySearchBar />
+                <CustomStayBar />
+              </div>
+
+              <Tabs value={sub} onValueChange={(v) => setSub(v as StayType)} className="w-full">
+                <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+                  <TabsList className="bg-surface-raised">
+                    {SUB_TYPES.map((t) => (
+                      <TabsTrigger key={t} value={t} className="text-[11px] uppercase tracking-[0.24em] data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+                        {stayTypeLabels[t]}
+                      </TabsTrigger>
                     ))}
+                  </TabsList>
+                  <p className="text-xs text-muted-foreground/80 tracking-wide max-w-xs">
+                    All rates on request. Final quote confirmed on enquiry.
+                  </p>
                 </div>
-              </TabsContent>
-            ))}
+
+                {SUB_TYPES.map((t) => (
+                  <TabsContent key={t} value={t} className="mt-0">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                      {stays
+                        .filter((s) => s.type === t)
+                        .map((s, i) => (
+                          <StayCard key={s.slug} stay={s} index={i} />
+                        ))}
+                    </div>
+                  </TabsContent>
+                ))}
+              </Tabs>
+            </TabsContent>
+
+            <TabsContent value="long" className="mt-0 pb-12">
+              <LongTermStayForm />
+            </TabsContent>
+
+            <TabsContent value="buysell" className="mt-0 pb-12">
+              <BuySellPropertyForm />
+            </TabsContent>
           </Tabs>
         </div>
       </section>
