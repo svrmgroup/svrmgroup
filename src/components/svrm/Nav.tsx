@@ -15,7 +15,7 @@ const links = [
   { to: "/security", label: "Security" },
   { to: "/experiences", label: "Custom" },
   { to: "/blog", label: "Journal" },
-  { to: "/faq", label: "FAQ" },
+  
   { to: "/contact", label: "Contact" },
 ];
 
