@@ -95,41 +95,18 @@
 
   <body>
     <div id="root"></div>
-    <div id="google_translate_element" style="display:none"></div>
     <script>
-      // Restore saved language BEFORE Google Translate loads so it picks up the cookie.
+      // Restore saved language direction before React renders.
       (function () {
         try {
           var lang = localStorage.getItem('svrm-lang');
           var RTL = ['ar','he','fa','ur'];
-          if (lang && lang !== 'en') {
-            var v = '/en/' + lang;
-            document.cookie = 'googtrans=' + v + ';path=/';
-            document.cookie = 'googtrans=' + v + ';path=/;domain=' + location.hostname;
-          }
           var isRtl = lang && RTL.indexOf(lang) !== -1;
           document.documentElement.setAttribute('dir', isRtl ? 'rtl' : 'ltr');
           if (lang) document.documentElement.setAttribute('lang', lang);
         } catch (e) {}
       })();
-      function googleTranslateElementInit() {
-        new google.translate.TranslateElement(
-          {
-            pageLanguage: 'en',
-            includedLanguages: 'ar,zh-CN,zh-TW,fr,de,es,pt,it,ru,ja,ko,hi,nl,tr,pl,sv,af,zu,xh,he,th,vi,id',
-            autoDisplay: false,
-            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-          },
-          'google_translate_element'
-        );
-      }
     </script>
-    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    <style>
-      .goog-te-banner-frame.skiptranslate, .goog-te-gadget { display: none !important; }
-      body { top: 0 !important; }
-      font.goog-text-highlight { background: transparent !important; box-shadow: none !important; }
-    </style>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
