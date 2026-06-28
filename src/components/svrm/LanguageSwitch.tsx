@@ -156,13 +156,29 @@ const LanguageSwitch = ({ className = "" }: { className?: string }) => {
   }, []);
 
   const choose = (code: string) => {
+    const prev = localStorage.getItem(STORAGE_KEY) || "en";
     localStorage.setItem(STORAGE_KEY, code);
     setCookie(code);
     setCurrent(code);
     setOpen(false);
-    // Reload guarantees clean re-translation (incl. <title> & meta).
-    window.location.reload();
+    // Notify currency/locale-aware components without a full reload
+    window.dispatchEvent(new CustomEvent("svrm-lang-change", { detail: code }));
+    // Switching between two non-English languages (or back to English) reliably
+    // requires Google Translate to re-bootstrap. Same-language swaps just re-apply.
+    const needsReload = (prev !== "en" && code !== prev);
+    if (needsReload) {
+      window.location.reload();
+      return;
+    }
+    if (code === "en") {
+      // Revert: clear cookie + reset the hidden Google select
+      setCookie("");
+      applyToGoogleSelect("en");
+    } else {
+      applyToGoogleSelect(code);
+    }
   };
+
 
   const active = LANGUAGES.find((l) => l.code === current) || LANGUAGES[0];
   const badge =
