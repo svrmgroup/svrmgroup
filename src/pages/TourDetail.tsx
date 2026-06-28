@@ -33,13 +33,13 @@ const TourDetail = () => {
 
   const dateLabel = range?.from
     ? range.to
-      ? `${format(range.from, "d MMM")} → ${format(range.to, "d MMM yyyy")}`
-      : format(range.from, "d MMM yyyy")
+      ? formatDateRange(range.from, range.to, { day: "numeric", month: "short", year: "numeric" })
+      : formatDate(range.from, { day: "numeric", month: "short", year: "numeric" })
     : "Select your dates";
 
   const datesSuffix =
     range?.from && range?.to
-      ? ` · ${format(range.from, "d MMM")}–${format(range.to, "d MMM yyyy")} · ${travellers} traveller${travellers > 1 ? "s" : ""}`
+      ? ` · ${formatDateRange(range.from, range.to, { day: "numeric", month: "short", year: "numeric" })} · ${travellers} traveller${travellers > 1 ? "s" : ""}`
       : ` · ${travellers} traveller${travellers > 1 ? "s" : ""}`;
 
   return (
