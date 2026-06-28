@@ -4,7 +4,9 @@ import { Menu } from "lucide-react";
 import Logo from "./Logo";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import CurrencySwitch from "./CurrencySwitch";
+import LanguageSwitch from "./LanguageSwitch";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
+
 import { navCategories } from "@/lib/navCategories";
 
 const links = [
@@ -85,7 +87,9 @@ const Nav = () => {
 
 
         <div className="flex items-center gap-3">
-          <CurrencySwitch className="hidden md:inline-flex" />
+          <LanguageSwitch className="hidden md:block" />
+          <CurrencySwitch className="hidden md:block" />
+
           <a
             href={buildWhatsAppUrl()}
             target="_blank"
@@ -125,7 +129,7 @@ const Nav = () => {
                     {l.label}
                   </NavLink>
                 ))}
-                <div className="pt-2"><CurrencySwitch /></div>
+                <div className="pt-2 flex flex-col gap-3"><LanguageSwitch /><CurrencySwitch /></div>
                 <a
                   href={buildWhatsAppUrl()}
                   target="_blank"
