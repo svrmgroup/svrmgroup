@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { DateRange } from "react-day-picker";
-import { format, differenceInCalendarDays } from "date-fns";
+import { differenceInCalendarDays } from "date-fns";
+import { formatDate, formatDateRange } from "@/lib/locale";
 import { CalendarIcon, Users } from "lucide-react";
 import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
