@@ -27,6 +27,7 @@ let runId = 0;
 let observer: MutationObserver | null = null;
 let observerTimer: number | undefined;
 const memoryCache = new Map<string, string>();
+const originalTextNodes = new WeakMap<Text, string>();
 
 export const getSavedLanguage = () => localStorage.getItem(STORAGE_KEY) || "en";
 
@@ -138,41 +139,35 @@ const translateMany = async (texts: string[], lang: string): Promise<Map<string,
   return output;
 };
 
-const wrapTextNodes = (root: ParentNode) => {
+const splitOuterWhitespace = (text: string) => {
+  const leading = text.match(/^\s*/)?.[0] || "";
+  const trailing = text.match(/\s*$/)?.[0] || "";
+  const core = text.slice(leading.length, text.length - trailing.length);
+  return { leading, core, trailing };
+};
+
+const collectTextTargets = (root: ParentNode) => {
+  const targets: Array<{ node: Text; original: string; leading: string; core: string; trailing: string }> = [];
   const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
     acceptNode(node) {
-      const text = node.nodeValue || "";
+      const text = originalTextNodes.get(node as Text) || node.nodeValue || "";
       const parent = (node as Text).parentElement;
       if (!parent || shouldSkipElement(parent)) return NodeFilter.FILTER_REJECT;
       return canTranslate(text) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
     },
   });
 
-  const nodes: Text[] = [];
   let node = walker.nextNode();
   while (node) {
-    nodes.push(node as Text);
+    const textNode = node as Text;
+    const original = originalTextNodes.get(textNode) || textNode.nodeValue || "";
+    originalTextNodes.set(textNode, original);
+    const { leading, core, trailing } = splitOuterWhitespace(original);
+    if (canTranslate(core)) targets.push({ node: textNode, original, leading, core, trailing });
     node = walker.nextNode();
   }
 
-  nodes.forEach((textNode) => {
-    const raw = textNode.nodeValue || "";
-    const leading = raw.match(/^\s*/)?.[0] || "";
-    const trailing = raw.match(/\s*$/)?.[0] || "";
-    const core = raw.slice(leading.length, raw.length - trailing.length);
-    if (!canTranslate(core)) return;
-
-    const span = document.createElement("span");
-    span.dataset.svrmI18n = "true";
-    span.dataset.svrmOriginal = core;
-    span.textContent = core;
-
-    const fragment = document.createDocumentFragment();
-    if (leading) fragment.appendChild(document.createTextNode(leading));
-    fragment.appendChild(span);
-    if (trailing) fragment.appendChild(document.createTextNode(trailing));
-    textNode.parentNode?.replaceChild(fragment, textNode);
-  });
+  return targets;
 };
 
 const collectAttributeTargets = (root: ParentNode) => {
@@ -199,19 +194,16 @@ export const translatePage = async (lang = getSavedLanguage(), root: ParentNode 
   const thisRun = ++runId;
   applyDocumentLanguage(lang);
   protectContactNodes(root);
-  wrapTextNodes(root);
-
-  const spans = Array.from(document.querySelectorAll<HTMLElement>("[data-svrm-i18n='true']"));
+  const textTargets = collectTextTargets(root);
   const attrTargets = collectAttributeTargets(root);
   const originals = [
-    ...spans.map((span) => span.dataset.svrmOriginal || "").filter(Boolean),
+    ...textTargets.map((target) => target.core),
     ...attrTargets.map((target) => target.text),
   ];
 
   if (lang === "en") {
-    spans.forEach((span) => {
-      span.textContent = span.dataset.svrmOriginal || span.textContent || "";
-      span.dataset.svrmLang = "en";
+    textTargets.forEach(({ node, original }) => {
+      node.nodeValue = original;
     });
     attrTargets.forEach(({ el, attr, text }) => el.setAttribute(attr, text));
     return;
@@ -220,10 +212,8 @@ export const translatePage = async (lang = getSavedLanguage(), root: ParentNode 
   const translations = await translateMany(originals, lang);
   if (thisRun !== runId || getSavedLanguage() !== lang) return;
 
-  spans.forEach((span) => {
-    const original = span.dataset.svrmOriginal || "";
-    span.textContent = translations.get(original) || original;
-    span.dataset.svrmLang = lang;
+  textTargets.forEach(({ node, leading, core, trailing }) => {
+    node.nodeValue = `${leading}${translations.get(core) || core}${trailing}`;
   });
   attrTargets.forEach(({ el, attr, text }) => {
     el.setAttribute(attr, translations.get(text) || text);
