@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { format, differenceInCalendarDays } from "date-fns";
+import { formatDate, formatDateRange } from "@/lib/locale";
 import { DateRange } from "react-day-picker";
 import { z } from "zod";
 import { CalendarIcon } from "lucide-react";
