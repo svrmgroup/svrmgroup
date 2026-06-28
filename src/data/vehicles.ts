@@ -55,6 +55,7 @@ export const vehicles: Vehicle[] = [
   { slug: "mercedes-s-class", name: "Mercedes-Benz S-Class", tagline: "The benchmark sedan, chauffeured.", fromZAR: 14000, image: sclass, tier: "Executive", selfDrive: false },
   { slug: "bmw-7-series", name: "BMW 7 Series", tagline: "Executive transfer, understated.", fromZAR: 20500, rentalZAR: 14500, image: bmw7, tier: "Executive", selfDrive: true },
   { slug: "mercedes-v-class", name: "Mercedes V-Class", tagline: "Up to seven, in lounge comfort.", fromZAR: 8500, image: vclass, tier: "Executive", selfDrive: false },
+  { slug: "hyundai-staria", name: "Hyundai Staria", tagline: "Futuristic people-mover for groups up to nine.", fromZAR: 4800, rentalZAR: 3200, image: staria, tier: "Executive", selfDrive: true },
   { slug: "mercedes-e-class", name: "Mercedes-Benz E-Class", tagline: "Executive sedan, quietly capable.", fromZAR: 7500, rentalZAR: 5600, image: eclass, tier: "Executive", selfDrive: true },
   { slug: "bmw-5-series", name: "BMW 5 Series", tagline: "The dynamic executive.", fromZAR: 7200, rentalZAR: 5400, image: bmw5, tier: "Executive", selfDrive: true },
 
@@ -63,8 +64,10 @@ export const vehicles: Vehicle[] = [
   { slug: "mercedes-c-class", name: "Mercedes C-Class", tagline: "Discreet daily driver.", fromZAR: 4500, rentalZAR: 3400, image: cclass, tier: "Everyday", selfDrive: true },
   { slug: "audi-q5", name: "Audi Q5", tagline: "Effortless, comfortable, current.", fromZAR: 6200, rentalZAR: 4600, image: audiq5, tier: "Everyday", selfDrive: true },
 
-  // Budget — self-drive only
+  // Budget
   { slug: "bmw-3-series", name: "BMW 3 Series", tagline: "Sharp, sporty, value-led.", fromZAR: 3800, rentalZAR: 2400, image: bmw3, tier: "Budget", selfDrive: true },
+  { slug: "toyota-corolla", name: "Toyota Corolla", tagline: "Reliable daily, low running costs.", fromZAR: 2400, rentalZAR: 1500, image: corolla, tier: "Budget", selfDrive: true },
+  { slug: "vw-polo", name: "Volkswagen Polo", tagline: "Compact, nimble, easy to park.", fromZAR: 2200, rentalZAR: 1300, image: polo, tier: "Budget", selfDrive: true },
 ];
 
 export const vehicleTiers: VehicleTier[] = ["Signature", "Premium SUV", "Executive", "Everyday", "Budget"];
