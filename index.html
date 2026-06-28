@@ -84,7 +84,18 @@
   <body>
     <div id="root"></div>
     <div id="google_translate_element" style="display:none"></div>
-    <script type="text/javascript">
+    <script>
+      // Restore saved language BEFORE Google Translate loads so it picks up the cookie.
+      (function () {
+        try {
+          var lang = localStorage.getItem('svrm-lang');
+          if (lang && lang !== 'en') {
+            var v = '/en/' + lang;
+            document.cookie = 'googtrans=' + v + ';path=/';
+            document.cookie = 'googtrans=' + v + ';path=/;domain=' + location.hostname;
+          }
+        } catch (e) {}
+      })();
       function googleTranslateElementInit() {
         new google.translate.TranslateElement(
           {
@@ -97,7 +108,7 @@
         );
       }
     </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <style>
       .goog-te-banner-frame.skiptranslate, .goog-te-gadget { display: none !important; }
       body { top: 0 !important; }
