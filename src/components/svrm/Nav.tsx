@@ -53,7 +53,7 @@ const Nav = () => {
           {links.map((l) =>
             l.to === "/contact" ? (
               <div key={l.to} className="relative group">
-                <NavLink to={l.to} className={linkClass} end={l.to === "/"}>
+                <NavLink to={l.to} className={linkClass}>
                   {l.label}
                 </NavLink>
                 <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
