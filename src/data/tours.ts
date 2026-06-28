@@ -10,6 +10,7 @@ import aerialImg from "@/assets/tours/aerial.jpg";
 import culinaryImg from "@/assets/tours/culinary.jpg";
 import wellnessImg from "@/assets/tours/wellness.jpg";
 import photographyImg from "@/assets/tours/photography.jpg";
+import groupTravelImg from "@/assets/tours/group-travel.jpg";
 import safariVid from "@/assets/videos/tour-safari.mp4.asset.json";
 import huntingVid from "@/assets/videos/tour-hunting.mp4.asset.json";
 import culturalVid from "@/assets/videos/tour-cultural.mp4.asset.json";
@@ -32,6 +33,7 @@ export type TourSlug =
   | "culinary"
   | "wellness"
   | "photography"
+  | "group-travel"
   | "builder";
 
 export interface TourPackage {
@@ -190,6 +192,21 @@ export const tours: TourCategory[] = [
       { duration: "Half day", title: "Sunrise Lion's Head shoot", fromZAR: 3800, inclusions: ["Pre-dawn private hike", "Photographer mentor", "Coffee on summit", "Edits delivered"] },
       { duration: "1 day", title: "Cape Town in a day", fromZAR: 6800, inclusions: ["Bo-Kaap, V&A, Sea Point", "Sunset at Signal Hill", "Private photographer guide", "Curated edits"] },
       { duration: "3 days", title: "Cape photographic signature", fromZAR: 28000, inclusions: ["City + Cape Point + Boulders", "Sunrise & sunset shoots", "Private guide & transport", "Boutique accommodation"] },
+    ],
+  },
+  {
+    slug: "group-travel",
+    label: "Group Travel",
+    blurb: "Bigger parties, same standard.",
+    description:
+      "Curated group tours for weddings, corporate retreats, incentive trips, school groups and family reunions — 16-seater Sprinters, 22 & 32-seater touring buses, and full luxury coaches. Routes built around your dates, with chauffeurs, guides and stays sequenced end to end.",
+    image: groupTravelImg,
+    video: culturalVid.url,
+    packages: [
+      { duration: "Half day", title: "City group transfer", fromZAR: 6500, inclusions: ["16 or 22-seater bus", "Chauffeur & fuel", "Bottled water onboard", "Up to 5 hours"] },
+      { duration: "1 day", title: "Cape Peninsula group tour", fromZAR: 14500, inclusions: ["Up to 32-seater bus", "Guide + chauffeur", "Boulders & Cape Point", "Lunch arranged"] },
+      { duration: "3 days", title: "Garden Route group", fromZAR: 65000, inclusions: ["Luxury touring coach", "All accommodation", "Guided stops & meals", "All transfers"] },
+      { duration: "Custom", title: "Weddings, corporate & incentive", fromZAR: null, inclusions: ["Multi-vehicle fleets", "Airport meet & greet", "Hostess & coordinator", "Curated, end to end"] },
     ],
   },
 ];

@@ -17,6 +17,8 @@ const tierBlurbs: Record<string, string> = {
   "Premium SUV": "Off-the-grid capability without compromise. Range Rover, AMG G-Class, Porsche, BMW.",
   "Executive": "Discreet sedans and lounge vans for transfers, meetings and small parties.",
   "Everyday": "Smart everyday vehicles for longer stays — budget-friendly, fully insured.",
+  "Budget": "Reliable, lower-cost daily drivers for extended self-drive stays.",
+  "Group Travel": "16-seater Sprinters, 22 & 32-seater buses and full luxury coaches — chauffeur-driven, NDA-bound.",
 };
 
 type Mode = "cars" | "jets" | "helicopters" | "yachts";

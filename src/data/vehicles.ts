@@ -20,8 +20,12 @@ import bmw5 from "@/assets/vehicles/bmw5.jpg";
 import eclass from "@/assets/vehicles/eclass.jpg";
 import corolla from "@/assets/vehicles/corolla.jpg";
 import polo from "@/assets/vehicles/polo.jpg";
+import sprinter16 from "@/assets/vehicles/sprinter16.jpg";
+import midibus22 from "@/assets/vehicles/midibus22.jpg";
+import bus32 from "@/assets/vehicles/bus32.jpg";
+import coach from "@/assets/vehicles/coach.jpg";
 
-export type VehicleTier = "Signature" | "Premium SUV" | "Executive" | "Everyday" | "Budget";
+export type VehicleTier = "Signature" | "Premium SUV" | "Executive" | "Everyday" | "Budget" | "Group Travel";
 
 export interface Vehicle {
   slug: string;
@@ -68,9 +72,15 @@ export const vehicles: Vehicle[] = [
   { slug: "bmw-3-series", name: "BMW 3 Series", tagline: "Sharp, sporty, value-led.", fromZAR: 3800, rentalZAR: 2400, image: bmw3, tier: "Budget", selfDrive: true },
   { slug: "toyota-corolla", name: "Toyota Corolla", tagline: "Reliable daily, low running costs.", fromZAR: 2400, rentalZAR: 1500, image: corolla, tier: "Budget", selfDrive: true },
   { slug: "vw-polo", name: "Volkswagen Polo", tagline: "Compact, nimble, easy to park.", fromZAR: 2200, rentalZAR: 1300, image: polo, tier: "Budget", selfDrive: true },
+
+  // Group Travel
+  { slug: "sprinter-16", name: "Mercedes Sprinter · 16-seater", tagline: "Executive group transfer, lounge seating.", fromZAR: 9500, image: sprinter16, tier: "Group Travel", selfDrive: false },
+  { slug: "midibus-22", name: "Midibus · 22-seater", tagline: "Mid-size group days out and shuttles.", fromZAR: 13500, image: midibus22, tier: "Group Travel", selfDrive: false },
+  { slug: "bus-32", name: "Touring Bus · 32-seater", tagline: "Larger parties, full-day tours, conferences.", fromZAR: 18500, image: bus32, tier: "Group Travel", selfDrive: false },
+  { slug: "luxury-coach", name: "Luxury Coach · 50+ seater", tagline: "Long-haul touring coach with onboard amenities.", fromZAR: 26500, image: coach, tier: "Group Travel", selfDrive: false },
 ];
 
-export const vehicleTiers: VehicleTier[] = ["Signature", "Premium SUV", "Executive", "Everyday", "Budget"];
+export const vehicleTiers: VehicleTier[] = ["Signature", "Premium SUV", "Executive", "Everyday", "Budget", "Group Travel"];
 
 /** Effective self-drive rate for a vehicle. */
 export const rentalRate = (v: Vehicle) => v.rentalZAR ?? v.fromZAR;
