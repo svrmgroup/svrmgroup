@@ -21,8 +21,16 @@ const SUB_TYPES: StayType[] = ["villa", "apartment", "hotel"];
 type TopMode = "short" | "long" | "buysell";
 
 const Stays = () => {
+  const [params] = useSearchParams();
   const [mode, setMode] = useState<TopMode>("short");
   const [sub, setSub] = useState<StayType>("villa");
+
+  useEffect(() => {
+    const cat = params.get("cat");
+    if (cat && (["short","long","buysell"] as const).includes(cat as TopMode)) {
+      setMode(cat as TopMode);
+    }
+  }, [params]);
 
   return (
     <main className="bg-background text-foreground min-h-screen">
