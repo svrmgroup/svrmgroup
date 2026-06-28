@@ -87,7 +87,9 @@ const Nav = () => {
 
 
         <div className="flex items-center gap-3">
-          <CurrencySwitch className="hidden md:inline-flex" />
+          <LanguageSwitch className="hidden md:block" />
+          <CurrencySwitch className="hidden md:block" />
+
           <a
             href={buildWhatsAppUrl()}
             target="_blank"
