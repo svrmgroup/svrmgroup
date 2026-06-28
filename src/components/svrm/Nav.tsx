@@ -50,12 +50,31 @@ const Nav = () => {
         </Link>
 
         <nav className="hidden lg:flex items-center gap-7">
-          {links.map((l) => (
-            <NavLink key={l.to} to={l.to} className={linkClass} end={l.to === "/"}>
-              {l.label}
-            </NavLink>
-          ))}
+          {links.map((l) =>
+            l.to === "/contact" ? (
+              <div key={l.to} className="relative group">
+                <NavLink to={l.to} className={linkClass} end={l.to === "/"}>
+                  {l.label}
+                </NavLink>
+                <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                  <div className="bg-surface-deep/95 backdrop-blur-md border border-border/60 min-w-[140px]">
+                    <NavLink
+                      to="/contact#faq"
+                      className="block px-5 py-3 text-[11px] uppercase tracking-[0.24em] text-muted-foreground hover:text-foreground hover:bg-primary/5 transition-colors"
+                    >
+                      FAQ
+                    </NavLink>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <NavLink key={l.to} to={l.to} className={linkClass} end={l.to === "/"}>
+                {l.label}
+              </NavLink>
+            )
+          )}
         </nav>
+
 
         <div className="flex items-center gap-3">
           <CurrencySwitch className="hidden md:inline-flex" />
