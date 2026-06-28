@@ -55,11 +55,34 @@ const Rentals = () => {
       </div>
 
       <PageHero
-        eyebrow="Car Rentals · Self-Drive Luxury in Cape Town"
+        eyebrow="Car Hire & Rentals · Self-Drive Luxury in Cape Town"
         title="Self-drive, on your terms."
-        subtitle="Luxury self-drive car rental in Cape Town — from a sharp BMW 3 Series to a Rolls-Royce, delivered to you. Self-drive rates are lower than our chauffeured fleet. Pick your dates, your tier, or send a custom budget brief."
+        subtitle="Luxury car hire and rental in Cape Town — from a sharp BMW 3 Series to a Rolls-Royce, delivered to you. Self-drive rates are lower than our chauffeured fleet. Pick your dates, your tier, or send a custom budget brief."
         videoSrc={heroVideo.url}
       />
+
+      <section className="bg-surface-deep py-14 border-b border-border/40">
+        <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div>
+            <p className="eyebrow">Luxury car hire Cape Town</p>
+            <h3 className="font-serif text-2xl md:text-3xl mt-4 text-foreground">Premium fleet, delivered.</h3>
+            <p className="text-muted-foreground mt-4 text-sm leading-relaxed">
+              Self-drive a Rolls-Royce, Range Rover, AMG G-Class, Porsche or Mercedes for a Garden Route
+              week or a Camps Bay weekend. Delivered to your hotel, villa or Cape Town International — fully
+              insured, full tank, no airport queues.
+            </p>
+          </div>
+          <div>
+            <p className="eyebrow">Budget car hire Cape Town</p>
+            <h3 className="font-serif text-2xl md:text-3xl mt-4 text-foreground">Smart everyday rentals.</h3>
+            <p className="text-muted-foreground mt-4 text-sm leading-relaxed">
+              For longer stays we also place reliable everyday vehicles — BMW 3 Series, Mercedes E-Class,
+              VW and Toyota — at lower daily rates. Same delivery, same insurance, same one-number support.
+            </p>
+          </div>
+        </div>
+      </section>
+
 
       <section className="pb-24">
         <div className="max-w-7xl mx-auto px-6">
