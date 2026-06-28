@@ -72,6 +72,13 @@ const setCookie = (lang: string) => {
   document.cookie = `googtrans=${value};path=/;domain=${host}`;
 };
 
+const RTL_LANGS = ["ar", "he", "fa", "ur"];
+const applyDir = (lang: string) => {
+  const isRtl = RTL_LANGS.includes(lang);
+  document.documentElement.setAttribute("dir", isRtl ? "rtl" : "ltr");
+  document.documentElement.setAttribute("lang", lang || "en");
+};
+
 const applyToGoogleSelect = (lang: string, attempts = 0) => {
   const sel = document.querySelector(".goog-te-combo") as HTMLSelectElement | null;
   if (!sel) {
@@ -87,6 +94,13 @@ const LanguageSwitch = ({ className = "" }: { className?: string }) => {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const location = useLocation();
+
+  // Keep <html dir> + lang in sync with current language
+  useEffect(() => {
+    applyDir(current);
+  }, [current]);
+
+
 
   // Initial: load saved → else geo-detect
   useEffect(() => {

@@ -130,3 +130,12 @@
 @media (prefers-reduced-motion: reduce) {
   .kb-a, .kb-b, .kb-c, .kb-d { animation: none; transform: scale(1.05); }
 }
+
+/* ---------- RTL polish ---------- */
+[dir="rtl"] body { text-align: right; }
+[dir="rtl"] .flip-x-rtl { transform: scaleX(-1); }
+/* Keep brand wordmark and Latin-only marks LTR even in RTL layouts */
+[dir="rtl"] .keep-ltr,
+[dir="rtl"] .notranslate { direction: ltr; unicode-bidi: isolate; }
+/* Mirror simple horizontal margins on common nav spacing */
+[dir="rtl"] .rtl-mirror-ml > * + * { margin-left: 0; margin-right: var(--rtl-gap, 1.5rem); }

@@ -101,11 +101,15 @@
       (function () {
         try {
           var lang = localStorage.getItem('svrm-lang');
+          var RTL = ['ar','he','fa','ur'];
           if (lang && lang !== 'en') {
             var v = '/en/' + lang;
             document.cookie = 'googtrans=' + v + ';path=/';
             document.cookie = 'googtrans=' + v + ';path=/;domain=' + location.hostname;
           }
+          var isRtl = lang && RTL.indexOf(lang) !== -1;
+          document.documentElement.setAttribute('dir', isRtl ? 'rtl' : 'ltr');
+          if (lang) document.documentElement.setAttribute('lang', lang);
         } catch (e) {}
       })();
       function googleTranslateElementInit() {
