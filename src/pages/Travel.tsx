@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
 import PageHero from "@/components/svrm/PageHero";
@@ -24,8 +25,16 @@ const tierBlurbs: Record<string, string> = {
 type Mode = "cars" | "jets" | "helicopters" | "yachts";
 
 const Travel = () => {
+  const [params] = useSearchParams();
   const [mode, setMode] = useState<Mode>("cars");
   const [carTier, setCarTier] = useState<string>("All");
+
+  useEffect(() => {
+    const cat = params.get("cat");
+    if (cat && (["cars","jets","helicopters","yachts"] as const).includes(cat as Mode)) {
+      setMode(cat as Mode);
+    }
+  }, [params]);
 
   return (
     <main className="bg-background text-foreground min-h-screen">

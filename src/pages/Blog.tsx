@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
 import PageHero from "@/components/svrm/PageHero";
@@ -7,8 +7,17 @@ import { posts, categories, type BlogCategory } from "@/data/blog";
 import { Seo } from "@/components/Seo";
 
 const Blog = () => {
+  const [params] = useSearchParams();
   const [active, setActive] = useState<BlogCategory | "All">("All");
   const filtered = active === "All" ? posts : posts.filter((p) => p.category === active);
+
+  useEffect(() => {
+    const cat = params.get("cat");
+    if (!cat) return;
+    if (cat === "All" || (categories as string[]).includes(cat)) {
+      setActive(cat as BlogCategory | "All");
+    }
+  }, [params]);
 
   return (
     <main className="bg-background text-foreground min-h-screen">

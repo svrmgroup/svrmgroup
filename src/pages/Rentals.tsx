@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
 import PageHero from "@/components/svrm/PageHero";
@@ -15,11 +16,19 @@ import heroVideo from "@/assets/videos/rentals.mp4.asset.json";
 type TabKey = "All" | VehicleTier | "Custom";
 
 const Rentals = () => {
+  const [params] = useSearchParams();
   const [selected, setSelected] = useState<Vehicle | null>(null);
   const [open, setOpen] = useState(false);
   const [tab, setTab] = useState<TabKey>("All");
 
   const fleet = vehicles.filter((v) => v.selfDrive);
+
+  useEffect(() => {
+    const cat = params.get("cat");
+    if (!cat) return;
+    const valid: TabKey[] = ["All", ...vehicleTiers, "Custom"];
+    if (valid.includes(cat as TabKey)) setTab(cat as TabKey);
+  }, [params]);
 
   const openSheet = (v: Vehicle) => {
     setSelected(v);
