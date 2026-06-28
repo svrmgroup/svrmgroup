@@ -107,6 +107,7 @@ export const tours: TourCategory[] = [
       { duration: "5 days", title: "Cape & bush", fromZAR: 59000, inclusions: ["Cape adventure + safari", "Helicopter + game drives", "Internal flights", "Luxury lodging"] },
       { duration: "7 days", title: "Land, sea & sky", fromZAR: 89000, inclusions: ["Heli, yacht & safari", "Horseback Winelands trail", "Private guides throughout", "Premium accommodation"] },
     ],
+  },
   {
     slug: "marine",
     label: "Marine & Wildlife",
