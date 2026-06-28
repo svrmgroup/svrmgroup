@@ -52,7 +52,8 @@ const Contact = () => {
               <p className="eyebrow">Concierge</p>
               <a
                 href={`mailto:${CONCIERGE_EMAIL}`}
-                className="block font-serif text-2xl md:text-3xl mt-3 text-foreground hover:text-gold transition-colors break-all"
+                className="notranslate block font-serif text-2xl md:text-3xl mt-3 text-foreground hover:text-gold transition-colors break-all"
+                translate="no"
               >
                 {CONCIERGE_EMAIL}
               </a>

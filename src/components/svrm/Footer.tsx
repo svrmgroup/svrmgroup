@@ -68,7 +68,7 @@ const Footer = () => (
         <p className="eyebrow">Concierge</p>
         <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
           <li>
-            <a href={`mailto:${CONCIERGE_EMAIL}`} className="hover:text-gold transition-colors break-all">
+            <a href={`mailto:${CONCIERGE_EMAIL}`} className="notranslate hover:text-gold transition-colors break-all" translate="no">
               {CONCIERGE_EMAIL}
             </a>
           </li>

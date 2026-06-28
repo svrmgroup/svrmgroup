@@ -1,10 +1,16 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import { protectContactNodes } from "@/lib/protectContacts";
 
 const ScrollToTop = () => {
   const { pathname, hash } = useLocation();
 
   useEffect(() => {
+    // Shield email + phone numbers from Google Translate on every route.
+    // Run after the new page paints, then once more after translation re-applies.
+    requestAnimationFrame(() => protectContactNodes());
+    const t = setTimeout(() => protectContactNodes(), 600);
+
     if (hash) {
       // Defer to allow target route to render before scrolling.
       const id = decodeURIComponent(hash.replace("#", ""));
@@ -17,12 +23,14 @@ const ScrollToTop = () => {
         }
       };
       tryScroll();
-      return;
+      return () => clearTimeout(t);
     }
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    return () => clearTimeout(t);
   }, [pathname, hash]);
 
   return null;
 };
+
 
 export default ScrollToTop;
