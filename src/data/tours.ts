@@ -10,6 +10,7 @@ import aerialImg from "@/assets/tours/aerial.jpg";
 import culinaryImg from "@/assets/tours/culinary.jpg";
 import wellnessImg from "@/assets/tours/wellness.jpg";
 import photographyImg from "@/assets/tours/photography.jpg";
+import groupTravelImg from "@/assets/tours/group-travel.jpg";
 import safariVid from "@/assets/videos/tour-safari.mp4.asset.json";
 import huntingVid from "@/assets/videos/tour-hunting.mp4.asset.json";
 import culturalVid from "@/assets/videos/tour-cultural.mp4.asset.json";
@@ -32,6 +33,7 @@ export type TourSlug =
   | "culinary"
   | "wellness"
   | "photography"
+  | "group-travel"
   | "builder";
 
 export interface TourPackage {
