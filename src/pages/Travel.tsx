@@ -25,8 +25,16 @@ const tierBlurbs: Record<string, string> = {
 type Mode = "cars" | "jets" | "helicopters" | "yachts";
 
 const Travel = () => {
+  const [params] = useSearchParams();
   const [mode, setMode] = useState<Mode>("cars");
   const [carTier, setCarTier] = useState<string>("All");
+
+  useEffect(() => {
+    const cat = params.get("cat");
+    if (cat && (["cars","jets","helicopters","yachts"] as const).includes(cat as Mode)) {
+      setMode(cat as Mode);
+    }
+  }, [params]);
 
   return (
     <main className="bg-background text-foreground min-h-screen">
