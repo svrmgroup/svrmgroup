@@ -47,7 +47,7 @@ const Security = () => {
         const items = securityOfferings.filter((o) => o.category === category);
         if (!items.length) return null;
         return (
-          <section key={category} className="pb-20">
+          <section key={category} id={category.toLowerCase().replace(/&/g, "and").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")} className="pb-20 scroll-mt-24">
             <div className="max-w-7xl mx-auto px-6">
               <div className="flex items-end justify-between mb-8">
                 <h2 className="font-serif text-3xl md:text-4xl text-foreground">{category}</h2>
