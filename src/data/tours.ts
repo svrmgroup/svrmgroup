@@ -194,6 +194,21 @@ export const tours: TourCategory[] = [
       { duration: "3 days", title: "Cape photographic signature", fromZAR: 28000, inclusions: ["City + Cape Point + Boulders", "Sunrise & sunset shoots", "Private guide & transport", "Boutique accommodation"] },
     ],
   },
+  {
+    slug: "group-travel",
+    label: "Group Travel",
+    blurb: "Bigger parties, same standard.",
+    description:
+      "Curated group tours for weddings, corporate retreats, incentive trips, school groups and family reunions — 16-seater Sprinters, 22 & 32-seater touring buses, and full luxury coaches. Routes built around your dates, with chauffeurs, guides and stays sequenced end to end.",
+    image: groupTravelImg,
+    video: culturalVid.url,
+    packages: [
+      { duration: "Half day", title: "City group transfer", fromZAR: 6500, inclusions: ["16 or 22-seater bus", "Chauffeur & fuel", "Bottled water onboard", "Up to 5 hours"] },
+      { duration: "1 day", title: "Cape Peninsula group tour", fromZAR: 14500, inclusions: ["Up to 32-seater bus", "Guide + chauffeur", "Boulders & Cape Point", "Lunch arranged"] },
+      { duration: "3 days", title: "Garden Route group", fromZAR: 65000, inclusions: ["Luxury touring coach", "All accommodation", "Guided stops & meals", "All transfers"] },
+      { duration: "Custom", title: "Weddings, corporate & incentive", fromZAR: null, inclusions: ["Multi-vehicle fleets", "Airport meet & greet", "Hostess & coordinator", "Curated, end to end"] },
+    ],
+  },
 ];
 
 export const findTour = (slug: string) => tours.find((t) => t.slug === slug);
