@@ -33,7 +33,29 @@ const Travel = () => {
         title={"Luxury Chauffeur Service Cape Town | Private Transfers — SVRM"}
         description={"Private chauffeur-driven cars, private jets, helicopters and luxury yacht charter across Cape Town and South Africa. Discreet, NDA-bound, quoted on request."}
         path="/travel"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: [
+            {
+              "@type": "Question",
+              name: "Do you do Cape Town airport transfers?",
+              acceptedAnswer: { "@type": "Answer", text: "Yes — Cape Town International (CPT) to any address in the city, Winelands or the Atlantic seaboard. Meet-and-greet inside the terminal, luggage handled, child seats on request." },
+            },
+            {
+              "@type": "Question",
+              name: "What's the difference between a chauffeur and a private driver in Cape Town?",
+              acceptedAnswer: { "@type": "Answer", text: "SVRM chauffeurs are professional drivers in suit, NDA-bound, with English fluency and local knowledge. We place the same chauffeur with you for the length of your stay so they learn your preferences." },
+            },
+            {
+              "@type": "Question",
+              name: "Can I book a chauffeured car by the hour or just for the day?",
+              acceptedAnswer: { "@type": "Answer", text: "Both. Half-day (4 hours), full-day (8 hours) and multi-day arrangements are standard. Single transfers are also quoted on request." },
+            },
+          ],
+        }}
       />
+
       <Nav />
       <PageHero
         eyebrow="Travel · Cape Town Chauffeur, Jets, Helicopters & Yachts"
