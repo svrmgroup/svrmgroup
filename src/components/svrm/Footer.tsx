@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
 import { Instagram } from "lucide-react";
-import { buildWhatsAppUrl, CONCIERGE_EMAIL, INSTAGRAM_URL, TIKTOK_URL } from "@/lib/whatsapp";
+import { buildWhatsAppUrl, CONCIERGE_EMAIL, INSTAGRAM_URL, TIKTOK_URL, SOCIAL_HANDLE } from "@/lib/whatsapp";
 
 const explore = [
   { to: "/travel", label: "Travel" },
@@ -37,7 +37,7 @@ const Footer = () => (
             href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="SVRM on Instagram"
+            aria-label="SVRM Group on Instagram"
             className="h-10 w-10 border border-border/60 flex items-center justify-center text-muted-foreground hover:text-gold hover:border-primary transition-colors"
           >
             <Instagram className="h-4 w-4" />
@@ -46,11 +46,12 @@ const Footer = () => (
             href={TIKTOK_URL}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="SVRM on TikTok"
+            aria-label="SVRM Group on TikTok"
             className="h-10 w-10 border border-border/60 flex items-center justify-center text-muted-foreground hover:text-gold hover:border-primary transition-colors"
           >
             <TikTokIcon className="h-4 w-4" />
           </a>
+          <span className="ml-2 text-xs uppercase tracking-[0.24em] text-muted-foreground/80">{SOCIAL_HANDLE}</span>
         </div>
       </div>
       <div>

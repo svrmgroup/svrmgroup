@@ -29,7 +29,7 @@ interface Props {
 }
 
 const RentalBookingSheet = ({ vehicle, open, onOpenChange }: Props) => {
-  const { format: formatPrice, currency } = useCurrency();
+  const { currency } = useCurrency();
   const [range, setRange] = useState<DateRange | undefined>();
   const [pickup, setPickup] = useState(pickupLocations[0]);
   const [extras, setExtras] = useState<string[]>([]);
