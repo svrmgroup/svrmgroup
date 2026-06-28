@@ -19,7 +19,16 @@ const Tours = () => (
     />
 
     <section className="pb-12 md:pb-20">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="max-w-7xl mx-auto px-6">
+        <p className="text-sm text-muted-foreground/90 leading-relaxed max-w-3xl mb-12 md:mb-16">
+          The most-requested Cape Town tours we run: private <span className="text-foreground">safari</span> in
+          the Big Five reserves, a <span className="text-foreground">helicopter tour</span> over the
+          Twelve Apostles and Cape Point, a guided <span className="text-foreground">Table Mountain</span> day,
+          and marine excursions to see whales, sharks and the Boulders Beach penguins. All private, all
+          chauffeured, all booked through one number.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+
         {tours.map((t) => (
           <Link
             key={t.slug}
