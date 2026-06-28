@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { protectContactNodes } from "@/lib/protectContacts";
+import { getSavedLanguage, translatePage } from "@/lib/siteTranslator";
 
 const ScrollToTop = () => {
   const { pathname, hash } = useLocation();
@@ -10,6 +11,7 @@ const ScrollToTop = () => {
     // Run after the new page paints, then once more after translation re-applies.
     requestAnimationFrame(() => protectContactNodes());
     const t = setTimeout(() => protectContactNodes(), 600);
+    const translateTimer = setTimeout(() => translatePage(getSavedLanguage()), 250);
 
     if (hash) {
       // Defer to allow target route to render before scrolling.
@@ -23,10 +25,16 @@ const ScrollToTop = () => {
         }
       };
       tryScroll();
-      return () => clearTimeout(t);
+      return () => {
+        clearTimeout(t);
+        clearTimeout(translateTimer);
+      };
     }
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-    return () => clearTimeout(t);
+    return () => {
+      clearTimeout(t);
+      clearTimeout(translateTimer);
+    };
   }, [pathname, hash]);
 
   return null;

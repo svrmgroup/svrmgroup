@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Globe, ChevronDown, Check } from "lucide-react";
+import { applyDocumentLanguage, startTranslationObserver, translatePage } from "@/lib/siteTranslator";
 
 type Lang = { code: string; label: string; native: string };
 
@@ -58,56 +59,26 @@ const COUNTRY_LANG: Record<string, string> = {
   ID: "id",
 };
 
-const setCookie = (lang: string) => {
-  const value = lang === "en" ? "" : `/en/${lang}`;
-  const host = window.location.hostname;
-  if (!value) {
-    // Clear cookie variants
-    ["", `;domain=${host}`, `;domain=.${host}`].forEach((d) => {
-      document.cookie = `googtrans=;path=/;expires=Thu, 01 Jan 1970 00:00:00 GMT${d}`;
-    });
-    return;
-  }
-  document.cookie = `googtrans=${value};path=/`;
-  document.cookie = `googtrans=${value};path=/;domain=${host}`;
-};
-
-const RTL_LANGS = ["ar", "he", "fa", "ur"];
-const applyDir = (lang: string) => {
-  const isRtl = RTL_LANGS.includes(lang);
-  document.documentElement.setAttribute("dir", isRtl ? "rtl" : "ltr");
-  document.documentElement.setAttribute("lang", lang || "en");
-};
-
-const applyToGoogleSelect = (lang: string, attempts = 0) => {
-  const sel = document.querySelector(".goog-te-combo") as HTMLSelectElement | null;
-  if (!sel) {
-    if (attempts < 30) setTimeout(() => applyToGoogleSelect(lang, attempts + 1), 200);
-    return;
-  }
-  sel.value = lang === "en" ? "" : lang;
-  sel.dispatchEvent(new Event("change"));
-};
-
 const LanguageSwitch = ({ className = "" }: { className?: string }) => {
-  const [current, setCurrent] = useState<string>("en");
+  const [current, setCurrent] = useState<string>(localStorage.getItem(STORAGE_KEY) || "en");
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
-  // Keep <html dir> + lang in sync with current language
   useEffect(() => {
-    applyDir(current);
+    applyDocumentLanguage(current);
   }, [current]);
 
-
+  useEffect(() => {
+    startTranslationObserver();
+  }, []);
 
   // Initial: load saved → else geo-detect
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
       setCurrent(saved);
-      if (saved !== "en") applyToGoogleSelect(saved);
+      window.setTimeout(() => translatePage(saved), 150);
       return;
     }
     if (sessionStorage.getItem(GEO_DONE_KEY)) return;
@@ -121,8 +92,7 @@ const LanguageSwitch = ({ className = "" }: { className?: string }) => {
         if (!lang) return;
         localStorage.setItem(STORAGE_KEY, lang);
         setCurrent(lang);
-        setCookie(lang);
-        applyToGoogleSelect(lang);
+        window.setTimeout(() => translatePage(lang), 150);
       })
       .catch(() => {});
   }, []);
@@ -130,9 +100,7 @@ const LanguageSwitch = ({ className = "" }: { className?: string }) => {
   // Re-apply translation on every SPA navigation
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved && saved !== "en") {
-      setTimeout(() => applyToGoogleSelect(saved), 250);
-    }
+    if (saved) setTimeout(() => translatePage(saved), 250);
   }, [location.pathname]);
 
   // Honour ?lang= URL param (deep-links from hreflang alternates)
@@ -141,9 +109,8 @@ const LanguageSwitch = ({ className = "" }: { className?: string }) => {
     const q = params.get("lang");
     if (q && LANGUAGES.some((l) => l.code === q) && q !== localStorage.getItem(STORAGE_KEY)) {
       localStorage.setItem(STORAGE_KEY, q);
-      setCookie(q);
       setCurrent(q);
-      applyToGoogleSelect(q);
+      window.setTimeout(() => translatePage(q), 150);
     }
   }, []);
 
@@ -156,24 +123,12 @@ const LanguageSwitch = ({ className = "" }: { className?: string }) => {
   }, []);
 
   const choose = (code: string) => {
-    const prev = localStorage.getItem(STORAGE_KEY) || "en";
     localStorage.setItem(STORAGE_KEY, code);
-    setCookie(code);
     setCurrent(code);
     setOpen(false);
-    // Notify currency/locale-aware components without a full reload
     window.dispatchEvent(new CustomEvent("svrm-lang-change", { detail: code }));
-    // Google Translate only reliably (re)translates the whole page when it
-    // bootstraps from the `googtrans` cookie at load. The hidden `.goog-te-combo`
-    // shortcut is not available in every embed/iframe context, so we always
-    // reload after a language change.
-    if (code === "en") setCookie("");
-    if (code !== prev) {
-      window.location.reload();
-      return;
-    }
+    translatePage(code);
   };
-
 
   const active = LANGUAGES.find((l) => l.code === current) || LANGUAGES[0];
   const badge =
