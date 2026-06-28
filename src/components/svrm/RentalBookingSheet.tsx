@@ -89,7 +89,7 @@ const RentalBookingSheet = ({ vehicle, open, onOpenChange }: Props) => {
   };
 
   const waMessage = vehicle
-    ? `${vehicle.name} self-drive · ${range?.from ? format(range.from, "d MMM") : "?"} → ${range?.to ? format(range.to, "d MMM") : "?"} · pickup ${pickup}${extras.length ? ` · extras: ${extras.join(", ")}` : ""}`
+    ? `${vehicle.name} self-drive · ${range?.from ? formatDate(range.from, { day: "numeric", month: "short" }) : "?"} → ${range?.to ? formatDate(range.to, { day: "numeric", month: "short" }) : "?"} · pickup ${pickup}${extras.length ? ` · extras: ${extras.join(", ")}` : ""}`
     : "rental";
 
   return (
