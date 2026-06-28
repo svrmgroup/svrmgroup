@@ -78,7 +78,7 @@ const Contact = () => {
             <div>
               <p className="eyebrow">Hours</p>
               <p className="mt-3 text-muted-foreground">
-                Concierge 07:00–22:00 SAST, daily.<br />Active bookings supported 24/7.
+                Concierge 24/7.<br />Active bookings supported 24/7.
               </p>
             </div>
             <div className="border-t border-border/40 pt-8">
