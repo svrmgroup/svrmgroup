@@ -9,7 +9,7 @@ import heroVideo from "@/assets/videos/tours.mp4.asset.json";
 
 const Tours = () => (
   <main className="bg-background text-foreground min-h-screen">
-    <Seo title={"Private Cape Town Tours | Safari, Garden Route, Marine — SVRM"} description={"Privately guided Cape Town tours — safari, Garden Route road trips, marine & wildlife, cultural, aerial and wellness itineraries. Curated end-to-end by SVRM."} path="/tours" />
+    <Seo title={"Private Cape Town Tours | Safari, Garden Route, Marine — SVRM"} description={"Privately guided Cape Town tours — safari, Garden Route road trips, marine & wildlife, cultural, aerial and wellness itineraries. Curated end-to-end by SVRM."} path="/tours" keywords="private tours Cape Town, safari tours South Africa, Garden Route tour, Cape Peninsula tour, marine wildlife tour Cape Town, shark cage diving, whale watching Hermanus, Table Mountain tour, township cultural tour, photography tour Cape Town, helicopter scenic flight, wellness retreat South Africa, custom Cape Town itinerary" />
     <Nav />
     <PageHero
       eyebrow="Tours · Private Guided Cape Town & South Africa"
