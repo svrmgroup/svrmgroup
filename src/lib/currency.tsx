@@ -1,4 +1,6 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { formatCurrency, onLocaleChange, getActiveLocale } from "./locale";
+
 
 export type Currency = "ZAR" | "USD" | "GBP" | "EUR" | "AED" | "AUD" | "CAD" | "CHF" | "JPY" | "CNY" | "INR" | "SAR";
 
