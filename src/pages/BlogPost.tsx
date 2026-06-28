@@ -27,7 +27,7 @@ const BlogPost = () => {
   }
 
   const related = posts.filter((p) => p.slug !== post.slug && p.category === post.category).slice(0, 2);
-  const wa = waLink(`Hello SVRM — I read "${post.title}" on the Journal and would like to open a conversation.`);
+  const wa = buildWhatsAppUrl(`Hello SVRM — I read "${post.title}" on the Journal and would like to open a conversation.`);
 
   return (
     <main className="bg-background text-foreground min-h-screen">
