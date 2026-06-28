@@ -16,6 +16,7 @@ import TourBuilderPage from "./pages/TourBuilderPage.tsx";
 import CustomExperiences from "./pages/CustomExperiences.tsx";
 import Blog from "./pages/Blog.tsx";
 import BlogPost from "./pages/BlogPost.tsx";
+import Faq from "./pages/Faq.tsx";
 import Contact from "./pages/Contact.tsx";
 import Rentals from "./pages/Rentals.tsx";
 import Security from "./pages/Security.tsx";
