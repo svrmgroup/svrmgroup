@@ -1,4 +1,6 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { formatCurrency, onLocaleChange, getActiveLocale } from "./locale";
+
 
 export type Currency = "ZAR" | "USD" | "GBP" | "EUR" | "AED" | "AUD" | "CAD" | "CHF" | "JPY" | "CNY" | "INR" | "SAR";
 
@@ -48,10 +50,13 @@ const CurrencyContext = createContext<Ctx | undefined>(undefined);
 
 export const CurrencyProvider = ({ children }: { children: ReactNode }) => {
   const [currency, setCurrencyState] = useState<Currency>("ZAR");
+  const [, setLocaleTick] = useState(0);
 
   useEffect(() => {
     const saved = localStorage.getItem("svrm-currency") as Currency | null;
     if (saved && saved in RATES) setCurrencyState(saved);
+    // Re-render formatted strings when language changes
+    return onLocaleChange(() => setLocaleTick((n) => n + 1));
   }, []);
 
   const setCurrency = (c: Currency) => {
@@ -65,8 +70,13 @@ export const CurrencyProvider = ({ children }: { children: ReactNode }) => {
       currency === "ZAR" || currency === "JPY" || currency === "INR"
         ? Math.round(converted / 100) * 100
         : Math.round(converted / 10) * 10;
-    return `${SYMBOLS[currency]} ${rounded.toLocaleString("en-US")}`;
+    try {
+      return formatCurrency(rounded, currency, getActiveLocale());
+    } catch {
+      return `${SYMBOLS[currency]} ${rounded.toLocaleString("en-US")}`;
+    }
   };
+
 
   return (
     <CurrencyContext.Provider value={{ currency, setCurrency, format, symbol: SYMBOLS[currency] }}>

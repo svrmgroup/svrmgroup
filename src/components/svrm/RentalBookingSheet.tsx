@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { format, differenceInCalendarDays } from "date-fns";
+import { formatDate, formatDateRange } from "@/lib/locale";
 import { DateRange } from "react-day-picker";
 import { z } from "zod";
 import { CalendarIcon } from "lucide-react";
@@ -88,7 +89,7 @@ const RentalBookingSheet = ({ vehicle, open, onOpenChange }: Props) => {
   };
 
   const waMessage = vehicle
-    ? `${vehicle.name} self-drive · ${range?.from ? format(range.from, "d MMM") : "?"} → ${range?.to ? format(range.to, "d MMM") : "?"} · pickup ${pickup}${extras.length ? ` · extras: ${extras.join(", ")}` : ""}`
+    ? `${vehicle.name} self-drive · ${range?.from ? formatDate(range.from, { day: "numeric", month: "short" }) : "?"} → ${range?.to ? formatDate(range.to, { day: "numeric", month: "short" }) : "?"} · pickup ${pickup}${extras.length ? ` · extras: ${extras.join(", ")}` : ""}`
     : "rental";
 
   return (
@@ -120,8 +121,8 @@ const RentalBookingSheet = ({ vehicle, open, onOpenChange }: Props) => {
                       <CalendarIcon className="h-4 w-4" />
                       {range?.from
                         ? range.to
-                          ? `${format(range.from, "d MMM yyyy")} → ${format(range.to, "d MMM yyyy")}`
-                          : format(range.from, "d MMM yyyy")
+                          ? formatDateRange(range.from, range.to, { day: "numeric", month: "short", year: "numeric" })
+                          : formatDate(range.from, { day: "numeric", month: "short", year: "numeric" })
                         : "Select pickup & return dates"}
                     </span>
                     {days > 0 && (

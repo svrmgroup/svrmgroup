@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { DateRange } from "react-day-picker";
-import { format, differenceInCalendarDays } from "date-fns";
+import { differenceInCalendarDays } from "date-fns";
+import { formatDate, formatDateRange } from "@/lib/locale";
 import { CalendarIcon, Users } from "lucide-react";
 import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
@@ -32,13 +33,13 @@ const TourDetail = () => {
 
   const dateLabel = range?.from
     ? range.to
-      ? `${format(range.from, "d MMM")} → ${format(range.to, "d MMM yyyy")}`
-      : format(range.from, "d MMM yyyy")
+      ? formatDateRange(range.from, range.to, { day: "numeric", month: "short", year: "numeric" })
+      : formatDate(range.from, { day: "numeric", month: "short", year: "numeric" })
     : "Select your dates";
 
   const datesSuffix =
     range?.from && range?.to
-      ? ` · ${format(range.from, "d MMM")}–${format(range.to, "d MMM yyyy")} · ${travellers} traveller${travellers > 1 ? "s" : ""}`
+      ? ` · ${formatDateRange(range.from, range.to, { day: "numeric", month: "short", year: "numeric" })} · ${travellers} traveller${travellers > 1 ? "s" : ""}`
       : ` · ${travellers} traveller${travellers > 1 ? "s" : ""}`;
 
   return (
