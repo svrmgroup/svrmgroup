@@ -95,6 +95,13 @@ const LanguageSwitch = ({ className = "" }: { className?: string }) => {
   const ref = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
+  // Keep <html dir> + lang in sync with current language
+  useEffect(() => {
+    applyDir(current);
+  }, [current]);
+
+
+
   // Initial: load saved → else geo-detect
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
