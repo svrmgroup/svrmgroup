@@ -129,7 +129,7 @@ const Nav = () => {
                     {l.label}
                   </NavLink>
                 ))}
-                <div className="pt-2"><CurrencySwitch /></div>
+                <div className="pt-2 flex flex-col gap-3"><LanguageSwitch /><CurrencySwitch /></div>
                 <a
                   href={buildWhatsAppUrl()}
                   target="_blank"
