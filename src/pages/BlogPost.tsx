@@ -35,7 +35,6 @@ const BlogPost = () => {
         title={`${post.title} — SVRM Journal`}
         description={post.excerpt}
         path={`/blog/${post.slug}`}
-        image={post.image}
       />
       <Nav />
 
