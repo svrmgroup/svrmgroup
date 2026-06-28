@@ -10,7 +10,7 @@ import heroVideo from "@/assets/videos/lifestyle.mp4.asset.json";
 
 const Lifestyle = () => (
   <main className="bg-background text-foreground min-h-screen">
-    <Seo title={"Luxury Lifestyle Management Cape Town — Yachting & Charters | SVRM"} description={"Private yachting, day charters and luxury lifestyle management along the Cape Town coast — curated with the discretion that defines SVRM Group."} path="/lifestyle" />
+    <Seo title={"Luxury Lifestyle Management Cape Town — Yachting & Charters | SVRM"} description={"Private yachting, day charters and luxury lifestyle management along the Cape Town coast — curated with the discretion that defines SVRM Group."} path="/lifestyle" keywords="luxury lifestyle management Cape Town, yacht charter Cape Town, private yacht hire V&A Waterfront, sunset cruise Cape Town, day charter Atlantic Seaboard, motor yacht hire, sailing yacht Cape Town, luxury experiences South Africa" />
     <Nav />
     <PageHero
       eyebrow="Lifestyle · Private Yachting & Curated Days in Cape Town"

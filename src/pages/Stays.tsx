@@ -38,6 +38,7 @@ const Stays = () => {
         title={"Luxury Villas & Accommodation Cape Town — SVRM Stays"}
         description={"Luxury villas, apartments and hotel suites in Cape Town — Camps Bay, Clifton, Bantry Bay, V&A and the Winelands. Short-term, long-term and buy/sell, handled privately by SVRM."}
         path="/stays"
+        keywords="luxury villa Cape Town, Camps Bay villa rental, Clifton villa, Bantry Bay accommodation, V&A Waterfront apartment, Constantia estate rental, Winelands accommodation, luxury hotel suite Cape Town, long-term rental Cape Town, short-term let Cape Town, property for sale Cape Town, buy property Cape Town, Atlantic Seaboard villa"
       />
       <Nav />
 

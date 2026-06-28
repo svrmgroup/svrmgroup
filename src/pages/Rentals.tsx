@@ -43,6 +43,7 @@ const Rentals = () => {
         title={"Luxury Car Rental Cape Town | Self-Drive Premium Fleet — SVRM"}
         description={"Self-drive luxury and budget car rental in Cape Town — BMW, Mercedes, Range Rover, Porsche and Rolls-Royce. Lower than chauffeured rates, delivered to you. Custom briefs welcome."}
         path="/rentals"
+        keywords="luxury car rental Cape Town, self-drive car hire Cape Town, BMW rental Cape Town, Mercedes E-Class hire, Range Rover rental, Porsche hire Cape Town, Rolls-Royce rental, budget car rental Cape Town, premium car hire South Africa, car delivery Cape Town airport"
       />
       <Nav />
 

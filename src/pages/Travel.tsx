@@ -42,6 +42,7 @@ const Travel = () => {
         title={"Luxury Chauffeur Service Cape Town | Private Transfers — SVRM"}
         description={"Private chauffeur-driven cars, private jets, helicopters and luxury yacht charter across Cape Town and South Africa. Discreet, NDA-bound, quoted on request."}
         path="/travel"
+        keywords="luxury chauffeur Cape Town, private chauffeur service, airport transfer Cape Town, executive transport South Africa, Mercedes S-Class chauffeur, BMW 7 Series chauffeur, Rolls-Royce Phantom hire, Range Rover chauffeur, Sprinter group travel, private jet charter Cape Town, helicopter charter Cape Town, yacht charter V&A Waterfront, wedding transport, corporate roadshow"
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "FAQPage",

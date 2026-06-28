@@ -6,16 +6,18 @@ interface SeoProps {
   title: string;
   description: string;
   path: string;
+  keywords?: string;
   jsonLd?: object | object[];
 }
 
-export function Seo({ title, description, path, jsonLd }: SeoProps) {
+export function Seo({ title, description, path, keywords, jsonLd }: SeoProps) {
   const url = `${SITE_URL}${path}`;
   const schemas = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
   return (
     <Helmet>
       <title>{title}</title>
       <meta name="description" content={description} />
+      {keywords && <meta name="keywords" content={keywords} />}
       <link rel="canonical" href={url} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />

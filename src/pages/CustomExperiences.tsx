@@ -17,7 +17,7 @@ const cards = [
 
 const CustomExperiences = () => (
   <main className="bg-background text-foreground min-h-screen">
-    <Seo title={"Bespoke Luxury Experiences Cape Town — SVRM Concierge"} description={"Bespoke concierge in Cape Town — private chefs, cleaners, events, proposals, sourcing and last-minute requests. If it can be arranged, SVRM arranges it."} path="/experiences" />
+    <Seo title={"Bespoke Luxury Experiences Cape Town — SVRM Concierge"} description={"Bespoke concierge in Cape Town — private chefs, cleaners, events, proposals, sourcing and last-minute requests. If it can be arranged, SVRM arranges it."} path="/experiences" keywords="bespoke concierge Cape Town, private chef Cape Town, private events concierge, proposal planning Cape Town, personal shopper Cape Town, luxury sourcing South Africa, last-minute concierge, housekeeping Cape Town, lifestyle management bespoke" />
     <Nav />
     <PageHero
       eyebrow="Custom Experiences · Bespoke Concierge in Cape Town"

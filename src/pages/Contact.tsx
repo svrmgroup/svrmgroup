@@ -36,6 +36,7 @@ const Contact = () => {
         title={"Contact SVRM | Cape Town Luxury Concierge — Enquiries & FAQ"}
         description={"Contact SVRM, Cape Town's luxury concierge. WhatsApp +27 73 064 1481 or concierge@svrm.group. Includes a complete FAQ on bookings, pricing, travel, tours, stays and security."}
         path="/contact"
+        keywords="contact SVRM, SVRM concierge contact, Cape Town concierge WhatsApp, luxury concierge enquiry, lifestyle management Cape Town contact, FAQ luxury services, concierge phone number Cape Town"
         jsonLd={faqJsonLd}
       />
       <Nav />

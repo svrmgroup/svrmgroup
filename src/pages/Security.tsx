@@ -15,6 +15,7 @@ const Security = () => {
         title={"Armed Close Protection & Armoured Vehicles Cape Town — SVRM"}
         description={"Armed close protection officers, armoured BMW 7 Series & X5, G63 convoys, residential and event security across Cape Town and South Africa. Confidential, price on request."}
         path="/security"
+        keywords="armed close protection Cape Town, bodyguard Cape Town, executive protection South Africa, armoured vehicle hire, bullet proof BMW 7 Series, armoured BMW X5, Mercedes G63 convoy, residential security Cape Town, event security, secure airport transfer, PSiRA security, VIP protection South Africa"
       />
       <Nav />
 
