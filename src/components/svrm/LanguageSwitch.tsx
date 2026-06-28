@@ -78,7 +78,7 @@ const LanguageSwitch = ({ className = "" }: { className?: string }) => {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
       setCurrent(saved);
-      window.setTimeout(() => translatePage(saved), 150);
+      translatePage(saved);
       return;
     }
     if (sessionStorage.getItem(GEO_DONE_KEY)) return;
@@ -87,12 +87,12 @@ const LanguageSwitch = ({ className = "" }: { className?: string }) => {
       .then((r) => r.json())
       .then((d) => {
         const country: string | undefined = d?.country_code;
-        if (!country || country === "ZA") return; // ZA → English
+        if (!country || country === "ZA") return;
         const lang = COUNTRY_LANG[country];
         if (!lang) return;
         localStorage.setItem(STORAGE_KEY, lang);
         setCurrent(lang);
-        window.setTimeout(() => translatePage(lang), 150);
+        translatePage(lang);
       })
       .catch(() => {});
   }, []);
@@ -100,7 +100,7 @@ const LanguageSwitch = ({ className = "" }: { className?: string }) => {
   // Re-apply translation on every SPA navigation
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) setTimeout(() => translatePage(saved), 250);
+    if (saved && saved !== "en") translatePage(saved);
   }, [location.pathname]);
 
   // Honour ?lang= URL param (deep-links from hreflang alternates)
@@ -110,9 +110,10 @@ const LanguageSwitch = ({ className = "" }: { className?: string }) => {
     if (q && LANGUAGES.some((l) => l.code === q) && q !== localStorage.getItem(STORAGE_KEY)) {
       localStorage.setItem(STORAGE_KEY, q);
       setCurrent(q);
-      window.setTimeout(() => translatePage(q), 150);
+      translatePage(q);
     }
   }, []);
+
 
   useEffect(() => {
     const onClick = (e: MouseEvent) => {

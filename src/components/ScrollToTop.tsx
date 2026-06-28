@@ -11,7 +11,9 @@ const ScrollToTop = () => {
     // Run after the new page paints, then once more after translation re-applies.
     requestAnimationFrame(() => protectContactNodes());
     const t = setTimeout(() => protectContactNodes(), 600);
-    const translateTimer = setTimeout(() => translatePage(getSavedLanguage()), 250);
+    const lang = getSavedLanguage();
+    const translateTimer = lang === "en" ? 0 : window.setTimeout(() => translatePage(lang), 80);
+
 
     if (hash) {
       // Defer to allow target route to render before scrolling.
