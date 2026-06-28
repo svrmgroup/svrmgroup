@@ -10,12 +10,12 @@ import heroVideo from "@/assets/videos/lifestyle.mp4.asset.json";
 
 const Lifestyle = () => (
   <main className="bg-background text-foreground min-h-screen">
-    <Seo title={"Lifestyle — Private Yachts & Charters | SVRM"} description={"Private yachting and day charters along the South African coast, curated with the discretion that defines SVRM lifestyle management."} path="/lifestyle" />
+    <Seo title={"Luxury Lifestyle Management Cape Town — Yachting & Charters | SVRM"} description={"Private yachting, day charters and luxury lifestyle management along the Cape Town coast — curated with the discretion that defines SVRM Group."} path="/lifestyle" />
     <Nav />
     <PageHero
-      eyebrow="Lifestyle"
+      eyebrow="Lifestyle · Private Yachting & Curated Days in Cape Town"
       title="A day on the water. A table no-one else has."
-      subtitle="Private yachting and day charters along the South African coast, with the discretion and curation that defines SVRM."
+      subtitle="Private yachting and day charters along the Cape Town coast, plus luxury lifestyle management — with the discretion and curation that defines SVRM."
       videoSrc={heroVideo.url}
     />
 

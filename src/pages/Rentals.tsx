@@ -31,8 +31,8 @@ const Rentals = () => {
   return (
     <main className="bg-background text-foreground min-h-screen">
       <Seo
-        title={"Car Rentals — Self-drive Luxury & Budget in Cape Town | SVRM"}
-        description={"Self-drive from a BMW 3 Series to a Rolls-Royce. Cheaper than chauffeured — pick your dates, your tier, or send a custom budget brief."}
+        title={"Luxury Car Rental Cape Town | Self-Drive Premium Fleet — SVRM"}
+        description={"Self-drive luxury and budget car rental in Cape Town — BMW, Mercedes, Range Rover, Porsche and Rolls-Royce. Lower than chauffeured rates, delivered to you. Custom briefs welcome."}
         path="/rentals"
       />
       <Nav />
@@ -40,7 +40,7 @@ const Rentals = () => {
       <div className="sticky top-20 z-30 bg-background/90 backdrop-blur border-b border-border/40">
         <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
           <p className="text-xs uppercase tracking-[0.24em] text-muted-foreground">
-            {fleet.length} self-drive vehicles · cheaper than chauffeured
+            {fleet.length} self-drive vehicles · luxury car rental Cape Town
           </p>
           <a
             href={buildWhatsAppUrl("a car rental")}
@@ -55,9 +55,9 @@ const Rentals = () => {
       </div>
 
       <PageHero
-        eyebrow="Car Rentals"
+        eyebrow="Car Rentals · Self-Drive Luxury in Cape Town"
         title="Self-drive, on your terms."
-        subtitle="From a sharp BMW 3 Series to a Rolls-Royce — self-drive rates are lower than our chauffeured fleet. Pick your dates, your tier, or send a custom budget brief."
+        subtitle="Luxury self-drive car rental in Cape Town — from a sharp BMW 3 Series to a Rolls-Royce, delivered to you. Self-drive rates are lower than our chauffeured fleet. Pick your dates, your tier, or send a custom budget brief."
         videoSrc={heroVideo.url}
       />
 

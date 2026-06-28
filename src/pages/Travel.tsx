@@ -30,15 +30,15 @@ const Travel = () => {
   return (
     <main className="bg-background text-foreground min-h-screen">
       <Seo
-        title={"Travel — Cars, Jets, Helicopters & Yachts | SVRM"}
-        description={"Chauffeured cars, private jet & helicopter charter, and luxury yacht charter across South Africa. Every quote on request."}
+        title={"Luxury Chauffeur Service Cape Town | Private Transfers — SVRM"}
+        description={"Private chauffeur-driven cars, private jets, helicopters and luxury yacht charter across Cape Town and South Africa. Discreet, NDA-bound, quoted on request."}
         path="/travel"
       />
       <Nav />
       <PageHero
-        eyebrow="Travel"
+        eyebrow="Travel · Cape Town Chauffeur, Jets, Helicopters & Yachts"
         title="Arrive without thinking about it."
-        subtitle="Cars, private jets, helicopters and yachts — switch the category and send the brief."
+        subtitle="Private chauffeur-driven cars across Cape Town and the Western Cape, plus private jets, helicopters and luxury yacht charter — switch the category and send the brief."
         videoSrc={heroVideo.url}
       />
 
