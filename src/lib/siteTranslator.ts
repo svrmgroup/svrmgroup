@@ -28,6 +28,10 @@ let observer: MutationObserver | null = null;
 let observerTimer: number | undefined;
 const memoryCache = new Map<string, string>();
 const originalTextNodes = new WeakMap<Text, string>();
+const inflight = new Map<string, Promise<string>>();
+const CACHE_PREFIX = "svrm-tr:";
+const persistQueue = new Map<string, string>();
+let persistTimer: number | undefined;
 
 export const getSavedLanguage = () => localStorage.getItem(STORAGE_KEY) || "en";
 
@@ -64,11 +68,40 @@ const canTranslate = (text: string): boolean => {
 
 const cacheKey = (lang: string, text: string) => `${lang}::${text}`;
 
-const readCached = (lang: string, text: string) => memoryCache.get(cacheKey(lang, text));
+const readCached = (lang: string, text: string) => {
+  const key = cacheKey(lang, text);
+  const mem = memoryCache.get(key);
+  if (mem !== undefined) return mem;
+  try {
+    const stored = localStorage.getItem(CACHE_PREFIX + key);
+    if (stored !== null) {
+      memoryCache.set(key, stored);
+      return stored;
+    }
+  } catch {}
+  return undefined;
+};
+
+const flushPersist = () => {
+  try {
+    persistQueue.forEach((value, key) => {
+      try { localStorage.setItem(CACHE_PREFIX + key, value); } catch {}
+    });
+  } finally {
+    persistQueue.clear();
+    persistTimer = undefined;
+  }
+};
 
 const writeCached = (lang: string, text: string, translated: string) => {
-  memoryCache.set(cacheKey(lang, text), translated);
+  const key = cacheKey(lang, text);
+  memoryCache.set(key, translated);
+  persistQueue.set(key, translated);
+  if (persistTimer === undefined) {
+    persistTimer = window.setTimeout(flushPersist, 500);
+  }
 };
+
 
 const fetchTranslationBatch = async (texts: string[], lang: string): Promise<string[]> => {
   if (lang === "en") return texts;
@@ -226,7 +259,8 @@ export const startTranslationObserver = () => {
     const lang = getSavedLanguage();
     if (lang === "en") return;
     window.clearTimeout(observerTimer);
-    observerTimer = window.setTimeout(() => translatePage(lang), 350);
+    observerTimer = window.setTimeout(() => translatePage(lang), 120);
   });
   observer.observe(document.body, { childList: true, subtree: true });
+
 };
