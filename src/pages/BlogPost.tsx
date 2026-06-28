@@ -4,7 +4,7 @@ import Footer from "@/components/svrm/Footer";
 import { Seo } from "@/components/Seo";
 import { posts } from "@/data/blog";
 import { Button } from "@/components/ui/button";
-import { waLink } from "@/lib/whatsapp";
+import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
