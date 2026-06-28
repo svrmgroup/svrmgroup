@@ -13,6 +13,7 @@ const Index = () => (
       title="SVRM | Luxury Lifestyle Management & Concierge Cape Town"
       description="SVRM is Cape Town's private lifestyle management group — luxury chauffeur, private tours, villas, car rental, armed security and bespoke concierge across South Africa."
       path="/"
+      keywords="SVRM, SVRM Group, luxury concierge Cape Town, lifestyle management South Africa, private chauffeur Cape Town, airport transfer Cape Town, private tours Cape Town, luxury villa rental Cape Town, armed close protection, armoured vehicles, private jet charter, helicopter charter, yacht charter, bespoke concierge, VIP services Cape Town"
     />
     <Nav />
     <Hero />
