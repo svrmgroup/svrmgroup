@@ -163,19 +163,14 @@ const LanguageSwitch = ({ className = "" }: { className?: string }) => {
     setOpen(false);
     // Notify currency/locale-aware components without a full reload
     window.dispatchEvent(new CustomEvent("svrm-lang-change", { detail: code }));
-    // Switching between two non-English languages (or back to English) reliably
-    // requires Google Translate to re-bootstrap. Same-language swaps just re-apply.
-    const needsReload = (prev !== "en" && code !== prev);
-    if (needsReload) {
+    // Google Translate only reliably (re)translates the whole page when it
+    // bootstraps from the `googtrans` cookie at load. The hidden `.goog-te-combo`
+    // shortcut is not available in every embed/iframe context, so we always
+    // reload after a language change.
+    if (code === "en") setCookie("");
+    if (code !== prev) {
       window.location.reload();
       return;
-    }
-    if (code === "en") {
-      // Revert: clear cookie + reset the hidden Google select
-      setCookie("");
-      applyToGoogleSelect("en");
-    } else {
-      applyToGoogleSelect(code);
     }
   };
 
