@@ -70,8 +70,10 @@ const Tours = () => (
             </span>
           </div>
         </Link>
+        </div>
       </div>
     </section>
+
 
     <Footer />
   </main>
