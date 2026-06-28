@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Globe, ChevronDown, Check } from "lucide-react";
 
 type Lang = { code: string; label: string; native: string };
@@ -30,31 +31,106 @@ const LANGUAGES: Lang[] = [
   { code: "id", label: "Indonesian", native: "Bahasa Indonesia" },
 ];
 
-const COOKIE_NAME = "googtrans";
+const STORAGE_KEY = "svrm-lang";
+const GEO_DONE_KEY = "svrm-lang-geo-checked";
 
-const setCookie = (value: string) => {
-  // domain & path so Google Translate picks it up
-  const host = window.location.hostname;
-  document.cookie = `${COOKIE_NAME}=${value};path=/`;
-  document.cookie = `${COOKIE_NAME}=${value};path=/;domain=${host}`;
-  const parts = host.split(".");
-  if (parts.length > 1) {
-    document.cookie = `${COOKIE_NAME}=${value};path=/;domain=.${parts.slice(-2).join(".")}`;
-  }
+// Country → preferred site language. ZA stays English (per user request).
+const COUNTRY_LANG: Record<string, string> = {
+  AE: "ar", SA: "ar", QA: "ar", KW: "ar", OM: "ar", BH: "ar",
+  EG: "ar", MA: "ar", JO: "ar", LB: "ar", IQ: "ar", DZ: "ar", TN: "ar",
+  CN: "zh-CN", HK: "zh-TW", TW: "zh-TW", SG: "zh-CN",
+  FR: "fr", BE: "fr", LU: "fr", CI: "fr", SN: "fr",
+  DE: "de", AT: "de", CH: "de",
+  ES: "es", MX: "es", AR: "es", CL: "es", CO: "es", PE: "es",
+  PT: "pt", BR: "pt", AO: "pt", MZ: "pt",
+  IT: "it",
+  RU: "ru", BY: "ru", KZ: "ru",
+  JP: "ja",
+  KR: "ko",
+  IN: "hi",
+  NL: "nl",
+  TR: "tr",
+  PL: "pl",
+  SE: "sv",
+  IL: "he",
+  TH: "th",
+  VN: "vi",
+  ID: "id",
 };
 
-const readCurrent = (): string => {
-  const match = document.cookie.match(/googtrans=\/[^/]+\/([^;]+)/);
-  return match?.[1] || "en";
+const setCookie = (lang: string) => {
+  const value = lang === "en" ? "" : `/en/${lang}`;
+  const host = window.location.hostname;
+  if (!value) {
+    // Clear cookie variants
+    ["", `;domain=${host}`, `;domain=.${host}`].forEach((d) => {
+      document.cookie = `googtrans=;path=/;expires=Thu, 01 Jan 1970 00:00:00 GMT${d}`;
+    });
+    return;
+  }
+  document.cookie = `googtrans=${value};path=/`;
+  document.cookie = `googtrans=${value};path=/;domain=${host}`;
+};
+
+const applyToGoogleSelect = (lang: string, attempts = 0) => {
+  const sel = document.querySelector(".goog-te-combo") as HTMLSelectElement | null;
+  if (!sel) {
+    if (attempts < 30) setTimeout(() => applyToGoogleSelect(lang, attempts + 1), 200);
+    return;
+  }
+  sel.value = lang === "en" ? "" : lang;
+  sel.dispatchEvent(new Event("change"));
 };
 
 const LanguageSwitch = ({ className = "" }: { className?: string }) => {
   const [current, setCurrent] = useState<string>("en");
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const location = useLocation();
 
+  // Initial: load saved → else geo-detect
   useEffect(() => {
-    setCurrent(readCurrent());
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      setCurrent(saved);
+      if (saved !== "en") applyToGoogleSelect(saved);
+      return;
+    }
+    if (sessionStorage.getItem(GEO_DONE_KEY)) return;
+    sessionStorage.setItem(GEO_DONE_KEY, "1");
+    fetch("https://ipapi.co/json/")
+      .then((r) => r.json())
+      .then((d) => {
+        const country: string | undefined = d?.country_code;
+        if (!country || country === "ZA") return; // ZA → English
+        const lang = COUNTRY_LANG[country];
+        if (!lang) return;
+        localStorage.setItem(STORAGE_KEY, lang);
+        setCurrent(lang);
+        setCookie(lang);
+        applyToGoogleSelect(lang);
+      })
+      .catch(() => {});
+  }, []);
+
+  // Re-apply translation on every SPA navigation
+  useEffect(() => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved && saved !== "en") {
+      setTimeout(() => applyToGoogleSelect(saved), 250);
+    }
+  }, [location.pathname]);
+
+  // Honour ?lang= URL param (deep-links from hreflang alternates)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get("lang");
+    if (q && LANGUAGES.some((l) => l.code === q) && q !== localStorage.getItem(STORAGE_KEY)) {
+      localStorage.setItem(STORAGE_KEY, q);
+      setCookie(q);
+      setCurrent(q);
+      applyToGoogleSelect(q);
+    }
   }, []);
 
   useEffect(() => {
@@ -66,19 +142,17 @@ const LanguageSwitch = ({ className = "" }: { className?: string }) => {
   }, []);
 
   const choose = (code: string) => {
-    if (code === "en") {
-      // clear translation
-      setCookie("/en/en");
-    } else {
-      setCookie(`/en/${code}`);
-    }
+    localStorage.setItem(STORAGE_KEY, code);
+    setCookie(code);
     setCurrent(code);
     setOpen(false);
-    // reload to apply translation cleanly
+    // Reload guarantees clean re-translation (incl. <title> & meta).
     window.location.reload();
   };
 
   const active = LANGUAGES.find((l) => l.code === current) || LANGUAGES[0];
+  const badge =
+    active.code === "zh-CN" || active.code === "zh-TW" ? "ZH" : active.code.toUpperCase();
 
   return (
     <div ref={ref} className={`relative ${className}`}>
@@ -88,13 +162,17 @@ const LanguageSwitch = ({ className = "" }: { className?: string }) => {
         className="inline-flex items-center gap-2 border border-border/60 px-2.5 py-1 text-[11px] tracking-[0.18em] text-muted-foreground hover:text-foreground transition-colors notranslate"
         aria-haspopup="listbox"
         aria-expanded={open}
+        translate="no"
       >
         <Globe className="h-3.5 w-3.5" />
-        <span className="uppercase">{active.code === "zh-CN" || active.code === "zh-TW" ? "ZH" : active.code.toUpperCase()}</span>
+        <span className="uppercase">{badge}</span>
         <ChevronDown className="h-3 w-3 opacity-70" />
       </button>
       {open && (
-        <div className="absolute right-0 top-full mt-2 z-50 w-60 max-h-80 overflow-y-auto bg-surface-deep/95 backdrop-blur-md border border-border/60 shadow-lg notranslate">
+        <div
+          className="absolute right-0 top-full mt-2 z-50 w-60 max-h-80 overflow-y-auto bg-surface-deep/95 backdrop-blur-md border border-border/60 shadow-lg notranslate"
+          translate="no"
+        >
           {LANGUAGES.map((l) => (
             <button
               key={l.code}

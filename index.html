@@ -8,6 +8,18 @@
     <meta name="author" content="SVRM Group" />
     <meta name="keywords" content="luxury concierge Cape Town, lifestyle management South Africa, chauffeur Cape Town, private tours Cape Town, luxury villa rental Cape Town, armed close protection Cape Town, car rental Cape Town" />
     <link rel="canonical" href="https://svrm.group/" />
+    <link rel="alternate" hreflang="x-default" href="https://svrm.group/" />
+    <link rel="alternate" hreflang="en" href="https://svrm.group/" />
+    <link rel="alternate" hreflang="ar" href="https://svrm.group/?lang=ar" />
+    <link rel="alternate" hreflang="zh" href="https://svrm.group/?lang=zh-CN" />
+    <link rel="alternate" hreflang="fr" href="https://svrm.group/?lang=fr" />
+    <link rel="alternate" hreflang="de" href="https://svrm.group/?lang=de" />
+    <link rel="alternate" hreflang="es" href="https://svrm.group/?lang=es" />
+    <link rel="alternate" hreflang="pt" href="https://svrm.group/?lang=pt" />
+    <link rel="alternate" hreflang="ru" href="https://svrm.group/?lang=ru" />
+    <link rel="alternate" hreflang="ja" href="https://svrm.group/?lang=ja" />
+    <link rel="alternate" hreflang="hi" href="https://svrm.group/?lang=hi" />
+    <link rel="alternate" hreflang="nl" href="https://svrm.group/?lang=nl" />
 
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://svrm.group/" />
@@ -84,7 +96,18 @@
   <body>
     <div id="root"></div>
     <div id="google_translate_element" style="display:none"></div>
-    <script type="text/javascript">
+    <script>
+      // Restore saved language BEFORE Google Translate loads so it picks up the cookie.
+      (function () {
+        try {
+          var lang = localStorage.getItem('svrm-lang');
+          if (lang && lang !== 'en') {
+            var v = '/en/' + lang;
+            document.cookie = 'googtrans=' + v + ';path=/';
+            document.cookie = 'googtrans=' + v + ';path=/;domain=' + location.hostname;
+          }
+        } catch (e) {}
+      })();
       function googleTranslateElementInit() {
         new google.translate.TranslateElement(
           {
@@ -97,7 +120,7 @@
         );
       }
     </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <style>
       .goog-te-banner-frame.skiptranslate, .goog-te-gadget { display: none !important; }
       body { top: 0 !important; }
