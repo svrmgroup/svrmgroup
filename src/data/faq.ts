@@ -86,7 +86,7 @@ export const faqGroups: FaqGroup[] = [
     id: "hours",
     title: "Hours",
     items: [
-      { q: "What are your hours?", a: "Concierge support runs 07:00–22:00 SAST seven days a week. Active bookings (transport, security, ongoing itineraries) are supported 24/7 by the on-duty team." },
+      { q: "What are your hours?", a: "Concierge support runs 24/7 seven days a week. Active bookings (transport, security, ongoing itineraries) are supported 24/7 by the on-duty team." },
     ],
   },
 ];
