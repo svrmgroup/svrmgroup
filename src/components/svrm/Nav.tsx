@@ -4,7 +4,9 @@ import { Menu } from "lucide-react";
 import Logo from "./Logo";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import CurrencySwitch from "./CurrencySwitch";
+import LanguageSwitch from "./LanguageSwitch";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
+
 import { navCategories } from "@/lib/navCategories";
 
 const links = [
