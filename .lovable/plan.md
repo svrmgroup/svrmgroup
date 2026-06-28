@@ -1,52 +1,55 @@
-## 1. Social handles → @SVRMGROUP
+## SEO foundation for SVRM — approved version
 
-Only one file references the old handle. Update it; every component (Footer icons, mobile + desktop) reads from this constant, so nothing else needs touching.
+You approved this. Click **Implement plan** below to let me apply it. I will **not** publish — you'll review in the preview first.
 
-- `src/lib/whatsapp.ts`
-  - `INSTAGRAM_URL` → `https://www.instagram.com/svrmgroup/`
-  - `TIKTOK_URL` → `https://www.tiktok.com/@svrmgroup`
-  - Add `SOCIAL_HANDLE = "@SVRMGROUP"`
-- `src/components/svrm/Footer.tsx`: add a small `@SVRMGROUP` label next to the IG/TikTok icons (currently icon-only). Keep layout/colour the same.
-- `aria-label`s updated to "SVRM Group on Instagram / TikTok".
+### What I'll change
 
-No other files mention `svrmcpt`. Header has no social icons today — leaving as-is (not adding new UI you didn't have).
+**1. Fix duplicate domain → svrm.group is the official address**
+- `index.html` — canonical + og:url → `https://svrm.group/`
+- `src/components/Seo.tsx` — base URL → `https://svrm.group`
+- `public/sitemap.xml` — all URLs → `svrm.group`, add `/security` and `/rentals`, drop stale ones
+- `public/robots.txt` — sitemap line → `svrm.group`
 
-## 2. Pricing → "On request" everywhere
+**2. Per-page titles & meta descriptions** (shown in Google results, not on the site)
+Updated in each page's `<Seo>` component:
+- Home → *SVRM | Luxury Lifestyle Management & Concierge Cape Town*
+- Travel → *Luxury Chauffeur Service Cape Town | Private Transfers — SVRM*
+- Tours → *Private Cape Town Tours | Safari, Garden Route, Marine — SVRM*
+- Stays → *Luxury Villas & Accommodation Cape Town — SVRM Stays*
+- Security → *Armed Close Protection & Armoured Vehicles Cape Town — SVRM*
+- Rentals → *Luxury Car Rental Cape Town | Self-Drive Premium Fleet — SVRM*
+- Lifestyle → *Luxury Lifestyle Management Cape Town — Yachting & Charters | SVRM*
+- Experiences → *Bespoke Luxury Experiences Cape Town — SVRM Concierge*
+- Blog → *The SVRM Journal — Luxury Travel & Lifestyle Cape Town*
+- Contact → *Contact SVRM | Luxury Concierge Cape Town*
+- Tour Builder → *Build a Custom Cape Town Tour | Bespoke Itinerary — SVRM*
 
-Hide all numeric prices on the four commercial pages while keeping the underlying data (so we can restore later without re-typing).
+**3. LocalBusiness structured data in `index.html`**
+Invisible JSON-LD block describing SVRM to Google: Cape Town location, services catalogue (chauffeur, tours, stays, security, rentals, charter, concierge), WhatsApp, email, Instagram/TikTok, geo coordinates. Single biggest lever for *"… Cape Town"* searches.
 
-- **Tours** (`PricingCard`, `TourBuilder`, `TourDetail`): replace ZAR/GBP/USD numbers with the gold label **"Price on request"**. Per-person / duration / inclusions stay.
-- **Tours → Custom builder**: instead of a live total, show a **"Rough estimate: from R X,XXX pp"** band that updates as options change, with a clear note that the final quote is on request. Uses the existing builder maths, just relabeled.
-- **Stays** (`StayCard`, enquiry sheets): remove `fromZAR / per night`; show **"Rates on request"**.
-- **Rentals** (`RentalCard`, `RentalBookingSheet`, `CustomRentalRequest`): remove daily rates; show **"Rates on request"**. Calendar + tier picker stay.
-- **Travel** (`VehicleCard`, tier sections): remove daily rates; show **"Rates on request"**.
-- `CurrencySwitch` stays mounted (still used by the rough-estimate band in the tour builder) but is hidden on pages where no prices remain.
+**4. Light keyword copy — added, not replaced**
+On each page I'm extending the existing eyebrow/subtitle by a few words to include the searchable terms. Examples (existing words kept, additions in bold-ish here):
+- Travel eyebrow → "Travel · Cape Town Chauffeur, Jets, Helicopters & Yachts"
+- Travel subtitle → "Private chauffeur-driven cars across Cape Town and the Western Cape, plus private jets, helicopters and luxury yacht charter — switch the category and send the brief."
+- Tours eyebrow → "Tours · Private Guided Cape Town & South Africa"
+- Stays eyebrow → "Stays · Luxury Villas, Apartments & Hotels in Cape Town"
+- Security eyebrow → "Security · Armed Close Protection & Armoured Transport"
+- Rentals eyebrow → "Car Rentals · Self-Drive Luxury in Cape Town"
+- Lifestyle eyebrow → "Lifestyle · Private Yachting & Curated Days in Cape Town"
+- Experiences eyebrow → "Custom Experiences · Bespoke Concierge in Cape Town"
+- Blog eyebrow → "Journal · Luxury Travel & Lifestyle Notes from Cape Town"
+- Contact eyebrow → "Contact · Luxury Concierge Cape Town"
 
-## 3. Travel — add category switcher
+Nothing removed, no new sections, no design changes — just longer subtitles in the spot they already exist.
 
-Add a top-level tab row on `/travel`: **Cars · Private Jets · Helicopters · Yachts**.
+### What I'll NOT do
+- Not publish (you said hold).
+- Not change layout, colours, fonts, imagery, navigation, or any existing copy beyond the eyebrow/subtitle extensions above.
+- Not add SEO image (`og:image` already exists).
 
-- Refactor `src/pages/Travel.tsx` to wrap the current fleet view in a `Tabs` (matching the Rentals page styling).
-- New data file `src/data/aviation.ts` for jets/helicopters and `src/data/yachts.ts` for yachts. Each entry: name, tagline, image, capacity, "Price on request", Enquire-via-WhatsApp CTA.
-- Seed 3–4 cards per new category (e.g. Light Jet / Midsize / Heavy; Robinson R44 / AS350 / EC130; 60ft Sailing / 80ft Motor / Superyacht charter). Generate matching cinematic images.
+### After I implement
+1. You preview and approve.
+2. You publish when ready.
+3. I walk you through Google Search Console + Google Business Profile setup (the real unlock for Cape Town searches).
 
-## 4. Stays — add category switcher
-
-Replace the current Villa / Apartment / Hotel tab with a two-level structure:
-
-- **Top tabs**: Short-term · Long-term · Buy & Sell
-  - **Short-term** keeps the existing Villa / Apartment / Hotel sub-tabs and the StaySearchBar + CustomStayBar.
-  - **Long-term** shows a brief intro + a lead form (months, area, budget bracket → WhatsApp). New small section, no listings yet.
-  - **Buy & Sell** shows an intro + lead form (buy or sell, area, bedroom count, budget) → WhatsApp. New small section, no listings yet.
-
-## 5. Publish
-
-After you approve the above, publish to https://svrm.group and https://www.svrm.group. Head metadata is already accurate; I'll verify the title/description/OG tags before clicking publish.
-
-## What is NOT being changed
-
-Design, layout, colours, logo, services list, phone, email, domain, WhatsApp button. Pricing data is kept in source (just hidden) so it can be re-enabled later.
-
-## Open question
-
-For **Long-term stays** and **Buy & Sell properties** — do you want me to keep them as lead-capture forms only (recommended for launch), or seed a few placeholder listings now? If you want listings, please send a source (rough property list, or a site to model them on like the noxrentals stays).
+**Click "Implement plan" to proceed.**

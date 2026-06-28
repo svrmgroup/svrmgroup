@@ -9,12 +9,12 @@ import heroVideo from "@/assets/videos/tours.mp4.asset.json";
 
 const Tours = () => (
   <main className="bg-background text-foreground min-h-screen">
-    <Seo title={"Tours — Safari, Cultural & Adventure | SVRM"} description={"Exclusive South African tours — safari, hunting, cultural and adventure itineraries assembled by SVRM, or composed entirely around you."} path="/tours" />
+    <Seo title={"Private Cape Town Tours | Safari, Garden Route, Marine — SVRM"} description={"Privately guided Cape Town tours — safari, Garden Route road trips, marine & wildlife, cultural, aerial and wellness itineraries. Curated end-to-end by SVRM."} path="/tours" />
     <Nav />
     <PageHero
-      eyebrow="Tours"
+      eyebrow="Tours · Private Guided Cape Town & South Africa"
       title="South Africa, taken seriously."
-      subtitle="Exclusive, alcohol-free itineraries — assembled by theme and duration, or composed entirely around you."
+      subtitle="Privately guided Cape Town tours — safari, Garden Route, marine & wildlife, cultural, aerial and wellness — assembled by theme and duration, or composed entirely around you."
       videoSrc={heroVideo.url}
     />
 

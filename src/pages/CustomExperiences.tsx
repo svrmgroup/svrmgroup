@@ -17,12 +17,12 @@ const cards = [
 
 const CustomExperiences = () => (
   <main className="bg-background text-foreground min-h-screen">
-    <Seo title={"Custom Experiences — Chefs, Events & More | SVRM"} description={"Private chefs, cleaners, events, sourcing and bespoke requests — if it can be arranged in Cape Town, SVRM arranges it."} path="/experiences" />
+    <Seo title={"Bespoke Luxury Experiences Cape Town — SVRM Concierge"} description={"Bespoke concierge in Cape Town — private chefs, cleaners, events, proposals, sourcing and last-minute requests. If it can be arranged, SVRM arranges it."} path="/experiences" />
     <Nav />
     <PageHero
-      eyebrow="Custom Experiences"
+      eyebrow="Custom Experiences · Bespoke Concierge in Cape Town"
       title="Whatever life requires."
-      subtitle="Beyond the signatures, SVRM handles the requests that don't fit a category — for individuals and businesses alike."
+      subtitle="Bespoke concierge for Cape Town and beyond — private chefs, events, sourcing, last-minute essentials and the requests that don't fit a category, for individuals and businesses alike."
       videoSrc={heroVideo.url}
     />
 

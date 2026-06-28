@@ -7,12 +7,12 @@ import { Seo } from "@/components/Seo";
 
 const Contact = () => (
   <main className="bg-background text-foreground min-h-screen">
-    <Seo title={"Contact SVRM — Enquire by Form or WhatsApp"} description={"Begin a conversation with SVRM. Booking is by request — tell us what you need and we'll respond personally within hours."} path="/contact" />
+    <Seo title={"Contact SVRM | Luxury Concierge Cape Town — WhatsApp & Email"} description={"Contact SVRM, Cape Town's luxury concierge and lifestyle management group. WhatsApp +27 73 064 1481 or email concierge@svrm.group — personal reply within hours."} path="/contact" />
     <Nav />
     <PageHero
-      eyebrow="Contact"
+      eyebrow="Contact · Luxury Concierge Cape Town"
       title="Begin a conversation."
-      subtitle="Booking is by request. Tell us what you need — a single transfer or a complete itinerary — and we'll respond personally, within hours."
+      subtitle="Booking is by request. Tell us what you need — a single Cape Town transfer or a complete itinerary — and our concierge team will respond personally, within hours."
     />
 
     <section className="pb-28">

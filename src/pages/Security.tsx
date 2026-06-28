@@ -12,16 +12,16 @@ const Security = () => {
   return (
     <main className="bg-background text-foreground min-h-screen">
       <Seo
-        title={"Security & Armoured Transport — Cape Town | SVRM"}
-        description={"Armoured BMW 7 Series & X5, G63 convoys, close protection officers, residential and event security across South Africa. Price on request."}
+        title={"Armed Close Protection & Armoured Vehicles Cape Town — SVRM"}
+        description={"Armed close protection officers, armoured BMW 7 Series & X5, G63 convoys, residential and event security across Cape Town and South Africa. Confidential, price on request."}
         path="/security"
       />
       <Nav />
 
       <PageHero
-        eyebrow="Security"
+        eyebrow="Security · Armed Close Protection & Armoured Transport"
         title="Protection, quietly arranged."
-        subtitle="Armoured vehicles, vetted close protection officers, residential and event security — coordinated end-to-end by SVRM."
+        subtitle="Armoured vehicles, vetted close protection officers, residential and event security in Cape Town and across South Africa — coordinated end-to-end by SVRM."
         videoSrc={heroVideo.url}
       />
 

@@ -26,8 +26,8 @@ const Stays = () => {
   return (
     <main className="bg-background text-foreground min-h-screen">
       <Seo
-        title={"Stays — Short-term, Long-term & Property | SVRM"}
-        description={"Cape Town short-term villas, apartments and hotel rooms, long-term furnished residences, and buy/sell property — handled by SVRM."}
+        title={"Luxury Villas & Accommodation Cape Town — SVRM Stays"}
+        description={"Luxury villas, apartments and hotel suites in Cape Town — Camps Bay, Clifton, Bantry Bay, V&A and the Winelands. Short-term, long-term and buy/sell, handled privately by SVRM."}
         path="/stays"
       />
       <Nav />
@@ -35,7 +35,7 @@ const Stays = () => {
       <div className="sticky top-20 z-30 bg-background/90 backdrop-blur border-b border-border/40">
         <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between gap-4">
           <p className="text-xs uppercase tracking-[0.24em] text-muted-foreground">
-            Stays · Cape Town
+            Luxury Villas & Accommodation · Cape Town
           </p>
           <a
             href={buildWhatsAppUrl("a stay in Cape Town")}
@@ -50,9 +50,9 @@ const Stays = () => {
       </div>
 
       <PageHero
-        eyebrow="Stays & Property"
+        eyebrow="Stays · Luxury Villas, Apartments & Hotels in Cape Town"
         title="Short-term, long-term, or your own."
-        subtitle="Hand-picked nightly stays, furnished long-term residences, and discreet buy & sell — across Camps Bay, Clifton, Bantry Bay, V&A, Constantia and the Winelands."
+        subtitle="Hand-picked luxury villas, apartments and hotel suites — Camps Bay, Clifton, Bantry Bay, V&A, Constantia and the Winelands. Nightly stays, furnished long-term residences and discreet buy & sell."
         videoSrc={heroVideo.url}
       />
 

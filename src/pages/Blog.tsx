@@ -11,12 +11,12 @@ const Blog = () => {
 
   return (
     <main className="bg-background text-foreground min-h-screen">
-      <Seo title={"Journal — Notes from the Concierge | SVRM"} description={"Field notes, recommendations and observations from SVRM's Cape Town concierge team — published when we have something worth saying."} path="/blog" />
+      <Seo title={"The SVRM Journal — Luxury Travel & Lifestyle Cape Town"} description={"The SVRM Journal — field notes, luxury travel recommendations and observations from our Cape Town concierge team. Insights on tours, stays, chauffeur and bespoke experiences."} path="/blog" />
     <Nav />
       <PageHero
-        eyebrow="Journal"
+        eyebrow="Journal · Luxury Travel & Lifestyle Notes from Cape Town"
         title="Notes from the concierge."
-        subtitle="Field notes, recommendations and quiet observations — published as we have something worth saying."
+        subtitle="Field notes on luxury travel, private tours, stays and lifestyle in Cape Town — published as we have something worth saying."
       />
 
       <section className="pb-28">

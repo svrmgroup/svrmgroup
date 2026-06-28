@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://cape-town-curator.lovable.app/sitemap.xml
+Sitemap: https://svrm.group/sitemap.xml
