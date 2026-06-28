@@ -33,7 +33,29 @@ const Travel = () => {
         title={"Luxury Chauffeur Service Cape Town | Private Transfers — SVRM"}
         description={"Private chauffeur-driven cars, private jets, helicopters and luxury yacht charter across Cape Town and South Africa. Discreet, NDA-bound, quoted on request."}
         path="/travel"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: [
+            {
+              "@type": "Question",
+              name: "Do you do Cape Town airport transfers?",
+              acceptedAnswer: { "@type": "Answer", text: "Yes — Cape Town International (CPT) to any address in the city, Winelands or the Atlantic seaboard. Meet-and-greet inside the terminal, luggage handled, child seats on request." },
+            },
+            {
+              "@type": "Question",
+              name: "What's the difference between a chauffeur and a private driver in Cape Town?",
+              acceptedAnswer: { "@type": "Answer", text: "SVRM chauffeurs are professional drivers in suit, NDA-bound, with English fluency and local knowledge. We place the same chauffeur with you for the length of your stay so they learn your preferences." },
+            },
+            {
+              "@type": "Question",
+              name: "Can I book a chauffeured car by the hour or just for the day?",
+              acceptedAnswer: { "@type": "Answer", text: "Both. Half-day (4 hours), full-day (8 hours) and multi-day arrangements are standard. Single transfers are also quoted on request." },
+            },
+          ],
+        }}
       />
+
       <Nav />
       <PageHero
         eyebrow="Travel · Cape Town Chauffeur, Jets, Helicopters & Yachts"
@@ -167,6 +189,36 @@ const Travel = () => {
           </div>
         </div>
       </section>
+
+      <section className="bg-background py-20 md:py-24 border-t border-border/40">
+        <div className="max-w-4xl mx-auto px-6">
+          <p className="eyebrow">Frequently asked · Cape Town Chauffeur & Airport Transfers</p>
+          <h2 className="font-serif text-3xl md:text-4xl mt-4 text-foreground">A few quick answers.</h2>
+          <div className="mt-10 divide-y divide-border/40 border-y border-border/40">
+            {[
+              {
+                q: "Do you do Cape Town airport transfers?",
+                a: "Yes — Cape Town International (CPT) to any address in the city, Winelands or the Atlantic seaboard. Meet-and-greet inside the terminal, luggage handled, child seats on request. Booked as a single transfer or as part of a full-stay chauffeur arrangement.",
+              },
+              {
+                q: "What's the difference between a chauffeur and a private driver in Cape Town?",
+                a: "Our chauffeurs are professional drivers in suit, NDA-bound, with English fluency and local knowledge of routes, restaurants and timing. A private driver booked elsewhere is usually a one-off transfer; SVRM places the same chauffeur with you for the length of your stay so they learn your preferences.",
+              },
+              {
+                q: "Can I book a chauffeured car by the hour or just for the day?",
+                a: "Both. Half-day (4 hours), full-day (8 hours) and multi-day arrangements are standard. We also do single transfers — airport, restaurant, event — quoted on request once we know the route and timing.",
+              },
+            ].map((f) => (
+              <div key={f.q} className="py-6">
+                <p className="font-serif text-xl text-foreground">{f.q}</p>
+                <p className="text-muted-foreground text-sm leading-relaxed mt-3">{f.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
 
       <section className="bg-background py-24 md:py-32 border-t border-border/40">
         <div className="max-w-3xl mx-auto px-6">

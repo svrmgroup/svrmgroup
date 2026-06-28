@@ -12,6 +12,12 @@ const Intro = () => (
         they own. Today, we curate travel, stays, tours and bespoke experiences across South Africa
         — and we're extending the standard into the worlds of autos, real estate and hospitality.
       </p>
+      <p className="mt-6 text-muted-foreground/80 leading-relaxed max-w-2xl mx-auto text-sm">
+        From a Cape Town airport transfer in a chauffeur-driven Mercedes, to luxury car hire for a
+        Garden Route week, a private safari, a villa above Camps Bay or a helicopter flip over the
+        Twelve Apostles — every brief is handled by one team, on one number.
+      </p>
+
     </div>
   </section>
 );
