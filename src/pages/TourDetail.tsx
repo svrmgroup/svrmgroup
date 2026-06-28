@@ -9,6 +9,7 @@ import PricingCard from "@/components/svrm/PricingCard";
 import EnquiryForm from "@/components/svrm/EnquiryForm";
 import { Seo } from "@/components/Seo";
 import { findTour } from "@/data/tours";
+import WellnessCustomBuilder from "@/components/svrm/WellnessCustomBuilder";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
@@ -180,6 +181,8 @@ const TourDetail = () => {
           </p>
         </div>
       </section>
+
+      {tour.slug === "wellness" && <WellnessCustomBuilder datesSuffix={datesSuffix} />}
 
       <section className="bg-surface-deep py-24 md:py-32 border-t border-border/40">
         <div className="max-w-3xl mx-auto px-6">
