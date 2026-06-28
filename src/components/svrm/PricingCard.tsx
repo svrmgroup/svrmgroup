@@ -1,9 +1,8 @@
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
-import { useCurrency } from "@/lib/currency";
 
 interface Props {
   duration: string;
-  /** ZAR base price, or null for "On request". */
+  /** ZAR base price, or null for "On request". Currently hidden — kept for future use. */
   fromZAR: number | null;
   title: string;
   inclusions: string[];
@@ -11,11 +10,9 @@ interface Props {
   onEnquire?: () => void;
 }
 
-const PricingCard = ({ duration, fromZAR: _fromZAR, title, inclusions, subject, onEnquire }: Props) => {
-  // Pricing hidden across the site — every quote is on request.
-  void _fromZAR;
-  useCurrency();
+const PricingCard = ({ duration, title, inclusions, subject, onEnquire }: Props) => {
   return (
+
   <article className="bg-surface-raised border border-border/40 p-8 flex flex-col">
     <p className="eyebrow">{duration}</p>
     <h3 className="font-serif text-2xl md:text-3xl mt-4 text-foreground">{title}</h3>
