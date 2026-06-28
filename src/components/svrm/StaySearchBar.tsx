@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { format, differenceInCalendarDays } from "date-fns";
+import { differenceInCalendarDays } from "date-fns";
 import { DateRange } from "react-day-picker";
 import { CalendarIcon, Users, BedDouble, Sparkles, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
+import { formatDate, formatDateRange } from "@/lib/locale";
 
 const StaySearchBar = () => {
   const [range, setRange] = useState<DateRange | undefined>();
@@ -18,15 +19,15 @@ const StaySearchBar = () => {
 
   const dateLabel = range?.from
     ? range.to
-      ? `${format(range.from, "d MMM")} → ${format(range.to, "d MMM yyyy")}`
-      : format(range.from, "d MMM yyyy")
+      ? formatDateRange(range.from, range.to, { day: "numeric", month: "short", year: "numeric" })
+      : formatDate(range.from, { day: "numeric", month: "short", year: "numeric" })
     : "Select dates";
 
   const buildMessage = () => {
     const parts = [
       "Stay enquiry",
       range?.from && range?.to
-        ? `${format(range.from, "d MMM")} → ${format(range.to, "d MMM yyyy")} (${nights} night${nights > 1 ? "s" : ""})`
+        ? `${formatDateRange(range.from, range.to, { day: "numeric", month: "short", year: "numeric" })} (${nights} night${nights > 1 ? "s" : ""})`
         : "Dates: flexible",
       `${guests} guest${guests > 1 ? "s" : ""}`,
       `${rooms} room${rooms > 1 ? "s" : ""}`,
@@ -34,6 +35,7 @@ const StaySearchBar = () => {
     ].filter(Boolean);
     return parts.join(" · ");
   };
+
 
   const Stepper = ({
     icon: Icon,
