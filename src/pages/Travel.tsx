@@ -23,6 +23,7 @@ type Mode = "cars" | "jets" | "helicopters" | "yachts";
 
 const Travel = () => {
   const [mode, setMode] = useState<Mode>("cars");
+  const [carTier, setCarTier] = useState<string>("All");
 
   return (
     <main className="bg-background text-foreground min-h-screen">
@@ -55,10 +56,26 @@ const Travel = () => {
             </TabsList>
 
             <TabsContent value="cars" className="mt-0">
-              <p className="text-xs text-muted-foreground/80 tracking-wide max-w-2xl mb-12">
+              <p className="text-xs text-muted-foreground/80 tracking-wide max-w-2xl mb-6">
                 Every chauffeured rate is quoted on request once we know route, hours and add-ons.
               </p>
-              {vehicleTiers.map((tier) => {
+              <div className="flex flex-wrap gap-2 mb-10">
+                {(["All", ...vehicleTiers] as const).map((t) => (
+                  <button
+                    key={t}
+                    type="button"
+                    onClick={() => setCarTier(t)}
+                    className={`text-[11px] uppercase tracking-[0.24em] px-4 py-2 border rounded-none transition-colors ${
+                      carTier === t
+                        ? "bg-primary text-primary-foreground border-primary"
+                        : "border-border/60 text-muted-foreground hover:text-foreground"
+                    }`}
+                  >
+                    {t}
+                  </button>
+                ))}
+              </div>
+              {(carTier === "All" ? vehicleTiers : [carTier as typeof vehicleTiers[number]]).map((tier) => {
                 const list = vehicles.filter((v) => v.tier === tier);
                 if (list.length === 0) return null;
                 return (
