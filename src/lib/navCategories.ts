@@ -26,10 +26,13 @@ export const navCategories: Record<string, NavCategory[]> = {
   "/tours": [
     { label: "Safari", to: "/tours/safari" },
     { label: "Garden Route", to: "/tours/garden-route" },
-    { label: "Marine & Wildlife", to: "/tours/marine-wildlife" },
+    { label: "Marine & Wildlife", to: "/tours/marine" },
     { label: "Cultural", to: "/tours/cultural" },
-    { label: "Aerial & Scenic", to: "/tours/aerial-scenic" },
+    { label: "Aerial & Scenic", to: "/tours/aerial" },
+    { label: "Culinary", to: "/tours/culinary" },
     { label: "Wellness", to: "/tours/wellness" },
+    { label: "Photography", to: "/tours/photography" },
+    { label: "Group Travel", to: "/tours/group-travel" },
     { label: "Build a tour", to: "/tours/builder" },
   ],
   "/security": [
@@ -37,12 +40,6 @@ export const navCategories: Record<string, NavCategory[]> = {
     { label: "Close Protection", to: "/security#close-protection" },
     { label: "Residential", to: "/security#residential" },
     { label: "Events", to: "/security#events" },
-  ],
-  "/experiences": [
-    { label: "Private Chefs", to: "/experiences?cat=chefs" },
-    { label: "Events", to: "/experiences?cat=events" },
-    { label: "Sourcing & Errands", to: "/experiences?cat=sourcing" },
-    { label: "Last-minute", to: "/experiences?cat=lastminute" },
   ],
   "/blog": [
     { label: "All", to: "/blog?cat=All" },
