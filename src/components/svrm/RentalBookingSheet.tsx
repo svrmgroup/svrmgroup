@@ -121,8 +121,8 @@ const RentalBookingSheet = ({ vehicle, open, onOpenChange }: Props) => {
                       <CalendarIcon className="h-4 w-4" />
                       {range?.from
                         ? range.to
-                          ? `${format(range.from, "d MMM yyyy")} → ${format(range.to, "d MMM yyyy")}`
-                          : format(range.from, "d MMM yyyy")
+                          ? formatDateRange(range.from, range.to, { day: "numeric", month: "short", year: "numeric" })
+                          : formatDate(range.from, { day: "numeric", month: "short", year: "numeric" })
                         : "Select pickup & return dates"}
                     </span>
                     {days > 0 && (
