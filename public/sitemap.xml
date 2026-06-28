@@ -10,5 +10,11 @@
   <url><loc>https://svrm.group/lifestyle</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://svrm.group/experiences</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://svrm.group/blog</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/top-5-luxury-safari-lodges-sa</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/design-your-dream-tour</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/atlantic-seaboard-yachting</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/long-term-cape-town-residences</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/chauffeured-vs-self-drive</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/request-only-the-svrm-way</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://svrm.group/contact</loc><changefreq>yearly</changefreq><priority>0.7</priority></url>
 </urlset>

@@ -15,6 +15,7 @@ import TourDetail from "./pages/TourDetail.tsx";
 import TourBuilderPage from "./pages/TourBuilderPage.tsx";
 import CustomExperiences from "./pages/CustomExperiences.tsx";
 import Blog from "./pages/Blog.tsx";
+import BlogPost from "./pages/BlogPost.tsx";
 import Contact from "./pages/Contact.tsx";
 import Rentals from "./pages/Rentals.tsx";
 import Security from "./pages/Security.tsx";
@@ -42,6 +43,7 @@ const App = () => (
             <Route path="/tours/:slug" element={<TourDetail />} />
             <Route path="/experiences" element={<CustomExperiences />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/contact" element={<Contact />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
