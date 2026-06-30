@@ -1,53 +1,37 @@
-## Step (b) — Keyword-rich landing sections grounded in real Cape Town search data
+## Why your logo isn't showing in Google search
 
-### What Semrush told us (ZA market)
+The screenshot shows Google's **search result favicon**, which is different from the browser tab favicon. Two issues are likely at play:
 
-The phrases Cape Town visitors actually type into Google:
+1. **Google hasn't re-crawled yet** — Google caches favicons for days/weeks. Even with a correct setup, the new icon only appears after Googlebot reprocesses the site.
+2. **Transparent PNG on dark mode** — your current `/favicon.png` is transparent. On Google's dark-mode search UI (visible in your screenshot), a transparent logo with no contrasting backdrop can render as invisible, causing Google to fall back to the default globe.
 
-| Phrase | Searches/mo | Difficulty | Verdict for SVRM |
-|---|---|---|---|
-| car hire cape town | 5,400 | 39 | Huge but crowded — target the "luxury" variant |
-| luxury car hire cape town | 590 | 33 | **Sweet spot** — high intent, gettable |
-| airport transfer cape town | 390 | 18 | **Easy win** — SVRM already does this |
-| safari cape town | 1,900 | 22 | **Easy win** — high volume, low difficulty |
-| helicopter tour cape town | 260 | 17 | **Easy win** |
-| table mountain tour | 260 | 26 | Easy win |
-| private tours cape town | 140 | 18 | Easy win |
-| private driver cape town | 110 | 20 | Easy win |
-| chauffeur cape town | 90 | 0 | Easy add-on |
+## Plan
 
-Surprises worth acting on:
-- South Africans say **"car hire"**, not "rental". The /rentals page is missing this phrase entirely.
-- **"Airport transfer"** is bigger than "chauffeur" — Travel page should lead with it.
-- **"Safari cape town"** is 1,900/mo. Currently buried inside /tours; deserves its own emphasis.
+### 1. Add a Google-optimised favicon variant
+Generate a second favicon, `public/favicon-google.png`, that is **48×48 with a solid dark circular background** matching the brand (deep charcoal `#0F0F0F` or similar) so the gold/white SVRM emblem stays visible on both light and dark Google backgrounds. Keep the existing transparent `favicon.png` for the browser tab (where transparency looks better against varied tab-bar colours).
 
-### What I'll add to the site
+### 2. Update `index.html` link order
+Google picks the **largest declared icon** that meets its rules. Update the icon links so:
+- `favicon.png` (512×512, transparent) → primary for browser tabs / Apple touch
+- `favicon-google.png` (48×48, solid bg) → declared as an additional `rel="icon"` with explicit `sizes="48x48"` so Google has a clean, opaque option
 
-Five short, on-brand sections — added below existing content, design untouched. Each ends with the existing CTA, so layout stays familiar.
+```html
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-google.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon.png" />
+<link rel="apple-touch-icon" sizes="512x512" href="/favicon.png" />
+```
 
-**1. `/travel` — "Cape Town Chauffeur & Airport Transfers" FAQ block**
-Three Q&As above the enquiry form, weaving in "airport transfer cape town", "chauffeur cape town", "private driver cape town". Also drops `FAQPage` JSON-LD so Google can show the questions as rich results.
+### 3. Update JSON-LD `logo` field
+Point the `Organization` schema `logo` to the solid version (`/favicon-google.png`) — Google's Knowledge Panel and search result favicon both consult this schema field.
 
-**2. `/rentals` — Add "luxury car hire" language**
-Rename eyebrow + subtitle to use "Cape Town car hire" alongside "rental" (keep "rental" — that's also searched). Add a 2-paragraph intro panel covering self-drive luxury car hire and budget car hire.
+### 4. Tell you how to trigger re-indexing
+After publishing, you'll need to:
+- Open **Google Search Console** → URL Inspection → enter `https://svrm.group/` → click **Request Indexing**
+- Wait 3–14 days; Google reprocesses favicons on its own schedule, no faster path exists
+- Confirm `https://svrm.group/favicon-google.png` loads in a browser and is not blocked by `robots.txt` (it isn't — yours allows everything)
 
-**3. `/tours` — Promote Safari + Helicopter + Table Mountain**
-Add a "Most-requested Cape Town tours" intro paragraph above the category grid naming safari, helicopter tour, Table Mountain, marine — the four phrases people actually search.
+### What I will NOT change
+No design, copy, colours, phone, email, domain, services, or layout changes. Only the favicon asset for Google + the `<link>` tags + the JSON-LD `logo` URL.
 
-**4. `/security` — No change**
-"Armed close protection cape town" has no measurable Semrush volume — it's a word-of-mouth category. Leave as is.
-
-**5. Homepage — One trust paragraph**
-Below the services strip, a short editorial paragraph mentioning Cape Town airport transfers, private tours, luxury car hire, villas — the cluster of phrases. Acts as the homepage's "what we do" signal to Google.
-
-### What I'm NOT doing
-
-- No new pages, no layout changes, no new components, no removed content.
-- No keyword stuffing — each addition is 1–3 sentences in SVRM's voice.
-- Not touching the Stays page beyond what already ships ("villa rental cape town" volume is only 210/mo and the current copy already handles it).
-
-### After implementation
-
-You preview the 4 changed pages. If approved → publish → I run step (c): set up the SVRM Journal with 2–3 starter posts (the long-term SEO compounder).
-
-**Click "Implement plan" to proceed.**
+## Open question
+Do you want the Google favicon backdrop to be **deep charcoal/black** (matches site bg, most subtle) or **brushed gold** (most eye-catching in search results)? I'll default to deep charcoal if you don't specify.
