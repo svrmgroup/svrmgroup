@@ -88,7 +88,7 @@ const Footer = () => (
     </div>
     <div className="border-t border-border/60">
       <div className="max-w-7xl mx-auto px-6 py-5 text-[11px] leading-relaxed text-muted-foreground/70 text-center">
-        All rates shown are guide prices. Final pricing is tailored to the season, availability and the finer details of your booking — often more favourable, occasionally reflecting peak demand. We confirm the exact figure before anything is confirmed.
+        Every price on this site is a rough guide only — a starting point, not a final figure. Request a quote and the number is often lower than what you see here, tailored to your dates, party size and the specifics of your brief. Final pricing is confirmed by us in writing before anything is booked.
       </div>
     </div>
     <div className="border-t border-border/60">
