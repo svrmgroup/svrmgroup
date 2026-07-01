@@ -1,71 +1,76 @@
-## Goal
 
-Rebuild the short-term section of `/stays` around your Nox Rentals partnership: 20-24 real Nox properties across the full price spectrum, with real Nox photos hosted on SVRM (downloaded, not hotlinked), a "from ZAR X / night" starter price shown per card, and a Sort control (Popular / Price low→high / Price high→low). "Enquire" still goes to WhatsApp — no outbound links to Nox.
+## Goals
+1. Replace the single hero image per Nox property with a **scrollable photo carousel** (arrows + swipe on mobile).
+2. Use only real interior/exterior photos of each villa / apartment. No "Guest Guarantee" promo banners, no text overlays.
+3. Fix the truncated text in the card (property name currently gets clipped).
+4. Remove the "Managed with Nox Rentals" line from each card.
+5. Reorder the **Short-term** tab so the layout, top to bottom, is:
+   1. Check‑in search bar (dates, guests, rooms)
+   2. Sub‑tabs (Villas / Apartments / Hotel Rooms) + property grid
+   3. "Tell us your budget" custom stay bar
+6. Leave the top-level tabs — **Short‑term · Long‑term · Buy & Sell** — exactly where they are.
 
-## Property selection (20-24 across all budgets, all Nox areas)
+## What I'll do
 
-Curated from Nox's live inventory so we cover budget → ultra-luxury. Each entry gets its **cheapest low-season nightly rate** pulled from its Nox listing page as the "from" price.
+### 1. Pull real gallery photos per property
+For each of the 24 Nox listings, fetch the property page on `noxrentals.com` and read the JSON payload embedded by Guesty (the array of listing photos on `assets.guesty.com/image.../...`). I'll take the first 6–8 photos per property, drop any that are:
+- Marketing banners (filenames containing `guest-guarantee`, `banner`, `promo`, `logo`, `hero`, `cover-text`).
+- Non-photo mime types.
+- Images whose dominant text region is detected (very small, quick heuristic — cheap safety net).
 
-Villas (~8, mid → ultra)
-- Camps Bay Sunset Sanctuary (3 bed)
-- Camps Bay Ithemba (6 bed, pool, views)
-- Camps Bay Buddha Retreat (10 bed, 2 pools) — flagship
-- Camps Bay Kinvara Villa (5 bed, gym, pool)
-- Llandudno Solmara House (5 bed, beach oasis)
-- Llandudno Sands 4-bed coastal retreat
-- Bantry Bay Hamaya (4 bed, sea + mountain)
-- Constantia / Higgovale Sandstone (4 bed, mountain views)
+Each kept photo is downloaded, resized to 1600px wide JPEG, and uploaded via `lovable-assets`. The pointer `url`s are stored on each stay as `images: string[]`.
 
-Apartments & penthouses (~10, budget → premium)
-- 1-bed Stonewood at The Granger (budget entry)
-- Urban Signature 1-bed (budget CBD)
-- Old Cape Quarter 1-bed (budget De Waterkant)
-- Aquene Bay 2-bed (mid CBD)
-- Green Point Azura Atlantic 2-bed
-- De Waterkant 116 DWP townhouse w/ pool
-- Mouille Point 2-bed w/ Cape views
-- Sea Point Alpha Sunsets 2-bed
-- Clifton Marella (direct beach access)
-- Clifton Dunmore Horizons penthouse (3 bed premium)
-- Sea Point Luxurious Penthouse (3 bed)
-- V&A Marina Altmore 001
+### 2. Data model change (`src/data/stays.ts`)
+```ts
+export interface Stay {
+  slug: string;
+  name: string;
+  area: string;
+  beds: string;
+  fromZAR: number;
+  image: string;        // kept as cover / fallback
+  images?: string[];    // NEW — gallery for Nox properties
+  blurb: string;
+  type: StayType;
+  nox?: boolean;
+}
+```
+Hotels stay as-is (single image).
 
-Standout residences (~4, high-end)
-- Waterfront Aqua Views (Waterclub)
-- Waterfront Amani Views (Waterclub)
-- Camps Bay Rock Residence (6 bed, sea view)
-- Lobster Villa (Llandudno, 6 bed family retreat)
+### 3. New `StayCard`
+- Swap the single `KenBurnsImage` for an **embla carousel** (already in the project via shadcn) with:
+  - Left / right arrow buttons that appear on hover on desktop.
+  - Native touch swipe on mobile.
+  - Small dot indicators at the bottom.
+  - Same `aspect-[16/10]` frame so grid alignment doesn't shift.
+- Text fixes:
+  - Property name: allow up to 2 lines (`line-clamp-2`), remove any truncation.
+  - Beds / area line: single line with ellipsis.
+  - Blurb: `line-clamp-3` so cards stay the same height.
+- Remove the "Managed with Nox Rentals" line entirely.
 
-Final 20-24 confirmed while building based on Nox availability.
+### 4. Reorder short-term tab (`src/pages/Stays.tsx`)
+Current order inside `TabsContent value="short"`:
+```
+StaySearchBar
+CustomStayBar
+Sub-tabs + grid
+```
+New order:
+```
+StaySearchBar                     ← "check in" at the top
+Sub-tabs (Villas/Apts/Hotel) + Sort + grid
+CustomStayBar                     ← "tell us your budget" at the bottom
+```
+The three top-level tabs (Short-term, Long-term, Buy & Sell) and the Long-term / Buy & Sell tab contents are untouched.
 
-## Data & pricing
+### 5. Nothing else changes
+- Sort control (Popular / Low→High / High→Low) stays.
+- Currency switcher behaviour stays.
+- Hotel cards keep "On request" and a single photo.
+- WhatsApp Enquire button unchanged.
 
-- Rewrite `src/data/stays.ts` short-term entries (`villa` + `apartment` types). Keep hotel entries as-is.
-- Each new stay gets: `name`, `area`, `beds`, `fromZAR` (Nox's low-season nightly rate), `image`, `blurb`, `type`, `noxSlug` (internal only, not shown).
-- No outbound Nox links on the card — Enquire button still goes to WhatsApp with the property name and area.
-
-## Photos
-
-Downloaded from each Nox listing's main hero shot, saved to `src/assets/stays/nox/<slug>.jpg`, then externalised via `lovable-assets` (repo stays light). Existing unused stay images that no longer map to a listing get removed.
-
-## UI changes on `/stays`
-
-Short-term tab additions:
-1. **Sort dropdown** above the grid: `Popular` (default, curated order) · `Price: Low to High` · `Price: High to Low`.
-2. **"From R X,XXX / night"** replaces the current "On request" line on each `StayCard`. Currency switcher (ZAR/GBP/USD) already handles conversion — reuse it.
-3. Small "Managed with Nox Rentals" line in the sub-tab header so guests understand the partnership.
-4. Villa / Apartment / Hotel sub-tabs stay. Hotels remain "On request".
-
-## Files touched
-
-- `src/data/stays.ts` — replace short-term entries, add `noxSlug`, populate `fromZAR`.
-- `src/components/svrm/StayCard.tsx` — show "from R X / night" using currency context; keep hotels on "On request".
-- `src/pages/Stays.tsx` — add Sort dropdown state, add partnership subtitle.
-- `src/assets/stays/nox/*.jpg.asset.json` — new Nox photos on CDN.
-- Remove old unused stay images.
-
-## Out of scope
-
-- Live availability / real-time pricing (Nox doesn't expose an API for this — indicative "from" rates only, quote confirmed on enquiry).
-- Outbound "Book on Nox" buttons (you asked to keep WhatsApp as the flow).
-- Long-term and Buy & Sell tabs — untouched.
+## Technical notes
+- Photo scraping runs once, in the sandbox, as a Python script under `/tmp/nox/`. It writes ~150 new `.jpg.asset.json` pointer files under `src/assets/stays/nox/<slug>/NN.jpg.asset.json`. Old single hero pointers are kept (used as cover / for SSR-safe first paint).
+- Carousel uses `embla-carousel-react` via the existing `@/components/ui/carousel` wrapper — no new dependency.
+- All work stays in frontend / data files. No backend, no schema changes, no route changes.
