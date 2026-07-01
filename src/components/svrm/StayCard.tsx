@@ -114,7 +114,7 @@ const StayCard = ({ stay }: { stay: Stay; index?: number }) => {
               {showPrice ? format(stay.fromZAR) : "On request"}
             </p>
             {showPrice && (
-              <p className="text-[10px] tracking-wide text-muted-foreground/60 mt-1">Flexes with season &amp; availability</p>
+              <p className="text-[10px] tracking-wide text-muted-foreground/60 mt-1">Rough guide — final quote often lower</p>
             )}
           </div>
 

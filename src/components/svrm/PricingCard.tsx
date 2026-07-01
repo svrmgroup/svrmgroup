@@ -31,7 +31,7 @@ const PricingCard = ({ duration, title, inclusions, subject, fromZAR, slug, onEn
           {bookable ? `From ${format(fromZAR)}` : "On request"}
         </p>
         <p className="text-xs text-muted-foreground/60 mt-1">
-          per person · personalised quote · flexes with season &amp; availability
+          per person · rough guide · final quote often lower on request
         </p>
       </div>
 
