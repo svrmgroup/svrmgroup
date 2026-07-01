@@ -288,9 +288,7 @@ const BookingSheet = ({
             </p>
           </div>
           <p className="text-[11px] leading-relaxed text-muted-foreground/80 -mt-1">
-            Guide price only. Your final rate is tailored to the season, availability and the finer
-            details we arrange for you — often more favourable, sometimes reflecting peak demand.
-            We confirm the exact figure before anything is booked.
+            Rough guide only — not a final quote. Request the booking and we come back with a tailored figure that is often lower than the number shown here, based on your dates, party size and the finer details. Nothing is charged until you approve the final price in writing.
           </p>
 
 

@@ -25,7 +25,7 @@ const VehicleCard = ({ vehicle, index }: { vehicle: Vehicle; index: number }) =>
               From / day · guide
             </p>
             <p className="font-serif text-xl text-gold">{format(vehicle.fromZAR)}</p>
-            <p className="text-[10px] tracking-wide text-muted-foreground/60 mt-1">Flexes with season &amp; availability</p>
+            <p className="text-[10px] tracking-wide text-muted-foreground/60 mt-1">Rough guide — final quote often lower</p>
           </div>
 
           <button
