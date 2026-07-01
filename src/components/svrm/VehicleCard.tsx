@@ -22,10 +22,12 @@ const VehicleCard = ({ vehicle, index }: { vehicle: Vehicle; index: number }) =>
         <div className="mt-5 flex items-end justify-between gap-4">
           <div>
             <p className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground/70">
-              From / day
+              From / day · guide
             </p>
             <p className="font-serif text-xl text-gold">{format(vehicle.fromZAR)}</p>
+            <p className="text-[10px] tracking-wide text-muted-foreground/60 mt-1">Flexes with season &amp; availability</p>
           </div>
+
           <button
             type="button"
             onClick={() => setOpen(true)}

@@ -25,9 +25,11 @@ const RentalCard = ({ vehicle, index, onBook }: Props) => {
         <p className="text-sm text-muted-foreground mt-2 flex-1">{vehicle.tagline}</p>
         <div className="mt-5 flex items-end justify-between gap-4">
           <div>
-            <p className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground/70">From / day</p>
+            <p className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground/70">From / day · guide</p>
             <p className="font-serif text-xl text-gold">{format(rate)}</p>
+            <p className="text-[10px] tracking-wide text-muted-foreground/60 mt-1">Flexes with season &amp; availability</p>
           </div>
+
           <button
             type="button"
             onClick={() => onBook(vehicle)}

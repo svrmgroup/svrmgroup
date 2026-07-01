@@ -284,11 +284,15 @@ const BookingSheet = ({
               </p>
             </div>
             <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground/80 text-right max-w-[180px]">
-              {units > 0
-                ? `Personal quote confirmed within hours.`
-                : "Personal quote confirmed within hours."}
+              Personal quote confirmed within hours.
             </p>
           </div>
+          <p className="text-[11px] leading-relaxed text-muted-foreground/80 -mt-1">
+            Guide price only. Your final rate is tailored to the season, availability and the finer
+            details we arrange for you — often more favourable, sometimes reflecting peak demand.
+            We confirm the exact figure before anything is booked.
+          </p>
+
 
           <div className="flex flex-col sm:flex-row gap-3">
             <button

@@ -26,12 +26,15 @@ const PricingCard = ({ duration, title, inclusions, subject, fromZAR, slug, onEn
       <p className="eyebrow">{duration}</p>
       <h3 className="font-serif text-2xl md:text-3xl mt-4 text-foreground">{title}</h3>
       <div className="mt-6">
-        <p className="text-xs uppercase tracking-[0.24em] text-muted-foreground">Pricing</p>
+        <p className="text-xs uppercase tracking-[0.24em] text-muted-foreground">Pricing · guide</p>
         <p className="font-serif text-3xl text-gold mt-2">
           {bookable ? `From ${format(fromZAR)}` : "On request"}
         </p>
-        <p className="text-xs text-muted-foreground/60 mt-1">per person · personalised quote</p>
+        <p className="text-xs text-muted-foreground/60 mt-1">
+          per person · personalised quote · flexes with season &amp; availability
+        </p>
       </div>
+
 
       <ul className="mt-6 space-y-2 text-sm text-foreground/85 flex-1">
         {inclusions.map((i) => (
