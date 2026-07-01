@@ -84,9 +84,7 @@ const Stays = () => {
             </TabsList>
 
             <TabsContent value="short" className="mt-0">
-              <div className="mb-10">
-                <StaySearchBar />
-              </div>
+
 
               <Tabs value={sub} onValueChange={(v) => setSub(v as StayType)} className="w-full">
                 <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
