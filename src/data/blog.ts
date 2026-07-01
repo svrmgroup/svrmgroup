@@ -4,6 +4,14 @@ import villaImg from "@/assets/svc-stays-villa.jpg";
 import fleetImg from "@/assets/svc-travel-fleet.jpg";
 import culturalImg from "@/assets/svc-tours-cultural.jpg";
 import customImg from "@/assets/svc-custom.jpg";
+import jetImg from "@/assets/svc-travel-jet.jpg";
+import heliImg from "@/assets/svc-transport-heli.jpg";
+import chefImg from "@/assets/svc-lifestyle-chef.jpg";
+import wellnessImg from "@/assets/svc-lifestyle-wellness.jpg";
+import penthouseImg from "@/assets/svc-stays-penthouse.jpg";
+import adventureImg from "@/assets/svc-tours-adventure.jpg";
+import shoppingImg from "@/assets/svc-lifestyle-shopping.jpg";
+import estateImg from "@/assets/svc-stays-estate.jpg";
 
 export type BlogCategory = "Travel" | "Tours" | "Lifestyle" | "Properties" | "Insights";
 
@@ -236,6 +244,279 @@ export const posts: BlogPost[] = [
     ],
     closing:
       "Open a conversation with the concierge when you are ready. The first message is the only one that needs to feel formal.",
+  },
+  {
+    slug: "private-jet-charter-cape-town",
+    title: "Private jet charter from Cape Town: what actually matters",
+    excerpt:
+      "Aircraft type, crew, slot timing, and the small operational details that separate a good charter from a forgettable one.",
+    category: "Travel",
+    date: "April 2026",
+    image: jetImg,
+    readTime: "5 min read",
+    intro:
+      "Private aviation out of Cape Town International is more accessible than most guests expect — and the difference between operators is much larger than the difference between aircraft.",
+    sections: [
+      {
+        heading: "Match the aircraft to the leg",
+        body:
+          "A Pilatus PC-12 is perfect for the safari hop to Sabi Sand. A Citation XLS is right for Johannesburg or Victoria Falls. A Global for anything intercontinental. We size the aircraft to the leg, not the ego — and the saving is usually meaningful.",
+      },
+      {
+        heading: "Crew is the whole experience",
+        body:
+          "The captain sets the tone. We fly with a short list of South African crews we know personally — quiet, unflappable, and briefed on the guest before wheels-up.",
+      },
+      {
+        heading: "Slot times are everything",
+        body:
+          "Cape Town's afternoon southeaster and the winter fog windows are real. A charter booked with the weather in mind lands calmly. One booked without it does not.",
+      },
+      {
+        heading: "Ground handling on both ends",
+        body:
+          "Chauffeured arrival to the FBO, wheels-up in ten minutes, chauffeured collection at the destination. We arrange all three under one brief so nothing is handed between vendors.",
+      },
+    ],
+    closing:
+      "Send dates, party size and destination on WhatsApp. We return two or three sensible aircraft options and a fully-loaded quote within the day.",
+  },
+  {
+    slug: "helicopter-transfers-cape-winelands",
+    title: "Helicopter transfers to the Winelands and beyond",
+    excerpt:
+      "Twelve minutes to Franschhoek, thirty to Hermanus. When a helicopter earns its place in the itinerary.",
+    category: "Travel",
+    date: "April 2026",
+    image: heliImg,
+    readTime: "3 min read",
+    intro:
+      "A helicopter is not always the right answer — but when it is, it reshapes the day. Here is when we recommend one, and when we quietly steer guests back to the road.",
+    sections: [
+      {
+        heading: "The right legs",
+        body:
+          "V&A to Franschhoek in twelve minutes. Cape Town to Hermanus for whale season in thirty. Cape Point scenic loop in forty-five. Legs where the road would consume the day and the view from the air is the point.",
+      },
+      {
+        heading: "The wrong legs",
+        body:
+          "Anywhere inside the city bowl, anything under fifteen minutes by road, and most airport transfers. A chauffeured S-Class is more comfortable, more discreet, and considerably cheaper.",
+      },
+      {
+        heading: "What we book",
+        body:
+          "Twin-engine machines only, IFR-rated crews, and a ground team on both pads. Weather calls are made honestly — if the wind is wrong we say so and reroute by road without a fuss.",
+      },
+    ],
+    closing:
+      "Tell us the leg and the party. We recommend heli or road with a straight answer, and arrange whichever serves the day.",
+  },
+  {
+    slug: "private-chef-cape-town",
+    title: "Private chefs at home: how we brief them",
+    excerpt:
+      "The three questions we ask before pairing a chef with a residence — and why the menu is the last conversation, not the first.",
+    category: "Lifestyle",
+    date: "March 2026",
+    image: chefImg,
+    readTime: "4 min read",
+    intro:
+      "A private chef at the villa is one of the quietest luxuries Cape Town offers. Getting it right is less about the menu and more about the fit.",
+    sections: [
+      {
+        heading: "Who is at the table",
+        body:
+          "Six adults over a long lunch is a different chef to two couples with young children. We match temperament first — the food follows.",
+      },
+      {
+        heading: "How the kitchen works",
+        body:
+          "Some residences have a chef's kitchen. Some have a domestic one behind a wall. A good chef adapts, but we brief them in advance so nothing is improvised on the night.",
+      },
+      {
+        heading: "The menu is last",
+        body:
+          "We agree the shape of the evening — canapés on the terrace, a plated main, a shared dessert — before the chef proposes a dish. Menus written to a real evening are always better than menus written in the abstract.",
+      },
+    ],
+    closing:
+      "Give us the residence, the guests and the evening you have in mind. We propose two chefs, both of whom we have eaten with personally.",
+  },
+  {
+    slug: "cape-town-summer-season-guide",
+    title: "The Cape Town summer season, honestly assessed",
+    excerpt:
+      "When to come, when to avoid, and what a good concierge does with each week between November and March.",
+    category: "Insights",
+    date: "March 2026",
+    image: penthouseImg,
+    readTime: "6 min read",
+    intro:
+      "Southern Hemisphere summer in Cape Town runs from November to March. Not all of it is equal. Here is the week-by-week view from someone who works through the whole season.",
+    sections: [
+      {
+        heading: "Early November — the quiet window",
+        body:
+          "Warm days, cool evenings, still-affordable villas, restaurants easy to book. Our favourite fortnight of the year and the one we quietly recommend to returning clients.",
+      },
+      {
+        heading: "Late November to mid-December — the sweet spot",
+        body:
+          "Long light, warm sea, everything open, prices climbing but not yet peak. Book residences six months out.",
+      },
+      {
+        heading: "20 December to 5 January — the peak",
+        body:
+          "Genuinely busy. Villa rates double, restaurants require standing arrangements, roads to Camps Bay slow at 6pm. Beautiful if planned tightly, chaotic if not.",
+      },
+      {
+        heading: "Mid-January to end of February — the second spring",
+        body:
+          "Locals return to work, the city exhales, weather remains excellent. Arguably the best combination of climate and calm in the calendar.",
+      },
+      {
+        heading: "March — the long farewell",
+        body:
+          "Warm sea, cooler evenings, harvest in the Winelands. Our second-favourite month.",
+      },
+    ],
+    closing:
+      "Tell us the window you are considering. We say honestly whether it is right — and, if not, when to come instead.",
+  },
+  {
+    slug: "garden-route-in-four-days",
+    title: "The Garden Route in four days, done properly",
+    excerpt:
+      "A tight, unhurried itinerary from Cape Town to Plettenberg Bay — no rushed lunches, no wasted afternoons.",
+    category: "Tours",
+    date: "February 2026",
+    image: adventureImg,
+    readTime: "5 min read",
+    intro:
+      "The Garden Route is often oversold as a week-long drive. Four days, planned well, is usually enough — and considerably more elegant.",
+    sections: [
+      {
+        heading: "Day one — Cape Town to Hermanus",
+        body:
+          "Late start, coastal drive via Betty's Bay, lunch at the harbour, whale-watching in season. Overnight at a small guesthouse above the cliffs.",
+      },
+      {
+        heading: "Day two — Hermanus to Knysna",
+        body:
+          "The long driving day. Break at Wilderness for the beach, arrive Knysna for sunset over the lagoon. Dinner at a private residence we hold on account.",
+      },
+      {
+        heading: "Day three — Knysna and Plettenberg",
+        body:
+          "Slow morning, forest walk in Tsitsikamma, afternoon on the beach at Plett. This is the day the trip earns its keep.",
+      },
+      {
+        heading: "Day four — return by air",
+        body:
+          "Chauffeured to George, forty-five minute flight back to Cape Town. The drive home is what ruins most Garden Route trips. We do not do the drive home.",
+      },
+    ],
+    closing:
+      "We arrange the vehicle, the stays, the private dinners and the return flight as one brief. Send us your dates.",
+  },
+  {
+    slug: "wellness-recovery-cape-town",
+    title: "Wellness and recovery weeks in Cape Town",
+    excerpt:
+      "Discreet trainers, IV clinics, quiet residences, and how we structure a week that actually resets.",
+    category: "Lifestyle",
+    date: "February 2026",
+    image: wellnessImg,
+    readTime: "4 min read",
+    intro:
+      "A growing share of our work is quiet recovery weeks — post-surgery, post-tour, or simply post-year. Cape Town is unusually well suited to it.",
+    sections: [
+      {
+        heading: "The residence sets the tone",
+        body:
+          "Somewhere with a private pool, morning sun, and no neighbours in earshot. Bantry Bay and Higgovale both work. Camps Bay in peak season does not.",
+      },
+      {
+        heading: "The team comes to you",
+        body:
+          "Trainer at 7am, physio at 10, chef for lunch, massage at 4. The whole week is arranged around one residence so nothing has to be commuted to.",
+      },
+      {
+        heading: "Medical when needed",
+        body:
+          "We work with a small list of private GPs, IV clinics and physiotherapists who visit in-residence. All NDA-bound, all invoiced through us for privacy.",
+      },
+    ],
+    closing:
+      "Share the shape of the week and any medical context on WhatsApp. Full discretion, and a proposal within twenty-four hours.",
+  },
+  {
+    slug: "buying-property-cape-town",
+    title: "Buying property in Cape Town: the concierge view",
+    excerpt:
+      "Where our clients are buying, what to expect from the process, and why the right introduction matters more than the right listing.",
+    category: "Properties",
+    date: "January 2026",
+    image: estateImg,
+    readTime: "5 min read",
+    intro:
+      "We are not estate agents. We are, however, in the residences of Cape Town's best neighbourhoods most weeks — and clients increasingly ask us where to buy.",
+    sections: [
+      {
+        heading: "Where the money is quietly going",
+        body:
+          "Fresnaye and Bantry Bay for view and privacy. Higgovale for architecture. Constantia for land. Llandudno for the long view. Each has a very different profile of buyer.",
+      },
+      {
+        heading: "Off-market is most of the market",
+        body:
+          "The best houses do not appear on the listing sites. They move between neighbours, agents and concierges. An introduction is worth more than a portal alert.",
+      },
+      {
+        heading: "The process, briefly",
+        body:
+          "Offer to purchase, deposit, bond approval if applicable, transfer at the Deeds Office. Usually eight to twelve weeks. We coordinate the conveyancer and the handover.",
+      },
+      {
+        heading: "Live in it first",
+        body:
+          "We routinely place buyers into a long-term residence for a month or two while they look. It is the single best way to avoid a wrong purchase.",
+      },
+    ],
+    closing:
+      "Tell us the brief in confidence. We arrange the stay, the introductions, and the viewings — quietly.",
+  },
+  {
+    slug: "shopping-cape-town-private",
+    title: "Private shopping days in Cape Town",
+    excerpt:
+      "Where we take clients when the brief is a considered wardrobe, not a tourist afternoon.",
+    category: "Lifestyle",
+    date: "December 2025",
+    image: shoppingImg,
+    readTime: "3 min read",
+    intro:
+      "Cape Town's shopping is quietly excellent if you know where to go — and considerably less so if you do not. Here is how we structure a private day.",
+    sections: [
+      {
+        heading: "Start in De Waterkant",
+        body:
+          "Local designers, small ateliers, and the best of South African leather. Morning coffee, two hours on foot, chauffeur waiting.",
+      },
+      {
+        heading: "Then the V&A private suites",
+        body:
+          "The luxury houses at the V&A open private appointment rooms on request. We book them ahead so the shop is closed to walk-ins during the visit.",
+      },
+      {
+        heading: "Finish in Woodstock",
+        body:
+          "Art, ceramics, and the design galleries around the Old Biscuit Mill. Late lunch, back to the residence with everything already delivered ahead.",
+      },
+    ],
+    closing:
+      "Tell us the brief and the labels. We compose the day, book the private rooms, and handle the deliveries.",
   },
 ];
 
