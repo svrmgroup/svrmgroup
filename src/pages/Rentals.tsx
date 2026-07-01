@@ -12,6 +12,7 @@ import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import { MessageCircle } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import heroVideo from "@/assets/videos/rentals.mp4.asset.json";
+import rentalsOg from "@/assets/svc-travel-sclass.jpg";
 
 type TabKey = "All" | VehicleTier | "Custom";
 
