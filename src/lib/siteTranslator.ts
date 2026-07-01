@@ -28,6 +28,7 @@ let observer: MutationObserver | null = null;
 let observerTimer: number | undefined;
 const memoryCache = new Map<string, string>();
 const originalTextNodes = new WeakMap<Text, string>();
+const lastAppliedTranslation = new WeakMap<Text, string>();
 const inflight = new Map<string, Promise<string>>();
 const CACHE_PREFIX = "svrm-tr:";
 const persistQueue = new Map<string, string>();
@@ -193,7 +194,17 @@ const collectTextTargets = (root: ParentNode) => {
   let node = walker.nextNode();
   while (node) {
     const textNode = node as Text;
-    const original = originalTextNodes.get(textNode) || textNode.nodeValue || "";
+    const currentValue = textNode.nodeValue || "";
+    // If React (or any code) has replaced this node's text with something
+    // that isn't the cached original AND isn't our last translation, treat
+    // the new value as the fresh original (e.g. currency-conversion updates).
+    const lastApplied = lastAppliedTranslation.get(textNode);
+    const cachedOriginal = originalTextNodes.get(textNode);
+    if (cachedOriginal !== undefined && currentValue !== cachedOriginal && currentValue !== lastApplied) {
+      originalTextNodes.set(textNode, currentValue);
+      lastAppliedTranslation.delete(textNode);
+    }
+    const original = originalTextNodes.get(textNode) || currentValue;
     originalTextNodes.set(textNode, original);
     const { leading, core, trailing } = splitOuterWhitespace(original);
     if (canTranslate(core)) targets.push({ node: textNode, original, leading, core, trailing });
@@ -246,7 +257,9 @@ export const translatePage = async (lang = getSavedLanguage(), root: ParentNode 
   if (thisRun !== runId || getSavedLanguage() !== lang) return;
 
   textTargets.forEach(({ node, leading, core, trailing }) => {
-    node.nodeValue = `${leading}${translations.get(core) || core}${trailing}`;
+    const translated = `${leading}${translations.get(core) || core}${trailing}`;
+    node.nodeValue = translated;
+    lastAppliedTranslation.set(node, translated);
   });
   attrTargets.forEach(({ el, attr, text }) => {
     el.setAttribute(attr, translations.get(text) || text);

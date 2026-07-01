@@ -39,10 +39,11 @@ const Travel = () => {
   return (
     <main className="bg-background text-foreground min-h-screen">
       <Seo
-        title={"Luxury Chauffeur Service Cape Town | Private Transfers — SVRM"}
-        description={"Private chauffeur-driven cars, private jets, helicopters and luxury yacht charter across Cape Town and South Africa. Discreet, NDA-bound, quoted on request."}
+        title={"Luxury Chauffeur, Private Jets, Helicopters & Yachts Cape Town — SVRM"}
+        description={"Discreet chauffeur-driven Mercedes S-Class, BMW 7, Range Rover and Rolls-Royce, plus private jets, helicopter transfers and superyacht charters across Cape Town, the Winelands and beyond. NDA-bound, uniformed, 24/7."}
         path="/travel"
-        keywords="luxury chauffeur Cape Town, private chauffeur service, airport transfer Cape Town, executive transport South Africa, Mercedes S-Class chauffeur, BMW 7 Series chauffeur, Rolls-Royce Phantom hire, Range Rover chauffeur, Sprinter group travel, private jet charter Cape Town, helicopter charter Cape Town, yacht charter V&A Waterfront, wedding transport, corporate roadshow"
+        keywords="luxury chauffeur Cape Town, VIP chauffeur service, private airport transfer Cape Town, Mercedes S-Class chauffeur, BMW 7 Series with driver, Rolls-Royce Phantom chauffeur, Range Rover chauffeur Cape Town, executive transfers South Africa, private jet charter Cape Town, empty leg jet Cape Town, helicopter transfer Cape Town, scenic helicopter flight, superyacht charter Cape Town, V&A Waterfront yacht hire, wedding car hire Cape Town, corporate roadshow transport, celebrity chauffeur Cape Town, close protection driver, group transfers Sprinter, luxury Winelands day trip"
+
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "FAQPage",
