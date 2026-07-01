@@ -46,25 +46,25 @@ export const vehicles: Vehicle[] = [
   { slug: "rolls-royce-cullinan", name: "Rolls-Royce Cullinan", tagline: "The summit of the SVRM fleet.", fromZAR: 37500, image: cullinan, tier: "Signature", selfDrive: false },
   { slug: "rolls-royce-ghost", name: "Rolls-Royce Ghost", tagline: "Silent presence, chauffeured.", fromZAR: 30000, image: ghost, tier: "Signature", selfDrive: false },
   { slug: "bentley-bentayga", name: "Bentley Bentayga", tagline: "British craft, African horizon.", fromZAR: 25000, rentalZAR: 18500, image: bentayga, tier: "Signature", selfDrive: true },
-  { slug: "lamborghini-urus", name: "Lamborghini Urus", tagline: "Performance, refined.", fromZAR: 28500, rentalZAR: 27500, image: urus, tier: "Signature", selfDrive: true },
+  { slug: "lamborghini-urus", name: "Lamborghini Urus", tagline: "Performance, refined.", fromZAR: 28500, rentalZAR: 20500, image: urus, tier: "Signature", selfDrive: true },
 
   // Premium SUV
   { slug: "mercedes-amg-g63", name: "Mercedes-AMG G63", tagline: "The icon. Cape Town's roads, conquered.", fromZAR: 18000, rentalZAR: 16500, image: g63, tier: "Premium SUV", selfDrive: true },
   { slug: "range-rover-autobiography", name: "Range Rover Autobiography", tagline: "Quiet authority, every terrain.", fromZAR: 17500, rentalZAR: 15500, image: rangerover, tier: "Premium SUV", selfDrive: true },
-  { slug: "range-rover-sport", name: "Range Rover Sport", tagline: "Athletic Range, dynamic stance.", fromZAR: 10500, rentalZAR: 6800, image: rrsport, tier: "Premium SUV", selfDrive: true },
+  { slug: "range-rover-sport", name: "Range Rover Sport", tagline: "Athletic Range, dynamic stance.", fromZAR: 10500, rentalZAR: 7800, image: rrsport, tier: "Premium SUV", selfDrive: true },
   { slug: "porsche-cayenne", name: "Porsche Cayenne", tagline: "Sport SUV with a Stuttgart accent.", fromZAR: 9500, rentalZAR: 8900, image: cayenne, tier: "Premium SUV", selfDrive: true },
-  { slug: "bmw-x5", name: "BMW X5", tagline: "Family-sized, executive-grade.", fromZAR: 8500, rentalZAR: 6500, image: bmwx5, tier: "Premium SUV", selfDrive: true },
+  { slug: "bmw-x5", name: "BMW X5", tagline: "Family-sized, executive-grade.", fromZAR: 8500, rentalZAR: 7500, image: bmwx5, tier: "Premium SUV", selfDrive: true },
 
   // Executive
   { slug: "mercedes-s-class", name: "Mercedes-Benz S-Class", tagline: "The benchmark sedan, chauffeured.", fromZAR: 18000, image: sclass, tier: "Executive", selfDrive: false },
-  { slug: "bmw-7-series", name: "BMW 7 Series", tagline: "Executive transfer, understated.", fromZAR: 14500, rentalZAR: 14500, image: bmw7, tier: "Executive", selfDrive: true },
+  { slug: "bmw-7-series", name: "BMW 7 Series", tagline: "Executive transfer, understated.", fromZAR: 14500, rentalZAR: 13500, image: bmw7, tier: "Executive", selfDrive: true },
   { slug: "mercedes-v-class", name: "Mercedes V-Class", tagline: "Up to seven, in lounge comfort.", fromZAR: 15500, image: vclass, tier: "Executive", selfDrive: false },
   { slug: "hyundai-staria", name: "Hyundai Staria", tagline: "Futuristic people-mover for groups up to nine.", fromZAR: 4800, rentalZAR: 3200, image: staria, tier: "Executive", selfDrive: true },
-  { slug: "mercedes-e-class", name: "Mercedes-Benz E-Class", tagline: "Executive sedan, quietly capable.", fromZAR: 7500, rentalZAR: 5600, image: eclass, tier: "Executive", selfDrive: true },
-  { slug: "bmw-5-series", name: "BMW 5 Series", tagline: "The dynamic executive.", fromZAR: 7200, rentalZAR: 5400, image: bmw5, tier: "Executive", selfDrive: true },
+  { slug: "mercedes-e-class", name: "Mercedes-Benz E-Class", tagline: "Executive sedan, quietly capable.", fromZAR: 7500, rentalZAR: 4000, image: eclass, tier: "Executive", selfDrive: true },
+  { slug: "bmw-5-series", name: "BMW 5 Series", tagline: "The dynamic executive.", fromZAR: 7200, rentalZAR: 2800, image: bmw5, tier: "Executive", selfDrive: true },
 
   // Everyday
-  { slug: "bmw-x3", name: "BMW X3", tagline: "Compact SUV, dialled in.", fromZAR: 4500, rentalZAR: 3800, image: bmwx3, tier: "Everyday", selfDrive: true },
+  { slug: "bmw-x3", name: "BMW X3", tagline: "Compact SUV, dialled in.", fromZAR: 4500, rentalZAR: 3000, image: bmwx3, tier: "Everyday", selfDrive: true },
   { slug: "mercedes-c-class", name: "Mercedes C-Class", tagline: "Discreet daily driver.", fromZAR: 4000, rentalZAR: 3400, image: cclass, tier: "Everyday", selfDrive: true },
   { slug: "audi-q5", name: "Audi Q5", tagline: "Effortless, comfortable, current.", fromZAR: 6200, rentalZAR: 4600, image: audiq5, tier: "Everyday", selfDrive: true },
 
