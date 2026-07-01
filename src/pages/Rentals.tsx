@@ -45,6 +45,17 @@ const Rentals = () => {
         description={"Rent a luxury or everyday car in Cape Town, delivered to your door, hotel or airport. BMW, Mercedes, Range Rover, Porsche, Rolls-Royce and value picks — daily, weekly and monthly rates, insured and fully valeted. Book online in minutes."}
         path="/rentals"
         keywords="luxury car rental Cape Town, self-drive car hire Cape Town, rent BMW Cape Town, Mercedes E-Class rental, Range Rover Sport hire, Porsche Cayenne rental, Rolls-Royce self drive, G-Wagon rental Cape Town, exotic car hire South Africa, weekend car rental Cape Town, monthly car rental, airport car delivery Cape Town, CTIA car hire, chauffeur optional, cheap luxury rental Cape Town, honeymoon car hire, wedding car rental, film production car hire, business traveller car rental Cape Town, best car rental Cape Town"
+        image={rentalsOg}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          serviceType: "Luxury & Value Self-Drive Car Rental",
+          name: "SVRM Car Rental Cape Town",
+          provider: { "@type": "Organization", name: "SVRM Group", url: "https://svrm.group/" },
+          areaServed: { "@type": "City", name: "Cape Town" },
+          audience: { "@type": "Audience", audienceType: "Leisure and business travellers" },
+          offers: { "@type": "AggregateOffer", priceCurrency: "ZAR", lowPrice: "2800", highPrice: "20500", availability: "https://schema.org/InStock" },
+        }}
       />
 
       <Nav />
