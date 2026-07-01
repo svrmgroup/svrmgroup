@@ -1,8 +1,12 @@
+import { useState } from "react";
 import KenBurnsImage from "./KenBurnsImage";
 import { Vehicle } from "@/data/vehicles";
-import { buildWhatsAppUrl } from "@/lib/whatsapp";
+import BookingSheet from "./BookingSheet";
+import { useCurrency } from "@/lib/currency";
 
 const VehicleCard = ({ vehicle, index }: { vehicle: Vehicle; index: number }) => {
+  const [open, setOpen] = useState(false);
+  const { format } = useCurrency();
   return (
     <article className="group bg-surface-raised border border-border/40 flex flex-col">
       <KenBurnsImage
@@ -17,19 +21,30 @@ const VehicleCard = ({ vehicle, index }: { vehicle: Vehicle; index: number }) =>
         <p className="text-sm text-muted-foreground mt-2 flex-1">{vehicle.tagline}</p>
         <div className="mt-5 flex items-end justify-between gap-4">
           <div>
-            <p className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground/70">Rates</p>
-            <p className="font-serif text-xl text-gold">On request</p>
+            <p className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground/70">
+              From / day
+            </p>
+            <p className="font-serif text-xl text-gold">{format(vehicle.fromZAR)}</p>
           </div>
-          <a
-            href={buildWhatsAppUrl(`${vehicle.name} chauffeur / hire`)}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
             className="text-[10px] uppercase tracking-[0.24em] px-4 py-3 bg-primary text-primary-foreground hover:bg-primary-glow transition-colors"
           >
-            Enquire
-          </a>
+            Book dates
+          </button>
         </div>
       </div>
+      <BookingSheet
+        open={open}
+        onOpenChange={setOpen}
+        kind="vehicle"
+        name={vehicle.name}
+        subtitle={`${vehicle.tier} · chauffeured`}
+        rateZAR={vehicle.fromZAR}
+        unit="day"
+        slug={vehicle.slug}
+      />
     </article>
   );
 };

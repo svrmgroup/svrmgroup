@@ -3,12 +3,13 @@ import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Stay } from "@/data/stays";
 import { stayGalleries } from "@/data/stayGalleries";
-import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import { useCurrency } from "@/lib/currency";
+import BookingSheet from "./BookingSheet";
 
 const StayCard = ({ stay }: { stay: Stay; index?: number }) => {
   const { format } = useCurrency();
   const showPrice = stay.nox;
+  const [open, setOpen] = useState(false);
 
   const gallery = stayGalleries[stay.slug];
   const images = gallery && gallery.length ? gallery : [stay.image];
@@ -113,16 +114,26 @@ const StayCard = ({ stay }: { stay: Stay; index?: number }) => {
               {showPrice ? format(stay.fromZAR) : "On request"}
             </p>
           </div>
-          <a
-            href={buildWhatsAppUrl(`${stay.name} (${stay.area})`)}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            type="button"
+            onClick={() => setOpen(true)}
             className="text-[10px] uppercase tracking-[0.24em] px-4 py-3 bg-primary text-primary-foreground hover:bg-primary-glow transition-colors whitespace-nowrap"
           >
-            Enquire
-          </a>
+            Book dates
+          </button>
         </div>
       </div>
+
+      <BookingSheet
+        open={open}
+        onOpenChange={setOpen}
+        kind="stay"
+        name={stay.name}
+        subtitle={`${stay.area} · ${stay.beds}`}
+        rateZAR={stay.fromZAR}
+        unit="night"
+        slug={stay.slug}
+      />
     </article>
   );
 };
