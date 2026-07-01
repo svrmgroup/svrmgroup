@@ -84,9 +84,8 @@ const Stays = () => {
             </TabsList>
 
             <TabsContent value="short" className="mt-0">
-              <div className="space-y-6 mb-12">
+              <div className="mb-10">
                 <StaySearchBar />
-                <CustomStayBar />
               </div>
 
               <Tabs value={sub} onValueChange={(v) => setSub(v as StayType)} className="w-full">
@@ -112,11 +111,6 @@ const Stays = () => {
                   </div>
                 </div>
 
-                <p className="text-xs text-muted-foreground/70 tracking-wide mb-6">
-                  Villas &amp; apartments curated through SVRM's partnership with{" "}
-                  <span className="text-gold">Nox Rentals</span>. Rates shown are indicative low-season starting prices — final quote confirmed on enquiry.
-                </p>
-
                 {SUB_TYPES.map((t) => {
                   const list = stays.filter((s) => s.type === t);
                   const sorted =
@@ -136,6 +130,10 @@ const Stays = () => {
                   );
                 })}
               </Tabs>
+
+              <div className="mt-12">
+                <CustomStayBar />
+              </div>
             </TabsContent>
 
             <TabsContent value="long" className="mt-0 pb-12">
