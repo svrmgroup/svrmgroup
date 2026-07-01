@@ -14,6 +14,7 @@ import { Seo } from "@/components/Seo";
 import { MessageCircle } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import heroVideo from "@/assets/videos/stays.mp4.asset.json";
+import staysOg from "@/assets/svc-stays-villa.jpg";
 import StaySearchBar from "@/components/svrm/StaySearchBar";
 import CustomStayBar from "@/components/svrm/CustomStayBar";
 
