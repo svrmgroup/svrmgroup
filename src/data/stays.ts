@@ -20,7 +20,7 @@ import nx_clifton_apartment_w_direct_beach_access_marella from "@/assets/stays/n
 import nx_de_waterkant_townhouse_with_pool_access_116_dwp from "@/assets/stays/nox/de-waterkant-townhouse-with-pool-access-116-dwp.jpg.asset.json";
 import nx_aqua_views_at_the_waterclub_in_cape_town from "@/assets/stays/nox/aqua-views-at-the-waterclub-in-cape-town.jpg.asset.json";
 import nx_clifton_3bed_penthouse_sea_views_dunmore_horizons from "@/assets/stays/nox/clifton-3bed-penthouse-sea-views-dunmore-horizons.jpg.asset.json";
-import nx_luxurious_penthouse_w_sweeping_views_sea_point_penthouse from "@/assets/stays/nox/luxurious-penthouse-w-sweeping-views-sea-point-penthouse.jpg.asset.json";
+import nx_luxurious_penthouse_w_sweeping_views_sea_point_penthouse from "@/assets/stays/nox/sea-point-penthouse/hero.jpg.asset.json";
 import nx_camps_bay_family_holiday_home_sunset_sanctuary from "@/assets/stays/nox/camps-bay-family-holiday-home-sunset-sanctuary.jpg.asset.json";
 import nx_mountain_view_holiday_villa_w_garden_pool_iliwa from "@/assets/stays/nox/mountain-view-holiday-villa-w-garden-pool-iliwa.jpg.asset.json";
 import nx_4_bed_higgovale_mountain_views_sandstone_apartment from "@/assets/stays/nox/4-bed-higgovale-mountain-views-sandstone-apartment.jpg.asset.json";
