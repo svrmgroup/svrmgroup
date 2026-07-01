@@ -25,6 +25,7 @@ const Stays = () => {
   const [params] = useSearchParams();
   const [mode, setMode] = useState<TopMode>("short");
   const [sub, setSub] = useState<StayType>("villa");
+  const [sort, setSort] = useState<SortMode>("popular");
 
   useEffect(() => {
     const cat = params.get("cat");
