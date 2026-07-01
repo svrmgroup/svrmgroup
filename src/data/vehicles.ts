@@ -57,11 +57,11 @@ export const vehicles: Vehicle[] = [
 
   // Executive
   { slug: "mercedes-s-class", name: "Mercedes-Benz S-Class", tagline: "The benchmark sedan, chauffeured.", fromZAR: 18000, image: sclass, tier: "Executive", selfDrive: false },
-  { slug: "bmw-7-series", name: "BMW 7 Series", tagline: "Executive transfer, understated.", fromZAR: 14500, rentalZAR: 13500, image: bmw7, tier: "Executive", selfDrive: true },
+  { slug: "bmw-7-series", name: "BMW 7 Series", tagline: "Executive transfer, understated.", fromZAR: 14500, rentalZAR: 3500, image: bmw7, tier: "Executive", selfDrive: true },
   { slug: "mercedes-v-class", name: "Mercedes V-Class", tagline: "Up to seven, in lounge comfort.", fromZAR: 15500, image: vclass, tier: "Executive", selfDrive: false },
   { slug: "hyundai-staria", name: "Hyundai Staria", tagline: "Futuristic people-mover for groups up to nine.", fromZAR: 4800, rentalZAR: 3200, image: staria, tier: "Executive", selfDrive: true },
   { slug: "mercedes-e-class", name: "Mercedes-Benz E-Class", tagline: "Executive sedan, quietly capable.", fromZAR: 7500, rentalZAR: 4000, image: eclass, tier: "Executive", selfDrive: true },
-  { slug: "bmw-5-series", name: "BMW 5 Series", tagline: "The dynamic executive.", fromZAR: 7200, rentalZAR: 2800, image: bmw5, tier: "Executive", selfDrive: true },
+  { slug: "bmw-5-series", name: "BMW 5 Series", tagline: "The dynamic executive.", fromZAR: 7200, rentalZAR: 3200, image: bmw5, tier: "Executive", selfDrive: true },
 
   // Everyday
   { slug: "bmw-x3", name: "BMW X3", tagline: "Compact SUV, dialled in.", fromZAR: 4500, rentalZAR: 3000, image: bmwx3, tier: "Everyday", selfDrive: true },
