@@ -4,6 +4,14 @@ import villaImg from "@/assets/svc-stays-villa.jpg";
 import fleetImg from "@/assets/svc-travel-fleet.jpg";
 import culturalImg from "@/assets/svc-tours-cultural.jpg";
 import customImg from "@/assets/svc-custom.jpg";
+import jetImg from "@/assets/svc-travel-jet.jpg";
+import heliImg from "@/assets/svc-transport-heli.jpg";
+import chefImg from "@/assets/svc-lifestyle-chef.jpg";
+import wellnessImg from "@/assets/svc-lifestyle-wellness.jpg";
+import penthouseImg from "@/assets/svc-stays-penthouse.jpg";
+import adventureImg from "@/assets/svc-tours-adventure.jpg";
+import shoppingImg from "@/assets/svc-lifestyle-shopping.jpg";
+import estateImg from "@/assets/svc-stays-estate.jpg";
 
 export type BlogCategory = "Travel" | "Tours" | "Lifestyle" | "Properties" | "Insights";
 
