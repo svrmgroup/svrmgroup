@@ -98,22 +98,43 @@ const Stays = () => {
                       </TabsTrigger>
                     ))}
                   </TabsList>
-                  <p className="text-xs text-muted-foreground/80 tracking-wide max-w-xs">
-                    All rates on request. Final quote confirmed on enquiry.
-                  </p>
+                  <div className="flex items-center gap-3">
+                    <label className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground/80">Sort</label>
+                    <select
+                      value={sort}
+                      onChange={(e) => setSort(e.target.value as SortMode)}
+                      className="bg-surface-raised border border-border/60 text-xs uppercase tracking-[0.18em] px-3 py-2 text-foreground focus:outline-none focus:border-primary"
+                    >
+                      <option value="popular">Popular</option>
+                      <option value="asc">Price: Low to High</option>
+                      <option value="desc">Price: High to Low</option>
+                    </select>
+                  </div>
                 </div>
 
-                {SUB_TYPES.map((t) => (
-                  <TabsContent key={t} value={t} className="mt-0">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-                      {stays
-                        .filter((s) => s.type === t)
-                        .map((s, i) => (
+                <p className="text-xs text-muted-foreground/70 tracking-wide mb-6">
+                  Villas &amp; apartments curated through SVRM's partnership with{" "}
+                  <span className="text-gold">Nox Rentals</span>. Rates shown are indicative low-season starting prices — final quote confirmed on enquiry.
+                </p>
+
+                {SUB_TYPES.map((t) => {
+                  const list = stays.filter((s) => s.type === t);
+                  const sorted =
+                    sort === "asc"
+                      ? [...list].sort((a, b) => a.fromZAR - b.fromZAR)
+                      : sort === "desc"
+                        ? [...list].sort((a, b) => b.fromZAR - a.fromZAR)
+                        : list;
+                  return (
+                    <TabsContent key={t} value={t} className="mt-0">
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                        {sorted.map((s, i) => (
                           <StayCard key={s.slug} stay={s} index={i} />
                         ))}
-                    </div>
-                  </TabsContent>
-                ))}
+                      </div>
+                    </TabsContent>
+                  );
+                })}
               </Tabs>
             </TabsContent>
 
