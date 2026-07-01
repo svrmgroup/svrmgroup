@@ -173,6 +173,7 @@ const TourDetail = () => {
                 fromZAR={p.fromZAR}
                 inclusions={p.inclusions}
                 subject={`${tour.label} — ${p.duration} ${p.title}${datesSuffix}`}
+                slug={`${tour.slug}-${p.duration.toLowerCase().replace(/\s+/g, "-")}`}
               />
             ))}
           </div>
