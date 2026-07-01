@@ -45,7 +45,8 @@ const Travel = () => {
         path="/travel"
         keywords="luxury chauffeur Cape Town, VIP chauffeur service, private airport transfer Cape Town, Mercedes S-Class chauffeur, BMW 7 Series with driver, Rolls-Royce Phantom chauffeur, Range Rover chauffeur Cape Town, executive transfers South Africa, private jet charter Cape Town, empty leg jet Cape Town, helicopter transfer Cape Town, scenic helicopter flight, superyacht charter Cape Town, V&A Waterfront yacht hire, wedding car hire Cape Town, corporate roadshow transport, celebrity chauffeur Cape Town, close protection driver, group transfers Sprinter, luxury Winelands day trip"
 
-        jsonLd={{
+        image={travelOg}
+        jsonLd={[{
           "@context": "https://schema.org",
           "@type": "FAQPage",
           mainEntity: [
@@ -65,7 +66,23 @@ const Travel = () => {
               acceptedAnswer: { "@type": "Answer", text: "Both. Half-day (4 hours), full-day (8 hours) and multi-day arrangements are standard. Single transfers are also quoted on request." },
             },
           ],
-        }}
+        }, {
+          "@context": "https://schema.org",
+          "@type": "Service",
+          serviceType: "Luxury Chauffeur & Private Aviation",
+          provider: { "@type": "Organization", name: "SVRM Group", url: "https://svrm.group/" },
+          areaServed: [{ "@type": "City", name: "Cape Town" }, { "@type": "Country", name: "South Africa" }],
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: "Travel",
+            itemListElement: [
+              { "@type": "Offer", itemOffered: { "@type": "Service", name: "Chauffeur-driven luxury cars" } },
+              { "@type": "Offer", itemOffered: { "@type": "Service", name: "Private jet charter" } },
+              { "@type": "Offer", itemOffered: { "@type": "Service", name: "Helicopter transfers & scenic flights" } },
+              { "@type": "Offer", itemOffered: { "@type": "Service", name: "Yacht & superyacht charter" } },
+            ],
+          },
+        }]}
       />
 
       <Nav />
