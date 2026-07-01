@@ -87,11 +87,17 @@ const Footer = () => (
       </div>
     </div>
     <div className="border-t border-border/60">
+      <div className="max-w-7xl mx-auto px-6 py-5 text-[11px] leading-relaxed text-muted-foreground/70 text-center">
+        All rates shown are guide prices. Final pricing is tailored to the season, availability and the finer details of your booking — often more favourable, occasionally reflecting peak demand. We confirm the exact figure before anything is confirmed.
+      </div>
+    </div>
+    <div className="border-t border-border/60">
       <div className="max-w-7xl mx-auto px-6 py-6 text-xs uppercase tracking-[0.28em] text-muted-foreground/70 flex flex-col sm:flex-row gap-2 justify-between">
         <span>© {new Date().getFullYear()} SVRM Group</span>
         <span className="text-gold/60">Curated, without compromise.</span>
       </div>
     </div>
+
   </footer>
 );
 
