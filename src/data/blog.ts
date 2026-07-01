@@ -26,11 +26,21 @@ export interface BlogPost {
   excerpt: string;
   category: BlogCategory;
   date: string;
+  /** ISO date for article:published_time & JSON-LD. */
+  publishedISO?: string;
   image: string;
   readTime: string;
   intro: string;
   sections: BlogSection[];
   closing?: string;
+  /** SEO <title>. Keep under ~60 chars. Falls back to `${title} — SVRM Journal`. */
+  seoTitle?: string;
+  /** Meta description. Keep under ~160 chars. Falls back to excerpt. */
+  seoDescription?: string;
+  /** Meta keywords, comma-separated. */
+  seoKeywords?: string;
+  /** Absolute or root-relative URL for og:image. Falls back to hero image. */
+  ogImage?: string;
 }
 
 export const posts: BlogPost[] = [
