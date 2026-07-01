@@ -14,6 +14,7 @@ import { Seo } from "@/components/Seo";
 import { MessageCircle } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import heroVideo from "@/assets/videos/stays.mp4.asset.json";
+import staysOg from "@/assets/svc-stays-villa.jpg";
 import StaySearchBar from "@/components/svrm/StaySearchBar";
 import CustomStayBar from "@/components/svrm/CustomStayBar";
 
@@ -41,6 +42,15 @@ const Stays = () => {
         description={"Luxury villas, apartments and hotel suites in Cape Town — Camps Bay, Clifton, Bantry Bay, V&A and the Winelands. Short-term, long-term and buy/sell, handled privately by SVRM."}
         path="/stays"
         keywords="luxury villa Cape Town, Camps Bay villa rental, Clifton villa, Bantry Bay accommodation, V&A Waterfront apartment, Constantia estate rental, Winelands accommodation, luxury hotel suite Cape Town, long-term rental Cape Town, short-term let Cape Town, property for sale Cape Town, buy property Cape Town, Atlantic Seaboard villa, Sea Point penthouse rental, Mouille Point apartment, Green Point apartment, Llandudno beach villa, Higgovale villa, De Waterkant apartment, Cape Quarter apartment, Waterclub apartment Cape Town, Azura Atlantic Green Point, Alpha Sunsets Sea Point, Skyshore Mouille Point, Rock Residence Camps Bay, Buddha Retreat Camps Bay, Solmara House Llandudno, Hamaya villa Cape Town, Iliwa villa, Stonewood at The Granger, Sandstone Higgovale, Nox Rentals Cape Town, Nox luxury apartments, holiday villa Cape Town with pool, family villa Camps Bay, ocean view apartment Cape Town, penthouse with sea view Cape Town"
+        image={staysOg}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "LodgingBusiness",
+          name: "SVRM Stays — Cape Town Villas & Apartments",
+          url: "https://svrm.group/stays",
+          areaServed: { "@type": "City", name: "Cape Town" },
+          priceRange: "$$$$",
+        }}
       />
       <Nav />
 

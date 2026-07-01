@@ -48,6 +48,17 @@ const TourDetail = () => {
         title={title.length > 60 ? `${tour.label} | SVRM` : title}
         description={String(description).slice(0, 158)}
         path={`/tours/${slug}`}
+        image={tour.image}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "TouristTrip",
+          name: tour.label,
+          description: String(description),
+          touristType: "Luxury private travellers",
+          provider: { "@type": "Organization", name: "SVRM Group", url: "https://svrm.group/" },
+          image: new URL(tour.image, "https://svrm.group").toString(),
+          url: `https://svrm.group/tours/${slug}`,
+        }}
       />
       <Nav />
       <section className="relative h-[60vh] min-h-[420px] w-full overflow-hidden">

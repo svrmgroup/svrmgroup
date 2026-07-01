@@ -7,6 +7,7 @@ import { securityOfferings, securityCategories } from "@/data/security";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import { ShieldCheck, MessageCircle } from "lucide-react";
 import heroVideo from "@/assets/videos/security.mp4.asset.json";
+import bmw7 from "@/assets/security/bmw7-armored.jpg";
 
 const Security = () => {
   return (
@@ -16,6 +17,8 @@ const Security = () => {
         description={"Armed close protection officers, armoured BMW 7 Series & X5, G63 convoys, residential and event security across Cape Town and South Africa. Confidential, price on request."}
         path="/security"
         keywords="armed close protection Cape Town, bodyguard Cape Town, executive protection South Africa, armoured vehicle hire, bullet proof BMW 7 Series, armoured BMW X5, Mercedes G63 convoy, residential security Cape Town, event security, secure airport transfer, PSiRA security, VIP protection South Africa"
+        image={bmw7}
+        jsonLd={{ "@context": "https://schema.org", "@type": "Service", serviceType: "Executive Protection & Armoured Transport", provider: { "@type": "Organization", name: "SVRM Group", url: "https://svrm.group/" }, areaServed: { "@type": "Country", name: "South Africa" } }}
       />
       <Nav />
 

@@ -26,16 +26,30 @@ export interface BlogPost {
   excerpt: string;
   category: BlogCategory;
   date: string;
+  /** ISO date for article:published_time & JSON-LD. */
+  publishedISO?: string;
   image: string;
   readTime: string;
   intro: string;
   sections: BlogSection[];
   closing?: string;
+  /** SEO <title>. Keep under ~60 chars. Falls back to `${title} — SVRM Journal`. */
+  seoTitle?: string;
+  /** Meta description. Keep under ~160 chars. Falls back to excerpt. */
+  seoDescription?: string;
+  /** Meta keywords, comma-separated. */
+  seoKeywords?: string;
+  /** Absolute or root-relative URL for og:image. Falls back to hero image. */
+  ogImage?: string;
 }
 
 export const posts: BlogPost[] = [
   {
     slug: "top-5-luxury-safari-lodges-sa",
+    publishedISO: "2026-03-01",
+    seoTitle: "Top 5 Luxury Safari Lodges in South Africa (2026)",
+    seoDescription: "Singita, Royal Malewane, Tswalu, Sabi Sabi Earth Lodge & Bushmans Kloof \u2014 the five South African safari lodges SVRM books most, honestly compared.",
+    seoKeywords: "luxury safari South Africa, best safari lodges South Africa, Singita Lebombo, Royal Malewane, Tswalu Kalahari, Sabi Sabi Earth Lodge, Bushmans Kloof, private safari from Cape Town, Big 5 safari, Kruger private lodges",
     title: "Top 5 luxury safari lodges in South Africa",
     excerpt:
       "The five lodges we send our most discerning clients to — and how to choose between them.",
@@ -77,6 +91,10 @@ export const posts: BlogPost[] = [
   },
   {
     slug: "design-your-dream-tour",
+    publishedISO: "2026-02-15",
+    seoTitle: "How to Design Your Dream Cape Town Tour",
+    seoDescription: "The four questions a great concierge asks before building an itinerary \u2014 pace, brief, non-negotiables, and the empty window that saves every trip.",
+    seoKeywords: "design custom Cape Town tour, bespoke itinerary Cape Town, private tour planning South Africa, concierge tour brief, luxury travel planner Cape Town",
     title: "How to design your dream tour",
     excerpt:
       "What we ask, what we listen for, and how a great brief shortens a great itinerary.",
@@ -113,6 +131,10 @@ export const posts: BlogPost[] = [
   },
   {
     slug: "atlantic-seaboard-yachting",
+    publishedISO: "2026-02-05",
+    seoTitle: "A Quiet Yacht Day on the Atlantic Seaboard, Cape Town",
+    seoDescription: "How to compose a private yacht charter from the V&A Waterfront \u2014 vessel choice, provisioning, sunset timing and the dinner that follows.",
+    seoKeywords: "private yacht charter Cape Town, V&A Waterfront yacht hire, Atlantic Seaboard sunset cruise, catamaran charter Cape Town, luxury day charter, Clifton yacht cruise",
     title: "A quiet day on the Atlantic seaboard",
     excerpt:
       "Why the V&A is just the start — and how to compose a yacht day that doesn't feel scheduled.",
@@ -149,6 +171,10 @@ export const posts: BlogPost[] = [
   },
   {
     slug: "long-term-cape-town-residences",
+    publishedISO: "2026-01-20",
+    seoTitle: "Long-Term Luxury Rentals Cape Town \u2014 Concierge Guide",
+    seoDescription: "Neighbourhoods, buildings and lease terms for month-plus stays in Cape Town \u2014 Bantry Bay, Fresnaye, De Waterkant, Constantia and Llandudno.",
+    seoKeywords: "long term rental Cape Town, monthly villa rental Cape Town, luxury apartment long stay, Bantry Bay long term, Fresnaye rental, De Waterkant apartment, Constantia estate, Llandudno villa, serviced apartment Cape Town, digital nomad Cape Town luxury",
     title: "Long-term residences: the Cape Town brief",
     excerpt:
       "The neighbourhoods, the buildings and the leases we trust for stays of a month or more.",
@@ -185,6 +211,10 @@ export const posts: BlogPost[] = [
   },
   {
     slug: "chauffeured-vs-self-drive",
+    publishedISO: "2026-01-10",
+    seoTitle: "Chauffeured or Self-Drive Car Hire in Cape Town?",
+    seoDescription: "A practical guide from SVRM on when to book chauffeured travel, when to self-drive, and why most Cape Town trips work best as a hybrid.",
+    seoKeywords: "chauffeur vs self drive Cape Town, luxury car rental Cape Town, private chauffeur Cape Town, Garden Route self drive, hire car Cape Town, executive driver South Africa",
     title: "Chauffeured or self-drive — which suits the trip?",
     excerpt:
       "A practical guide to choosing transport when the brief is genuinely flexible.",
@@ -216,6 +246,10 @@ export const posts: BlogPost[] = [
   },
   {
     slug: "request-only-the-svrm-way",
+    publishedISO: "2025-12-15",
+    seoTitle: "Why SVRM Prices Are on Request \u2014 The Concierge View",
+    seoDescription: "How SVRM quotes bespoke luxury services in Cape Town \u2014 what to expect after the first WhatsApp message and why published rates would be wrong.",
+    seoKeywords: "SVRM pricing, luxury concierge quote, bespoke Cape Town concierge, private lifestyle management pricing, NDA concierge South Africa",
     title: "Request-only: why we don't publish prices",
     excerpt:
       "Every itinerary is personal. Here's what to expect when you send the first message.",
@@ -247,6 +281,10 @@ export const posts: BlogPost[] = [
   },
   {
     slug: "private-jet-charter-cape-town",
+    publishedISO: "2026-04-05",
+    seoTitle: "Private Jet Charter from Cape Town \u2014 What Matters",
+    seoDescription: "Aircraft sizing, crew, weather slots and FBO ground handling \u2014 how to book a Cape Town private jet charter that actually lands calmly.",
+    seoKeywords: "private jet charter Cape Town, jet hire Cape Town International, empty leg Cape Town, Pilatus PC-12 safari, Citation XLS Cape Town Johannesburg, Global jet charter South Africa, FBO Cape Town, private aviation South Africa",
     title: "Private jet charter from Cape Town: what actually matters",
     excerpt:
       "Aircraft type, crew, slot timing, and the small operational details that separate a good charter from a forgettable one.",
@@ -283,6 +321,10 @@ export const posts: BlogPost[] = [
   },
   {
     slug: "helicopter-transfers-cape-winelands",
+    publishedISO: "2026-04-15",
+    seoTitle: "Helicopter Transfers to the Cape Winelands & Hermanus",
+    seoDescription: "Twelve minutes to Franschhoek, thirty to Hermanus \u2014 when a private helicopter charter earns its place in a Cape Town itinerary, and when it doesn't.",
+    seoKeywords: "helicopter transfer Cape Town, helicopter charter Winelands, V&A to Franschhoek helicopter, Cape Town to Hermanus helicopter, whale watching helicopter, scenic helicopter Cape Peninsula, private helicopter South Africa",
     title: "Helicopter transfers to the Winelands and beyond",
     excerpt:
       "Twelve minutes to Franschhoek, thirty to Hermanus. When a helicopter earns its place in the itinerary.",
@@ -314,6 +356,10 @@ export const posts: BlogPost[] = [
   },
   {
     slug: "private-chef-cape-town",
+    publishedISO: "2026-03-10",
+    seoTitle: "Private Chefs in Cape Town \u2014 How SVRM Briefs Them",
+    seoDescription: "The three questions we ask before pairing a private chef with a Camps Bay or Bantry Bay villa \u2014 and why the menu is always the last conversation.",
+    seoKeywords: "private chef Cape Town, villa chef Camps Bay, in-residence chef South Africa, luxury dining at home Cape Town, private dining Bantry Bay, personal chef Winelands",
     title: "Private chefs at home: how we brief them",
     excerpt:
       "The three questions we ask before pairing a chef with a residence — and why the menu is the last conversation, not the first.",
@@ -345,6 +391,10 @@ export const posts: BlogPost[] = [
   },
   {
     slug: "cape-town-summer-season-guide",
+    publishedISO: "2026-03-20",
+    seoTitle: "Cape Town Summer Season Guide (Nov\u2013Mar), Honestly",
+    seoDescription: "Week-by-week view of Cape Town's Nov\u2013Mar summer season from a full-time concierge \u2014 when to come, when to avoid, and what each window costs.",
+    seoKeywords: "best time to visit Cape Town, Cape Town summer season, when to travel Cape Town, Cape Town December January, peak season Cape Town, shoulder season Cape Town, Cape Town weather guide",
     title: "The Cape Town summer season, honestly assessed",
     excerpt:
       "When to come, when to avoid, and what a good concierge does with each week between November and March.",
@@ -386,6 +436,10 @@ export const posts: BlogPost[] = [
   },
   {
     slug: "garden-route-in-four-days",
+    publishedISO: "2026-02-25",
+    seoTitle: "The Garden Route in 4 Days \u2014 A Luxury Itinerary",
+    seoDescription: "A tight, unhurried private Garden Route itinerary from Cape Town via Hermanus, Knysna and Plettenberg Bay \u2014 with a chartered return flight.",
+    seoKeywords: "Garden Route itinerary, luxury Garden Route tour, private Garden Route trip, Cape Town to Plettenberg Bay, Knysna luxury stay, Hermanus whale watching, Tsitsikamma tour, 4 day Garden Route",
     title: "The Garden Route in four days, done properly",
     excerpt:
       "A tight, unhurried itinerary from Cape Town to Plettenberg Bay — no rushed lunches, no wasted afternoons.",
@@ -422,6 +476,10 @@ export const posts: BlogPost[] = [
   },
   {
     slug: "wellness-recovery-cape-town",
+    publishedISO: "2026-02-20",
+    seoTitle: "Wellness & Recovery Weeks in Cape Town \u2014 SVRM",
+    seoDescription: "Discreet in-residence trainers, physios, IV clinics and private chefs \u2014 how SVRM structures a Cape Town wellness or post-surgery recovery week.",
+    seoKeywords: "wellness retreat Cape Town, recovery week Cape Town, in-residence trainer, private physio Cape Town, IV therapy Cape Town, post surgery recovery South Africa, medical concierge Cape Town, private GP Cape Town",
     title: "Wellness and recovery weeks in Cape Town",
     excerpt:
       "Discreet trainers, IV clinics, quiet residences, and how we structure a week that actually resets.",
@@ -453,6 +511,10 @@ export const posts: BlogPost[] = [
   },
   {
     slug: "buying-property-cape-town",
+    publishedISO: "2026-01-30",
+    seoTitle: "Buying Luxury Property in Cape Town \u2014 Concierge View",
+    seoDescription: "Where SVRM clients are quietly buying in Cape Town \u2014 Fresnaye, Bantry Bay, Higgovale, Constantia, Llandudno \u2014 and how off-market really works.",
+    seoKeywords: "buying property Cape Town, luxury property Cape Town, Fresnaye property, Bantry Bay house, Higgovale home, Constantia estate, Llandudno property, off market Cape Town, foreign buyer South Africa, luxury real estate Cape Town",
     title: "Buying property in Cape Town: the concierge view",
     excerpt:
       "Where our clients are buying, what to expect from the process, and why the right introduction matters more than the right listing.",
@@ -489,6 +551,10 @@ export const posts: BlogPost[] = [
   },
   {
     slug: "shopping-cape-town-private",
+    publishedISO: "2025-12-05",
+    seoTitle: "Private Shopping Days in Cape Town \u2014 SVRM Concierge",
+    seoDescription: "How SVRM composes a private shopping day in Cape Town \u2014 De Waterkant ateliers, V&A private suites and Woodstock design galleries.",
+    seoKeywords: "private shopping Cape Town, personal shopper Cape Town, luxury shopping V&A Waterfront, De Waterkant designers, Woodstock galleries, VIP shopping South Africa",
     title: "Private shopping days in Cape Town",
     excerpt:
       "Where we take clients when the brief is a considered wardrobe, not a tourist afternoon.",

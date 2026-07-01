@@ -1,76 +1,55 @@
+## Goal
+Give every blog post and every main page stronger, unique SEO metadata so Google (and social platforms) rank and preview them well.
 
-## Goals
-1. Replace the single hero image per Nox property with a **scrollable photo carousel** (arrows + swipe on mobile).
-2. Use only real interior/exterior photos of each villa / apartment. No "Guest Guarantee" promo banners, no text overlays.
-3. Fix the truncated text in the card (property name currently gets clipped).
-4. Remove the "Managed with Nox Rentals" line from each card.
-5. Reorder the **Short-term** tab so the layout, top to bottom, is:
-   1. Check‑in search bar (dates, guests, rooms)
-   2. Sub‑tabs (Villas / Apartments / Hotel Rooms) + property grid
-   3. "Tell us your budget" custom stay bar
-6. Leave the top-level tabs — **Short‑term · Long‑term · Buy & Sell** — exactly where they are.
+## What changes
 
-## What I'll do
+### 1. Extend `Seo.tsx` to support Open Graph images
+Add optional `image` prop. When passed, it renders:
+- `<meta property="og:image">` (absolute URL)
+- `<meta name="twitter:image">`
+- `<meta name="twitter:card" content="summary_large_image">`
 
-### 1. Pull real gallery photos per property
-For each of the 24 Nox listings, fetch the property page on `noxrentals.com` and read the JSON payload embedded by Guesty (the array of listing photos on `assets.guesty.com/image.../...`). I'll take the first 6–8 photos per property, drop any that are:
-- Marketing banners (filenames containing `guest-guarantee`, `banner`, `promo`, `logo`, `hero`, `cover-text`).
-- Non-photo mime types.
-- Images whose dominant text region is detected (very small, quick heuristic — cheap safety net).
+Also add optional `type` prop (`"website"` default, `"article"` for blog posts) and optional `article` metadata (published date, author, section) for blog posts.
 
-Each kept photo is downloaded, resized to 1600px wide JPEG, and uploaded via `lovable-assets`. The pointer `url`s are stored on each stay as `images: string[]`.
+### 2. Per-post SEO on the blog
+Extend the `Post` type in `src/data/blog.ts` with three optional fields:
+- `seoTitle` — <60 chars, keyword-forward (falls back to `${post.title} — SVRM Journal`)
+- `seoDescription` — <160 chars, distinct from excerpt when useful (falls back to `excerpt`)
+- `ogImage` — absolute URL for social preview (falls back to the post's hero `image` resolved to an absolute `https://svrm.group/...` URL)
 
-### 2. Data model change (`src/data/stays.ts`)
-```ts
-export interface Stay {
-  slug: string;
-  name: string;
-  area: string;
-  beds: string;
-  fromZAR: number;
-  image: string;        // kept as cover / fallback
-  images?: string[];    // NEW — gallery for Nox properties
-  blurb: string;
-  type: StayType;
-  nox?: boolean;
-}
-```
-Hotels stay as-is (single image).
+Fill these in for every existing post (~12+ entries) with hand-written, keyword-rich titles and descriptions targeting terms like "Cape Town private jet charter", "Garden Route luxury itinerary", "helicopter winelands transfer", etc.
 
-### 3. New `StayCard`
-- Swap the single `KenBurnsImage` for an **embla carousel** (already in the project via shadcn) with:
-  - Left / right arrow buttons that appear on hover on desktop.
-  - Native touch swipe on mobile.
-  - Small dot indicators at the bottom.
-  - Same `aspect-[16/10]` frame so grid alignment doesn't shift.
-- Text fixes:
-  - Property name: allow up to 2 lines (`line-clamp-2`), remove any truncation.
-  - Beds / area line: single line with ellipsis.
-  - Blurb: `line-clamp-3` so cards stay the same height.
-- Remove the "Managed with Nox Rentals" line entirely.
+Update `BlogPost.tsx` to pass `seoTitle`, `seoDescription`, `ogImage`, `type="article"`, and JSON-LD `Article` schema (headline, image, datePublished, author = "SVRM") to `<Seo>`.
 
-### 4. Reorder short-term tab (`src/pages/Stays.tsx`)
-Current order inside `TabsContent value="short"`:
-```
-StaySearchBar
-CustomStayBar
-Sub-tabs + grid
-```
-New order:
-```
-StaySearchBar                     ← "check in" at the top
-Sub-tabs (Villas/Apts/Hotel) + Sort + grid
-CustomStayBar                     ← "tell us your budget" at the bottom
-```
-The three top-level tabs (Short-term, Long-term, Buy & Sell) and the Long-term / Buy & Sell tab contents are untouched.
+Update `Blog.tsx` to add JSON-LD `Blog` + `ItemList` schema listing the posts.
 
-### 5. Nothing else changes
-- Sort control (Popular / Low→High / High→Low) stays.
-- Currency switcher behaviour stays.
-- Hotel cards keep "On request" and a single photo.
-- WhatsApp Enquire button unchanged.
+### 3. Sharper SEO on every main page
+Rewrite `title` + `description` on each page to be tighter (<60 / <160 chars), keyword-led, and add page-appropriate JSON-LD + an `ogImage` where a strong hero exists:
+
+- `/` (Index) — Organization + WebSite schema, hero og:image
+- `/travel` — Service schema (Chauffeur, Jets, Helicopters, Yachts)
+- `/rentals` — Service schema + ItemList of vehicle categories
+- `/stays` — LodgingBusiness schema + ItemList of featured properties
+- `/tours` — TouristTrip / ItemList schema for tour categories
+- `/tours/:slug` — per-tour TouristTrip schema, unique title/description, hero og:image
+- `/security` — Service schema (armoured transport, close protection)
+- `/lifestyle` — Service schema (yachting, private chef)
+- `/experiences` — Service schema (bespoke)
+- `/contact` — ContactPage + LocalBusiness schema, FAQPage schema for the FAQ block
+
+### 4. Sitewide fallback og:image in `index.html`
+Add a single absolute-URL `og:image` + `twitter:image` (SVRM hero) in `index.html` as the fallback for crawlers that don't execute JS or hit routes without their own image.
 
 ## Technical notes
-- Photo scraping runs once, in the sandbox, as a Python script under `/tmp/nox/`. It writes ~150 new `.jpg.asset.json` pointer files under `src/assets/stays/nox/<slug>/NN.jpg.asset.json`. Old single hero pointers are kept (used as cover / for SSR-safe first paint).
-- Carousel uses `embla-carousel-react` via the existing `@/components/ui/carousel` wrapper — no new dependency.
-- All work stays in frontend / data files. No backend, no schema changes, no route changes.
+- All og:image URLs must be absolute `https://svrm.group/...`. For imported assets (Vite hashes filenames), resolve at runtime via `new URL(imgImport, 'https://svrm.group').toString()` — or pin OG images to files placed under `public/og/` so their paths are stable.
+- Recommended approach: create `public/og/` and drop 1200×630 versions of the hero images used for OG (blog posts + main pages), then reference them by stable path.
+- JSON-LD is emitted via existing `jsonLd` prop on `<Seo>`; already supported.
+- No layout/UI changes — metadata only.
+
+## Out of scope
+- No new visual design or copy on the visible pages
+- No sitemap.xml regeneration (can be a follow-up)
+- No SSR migration; per-route tags rely on `react-helmet-async` (already in use), which is fine for Googlebot but limited for non-JS social crawlers — sitewide fallback in `index.html` covers that.
+
+## Question before I build
+Do you want me to generate fresh 1200×630 OG images for each page/post (cleaner social previews, ~1 min per image), or reuse the existing hero images resolved to absolute URLs (faster, uses what's already there)?

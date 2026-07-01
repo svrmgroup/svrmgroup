@@ -19,9 +19,27 @@ const Blog = () => {
     }
   }, [params]);
 
+  const blogJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    name: "The SVRM Journal",
+    url: "https://svrm.group/blog",
+    description: "Field notes on luxury travel, private tours, stays and lifestyle in Cape Town.",
+    publisher: { "@type": "Organization", name: "SVRM Group", url: "https://svrm.group/" },
+    blogPost: posts.map((p) => ({
+      "@type": "BlogPosting",
+      headline: p.title,
+      description: p.seoDescription ?? p.excerpt,
+      url: `https://svrm.group/blog/${p.slug}`,
+      datePublished: p.publishedISO ?? p.date,
+      articleSection: p.category,
+      image: new URL(p.image, "https://svrm.group").toString(),
+    })),
+  };
+
   return (
     <main className="bg-background text-foreground min-h-screen">
-      <Seo title={"The SVRM Journal — Luxury Travel & Lifestyle Cape Town"} description={"The SVRM Journal — field notes, luxury travel recommendations and observations from our Cape Town concierge team. Insights on tours, stays, chauffeur and bespoke experiences."} path="/blog" keywords="SVRM Journal, Cape Town luxury travel blog, South Africa travel guide, safari blog, Garden Route guide, luxury villa guide Cape Town, concierge insights, Cape Town travel tips" />
+      <Seo title={"The SVRM Journal — Luxury Travel & Lifestyle Cape Town"} description={"The SVRM Journal — field notes, luxury travel recommendations and observations from our Cape Town concierge team. Insights on tours, stays, chauffeur and bespoke experiences."} path="/blog" keywords="SVRM Journal, Cape Town luxury travel blog, South Africa travel guide, safari blog, Garden Route guide, luxury villa guide Cape Town, concierge insights, Cape Town travel tips" jsonLd={blogJsonLd} />
     <Nav />
       <PageHero
         eyebrow="Journal · Luxury Travel & Lifestyle Notes from Cape Town"

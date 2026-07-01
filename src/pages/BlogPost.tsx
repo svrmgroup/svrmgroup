@@ -29,12 +29,51 @@ const BlogPost = () => {
   const related = posts.filter((p) => p.slug !== post.slug && p.category === post.category).slice(0, 2);
   const wa = buildWhatsAppUrl(`Hello SVRM — I read "${post.title}" on the Journal and would like to open a conversation.`);
 
+  const seoTitle = post.seoTitle ?? `${post.title} — SVRM Journal`;
+  const seoDescription = post.seoDescription ?? post.excerpt;
+  const ogImage = post.ogImage ?? post.image;
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: seoDescription,
+    image: [ogImage].map((u) => new URL(u, "https://svrm.group").toString()),
+    datePublished: post.publishedISO ?? post.date,
+    dateModified: post.publishedISO ?? post.date,
+    articleSection: post.category,
+    author: { "@type": "Organization", name: "SVRM Group", url: "https://svrm.group/" },
+    publisher: {
+      "@type": "Organization",
+      name: "SVRM Group",
+      logo: { "@type": "ImageObject", url: "https://svrm.group/favicon.png" },
+    },
+    mainEntityOfPage: `https://svrm.group/blog/${post.slug}`,
+  };
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: "https://svrm.group/" },
+      { "@type": "ListItem", position: 2, name: "Journal", item: "https://svrm.group/blog" },
+      { "@type": "ListItem", position: 3, name: post.title, item: `https://svrm.group/blog/${post.slug}` },
+    ],
+  };
+
   return (
     <main className="bg-background text-foreground min-h-screen">
       <Seo
-        title={`${post.title} — SVRM Journal`}
-        description={post.excerpt}
+        title={seoTitle}
+        description={seoDescription}
         path={`/blog/${post.slug}`}
+        keywords={post.seoKeywords}
+        image={ogImage}
+        type="article"
+        article={{
+          publishedTime: post.publishedISO,
+          section: post.category,
+          author: "SVRM Group",
+        }}
+        jsonLd={[articleJsonLd, breadcrumbJsonLd]}
       />
       <Nav />
 
