@@ -125,9 +125,7 @@ import g_luxurious_camps_bay_retreat_w_sea_views_rock_residence_04 from "@/asset
 import g_luxurious_camps_bay_retreat_w_sea_views_rock_residence_05 from "@/assets/stays/nox/luxurious-camps-bay-retreat-w-sea-views-rock-residence/05.jpg.asset.json";
 import g_luxurious_camps_bay_retreat_w_sea_views_rock_residence_06 from "@/assets/stays/nox/luxurious-camps-bay-retreat-w-sea-views-rock-residence/06.jpg.asset.json";
 import g_luxurious_camps_bay_retreat_w_sea_views_rock_residence_07 from "@/assets/stays/nox/luxurious-camps-bay-retreat-w-sea-views-rock-residence/07.jpg.asset.json";
-import g_luxurious_penthouse_w_sweeping_views_sea_point_penthouse_02 from "@/assets/stays/nox/luxurious-penthouse-w-sweeping-views-sea-point-penthouse/02.jpg.asset.json";
 import g_luxurious_villa_w_breathtaking_sea_mountain_views_hamaya_01 from "@/assets/stays/nox/luxurious-villa-w-breathtaking-sea-mountain-views-hamaya/01.jpg.asset.json";
-import g_luxurious_villa_w_breathtaking_sea_mountain_views_hamaya_03 from "@/assets/stays/nox/luxurious-villa-w-breathtaking-sea-mountain-views-hamaya/03.jpg.asset.json";
 import g_luxurious_villa_w_breathtaking_sea_mountain_views_hamaya_04 from "@/assets/stays/nox/luxurious-villa-w-breathtaking-sea-mountain-views-hamaya/04.jpg.asset.json";
 import g_luxurious_villa_w_breathtaking_sea_mountain_views_hamaya_05 from "@/assets/stays/nox/luxurious-villa-w-breathtaking-sea-mountain-views-hamaya/05.jpg.asset.json";
 import g_modern_sea_point_apartment_w_sea_views_alpha_sunsets_00 from "@/assets/stays/nox/modern-sea-point-apartment-w-sea-views-alpha-sunsets/00.jpg.asset.json";
