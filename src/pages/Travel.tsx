@@ -12,6 +12,7 @@ import { yachts } from "@/data/yachts";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Seo } from "@/components/Seo";
 import heroVideo from "@/assets/videos/travel.mp4.asset.json";
+import travelOg from "@/assets/svc-travel-fleet.jpg";
 
 const tierBlurbs: Record<string, string> = {
   "Signature": "The top of the SVRM fleet — Rolls-Royce, Bentley, Lamborghini. Chauffeur-led.",
