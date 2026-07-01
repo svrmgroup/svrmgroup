@@ -19,6 +19,7 @@ import CustomStayBar from "@/components/svrm/CustomStayBar";
 
 const SUB_TYPES: StayType[] = ["villa", "apartment", "hotel"];
 type TopMode = "short" | "long" | "buysell";
+type SortMode = "popular" | "asc" | "desc";
 
 const Stays = () => {
   const [params] = useSearchParams();
