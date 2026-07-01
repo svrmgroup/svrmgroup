@@ -40,7 +40,7 @@ const Stays = () => {
         title={"Luxury Villas & Accommodation Cape Town — SVRM Stays"}
         description={"Luxury villas, apartments and hotel suites in Cape Town — Camps Bay, Clifton, Bantry Bay, V&A and the Winelands. Short-term, long-term and buy/sell, handled privately by SVRM."}
         path="/stays"
-        keywords="luxury villa Cape Town, Camps Bay villa rental, Clifton villa, Bantry Bay accommodation, V&A Waterfront apartment, Constantia estate rental, Winelands accommodation, luxury hotel suite Cape Town, long-term rental Cape Town, short-term let Cape Town, property for sale Cape Town, buy property Cape Town, Atlantic Seaboard villa"
+        keywords="luxury villa Cape Town, Camps Bay villa rental, Clifton villa, Bantry Bay accommodation, V&A Waterfront apartment, Constantia estate rental, Winelands accommodation, luxury hotel suite Cape Town, long-term rental Cape Town, short-term let Cape Town, property for sale Cape Town, buy property Cape Town, Atlantic Seaboard villa, Sea Point penthouse rental, Mouille Point apartment, Green Point apartment, Llandudno beach villa, Higgovale villa, De Waterkant apartment, Cape Quarter apartment, Waterclub apartment Cape Town, Azura Atlantic Green Point, Alpha Sunsets Sea Point, Skyshore Mouille Point, Rock Residence Camps Bay, Buddha Retreat Camps Bay, Solmara House Llandudno, Hamaya villa Cape Town, Iliwa villa, Stonewood at The Granger, Sandstone Higgovale, Nox Rentals Cape Town, Nox luxury apartments, holiday villa Cape Town with pool, family villa Camps Bay, ocean view apartment Cape Town, penthouse with sea view Cape Town"
       />
       <Nav />
 
