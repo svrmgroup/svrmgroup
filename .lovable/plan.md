@@ -1,55 +1,50 @@
+
 ## Goal
-Give every blog post and every main page stronger, unique SEO metadata so Google (and social platforms) rank and preview them well.
 
-## What changes
+Every enquiry submitted on the site (contact form, booking sheets, rental requests, custom stay/rental, tour builder, etc.) should:
+1. Send an email to **concierge@svrm.group** with all details.
+2. Send a **WhatsApp message** to your number (+27 73 064 1481) so you get an instant notification.
 
-### 1. Extend `Seo.tsx` to support Open Graph images
-Add optional `image` prop. When passed, it renders:
-- `<meta property="og:image">` (absolute URL)
-- `<meta name="twitter:image">`
-- `<meta name="twitter:card" content="summary_large_image">`
+Enquiries will still be saved in the backend database as a record, but the primary delivery is now email + WhatsApp — nothing lives only in "Lovable storage".
 
-Also add optional `type` prop (`"website"` default, `"article"` for blog posts) and optional `article` metadata (published date, author, section) for blog posts.
+## How it will work
 
-### 2. Per-post SEO on the blog
-Extend the `Post` type in `src/data/blog.ts` with three optional fields:
-- `seoTitle` — <60 chars, keyword-forward (falls back to `${post.title} — SVRM Journal`)
-- `seoDescription` — <160 chars, distinct from excerpt when useful (falls back to `excerpt`)
-- `ogImage` — absolute URL for social preview (falls back to the post's hero `image` resolved to an absolute `https://svrm.group/...` URL)
+```text
+User submits form
+      │
+      ▼
+Edge Function: notify-enquiry
+      │
+      ├──► Save row to database (audit trail)
+      ├──► Send email → concierge@svrm.group  (via Lovable Emails)
+      └──► Send WhatsApp → +27 73 064 1481    (via Twilio WhatsApp)
+```
 
-Fill these in for every existing post (~12+ entries) with hand-written, keyword-rich titles and descriptions targeting terms like "Cape Town private jet charter", "Garden Route luxury itinerary", "helicopter winelands transfer", etc.
+## Steps
 
-Update `BlogPost.tsx` to pass `seoTitle`, `seoDescription`, `ogImage`, `type="article"`, and JSON-LD `Article` schema (headline, image, datePublished, author = "SVRM") to `<Seo>`.
+1. **Email domain setup**
+   - Configure `svrm.group` as a verified sender domain so `concierge@svrm.group` can send/receive transactional email from the app. You'll add a few DNS records (I'll guide you through the dialog).
 
-Update `Blog.tsx` to add JSON-LD `Blog` + `ItemList` schema listing the posts.
+2. **WhatsApp channel**
+   - Connect **Twilio** (recommended) with a WhatsApp-enabled sender. You'll need a Twilio account and to enable WhatsApp on a number. I'll request the API credentials via the secure secrets form once you confirm.
+   - Alternative: skip WhatsApp notifications and just use email if you'd rather not set up Twilio yet.
 
-### 3. Sharper SEO on every main page
-Rewrite `title` + `description` on each page to be tighter (<60 / <160 chars), keyword-led, and add page-appropriate JSON-LD + an `ogImage` where a strong hero exists:
+3. **Backend edge function `notify-enquiry`**
+   - Accepts submissions from the site.
+   - Inserts row into the existing `enquiries` / `rental_requests` tables (kept as backup log).
+   - Sends a formatted email to `concierge@svrm.group` with subject like `New enquiry — {subject} from {name}` and full details (name, email, phone, message, source page, extras, dates, vehicle, etc.).
+   - Sends a short WhatsApp message like:  
+     `New SVRM enquiry · Tours · John Smith · +44… · "Looking for 3-day Garden Route" · sent from /tours`
+   - Replies with success/failure to the frontend.
 
-- `/` (Index) — Organization + WebSite schema, hero og:image
-- `/travel` — Service schema (Chauffeur, Jets, Helicopters, Yachts)
-- `/rentals` — Service schema + ItemList of vehicle categories
-- `/stays` — LodgingBusiness schema + ItemList of featured properties
-- `/tours` — TouristTrip / ItemList schema for tour categories
-- `/tours/:slug` — per-tour TouristTrip schema, unique title/description, hero og:image
-- `/security` — Service schema (armoured transport, close protection)
-- `/lifestyle` — Service schema (yachting, private chef)
-- `/experiences` — Service schema (bespoke)
-- `/contact` — ContactPage + LocalBusiness schema, FAQPage schema for the FAQ block
+4. **Frontend wiring**
+   - Update `EnquiryForm`, `BookingSheet`, `RentalBookingSheet`, `CustomStayBar`, `CustomRentalRequest`, `LongTermStayForm`, `BuySellPropertyForm`, `TourBuilder`, `WellnessCustomBuilder` to call the new edge function instead of writing directly to the database.
+   - Keep the same UX (toast success, WhatsApp fallback button, thank-you state).
 
-### 4. Sitewide fallback og:image in `index.html`
-Add a single absolute-URL `og:image` + `twitter:image` (SVRM hero) in `index.html` as the fallback for crawlers that don't execute JS or hit routes without their own image.
+5. **Confirmation**
+   - Send a test enquiry and verify: email lands in `concierge@svrm.group` inbox, WhatsApp notification arrives on your phone, row is still saved as backup.
 
-## Technical notes
-- All og:image URLs must be absolute `https://svrm.group/...`. For imported assets (Vite hashes filenames), resolve at runtime via `new URL(imgImport, 'https://svrm.group').toString()` — or pin OG images to files placed under `public/og/` so their paths are stable.
-- Recommended approach: create `public/og/` and drop 1200×630 versions of the hero images used for OG (blog posts + main pages), then reference them by stable path.
-- JSON-LD is emitted via existing `jsonLd` prop on `<Seo>`; already supported.
-- No layout/UI changes — metadata only.
+## What I need from you before building
 
-## Out of scope
-- No new visual design or copy on the visible pages
-- No sitemap.xml regeneration (can be a follow-up)
-- No SSR migration; per-route tags rely on `react-helmet-async` (already in use), which is fine for Googlebot but limited for non-JS social crawlers — sitewide fallback in `index.html` covers that.
-
-## Question before I build
-Do you want me to generate fresh 1200×630 OG images for each page/post (cleaner social previews, ~1 min per image), or reuse the existing hero images resolved to absolute URLs (faster, uses what's already there)?
+1. Confirm you want to proceed with **Twilio for WhatsApp** (you'll need an account + WhatsApp sender). Say **"skip WhatsApp"** if you'd rather have email only for now.
+2. Confirm sender address — I'll use `concierge@svrm.group` as both the **from** and **to** address (so replies go back to you). OK?
