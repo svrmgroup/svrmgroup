@@ -7,19 +7,13 @@ import { formatDateRange } from "@/lib/locale";
 import TwoStepDateRange from "./TwoStepDateRange";
 
 const StaySearchBar = () => {
-  const [range, setRange] = useState<DateRange | undefined>();
+  const [range, setRange] = useState<{ from?: Date; to?: Date }>({});
   const [guests, setGuests] = useState(2);
   const [rooms, setRooms] = useState(1);
   const [flexible, setFlexible] = useState(false);
 
   const nights =
-    range?.from && range?.to ? Math.max(1, differenceInCalendarDays(range.to, range.from)) : 0;
-
-  const dateLabel = range?.from
-    ? range.to
-      ? formatDateRange(range.from, range.to, { day: "numeric", month: "short", year: "numeric" })
-      : formatDate(range.from, { day: "numeric", month: "short", year: "numeric" })
-    : "Select dates";
+    range.from && range.to ? Math.max(1, differenceInCalendarDays(range.to, range.from)) : 0;
 
   const buildMessage = () => {
     const parts = [
