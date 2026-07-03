@@ -5,7 +5,7 @@ import Logo from "./Logo";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import CurrencySwitch from "./CurrencySwitch";
 import LanguageSwitch from "./LanguageSwitch";
-import { buildWhatsAppUrl, buildWhatsAppUrlRaw } from "@/lib/whatsapp";
+import { buildWhatsAppUrlRaw } from "@/lib/whatsapp";
 
 import { navCategories } from "@/lib/navCategories";
 

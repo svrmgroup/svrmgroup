@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { buildWhatsAppUrl, buildWhatsAppUrlRaw } from "@/lib/whatsapp";
+import { buildWhatsAppUrlRaw } from "@/lib/whatsapp";
 
 const ClosingCTA = () => (
   <section id="enquire" className="bg-surface-deep py-28 md:py-40 cv-auto">
