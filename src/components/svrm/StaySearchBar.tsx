@@ -1,12 +1,10 @@
 import { useState } from "react";
 import { differenceInCalendarDays } from "date-fns";
-import { DateRange } from "react-day-picker";
-import { CalendarIcon, Users, BedDouble, Sparkles, Search } from "lucide-react";
+import { Users, BedDouble, Sparkles, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
-import { formatDate, formatDateRange } from "@/lib/locale";
+import { formatDateRange } from "@/lib/locale";
+import TwoStepDateRange from "./TwoStepDateRange";
 
 const StaySearchBar = () => {
   const [range, setRange] = useState<DateRange | undefined>();
