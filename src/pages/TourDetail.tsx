@@ -1,9 +1,4 @@
-import { useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
-import { DateRange } from "react-day-picker";
-import { differenceInCalendarDays } from "date-fns";
-import { formatDate, formatDateRange } from "@/lib/locale";
-import { CalendarIcon, Users } from "lucide-react";
 import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
 import PricingCard from "@/components/svrm/PricingCard";
@@ -11,16 +6,10 @@ import EnquiryForm from "@/components/svrm/EnquiryForm";
 import { Seo } from "@/components/Seo";
 import { findTour } from "@/data/tours";
 import WellnessCustomBuilder from "@/components/svrm/WellnessCustomBuilder";
-import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
 
 const TourDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const tour = slug ? findTour(slug) : null;
-  const [range, setRange] = useState<DateRange | undefined>();
-  const [travellers, setTravellers] = useState(2);
-
   if (!tour) return <Navigate to="/tours" replace />;
 
   const title = `${tour.label} — SVRM Tour`;
@@ -28,19 +17,7 @@ const TourDetail = () => {
     ?? (tour as { subtitle?: string }).subtitle
     ?? `Bespoke ${tour.label} tour in South Africa, curated end-to-end by SVRM.`;
 
-  const nights =
-    range?.from && range?.to ? Math.max(1, differenceInCalendarDays(range.to, range.from)) : 0;
-
-  const dateLabel = range?.from
-    ? range.to
-      ? formatDateRange(range.from, range.to, { day: "numeric", month: "short", year: "numeric" })
-      : formatDate(range.from, { day: "numeric", month: "short", year: "numeric" })
-    : "Select your dates";
-
-  const datesSuffix =
-    range?.from && range?.to
-      ? ` · ${formatDateRange(range.from, range.to, { day: "numeric", month: "short", year: "numeric" })} · ${travellers} traveller${travellers > 1 ? "s" : ""}`
-      : ` · ${travellers} traveller${travellers > 1 ? "s" : ""}`;
+  const datesSuffix = "";
 
   return (
     <main className="bg-background text-foreground min-h-screen">
@@ -97,77 +74,6 @@ const TourDetail = () => {
         </div>
       </section>
 
-      {/* Date picker + traveller selector */}
-      <section className="pb-12">
-        <div className="max-w-4xl mx-auto px-6">
-          <div className="bg-surface-raised border border-border/40 p-6 md:p-8 grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-4">
-            <div>
-              <p className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Preferred dates</p>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <button
-                    type="button"
-                    className={cn(
-                      "mt-3 w-full flex items-center justify-between gap-3 border border-border/60 bg-transparent text-left px-4 py-3 text-sm",
-                      !range && "text-muted-foreground"
-                    )}
-                  >
-                    <span className="flex items-center gap-3">
-                      <CalendarIcon className="h-4 w-4" />
-                      {dateLabel}
-                    </span>
-                    {nights > 0 && (
-                      <span className="text-[10px] uppercase tracking-[0.2em] text-gold">
-                        {nights} night{nights > 1 ? "s" : ""}
-                      </span>
-                    )}
-                  </button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0 bg-surface-raised border-border/60" align="start">
-                  <Calendar
-                    mode="range"
-                    selected={range}
-                    onSelect={setRange}
-                    numberOfMonths={1}
-                    disabled={(d) => d < new Date(new Date().setHours(0, 0, 0, 0))}
-                    className={cn("p-3 pointer-events-auto")}
-                  />
-                </PopoverContent>
-              </Popover>
-            </div>
-            <div>
-              <p className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Travellers</p>
-              <div className="mt-3 flex items-center justify-between border border-border/60 px-4 py-3">
-                <span className="flex items-center gap-3 text-sm">
-                  <Users className="h-4 w-4" />
-                  {travellers} traveller{travellers > 1 ? "s" : ""}
-                </span>
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => setTravellers((n) => Math.max(1, n - 1))}
-                    className="w-8 h-8 border border-border/60 text-gold hover:bg-primary hover:text-primary-foreground transition-colors"
-                    aria-label="Fewer travellers"
-                  >
-                    −
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setTravellers((n) => Math.min(20, n + 1))}
-                    className="w-8 h-8 border border-border/60 text-gold hover:bg-primary hover:text-primary-foreground transition-colors"
-                    aria-label="More travellers"
-                  >
-                    +
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <p className="text-[11px] text-muted-foreground/70 mt-3 text-center">
-            Dates and travellers attach to your enquiry automatically.
-          </p>
-        </div>
-      </section>
 
       <section className="pb-24 md:pb-32">
         <div className="max-w-7xl mx-auto px-6">
