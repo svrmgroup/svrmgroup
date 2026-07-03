@@ -5,9 +5,16 @@ export const SOCIAL_HANDLE = "@SVRMGROUP";
 export const INSTAGRAM_URL = "https://www.instagram.com/svrmgroup/";
 export const TIKTOK_URL = "https://www.tiktok.com/@svrmgroup";
 
+const WA_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
+
+/** Standard enquiry link — wraps `subject` in "Hi SVRM, I'd like to enquire about <subject>." */
 export const buildWhatsAppUrl = (subject?: string) => {
-  const base = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}`;
-  if (!subject) return base;
+  if (!subject) return WA_BASE;
   const text = `Hi SVRM, I'd like to enquire about ${subject}.`;
-  return `${base}&text=${encodeURIComponent(text)}`;
+  return `${WA_BASE}?text=${encodeURIComponent(text)}`;
 };
+
+/** Use when the caller wants to supply the full message verbatim (no "enquire about" prefix). */
+export const buildWhatsAppUrlRaw = (fullMessage: string) =>
+  `${WA_BASE}?text=${encodeURIComponent(fullMessage)}`;
+
