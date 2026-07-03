@@ -5,9 +5,9 @@ export const SOCIAL_HANDLE = "@SVRMGROUP";
 export const INSTAGRAM_URL = "https://www.instagram.com/svrmgroup/";
 export const TIKTOK_URL = "https://www.tiktok.com/@svrmgroup";
 
-export const buildWhatsAppUrl = (subject?: string) => {
-  const base = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}`;
-  if (!subject) return base;
-  const text = `Hi SVRM, I'd like to enquire about ${subject}.`;
-  return `${base}&text=${encodeURIComponent(text)}`;
-};
+export const WHATSAPP_SHORTLINK =
+  "https://api.whatsapp.com/message/CXDCRJ5R6I2JD1?autoload=1&app_absent=0";
+
+// Note: WhatsApp shortlinks (message/<code>) don't support prefilled text.
+// The `subject` is accepted for backward compatibility but ignored.
+export const buildWhatsAppUrl = (_subject?: string) => WHATSAPP_SHORTLINK;
