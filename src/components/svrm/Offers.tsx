@@ -9,6 +9,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import bmwx3 from "@/assets/vehicles/bmwx3.jpg";
+import SmartImage from "@/components/svrm/SmartImage";
 import romantic from "@/assets/tours/romantic.jpg";
 import chauffeur from "@/assets/svc-travel-sclass.jpg";
 import safari from "@/assets/svc-exp-safari.jpg";
