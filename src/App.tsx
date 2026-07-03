@@ -20,6 +20,12 @@ import Contact from "./pages/Contact.tsx";
 import Rentals from "./pages/Rentals.tsx";
 import Security from "./pages/Security.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import { AdminAuthProvider } from "./hooks/useAdminAuth";
+import AdminLogin from "./pages/admin/AdminLogin";
+import AdminLayout from "./pages/admin/AdminLayout";
+import AdminEnquiries from "./pages/admin/AdminEnquiries";
+import AdminBookings from "./pages/admin/AdminBookings";
+import AdminCalendar from "./pages/admin/AdminCalendar";
 
 const queryClient = new QueryClient();
 

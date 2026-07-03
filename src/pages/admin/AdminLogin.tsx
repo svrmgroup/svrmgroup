@@ -43,7 +43,7 @@ const AdminLogin = () => {
 
   return (
     <main className="min-h-screen bg-background text-foreground flex items-center justify-center p-6">
-      <Seo title="Admin · SVRM" description="Admin console" path="/admin/login" noindex />
+      <Seo title="Admin · SVRM" description="Admin console" path="/admin/login" />
       <div className="w-full max-w-md bg-surface-raised border border-border/40 p-10">
         <p className="eyebrow">SVRM</p>
         <h1 className="font-serif text-3xl mt-3">Admin console</h1>
