@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { CurrencyProvider } from "@/lib/currency";
 import WhatsAppFab from "@/components/svrm/WhatsAppFab";
+import WhatsAppClickTracker from "@/components/WhatsAppClickTracker";
 import ScrollToTop from "@/components/ScrollToTop";
 import Index from "./pages/Index.tsx";
 import Travel from "./pages/Travel.tsx";
@@ -26,6 +27,7 @@ import AdminLayout from "./pages/admin/AdminLayout";
 import AdminEnquiries from "./pages/admin/AdminEnquiries";
 import AdminBookings from "./pages/admin/AdminBookings";
 import AdminCalendar from "./pages/admin/AdminCalendar";
+import AdminWhatsApp from "./pages/admin/AdminWhatsApp";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +40,7 @@ const App = () => (
         <BrowserRouter>
           <AdminAuthProvider>
             <ScrollToTop />
+            <WhatsAppClickTracker />
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/travel" element={<Travel />} />
@@ -58,6 +61,7 @@ const App = () => (
                 <Route index element={<AdminEnquiries />} />
                 <Route path="bookings" element={<AdminBookings />} />
                 <Route path="calendar" element={<AdminCalendar />} />
+                <Route path="whatsapp" element={<AdminWhatsApp />} />
               </Route>
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />

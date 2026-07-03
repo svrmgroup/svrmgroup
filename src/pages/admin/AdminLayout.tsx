@@ -1,6 +1,6 @@
 import { NavLink, Navigate, Outlet } from "react-router-dom";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
-import { LogOut, Inbox, Car, Calendar as CalIcon } from "lucide-react";
+import { LogOut, Inbox, Car, Calendar as CalIcon, MessageCircle } from "lucide-react";
 
 const AdminLayout = () => {
   const { session, isAdmin, loading, signOut } = useAdminAuth();
@@ -34,6 +34,9 @@ const AdminLayout = () => {
           </NavLink>
           <NavLink to="/admin/calendar" className={linkClass}>
             <CalIcon className="h-4 w-4" /> Calendar
+          </NavLink>
+          <NavLink to="/admin/whatsapp" className={linkClass}>
+            <MessageCircle className="h-4 w-4" /> WhatsApp
           </NavLink>
         </nav>
         <div className="p-4 border-t border-border/40 mt-4">
