@@ -27,6 +27,7 @@ import AdminLayout from "./pages/admin/AdminLayout";
 import AdminEnquiries from "./pages/admin/AdminEnquiries";
 import AdminBookings from "./pages/admin/AdminBookings";
 import AdminCalendar from "./pages/admin/AdminCalendar";
+import AdminWhatsApp from "./pages/admin/AdminWhatsApp";
 
 const queryClient = new QueryClient();
 
