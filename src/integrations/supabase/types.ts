@@ -14,6 +14,54 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_bookings: {
+        Row: {
+          category: string
+          created_at: string
+          created_by: string | null
+          end_date: string
+          guest_contact: string | null
+          guest_name: string | null
+          id: string
+          location: string | null
+          notes: string | null
+          start_date: string
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          created_by?: string | null
+          end_date: string
+          guest_contact?: string | null
+          guest_name?: string | null
+          id?: string
+          location?: string | null
+          notes?: string | null
+          start_date: string
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          created_by?: string | null
+          end_date?: string
+          guest_contact?: string | null
+          guest_name?: string | null
+          id?: string
+          location?: string | null
+          notes?: string | null
+          start_date?: string
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       email_send_log: {
         Row: {
           created_at: string
