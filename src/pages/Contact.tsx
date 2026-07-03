@@ -62,7 +62,7 @@ const Contact = () => {
             <div>
               <p className="eyebrow">WhatsApp</p>
               <a
-                href={buildWhatsAppUrlRaw("Hi SVRM, I'd like to speak with your team.")}
+                href={buildWhatsAppUrlRaw("Hi SVRM Group, I'd like to speak to the concierge. Please assist me with my request.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block font-serif text-2xl md:text-3xl mt-3 text-foreground hover:text-gold transition-colors"

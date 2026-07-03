@@ -14,7 +14,7 @@ const ClosingCTA = () => (
       </p>
       <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
         <a
-          href={buildWhatsAppUrlRaw("Hi SVRM, I'd like to plan something with your concierge.")}
+          href={buildWhatsAppUrlRaw("Hi SVRM Group, I'd like to plan something with your concierge. Please assist me with availability and booking details.")}
           target="_blank"
           rel="noopener noreferrer"
           className="px-10 py-5 bg-primary text-primary-foreground text-xs uppercase tracking-[0.32em] font-medium hover:bg-primary-glow transition-colors duration-500 shadow-[var(--shadow-gold)]"
