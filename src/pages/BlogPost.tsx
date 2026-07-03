@@ -4,7 +4,7 @@ import Footer from "@/components/svrm/Footer";
 import { Seo } from "@/components/Seo";
 import { posts } from "@/data/blog";
 import { Button } from "@/components/ui/button";
-import { buildWhatsAppUrl } from "@/lib/whatsapp";
+import { buildWhatsAppUrlRaw } from "@/lib/whatsapp";
 import SmartImage from "@/components/svrm/SmartImage";
 
 const BlogPost = () => {
@@ -28,7 +28,7 @@ const BlogPost = () => {
   }
 
   const related = posts.filter((p) => p.slug !== post.slug && p.category === post.category).slice(0, 2);
-  const wa = buildWhatsAppUrl(`Hello SVRM — I read "${post.title}" on the Journal and would like to open a conversation.`);
+  const wa = buildWhatsAppUrlRaw(`Hi SVRM Group, I read "${post.title}" on the Journal and would like to open a conversation. Please assist me with availability and booking details.`);
 
   const seoTitle = post.seoTitle ?? `${post.title} — SVRM Journal`;
   const seoDescription = post.seoDescription ?? post.excerpt;

@@ -7,10 +7,13 @@ export const TIKTOK_URL = "https://www.tiktok.com/@svrmgroup";
 
 const WA_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
 
-/** Standard enquiry link — wraps `subject` in "Hi SVRM, I'd like to enquire about <subject>." */
+/** Standard enquiry link — wraps `subject` in "Hi SVRM Group, I'd like to enquire about <subject>. Please confirm availability and booking details." */
 export const buildWhatsAppUrl = (subject?: string) => {
-  if (!subject) return WA_BASE;
-  const text = `Hi SVRM, I'd like to enquire about ${subject}.`;
+  if (!subject) {
+    const fallback = "Hi SVRM Group, I'd like to make a concierge enquiry. Please assist me with availability and booking details.";
+    return `${WA_BASE}?text=${encodeURIComponent(fallback)}`;
+  }
+  const text = `Hi SVRM Group, I'd like to enquire about ${subject}. Please confirm availability and booking details.`;
   return `${WA_BASE}?text=${encodeURIComponent(text)}`;
 };
 
