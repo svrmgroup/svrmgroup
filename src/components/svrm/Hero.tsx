@@ -1,6 +1,6 @@
 import heroPoster from "@/assets/hero-poster.jpg";
 import droneVideo from "@/assets/hero-drone.mp4.asset.json";
-import { buildWhatsAppUrl } from "@/lib/whatsapp";
+import { buildWhatsAppUrl, buildWhatsAppUrlRaw } from "@/lib/whatsapp";
 
 const Hero = () => {
   return (

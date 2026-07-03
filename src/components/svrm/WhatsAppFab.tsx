@@ -1,5 +1,5 @@
 import { MessageCircle } from "lucide-react";
-import { buildWhatsAppUrl } from "@/lib/whatsapp";
+import { buildWhatsAppUrl, buildWhatsAppUrlRaw } from "@/lib/whatsapp";
 
 const WhatsAppFab = () => (
   <a
