@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import SmartImage from "@/components/svrm/SmartImage";
 import travel from "@/assets/svc-travel-sclass.jpg";
 import lifestyle from "@/assets/svc-exp-yacht.jpg";
 import stays from "@/assets/svc-stays-villa.jpg";
@@ -34,10 +35,10 @@ const Services = () => (
             className={`group block ${i === 0 ? "lg:col-span-2" : ""}`}
           >
             <div className={`relative overflow-hidden bg-surface-raised ${i === 0 ? "aspect-[16/10]" : "aspect-[4/5]"}`}>
-              <img
+              <SmartImage
                 src={s.img}
                 alt={s.title}
-                loading="lazy"
+                wrapperClassName="absolute inset-0 w-full h-full"
                 className={`w-full h-full object-cover ${["kb-a","kb-b","kb-c","kb-d","kb-a","kb-b","kb-c"][i]}`}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-surface-deep via-surface-deep/30 to-transparent" />
