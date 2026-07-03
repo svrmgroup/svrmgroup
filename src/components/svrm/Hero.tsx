@@ -62,12 +62,14 @@ const Hero = () => {
           >
             Discover SVRM
           </a>
-          <Link
-            to="/contact"
+          <a
+            href={buildWhatsAppUrl("SVRM's services")}
+            target="_blank"
+            rel="noopener noreferrer"
             className="px-8 py-4 border border-primary/70 text-gold text-xs uppercase tracking-[0.28em] font-medium hover:bg-primary hover:text-primary-foreground transition-colors duration-500"
           >
             Enquire
-          </Link>
+          </a>
         </div>
       </div>
 
