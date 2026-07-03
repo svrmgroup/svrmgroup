@@ -72,7 +72,7 @@ const BookingSheet = ({
   const estimate = rateZAR && units > 0 ? rateZAR * units : 0;
 
   const reset = () => {
-    setRange(undefined);
+    setRange({});
     setGuests(2);
     setForm({ name: "", email: "", phone: "", message: "" });
   };
