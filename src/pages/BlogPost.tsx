@@ -4,7 +4,7 @@ import Footer from "@/components/svrm/Footer";
 import { Seo } from "@/components/Seo";
 import { posts } from "@/data/blog";
 import { Button } from "@/components/ui/button";
-import { buildWhatsAppUrl } from "@/lib/whatsapp";
+import { buildWhatsAppUrlRaw } from "@/lib/whatsapp";
 import SmartImage from "@/components/svrm/SmartImage";
 
 const BlogPost = () => {
