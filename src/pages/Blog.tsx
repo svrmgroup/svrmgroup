@@ -5,6 +5,7 @@ import Footer from "@/components/svrm/Footer";
 import PageHero from "@/components/svrm/PageHero";
 import { posts, categories, type BlogCategory } from "@/data/blog";
 import { Seo } from "@/components/Seo";
+import SmartImage from "@/components/svrm/SmartImage";
 
 const Blog = () => {
   const [params] = useSearchParams();
@@ -71,10 +72,10 @@ const Blog = () => {
               <Link to={`/blog/${p.slug}`} key={p.slug} className="group block">
                 <article>
                   <div className="relative overflow-hidden aspect-[4/3]">
-                    <img
+                    <SmartImage
                       src={p.image}
                       alt={p.title}
-                      loading="lazy"
+                      wrapperClassName="absolute inset-0 w-full h-full"
                       className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1400ms] ease-[var(--ease-luxe)] group-hover:scale-105"
                     />
                   </div>

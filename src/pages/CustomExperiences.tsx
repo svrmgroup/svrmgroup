@@ -5,6 +5,7 @@ import EnquiryForm from "@/components/svrm/EnquiryForm";
 import customImg from "@/assets/svc-custom.jpg";
 import { Seo } from "@/components/Seo";
 import heroVideo from "@/assets/videos/experiences.mp4.asset.json";
+import SmartImage from "@/components/svrm/SmartImage";
 
 const cards = [
   { title: "Last-minute essentials", body: "Cleaners, private chefs, a tailor at the door, the gift you forgot." },
@@ -42,7 +43,7 @@ const CustomExperiences = () => (
     <section className="py-20 md:py-28">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         <div className="relative aspect-[4/3] overflow-hidden">
-          <img src={customImg} alt="Bespoke arrangement" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+          <SmartImage src={customImg} alt="Bespoke arrangement" wrapperClassName="absolute inset-0 w-full h-full" className="absolute inset-0 w-full h-full object-cover" />
         </div>
         <div>
           <p className="eyebrow">Enquire</p>

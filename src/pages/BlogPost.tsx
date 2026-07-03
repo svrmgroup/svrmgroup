@@ -5,6 +5,7 @@ import { Seo } from "@/components/Seo";
 import { posts } from "@/data/blog";
 import { Button } from "@/components/ui/button";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
+import SmartImage from "@/components/svrm/SmartImage";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -80,9 +81,11 @@ const BlogPost = () => {
       <article>
         {/* Hero */}
         <header className="relative h-[70vh] min-h-[480px] overflow-hidden">
-          <img
+          <SmartImage
             src={post.image}
             alt={post.title}
+            priority
+            wrapperClassName="absolute inset-0 w-full h-full"
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/20" />
@@ -146,10 +149,10 @@ const BlogPost = () => {
                 {related.map((p) => (
                   <Link to={`/blog/${p.slug}`} key={p.slug} className="group">
                     <div className="relative overflow-hidden aspect-[4/3]">
-                      <img
+                      <SmartImage
                         src={p.image}
                         alt={p.title}
-                        loading="lazy"
+                        wrapperClassName="absolute inset-0 w-full h-full"
                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1400ms] ease-[var(--ease-luxe)] group-hover:scale-105"
                       />
                     </div>
