@@ -1,6 +1,7 @@
 import Nav from "@/components/svrm/Nav";
 import Hero from "@/components/svrm/Hero";
 import Intro from "@/components/svrm/Intro";
+import Offers from "@/components/svrm/Offers";
 import Services from "@/components/svrm/Services";
 import Testimonials from "@/components/svrm/Testimonials";
 import ClosingCTA from "@/components/svrm/ClosingCTA";
@@ -18,6 +19,7 @@ const Index = () => (
     <Nav />
     <Hero />
     <Intro />
+    <Offers />
     <Services />
     <Testimonials />
     <ClosingCTA />
