@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
 import { Instagram } from "lucide-react";
-import { buildWhatsAppUrl, CONCIERGE_EMAIL, INSTAGRAM_URL, TIKTOK_URL, SOCIAL_HANDLE } from "@/lib/whatsapp";
+import { buildWhatsAppUrlRaw, CONCIERGE_EMAIL, INSTAGRAM_URL, TIKTOK_URL, SOCIAL_HANDLE } from "@/lib/whatsapp";
 
 const explore = [
   { to: "/travel", label: "Travel" },

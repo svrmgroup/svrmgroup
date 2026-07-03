@@ -3,7 +3,7 @@ import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
 import PageHero from "@/components/svrm/PageHero";
 import EnquiryForm from "@/components/svrm/EnquiryForm";
-import { buildWhatsAppUrl, CONCIERGE_EMAIL } from "@/lib/whatsapp";
+import { buildWhatsAppUrlRaw, CONCIERGE_EMAIL } from "@/lib/whatsapp";
 import { Seo } from "@/components/Seo";
 import {
   Accordion,
