@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { X, Sparkles } from "lucide-react";
 import { useCurrency } from "@/lib/currency";
+import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
 const DISMISS_KEY = "svrm-promo-x3-dismissed";
 
