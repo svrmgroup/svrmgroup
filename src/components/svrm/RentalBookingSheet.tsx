@@ -1,12 +1,7 @@
 import { useState } from "react";
 import { format, differenceInCalendarDays } from "date-fns";
-import { formatDate, formatDateRange } from "@/lib/locale";
-import { DateRange } from "react-day-picker";
+import { formatDate } from "@/lib/locale";
 import { z } from "zod";
-import { CalendarIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { Vehicle, rentalRate } from "@/data/vehicles";
 import { rentalExtras, pickupLocations } from "@/data/extras";
@@ -15,6 +10,7 @@ import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import ExtrasPicker from "./ExtrasPicker";
+import TwoStepDateRange from "./TwoStepDateRange";
 
 const schema = z.object({
   name: z.string().trim().min(1).max(100),
