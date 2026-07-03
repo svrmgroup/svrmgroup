@@ -35,6 +35,9 @@ const AdminLayout = () => {
           <NavLink to="/admin/calendar" className={linkClass}>
             <CalIcon className="h-4 w-4" /> Calendar
           </NavLink>
+          <NavLink to="/admin/whatsapp" className={linkClass}>
+            <MessageCircle className="h-4 w-4" /> WhatsApp
+          </NavLink>
         </nav>
         <div className="p-4 border-t border-border/40 mt-4">
           <p className="text-[10px] text-muted-foreground truncate">{session.user.email}</p>
