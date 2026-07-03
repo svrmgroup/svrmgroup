@@ -6,8 +6,8 @@ export const INSTAGRAM_URL = "https://www.instagram.com/svrmgroup/";
 export const TIKTOK_URL = "https://www.tiktok.com/@svrmgroup";
 
 export const buildWhatsAppUrl = (subject?: string) => {
-  const base = `https://wa.me/${WHATSAPP_NUMBER}`;
+  const base = `https://api.whatsapp.com/send?phone=${WHATSAPP_NUMBER}`;
   if (!subject) return base;
   const text = `Hi SVRM, I'd like to enquire about ${subject}.`;
-  return `${base}?text=${encodeURIComponent(text)}`;
+  return `${base}&text=${encodeURIComponent(text)}`;
 };
