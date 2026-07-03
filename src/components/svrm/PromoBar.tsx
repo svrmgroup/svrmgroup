@@ -31,13 +31,14 @@ const PromoBar = () => {
         <Sparkles className="h-3.5 w-3.5 shrink-0 hidden sm:block" />
         <span className="text-center leading-snug">
           <span className="hidden sm:inline">Special offer · </span>
-          <Link
-            to="/rentals"
+          <a
+            href={buildWhatsAppUrl("the BMW X3 self-drive special at R2,000 / day")}
+            target="_blank"
+            rel="noopener noreferrer"
             className="underline underline-offset-4 decoration-primary-foreground/50 hover:decoration-primary-foreground transition"
           >
-            BMW X3 self-drive — {format(2000)} / day
-          </Link>
-          <span className="hidden md:inline"> · Free delivery in Cape Town</span>
+            BMW X3 self-drive — {format(2000)} / day · Enquire on WhatsApp
+          </a>
         </span>
         <button
           type="button"
