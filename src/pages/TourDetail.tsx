@@ -5,6 +5,7 @@ import PricingCard from "@/components/svrm/PricingCard";
 import EnquiryForm from "@/components/svrm/EnquiryForm";
 import { Seo } from "@/components/Seo";
 import { findTour } from "@/data/tours";
+import SmartImage from "@/components/svrm/SmartImage";
 import WellnessCustomBuilder from "@/components/svrm/WellnessCustomBuilder";
 
 const TourDetail = () => {
@@ -51,7 +52,7 @@ const TourDetail = () => {
             <source src={tour.video} type="video/mp4" />
           </video>
         ) : (
-          <img src={tour.image} alt={tour.label} className="absolute inset-0 w-full h-full object-cover" />
+          <SmartImage src={tour.image} alt={tour.label} priority wrapperClassName="absolute inset-0 w-full h-full" className="absolute inset-0 w-full h-full object-cover" />
         )}
         <div className="absolute inset-0 bg-gradient-to-b from-surface-deep/60 via-surface-deep/30 to-surface-deep" />
         <div className="absolute inset-0 flex items-end">
