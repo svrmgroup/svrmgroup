@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
 import { Instagram } from "lucide-react";
-import { buildWhatsAppUrl, CONCIERGE_EMAIL, INSTAGRAM_URL, TIKTOK_URL, SOCIAL_HANDLE } from "@/lib/whatsapp";
+import { buildWhatsAppUrlRaw, CONCIERGE_EMAIL, INSTAGRAM_URL, TIKTOK_URL, SOCIAL_HANDLE } from "@/lib/whatsapp";
 
 const explore = [
   { to: "/travel", label: "Travel" },
@@ -74,7 +74,7 @@ const Footer = () => (
           </li>
           <li>
             <a
-              href={buildWhatsAppUrl()}
+              href={buildWhatsAppUrlRaw("Hi SVRM, I'd like to get in touch.")}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-gold transition-colors"

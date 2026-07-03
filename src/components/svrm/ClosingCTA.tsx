@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { buildWhatsAppUrl } from "@/lib/whatsapp";
+import { buildWhatsAppUrlRaw } from "@/lib/whatsapp";
 
 const ClosingCTA = () => (
   <section id="enquire" className="bg-surface-deep py-28 md:py-40 cv-auto">
@@ -14,7 +14,7 @@ const ClosingCTA = () => (
       </p>
       <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">
         <a
-          href={buildWhatsAppUrl()}
+          href={buildWhatsAppUrlRaw("Hi SVRM, I'd like to plan something with your concierge.")}
           target="_blank"
           rel="noopener noreferrer"
           className="px-10 py-5 bg-primary text-primary-foreground text-xs uppercase tracking-[0.32em] font-medium hover:bg-primary-glow transition-colors duration-500 shadow-[var(--shadow-gold)]"

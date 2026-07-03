@@ -3,7 +3,7 @@ import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
 import PageHero from "@/components/svrm/PageHero";
 import EnquiryForm from "@/components/svrm/EnquiryForm";
-import { buildWhatsAppUrl, CONCIERGE_EMAIL } from "@/lib/whatsapp";
+import { buildWhatsAppUrlRaw, CONCIERGE_EMAIL } from "@/lib/whatsapp";
 import { Seo } from "@/components/Seo";
 import {
   Accordion,
@@ -62,7 +62,7 @@ const Contact = () => {
             <div>
               <p className="eyebrow">WhatsApp</p>
               <a
-                href={buildWhatsAppUrl()}
+                href={buildWhatsAppUrlRaw("Hi SVRM, I'd like to speak with your team.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block font-serif text-2xl md:text-3xl mt-3 text-foreground hover:text-gold transition-colors"
