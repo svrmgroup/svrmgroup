@@ -264,6 +264,21 @@ export const tours: TourCategory[] = [
         ],
       },
       {
+        duration: "10 days",
+        title: "Anniversary grand celebration",
+        fromZAR: 178000,
+        inclusions: [
+          "Cape Town, Winelands, Garden Route & private safari lodge",
+          "Hot-air balloon at sunrise + helicopter beach picnic",
+          "Private yacht sunset cruise with chef & florist",
+          "Bespoke jewellery atelier appointment & anniversary gift commission",
+          "Daily rose-petal turndown & fresh bouquets in every suite",
+          "Couples spa treatments & candlelit chef dinners throughout",
+          "Vow renewal ceremony option with private officiant & photographer",
+          "Chauffeur & concierge dedicated to you, end to end",
+        ],
+      },
+      {
         duration: "7+ days",
         title: "Bespoke honeymoon, end to end",
         fromZAR: null,
