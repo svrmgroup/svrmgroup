@@ -10,9 +10,6 @@ import WellnessCustomBuilder from "@/components/svrm/WellnessCustomBuilder";
 const TourDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const tour = slug ? findTour(slug) : null;
-  const [range, setRange] = useState<DateRange | undefined>();
-  const [travellers, setTravellers] = useState(2);
-
   if (!tour) return <Navigate to="/tours" replace />;
 
   const title = `${tour.label} — SVRM Tour`;
@@ -20,19 +17,7 @@ const TourDetail = () => {
     ?? (tour as { subtitle?: string }).subtitle
     ?? `Bespoke ${tour.label} tour in South Africa, curated end-to-end by SVRM.`;
 
-  const nights =
-    range?.from && range?.to ? Math.max(1, differenceInCalendarDays(range.to, range.from)) : 0;
-
-  const dateLabel = range?.from
-    ? range.to
-      ? formatDateRange(range.from, range.to, { day: "numeric", month: "short", year: "numeric" })
-      : formatDate(range.from, { day: "numeric", month: "short", year: "numeric" })
-    : "Select your dates";
-
-  const datesSuffix =
-    range?.from && range?.to
-      ? ` · ${formatDateRange(range.from, range.to, { day: "numeric", month: "short", year: "numeric" })} · ${travellers} traveller${travellers > 1 ? "s" : ""}`
-      : ` · ${travellers} traveller${travellers > 1 ? "s" : ""}`;
+  const datesSuffix = "";
 
   return (
     <main className="bg-background text-foreground min-h-screen">
