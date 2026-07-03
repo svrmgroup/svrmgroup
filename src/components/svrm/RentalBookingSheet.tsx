@@ -41,7 +41,7 @@ const RentalBookingSheet = ({ vehicle, open, onOpenChange }: Props) => {
     setExtras((s) => (s.includes(id) ? s.filter((x) => x !== id) : [...s, id]));
 
   const reset = () => {
-    setRange(undefined);
+    setRange({});
     setExtras([]);
     setForm({ name: "", email: "", phone: "", message: "" });
     setPickup(pickupLocations[0]);
