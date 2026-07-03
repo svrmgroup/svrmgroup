@@ -74,7 +74,7 @@ const Footer = () => (
           </li>
           <li>
             <a
-              href={buildWhatsAppUrl()}
+              href={buildWhatsAppUrlRaw("Hi SVRM, I'd like to get in touch.")}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-gold transition-colors"

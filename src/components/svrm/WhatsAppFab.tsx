@@ -3,7 +3,7 @@ import { buildWhatsAppUrl, buildWhatsAppUrlRaw } from "@/lib/whatsapp";
 
 const WhatsAppFab = () => (
   <a
-    href={buildWhatsAppUrl()}
+    href={buildWhatsAppUrlRaw("Hi SVRM, I'd like to start a conversation.")}
     target="_blank"
     rel="noopener noreferrer"
     aria-label="Chat with SVRM on WhatsApp"
