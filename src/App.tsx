@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { CurrencyProvider } from "@/lib/currency";
 import WhatsAppFab from "@/components/svrm/WhatsAppFab";
+import WhatsAppClickTracker from "@/components/WhatsAppClickTracker";
 import ScrollToTop from "@/components/ScrollToTop";
 import Index from "./pages/Index.tsx";
 import Travel from "./pages/Travel.tsx";
