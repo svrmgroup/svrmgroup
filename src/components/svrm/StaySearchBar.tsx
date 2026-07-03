@@ -76,42 +76,16 @@ const StaySearchBar = () => {
   return (
     <div className="bg-surface-raised border border-border/50 p-5 md:p-6">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
-        <Popover>
-          <PopoverTrigger asChild>
-            <button
-              type="button"
-              className={cn(
-                "flex items-center justify-between gap-3 border border-border/60 px-4 py-3 text-left text-sm",
-                !range && "text-muted-foreground"
-              )}
-            >
-              <span className="flex items-center gap-3">
-                <CalendarIcon className="h-4 w-4 text-gold" />
-                <span>
-                  <span className="block text-[10px] uppercase tracking-[0.22em] text-muted-foreground">
-                    Check-in → Check-out
-                  </span>
-                  <span className="block text-base font-serif text-foreground">{dateLabel}</span>
-                </span>
-              </span>
-              {nights > 0 && (
-                <span className="text-[10px] uppercase tracking-[0.2em] text-gold">
-                  {nights} night{nights > 1 ? "s" : ""}
-                </span>
-              )}
-            </button>
-          </PopoverTrigger>
-          <PopoverContent className="w-auto p-0 bg-surface-raised border-border/60" align="start">
-            <Calendar
-              mode="range"
-              selected={range}
-              onSelect={setRange}
-              numberOfMonths={1}
-              disabled={(d) => d < new Date(new Date().setHours(0, 0, 0, 0))}
-              className={cn("p-3 pointer-events-auto")}
-            />
-          </PopoverContent>
-        </Popover>
+        <div className="lg:col-span-2">
+          <TwoStepDateRange
+            from={range.from}
+            to={range.to}
+            onChange={setRange}
+            firstLabel="Check-in date"
+            secondLabel="Check-out date"
+            unit="night"
+          />
+        </div>
 
         <Stepper icon={Users} label="Guests" value={guests} onChange={setGuests} max={40} />
         <Stepper icon={BedDouble} label="Rooms" value={rooms} onChange={setRooms} max={15} />
