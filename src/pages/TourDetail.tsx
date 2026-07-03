@@ -1,9 +1,4 @@
-import { useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
-import { DateRange } from "react-day-picker";
-import { differenceInCalendarDays } from "date-fns";
-import { formatDate, formatDateRange } from "@/lib/locale";
-import { CalendarIcon, Users } from "lucide-react";
 import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
 import PricingCard from "@/components/svrm/PricingCard";
@@ -11,9 +6,6 @@ import EnquiryForm from "@/components/svrm/EnquiryForm";
 import { Seo } from "@/components/Seo";
 import { findTour } from "@/data/tours";
 import WellnessCustomBuilder from "@/components/svrm/WellnessCustomBuilder";
-import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
 
 const TourDetail = () => {
   const { slug } = useParams<{ slug: string }>();
