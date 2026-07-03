@@ -61,6 +61,7 @@ const App = () => (
                 <Route index element={<AdminEnquiries />} />
                 <Route path="bookings" element={<AdminBookings />} />
                 <Route path="calendar" element={<AdminCalendar />} />
+                <Route path="whatsapp" element={<AdminWhatsApp />} />
               </Route>
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
