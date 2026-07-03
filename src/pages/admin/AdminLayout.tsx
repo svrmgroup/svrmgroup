@@ -1,6 +1,6 @@
 import { NavLink, Navigate, Outlet } from "react-router-dom";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
-import { LogOut, Inbox, Car, Calendar as CalIcon } from "lucide-react";
+import { LogOut, Inbox, Car, Calendar as CalIcon, MessageCircle } from "lucide-react";
 
 const AdminLayout = () => {
   const { session, isAdmin, loading, signOut } = useAdminAuth();
