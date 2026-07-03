@@ -27,7 +27,7 @@ interface Props {
 
 const RentalBookingSheet = ({ vehicle, open, onOpenChange }: Props) => {
   const { currency } = useCurrency();
-  const [range, setRange] = useState<DateRange | undefined>();
+  const [range, setRange] = useState<{ from?: Date; to?: Date }>({});
   const [pickup, setPickup] = useState(pickupLocations[0]);
   const [extras, setExtras] = useState<string[]>([]);
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
