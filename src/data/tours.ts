@@ -11,6 +11,7 @@ import culinaryImg from "@/assets/tours/culinary.jpg";
 import wellnessImg from "@/assets/tours/wellness.jpg";
 import photographyImg from "@/assets/tours/photography.jpg";
 import groupTravelImg from "@/assets/tours/group-travel.jpg";
+import romanticImg from "@/assets/tours/romantic.jpg";
 import safariVid from "@/assets/videos/tour-safari.mp4.asset.json";
 import huntingVid from "@/assets/videos/tour-hunting.mp4.asset.json";
 import culturalVid from "@/assets/videos/tour-cultural.mp4.asset.json";
@@ -34,6 +35,7 @@ export type TourSlug =
   | "wellness"
   | "photography"
   | "group-travel"
+  | "romantic"
   | "builder";
 
 export interface TourPackage {
@@ -207,6 +209,71 @@ export const tours: TourCategory[] = [
       { duration: "1 day", title: "Cape Peninsula group tour", fromZAR: 14500, inclusions: ["Up to 32-seater bus", "Guide + chauffeur", "Boulders & Cape Point", "Lunch arranged"] },
       { duration: "3 days", title: "Garden Route group", fromZAR: 65000, inclusions: ["Luxury touring coach", "All accommodation", "Guided stops & meals", "All transfers"] },
       { duration: "Custom", title: "Weddings, corporate & incentive", fromZAR: null, inclusions: ["Multi-vehicle fleets", "Airport meet & greet", "Hostess & coordinator", "Curated, end to end"] },
+    ],
+  },
+  {
+    slug: "romantic",
+    label: "Romantic Packages",
+    blurb: "Proposals, honeymoons and quiet celebrations.",
+    description:
+      "Curated romance across the Cape — surprise proposals, honeymoons, anniversaries and vow renewals. Rose-petal turndowns and bespoke bouquets on the bed, private florists, fine jewellery sourcing with a trusted Cape Town atelier, sunrise hot-air balloon flights over the Winelands, helicopter picnics on secluded beaches, and candlelit private-chef dinners at your villa. Every detail arranged discreetly, end to end.",
+    image: romanticImg,
+    packages: [
+      {
+        duration: "Half day",
+        title: "The Proposal",
+        fromZAR: 12500,
+        inclusions: [
+          "Private venue styling (beach, vineyard or villa)",
+          "Signature bouquet & rose-petal setup on the bed",
+          "Photographer to capture the moment",
+          "Chauffeured transfers throughout",
+        ],
+      },
+      {
+        duration: "2 days",
+        title: "Anniversary escape",
+        fromZAR: 24000,
+        inclusions: [
+          "1 night in a boutique suite with sea or vineyard view",
+          "Rose-petal turndown & fresh floral arrangement",
+          "Private candlelit chef's dinner",
+          "Couples spa treatment",
+        ],
+      },
+      {
+        duration: "3 days",
+        title: "Cape honeymoon signature",
+        fromZAR: 48000,
+        inclusions: [
+          "2 nights in a luxury honeymoon suite",
+          "Sunrise hot-air balloon over the Winelands",
+          "Private helicopter beach picnic",
+          "Daily florist-fresh bouquets & petal turndown",
+        ],
+      },
+      {
+        duration: "5 days",
+        title: "Grand romantic tour",
+        fromZAR: 92000,
+        inclusions: [
+          "Cape Town + Winelands + private safari lodge",
+          "Hot-air balloon, helicopter & yacht sunset cruise",
+          "Private jewellery atelier appointment (rings & bespoke pieces)",
+          "Chef-led candlelit dinners & couples spa daily",
+        ],
+      },
+      {
+        duration: "7+ days",
+        title: "Bespoke honeymoon, end to end",
+        fromZAR: null,
+        inclusions: [
+          "Multi-region itinerary curated around you",
+          "Private villa stays with dedicated concierge",
+          "Fine jewellery sourcing & bespoke commissions",
+          "Everything discreet, seamless, one point of contact",
+        ],
+      },
     ],
   },
 ];
