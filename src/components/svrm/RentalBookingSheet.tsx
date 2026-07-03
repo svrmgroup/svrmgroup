@@ -1,12 +1,7 @@
 import { useState } from "react";
 import { format, differenceInCalendarDays } from "date-fns";
-import { formatDate, formatDateRange } from "@/lib/locale";
-import { DateRange } from "react-day-picker";
+import { formatDate } from "@/lib/locale";
 import { z } from "zod";
-import { CalendarIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { Vehicle, rentalRate } from "@/data/vehicles";
 import { rentalExtras, pickupLocations } from "@/data/extras";
@@ -15,6 +10,7 @@ import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import ExtrasPicker from "./ExtrasPicker";
+import TwoStepDateRange from "./TwoStepDateRange";
 
 const schema = z.object({
   name: z.string().trim().min(1).max(100),
@@ -31,7 +27,7 @@ interface Props {
 
 const RentalBookingSheet = ({ vehicle, open, onOpenChange }: Props) => {
   const { currency } = useCurrency();
-  const [range, setRange] = useState<DateRange | undefined>();
+  const [range, setRange] = useState<{ from?: Date; to?: Date }>({});
   const [pickup, setPickup] = useState(pickupLocations[0]);
   const [extras, setExtras] = useState<string[]>([]);
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
@@ -45,7 +41,7 @@ const RentalBookingSheet = ({ vehicle, open, onOpenChange }: Props) => {
     setExtras((s) => (s.includes(id) ? s.filter((x) => x !== id) : [...s, id]));
 
   const reset = () => {
-    setRange(undefined);
+    setRange({});
     setExtras([]);
     setForm({ name: "", email: "", phone: "", message: "" });
     setPickup(pickupLocations[0]);
@@ -108,39 +104,16 @@ const RentalBookingSheet = ({ vehicle, open, onOpenChange }: Props) => {
           <form onSubmit={onSubmit} className="mt-8 space-y-6">
             <div>
               <p className="eyebrow">Dates</p>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <button
-                    type="button"
-                    className={cn(
-                      "mt-3 w-full flex items-center justify-between gap-3 border border-border/60 bg-transparent text-left px-4 py-3 text-sm",
-                      !range && "text-muted-foreground"
-                    )}
-                  >
-                    <span className="flex items-center gap-3">
-                      <CalendarIcon className="h-4 w-4" />
-                      {range?.from
-                        ? range.to
-                          ? formatDateRange(range.from, range.to, { day: "numeric", month: "short", year: "numeric" })
-                          : formatDate(range.from, { day: "numeric", month: "short", year: "numeric" })
-                        : "Select pickup & return dates"}
-                    </span>
-                    {days > 0 && (
-                      <span className="text-[10px] uppercase tracking-[0.2em] text-gold">{days} day{days > 1 ? "s" : ""}</span>
-                    )}
-                  </button>
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-0 bg-surface-raised border-border/60" align="start">
-                  <Calendar
-                    mode="range"
-                    selected={range}
-                    onSelect={setRange}
-                    numberOfMonths={1}
-                    disabled={(d) => d < new Date(new Date().setHours(0, 0, 0, 0))}
-                    className={cn("p-3 pointer-events-auto")}
-                  />
-                </PopoverContent>
-              </Popover>
+              <div className="mt-3">
+                <TwoStepDateRange
+                  from={range.from}
+                  to={range.to}
+                  onChange={setRange}
+                  firstLabel="Pickup date"
+                  secondLabel="Return date"
+                  unit="day"
+                />
+              </div>
             </div>
 
             <div>
