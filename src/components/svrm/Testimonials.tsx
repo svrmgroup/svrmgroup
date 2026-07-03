@@ -17,7 +17,7 @@ const quotes = [
 ];
 
 const Testimonials = () => (
-  <section className="py-24 md:py-36 bg-background">
+  <section className="py-24 md:py-36 bg-background cv-auto">
     <div className="max-w-7xl mx-auto px-6">
       <div className="text-center mb-20">
         <p className="eyebrow">In their words</p>

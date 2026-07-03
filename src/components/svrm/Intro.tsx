@@ -1,5 +1,5 @@
 const Intro = () => (
-  <section className="bg-surface-deep py-24 md:py-32">
+  <section className="bg-surface-deep py-24 md:py-32 cv-auto">
     <div className="max-w-4xl mx-auto px-6 text-center">
       <p className="eyebrow">SVRM Group</p>
       <h2 className="font-serif text-3xl md:text-5xl mt-6 text-foreground leading-[1.15]">
