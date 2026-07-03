@@ -237,33 +237,51 @@ export const translatePage = async (lang = getSavedLanguage(), root: ParentNode 
   if (typeof window === "undefined" || !root) return;
   const thisRun = ++runId;
   applyDocumentLanguage(lang);
-  protectContactNodes(root);
-  const textTargets = collectTextTargets(root);
-  const attrTargets = collectAttributeTargets(root);
-  const originals = [
-    ...textTargets.map((target) => target.core),
-    ...attrTargets.map((target) => target.text),
-  ];
+  // Signal to CSS that a translation pass is running so the page can
+  // fade smoothly rather than flashing text one node at a time.
+  document.documentElement.setAttribute("data-translating", "true");
+  const finish = () => {
+    if (thisRun === runId) {
+      document.documentElement.removeAttribute("data-translating");
+    }
+  };
+  try {
+    protectContactNodes(root);
+    const textTargets = collectTextTargets(root);
+    const attrTargets = collectAttributeTargets(root);
+    const originals = [
+      ...textTargets.map((target) => target.core),
+      ...attrTargets.map((target) => target.text),
+    ];
 
-  if (lang === "en") {
-    textTargets.forEach(({ node, original }) => {
-      node.nodeValue = original;
+    if (lang === "en") {
+      textTargets.forEach(({ node, original }) => {
+        node.nodeValue = original;
+      });
+      attrTargets.forEach(({ el, attr, text }) => el.setAttribute(attr, text));
+      finish();
+      return;
+    }
+
+    const translations = await translateMany(originals, lang);
+    if (thisRun !== runId || getSavedLanguage() !== lang) {
+      finish();
+      return;
+    }
+
+    textTargets.forEach(({ node, leading, core, trailing }) => {
+      const translated = `${leading}${translations.get(core) || core}${trailing}`;
+      node.nodeValue = translated;
+      lastAppliedTranslation.set(node, translated);
     });
-    attrTargets.forEach(({ el, attr, text }) => el.setAttribute(attr, text));
-    return;
+    attrTargets.forEach(({ el, attr, text }) => {
+      el.setAttribute(attr, translations.get(text) || text);
+    });
+    finish();
+  } catch (err) {
+    finish();
+    throw err;
   }
-
-  const translations = await translateMany(originals, lang);
-  if (thisRun !== runId || getSavedLanguage() !== lang) return;
-
-  textTargets.forEach(({ node, leading, core, trailing }) => {
-    const translated = `${leading}${translations.get(core) || core}${trailing}`;
-    node.nodeValue = translated;
-    lastAppliedTranslation.set(node, translated);
-  });
-  attrTargets.forEach(({ el, attr, text }) => {
-    el.setAttribute(attr, translations.get(text) || text);
-  });
 };
 
 export const startTranslationObserver = () => {
