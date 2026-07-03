@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import SmartImage from "@/components/svrm/SmartImage";
 import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
 import PageHero from "@/components/svrm/PageHero";
@@ -36,10 +37,10 @@ const Tours = () => (
             to={`/tours/${t.slug}`}
             className="group relative block overflow-hidden aspect-[4/3]"
           >
-            <img
+            <SmartImage
               src={t.image}
               alt={t.label}
-              loading="lazy"
+              wrapperClassName="absolute inset-0 w-full h-full"
               className="absolute inset-0 w-full h-full object-cover kb-a"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-surface-deep via-surface-deep/40 to-transparent" />
