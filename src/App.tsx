@@ -39,6 +39,7 @@ const App = () => (
         <BrowserRouter>
           <AdminAuthProvider>
             <ScrollToTop />
+            <WhatsAppClickTracker />
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/travel" element={<Travel />} />
