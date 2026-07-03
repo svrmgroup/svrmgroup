@@ -58,7 +58,7 @@ const BookingSheet = ({
   slug,
 }: Props) => {
   const { format: fmt } = useCurrency();
-  const [range, setRange] = useState<DateRange | undefined>();
+  const [range, setRange] = useState<{ from?: Date; to?: Date }>({});
   const [guests, setGuests] = useState(2);
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const [submitting, setSubmitting] = useState(false);
