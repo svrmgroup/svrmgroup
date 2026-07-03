@@ -157,53 +157,16 @@ const BookingSheet = ({
         <form onSubmit={onSubmit} className="mt-8 space-y-6">
           <div>
             <p className="eyebrow">Dates</p>
-            <Popover>
-              <PopoverTrigger asChild>
-                <button
-                  type="button"
-                  className={cn(
-                    "mt-3 w-full flex items-center justify-between gap-3 border border-border/60 bg-transparent text-left px-4 py-3 text-sm",
-                    !range && "text-muted-foreground",
-                  )}
-                >
-                  <span className="flex items-center gap-3">
-                    <CalendarIcon className="h-4 w-4" />
-                    {range?.from
-                      ? range.to
-                        ? formatDateRange(range.from, range.to, {
-                            day: "numeric",
-                            month: "short",
-                            year: "numeric",
-                          })
-                        : formatDate(range.from, {
-                            day: "numeric",
-                            month: "short",
-                            year: "numeric",
-                          })
-                      : `Select ${unit === "night" ? "check-in & check-out" : "start & end"} dates`}
-                  </span>
-                  {days > 0 && (
-                    <span className="text-[10px] uppercase tracking-[0.2em] text-gold">
-                      {days} {unit === "night" ? "night" : "day"}
-                      {days > 1 ? "s" : ""}
-                    </span>
-                  )}
-                </button>
-              </PopoverTrigger>
-              <PopoverContent
-                className="w-auto p-0 bg-surface-raised border-border/60"
-                align="start"
-              >
-                <Calendar
-                  mode="range"
-                  selected={range}
-                  onSelect={setRange}
-                  numberOfMonths={1}
-                  disabled={(d) => d < new Date(new Date().setHours(0, 0, 0, 0))}
-                  className={cn("p-3 pointer-events-auto")}
-                />
-              </PopoverContent>
-            </Popover>
+            <div className="mt-3">
+              <TwoStepDateRange
+                from={range.from}
+                to={range.to}
+                onChange={setRange}
+                firstLabel={kind === "stay" ? "Check-in date" : kind === "vehicle" ? "Pickup date" : "Start date"}
+                secondLabel={kind === "stay" ? "Check-out date" : kind === "vehicle" ? "Return date" : "End date"}
+                unit={unit === "night" ? "night" : "day"}
+              />
+            </div>
           </div>
 
           {kind !== "vehicle" && (
