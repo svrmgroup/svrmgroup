@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import SmartImage from "@/components/svrm/SmartImage";
 
 interface Props {
   id?: string;
@@ -15,12 +16,12 @@ const SectionBlock = ({ id, eyebrow, title, body, image, imageAlt, reverse = fal
   <section id={id} className="py-20 md:py-28">
     <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
       <div className={`${reverse ? "lg:order-2" : ""} relative aspect-[4/3] overflow-hidden`}>
-        <img
+        <SmartImage
           src={image}
           alt={imageAlt}
-          loading="lazy"
           width={1536}
           height={1024}
+          wrapperClassName="absolute inset-0 w-full h-full"
           className="absolute inset-0 w-full h-full object-cover"
         />
       </div>
