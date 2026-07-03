@@ -10,38 +10,49 @@ import {
 } from "@/components/ui/carousel";
 import bmwx3 from "@/assets/vehicles/bmwx3.jpg";
 import SmartImage from "@/components/svrm/SmartImage";
+import CurrencySwitch from "@/components/svrm/CurrencySwitch";
 import romantic from "@/assets/tours/romantic.jpg";
 import chauffeur from "@/assets/svc-travel-sclass.jpg";
 import safari from "@/assets/svc-exp-safari.jpg";
 import villa from "@/assets/svc-stays-villa.jpg";
+import { useCurrency } from "@/lib/currency";
 
 type Offer = {
   eyebrow: string;
   title: string;
   detail: string;
-  price: string;
+  /** Price in ZAR — converted live via the currency context. Null renders as "On request". */
+  priceZAR: number | null;
+  /** Original ZAR price, shown struck-through when a special applies. */
+  originalZAR?: number;
+  pricePrefix?: string;
   priceSuffix?: string;
   cta: string;
   to: string;
   image: string;
+  /** Show the gold "Special Offer" badge and ribbon treatment. */
+  special?: boolean;
 };
 
 const offers: Offer[] = [
   {
-    eyebrow: "Featured · Self-drive",
+    eyebrow: "Special Offer · Self-drive",
     title: "BMW X3",
-    detail: "Compact SUV, dialled in. Free delivery within Cape Town.",
-    price: "R2,000",
+    detail: "Compact luxury SUV, dialled in. Free delivery within Cape Town.",
+    priceZAR: 2000,
+    originalZAR: 3000,
     priceSuffix: "/ day",
     cta: "Reserve the X3",
     to: "/rentals",
     image: bmwx3,
+    special: true,
   },
   {
     eyebrow: "New · Romantic",
     title: "Cape Honeymoon Signature",
     detail: "3 nights, hot-air balloon, helicopter beach picnic, petal turndowns.",
-    price: "From R48,000",
+    priceZAR: 48000,
+    pricePrefix: "From ",
     cta: "See romantic packages",
     to: "/tours/romantic",
     image: romantic,
@@ -50,7 +61,8 @@ const offers: Offer[] = [
     eyebrow: "Chauffeur",
     title: "Private S-Class Days",
     detail: "Executive chauffeur with S-Class or E-Class, up to 8 hours in-city.",
-    price: "From R6,500",
+    priceZAR: 6500,
+    pricePrefix: "From ",
     priceSuffix: "/ day",
     cta: "Book a chauffeur",
     to: "/travel",
@@ -60,7 +72,8 @@ const offers: Offer[] = [
     eyebrow: "Safari",
     title: "Sabi Sand Signature",
     detail: "4 nights premium lodge, twice-daily game drives, flights included.",
-    price: "From R28,000",
+    priceZAR: 28000,
+    pricePrefix: "From ",
     priceSuffix: "/ pp",
     cta: "View safari tours",
     to: "/tours/safari",
@@ -70,7 +83,7 @@ const offers: Offer[] = [
     eyebrow: "Stays",
     title: "Camps Bay Villa",
     detail: "Curated villas and residences across the Cape's best addresses.",
-    price: "On request",
+    priceZAR: null,
     cta: "Browse stays",
     to: "/stays",
     image: villa,
@@ -81,6 +94,7 @@ const Offers = () => {
   const autoplay = useRef(
     Autoplay({ delay: 5000, stopOnInteraction: false, stopOnMouseEnter: true }),
   );
+  const { format } = useCurrency();
 
   return (
     <section id="offers" className="py-24 md:py-32 bg-surface-raised/40">
@@ -93,10 +107,18 @@ const Offers = () => {
             </h2>
             <div className="gold-divider w-16 mt-6" />
           </div>
-          <p className="text-sm text-muted-foreground max-w-md md:text-right">
-            A rotating selection of our best-value fleet, romantic packages and
-            chauffeur days — updated regularly.
-          </p>
+          <div className="flex flex-col md:items-end gap-3">
+            <p className="text-sm text-muted-foreground max-w-md md:text-right">
+              A rotating selection of our best-value fleet, romantic packages
+              and chauffeur days — updated regularly.
+            </p>
+            <div className="flex items-center gap-3">
+              <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                Show prices in
+              </span>
+              <CurrencySwitch />
+            </div>
+          </div>
         </div>
 
         <Carousel
@@ -112,8 +134,17 @@ const Offers = () => {
               >
                 <Link
                   to={o.to}
-                  className="group block h-full bg-background border border-border/60 hover:border-primary/60 transition-colors overflow-hidden"
+                  className={`group relative block h-full bg-background overflow-hidden transition-colors ${
+                    o.special
+                      ? "border-2 border-primary/80 shadow-[0_0_0_1px_hsl(var(--primary)/0.15),0_20px_60px_-20px_hsl(var(--primary)/0.4)]"
+                      : "border border-border/60 hover:border-primary/60"
+                  }`}
                 >
+                  {o.special && (
+                    <div className="absolute top-4 right-4 z-20 bg-primary text-primary-foreground px-3 py-1.5 text-[10px] tracking-[0.2em] uppercase font-medium shadow-lg">
+                      Special Offer
+                    </div>
+                  )}
                   <div className="relative aspect-[4/3] overflow-hidden bg-surface-raised">
                     <SmartImage
                       src={o.image}
@@ -133,17 +164,31 @@ const Offers = () => {
                       {o.detail}
                     </p>
                     <div className="flex items-baseline justify-between pt-3 border-t border-border/50">
-                      <div>
-                        <span className="font-serif text-xl text-foreground">
-                          {o.price}
+                      <div className="flex items-baseline gap-2 flex-wrap">
+                        {o.originalZAR && (
+                          <span className="text-sm text-muted-foreground/70 line-through">
+                            {format(o.originalZAR)}
+                          </span>
+                        )}
+                        {o.pricePrefix && (
+                          <span className="text-xs text-muted-foreground">
+                            {o.pricePrefix}
+                          </span>
+                        )}
+                        <span
+                          className={`font-serif text-xl ${
+                            o.special ? "text-gold" : "text-foreground"
+                          }`}
+                        >
+                          {o.priceZAR === null ? "On request" : format(o.priceZAR)}
                         </span>
-                        {o.priceSuffix && (
-                          <span className="text-xs text-muted-foreground ml-1">
+                        {o.priceSuffix && o.priceZAR !== null && (
+                          <span className="text-xs text-muted-foreground">
                             {o.priceSuffix}
                           </span>
                         )}
                       </div>
-                      <span className="text-xs uppercase tracking-[0.15em] text-primary group-hover:translate-x-1 transition-transform">
+                      <span className="text-xs uppercase tracking-[0.15em] text-primary group-hover:translate-x-1 transition-transform whitespace-nowrap">
                         {o.cta} →
                       </span>
                     </div>
