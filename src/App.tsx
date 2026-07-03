@@ -36,26 +36,34 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <ScrollToTop />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/travel" element={<Travel />} />
-            <Route path="/rentals" element={<Rentals />} />
-            <Route path="/security" element={<Security />} />
-            <Route path="/lifestyle" element={<Lifestyle />} />
-            <Route path="/stays" element={<Stays />} />
-            <Route path="/tours" element={<Tours />} />
-            <Route path="/tours/builder" element={<TourBuilderPage />} />
-            <Route path="/tours/:slug" element={<TourDetail />} />
-            <Route path="/experiences" element={<CustomExperiences />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/faq" element={<Navigate to="/contact#faq" replace />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          <WhatsAppFab />
+          <AdminAuthProvider>
+            <ScrollToTop />
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/travel" element={<Travel />} />
+              <Route path="/rentals" element={<Rentals />} />
+              <Route path="/security" element={<Security />} />
+              <Route path="/lifestyle" element={<Lifestyle />} />
+              <Route path="/stays" element={<Stays />} />
+              <Route path="/tours" element={<Tours />} />
+              <Route path="/tours/builder" element={<TourBuilderPage />} />
+              <Route path="/tours/:slug" element={<TourDetail />} />
+              <Route path="/experiences" element={<CustomExperiences />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/faq" element={<Navigate to="/contact#faq" replace />} />
+              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/admin" element={<AdminLayout />}>
+                <Route index element={<AdminEnquiries />} />
+                <Route path="bookings" element={<AdminBookings />} />
+                <Route path="calendar" element={<AdminCalendar />} />
+              </Route>
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+            <WhatsAppFab />
+          </AdminAuthProvider>
         </BrowserRouter>
       </TooltipProvider>
     </CurrencyProvider>
