@@ -115,13 +115,13 @@ const Offers = () => {
                   className="group block h-full bg-background border border-border/60 hover:border-primary/60 transition-colors overflow-hidden"
                 >
                   <div className="relative aspect-[4/3] overflow-hidden bg-surface-raised">
-                    <img
+                    <SmartImage
                       src={o.image}
                       alt={o.title}
-                      loading="lazy"
+                      wrapperClassName="absolute inset-0 w-full h-full"
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute top-4 left-4 bg-background/90 backdrop-blur px-3 py-1.5 text-[10px] tracking-[0.15em] uppercase text-foreground/80">
+                    <div className="absolute top-4 left-4 bg-background/90 backdrop-blur px-3 py-1.5 text-[10px] tracking-[0.15em] uppercase text-foreground/80 z-10">
                       {o.eyebrow}
                     </div>
                   </div>
