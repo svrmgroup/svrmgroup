@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { forwardRef, useState } from "react";
 import { differenceInCalendarDays } from "date-fns";
 import { CalendarIcon, X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -10,83 +10,33 @@ export interface TwoStepDateRangeProps {
   from?: Date;
   to?: Date;
   onChange: (range: { from?: Date; to?: Date }) => void;
-  /** Labels for the two steps. */
   firstLabel: string;
   secondLabel: string;
-  /** Unit for the days indicator. */
   unit?: "night" | "day";
-  /** Layout: stacked (default) or two columns. */
   columns?: 1 | 2;
-  /** Compact/nested styling used in search bars. */
-  compact?: boolean;
 }
 
 const startOfToday = () => new Date(new Date().setHours(0, 0, 0, 0));
+const fmtShort = (d: Date) => formatDate(d, { day: "numeric", month: "short", year: "numeric" });
 
-const TwoStepDateRange = ({
-  from,
-  to,
-  onChange,
-  firstLabel,
-  secondLabel,
-  unit = "day",
-  columns = 2,
-  compact = false,
-}: TwoStepDateRangeProps) => {
-  const [openStep, setOpenStep] = useState<"from" | "to" | null>(null);
+interface StepButtonProps {
+  label: string;
+  value?: Date;
+  active: boolean;
+  disabled?: boolean;
+  onClick?: () => void;
+}
 
-  const days = from && to ? Math.max(1, differenceInCalendarDays(to, from)) : 0;
-
-  const fmtShort = (d: Date) => formatDate(d, { day: "numeric", month: "short", year: "numeric" });
-
-  const handleFrom = (d?: Date) => {
-    if (!d) {
-      onChange({ from: undefined, to: undefined });
-      return;
-    }
-    // If existing end date is before the new start, clear it.
-    const nextTo = to && to < d ? undefined : to;
-    onChange({ from: d, to: nextTo });
-    setOpenStep(null);
-    // Auto-advance to second step for guided flow.
-    if (!nextTo) setTimeout(() => setOpenStep("to"), 120);
-  };
-
-  const handleTo = (d?: Date) => {
-    if (!d) return;
-    if (from && d < from) {
-      // Guard: shouldn't happen because disabled, but ignore just in case.
-      return;
-    }
-    onChange({ from, to: d });
-    setOpenStep(null);
-  };
-
-  const clear = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    onChange({ from: undefined, to: undefined });
-    setOpenStep(null);
-  };
-
-  const StepButton = ({
-    label,
-    value,
-    active,
-    onOpen,
-    disabled,
-  }: {
-    label: string;
-    value?: Date;
-    active: boolean;
-    onOpen: () => void;
-    disabled?: boolean;
-  }) => (
+const StepButton = forwardRef<HTMLButtonElement, StepButtonProps>(
+  ({ label, value, active, disabled, onClick, ...rest }, ref) => (
     <button
+      ref={ref}
       type="button"
-      onClick={onOpen}
+      onClick={onClick}
       disabled={disabled}
+      {...rest}
       className={cn(
-        "flex items-center justify-between gap-3 border text-left px-4 py-3 text-sm transition-colors",
+        "flex items-center justify-between gap-3 border text-left px-4 py-3 text-sm transition-colors w-full",
         active ? "border-primary" : "border-border/60 hover:border-primary/60",
         disabled && "opacity-60 cursor-not-allowed",
       )}
@@ -101,19 +51,53 @@ const TwoStepDateRange = ({
         </span>
       </span>
     </button>
-  );
+  ),
+);
+StepButton.displayName = "StepButton";
+
+const TwoStepDateRange = ({
+  from,
+  to,
+  onChange,
+  firstLabel,
+  secondLabel,
+  unit = "day",
+  columns = 2,
+}: TwoStepDateRangeProps) => {
+  const [openStep, setOpenStep] = useState<"from" | "to" | null>(null);
+
+  const days = from && to ? Math.max(1, differenceInCalendarDays(to, from)) : 0;
+
+  const handleFrom = (d?: Date) => {
+    if (!d) {
+      onChange({ from: undefined, to: undefined });
+      return;
+    }
+    const nextTo = to && to <= d ? undefined : to;
+    onChange({ from: d, to: nextTo });
+    setOpenStep(null);
+    if (!nextTo) setTimeout(() => setOpenStep("to"), 120);
+  };
+
+  const handleTo = (d?: Date) => {
+    if (!d) return;
+    if (from && d <= from) return;
+    onChange({ from, to: d });
+    setOpenStep(null);
+  };
+
+  const clear = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onChange({ from: undefined, to: undefined });
+    setOpenStep(null);
+  };
 
   return (
-    <div className={cn("space-y-2", compact && "space-y-2")}>
+    <div className="space-y-2">
       <div className={cn("grid gap-3", columns === 2 ? "grid-cols-1 sm:grid-cols-2" : "grid-cols-1")}>
         <Popover open={openStep === "from"} onOpenChange={(o) => setOpenStep(o ? "from" : null)}>
           <PopoverTrigger asChild>
-            <StepButton
-              label={firstLabel}
-              value={from}
-              active={openStep === "from"}
-              onOpen={() => setOpenStep("from")}
-            />
+            <StepButton label={firstLabel} value={from} active={openStep === "from"} />
           </PopoverTrigger>
           <PopoverContent className="w-auto p-0 bg-surface-raised border-border/60" align="start">
             <Calendar
@@ -130,13 +114,7 @@ const TwoStepDateRange = ({
 
         <Popover open={openStep === "to"} onOpenChange={(o) => setOpenStep(o ? "to" : null)}>
           <PopoverTrigger asChild>
-            <StepButton
-              label={secondLabel}
-              value={to}
-              active={openStep === "to"}
-              onOpen={() => setOpenStep("to")}
-              disabled={!from}
-            />
+            <StepButton label={secondLabel} value={to} active={openStep === "to"} disabled={!from} />
           </PopoverTrigger>
           <PopoverContent className="w-auto p-0 bg-surface-raised border-border/60" align="start">
             <Calendar
