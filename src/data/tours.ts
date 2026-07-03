@@ -227,7 +227,7 @@ export const tours: TourCategory[] = [
           "Private venue styling (beach, vineyard or villa)",
           "Signature bouquet & rose-petal setup on the bed",
           "Photographer to capture the moment",
-          "Chauffeured transfers throughout",
+          "Private chauffeur & 24/7 concierge",
         ],
       },
       {
@@ -239,6 +239,7 @@ export const tours: TourCategory[] = [
           "Rose-petal turndown & fresh floral arrangement",
           "Private candlelit chef's dinner",
           "Couples spa treatment",
+          "Private chauffeur & 24/7 concierge",
         ],
       },
       {
@@ -250,6 +251,7 @@ export const tours: TourCategory[] = [
           "Sunrise hot-air balloon over the Winelands",
           "Private helicopter beach picnic",
           "Daily florist-fresh bouquets & petal turndown",
+          "Private chauffeur & 24/7 concierge",
         ],
       },
       {
@@ -261,6 +263,7 @@ export const tours: TourCategory[] = [
           "Hot-air balloon, helicopter & yacht sunset cruise",
           "Private jewellery atelier appointment (rings & bespoke pieces)",
           "Chef-led candlelit dinners & couples spa daily",
+          "Private chauffeur & 24/7 concierge",
         ],
       },
       {
@@ -275,7 +278,7 @@ export const tours: TourCategory[] = [
           "Daily rose-petal turndown & fresh bouquets in every suite",
           "Couples spa treatments & candlelit chef dinners throughout",
           "Vow renewal ceremony option with private officiant & photographer",
-          "Chauffeur & concierge dedicated to you, end to end",
+          "Private chauffeur & 24/7 concierge, dedicated to you end to end",
         ],
       },
       {
@@ -286,6 +289,7 @@ export const tours: TourCategory[] = [
           "Multi-region itinerary curated around you",
           "Private villa stays with dedicated concierge",
           "Fine jewellery sourcing & bespoke commissions",
+          "Private chauffeur & 24/7 concierge",
           "Everything discreet, seamless, one point of contact",
         ],
       },
