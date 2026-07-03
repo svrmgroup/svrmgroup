@@ -97,12 +97,19 @@ const Offers = () => {
   const { format } = useCurrency();
 
   return (
-    <section id="offers" className="py-24 md:py-32 bg-surface-raised/40">
+    <section
+      id="offers"
+      className="relative py-20 md:py-28 bg-gradient-to-b from-surface-raised/60 via-surface-raised/30 to-background border-y border-primary/20"
+    >
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 md:mb-16">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10 md:mb-14">
           <div>
-            <p className="eyebrow">Current offers</p>
-            <h2 className="font-serif text-4xl md:text-5xl mt-4 text-foreground">
+            <div className="inline-flex items-center gap-2 border border-primary/50 bg-primary/10 text-gold px-3 py-1 text-[10px] tracking-[0.22em] uppercase mb-5">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+              Limited-time offers &amp; promotions
+            </div>
+            <h2 className="font-serif text-4xl md:text-6xl mt-2 text-foreground leading-[1.05]">
               Handpicked, this season.
             </h2>
             <div className="gold-divider w-16 mt-6" />

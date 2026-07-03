@@ -139,3 +139,25 @@
 [dir="rtl"] .notranslate { direction: ltr; unicode-bidi: isolate; }
 /* Mirror simple horizontal margins on common nav spacing */
 [dir="rtl"] .rtl-mirror-ml > * + * { margin-left: 0; margin-right: var(--rtl-gap, 1.5rem); }
+
+/* ---------- Language transition ---------- */
+/* Smooth fade while the site translator swaps text so users don't see
+   individual words flicker. The attribute is toggled by siteTranslator.ts. */
+main, header, footer {
+  transition: opacity 260ms var(--ease-luxe), filter 260ms var(--ease-luxe);
+}
+html[data-translating="true"] main,
+html[data-translating="true"] header,
+html[data-translating="true"] footer {
+  opacity: 0.55;
+  filter: blur(0.5px);
+}
+
+/* ---------- Perf: skip offscreen work ---------- */
+/* Let the browser defer layout/paint for sections that aren't visible yet.
+   Applied via a utility class so we opt in per-section, avoiding scrollbar
+   jitter on pages that measure their own layout. */
+.cv-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 800px 1200px;
+}

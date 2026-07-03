@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
 const ClosingCTA = () => (
-  <section id="enquire" className="bg-surface-deep py-28 md:py-40">
+  <section id="enquire" className="bg-surface-deep py-28 md:py-40 cv-auto">
     <div className="max-w-3xl mx-auto px-6 text-center">
       <p className="eyebrow">Concierge</p>
       <h2 className="font-serif text-5xl md:text-7xl mt-6 text-foreground leading-[1.05]">
