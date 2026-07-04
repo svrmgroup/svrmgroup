@@ -28,6 +28,9 @@ import AdminEnquiries from "./pages/admin/AdminEnquiries";
 import AdminBookings from "./pages/admin/AdminBookings";
 import AdminCalendar from "./pages/admin/AdminCalendar";
 import AdminWhatsApp from "./pages/admin/AdminWhatsApp";
+import AdminAnalytics from "./pages/admin/AdminAnalytics";
+import AdminManualBookings from "./pages/admin/AdminManualBookings";
+import AdminLeads from "./pages/admin/AdminLeads";
 
 const queryClient = new QueryClient();
 
@@ -58,8 +61,11 @@ const App = () => (
               <Route path="/faq" element={<Navigate to="/contact#faq" replace />} />
               <Route path="/admin/login" element={<AdminLogin />} />
               <Route path="/admin" element={<AdminLayout />}>
-                <Route index element={<AdminEnquiries />} />
+                <Route index element={<AdminAnalytics />} />
+                <Route path="enquiries" element={<AdminEnquiries />} />
                 <Route path="bookings" element={<AdminBookings />} />
+                <Route path="manual" element={<AdminManualBookings />} />
+                <Route path="leads" element={<AdminLeads />} />
                 <Route path="calendar" element={<AdminCalendar />} />
                 <Route path="whatsapp" element={<AdminWhatsApp />} />
               </Route>

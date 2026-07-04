@@ -1,6 +1,6 @@
 import { NavLink, Navigate, Outlet } from "react-router-dom";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
-import { LogOut, Inbox, Car, Calendar as CalIcon, MessageCircle } from "lucide-react";
+import { LogOut, Inbox, Car, Calendar as CalIcon, MessageCircle, FileText, Building2, BarChart3 } from "lucide-react";
 
 const AdminLayout = () => {
   const { session, isAdmin, loading, signOut } = useAdminAuth();
@@ -27,10 +27,19 @@ const AdminLayout = () => {
         </div>
         <nav className="py-4 flex flex-col">
           <NavLink to="/admin" end className={linkClass}>
+            <BarChart3 className="h-4 w-4" /> Analytics
+          </NavLink>
+          <NavLink to="/admin/enquiries" className={linkClass}>
             <Inbox className="h-4 w-4" /> Enquiries
           </NavLink>
           <NavLink to="/admin/bookings" className={linkClass}>
-            <Car className="h-4 w-4" /> Rental bookings
+            <Car className="h-4 w-4" /> Rental requests
+          </NavLink>
+          <NavLink to="/admin/manual" className={linkClass}>
+            <FileText className="h-4 w-4" /> Manual bookings
+          </NavLink>
+          <NavLink to="/admin/leads" className={linkClass}>
+            <Building2 className="h-4 w-4" /> B2B leads
           </NavLink>
           <NavLink to="/admin/calendar" className={linkClass}>
             <CalIcon className="h-4 w-4" /> Calendar

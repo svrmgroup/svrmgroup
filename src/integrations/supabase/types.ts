@@ -62,6 +62,72 @@ export type Database = {
         }
         Relationships: []
       }
+      b2b_leads: {
+        Row: {
+          address: string | null
+          category: string | null
+          created_at: string
+          created_by: string | null
+          emails: string[]
+          id: string
+          last_contacted_at: string | null
+          lat: number | null
+          lng: number | null
+          name: string
+          notes: string | null
+          phone: string | null
+          place_id: string | null
+          rating: number | null
+          search_query: string | null
+          status: string
+          tags: string[]
+          updated_at: string
+          website: string | null
+        }
+        Insert: {
+          address?: string | null
+          category?: string | null
+          created_at?: string
+          created_by?: string | null
+          emails?: string[]
+          id?: string
+          last_contacted_at?: string | null
+          lat?: number | null
+          lng?: number | null
+          name: string
+          notes?: string | null
+          phone?: string | null
+          place_id?: string | null
+          rating?: number | null
+          search_query?: string | null
+          status?: string
+          tags?: string[]
+          updated_at?: string
+          website?: string | null
+        }
+        Update: {
+          address?: string | null
+          category?: string | null
+          created_at?: string
+          created_by?: string | null
+          emails?: string[]
+          id?: string
+          last_contacted_at?: string | null
+          lat?: number | null
+          lng?: number | null
+          name?: string
+          notes?: string | null
+          phone?: string | null
+          place_id?: string | null
+          rating?: number | null
+          search_query?: string | null
+          status?: string
+          tags?: string[]
+          updated_at?: string
+          website?: string | null
+        }
+        Relationships: []
+      }
       email_send_log: {
         Row: {
           created_at: string
@@ -190,6 +256,69 @@ export type Database = {
           source_page?: string | null
           status?: Database["public"]["Enums"]["enquiry_status"]
           subject?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      manual_bookings: {
+        Row: {
+          balance_due: number
+          booking_code: string
+          client_email: string | null
+          client_name: string
+          client_phone: string | null
+          confirmation_message: string | null
+          created_at: string
+          created_by: string | null
+          currency: string
+          deposit_amount: number
+          end_date: string | null
+          id: string
+          line_items: Json
+          notes: string | null
+          start_date: string | null
+          status: string
+          subtotal: number
+          updated_at: string
+        }
+        Insert: {
+          balance_due?: number
+          booking_code?: string
+          client_email?: string | null
+          client_name: string
+          client_phone?: string | null
+          confirmation_message?: string | null
+          created_at?: string
+          created_by?: string | null
+          currency?: string
+          deposit_amount?: number
+          end_date?: string | null
+          id?: string
+          line_items?: Json
+          notes?: string | null
+          start_date?: string | null
+          status?: string
+          subtotal?: number
+          updated_at?: string
+        }
+        Update: {
+          balance_due?: number
+          booking_code?: string
+          client_email?: string | null
+          client_name?: string
+          client_phone?: string | null
+          confirmation_message?: string | null
+          created_at?: string
+          created_by?: string | null
+          currency?: string
+          deposit_amount?: number
+          end_date?: string | null
+          id?: string
+          line_items?: Json
+          notes?: string | null
+          start_date?: string | null
+          status?: string
+          subtotal?: number
           updated_at?: string
         }
         Relationships: []
