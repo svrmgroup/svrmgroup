@@ -31,6 +31,10 @@ import AdminWhatsApp from "./pages/admin/AdminWhatsApp";
 import AdminAnalytics from "./pages/admin/AdminAnalytics";
 import AdminManualBookings from "./pages/admin/AdminManualBookings";
 import AdminLeads from "./pages/admin/AdminLeads";
+import AdminExpenses from "./pages/admin/AdminExpenses";
+import AdminPnL from "./pages/admin/AdminPnL";
+import AdminSuppliers from "./pages/admin/AdminSuppliers";
+import AdminTasks from "./pages/admin/AdminTasks";
 
 const queryClient = new QueryClient();
 
@@ -66,6 +70,10 @@ const App = () => (
                 <Route path="bookings" element={<AdminBookings />} />
                 <Route path="manual" element={<AdminManualBookings />} />
                 <Route path="leads" element={<AdminLeads />} />
+                <Route path="expenses" element={<AdminExpenses />} />
+                <Route path="pnl" element={<AdminPnL />} />
+                <Route path="suppliers" element={<AdminSuppliers />} />
+                <Route path="tasks" element={<AdminTasks />} />
                 <Route path="calendar" element={<AdminCalendar />} />
                 <Route path="whatsapp" element={<AdminWhatsApp />} />
               </Route>
