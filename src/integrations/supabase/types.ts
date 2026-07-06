@@ -128,6 +128,60 @@ export type Database = {
         }
         Relationships: []
       }
+      booking_tasks: {
+        Row: {
+          admin_booking_id: string | null
+          assignee: string | null
+          created_at: string
+          due_date: string | null
+          id: string
+          manual_booking_id: string | null
+          notes: string | null
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          admin_booking_id?: string | null
+          assignee?: string | null
+          created_at?: string
+          due_date?: string | null
+          id?: string
+          manual_booking_id?: string | null
+          notes?: string | null
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          admin_booking_id?: string | null
+          assignee?: string | null
+          created_at?: string
+          due_date?: string | null
+          id?: string
+          manual_booking_id?: string | null
+          notes?: string | null
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "booking_tasks_admin_booking_id_fkey"
+            columns: ["admin_booking_id"]
+            isOneToOne: false
+            referencedRelation: "admin_bookings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "booking_tasks_manual_booking_id_fkey"
+            columns: ["manual_booking_id"]
+            isOneToOne: false
+            referencedRelation: "manual_bookings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       email_send_log: {
         Row: {
           created_at: string
@@ -260,6 +314,56 @@ export type Database = {
         }
         Relationships: []
       }
+      expenses: {
+        Row: {
+          amount: number
+          category: string
+          created_at: string
+          created_by: string | null
+          currency: string
+          date: string
+          id: string
+          manual_booking_id: string | null
+          note: string | null
+          receipt_url: string | null
+          updated_at: string
+        }
+        Insert: {
+          amount?: number
+          category?: string
+          created_at?: string
+          created_by?: string | null
+          currency?: string
+          date?: string
+          id?: string
+          manual_booking_id?: string | null
+          note?: string | null
+          receipt_url?: string | null
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          category?: string
+          created_at?: string
+          created_by?: string | null
+          currency?: string
+          date?: string
+          id?: string
+          manual_booking_id?: string | null
+          note?: string | null
+          receipt_url?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "expenses_manual_booking_id_fkey"
+            columns: ["manual_booking_id"]
+            isOneToOne: false
+            referencedRelation: "manual_bookings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       manual_bookings: {
         Row: {
           balance_due: number
@@ -380,6 +484,99 @@ export type Database = {
           updated_at?: string
           vehicle_name?: string
           vehicle_slug?: string
+        }
+        Relationships: []
+      }
+      supplier_payouts: {
+        Row: {
+          amount: number
+          created_at: string
+          currency: string
+          due_date: string | null
+          id: string
+          manual_booking_id: string | null
+          note: string | null
+          paid_at: string | null
+          status: string
+          supplier_id: string
+          updated_at: string
+        }
+        Insert: {
+          amount?: number
+          created_at?: string
+          currency?: string
+          due_date?: string | null
+          id?: string
+          manual_booking_id?: string | null
+          note?: string | null
+          paid_at?: string | null
+          status?: string
+          supplier_id: string
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          currency?: string
+          due_date?: string | null
+          id?: string
+          manual_booking_id?: string | null
+          note?: string | null
+          paid_at?: string | null
+          status?: string
+          supplier_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "supplier_payouts_manual_booking_id_fkey"
+            columns: ["manual_booking_id"]
+            isOneToOne: false
+            referencedRelation: "manual_bookings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "supplier_payouts_supplier_id_fkey"
+            columns: ["supplier_id"]
+            isOneToOne: false
+            referencedRelation: "suppliers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      suppliers: {
+        Row: {
+          category: string
+          created_at: string
+          email: string | null
+          id: string
+          name: string
+          notes: string | null
+          phone: string | null
+          updated_at: string
+          whatsapp: string | null
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          email?: string | null
+          id?: string
+          name: string
+          notes?: string | null
+          phone?: string | null
+          updated_at?: string
+          whatsapp?: string | null
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          email?: string | null
+          id?: string
+          name?: string
+          notes?: string | null
+          phone?: string | null
+          updated_at?: string
+          whatsapp?: string | null
         }
         Relationships: []
       }
