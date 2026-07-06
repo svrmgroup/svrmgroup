@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Plus, Trash2, Copy, MessageCircle, ChevronDown } from "lucide-react";
+import { Plus, Trash2, Copy, MessageCircle, ChevronDown, FileDown } from "lucide-react";
 import { buildConfirmationMessage, type LineItem } from "@/lib/confirmationMessage";
+import { downloadInvoicePdf } from "@/lib/invoicePdf";
 
 type Status = "draft" | "sent" | "deposit_paid" | "confirmed" | "completed" | "cancelled";
 
@@ -269,6 +270,15 @@ const AdminManualBookings = () => {
                       <Info label="Email">{r.client_email || "—"}</Info>
                       <Info label="Phone">{r.client_phone || "—"}</Info>
                       <Info label="Deposit / Balance">{r.currency} {Number(r.deposit_amount).toLocaleString()} / {Number(r.balance_due).toLocaleString()}</Info>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2">
+                      <button
+                        onClick={() => downloadInvoicePdf(r)}
+                        className="flex items-center gap-1.5 text-xs text-gold border border-primary/40 px-3 py-1.5 hover:bg-primary/10 transition-colors"
+                      >
+                        <FileDown className="h-3 w-3" /> Download PDF invoice
+                      </button>
                     </div>
 
                     {r.confirmation_message && (
