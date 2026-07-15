@@ -26,6 +26,8 @@ const SmartImage = ({
 }: Props) => {
   const [loaded, setLoaded] = useState(false);
 
+  const hasSrc = typeof src === "string" && src.trim().length > 0;
+
   return (
     <span
       className={cn(
@@ -35,23 +37,25 @@ const SmartImage = ({
         wrapperClassName,
       )}
     >
-      <img
-        {...rest}
-        src={src}
-        alt={alt}
-        loading={priority ? "eager" : loading ?? "lazy"}
-        decoding={decoding ?? "async"}
-        fetchPriority={priority ? "high" : fetchPriority}
-        onLoad={(e) => {
-          setLoaded(true);
-          onLoad?.(e);
-        }}
-        className={cn(
-          "transition-opacity duration-500",
-          loaded ? "opacity-100" : "opacity-0",
-          className,
-        )}
-      />
+      {hasSrc && (
+        <img
+          {...rest}
+          src={src}
+          alt={alt}
+          loading={priority ? "eager" : loading ?? "lazy"}
+          decoding={decoding ?? "async"}
+          fetchPriority={priority ? "high" : fetchPriority}
+          onLoad={(e) => {
+            setLoaded(true);
+            onLoad?.(e);
+          }}
+          className={cn(
+            "transition-opacity duration-500",
+            loaded ? "opacity-100" : "opacity-0",
+            className,
+          )}
+        />
+      )}
     </span>
   );
 };
