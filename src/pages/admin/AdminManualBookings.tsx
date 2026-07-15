@@ -378,6 +378,10 @@ const AdminManualBookings = () => {
                       </div>
                     )}
 
+                    <div className="border-t border-border/40 pt-4">
+                      <StaffAssigner bookingId={r.id} />
+                    </div>
+
                     <label className="block">
                       <span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Status</span>
                       <select value={r.status} onChange={(e) => update(r.id, { status: e.target.value as Status })} className={`${inputCls} mt-2`}>
