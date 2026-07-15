@@ -27,6 +27,10 @@ export interface InvoiceBooking {
   notes?: string | null;
   confirmation_message?: string | null;
   created_at?: string;
+  /** Optional overrides applied by the admin PDF editor before download. */
+  concierge_override?: ConciergeInfo | null;
+  package_title_override?: string | null;
+  issue_date_override?: string | null;
 }
 
 interface Settings {
