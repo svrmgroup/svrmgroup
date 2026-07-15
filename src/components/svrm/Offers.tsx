@@ -95,6 +95,24 @@ const Offers = () => {
     Autoplay({ delay: 5000, stopOnInteraction: false, stopOnMouseEnter: true }),
   );
   const { format } = useCurrency();
+  const { items: cmsOffers } = useCmsItems("offers");
+
+  const cmsMapped: Offer[] = cmsOffers.map((c) => ({
+    eyebrow: c.eyebrow || "Featured",
+    title: c.title,
+    detail: c.summary || "",
+    priceZAR: c.price_zar,
+    originalZAR: c.original_price_zar ?? undefined,
+    pricePrefix: c.price_prefix ?? undefined,
+    priceSuffix: c.price_suffix ?? undefined,
+    cta: c.cta_label || "Learn more",
+    to: c.cta_href || "/contact",
+    image: c.image_url || villa,
+    special: /special/i.test(c.eyebrow || ""),
+  }));
+  const displayOffers = cmsMapped.length > 0 ? cmsMapped : offers;
+
+
 
   return (
     <section
