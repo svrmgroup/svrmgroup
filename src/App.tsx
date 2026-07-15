@@ -35,6 +35,7 @@ import AdminExpenses from "./pages/admin/AdminExpenses";
 import AdminPnL from "./pages/admin/AdminPnL";
 import AdminSuppliers from "./pages/admin/AdminSuppliers";
 import AdminTasks from "./pages/admin/AdminTasks";
+import AdminDirectory from "./pages/admin/AdminDirectory";
 
 const queryClient = new QueryClient();
 
