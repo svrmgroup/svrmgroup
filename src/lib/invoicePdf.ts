@@ -259,7 +259,7 @@ async function build(kind: PdfKind, b: InvoiceBooking) {
   doc.text("PACKAGE", 40, y);
   y += 18;
   const firstItem = (b.line_items || [])[0];
-  const packageTitle = firstItem?.label || "Bespoke SVRM experience";
+  const packageTitle = b.package_title_override || firstItem?.label || "Bespoke SVRM experience";
   doc.setFont("times", "italic"); doc.setFontSize(13); doc.setTextColor(TEXT);
   const titleLines = doc.splitTextToSize(packageTitle, w - 80);
   doc.text(titleLines, 40, y);
