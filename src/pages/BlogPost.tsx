@@ -1,15 +1,46 @@
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
 import { Seo } from "@/components/Seo";
-import { posts } from "@/data/blog";
+import { posts, type BlogPost as BlogPostType } from "@/data/blog";
 import { Button } from "@/components/ui/button";
 import { buildWhatsAppUrlRaw } from "@/lib/whatsapp";
 import SmartImage from "@/components/svrm/SmartImage";
+import { supabase } from "@/integrations/supabase/client";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
-  const post = posts.find((p) => p.slug === slug);
+  const staticPost = posts.find((p) => p.slug === slug);
+  const [cmsPost, setCmsPost] = useState<BlogPostType | null>(null);
+  const [loading, setLoading] = useState(!staticPost);
+
+  useEffect(() => {
+    if (staticPost || !slug) return;
+    (async () => {
+      const { data } = await (supabase as any).from("cms_items").select("*")
+        .eq("kind", "blogs").eq("slug", slug).eq("published", true).maybeSingle();
+      if (data) {
+        setCmsPost({
+          slug: data.slug, title: data.title, excerpt: data.summary || "",
+          category: (data.category || "Insights") as any,
+          date: new Date(data.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }),
+          publishedISO: data.created_at.slice(0, 10),
+          image: data.image_url || "", readTime: "5 min read",
+          intro: data.summary || "",
+          sections: data.description ? [{ body: data.description }] : [],
+        });
+      }
+      setLoading(false);
+    })();
+  }, [slug, staticPost]);
+
+  const post = staticPost || cmsPost;
+
+  if (loading) {
+    return <main className="bg-background text-foreground min-h-screen"><Nav /><section className="max-w-3xl mx-auto px-6 py-40 text-center"><p className="text-xs text-muted-foreground">Loading…</p></section></main>;
+  }
+
 
   if (!post) {
     return (

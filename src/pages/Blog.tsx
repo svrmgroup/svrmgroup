@@ -1,16 +1,38 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
 import PageHero from "@/components/svrm/PageHero";
-import { posts, categories, type BlogCategory } from "@/data/blog";
+import { posts, categories, type BlogCategory, type BlogPost } from "@/data/blog";
 import { Seo } from "@/components/Seo";
 import SmartImage from "@/components/svrm/SmartImage";
+import { useCmsItems } from "@/hooks/useCmsItems";
 
 const Blog = () => {
   const [params] = useSearchParams();
   const [active, setActive] = useState<BlogCategory | "All">("All");
-  const filtered = active === "All" ? posts : posts.filter((p) => p.category === active);
+  const { items: cmsBlogs } = useCmsItems("blogs");
+
+  const merged: BlogPost[] = useMemo(() => {
+    const cmsMapped: BlogPost[] = cmsBlogs.map((c) => ({
+      slug: c.slug,
+      title: c.title,
+      excerpt: c.summary || "",
+      category: ((c.category as BlogCategory) || "Insights"),
+      date: new Date(c.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }),
+      publishedISO: c.created_at.slice(0, 10),
+      image: c.image_url || "",
+      readTime: "5 min read",
+      intro: c.summary || "",
+      sections: c.description ? [{ body: c.description }] : [],
+    }));
+    // CMS entries override same-slug static posts
+    const cmsSlugs = new Set(cmsMapped.map(p => p.slug));
+    return [...cmsMapped, ...posts.filter(p => !cmsSlugs.has(p.slug))];
+  }, [cmsBlogs]);
+
+  const filtered = active === "All" ? merged : merged.filter((p) => p.category === active);
+
 
   useEffect(() => {
     const cat = params.get("cat");
