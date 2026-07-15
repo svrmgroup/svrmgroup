@@ -21,6 +21,7 @@ import Contact from "./pages/Contact.tsx";
 import Rentals from "./pages/Rentals.tsx";
 import Security from "./pages/Security.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import ClientPortal from "./pages/ClientPortal";
 import { AdminAuthProvider } from "./hooks/useAdminAuth";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminLayout from "./pages/admin/AdminLayout";
@@ -36,6 +37,15 @@ import AdminPnL from "./pages/admin/AdminPnL";
 import AdminSuppliers from "./pages/admin/AdminSuppliers";
 import AdminTasks from "./pages/admin/AdminTasks";
 import AdminDirectory from "./pages/admin/AdminDirectory";
+import AdminStaff from "./pages/admin/AdminStaff";
+import AdminAssignments from "./pages/admin/AdminAssignments";
+import AdminEmailTemplates from "./pages/admin/AdminEmailTemplates";
+import AdminClients from "./pages/admin/AdminClients";
+import AdminSettings from "./pages/admin/AdminSettings";
+import AdminActivity from "./pages/admin/AdminActivity";
+import AdminRoles from "./pages/admin/AdminRoles";
+import AdminCMS from "./pages/admin/AdminCMS";
+import AdminChangeRequests from "./pages/admin/AdminChangeRequests";
 
 const queryClient = new QueryClient();
 
@@ -64,20 +74,30 @@ const App = () => (
               <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/faq" element={<Navigate to="/contact#faq" replace />} />
+              <Route path="/booking/:token" element={<ClientPortal />} />
               <Route path="/admin/login" element={<AdminLogin />} />
               <Route path="/admin" element={<AdminLayout />}>
                 <Route index element={<AdminAnalytics />} />
                 <Route path="enquiries" element={<AdminEnquiries />} />
                 <Route path="bookings" element={<AdminBookings />} />
                 <Route path="manual" element={<AdminManualBookings />} />
+                <Route path="change-requests" element={<AdminChangeRequests />} />
+                <Route path="clients" element={<AdminClients />} />
                 <Route path="leads" element={<AdminLeads />} />
                 <Route path="expenses" element={<AdminExpenses />} />
                 <Route path="pnl" element={<AdminPnL />} />
                 <Route path="suppliers" element={<AdminSuppliers />} />
                 <Route path="tasks" element={<AdminTasks />} />
                 <Route path="directory" element={<AdminDirectory />} />
+                <Route path="staff" element={<AdminStaff />} />
+                <Route path="assignments" element={<AdminAssignments />} />
                 <Route path="calendar" element={<AdminCalendar />} />
                 <Route path="whatsapp" element={<AdminWhatsApp />} />
+                <Route path="cms" element={<AdminCMS />} />
+                <Route path="email-templates" element={<AdminEmailTemplates />} />
+                <Route path="activity" element={<AdminActivity />} />
+                <Route path="roles" element={<AdminRoles />} />
+                <Route path="settings" element={<AdminSettings />} />
               </Route>
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />

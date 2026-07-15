@@ -5,6 +5,7 @@ import { useAdminNotifications } from "@/hooks/useAdminNotifications";
 import {
   LogOut, Inbox, Car, Calendar as CalIcon, MessageCircle, FileText,
   Building2, BarChart3, Receipt, Wallet, Users, ListChecks, Menu, X, Share, BookUser,
+  UserCog, ClipboardList, Mail, ShieldCheck, Settings, Activity, ImagePlus, GitPullRequest, Contact as ContactIcon,
 } from "lucide-react";
 import Logo from "@/components/svrm/Logo";
 
@@ -24,7 +25,7 @@ const AdminLayout = () => {
   if (!isAdmin) return <Navigate to="/admin/login" replace />;
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
-    `flex items-center gap-3 px-4 py-3 text-xs uppercase tracking-[0.24em] border-l-2 transition-colors ${
+    `flex items-center gap-3 px-4 py-2.5 text-xs uppercase tracking-[0.24em] border-l-2 transition-colors ${
       isActive
         ? "border-primary text-foreground bg-surface-raised"
         : "border-transparent text-muted-foreground hover:text-foreground"
@@ -46,55 +47,49 @@ const AdminLayout = () => {
     try { localStorage.setItem("svrm-admin-install-dismissed", "1"); } catch {/* ignore */}
   };
 
+  const close = () => setOpen(false);
+
   const nav = (
     <nav className="py-2 flex flex-col overflow-y-auto flex-1">
       <p className={groupLabel}>Overview</p>
-      <NavLink to="/admin" end className={linkClass} onClick={() => setOpen(false)}>
-        <BarChart3 className="h-4 w-4" /> Analytics
-      </NavLink>
+      <NavLink to="/admin" end className={linkClass} onClick={close}><BarChart3 className="h-4 w-4" /> Analytics</NavLink>
 
       <p className={groupLabel}>Bookings</p>
-      <NavLink to="/admin/enquiries" className={linkClass} onClick={() => setOpen(false)}>
-        <Inbox className="h-4 w-4" /> Enquiries
-      </NavLink>
-      <NavLink to="/admin/bookings" className={linkClass} onClick={() => setOpen(false)}>
-        <Car className="h-4 w-4" /> Rental requests
-      </NavLink>
-      <NavLink to="/admin/manual" className={linkClass} onClick={() => setOpen(false)}>
-        <FileText className="h-4 w-4" /> Manual bookings
-      </NavLink>
-      <NavLink to="/admin/calendar" className={linkClass} onClick={() => setOpen(false)}>
-        <CalIcon className="h-4 w-4" /> Calendar
-      </NavLink>
+      <NavLink to="/admin/enquiries" className={linkClass} onClick={close}><Inbox className="h-4 w-4" /> Enquiries</NavLink>
+      <NavLink to="/admin/bookings" className={linkClass} onClick={close}><Car className="h-4 w-4" /> Rental requests</NavLink>
+      <NavLink to="/admin/manual" className={linkClass} onClick={close}><FileText className="h-4 w-4" /> Manual bookings</NavLink>
+      <NavLink to="/admin/change-requests" className={linkClass} onClick={close}><GitPullRequest className="h-4 w-4" /> Change requests</NavLink>
+      <NavLink to="/admin/calendar" className={linkClass} onClick={close}><CalIcon className="h-4 w-4" /> Calendar</NavLink>
+
+      <p className={groupLabel}>People</p>
+      <NavLink to="/admin/clients" className={linkClass} onClick={close}><ContactIcon className="h-4 w-4" /> Clients (CRM)</NavLink>
+      <NavLink to="/admin/staff" className={linkClass} onClick={close}><UserCog className="h-4 w-4" /> Staff</NavLink>
+      <NavLink to="/admin/assignments" className={linkClass} onClick={close}><ClipboardList className="h-4 w-4" /> Assignments</NavLink>
 
       <p className={groupLabel}>Money</p>
-      <NavLink to="/admin/expenses" className={linkClass} onClick={() => setOpen(false)}>
-        <Receipt className="h-4 w-4" /> Expenses
-      </NavLink>
-      <NavLink to="/admin/pnl" className={linkClass} onClick={() => setOpen(false)}>
-        <Wallet className="h-4 w-4" /> P&amp;L
-      </NavLink>
-      <NavLink to="/admin/suppliers" className={linkClass} onClick={() => setOpen(false)}>
-        <Users className="h-4 w-4" /> Suppliers
-      </NavLink>
+      <NavLink to="/admin/expenses" className={linkClass} onClick={close}><Receipt className="h-4 w-4" /> Expenses</NavLink>
+      <NavLink to="/admin/pnl" className={linkClass} onClick={close}><Wallet className="h-4 w-4" /> P&amp;L</NavLink>
+      <NavLink to="/admin/suppliers" className={linkClass} onClick={close}><Users className="h-4 w-4" /> Suppliers</NavLink>
 
       <p className={groupLabel}>Operations</p>
-      <NavLink to="/admin/tasks" className={linkClass} onClick={() => setOpen(false)}>
-        <ListChecks className="h-4 w-4" /> Tasks
-      </NavLink>
+      <NavLink to="/admin/tasks" className={linkClass} onClick={close}><ListChecks className="h-4 w-4" /> Tasks</NavLink>
 
       <p className={groupLabel}>Growth</p>
-      <NavLink to="/admin/directory" className={linkClass} onClick={() => setOpen(false)}>
-        <BookUser className="h-4 w-4" /> Directory
-      </NavLink>
-      <NavLink to="/admin/leads" className={linkClass} onClick={() => setOpen(false)}>
-        <Building2 className="h-4 w-4" /> B2B leads
-      </NavLink>
-      <NavLink to="/admin/whatsapp" className={linkClass} onClick={() => setOpen(false)}>
-        <MessageCircle className="h-4 w-4" /> WhatsApp
-      </NavLink>
+      <NavLink to="/admin/directory" className={linkClass} onClick={close}><BookUser className="h-4 w-4" /> Directory</NavLink>
+      <NavLink to="/admin/leads" className={linkClass} onClick={close}><Building2 className="h-4 w-4" /> B2B leads</NavLink>
+      <NavLink to="/admin/whatsapp" className={linkClass} onClick={close}><MessageCircle className="h-4 w-4" /> WhatsApp</NavLink>
+
+      <p className={groupLabel}>Content</p>
+      <NavLink to="/admin/cms" className={linkClass} onClick={close}><ImagePlus className="h-4 w-4" /> CMS</NavLink>
+
+      <p className={groupLabel}>Settings</p>
+      <NavLink to="/admin/email-templates" className={linkClass} onClick={close}><Mail className="h-4 w-4" /> Email templates</NavLink>
+      <NavLink to="/admin/roles" className={linkClass} onClick={close}><ShieldCheck className="h-4 w-4" /> Users &amp; roles</NavLink>
+      <NavLink to="/admin/activity" className={linkClass} onClick={close}><Activity className="h-4 w-4" /> Activity log</NavLink>
+      <NavLink to="/admin/settings" className={linkClass} onClick={close}><Settings className="h-4 w-4" /> Company</NavLink>
     </nav>
   );
+
 
   return (
     <div className="min-h-screen bg-background text-foreground md:grid md:grid-cols-[240px_1fr]" style={{ paddingTop: "env(safe-area-inset-top)" }}>
