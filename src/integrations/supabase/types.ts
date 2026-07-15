@@ -580,6 +580,75 @@ export type Database = {
         }
         Relationships: []
       }
+      suppliers_directory: {
+        Row: {
+          category: Database["public"]["Enums"]["supplier_category"]
+          city: string | null
+          company_name: string
+          contact_name: string | null
+          country: string | null
+          created_at: string
+          created_by: string | null
+          email: string | null
+          id: string
+          last_contacted_at: string | null
+          notes: string | null
+          phone: string | null
+          preferred: boolean
+          rate_notes: string | null
+          rating: number | null
+          services_offered: string[]
+          status: Database["public"]["Enums"]["supplier_status"]
+          updated_at: string
+          website: string | null
+          whatsapp: string | null
+        }
+        Insert: {
+          category?: Database["public"]["Enums"]["supplier_category"]
+          city?: string | null
+          company_name: string
+          contact_name?: string | null
+          country?: string | null
+          created_at?: string
+          created_by?: string | null
+          email?: string | null
+          id?: string
+          last_contacted_at?: string | null
+          notes?: string | null
+          phone?: string | null
+          preferred?: boolean
+          rate_notes?: string | null
+          rating?: number | null
+          services_offered?: string[]
+          status?: Database["public"]["Enums"]["supplier_status"]
+          updated_at?: string
+          website?: string | null
+          whatsapp?: string | null
+        }
+        Update: {
+          category?: Database["public"]["Enums"]["supplier_category"]
+          city?: string | null
+          company_name?: string
+          contact_name?: string | null
+          country?: string | null
+          created_at?: string
+          created_by?: string | null
+          email?: string | null
+          id?: string
+          last_contacted_at?: string | null
+          notes?: string | null
+          phone?: string | null
+          preferred?: boolean
+          rate_notes?: string | null
+          rating?: number | null
+          services_offered?: string[]
+          status?: Database["public"]["Enums"]["supplier_status"]
+          updated_at?: string
+          website?: string | null
+          whatsapp?: string | null
+        }
+        Relationships: []
+      }
       suppressed_emails: {
         Row: {
           created_at: string
@@ -694,6 +763,20 @@ export type Database = {
     Enums: {
       app_role: "admin"
       enquiry_status: "new" | "in_progress" | "done" | "archived"
+      supplier_category:
+        | "transport"
+        | "accommodation"
+        | "tours"
+        | "yachts"
+        | "aviation"
+        | "security"
+        | "wellness"
+        | "dining"
+        | "events"
+        | "photography"
+        | "staffing"
+        | "other"
+      supplier_status: "active" | "pending" | "inactive"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -823,6 +906,21 @@ export const Constants = {
     Enums: {
       app_role: ["admin"],
       enquiry_status: ["new", "in_progress", "done", "archived"],
+      supplier_category: [
+        "transport",
+        "accommodation",
+        "tours",
+        "yachts",
+        "aviation",
+        "security",
+        "wellness",
+        "dining",
+        "events",
+        "photography",
+        "staffing",
+        "other",
+      ],
+      supplier_status: ["active", "pending", "inactive"],
     },
   },
 } as const

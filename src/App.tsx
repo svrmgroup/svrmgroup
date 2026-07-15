@@ -35,6 +35,7 @@ import AdminExpenses from "./pages/admin/AdminExpenses";
 import AdminPnL from "./pages/admin/AdminPnL";
 import AdminSuppliers from "./pages/admin/AdminSuppliers";
 import AdminTasks from "./pages/admin/AdminTasks";
+import AdminDirectory from "./pages/admin/AdminDirectory";
 
 const queryClient = new QueryClient();
 
@@ -74,6 +75,7 @@ const App = () => (
                 <Route path="pnl" element={<AdminPnL />} />
                 <Route path="suppliers" element={<AdminSuppliers />} />
                 <Route path="tasks" element={<AdminTasks />} />
+                <Route path="directory" element={<AdminDirectory />} />
                 <Route path="calendar" element={<AdminCalendar />} />
                 <Route path="whatsapp" element={<AdminWhatsApp />} />
               </Route>

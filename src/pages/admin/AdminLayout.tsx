@@ -4,7 +4,7 @@ import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { useAdminNotifications } from "@/hooks/useAdminNotifications";
 import {
   LogOut, Inbox, Car, Calendar as CalIcon, MessageCircle, FileText,
-  Building2, BarChart3, Receipt, Wallet, Users, ListChecks, Menu, X, Share,
+  Building2, BarChart3, Receipt, Wallet, Users, ListChecks, Menu, X, Share, BookUser,
 } from "lucide-react";
 import Logo from "@/components/svrm/Logo";
 
@@ -84,6 +84,9 @@ const AdminLayout = () => {
       </NavLink>
 
       <p className={groupLabel}>Growth</p>
+      <NavLink to="/admin/directory" className={linkClass} onClick={() => setOpen(false)}>
+        <BookUser className="h-4 w-4" /> Directory
+      </NavLink>
       <NavLink to="/admin/leads" className={linkClass} onClick={() => setOpen(false)}>
         <Building2 className="h-4 w-4" /> B2B leads
       </NavLink>
