@@ -5,6 +5,7 @@ import { Plus, Trash2, Copy, MessageCircle, ChevronDown, FileDown, Link as LinkI
 import { buildConfirmationMessage, type LineItem } from "@/lib/confirmationMessage";
 import { downloadInvoicePdf, downloadConfirmationPdf, downloadThankYouPdf } from "@/lib/invoicePdf";
 import PdfEditorDialog from "@/components/svrm/PdfEditorDialog";
+import StaffAssigner, { type PendingAssignment } from "@/components/svrm/StaffAssigner";
 
 type Status = "draft" | "sent" | "deposit_paid" | "confirmed" | "completed" | "cancelled";
 
