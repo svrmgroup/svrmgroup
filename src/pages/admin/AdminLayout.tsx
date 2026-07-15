@@ -6,6 +6,7 @@ import {
   LogOut, Inbox, Car, Calendar as CalIcon, MessageCircle, FileText,
   Building2, BarChart3, Receipt, Wallet, Users, ListChecks, Menu, X, Share, BookUser,
   UserCog, ClipboardList, Mail, ShieldCheck, Settings, Activity, ImagePlus, GitPullRequest, Contact as ContactIcon,
+  Image as ImageIcon,
 } from "lucide-react";
 import Logo from "@/components/svrm/Logo";
 
@@ -81,6 +82,7 @@ const AdminLayout = () => {
 
       <p className={groupLabel}>Content</p>
       <NavLink to="/admin/cms" className={linkClass} onClick={close}><ImagePlus className="h-4 w-4" /> CMS</NavLink>
+      <NavLink to="/admin/media" className={linkClass} onClick={close}><ImageIcon className="h-4 w-4" /> Media library</NavLink>
 
       <p className={groupLabel}>Settings</p>
       <NavLink to="/admin/email-templates" className={linkClass} onClick={close}><Mail className="h-4 w-4" /> Email templates</NavLink>
