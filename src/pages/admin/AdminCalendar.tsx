@@ -167,11 +167,24 @@ const AdminCalendar = () => {
       notes: form.notes.trim() || null,
       status: form.status,
     };
-    const { error } = editing
-      ? await supabase.from("admin_bookings").update(payload).eq("id", editing.id)
-      : await supabase.from("admin_bookings").insert(payload);
+    const { data: saved, error } = editing
+      ? await supabase.from("admin_bookings").update(payload).eq("id", editing.id).select().single()
+      : await supabase.from("admin_bookings").insert(payload).select().single();
+    if (error) { setSaving(false); return toast.error(error.message); }
+
+    if (!editing && saved && pendingStaff.length) {
+      const { data: userData } = await supabase.auth.getUser();
+      const rows = pendingStaff.map((p) => ({
+        booking_id: (saved as any).id,
+        staff_id: p.staff_id,
+        role: p.role || null,
+        created_by: userData.user?.id ?? null,
+      }));
+      const { error: aErr } = await supabase.from("booking_assignments" as any).insert(rows);
+      if (aErr) toast.error(`Booking saved, staff assignment failed: ${aErr.message}`);
+    }
+
     setSaving(false);
-    if (error) return toast.error(error.message);
     toast.success(editing ? "Booking updated" : "Booking created");
     setDialogOpen(false);
     load();
