@@ -46,11 +46,14 @@ const AdminLogin = () => {
     <main className="min-h-screen bg-background text-foreground flex items-center justify-center p-6">
       <Seo title="Admin · SVRM" description="Admin console" path="/admin/login" />
       <div className="w-full max-w-md bg-surface-raised border border-border/40 p-10">
-        <p className="eyebrow">SVRM</p>
-        <h1 className="font-serif text-3xl mt-3">Admin console</h1>
-        <p className="text-sm text-muted-foreground mt-2">
-          {mode === "signin" ? "Sign in to manage enquiries." : "Create your admin account."}
-        </p>
+        <div className="flex flex-col items-center text-center mb-2">
+          <Logo size="xl" />
+          <p className="eyebrow mt-5">SVRM</p>
+          <h1 className="font-serif text-3xl mt-3">Admin console</h1>
+          <p className="text-sm text-muted-foreground mt-2">
+            {mode === "signin" ? "Sign in to manage enquiries." : "Create your admin account."}
+          </p>
+        </div>
 
         {session && !isAdmin && (
           <div className="mt-6 border border-destructive/50 bg-destructive/5 p-4 text-xs text-destructive">
