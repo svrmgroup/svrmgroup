@@ -51,6 +51,7 @@ const ClientPortal = () => {
     const { error } = await supabase.from("booking_change_requests" as any).insert({
       booking_id: booking.id,
       requested_by_name: booking.client_name,
+      requested_by_email: booking.client_email,
       changes: {} as any,
       message: message.trim().slice(0, 2000),
     });
