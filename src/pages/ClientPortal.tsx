@@ -33,11 +33,12 @@ const ClientPortal = () => {
 
   useEffect(() => { (async () => {
     if (!token) return;
-    const [{ data: b }, { data: s }] = await Promise.all([
-      supabase.from("manual_bookings").select("*").eq("client_token", token).maybeSingle(),
+    const [{ data: bRows }, { data: s }] = await Promise.all([
+      supabase.rpc("get_booking_by_token" as any, { _token: token }),
       supabase.from("app_settings" as any).select("company_whatsapp,company_email,company_phone").eq("id", 1).maybeSingle(),
     ]);
     setLoading(false);
+    const b = Array.isArray(bRows) ? bRows[0] : bRows;
     if (!b) return toast.error("Booking not found");
     setBooking(b as any);
     setSettings((s as any) || {});
