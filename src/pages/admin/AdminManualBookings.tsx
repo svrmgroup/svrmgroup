@@ -5,6 +5,7 @@ import { Plus, Trash2, Copy, MessageCircle, ChevronDown, FileDown, Link as LinkI
 import { buildConfirmationMessage, type LineItem } from "@/lib/confirmationMessage";
 import { downloadInvoicePdf, downloadConfirmationPdf, downloadThankYouPdf } from "@/lib/invoicePdf";
 import PdfEditorDialog from "@/components/svrm/PdfEditorDialog";
+import StaffAssigner, { type PendingAssignment } from "@/components/svrm/StaffAssigner";
 
 type Status = "draft" | "sent" | "deposit_paid" | "confirmed" | "completed" | "cancelled";
 
@@ -60,6 +61,7 @@ const AdminManualBookings = () => {
     notes: "",
   });
   const [items, setItems] = useState<LineItem[]>([emptyItem()]);
+  const [pendingStaff, setPendingStaff] = useState<PendingAssignment[]>([]);
 
   const load = async () => {
     setLoading(true);
@@ -80,6 +82,7 @@ const AdminManualBookings = () => {
   const resetForm = () => {
     setForm({ client_name: "", client_email: "", client_phone: "", currency: "ZAR", start_date: "", end_date: "", deposit_amount: 0, notes: "" });
     setItems([emptyItem()]);
+    setPendingStaff([]);
   };
 
   const create = async () => {
@@ -125,6 +128,17 @@ const AdminManualBookings = () => {
       notes: data.notes,
     });
     await supabase.from("manual_bookings").update({ confirmation_message: msg }).eq("id", data.id);
+
+    if (pendingStaff.length) {
+      const rows = pendingStaff.map((p) => ({
+        booking_id: data.id,
+        staff_id: p.staff_id,
+        role: p.role || null,
+        created_by: userData.user?.id ?? null,
+      }));
+      const { error: aErr } = await supabase.from("booking_assignments" as any).insert(rows);
+      if (aErr) toast.error(`Booking created, staff assignment failed: ${aErr.message}`);
+    }
 
     toast.success(`Booking ${data.booking_code} created`);
     setShowForm(false);
@@ -238,6 +252,11 @@ const AdminManualBookings = () => {
           <Field label="Internal notes">
             <textarea rows={2} value={form.notes} onChange={(e) => setForm((f) => ({ ...f, notes: e.target.value }))} className={inputCls} />
           </Field>
+
+          <div className="border-t border-border/40 pt-4">
+            <StaffAssigner value={pendingStaff} onChange={setPendingStaff} />
+          </div>
+
 
           <button onClick={create} className="w-full px-6 py-3 bg-primary text-primary-foreground text-xs uppercase tracking-[0.28em] hover:bg-primary-glow transition-colors">
             Create booking & generate message
@@ -358,6 +377,10 @@ const AdminManualBookings = () => {
                         <pre className="text-xs whitespace-pre-wrap bg-background border border-border/40 p-4 font-sans max-h-80 overflow-y-auto">{r.confirmation_message}</pre>
                       </div>
                     )}
+
+                    <div className="border-t border-border/40 pt-4">
+                      <StaffAssigner bookingId={r.id} />
+                    </div>
 
                     <label className="block">
                       <span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Status</span>

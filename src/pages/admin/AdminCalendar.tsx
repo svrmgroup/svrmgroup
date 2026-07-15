@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { ChevronLeft, ChevronRight, Plus, Trash2, X } from "lucide-react";
+import StaffAssigner, { type PendingAssignment } from "@/components/svrm/StaffAssigner";
 
 interface Event {
   date: string;
@@ -54,6 +55,7 @@ const AdminCalendar = () => {
     status: "confirmed" as string,
   });
   const [saving, setSaving] = useState(false);
+  const [pendingStaff, setPendingStaff] = useState<PendingAssignment[]>([]);
 
   const load = async () => {
     const [{ data: r }, { data: e }, { data: b }] = await Promise.all([
@@ -118,6 +120,7 @@ const AdminCalendar = () => {
 
   const openNew = (date?: string) => {
     setEditing(null);
+    setPendingStaff([]);
     setForm({
       title: "",
       category: "rental",
@@ -134,6 +137,7 @@ const AdminCalendar = () => {
 
   const openEdit = (b: AdminBooking) => {
     setEditing(b);
+    setPendingStaff([]);
     setForm({
       title: b.title,
       category: b.category,
@@ -163,11 +167,24 @@ const AdminCalendar = () => {
       notes: form.notes.trim() || null,
       status: form.status,
     };
-    const { error } = editing
-      ? await supabase.from("admin_bookings").update(payload).eq("id", editing.id)
-      : await supabase.from("admin_bookings").insert(payload);
+    const { data: saved, error } = editing
+      ? await supabase.from("admin_bookings").update(payload).eq("id", editing.id).select().single()
+      : await supabase.from("admin_bookings").insert(payload).select().single();
+    if (error) { setSaving(false); return toast.error(error.message); }
+
+    if (!editing && saved && pendingStaff.length) {
+      const { data: userData } = await supabase.auth.getUser();
+      const rows = pendingStaff.map((p) => ({
+        booking_id: (saved as any).id,
+        staff_id: p.staff_id,
+        role: p.role || null,
+        created_by: userData.user?.id ?? null,
+      }));
+      const { error: aErr } = await supabase.from("booking_assignments" as any).insert(rows);
+      if (aErr) toast.error(`Booking saved, staff assignment failed: ${aErr.message}`);
+    }
+
     setSaving(false);
-    if (error) return toast.error(error.message);
     toast.success(editing ? "Booking updated" : "Booking created");
     setDialogOpen(false);
     load();
@@ -347,6 +364,12 @@ const AdminCalendar = () => {
               <Field label="Notes">
                 <textarea rows={3} value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} className={inputCls} />
               </Field>
+            </div>
+
+            <div className="mt-6 border-t border-border/40 pt-4">
+              {editing
+                ? <StaffAssigner bookingId={editing.id} />
+                : <StaffAssigner value={pendingStaff} onChange={setPendingStaff} />}
             </div>
 
             <div className="mt-8 flex items-center justify-between gap-3">
