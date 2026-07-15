@@ -1,7 +1,29 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Save, Upload } from "lucide-react";
+import { Save, Upload, FileText } from "lucide-react";
+import { renderPdfBlob, invalidateInvoiceSettingsCache, type InvoiceBooking } from "@/lib/invoicePdf";
+
+type PreviewKind = "invoice" | "confirmation" | "thank_you";
+
+const SAMPLE_BOOKING: InvoiceBooking = {
+  booking_code: "SVRM-PREVIEW",
+  client_name: "Alexandra Kruger",
+  client_email: "alexandra@example.com",
+  client_phone: "+27 82 555 0198",
+  start_date: new Date(Date.now() + 7 * 864e5).toISOString().slice(0, 10),
+  end_date: new Date(Date.now() + 10 * 864e5).toISOString().slice(0, 10),
+  currency: "ZAR",
+  line_items: [
+    { label: "Range Rover Sport — chauffeured", qty: 3, unit: "days", amount: 18000 },
+    { label: "Table Mountain private helicopter transfer", qty: 1, unit: "flight", amount: 24500 },
+    { label: "Villa Camps Bay — 3 nights", qty: 3, unit: "nights", amount: 45000 },
+  ],
+  subtotal: 87500,
+  deposit_amount: 43750,
+  balance_due: 43750,
+  notes: "Preview only — this booking illustrates how live PDFs will render with your branding.",
+};
 
 const AdminSettings = () => {
   const [s, setS] = useState<any>({});
