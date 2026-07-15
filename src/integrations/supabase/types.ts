@@ -1365,6 +1365,38 @@ export type Database = {
         Args: { payload: Json; queue_name: string }
         Returns: number
       }
+      get_booking_by_token: {
+        Args: { _token: string }
+        Returns: {
+          balance_due: number
+          booking_code: string
+          client_email: string | null
+          client_name: string
+          client_phone: string | null
+          client_token: string
+          confirmation_message: string | null
+          created_at: string
+          created_by: string | null
+          currency: string
+          deposit_amount: number
+          end_date: string | null
+          id: string
+          line_items: Json
+          notes: string | null
+          portal_completed_at: string | null
+          portal_expires_at: string | null
+          start_date: string | null
+          status: string
+          subtotal: number
+          updated_at: string
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "manual_bookings"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
