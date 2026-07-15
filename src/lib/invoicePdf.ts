@@ -65,8 +65,9 @@ async function loadSettings(): Promise<Settings> {
   return cache!;
 }
 
-// Cache the SVRM logo (or the settings override) as a data URL so jsPDF
-// renders it reliably regardless of CORS / same-origin quirks.
+// Cache a circularly-masked version of the SVRM logo as a data URL. The
+// source asset is a square image with a round mark inside it; we render it
+// through an offscreen canvas so the PDF only shows the circle.
 let logoDataUrlCache: { src: string; data: string } | null = null;
 async function loadLogoDataUrl(overrideUrl?: string): Promise<string | null> {
   const src = overrideUrl || svrmLogo.url;
@@ -75,12 +76,31 @@ async function loadLogoDataUrl(overrideUrl?: string): Promise<string | null> {
     const res = await fetch(src, { credentials: "omit" });
     if (!res.ok) return null;
     const blob = await res.blob();
-    const dataUrl: string = await new Promise((resolve, reject) => {
-      const r = new FileReader();
-      r.onload = () => resolve(r.result as string);
-      r.onerror = reject;
-      r.readAsDataURL(blob);
+    const img: HTMLImageElement = await new Promise((resolve, reject) => {
+      const url = URL.createObjectURL(blob);
+      const el = new Image();
+      el.crossOrigin = "anonymous";
+      el.onload = () => { URL.revokeObjectURL(url); resolve(el); };
+      el.onerror = (e) => { URL.revokeObjectURL(url); reject(e); };
+      el.src = url;
     });
+    const size = 512;
+    const canvas = document.createElement("canvas");
+    canvas.width = size; canvas.height = size;
+    const ctx = canvas.getContext("2d")!;
+    ctx.clearRect(0, 0, size, size);
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+    ctx.closePath();
+    ctx.clip();
+    // Cover-fit source
+    const s = Math.min(img.width, img.height);
+    const sx = (img.width - s) / 2;
+    const sy = (img.height - s) / 2;
+    ctx.drawImage(img, sx, sy, s, s, 0, 0, size, size);
+    ctx.restore();
+    const dataUrl = canvas.toDataURL("image/png");
     logoDataUrlCache = { src, data: dataUrl };
     return dataUrl;
   } catch {
@@ -88,18 +108,49 @@ async function loadLogoDataUrl(overrideUrl?: string): Promise<string | null> {
   }
 }
 
+interface ConciergeInfo {
+  name: string;
+  role?: string | null;
+  email?: string | null;
+  phone?: string | null;
+  whatsapp?: string | null;
+}
+
+async function loadConcierge(bookingId?: string): Promise<ConciergeInfo | null> {
+  if (!bookingId) return null;
+  try {
+    const { data } = await (supabase as any)
+      .from("booking_assignments")
+      .select("role, staff:staff_id ( full_name, role, email, phone, whatsapp )")
+      .eq("booking_id", bookingId)
+      .order("created_at", { ascending: true })
+      .limit(1)
+      .maybeSingle();
+    const st = data?.staff;
+    if (!st) return null;
+    return {
+      name: st.full_name,
+      role: data.role || st.role,
+      email: st.email,
+      phone: st.phone,
+      whatsapp: st.whatsapp,
+    };
+  } catch { return null; }
+}
+
 type PdfKind = "invoice" | "confirmation" | "thank_you";
 
 async function build(kind: PdfKind, b: InvoiceBooking) {
   const s = await loadSettings();
-  const GOLD = s.brand_primary || "#d4b876";
-  const DARK = s.brand_bg || "#1f1b18";
-  const CREAM = "#f8f1e4";
-  const CREAM_SOFT = "#efe6d3";
-  const TEXT = "#231f1c";
-  const MUTED = "#8a8478";
+  const GOLD = s.brand_primary || "#b8935a";
+  const DARK = s.brand_bg || "#3b2e20";
+  const CREAM = "#f3e9d2";
+  const CREAM_SOFT = "#e8dcbe";
+  const TEXT = "#2a2018";
+  const MUTED = "#8a7a63";
   const sym = CURRENCY_SYMBOLS[b.currency] || (b.currency + " ");
   const money = (n: number) => `${sym}${Number(n || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
 
   const doc = new jsPDF({ unit: "pt", format: "a4" });
   const w = doc.internal.pageSize.getWidth();
