@@ -3,7 +3,10 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Plus, Pencil, Trash2, X, Upload, AlertTriangle } from "lucide-react";
 
-const ROLES = ["driver","concierge","guide","security","both"] as const;
+const ROLES = [
+  "founder","manager","operations","concierge","sales","guide","driver",
+  "security","chef","host","pilot","captain","photographer","both","other",
+] as const;
 const STATUSES = ["active","on_leave","inactive"] as const;
 
 interface Staff {
@@ -12,6 +15,7 @@ interface Staff {
   license_number: string | null; pdp_expiry_date: string | null; license_expiry_date: string | null;
   assigned_vehicle: string | null; languages_spoken: string[]; specialties: string[];
   hourly_rate: number | null; currency: string | null; notes: string | null;
+  role_description: string | null; custom_role_title: string | null;
 }
 
 const empty = (): Partial<Staff> => ({
@@ -72,6 +76,8 @@ const AdminStaff = () => {
       specialties: specs.split(",").map(s => s.trim()).filter(Boolean),
       hourly_rate: editing.hourly_rate ?? null, currency: editing.currency || "ZAR",
       notes: editing.notes || null,
+      role_description: editing.role_description || null,
+      custom_role_title: editing.custom_role_title || null,
     };
     const { error } = editing.id
       ? await supabase.from("staff" as any).update(payload).eq("id", editing.id)
@@ -181,7 +187,11 @@ const AdminStaff = () => {
               <Input type="number" label="Hourly rate" value={String(editing.hourly_rate ?? "")} onChange={v => setEditing({ ...editing, hourly_rate: v ? Number(v) : null })}/>
               <Input label="Languages (comma separated)" value={langs} onChange={setLangs} className="md:col-span-2"/>
               <Input label="Specialties (comma separated)" value={specs} onChange={setSpecs} className="md:col-span-2"/>
-              <label className="md:col-span-2"><span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Notes</span>
+              <Input label="Custom job title (optional)" value={editing.custom_role_title || ""} onChange={v => setEditing({ ...editing, custom_role_title: v })} className="md:col-span-2"/>
+              <label className="md:col-span-2"><span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Role description (shown on invoices & profile)</span>
+                <textarea rows={3} value={editing.role_description || ""} onChange={e => setEditing({ ...editing, role_description: e.target.value })} className="input-luxury text-sm w-full mt-1" placeholder="e.g. Founder & Head of Concierge — oversees every SVRM experience end-to-end."/>
+              </label>
+              <label className="md:col-span-2"><span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Internal notes</span>
                 <textarea rows={3} value={editing.notes || ""} onChange={e => setEditing({ ...editing, notes: e.target.value })} className="input-luxury text-sm w-full mt-1"/>
               </label>
             </div>

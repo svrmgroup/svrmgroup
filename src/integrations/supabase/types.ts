@@ -1047,6 +1047,7 @@ export type Database = {
           assigned_vehicle: string | null
           created_at: string
           currency: string | null
+          custom_role_title: string | null
           email: string | null
           full_name: string
           hourly_rate: number | null
@@ -1059,6 +1060,7 @@ export type Database = {
           phone: string | null
           photo_url: string | null
           role: Database["public"]["Enums"]["staff_role"]
+          role_description: string | null
           specialties: string[]
           status: Database["public"]["Enums"]["staff_status"]
           updated_at: string
@@ -1069,6 +1071,7 @@ export type Database = {
           assigned_vehicle?: string | null
           created_at?: string
           currency?: string | null
+          custom_role_title?: string | null
           email?: string | null
           full_name: string
           hourly_rate?: number | null
@@ -1081,6 +1084,7 @@ export type Database = {
           phone?: string | null
           photo_url?: string | null
           role?: Database["public"]["Enums"]["staff_role"]
+          role_description?: string | null
           specialties?: string[]
           status?: Database["public"]["Enums"]["staff_status"]
           updated_at?: string
@@ -1091,6 +1095,7 @@ export type Database = {
           assigned_vehicle?: string | null
           created_at?: string
           currency?: string | null
+          custom_role_title?: string | null
           email?: string | null
           full_name?: string
           hourly_rate?: number | null
@@ -1103,6 +1108,7 @@ export type Database = {
           phone?: string | null
           photo_url?: string | null
           role?: Database["public"]["Enums"]["staff_role"]
+          role_description?: string | null
           specialties?: string[]
           status?: Database["public"]["Enums"]["staff_status"]
           updated_at?: string
@@ -1408,7 +1414,22 @@ export type Database = {
         | "change_request_approved"
         | "change_request_declined"
       enquiry_status: "new" | "in_progress" | "done" | "archived"
-      staff_role: "driver" | "concierge" | "guide" | "security" | "both"
+      staff_role:
+        | "driver"
+        | "concierge"
+        | "guide"
+        | "security"
+        | "both"
+        | "founder"
+        | "manager"
+        | "operations"
+        | "sales"
+        | "chef"
+        | "host"
+        | "pilot"
+        | "captain"
+        | "photographer"
+        | "other"
       staff_status: "active" | "on_leave" | "inactive"
       supplier_category:
         | "transport"
@@ -1576,7 +1597,23 @@ export const Constants = {
         "change_request_declined",
       ],
       enquiry_status: ["new", "in_progress", "done", "archived"],
-      staff_role: ["driver", "concierge", "guide", "security", "both"],
+      staff_role: [
+        "driver",
+        "concierge",
+        "guide",
+        "security",
+        "both",
+        "founder",
+        "manager",
+        "operations",
+        "sales",
+        "chef",
+        "host",
+        "pilot",
+        "captain",
+        "photographer",
+        "other",
+      ],
       staff_status: ["active", "on_leave", "inactive"],
       supplier_category: [
         "transport",

@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { Plus, Trash2, Copy, MessageCircle, ChevronDown, FileDown, Link as LinkIcon, Clock, CheckCircle2 } from "lucide-react";
 import { buildConfirmationMessage, type LineItem } from "@/lib/confirmationMessage";
 import { downloadInvoicePdf, downloadConfirmationPdf, downloadThankYouPdf } from "@/lib/invoicePdf";
+import PdfEditorDialog from "@/components/svrm/PdfEditorDialog";
 
 type Status = "draft" | "sent" | "deposit_paid" | "confirmed" | "completed" | "cancelled";
 
@@ -44,6 +45,7 @@ const AdminManualBookings = () => {
   const [rows, setRows] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
   const [openId, setOpenId] = useState<string | null>(null);
+  const [pdfEdit, setPdfEdit] = useState<{ booking: Booking; kind: "invoice" | "confirmation" | "thank_you" } | null>(null);
   const [showForm, setShowForm] = useState(false);
 
   // form state
@@ -277,22 +279,29 @@ const AdminManualBookings = () => {
 
                     <div className="flex flex-wrap gap-2">
                       <button
-                        onClick={() => downloadInvoicePdf(r)}
+                        onClick={() => setPdfEdit({ booking: r, kind: "invoice" })}
                         className="flex items-center gap-1.5 text-xs text-gold border border-primary/40 px-3 py-1.5 hover:bg-primary/10 transition-colors"
                       >
                         <FileDown className="h-3 w-3" /> Invoice PDF
                       </button>
                       <button
-                        onClick={() => downloadConfirmationPdf(r)}
+                        onClick={() => setPdfEdit({ booking: r, kind: "confirmation" })}
                         className="flex items-center gap-1.5 text-xs text-gold border border-primary/40 px-3 py-1.5 hover:bg-primary/10 transition-colors"
                       >
                         <FileDown className="h-3 w-3" /> Confirmation PDF
                       </button>
                       <button
-                        onClick={() => downloadThankYouPdf(r)}
+                        onClick={() => setPdfEdit({ booking: r, kind: "thank_you" })}
                         className="flex items-center gap-1.5 text-xs text-gold border border-primary/40 px-3 py-1.5 hover:bg-primary/10 transition-colors"
                       >
                         <FileDown className="h-3 w-3" /> Thank-you PDF
+                      </button>
+                      <button
+                        onClick={() => downloadInvoicePdf(r as any)}
+                        className="flex items-center gap-1.5 text-[10px] uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground px-2 py-1.5"
+                        title="Skip editor and download immediately"
+                      >
+                        Quick download
                       </button>
                       {r.client_token && (
                         <button
@@ -368,6 +377,9 @@ const AdminManualBookings = () => {
             );
           })}
         </div>
+      )}
+      {pdfEdit && (
+        <PdfEditorDialog booking={pdfEdit.booking} kind={pdfEdit.kind} onClose={() => setPdfEdit(null)}/>
       )}
     </div>
   );
