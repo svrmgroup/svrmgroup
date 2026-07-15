@@ -114,9 +114,12 @@ const AdminLayout = () => {
 
       {/* Desktop sidebar */}
       <aside className="hidden md:flex flex-col border-r border-border/40 bg-surface-deep md:min-h-screen sticky top-0 max-h-screen">
-        <div className="p-6 border-b border-border/40">
-          <p className="eyebrow">SVRM</p>
-          <p className="font-serif text-xl mt-1">Concierge</p>
+        <div className="p-6 border-b border-border/40 flex items-center gap-3">
+          <Logo size="md" />
+          <div>
+            <p className="eyebrow">SVRM</p>
+            <p className="font-serif text-xl mt-0.5 leading-none">Concierge</p>
+          </div>
         </div>
         {nav}
         <div className="p-4 border-t border-border/40">
