@@ -44,7 +44,7 @@ const SmartImage = ({
           alt={alt}
           loading={priority ? "eager" : loading ?? "lazy"}
           decoding={decoding ?? "async"}
-          fetchpriority={priority ? "high" : fetchPriority}
+          {...({ fetchpriority: priority ? "high" : fetchPriority } as Record<string, string | undefined>)}
           onLoad={(e) => {
             setLoaded(true);
             onLoad?.(e);
