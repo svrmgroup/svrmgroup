@@ -1,9 +1,9 @@
 {
   "name": "SVRM Concierge Admin",
   "short_name": "SVRM Admin",
-  "description": "SVRM Group operations console — bookings, leads, expenses, tasks.",
+  "description": "SVRM Group operations console — bookings, staff, expenses, PDFs.",
   "start_url": "/admin",
-  "scope": "/",
+  "scope": "/admin",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#1f1b18",
