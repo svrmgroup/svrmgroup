@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { toast } from "sonner";
 import { Seo } from "@/components/Seo";
+import Logo from "@/components/svrm/Logo";
 
 const AdminLogin = () => {
   const { session, isAdmin, loading } = useAdminAuth();
