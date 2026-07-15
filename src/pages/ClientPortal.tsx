@@ -161,16 +161,23 @@ const ClientPortal = () => {
             ) : (
               <div className="border border-border/40 p-5 space-y-3 rounded-md">
                 <p className="eyebrow">Request a change</p>
-                <div className="grid md:grid-cols-2 gap-3">
-                  <label className="text-xs">Guests<input value={form.guests} onChange={e => setForm({ ...form, guests: e.target.value })} className="input-luxury text-sm w-full mt-1"/></label>
-                  <label className="text-xs">Pickup / location<input value={form.pickup} onChange={e => setForm({ ...form, pickup: e.target.value })} className="input-luxury text-sm w-full mt-1"/></label>
-                  <label className="text-xs">New start date<input type="date" value={form.start_date} onChange={e => setForm({ ...form, start_date: e.target.value })} className="input-luxury text-sm w-full mt-1"/></label>
-                  <label className="text-xs">New end date<input type="date" value={form.end_date} onChange={e => setForm({ ...form, end_date: e.target.value })} className="input-luxury text-sm w-full mt-1"/></label>
-                </div>
-                <label className="block text-xs">Notes<textarea rows={3} value={form.notes} onChange={e => setForm({ ...form, notes: e.target.value })} className="input-luxury text-sm w-full mt-1"/></label>
+                <p className="text-xs text-muted-foreground">Every booking is different — tell us in your own words what you'd like adjusted (dates, guests, add-ons, pickup, anything else).</p>
+                <label className="block text-xs">
+                  Your request
+                  <textarea
+                    autoFocus
+                    rows={6}
+                    value={message}
+                    onChange={e => setMessage(e.target.value.slice(0, 2000))}
+                    placeholder="e.g. Could we push our pickup to 2pm on Friday and add a car seat for a 2-year-old?"
+                    className="input-luxury text-sm w-full mt-1"
+                    maxLength={2000}
+                  />
+                  <span className="mt-1 block text-[10px] text-muted-foreground text-right">{message.length}/2000</span>
+                </label>
                 <div className="flex gap-2">
                   <button onClick={() => setShowForm(false)} className="btn-ghost text-xs">Cancel</button>
-                  <button onClick={submit} disabled={submitting} className="btn-luxury text-xs">{submitting ? "Sending…" : "Submit request"}</button>
+                  <button onClick={submit} disabled={submitting || !message.trim()} className="btn-luxury text-xs">{submitting ? "Sending…" : "Submit request"}</button>
                 </div>
               </div>
             )}
