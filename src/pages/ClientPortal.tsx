@@ -46,18 +46,13 @@ const ClientPortal = () => {
 
   const submit = async () => {
     if (!booking) return;
+    if (!message.trim()) return toast.error("Please describe your requested change.");
     setSubmitting(true);
-    const changes: Record<string, string> = {};
-    if (form.guests) changes.guests = form.guests;
-    if (form.start_date) changes.start_date = form.start_date;
-    if (form.end_date) changes.end_date = form.end_date;
-    if (form.pickup) changes.pickup = form.pickup;
-    if (form.notes) changes.notes = form.notes;
     const { error } = await supabase.from("booking_change_requests" as any).insert({
       booking_id: booking.id,
       requested_by_name: booking.client_name,
-      changes: changes as any,
-      message: form.notes || null,
+      changes: {} as any,
+      message: message.trim().slice(0, 2000),
     });
     setSubmitting(false);
     if (error) return toast.error(error.message);
