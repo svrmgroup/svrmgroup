@@ -1,7 +1,29 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Save, Upload } from "lucide-react";
+import { Save, Upload, FileText } from "lucide-react";
+import { renderPdfBlob, invalidateInvoiceSettingsCache, type InvoiceBooking } from "@/lib/invoicePdf";
+
+type PreviewKind = "invoice" | "confirmation" | "thank_you";
+
+const SAMPLE_BOOKING: InvoiceBooking = {
+  booking_code: "SVRM-PREVIEW",
+  client_name: "Alexandra Kruger",
+  client_email: "alexandra@example.com",
+  client_phone: "+27 82 555 0198",
+  start_date: new Date(Date.now() + 7 * 864e5).toISOString().slice(0, 10),
+  end_date: new Date(Date.now() + 10 * 864e5).toISOString().slice(0, 10),
+  currency: "ZAR",
+  line_items: [
+    { label: "Range Rover Sport — chauffeured", qty: 3, unit: "days", amount: 18000 },
+    { label: "Table Mountain private helicopter transfer", qty: 1, unit: "flight", amount: 24500 },
+    { label: "Villa Camps Bay — 3 nights", qty: 3, unit: "nights", amount: 45000 },
+  ],
+  subtotal: 87500,
+  deposit_amount: 43750,
+  balance_due: 43750,
+  notes: "Preview only — this booking illustrates how live PDFs will render with your branding.",
+};
 
 const AdminSettings = () => {
   const [s, setS] = useState<any>({});
@@ -28,8 +50,49 @@ const AdminSettings = () => {
     delete patch.id; delete patch.created_at; delete patch.updated_at;
     const { error } = await supabase.from("app_settings" as any).update(patch).eq("id", 1);
     if (error) return toast.error(error.message);
+    invalidateInvoiceSettingsCache();
     toast.success("Settings saved — invoices and emails will use these values");
   };
+
+  // ---- Live PDF preview ----
+  const [previewKind, setPreviewKind] = useState<PreviewKind>("invoice");
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [previewLoading, setPreviewLoading] = useState(false);
+  const previewSeq = useRef(0);
+
+  // Only re-render preview when the fields that actually affect the PDF change.
+  const previewKey = useMemo(() => JSON.stringify({
+    kind: previewKind,
+    logo_url: s.logo_url, brand_primary: s.brand_primary, brand_bg: s.brand_bg,
+    company_name: s.company_name, tagline: s.tagline,
+    company_email: s.company_email, company_phone: s.company_phone, company_whatsapp: s.company_whatsapp,
+    website: s.website, vat_number: s.vat_number,
+    bank_name: s.bank_name, bank_account: s.bank_account, bank_branch: s.bank_branch, bank_swift: s.bank_swift,
+    invoice_footer: s.invoice_footer, confirmation_footer: s.confirmation_footer, thank_you_message: s.thank_you_message,
+  }), [previewKind, s]);
+
+  useEffect(() => {
+    if (loading) return;
+    const seq = ++previewSeq.current;
+    const t = setTimeout(async () => {
+      setPreviewLoading(true);
+      try {
+        const blob = await renderPdfBlob(previewKind, SAMPLE_BOOKING, s);
+        if (seq !== previewSeq.current) return;
+        const url = URL.createObjectURL(blob);
+        setPreviewUrl((old) => { if (old) URL.revokeObjectURL(old); return url; });
+      } catch (e: any) {
+        console.error("PDF preview failed", e);
+      } finally {
+        if (seq === previewSeq.current) setPreviewLoading(false);
+      }
+    }, 350);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [previewKey, loading]);
+
+  useEffect(() => () => { if (previewUrl) URL.revokeObjectURL(previewUrl); }, []); // eslint-disable-line
+
 
   if (loading) return <p className="text-sm text-muted-foreground">Loading…</p>;
 
@@ -115,6 +178,47 @@ const AdminSettings = () => {
               Portal links auto-expire this many days after the booking's end date. New bookings get their expiry set on creation.
             </div>
           </div>
+        </div>
+      </div>
+
+      <div className="card-luxury p-5 space-y-3">
+        <div className="flex items-baseline justify-between flex-wrap gap-3">
+          <div className="flex items-center gap-2">
+            <FileText className="h-4 w-4 text-gold" />
+            <p className="eyebrow">Live PDF preview</p>
+            {previewLoading && <span className="text-[10px] text-muted-foreground">Rendering…</span>}
+          </div>
+          <div className="flex gap-1">
+            {(["invoice", "confirmation", "thank_you"] as PreviewKind[]).map((k) => (
+              <button
+                key={k}
+                onClick={() => setPreviewKind(k)}
+                className={`px-3 py-1.5 text-[10px] uppercase tracking-[0.22em] border transition-colors ${
+                  previewKind === k
+                    ? "border-primary bg-primary/10 text-gold"
+                    : "border-border/40 text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {k === "thank_you" ? "Thank you" : k.charAt(0).toUpperCase() + k.slice(1)}
+              </button>
+            ))}
+          </div>
+        </div>
+        <p className="text-[11px] text-muted-foreground">
+          Rendered from a sample booking using the values above (unsaved edits included). Confirm the logo circle, colours,
+          concierge block, and footer before generating real client PDFs.
+        </p>
+        <div className="border border-border/40 bg-[#f3e9d2]" style={{ height: 780 }}>
+          {previewUrl ? (
+            <iframe
+              key={previewUrl}
+              src={`${previewUrl}#toolbar=0&navpanes=0&view=FitH`}
+              title="PDF preview"
+              className="w-full h-full"
+            />
+          ) : (
+            <div className="h-full flex items-center justify-center text-xs text-muted-foreground">Preparing preview…</div>
+          )}
         </div>
       </div>
 
