@@ -1,0 +1,18 @@
+{
+  "name": "SVRM Admin",
+  "short_name": "SVRM Admin",
+  "description": "SVRM Group admin dashboard — bookings, CMS, and operations.",
+  "id": "/admin",
+  "start_url": "/admin",
+  "scope": "/admin",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1f1b18",
+  "theme_color": "#1f1b18",
+  "categories": ["business", "productivity"],
+  "icons": [
+    { "src": "/svrm-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/svrm-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/svrm-icon-180.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}
