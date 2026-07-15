@@ -1,29 +1,47 @@
-## Goal
+# Smoother site + admin modal fix
 
-The main site (svrm.group) still triggers "Add to Home Screen" / install-app prompts on phones and desktop Chrome. Make it fully un-installable there — the installable web app must only be reachable from inside the admin console, and its icon must be the SVRM logo.
+## 1. Fix "Add staff" dialog (and all admin modals with the same issue)
 
-## Why it still installs from the public site
+The Add Staff modal uses a hand-rolled overlay that centers the card vertically on desktop while the outer element handles the scroll. When the card is taller than the viewport (which it is on a laptop with dev tools open, or on a short window), the top of the card gets clipped and there is no way to scroll up to reach the "Full name" field.
 
-The manifest is already runtime-gated to `/admin` (good), but `index.html` still ships iOS/Android "app-capable" signals that make phones offer "Add to Home Screen" on every page:
+Apply the same fix to the other three admin pages using the identical pattern: `AdminClients`, `AdminCalendar`, `AdminCMS`.
 
-- `<meta name="apple-mobile-web-app-capable" content="yes">`
-- `<meta name="mobile-web-app-capable" content="yes">`
-- `<meta name="apple-mobile-web-app-status-bar-style" ...>`
-- `<meta name="apple-mobile-web-app-title" content="SVRM">`
-- `<link rel="apple-touch-icon" ...>` at the document root
+Fix pattern for each:
+- Overlay: always top-aligned, scrollable, with generous top/bottom padding.
+- Card: capped at `max-h-[calc(100vh-4rem)]`, header and footer sticky, body scrolls inside the card.
+- Close on backdrop click and on `Esc`.
+- Lock background scroll while the modal is open.
 
-These tags are what iOS Safari and Android Chrome use to render the site as a standalone app even without a manifest. They need to move to admin-only.
+## 2. Faster page loads & lighter bundle
 
-## Changes
+Every admin page is currently statically imported into `src/App.tsx`, so visiting the public homepage still downloads the entire admin console. Split it:
 
-1. **`index.html`** — remove all four `apple-mobile-web-app-*` / `mobile-web-app-capable` meta tags and the root-level `apple-touch-icon` link. Keep the favicon links (tab icon) untouched.
+- Convert all `Admin*` route components to `React.lazy` + `Suspense` with a minimal fallback that matches the admin shell.
+- Also lazy-load heavy public pages that most visitors do not open on first load: `TourBuilderPage`, `Blog`, `BlogPost`, `ClientPortal`, `Security`.
+- Keep `Index`, layout, and above-the-fold components eager so the landing page still renders instantly.
+- Add a route-level prefetch on hover for the primary nav links so navigation still feels instant.
 
-2. **`src/main.tsx`** — extend the existing admin-only manifest injector so, when the visitor is on `/admin`, it also injects the four app-capable meta tags and the `apple-touch-icon` link (pointing at `/svrm-icon-180.png`, which is derived from the SVRM logo). Off `/admin`, none of them exist, so neither iOS nor Chrome offers install.
+## 3. Smoother scrolling & animations
 
-3. **`public/admin-manifest.webmanifest`** — switch the icon entries from `svrm-admin-*.png` to the SVRM-logo icons already generated in the last turn (`/svrm-icon-192.png`, `/svrm-icon-512.png`, `/svrm-icon-180.png`) so the installed admin app shows the SVRM circular logo on the home screen.
+- Add a global `@media (prefers-reduced-motion: reduce)` rule that disables non-essential transitions and long animations.
+- Audit long-running CSS animations (marquees, hero parallax) and ensure they use `transform`/`opacity` only, with `will-change` set only while animating.
+- Replace any layout-triggering hover effects (width/height/margin transitions) with `transform` equivalents.
+- Ensure images have explicit `width`/`height` or `aspect-ratio` so scroll does not jump as they load, and add `loading="lazy"` + `decoding="async"` to any below-the-fold images that are missing it.
 
-4. **Cleanup** — delete the now-unused `public/svrm-admin-180.png`, `public/svrm-admin-192.png`, `public/svrm-admin-512.png` files.
+## 4. Bug & broken-interaction sweep
 
-## Caveat to communicate to the user
+- Walk the public site and the admin console, capture console errors and failed network calls via Playwright, and fix any that surface (dead buttons, 404 assets, misrouted links, form submit errors).
+- Verify the fixed staff modal end-to-end: open, scroll, upload photo, save, close on Esc, close on backdrop.
 
-If the app was previously installed to a phone from the public URL, iOS/Android cache the manifest fields (name, icon, start_url) at install time. Those users need to delete the existing icon from their home screen and re-add it from `/admin` to pick up the new SVRM-logo admin app. New installs after this ship will only work from `/admin`.
+## Out of scope
+
+- No backend/schema changes.
+- No visual redesign — spacing and typography stay as-is; only layout/overflow bugs are corrected.
+- No new features.
+
+## Technical notes
+
+- Modal cleanup can be extracted into a small `AdminModal` wrapper in `src/components/admin/AdminModal.tsx` so the fix is applied once and reused; each page swaps its hand-rolled overlay for `<AdminModal open={show} onClose={() => setShow(false)} title="…">…</AdminModal>`.
+- Code-splitting is a mechanical `React.lazy(() => import("./pages/admin/AdminX"))` change in `src/App.tsx` plus one `<Suspense fallback={…}>` around `<Routes>` (or scoped around the admin subtree).
+- Reduced-motion + animation polish lives in `src/index.css`.
+- Playwright sweep runs from `/tmp/browser/` and does not add anything to the repo.
