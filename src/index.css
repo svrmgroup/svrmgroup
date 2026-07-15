@@ -165,7 +165,7 @@ html[data-translating="true"] footer {
 /* ---------- Admin console utilities ---------- */
 @layer components {
   .input-luxury {
-    @apply bg-surface-deep border border-border/40 px-3 py-2 rounded-none text-foreground placeholder:text-muted-foreground/70 focus:outline-none focus:border-primary/60 transition-colors;
+    @apply bg-background border border-border/60 px-3 py-2 rounded-none text-foreground placeholder:text-muted-foreground/70 focus:outline-none focus:border-primary/80 focus:ring-1 focus:ring-primary/30 transition-colors;
   }
   .btn-luxury {
     @apply bg-primary text-primary-foreground uppercase tracking-[0.24em] px-4 py-2.5 hover:bg-primary/90 transition-colors disabled:opacity-50;

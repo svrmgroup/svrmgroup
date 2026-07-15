@@ -56,9 +56,13 @@ const AdminStaff = () => {
     const path = `${crypto.randomUUID()}.${ext}`;
     const { error } = await supabase.storage.from("staff-photos").upload(path, file, { upsert: false });
     if (error) { setUploading(false); return toast.error(error.message); }
-    const { data } = supabase.storage.from("staff-photos").getPublicUrl(path);
-    setEditing(e => ({ ...e, photo_url: data.publicUrl }));
+    // Bucket is private (workspace policy blocks public buckets) — use a long-lived signed URL.
+    const { data, error: signErr } = await supabase.storage
+      .from("staff-photos")
+      .createSignedUrl(path, 60 * 60 * 24 * 365 * 10); // 10 years
     setUploading(false);
+    if (signErr || !data?.signedUrl) return toast.error(signErr?.message || "Could not generate photo URL");
+    setEditing(e => ({ ...e, photo_url: data.signedUrl }));
   };
 
   const save = async () => {
