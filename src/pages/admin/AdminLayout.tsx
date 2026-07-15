@@ -6,6 +6,7 @@ import {
   LogOut, Inbox, Car, Calendar as CalIcon, MessageCircle, FileText,
   Building2, BarChart3, Receipt, Wallet, Users, ListChecks, Menu, X, Share,
 } from "lucide-react";
+import Logo from "@/components/svrm/Logo";
 
 const AdminLayout = () => {
   const { session, isAdmin, loading, signOut } = useAdminAuth();
