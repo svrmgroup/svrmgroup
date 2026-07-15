@@ -3,7 +3,7 @@ import { X, Sparkles } from "lucide-react";
 import { useCurrency } from "@/lib/currency";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
-const DISMISS_KEY = "svrm-promo-x3-dismissed";
+const DISMISS_KEY = "svrm-promo-x3-dismissed-v2";
 
 /**
  * Slim, high-contrast promo strip pinned above the nav on every page.
