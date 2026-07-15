@@ -3,7 +3,10 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Plus, Pencil, Trash2, X, Upload, AlertTriangle } from "lucide-react";
 
-const ROLES = ["driver","concierge","guide","security","both"] as const;
+const ROLES = [
+  "founder","manager","operations","concierge","sales","guide","driver",
+  "security","chef","host","pilot","captain","photographer","both","other",
+] as const;
 const STATUSES = ["active","on_leave","inactive"] as const;
 
 interface Staff {
@@ -12,6 +15,7 @@ interface Staff {
   license_number: string | null; pdp_expiry_date: string | null; license_expiry_date: string | null;
   assigned_vehicle: string | null; languages_spoken: string[]; specialties: string[];
   hourly_rate: number | null; currency: string | null; notes: string | null;
+  role_description: string | null; custom_role_title: string | null;
 }
 
 const empty = (): Partial<Staff> => ({
