@@ -253,6 +253,11 @@ const AdminManualBookings = () => {
             <textarea rows={2} value={form.notes} onChange={(e) => setForm((f) => ({ ...f, notes: e.target.value }))} className={inputCls} />
           </Field>
 
+          <div className="border-t border-border/40 pt-4">
+            <StaffAssigner value={pendingStaff} onChange={setPendingStaff} />
+          </div>
+
+
           <button onClick={create} className="w-full px-6 py-3 bg-primary text-primary-foreground text-xs uppercase tracking-[0.28em] hover:bg-primary-glow transition-colors">
             Create booking & generate message
           </button>
