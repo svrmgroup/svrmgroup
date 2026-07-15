@@ -45,6 +45,7 @@ const AdminManualBookings = () => {
   const [rows, setRows] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
   const [openId, setOpenId] = useState<string | null>(null);
+  const [pdfEdit, setPdfEdit] = useState<{ booking: Booking; kind: "invoice" | "confirmation" | "thank_you" } | null>(null);
   const [showForm, setShowForm] = useState(false);
 
   // form state
