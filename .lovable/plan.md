@@ -1,47 +1,29 @@
-## 1. Homepage tab title & meta (keep BMW X3 offer visible on the page)
+## Goal
 
-In `src/pages/Index.tsx` `<Seo>`:
-- **title** → `SVRM Group | Luxury Concierge & Chauffeur — Cape Town`
-- **description** → rewrite lead so it opens with brand positioning ("SVRM is Cape Town's private lifestyle management group — luxury chauffeur, private tours, villas, car rental, armed security and bespoke concierge.") — drop the "BMW X3 R2,000/day" lead from the meta.
-- Keep the `<Offers>` section on the page (BMW X3 promo stays visible on the homepage itself).
-- Keep the BMW X3 `Offer` in JSON-LD (it's structured data, doesn't affect the tab title).
+The main site (svrm.group) still triggers "Add to Home Screen" / install-app prompts on phones and desktop Chrome. Make it fully un-installable there — the installable web app must only be reachable from inside the admin console, and its icon must be the SVRM logo.
 
-Also mirror the new title in `index.html`:
-- `<meta property="og:title">` and `<meta name="twitter:title">` → same new brand-first title.
+## Why it still installs from the public site
 
-## 2. Circular favicon from the uploaded SVRM logo
+The manifest is already runtime-gated to `/admin` (good), but `index.html` still ships iOS/Android "app-capable" signals that make phones offer "Add to Home Screen" on every page:
 
-- Save uploaded `user-uploads://logo-3.png` into `public/svrm-logo-source.png` (temp working file).
-- Use Python/PIL to generate a **circular-masked** favicon in three sizes:
-  - `public/favicon-32.png` (32×32) — small size Chrome uses in tabs
-  - `public/favicon-192.png` (192×192)
-  - `public/favicon.ico` (multi-size 16/32/48) — legacy `/favicon.ico` fallback browsers auto-request
-- Delete the temp `svrm-logo-source.png` afterwards.
-- Rewrite the icon `<link>` block in `index.html` so a small size comes first:
-  ```html
-  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
-  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/svrm-icon-180.png" />
-  ```
-  Remove the two oversized (1024/1254px) `favicon.png` / `favicon-google.png` references from the icon links (the files themselves stay because JSON-LD `logo` still points at `favicon-google.png`).
+- `<meta name="apple-mobile-web-app-capable" content="yes">`
+- `<meta name="mobile-web-app-capable" content="yes">`
+- `<meta name="apple-mobile-web-app-status-bar-style" ...>`
+- `<meta name="apple-mobile-web-app-title" content="SVRM">`
+- `<link rel="apple-touch-icon" ...>` at the document root
 
-## 3. Also swap the in-app logo to the uploaded SVRM logo
+These tags are what iOS Safari and Android Chrome use to render the site as a standalone app even without a manifest. They need to move to admin-only.
 
-`src/components/svrm/Logo.tsx` currently reads `@/assets/svrm-logo.png.asset.json`. Replace that asset with the new upload via the `lovable-assets` CLI so every place that already uses `<Logo />` (Nav, mobile sheet, footer, admin) updates in one step. No component code changes needed.
+## Changes
 
-## 4. Fully kill "Open in app" on the public site
+1. **`index.html`** — remove all four `apple-mobile-web-app-*` / `mobile-web-app-capable` meta tags and the root-level `apple-touch-icon` link. Keep the favicon links (tab icon) untouched.
 
-Even though `src/main.tsx` only injects the manifest on `/admin`, `public/manifest.webmanifest` still exists at `/manifest.webmanifest` and older visits may have cached install eligibility.
+2. **`src/main.tsx`** — extend the existing admin-only manifest injector so, when the visitor is on `/admin`, it also injects the four app-capable meta tags and the `apple-touch-icon` link (pointing at `/svrm-icon-180.png`, which is derived from the SVRM logo). Off `/admin`, none of them exist, so neither iOS nor Chrome offers install.
 
-- **Delete `public/manifest.webmanifest`** — the only manifest that ships is now `public/admin-manifest.webmanifest` (admin-only).
-- Leave `main.tsx` admin-injection logic as-is.
-- Note for user: if Chrome already offers "Open in app" from a previous visit, they'll need to (a) hard-refresh or (b) uninstall the previously-installed PWA — Chrome caches install prompts locally.
+3. **`public/admin-manifest.webmanifest`** — switch the icon entries from `svrm-admin-*.png` to the SVRM-logo icons already generated in the last turn (`/svrm-icon-192.png`, `/svrm-icon-512.png`, `/svrm-icon-180.png`) so the installed admin app shows the SVRM circular logo on the home screen.
 
-## Notes to relay
-- Browsers cache favicons hard — a hard refresh or private window may be needed to see the new circle icon.
-- The BMW X3 special offer stays fully visible on the homepage (Offers section + JSON-LD); only the browser tab text changes to be brand-first.
+4. **Cleanup** — delete the now-unused `public/svrm-admin-180.png`, `public/svrm-admin-192.png`, `public/svrm-admin-512.png` files.
 
-## Out of scope
-No routing, RLS, admin PWA, or JSON-LD offer changes.
+## Caveat to communicate to the user
+
+If the app was previously installed to a phone from the public URL, iOS/Android cache the manifest fields (name, icon, start_url) at install time. Those users need to delete the existing icon from their home screen and re-add it from `/admin` to pick up the new SVRM-logo admin app. New installs after this ship will only work from `/admin`.
