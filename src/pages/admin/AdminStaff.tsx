@@ -76,6 +76,8 @@ const AdminStaff = () => {
       specialties: specs.split(",").map(s => s.trim()).filter(Boolean),
       hourly_rate: editing.hourly_rate ?? null, currency: editing.currency || "ZAR",
       notes: editing.notes || null,
+      role_description: editing.role_description || null,
+      custom_role_title: editing.custom_role_title || null,
     };
     const { error } = editing.id
       ? await supabase.from("staff" as any).update(payload).eq("id", editing.id)
