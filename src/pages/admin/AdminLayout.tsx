@@ -100,9 +100,12 @@ const AdminLayout = () => {
         <button onClick={() => setOpen(true)} className="text-muted-foreground hover:text-foreground p-2 -ml-2">
           <Menu className="h-5 w-5" />
         </button>
-        <div className="text-center">
-          <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">SVRM</p>
-          <p className="font-serif text-sm -mt-0.5">Admin</p>
+        <div className="flex items-center gap-2">
+          <Logo size="sm" />
+          <div>
+            <p className="text-[9px] uppercase tracking-[0.3em] text-muted-foreground leading-none">SVRM</p>
+            <p className="font-serif text-sm text-foreground leading-tight">Admin</p>
+          </div>
         </div>
         <button onClick={signOut} className="text-muted-foreground hover:text-foreground p-2 -mr-2">
           <LogOut className="h-4 w-4" />
