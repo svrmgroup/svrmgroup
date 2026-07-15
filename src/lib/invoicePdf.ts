@@ -386,9 +386,9 @@ async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
   doc.save(`SVRM-${filenameKind}-${b.booking_code}.pdf`);
 }
 
-export function downloadInvoicePdf(b: InvoiceBooking) { return build("invoice", b); }
-export function downloadConfirmationPdf(b: InvoiceBooking) { return build("confirmation", b); }
-export function downloadThankYouPdf(b: InvoiceBooking) { return build("thank_you", b); }
+export function downloadInvoicePdf(b: InvoiceBooking, portalToken?: string | null) { return build("invoice", b, { portalToken }); }
+export function downloadConfirmationPdf(b: InvoiceBooking, portalToken?: string | null) { return build("confirmation", b, { portalToken }); }
+export function downloadThankYouPdf(b: InvoiceBooking, portalToken?: string | null) { return build("thank_you", b, { portalToken }); }
 export function renderPdfBlob(kind: PdfKind, b: InvoiceBooking, settingsOverride?: Partial<Settings> | null) {
   return build(kind, b, { output: "blob", settingsOverride }) as Promise<Blob>;
 }
