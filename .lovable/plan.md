@@ -1,47 +1,32 @@
-# Smoother site + admin modal fix
+# Circular SVRM logo for Google search results
 
-## 1. Fix "Add staff" dialog (and all admin modals with the same issue)
+Google shows a site icon next to your listing. Right now it's rendering as a square with a border because the favicon/logo you serve is a square image. To make it appear as a clean circle with no square background, the source image needs to be a **transparent PNG** where everything outside the circle is transparent — then Google crops it into its rounded shape and only the disc shows.
 
-The Add Staff modal uses a hand-rolled overlay that centers the card vertically on desktop while the outer element handles the scroll. When the card is taller than the viewport (which it is on a laptop with dev tools open, or on a short window), the top of the card gets clipped and there is no way to scroll up to reach the "Full name" field.
+## Steps
 
-Apply the same fix to the other three admin pages using the identical pattern: `AdminClients`, `AdminCalendar`, `AdminCMS`.
+1. **Prepare the circular logo (preview first, no upload yet).**
+   - Take the uploaded `logo_2.jpeg` (the sunset/Table Mountain SVRM circle).
+   - Cut out the exact circle, discard everything outside it, save as a transparent PNG at 512×512.
+   - Save it to `/mnt/documents/svrm-logo-circle.png` so you can review it in chat before anything ships.
+   - Pause here for your approval.
 
-Fix pattern for each:
-- Overlay: always top-aligned, scrollable, with generous top/bottom padding.
-- Card: capped at `max-h-[calc(100vh-4rem)]`, header and footer sticky, body scrolls inside the card.
-- Close on backdrop click and on `Esc`.
-- Lock background scroll while the modal is open.
+2. **On approval, wire it into the site so Google picks it up.**
+   - Replace `public/favicon.ico` and add `public/favicon-32.png`, `public/favicon-192.png`, `public/favicon-512.png` (all transparent circles from the same source).
+   - Update `<link rel="icon">` and `<link rel="apple-touch-icon">` in `index.html` to point at the new files.
+   - Update the Organization JSON-LD `logo` field in `index.html` to the 512px transparent PNG URL.
+   - Update the sitewide `og:image` (only if you already had one — Google sometimes falls back to it).
+   - Do NOT touch the admin `/admin` PWA icons — those were locked to the admin console last turn and stay as they are.
 
-## 2. Faster page loads & lighter bundle
-
-Every admin page is currently statically imported into `src/App.tsx`, so visiting the public homepage still downloads the entire admin console. Split it:
-
-- Convert all `Admin*` route components to `React.lazy` + `Suspense` with a minimal fallback that matches the admin shell.
-- Also lazy-load heavy public pages that most visitors do not open on first load: `TourBuilderPage`, `Blog`, `BlogPost`, `ClientPortal`, `Security`.
-- Keep `Index`, layout, and above-the-fold components eager so the landing page still renders instantly.
-- Add a route-level prefetch on hover for the primary nav links so navigation still feels instant.
-
-## 3. Smoother scrolling & animations
-
-- Add a global `@media (prefers-reduced-motion: reduce)` rule that disables non-essential transitions and long animations.
-- Audit long-running CSS animations (marquees, hero parallax) and ensure they use `transform`/`opacity` only, with `will-change` set only while animating.
-- Replace any layout-triggering hover effects (width/height/margin transitions) with `transform` equivalents.
-- Ensure images have explicit `width`/`height` or `aspect-ratio` so scroll does not jump as they load, and add `loading="lazy"` + `decoding="async"` to any below-the-fold images that are missing it.
-
-## 4. Bug & broken-interaction sweep
-
-- Walk the public site and the admin console, capture console errors and failed network calls via Playwright, and fix any that surface (dead buttons, 404 assets, misrouted links, form submit errors).
-- Verify the fixed staff modal end-to-end: open, scroll, upload photo, save, close on Esc, close on backdrop.
+3. **Tell Google to refresh.**
+   - Google re-crawls on its own schedule (days to weeks). To speed it up, submit the homepage URL via Search Console → URL Inspection → Request indexing after publish.
 
 ## Out of scope
 
-- No backend/schema changes.
-- No visual redesign — spacing and typography stay as-is; only layout/overflow bugs are corrected.
-- No new features.
+- No layout, copy, or navigation changes.
+- No changes to the admin console icons.
+- No new logo variants (dark mode, monochrome, etc.) unless you ask.
 
 ## Technical notes
 
-- Modal cleanup can be extracted into a small `AdminModal` wrapper in `src/components/admin/AdminModal.tsx` so the fix is applied once and reused; each page swaps its hand-rolled overlay for `<AdminModal open={show} onClose={() => setShow(false)} title="…">…</AdminModal>`.
-- Code-splitting is a mechanical `React.lazy(() => import("./pages/admin/AdminX"))` change in `src/App.tsx` plus one `<Suspense fallback={…}>` around `<Routes>` (or scoped around the admin subtree).
-- Reduced-motion + animation polish lives in `src/index.css`.
-- Playwright sweep runs from `/tmp/browser/` and does not add anything to the repo.
+- Google's site-icon spec: square, ≥ 48×48, same origin as the page, referenced from `<link rel="icon">` or `schema.org` Organization `logo`. Transparent PNG lets Google's own circular crop show only the disc, which is what removes the "square border" look.
+- Favicon replacement usually takes 1–4 weeks to appear in search results even after re-indexing.
