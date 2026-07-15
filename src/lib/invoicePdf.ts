@@ -60,7 +60,11 @@ const DEFAULTS: Settings = {
 
 
 let cache: Settings | null = null;
-async function loadSettings(): Promise<Settings> {
+async function loadSettings(override?: Partial<Settings> | null): Promise<Settings> {
+  if (override) {
+    const base = cache || DEFAULTS;
+    return { ...DEFAULTS, ...base, ...override };
+  }
   if (cache) return cache;
   try {
     const { data } = await supabase.from("app_settings" as any).select("*").eq("id", 1).maybeSingle();
@@ -68,6 +72,9 @@ async function loadSettings(): Promise<Settings> {
   } catch { cache = DEFAULTS; }
   return cache!;
 }
+
+/** Force the next PDF render to re-read app_settings (used after Save). */
+export function invalidateInvoiceSettingsCache() { cache = null; logoDataUrlCache = null; }
 
 // Cache a circularly-masked version of the SVRM logo as a data URL. The
 // source asset is a square image with a round mark inside it; we render it
@@ -146,8 +153,13 @@ async function loadConcierge(bookingId?: string): Promise<ConciergeInfo | null> 
 
 type PdfKind = "invoice" | "confirmation" | "thank_you";
 
-async function build(kind: PdfKind, b: InvoiceBooking) {
-  const s = await loadSettings();
+export interface RenderOpts {
+  settingsOverride?: Partial<Settings> | null;
+  output?: "save" | "blob";
+}
+
+async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
+  const s = await loadSettings(opts.settingsOverride);
   const GOLD = s.brand_primary || "#b8935a";
   const DARK = s.brand_bg || "#3b2e20";
   const CREAM = "#f3e9d2";
@@ -359,9 +371,15 @@ async function build(kind: PdfKind, b: InvoiceBooking) {
   doc.text(foot, w / 2, fy, { align: "center" });
 
   const filenameKind = kind === "invoice" ? "INV" : kind === "confirmation" ? "CONF" : "THANKYOU";
+  if (opts.output === "blob") {
+    return doc.output("blob") as Blob;
+  }
   doc.save(`SVRM-${filenameKind}-${b.booking_code}.pdf`);
 }
 
 export function downloadInvoicePdf(b: InvoiceBooking) { return build("invoice", b); }
 export function downloadConfirmationPdf(b: InvoiceBooking) { return build("confirmation", b); }
 export function downloadThankYouPdf(b: InvoiceBooking) { return build("thank_you", b); }
+export function renderPdfBlob(kind: PdfKind, b: InvoiceBooking, settingsOverride?: Partial<Settings> | null) {
+  return build(kind, b, { output: "blob", settingsOverride }) as Promise<Blob>;
+}
