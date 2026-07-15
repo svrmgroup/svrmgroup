@@ -366,6 +366,12 @@ const AdminCalendar = () => {
               </Field>
             </div>
 
+            <div className="mt-6 border-t border-border/40 pt-4">
+              {editing
+                ? <StaffAssigner bookingId={editing.id} />
+                : <StaffAssigner value={pendingStaff} onChange={setPendingStaff} />}
+            </div>
+
             <div className="mt-8 flex items-center justify-between gap-3">
               {editing ? (
                 <button onClick={remove} className="flex items-center gap-2 text-xs text-destructive hover:underline">
