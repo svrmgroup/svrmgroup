@@ -16,6 +16,7 @@ import chauffeur from "@/assets/svc-travel-sclass.jpg";
 import safari from "@/assets/svc-exp-safari.jpg";
 import villa from "@/assets/svc-stays-villa.jpg";
 import { useCurrency } from "@/lib/currency";
+import { useCmsItems } from "@/hooks/useCmsItems";
 
 type Offer = {
   eyebrow: string;
