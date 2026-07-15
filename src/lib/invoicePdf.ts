@@ -219,7 +219,11 @@ async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
 
   // Section title
   let y = logoY + 170;
-  const title = kind === "invoice" ? "INVOICE" : kind === "confirmation" ? "BOOKING CONFIRMATION" : "THANK YOU";
+  const title = kind === "invoice"
+    ? "INVOICE"
+    : kind === "confirmation"
+      ? "BOOKING CONFIRMATION"
+      : (s.thank_you_title || DEFAULTS.thank_you_title || "THANK YOU");
   doc.setTextColor(TEXT); doc.setFont("helvetica", "bold"); doc.setFontSize(18);
   doc.text(title, 40, y);
   y += 24;
@@ -323,25 +327,24 @@ async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
     y += boxH + 20;
   }
 
-  // Dark price panel
-  const panelH = 90;
-  if (y > h - panelH - 100) y = h - panelH - 100;
-  doc.setFillColor(DARK);
-  doc.roundedRect(40, y, w - 80, panelH, 8, 8, "F");
-  doc.setFont("helvetica", "bold"); doc.setFontSize(9); doc.setTextColor(GOLD);
-  const label = kind === "thank_you" ? "AMOUNT PAID" : "TOTAL PACKAGE PRICE";
-  doc.text(label, 60, y + 26);
-  doc.setFont("helvetica", "bold"); doc.setFontSize(24); doc.setTextColor("#ffffff");
-  doc.text(money(b.subtotal), 60, y + 56);
-  doc.setFont("helvetica", "normal"); doc.setFontSize(9); doc.setTextColor("#cfc7b6");
+  // Dark price panel — omitted entirely on thank-you PDFs (client requested no pricing).
   if (kind !== "thank_you") {
+    const panelH = 90;
+    if (y > h - panelH - 100) y = h - panelH - 100;
+    doc.setFillColor(DARK);
+    doc.roundedRect(40, y, w - 80, panelH, 8, 8, "F");
+    doc.setFont("helvetica", "bold"); doc.setFontSize(9); doc.setTextColor(GOLD);
+    doc.text("TOTAL PACKAGE PRICE", 60, y + 26);
+    doc.setFont("helvetica", "bold"); doc.setFontSize(24); doc.setTextColor("#ffffff");
+    doc.text(money(b.subtotal), 60, y + 56);
+    doc.setFont("helvetica", "normal"); doc.setFontSize(9); doc.setTextColor("#cfc7b6");
     doc.text(`Deposit Required (50%): ${money(b.deposit_amount)}`, 60, y + 78);
     doc.text(`Remaining Balance: ${money(b.balance_due)}`, w - 60, y + 66, { align: "right" });
     doc.setFontSize(8); doc.setTextColor("#a89e88");
     doc.setFont("times", "italic");
     doc.text("payable before trip commencement", w - 60, y + 80, { align: "right" });
+    y += panelH + 24;
   }
-  y += panelH + 24;
 
   // Payment terms / thank you body
   if (kind === "invoice") {
@@ -369,10 +372,18 @@ async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
     const lines = doc.splitTextToSize(msg, w - 80);
     doc.text(lines, 40, y); y += lines.length * 13 + 10;
   } else {
+    // Thank-you: heartfelt centered message + optional signature. No pricing.
     doc.setFont("times", "italic"); doc.setFontSize(13); doc.setTextColor(TEXT);
     const msg = s.thank_you_message || DEFAULTS.thank_you_message!;
-    const lines = doc.splitTextToSize(msg, w - 80);
+    const lines = doc.splitTextToSize(msg, w - 120);
     doc.text(lines, w / 2, y, { align: "center" });
+    y += lines.length * 18 + 24;
+    const sig = s.thank_you_signature || DEFAULTS.thank_you_signature;
+    if (sig) {
+      doc.setFont("helvetica", "normal"); doc.setFontSize(10); doc.setTextColor(MUTED);
+      const sigLines = doc.splitTextToSize(sig, w - 120);
+      doc.text(sigLines, w / 2, y, { align: "center" });
+    }
   }
 
   // Footer

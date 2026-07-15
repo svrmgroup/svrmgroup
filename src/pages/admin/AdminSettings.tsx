@@ -68,7 +68,8 @@ const AdminSettings = () => {
     company_email: s.company_email, company_phone: s.company_phone, company_whatsapp: s.company_whatsapp,
     website: s.website, vat_number: s.vat_number,
     bank_name: s.bank_name, bank_account: s.bank_account, bank_branch: s.bank_branch, bank_swift: s.bank_swift,
-    invoice_footer: s.invoice_footer, confirmation_footer: s.confirmation_footer, thank_you_message: s.thank_you_message,
+    invoice_footer: s.invoice_footer, confirmation_footer: s.confirmation_footer,
+    thank_you_message: s.thank_you_message, thank_you_title: s.thank_you_title, thank_you_signature: s.thank_you_signature,
   }), [previewKind, s]);
 
   useEffect(() => {
@@ -161,8 +162,14 @@ const AdminSettings = () => {
 
         <div className="card-luxury p-5 space-y-3 md:col-span-2">
           <p className="eyebrow">Client-facing messages</p>
-          <F l="Thank-you message (top of confirmation PDF & email)">
-            <textarea rows={2} value={s.thank_you_message || ""} onChange={e => setS({ ...s, thank_you_message: e.target.value })} className="input-luxury text-sm w-full"/>
+          <F l="Thank-you PDF title (heading at top of the thank-you PDF)">
+            <input value={s.thank_you_title || ""} onChange={e => setS({ ...s, thank_you_title: e.target.value })} placeholder="THANK YOU" className="input-luxury text-sm w-full"/>
+          </F>
+          <F l="Thank-you message (main body of thank-you PDF & confirmation email)">
+            <textarea rows={4} value={s.thank_you_message || ""} onChange={e => setS({ ...s, thank_you_message: e.target.value })} className="input-luxury text-sm w-full"/>
+          </F>
+          <F l="Thank-you signature (sign-off under the message — supports line breaks)">
+            <textarea rows={3} value={s.thank_you_signature || ""} onChange={e => setS({ ...s, thank_you_signature: e.target.value })} placeholder={"With warm regards,\nThe SVRM Group concierge team"} className="input-luxury text-sm w-full"/>
           </F>
           <F l="Invoice footer (payment terms line)">
             <textarea rows={2} value={s.invoice_footer || ""} onChange={e => setS({ ...s, invoice_footer: e.target.value })} className="input-luxury text-sm w-full"/>
