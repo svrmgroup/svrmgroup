@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Plus, Trash2, Pencil, X, Eye, EyeOff } from "lucide-react";
+import { Plus, Trash2, Pencil, X, Eye, EyeOff, RefreshCw } from "lucide-react";
+import { resyncAllCms } from "@/lib/cmsSeed";
 
 // ---- Kind configuration ---------------------------------------------------
 
@@ -140,6 +141,22 @@ const AdminCMS = () => {
     load();
   };
 
+  const [syncing, setSyncing] = useState(false);
+  const resync = async (mode: "insert-missing" | "upsert") => {
+    if (mode === "upsert" && !confirm("Overwrite existing rows with the built-in website content? Your edits to matching slugs will be lost.")) return;
+    setSyncing(true);
+    try {
+      const report = await resyncAllCms(mode);
+      const total = report.reduce((s, r) => s + r.inserted + r.updated, 0);
+      const errs = report.filter((r) => r.error);
+      if (errs.length) toast.error(`Some tables failed: ${errs.map((e) => `${e.table} (${e.error})`).join("; ")}`);
+      else toast.success(`Synced ${total} rows across ${report.length} collections.`);
+      load();
+    } finally {
+      setSyncing(false);
+    }
+  };
+
   const grouped = KINDS.reduce<Record<string, KindConfig[]>>((acc, k) => {
     (acc[k.group] ||= []).push(k); return acc;
   }, {});
@@ -152,8 +169,27 @@ const AdminCMS = () => {
           <h1 className="font-serif text-3xl md:text-4xl mt-2">CMS</h1>
           <p className="text-xs text-muted-foreground mt-2">Manage every editable section of the site. New items are merged with the built-in catalog at runtime.</p>
         </div>
-        <button onClick={openNew} className="btn-luxury text-xs flex items-center gap-2"><Plus className="h-3.5 w-3.5"/> New {config.label.replace(/s$/,"")}</button>
+        <div className="flex items-center gap-2 flex-wrap">
+          <button
+            onClick={() => resync("insert-missing")}
+            disabled={syncing}
+            className="text-xs flex items-center gap-2 px-3 py-2 border border-primary/50 text-gold hover:bg-primary/10 disabled:opacity-50"
+            title="Add any built-in website items that aren't yet in the CMS. Existing edits are untouched."
+          >
+            <RefreshCw className={`h-3.5 w-3.5 ${syncing ? "animate-spin" : ""}`}/> {syncing ? "Syncing…" : "Sync from website"}
+          </button>
+          <button
+            onClick={() => resync("upsert")}
+            disabled={syncing}
+            className="text-xs flex items-center gap-2 px-3 py-2 border border-destructive/50 text-destructive hover:bg-destructive/10 disabled:opacity-50"
+            title="Force-overwrite matching slugs with the built-in website content."
+          >
+            <RefreshCw className="h-3.5 w-3.5"/> Reset to website
+          </button>
+          <button onClick={openNew} className="btn-luxury text-xs flex items-center gap-2"><Plus className="h-3.5 w-3.5"/> New {config.label.replace(/s$/,"")}</button>
+        </div>
       </header>
+
 
       <div className="space-y-2">
         {Object.entries(grouped).map(([group, kinds]) => (

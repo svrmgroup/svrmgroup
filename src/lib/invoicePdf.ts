@@ -1,6 +1,7 @@
 import jsPDF from "jspdf";
 import type { LineItem } from "@/lib/confirmationMessage";
 import { supabase } from "@/integrations/supabase/client";
+import svrmLogo from "@/assets/svrm-logo.png.asset.json";
 
 /**
  * Branded PDF renderer — matches the SVRM Group template:
@@ -60,6 +61,29 @@ async function loadSettings(): Promise<Settings> {
   return cache!;
 }
 
+// Cache the SVRM logo (or the settings override) as a data URL so jsPDF
+// renders it reliably regardless of CORS / same-origin quirks.
+let logoDataUrlCache: { src: string; data: string } | null = null;
+async function loadLogoDataUrl(overrideUrl?: string): Promise<string | null> {
+  const src = overrideUrl || svrmLogo.url;
+  if (logoDataUrlCache && logoDataUrlCache.src === src) return logoDataUrlCache.data;
+  try {
+    const res = await fetch(src, { credentials: "omit" });
+    if (!res.ok) return null;
+    const blob = await res.blob();
+    const dataUrl: string = await new Promise((resolve, reject) => {
+      const r = new FileReader();
+      r.onload = () => resolve(r.result as string);
+      r.onerror = reject;
+      r.readAsDataURL(blob);
+    });
+    logoDataUrlCache = { src, data: dataUrl };
+    return dataUrl;
+  } catch {
+    return null;
+  }
+}
+
 type PdfKind = "invoice" | "confirmation" | "thank_you";
 
 async function build(kind: PdfKind, b: InvoiceBooking) {
@@ -80,19 +104,23 @@ async function build(kind: PdfKind, b: InvoiceBooking) {
   // Cream background
   doc.setFillColor(CREAM); doc.rect(0, 0, w, h, "F");
 
-  // Header — logo watermark + wordmark
+  // Header — SVRM logo (settings override → bundled brand asset → monogram)
   const logoY = 40;
-  if (s.logo_url) {
+  const logoData = await loadLogoDataUrl(s.logo_url);
+  if (logoData) {
     try {
-      // jsPDF supports data URLs and same-origin images
-      doc.addImage(s.logo_url, "PNG", w / 2 - 26, logoY, 52, 52);
-    } catch { /* fall through — logo optional */ }
+      doc.addImage(logoData, "PNG", w / 2 - 32, logoY, 64, 64);
+    } catch {
+      doc.setFillColor(GOLD); doc.circle(w / 2, logoY + 26, 26, "F");
+      doc.setTextColor(DARK); doc.setFont("times", "bold"); doc.setFontSize(9);
+      doc.text("SVRM", w / 2, logoY + 30, { align: "center" });
+    }
   } else {
-    // Gold circular monogram fallback
     doc.setFillColor(GOLD); doc.circle(w / 2, logoY + 26, 26, "F");
     doc.setTextColor(DARK); doc.setFont("times", "bold"); doc.setFontSize(9);
     doc.text("SVRM", w / 2, logoY + 30, { align: "center" });
   }
+
 
   // Company name + tagline
   doc.setTextColor(TEXT); doc.setFont("helvetica", "bold"); doc.setFontSize(24);
