@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { Plus, Trash2, Copy, MessageCircle, ChevronDown, FileDown, Link as LinkIcon, Clock, CheckCircle2 } from "lucide-react";
 import { buildConfirmationMessage, type LineItem } from "@/lib/confirmationMessage";
 import { downloadInvoicePdf, downloadConfirmationPdf, downloadThankYouPdf } from "@/lib/invoicePdf";
+import PdfEditorDialog from "@/components/svrm/PdfEditorDialog";
 
 type Status = "draft" | "sent" | "deposit_paid" | "confirmed" | "completed" | "cancelled";
 
