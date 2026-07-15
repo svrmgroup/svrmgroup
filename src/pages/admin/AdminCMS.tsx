@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Plus, Trash2, Pencil, X, Eye, EyeOff } from "lucide-react";
+import { Plus, Trash2, Pencil, X, Eye, EyeOff, RefreshCw } from "lucide-react";
+import { resyncAllCms } from "@/lib/cmsSeed";
 
 // ---- Kind configuration ---------------------------------------------------
 
