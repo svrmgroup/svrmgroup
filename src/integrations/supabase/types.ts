@@ -1397,6 +1397,50 @@ export type Database = {
           isSetofReturn: true
         }
       }
+      get_invoice_settings_by_token: {
+        Args: { _token: string }
+        Returns: {
+          bank_account: string
+          bank_branch: string
+          bank_name: string
+          bank_swift: string
+          brand_bg: string
+          brand_primary: string
+          company_address: string
+          company_email: string
+          company_name: string
+          company_phone: string
+          company_whatsapp: string
+          confirmation_footer: string
+          invoice_footer: string
+          logo_url: string
+          tagline: string
+          thank_you_message: string
+          vat_number: string
+          vat_rate: number
+          website: string
+        }[]
+      }
+      get_public_settings: {
+        Args: never
+        Returns: {
+          brand_bg: string
+          brand_primary: string
+          company_address: string
+          company_email: string
+          company_name: string
+          company_phone: string
+          company_whatsapp: string
+          confirmation_footer: string
+          instagram_handle: string
+          invoice_footer: string
+          logo_url: string
+          portal_expiry_days: number
+          tagline: string
+          thank_you_message: string
+          website: string
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
