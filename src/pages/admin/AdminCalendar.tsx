@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { ChevronLeft, ChevronRight, Plus, Trash2, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Plus, Trash2 } from "lucide-react";
 import StaffAssigner, { type PendingAssignment } from "@/components/svrm/StaffAssigner";
+import AdminModal from "@/components/admin/AdminModal";
 
 interface Event {
   date: string;
@@ -312,84 +313,81 @@ const AdminCalendar = () => {
         )}
       </div>
 
-      {dialogOpen && (
-        <div className="fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-4" onClick={() => setDialogOpen(false)}>
-          <div className="bg-surface-raised border border-border/40 w-full max-w-lg p-8 max-h-[90vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
-            <div className="flex items-start justify-between mb-6">
-              <div>
-                <p className="eyebrow">{editing ? "Edit" : "New"}</p>
-                <h2 className="font-serif text-2xl mt-1">Booking</h2>
-              </div>
-              <button onClick={() => setDialogOpen(false)} className="text-muted-foreground hover:text-foreground">
-                <X className="h-5 w-5" />
+      <AdminModal
+        open={dialogOpen}
+        onClose={() => setDialogOpen(false)}
+        title={
+          <div>
+            <p className="eyebrow">{editing ? "Edit" : "New"}</p>
+            <span className="font-serif text-2xl mt-1 block">Booking</span>
+          </div>
+        }
+        maxWidth="lg"
+        footer={
+          <div className="flex w-full items-center justify-between gap-3">
+            {editing ? (
+              <button onClick={remove} className="flex items-center gap-2 text-xs text-destructive hover:underline">
+                <Trash2 className="h-3.5 w-3.5" /> Delete
+              </button>
+            ) : <span />}
+            <div className="flex gap-3">
+              <button onClick={() => setDialogOpen(false)} className="px-5 py-3 text-xs uppercase tracking-[0.24em] text-muted-foreground hover:text-foreground">
+                Cancel
+              </button>
+              <button onClick={save} disabled={saving} className="px-6 py-3 bg-primary text-primary-foreground text-xs uppercase tracking-[0.24em] hover:bg-primary-glow transition-colors disabled:opacity-60">
+                {saving ? "…" : editing ? "Save" : "Create"}
               </button>
             </div>
+          </div>
+        }
+      >
+        <div className="p-6 md:p-8 space-y-4">
+          <Field label="Title *">
+            <input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} className={inputCls} placeholder="Villa booking — Camps Bay" />
+          </Field>
 
-            <div className="space-y-4">
-              <Field label="Title *">
-                <input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} className={inputCls} placeholder="Villa booking — Camps Bay" />
-              </Field>
+          <div className="grid grid-cols-2 gap-4">
+            <Field label="Category">
+              <select value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} className={inputCls}>
+                {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
+              </select>
+            </Field>
+            <Field label="Status">
+              <select value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value })} className={inputCls}>
+                {STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
+              </select>
+            </Field>
+          </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <Field label="Category">
-                  <select value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} className={inputCls}>
-                    {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}
-                  </select>
-                </Field>
-                <Field label="Status">
-                  <select value={form.status} onChange={(e) => setForm({ ...form, status: e.target.value })} className={inputCls}>
-                    {STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
-                  </select>
-                </Field>
-              </div>
+          <div className="grid grid-cols-2 gap-4">
+            <Field label="Start date">
+              <input type="date" value={form.start_date} onChange={(e) => setForm({ ...form, start_date: e.target.value })} className={inputCls} />
+            </Field>
+            <Field label="End date">
+              <input type="date" value={form.end_date} onChange={(e) => setForm({ ...form, end_date: e.target.value })} className={inputCls} />
+            </Field>
+          </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <Field label="Start date">
-                  <input type="date" value={form.start_date} onChange={(e) => setForm({ ...form, start_date: e.target.value })} className={inputCls} />
-                </Field>
-                <Field label="End date">
-                  <input type="date" value={form.end_date} onChange={(e) => setForm({ ...form, end_date: e.target.value })} className={inputCls} />
-                </Field>
-              </div>
+          <Field label="Guest name">
+            <input value={form.guest_name} onChange={(e) => setForm({ ...form, guest_name: e.target.value })} className={inputCls} />
+          </Field>
+          <Field label="Contact (email or phone)">
+            <input value={form.guest_contact} onChange={(e) => setForm({ ...form, guest_contact: e.target.value })} className={inputCls} />
+          </Field>
+          <Field label="Location">
+            <input value={form.location} onChange={(e) => setForm({ ...form, location: e.target.value })} className={inputCls} />
+          </Field>
+          <Field label="Notes">
+            <textarea rows={3} value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} className={inputCls} />
+          </Field>
 
-              <Field label="Guest name">
-                <input value={form.guest_name} onChange={(e) => setForm({ ...form, guest_name: e.target.value })} className={inputCls} />
-              </Field>
-              <Field label="Contact (email or phone)">
-                <input value={form.guest_contact} onChange={(e) => setForm({ ...form, guest_contact: e.target.value })} className={inputCls} />
-              </Field>
-              <Field label="Location">
-                <input value={form.location} onChange={(e) => setForm({ ...form, location: e.target.value })} className={inputCls} />
-              </Field>
-              <Field label="Notes">
-                <textarea rows={3} value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} className={inputCls} />
-              </Field>
-            </div>
-
-            <div className="mt-6 border-t border-border/40 pt-4">
-              {editing
-                ? <StaffAssigner bookingId={editing.id} />
-                : <StaffAssigner value={pendingStaff} onChange={setPendingStaff} />}
-            </div>
-
-            <div className="mt-8 flex items-center justify-between gap-3">
-              {editing ? (
-                <button onClick={remove} className="flex items-center gap-2 text-xs text-destructive hover:underline">
-                  <Trash2 className="h-3.5 w-3.5" /> Delete
-                </button>
-              ) : <span />}
-              <div className="flex gap-3">
-                <button onClick={() => setDialogOpen(false)} className="px-5 py-3 text-xs uppercase tracking-[0.24em] text-muted-foreground hover:text-foreground">
-                  Cancel
-                </button>
-                <button onClick={save} disabled={saving} className="px-6 py-3 bg-primary text-primary-foreground text-xs uppercase tracking-[0.24em] hover:bg-primary-glow transition-colors disabled:opacity-60">
-                  {saving ? "…" : editing ? "Save" : "Create"}
-                </button>
-              </div>
-            </div>
+          <div className="border-t border-border/40 pt-4">
+            {editing
+              ? <StaffAssigner bookingId={editing.id} />
+              : <StaffAssigner value={pendingStaff} onChange={setPendingStaff} />}
           </div>
         </div>
-      )}
+      </AdminModal>
     </div>
   );
 };
