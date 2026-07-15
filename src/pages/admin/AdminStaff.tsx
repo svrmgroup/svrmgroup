@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Plus, Pencil, Trash2, X, Upload, AlertTriangle } from "lucide-react";
+import { Plus, Pencil, Trash2, Upload, AlertTriangle } from "lucide-react";
+import AdminModal from "@/components/admin/AdminModal";
 
 const ROLES = [
   "founder","manager","operations","concierge","sales","guide","driver",
@@ -161,51 +162,50 @@ const AdminStaff = () => {
         )}
       </div>
 
-      {show && (
-        <div className="fixed inset-0 z-50 bg-black/70 flex items-start md:items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-surface-deep border border-border/60 w-full max-w-2xl my-8">
-            <div className="p-5 border-b border-border/40 flex items-center justify-between">
-              <h2 className="font-serif text-2xl">{editing.id ? "Edit staff" : "New staff"}</h2>
-              <button onClick={() => setShow(false)}><X className="h-5 w-5 text-muted-foreground"/></button>
+      <AdminModal
+        open={show}
+        onClose={() => setShow(false)}
+        title={editing.id ? "Edit staff" : "New staff"}
+        maxWidth="2xl"
+        footer={
+          <>
+            <button onClick={() => setShow(false)} className="btn-ghost text-xs">Cancel</button>
+            <button onClick={save} className="btn-luxury text-xs">{editing.id ? "Save" : "Add"}</button>
+          </>
+        }
+      >
+        <div className="p-5 grid md:grid-cols-2 gap-3">
+          <div className="md:col-span-2 flex items-center gap-4">
+            <div className="w-16 h-16 rounded-full bg-surface-raised overflow-hidden">
+              {editing.photo_url ? <img src={editing.photo_url} className="w-full h-full object-cover" alt=""/> : <div className="w-full h-full flex items-center justify-center text-xs text-muted-foreground">Photo</div>}
             </div>
-            <div className="p-5 grid md:grid-cols-2 gap-3">
-              <div className="md:col-span-2 flex items-center gap-4">
-                <div className="w-16 h-16 rounded-full bg-surface-raised overflow-hidden">
-                  {editing.photo_url ? <img src={editing.photo_url} className="w-full h-full object-cover" alt=""/> : <div className="w-full h-full flex items-center justify-center text-xs text-muted-foreground">Photo</div>}
-                </div>
-                <input ref={fileRef} type="file" accept="image/*" hidden onChange={e => { const f = e.target.files?.[0]; if (f) uploadPhoto(f); }}/>
-                <button type="button" onClick={() => fileRef.current?.click()} disabled={uploading} className="btn-ghost text-xs flex items-center gap-2">
-                  <Upload className="h-3.5 w-3.5"/> {uploading ? "Uploading…" : "Upload photo"}
-                </button>
-              </div>
-              <Input label="Full name *" value={editing.full_name || ""} onChange={v => setEditing({ ...editing, full_name: v })} className="md:col-span-2"/>
-              <Select label="Role" value={editing.role || "driver"} onChange={v => setEditing({ ...editing, role: v })} options={ROLES.map(r => ({ value: r, label: r }))}/>
-              <Select label="Status" value={editing.status || "active"} onChange={v => setEditing({ ...editing, status: v })} options={STATUSES.map(s => ({ value: s, label: s }))}/>
-              <Input label="Phone" value={editing.phone || ""} onChange={v => setEditing({ ...editing, phone: v })}/>
-              <Input label="WhatsApp" value={editing.whatsapp || ""} onChange={v => setEditing({ ...editing, whatsapp: v })}/>
-              <Input label="Email" value={editing.email || ""} onChange={v => setEditing({ ...editing, email: v })}/>
-              <Input label="Assigned vehicle" value={editing.assigned_vehicle || ""} onChange={v => setEditing({ ...editing, assigned_vehicle: v })}/>
-              <Input label="License #" value={editing.license_number || ""} onChange={v => setEditing({ ...editing, license_number: v })}/>
-              <Input type="date" label="License expiry" value={editing.license_expiry_date || ""} onChange={v => setEditing({ ...editing, license_expiry_date: v })}/>
-              <Input type="date" label="PDP expiry" value={editing.pdp_expiry_date || ""} onChange={v => setEditing({ ...editing, pdp_expiry_date: v })}/>
-              <Input type="number" label="Hourly rate" value={String(editing.hourly_rate ?? "")} onChange={v => setEditing({ ...editing, hourly_rate: v ? Number(v) : null })}/>
-              <Input label="Languages (comma separated)" value={langs} onChange={setLangs} className="md:col-span-2"/>
-              <Input label="Specialties (comma separated)" value={specs} onChange={setSpecs} className="md:col-span-2"/>
-              <Input label="Custom job title (optional)" value={editing.custom_role_title || ""} onChange={v => setEditing({ ...editing, custom_role_title: v })} className="md:col-span-2"/>
-              <label className="md:col-span-2"><span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Role description (shown on invoices & profile)</span>
-                <textarea rows={3} value={editing.role_description || ""} onChange={e => setEditing({ ...editing, role_description: e.target.value })} className="input-luxury text-sm w-full mt-1" placeholder="e.g. Founder & Head of Concierge — oversees every SVRM experience end-to-end."/>
-              </label>
-              <label className="md:col-span-2"><span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Internal notes</span>
-                <textarea rows={3} value={editing.notes || ""} onChange={e => setEditing({ ...editing, notes: e.target.value })} className="input-luxury text-sm w-full mt-1"/>
-              </label>
-            </div>
-            <div className="p-5 border-t border-border/40 flex justify-end gap-2">
-              <button onClick={() => setShow(false)} className="btn-ghost text-xs">Cancel</button>
-              <button onClick={save} className="btn-luxury text-xs">{editing.id ? "Save" : "Add"}</button>
-            </div>
+            <input ref={fileRef} type="file" accept="image/*" hidden onChange={e => { const f = e.target.files?.[0]; if (f) uploadPhoto(f); }}/>
+            <button type="button" onClick={() => fileRef.current?.click()} disabled={uploading} className="btn-ghost text-xs flex items-center gap-2">
+              <Upload className="h-3.5 w-3.5"/> {uploading ? "Uploading…" : "Upload photo"}
+            </button>
           </div>
+          <Input label="Full name *" value={editing.full_name || ""} onChange={v => setEditing({ ...editing, full_name: v })} className="md:col-span-2"/>
+          <Select label="Role" value={editing.role || "driver"} onChange={v => setEditing({ ...editing, role: v })} options={ROLES.map(r => ({ value: r, label: r }))}/>
+          <Select label="Status" value={editing.status || "active"} onChange={v => setEditing({ ...editing, status: v })} options={STATUSES.map(s => ({ value: s, label: s }))}/>
+          <Input label="Phone" value={editing.phone || ""} onChange={v => setEditing({ ...editing, phone: v })}/>
+          <Input label="WhatsApp" value={editing.whatsapp || ""} onChange={v => setEditing({ ...editing, whatsapp: v })}/>
+          <Input label="Email" value={editing.email || ""} onChange={v => setEditing({ ...editing, email: v })}/>
+          <Input label="Assigned vehicle" value={editing.assigned_vehicle || ""} onChange={v => setEditing({ ...editing, assigned_vehicle: v })}/>
+          <Input label="License #" value={editing.license_number || ""} onChange={v => setEditing({ ...editing, license_number: v })}/>
+          <Input type="date" label="License expiry" value={editing.license_expiry_date || ""} onChange={v => setEditing({ ...editing, license_expiry_date: v })}/>
+          <Input type="date" label="PDP expiry" value={editing.pdp_expiry_date || ""} onChange={v => setEditing({ ...editing, pdp_expiry_date: v })}/>
+          <Input type="number" label="Hourly rate" value={String(editing.hourly_rate ?? "")} onChange={v => setEditing({ ...editing, hourly_rate: v ? Number(v) : null })}/>
+          <Input label="Languages (comma separated)" value={langs} onChange={setLangs} className="md:col-span-2"/>
+          <Input label="Specialties (comma separated)" value={specs} onChange={setSpecs} className="md:col-span-2"/>
+          <Input label="Custom job title (optional)" value={editing.custom_role_title || ""} onChange={v => setEditing({ ...editing, custom_role_title: v })} className="md:col-span-2"/>
+          <label className="md:col-span-2"><span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Role description (shown on invoices & profile)</span>
+            <textarea rows={3} value={editing.role_description || ""} onChange={e => setEditing({ ...editing, role_description: e.target.value })} className="input-luxury text-sm w-full mt-1" placeholder="e.g. Founder & Head of Concierge — oversees every SVRM experience end-to-end."/>
+          </label>
+          <label className="md:col-span-2"><span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Internal notes</span>
+            <textarea rows={3} value={editing.notes || ""} onChange={e => setEditing({ ...editing, notes: e.target.value })} className="input-luxury text-sm w-full mt-1"/>
+          </label>
         </div>
-      )}
+      </AdminModal>
     </div>
   );
 };
