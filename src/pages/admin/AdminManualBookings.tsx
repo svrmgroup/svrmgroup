@@ -61,6 +61,7 @@ const AdminManualBookings = () => {
     notes: "",
   });
   const [items, setItems] = useState<LineItem[]>([emptyItem()]);
+  const [pendingStaff, setPendingStaff] = useState<PendingAssignment[]>([]);
 
   const load = async () => {
     setLoading(true);
@@ -81,6 +82,7 @@ const AdminManualBookings = () => {
   const resetForm = () => {
     setForm({ client_name: "", client_email: "", client_phone: "", currency: "ZAR", start_date: "", end_date: "", deposit_amount: 0, notes: "" });
     setItems([emptyItem()]);
+    setPendingStaff([]);
   };
 
   const create = async () => {
@@ -126,6 +128,17 @@ const AdminManualBookings = () => {
       notes: data.notes,
     });
     await supabase.from("manual_bookings").update({ confirmation_message: msg }).eq("id", data.id);
+
+    if (pendingStaff.length) {
+      const rows = pendingStaff.map((p) => ({
+        booking_id: data.id,
+        staff_id: p.staff_id,
+        role: p.role || null,
+        created_by: userData.user?.id ?? null,
+      }));
+      const { error: aErr } = await supabase.from("booking_assignments" as any).insert(rows);
+      if (aErr) toast.error(`Booking created, staff assignment failed: ${aErr.message}`);
+    }
 
     toast.success(`Booking ${data.booking_code} created`);
     setShowForm(false);
