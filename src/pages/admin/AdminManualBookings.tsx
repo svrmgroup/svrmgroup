@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Plus, Trash2, Copy, MessageCircle, ChevronDown, FileDown, Link as LinkIcon } from "lucide-react";
+import { Plus, Trash2, Copy, MessageCircle, ChevronDown, FileDown, Link as LinkIcon, Clock, CheckCircle2 } from "lucide-react";
 import { buildConfirmationMessage, type LineItem } from "@/lib/confirmationMessage";
-import { downloadInvoicePdf, downloadConfirmationPdf } from "@/lib/invoicePdf";
+import { downloadInvoicePdf, downloadConfirmationPdf, downloadThankYouPdf } from "@/lib/invoicePdf";
 
 type Status = "draft" | "sent" | "deposit_paid" | "confirmed" | "completed" | "cancelled";
 
@@ -24,6 +24,8 @@ interface Booking {
   notes: string | null;
   confirmation_message: string | null;
   client_token: string | null;
+  portal_expires_at?: string | null;
+  portal_completed_at?: string | null;
   created_at: string;
 }
 
@@ -286,19 +288,48 @@ const AdminManualBookings = () => {
                       >
                         <FileDown className="h-3 w-3" /> Confirmation PDF
                       </button>
+                      <button
+                        onClick={() => downloadThankYouPdf(r)}
+                        className="flex items-center gap-1.5 text-xs text-gold border border-primary/40 px-3 py-1.5 hover:bg-primary/10 transition-colors"
+                      >
+                        <FileDown className="h-3 w-3" /> Thank-you PDF
+                      </button>
                       {r.client_token && (
                         <button
                           onClick={() => {
-                            const url = `${window.location.origin}/booking/${r.client_token}`;
+                            const url = `${window.location.origin}/portal/${r.client_token}`;
                             navigator.clipboard.writeText(url);
-                            toast.success("Client portal link copied");
+                            toast.success("Private portal link copied");
                           }}
                           className="flex items-center gap-1.5 text-xs text-muted-foreground border border-border/40 px-3 py-1.5 hover:text-gold hover:border-primary/40 transition-colors"
                         >
                           <LinkIcon className="h-3 w-3" /> Copy portal link
                         </button>
                       )}
+                      {!r.portal_completed_at && (
+                        <button
+                          onClick={async () => {
+                            if (!confirm("Mark this booking complete? The client portal link will expire immediately.")) return;
+                            await update(r.id, { portal_completed_at: new Date().toISOString() } as any);
+                            toast.success("Portal marked complete");
+                          }}
+                          className="flex items-center gap-1.5 text-xs text-muted-foreground border border-border/40 px-3 py-1.5 hover:text-gold hover:border-primary/40 transition-colors"
+                        >
+                          <CheckCircle2 className="h-3 w-3" /> Mark complete
+                        </button>
+                      )}
                     </div>
+
+                    {(r.portal_expires_at || r.portal_completed_at) && (
+                      <div className="flex items-center gap-2 text-xs">
+                        <Clock className="h-3 w-3 text-muted-foreground"/>
+                        {r.portal_completed_at ? (
+                          <span className="text-gold">Portal completed on {new Date(r.portal_completed_at).toLocaleDateString()}</span>
+                        ) : (
+                          <span className="text-muted-foreground">Portal link expires {new Date(r.portal_expires_at!).toLocaleDateString()}</span>
+                        )}
+                      </div>
+                    )}
 
                     {r.confirmation_message && (
                       <div>
