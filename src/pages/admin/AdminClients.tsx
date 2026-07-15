@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Plus, Pencil, Trash2, X, Star, StarOff, Search } from "lucide-react";
+import { Plus, Pencil, Trash2, Star, StarOff, Search } from "lucide-react";
+import AdminModal from "@/components/admin/AdminModal";
 
 interface Client {
   id: string; full_name: string; email: string | null; phone: string | null; whatsapp: string | null;
@@ -147,32 +148,31 @@ const AdminClients = () => {
         )}
       </div>
 
-      {show && (
-        <div className="fixed inset-0 z-50 bg-black/70 flex items-start md:items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-surface-deep border border-border/60 w-full max-w-xl my-8">
-            <div className="p-5 border-b border-border/40 flex items-center justify-between">
-              <h2 className="font-serif text-2xl">{editing.id ? "Edit client" : "New client"}</h2>
-              <button onClick={() => setShow(false)}><X className="h-5 w-5 text-muted-foreground"/></button>
-            </div>
-            <div className="p-5 grid md:grid-cols-2 gap-3">
-              <label className="md:col-span-2"><span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Full name *</span><input value={editing.full_name || ""} onChange={e => setEditing({ ...editing, full_name: e.target.value })} className="input-luxury text-sm w-full mt-1"/></label>
-              <label><span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Email</span><input value={editing.email || ""} onChange={e => setEditing({ ...editing, email: e.target.value })} className="input-luxury text-sm w-full mt-1"/></label>
-              <label><span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Phone</span><input value={editing.phone || ""} onChange={e => setEditing({ ...editing, phone: e.target.value })} className="input-luxury text-sm w-full mt-1"/></label>
-              <label><span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">WhatsApp</span><input value={editing.whatsapp || ""} onChange={e => setEditing({ ...editing, whatsapp: e.target.value })} className="input-luxury text-sm w-full mt-1"/></label>
-              <label><span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Country</span><input value={editing.country || ""} onChange={e => setEditing({ ...editing, country: e.target.value })} className="input-luxury text-sm w-full mt-1"/></label>
-              <label><span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Status</span><select value={editing.status || "lead"} onChange={e => setEditing({ ...editing, status: e.target.value })} className="input-luxury text-sm w-full mt-1 capitalize">{STATUSES.map(s => <option key={s} value={s}>{s}</option>)}</select></label>
-              <label><span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Source</span><input value={editing.source || ""} onChange={e => setEditing({ ...editing, source: e.target.value })} className="input-luxury text-sm w-full mt-1"/></label>
-              <label className="flex items-end pb-2 gap-2"><input type="checkbox" checked={!!editing.vip} onChange={e => setEditing({ ...editing, vip: e.target.checked })}/><span className="text-xs">VIP</span></label>
-              <label className="md:col-span-2"><span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Tags (comma separated)</span><input value={tagsInput} onChange={e => setTagsInput(e.target.value)} className="input-luxury text-sm w-full mt-1"/></label>
-              <label className="md:col-span-2"><span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Notes</span><textarea rows={4} value={editing.notes || ""} onChange={e => setEditing({ ...editing, notes: e.target.value })} className="input-luxury text-sm w-full mt-1"/></label>
-            </div>
-            <div className="p-5 border-t border-border/40 flex justify-end gap-2">
-              <button onClick={() => setShow(false)} className="btn-ghost text-xs">Cancel</button>
-              <button onClick={save} className="btn-luxury text-xs">{editing.id ? "Save" : "Add"}</button>
-            </div>
-          </div>
+      <AdminModal
+        open={show}
+        onClose={() => setShow(false)}
+        title={editing.id ? "Edit client" : "New client"}
+        maxWidth="xl"
+        footer={
+          <>
+            <button onClick={() => setShow(false)} className="btn-ghost text-xs">Cancel</button>
+            <button onClick={save} className="btn-luxury text-xs">{editing.id ? "Save" : "Add"}</button>
+          </>
+        }
+      >
+        <div className="p-5 grid md:grid-cols-2 gap-3">
+          <label className="md:col-span-2"><span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Full name *</span><input value={editing.full_name || ""} onChange={e => setEditing({ ...editing, full_name: e.target.value })} className="input-luxury text-sm w-full mt-1"/></label>
+          <label><span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Email</span><input value={editing.email || ""} onChange={e => setEditing({ ...editing, email: e.target.value })} className="input-luxury text-sm w-full mt-1"/></label>
+          <label><span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Phone</span><input value={editing.phone || ""} onChange={e => setEditing({ ...editing, phone: e.target.value })} className="input-luxury text-sm w-full mt-1"/></label>
+          <label><span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">WhatsApp</span><input value={editing.whatsapp || ""} onChange={e => setEditing({ ...editing, whatsapp: e.target.value })} className="input-luxury text-sm w-full mt-1"/></label>
+          <label><span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Country</span><input value={editing.country || ""} onChange={e => setEditing({ ...editing, country: e.target.value })} className="input-luxury text-sm w-full mt-1"/></label>
+          <label><span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Status</span><select value={editing.status || "lead"} onChange={e => setEditing({ ...editing, status: e.target.value })} className="input-luxury text-sm w-full mt-1 capitalize">{STATUSES.map(s => <option key={s} value={s}>{s}</option>)}</select></label>
+          <label><span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Source</span><input value={editing.source || ""} onChange={e => setEditing({ ...editing, source: e.target.value })} className="input-luxury text-sm w-full mt-1"/></label>
+          <label className="flex items-end pb-2 gap-2"><input type="checkbox" checked={!!editing.vip} onChange={e => setEditing({ ...editing, vip: e.target.checked })}/><span className="text-xs">VIP</span></label>
+          <label className="md:col-span-2"><span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Tags (comma separated)</span><input value={tagsInput} onChange={e => setTagsInput(e.target.value)} className="input-luxury text-sm w-full mt-1"/></label>
+          <label className="md:col-span-2"><span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Notes</span><textarea rows={4} value={editing.notes || ""} onChange={e => setEditing({ ...editing, notes: e.target.value })} className="input-luxury text-sm w-full mt-1"/></label>
         </div>
-      )}
+      </AdminModal>
     </div>
   );
 };
