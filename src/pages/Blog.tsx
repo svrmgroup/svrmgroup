@@ -58,7 +58,7 @@ const Blog = () => {
       url: `https://svrm.group/blog/${p.slug}`,
       datePublished: p.publishedISO ?? p.date,
       articleSection: p.category,
-      image: new URL(p.image, "https://svrm.group").toString(),
+      ...(p.image ? { image: new URL(p.image, "https://svrm.group").toString() } : {}),
     })),
   };
 

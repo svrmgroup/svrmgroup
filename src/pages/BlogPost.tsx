@@ -72,7 +72,7 @@ const BlogPost = () => {
     "@type": "Article",
     headline: post.title,
     description: seoDescription,
-    image: [ogImage].map((u) => new URL(u, "https://svrm.group").toString()),
+    ...(ogImage ? { image: [ogImage].map((u) => new URL(u, "https://svrm.group").toString()) } : {}),
     datePublished: post.publishedISO ?? post.date,
     dateModified: post.publishedISO ?? post.date,
     articleSection: post.category,
