@@ -181,6 +181,47 @@ const AdminSettings = () => {
         </div>
       </div>
 
+      <div className="card-luxury p-5 space-y-3">
+        <div className="flex items-baseline justify-between flex-wrap gap-3">
+          <div className="flex items-center gap-2">
+            <FileText className="h-4 w-4 text-gold" />
+            <p className="eyebrow">Live PDF preview</p>
+            {previewLoading && <span className="text-[10px] text-muted-foreground">Rendering…</span>}
+          </div>
+          <div className="flex gap-1">
+            {(["invoice", "confirmation", "thank_you"] as PreviewKind[]).map((k) => (
+              <button
+                key={k}
+                onClick={() => setPreviewKind(k)}
+                className={`px-3 py-1.5 text-[10px] uppercase tracking-[0.22em] border transition-colors ${
+                  previewKind === k
+                    ? "border-primary bg-primary/10 text-gold"
+                    : "border-border/40 text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {k === "thank_you" ? "Thank you" : k.charAt(0).toUpperCase() + k.slice(1)}
+              </button>
+            ))}
+          </div>
+        </div>
+        <p className="text-[11px] text-muted-foreground">
+          Rendered from a sample booking using the values above (unsaved edits included). Confirm the logo circle, colours,
+          concierge block, and footer before generating real client PDFs.
+        </p>
+        <div className="border border-border/40 bg-[#f3e9d2]" style={{ height: 780 }}>
+          {previewUrl ? (
+            <iframe
+              key={previewUrl}
+              src={`${previewUrl}#toolbar=0&navpanes=0&view=FitH`}
+              title="PDF preview"
+              className="w-full h-full"
+            />
+          ) : (
+            <div className="h-full flex items-center justify-center text-xs text-muted-foreground">Preparing preview…</div>
+          )}
+        </div>
+      </div>
+
       <button onClick={save} className="btn-luxury text-xs flex items-center gap-2"><Save className="h-3.5 w-3.5"/> Save all</button>
     </div>
   );
