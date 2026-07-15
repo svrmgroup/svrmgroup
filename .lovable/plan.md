@@ -1,83 +1,111 @@
-## Plan: Admin PWA + Full Operations Suite
+# SVRM Admin Console — Full Rebuild Plan
 
-Turn the admin console into an installable iPhone home-screen app with offline support and notifications, and add the operational modules a rental business actually runs on: money in/out, who to pay, what to do next, and paperwork.
+Scope is the `/admin` section only. Public site stays as-is except for removing the site-wide PWA install prompt (phase 4). Brand palette sampled from your logo: cream `#F5E6C8`, gold `#C9A961`, deep charcoal `#1F1B18`, ink black `#0A0A0A`. Logo is used as a bare circle (no square card/border) everywhere in admin. Email: Lovable built-in.
 
-### 1. iPhone Web App (PWA)
+Delivery: 10 phases, pausing after each for your review.
 
-- Add a web manifest scoped to `/admin` — name "SVRM Admin", standalone display, brand theme color, `start_url: /admin`.
-- Generate iOS-friendly app icons (180×180 apple-touch-icon + 192/512 maskable) with the SVRM mark.
-- Add iOS meta tags (`apple-mobile-web-app-capable`, status bar style, splash color) so it opens fullscreen when launched from the Home Screen.
-- Install `vite-plugin-pwa` with `generateSW` and a guarded registration wrapper (skips Lovable preview/iframe/dev per PWA rules). HTML uses NetworkFirst, hashed assets CacheFirst. `/~oauth` excluded.
-- Add an "Install to iPhone" helper card on the admin login screen with a one-time Safari instruction (Share → Add to Home Screen).
-- Notifications:
-  - Realtime subscribe (Supabase realtime) to inserts on `enquiries`, `rental_requests`, `manual_bookings` while the admin app is open → toast + native `Notification` (permission requested on first admin login).
-  - True background web push (iOS 16.4+ home-screen install required) needs VAPID keys and a push edge function — noted as phase 2; not shipped in this round to keep scope tight.
+---
 
-### 2. Spend Tracking + Full P&L
+## Phase 1 — Stabilize existing admin + logo/brand pass
 
-New table `expenses`:
-- `date`, `category` (fuel, cleaning, supplier payout, marketing, staff, other), `amount`, `currency`, `note`, optional `manual_booking_id`, `receipt_url`, `created_by`.
+- Audit every `/admin/*` route: fix broken links, dead buttons, forms that don't persist, unresolved spinners, blank error states.
+- Harden auth: unauthenticated → `/admin/login`, session-expiry warning toast, `has_role('admin')` guard on every route.
+- Standardize error handling: every Supabase call surfaces a toast on failure; no silent fails.
+- Replace admin logo usage with bare circular SVRM mark (no square ring/border), sourced from the uploaded logo.
+- Apply black+gold admin theme (dark sidebar `#0A0A0A`, gold `#C9A961` active states, cream text).
 
-New admin page `/admin/expenses`:
-- Quick-add form (date, category, amount, note, optional booking link, optional receipt upload → Supabase storage bucket `receipts`).
-- Filterable ledger table + CSV export.
-- Monthly total + category donut chart.
+## Phase 2 — Global B2B Supplier Directory
 
-New admin page `/admin/pnl`:
-- Month picker + currency toggle.
-- Rows: Revenue (sum of `manual_bookings.subtotal` for month), Expenses (sum by category), Net Profit, Margin %.
-- Per-booking profit view: booking revenue − linked expenses.
-- CSV export.
+New `suppliers_directory` table (kept separate from existing `suppliers` used for payouts):
+`company_name, category (enum), country, city, contact_name, email, phone, whatsapp, website, services_offered (text[]), rate_notes, rating (1–5), status (active/pending/inactive), preferred (bool), last_contacted_at, notes, created_by`.
 
-### 3. Suppliers & Payouts
+`/admin/directory` page: table with filters (category, country, status, rating), full-text search, add/edit/delete modal, CSV import (with duplicate detection on email + company), CSV export, copy buttons for email/phone/WhatsApp, "Log contact" button, preferred-partner pinning.
 
-Two tables:
-- `suppliers` (name, category [owner/driver/guide/cleaner/other], phone, email, notes, whatsapp).
-- `supplier_payouts` (supplier_id, optional manual_booking_id, amount, currency, due_date, status [pending/paid], paid_at, note).
+## Phase 3 — Analytics + expenses overhaul (all-time capable)
 
-New admin page `/admin/suppliers`:
-- Supplier list with running balance owed.
-- Click supplier → detail with payout history, add-payout form, mark-paid, one-click WhatsApp to supplier.
+- Date range picker on `/admin` analytics: Today, 7d, 30d, Quarter, Year, **All Time (default)**, Custom.
+- Charts: bookings/requests by category, revenue vs expenses over time, clients by country/source, top suppliers by referral count, avg request-to-fulfillment time.
+- Confirm/extend `expenses` schema to include `supplier_id` and `currency`; add filterable all-time view.
+- Net profit (revenue − expenses) computed for the selected range.
+- Export current view as CSV and PDF.
 
-### 4. Tasks / Checklist
+## Phase 4 — PWA scoped to admin only
 
-New table `booking_tasks`:
-- optional `manual_booking_id`, optional `admin_booking_id`, `title`, `due_date`, `status` [todo/doing/done], `assignee`, `notes`.
+- Remove `manifest.webmanifest` link + PWA registration from public routes.
+- Register service worker only when `location.pathname.startsWith('/admin')`.
+- Manifest `scope: /admin`, `start_url: /admin`.
+- Public visitors never see "Add to Home Screen".
 
-New admin page `/admin/tasks`:
-- Today / Upcoming / Overdue columns.
-- Quick-add task, filter by booking, mark done.
-- When creating a manual booking, auto-seed default tasks (Confirm deposit, Prepare check-in, Handover keys, Check-out inspection).
+## Phase 5 — Staff profiles (drivers & concierge)
 
-### 5. Invoices / Receipts (PDF)
+New `staff` table: `full_name, role (driver/concierge/both), photo_url, phone, whatsapp, email, status, license_number, pdp_expiry_date, assigned_vehicle_id, languages_spoken[], specialties[], notes`.
 
-- Install `jspdf` + `jspdf-autotable`.
-- On any manual booking row, add a "Download PDF" and "Send PDF via WhatsApp" button.
-- Branded template: SVRM logo, booking code, client, line items table, deposit / balance / total, payment terms footer, contact block.
-- PDF generated client-side; WhatsApp share opens `wa.me/<phone>?text=<message with public link>` (Phase 2 note: hosting the PDF requires a storage bucket step — for now, PDF downloads locally and admin sends manually).
+`/admin/staff` page: list + add/edit/deactivate with photo upload to `staff-photos` bucket. Per-staff schedule view. Dashboard widget for PDP/license expiries within 30 days.
 
-### 6. Admin Navigation
+## Phase 6 — Job assignment on bookings
 
-Refresh `AdminLayout` sidebar with grouped sections:
-- Overview: Analytics
-- Bookings: Enquiries, Rental Requests, Manual Bookings, Calendar
-- Money: Expenses, P&L, Suppliers
-- Growth: Leads, WhatsApp
-- Operations: Tasks
+- `booking_assignments` table linking bookings ↔ staff with status pipeline: unassigned → assigned → confirmed → en_route/in_progress → completed.
+- Assign 1+ staff per booking; overlap detection warns before double-booking.
+- Auto-notify staff via email (+ WhatsApp deep-link) on assignment using phase-9 templates.
+- Day/week roster view showing all staff jobs side by side.
 
-Header gets install-app hint on iOS Safari.
+## Phase 7 — Branded PDF documents
 
-### Technical notes
+- Refresh existing `invoicePdf.ts` to match new brand (circular logo, cream/gold/charcoal, premium layout).
+- Add booking-confirmation PDF generator (auto-created on status → confirmed).
+- Sequential invoice numbering, VAT support, itemized lines, bank details, payment instructions.
+- PDFs downloadable and attachable to outgoing emails from admin.
 
-- Migrations run first (four tables + storage bucket `receipts` + RLS admin-only via `has_role`).
-- `vite-plugin-pwa` config: `registerType: 'autoUpdate'`, `injectRegister: null`, guarded wrapper in `src/pwa/register.ts`.
-- Manifest served from `public/manifest.webmanifest`. Head tags added in `index.html`.
-- Realtime notifications: `supabase.channel(...).on('postgres_changes', ...)` mounted inside `AdminLayout`.
-- PDF template lives in `src/lib/invoicePdf.ts`.
-- iOS push (VAPID + edge push function + `web-push` subscription table) is deferred to a follow-up because it needs the app installed to the Home Screen first and adds ~300 lines of infra; called out here so it's not silently dropped.
+## Phase 8 — Client booking portal + change requests
 
-### Out of scope (this round)
+- Public route `svrm.group/booking/:token` (long random UUID token stored on booking).
+- Branded thank-you page: client name, service, date/time, location, reference, no login required.
+- "Request a change" form: guests, date/time, pickup, free-text notes.
+- New `booking_change_requests` table with old/new value diff, status.
+- Admin notifications page shows pending change requests in real-time.
+- Approve → auto-updates booking + re-issues confirmation. Decline → templated email back to client.
+- Full change-request history per booking. Read-only view after service date.
 
-- True background web push (needs VAPID setup + push edge function; foreground realtime notifications work today).
-- Multi-currency FX conversion inside P&L (currency toggle filters; no auto-conversion).
-- Hosting invoice PDFs on a public URL (local download only; WhatsApp share sends message text, admin attaches PDF).
+## Phase 9 — Transactional email templates (Lovable built-in)
+
+Editable templates stored in `email_templates` table (subject + body with `{{placeholders}}`), managed from `/admin/settings/emails`:
+
+- Booking confirmation (with PDF)
+- Invoice sent (with PDF)
+- Payment received / overdue reminder
+- Staff job assignment (internal)
+- New inquiry / quote response
+- Welcome
+- Change request received (internal)
+- Change request approved / declined
+
+Uses Lovable's transactional email infrastructure. Same circular-logo + black/gold styling as the PDFs.
+
+## Phase 10 — Remaining admin pages: Clients CRM, CMS (hybrid), Users & roles, Activity log, Settings, Invoicing
+
+- **Clients CRM** — every public inquiry lands as a client/lead automatically; profiles, contact history, VIP flag, past bookings.
+- **CMS (hybrid)** — keep `src/data/*.ts` catalogs, add DB tables `cms_tours`, `cms_vehicles`, `cms_stays` that merge in at runtime; admin can add/edit/hide listings and upload photos.
+- **Users & roles** — extend `user_roles` with `super_admin`, `ops_manager`, `viewer`; role-gated routes.
+- **Activity log** — audit table populated by triggers on major tables.
+- **Invoicing/Payments** — status pipeline + linkage to bookings.
+- **Settings** — company details, brand assets, integration keys via secure secrets.
+- **Extras** — lead source tracking, document storage bucket per client (passports/NDAs) with restricted access, multi-currency handling, supplier response-time metrics.
+
+---
+
+## Technical notes
+
+- All new tables get `GRANT` + RLS + `has_role(auth.uid(),'admin')` policies + `updated_at` triggers, per project convention.
+- File uploads (staff photos, client docs, receipts) go to dedicated Supabase Storage buckets with RLS.
+- Realtime already wired via `useAdminNotifications`; extended to cover change requests + assignments.
+- PDF generation stays client-side with `jspdf` (already installed).
+- No new dependencies unless required (recharts + jspdf already present).
+- Phase order matches your requested numbering; I will stop and wait for your OK after each phase before starting the next.
+
+---
+
+## Out of scope this build
+
+- True background web push (needs VAPID + push edge function; foreground realtime works today).
+- Hosting invoice PDFs on public URLs (local download + email attachment only).
+- Migrating public site styling — only admin gets restyled.

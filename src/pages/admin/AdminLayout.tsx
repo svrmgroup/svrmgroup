@@ -6,6 +6,7 @@ import {
   LogOut, Inbox, Car, Calendar as CalIcon, MessageCircle, FileText,
   Building2, BarChart3, Receipt, Wallet, Users, ListChecks, Menu, X, Share,
 } from "lucide-react";
+import Logo from "@/components/svrm/Logo";
 
 const AdminLayout = () => {
   const { session, isAdmin, loading, signOut } = useAdminAuth();
@@ -99,9 +100,12 @@ const AdminLayout = () => {
         <button onClick={() => setOpen(true)} className="text-muted-foreground hover:text-foreground p-2 -ml-2">
           <Menu className="h-5 w-5" />
         </button>
-        <div className="text-center">
-          <p className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">SVRM</p>
-          <p className="font-serif text-sm -mt-0.5">Admin</p>
+        <div className="flex items-center gap-2">
+          <Logo size="sm" />
+          <div>
+            <p className="text-[9px] uppercase tracking-[0.3em] text-muted-foreground leading-none">SVRM</p>
+            <p className="font-serif text-sm text-foreground leading-tight">Admin</p>
+          </div>
         </div>
         <button onClick={signOut} className="text-muted-foreground hover:text-foreground p-2 -mr-2">
           <LogOut className="h-4 w-4" />
@@ -110,9 +114,12 @@ const AdminLayout = () => {
 
       {/* Desktop sidebar */}
       <aside className="hidden md:flex flex-col border-r border-border/40 bg-surface-deep md:min-h-screen sticky top-0 max-h-screen">
-        <div className="p-6 border-b border-border/40">
-          <p className="eyebrow">SVRM</p>
-          <p className="font-serif text-xl mt-1">Concierge</p>
+        <div className="p-6 border-b border-border/40 flex items-center gap-3">
+          <Logo size="md" />
+          <div>
+            <p className="eyebrow">SVRM</p>
+            <p className="font-serif text-xl mt-0.5 leading-none">Concierge</p>
+          </div>
         </div>
         {nav}
         <div className="p-4 border-t border-border/40">
@@ -129,9 +136,12 @@ const AdminLayout = () => {
           <div className="absolute inset-0 bg-black/60" onClick={() => setOpen(false)} />
           <aside className="relative w-72 max-w-[85%] h-full bg-surface-deep border-r border-border/40 flex flex-col">
             <div className="p-5 border-b border-border/40 flex items-center justify-between">
-              <div>
-                <p className="eyebrow">SVRM</p>
-                <p className="font-serif text-lg mt-1">Concierge</p>
+              <div className="flex items-center gap-3">
+                <Logo size="sm" />
+                <div>
+                  <p className="eyebrow">SVRM</p>
+                  <p className="font-serif text-lg mt-0.5 leading-none">Concierge</p>
+                </div>
               </div>
               <button onClick={() => setOpen(false)} className="text-muted-foreground p-2"><X className="h-5 w-5" /></button>
             </div>
