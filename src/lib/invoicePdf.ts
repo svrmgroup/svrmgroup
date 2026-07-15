@@ -39,6 +39,7 @@ interface Settings {
   vat_number?: string; vat_rate?: number;
   bank_name?: string; bank_account?: string; bank_branch?: string; bank_swift?: string;
   invoice_footer?: string; confirmation_footer?: string; thank_you_message?: string;
+  thank_you_title?: string; thank_you_signature?: string;
   brand_primary?: string; brand_bg?: string;
 }
 
@@ -56,6 +57,8 @@ const DEFAULTS: Settings = {
   invoice_footer: "A 50% deposit is required to secure this booking. The remaining balance must be paid prior to the commencement of travel.",
   confirmation_footer: "This confirmation constitutes acceptance of the SVRM Group terms of service.",
   thank_you_message: "Thank you for choosing SVRM. Our concierge team will be in touch shortly with next steps.",
+  thank_you_title: "THANK YOU",
+  thank_you_signature: "With warm regards,\nThe SVRM Group concierge team",
 };
 
 
