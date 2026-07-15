@@ -436,6 +436,75 @@ export type Database = {
         }
         Relationships: []
       }
+      cms_items: {
+        Row: {
+          category: string | null
+          created_at: string
+          cta_href: string | null
+          cta_label: string | null
+          description: string | null
+          eyebrow: string | null
+          id: string
+          image_url: string | null
+          kind: string
+          meta: Json
+          original_price_zar: number | null
+          price_prefix: string | null
+          price_suffix: string | null
+          price_zar: number | null
+          published: boolean
+          slug: string
+          sort_order: number
+          summary: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string | null
+          created_at?: string
+          cta_href?: string | null
+          cta_label?: string | null
+          description?: string | null
+          eyebrow?: string | null
+          id?: string
+          image_url?: string | null
+          kind: string
+          meta?: Json
+          original_price_zar?: number | null
+          price_prefix?: string | null
+          price_suffix?: string | null
+          price_zar?: number | null
+          published?: boolean
+          slug: string
+          sort_order?: number
+          summary?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string | null
+          created_at?: string
+          cta_href?: string | null
+          cta_label?: string | null
+          description?: string | null
+          eyebrow?: string | null
+          id?: string
+          image_url?: string | null
+          kind?: string
+          meta?: Json
+          original_price_zar?: number | null
+          price_prefix?: string | null
+          price_suffix?: string | null
+          price_zar?: number | null
+          published?: boolean
+          slug?: string
+          sort_order?: number
+          summary?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       cms_stays: {
         Row: {
           bedrooms: number | null
