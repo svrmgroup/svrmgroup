@@ -164,10 +164,11 @@ type PdfKind = "invoice" | "confirmation" | "thank_you";
 export interface RenderOpts {
   settingsOverride?: Partial<Settings> | null;
   output?: "save" | "blob";
+  portalToken?: string | null;
 }
 
 async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
-  const s = await loadSettings(opts.settingsOverride);
+  const s = await loadSettings(opts.settingsOverride, opts.portalToken);
   const GOLD = s.brand_primary || "#b8935a";
   const DARK = s.brand_bg || "#3b2e20";
   const CREAM = "#f3e9d2";
