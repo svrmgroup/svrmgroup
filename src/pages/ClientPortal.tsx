@@ -122,6 +122,29 @@ const ClientPortal = () => {
             <div><p className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Status</p><p className="mt-1 capitalize">{booking.status.replace("_"," ")}</p></div>
           </div>
 
+          <div className="mt-6 border-t border-border/30 pt-6">
+            <p className="eyebrow mb-3">Your details</p>
+            <div className="grid md:grid-cols-2 gap-4 text-sm">
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Name</p>
+                <p className="mt-1">{booking.client_name}</p>
+              </div>
+              {booking.client_email && (
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Email</p>
+                  <p className="mt-1 break-all">{booking.client_email}</p>
+                </div>
+              )}
+              {booking.client_phone && (
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Phone</p>
+                  <p className="mt-1">{booking.client_phone}</p>
+                </div>
+              )}
+            </div>
+            <p className="text-[10px] text-muted-foreground mt-3">If any of these look wrong, use "Request a change" below and we'll update them.</p>
+          </div>
+
           {booking.line_items?.length > 0 && (
             <div className="mt-8">
               <p className="eyebrow mb-3">Included</p>
