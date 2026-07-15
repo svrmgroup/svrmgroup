@@ -166,9 +166,9 @@ const ClientPortal = () => {
 
           {/* Downloadable PDFs */}
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-2">
-            <button onClick={() => downloadInvoicePdf(booking as any)} className="btn-ghost text-xs flex items-center justify-center gap-2"><FileDown className="h-3.5 w-3.5"/>Invoice PDF</button>
-            <button onClick={() => downloadConfirmationPdf(booking as any)} className="btn-ghost text-xs flex items-center justify-center gap-2"><FileDown className="h-3.5 w-3.5"/>Confirmation</button>
-            <button onClick={() => downloadThankYouPdf(booking as any)} className="btn-ghost text-xs flex items-center justify-center gap-2"><FileDown className="h-3.5 w-3.5"/>Thank-you note</button>
+            <button onClick={() => downloadInvoicePdf(booking as any, token)} className="btn-ghost text-xs flex items-center justify-center gap-2"><FileDown className="h-3.5 w-3.5"/>Invoice PDF</button>
+            <button onClick={() => downloadConfirmationPdf(booking as any, token)} className="btn-ghost text-xs flex items-center justify-center gap-2"><FileDown className="h-3.5 w-3.5"/>Confirmation</button>
+            <button onClick={() => downloadThankYouPdf(booking as any, token)} className="btn-ghost text-xs flex items-center justify-center gap-2"><FileDown className="h-3.5 w-3.5"/>Thank-you note</button>
           </div>
 
           {wa && (
