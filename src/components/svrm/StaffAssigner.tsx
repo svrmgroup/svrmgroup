@@ -42,10 +42,9 @@ const StaffAssigner = ({ bookingId, value, onChange, compact }: Props) => {
     (async () => {
       const { data } = await supabase
         .from("staff" as any)
-        .select("id, full_name, role, custom_role_title")
-        .eq("is_active", true)
+        .select("id, full_name, role, custom_role_title, status")
         .order("full_name");
-      setStaff((data as any) || []);
+      setStaff(((data as any) || []).filter((s: any) => !s.status || s.status === "active"));
     })();
   }, []);
 
