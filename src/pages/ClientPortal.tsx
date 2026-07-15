@@ -27,7 +27,7 @@ const ClientPortal = () => {
   const [settings, setSettings] = useState<Settings>({});
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
-  const [form, setForm] = useState({ guests: "", start_date: "", end_date: "", pickup: "", notes: "" });
+  const [message, setMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
