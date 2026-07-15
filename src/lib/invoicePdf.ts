@@ -12,6 +12,7 @@ import svrmLogo from "@/assets/svrm-logo.png.asset.json";
 const CURRENCY_SYMBOLS: Record<string, string> = { ZAR: "R", USD: "$", EUR: "€", GBP: "£" };
 
 export interface InvoiceBooking {
+  id?: string;
   booking_code: string;
   client_name: string;
   client_email?: string | null;
@@ -37,6 +38,8 @@ interface Settings {
   brand_primary?: string; brand_bg?: string;
 }
 
+// Palette lifted directly from the SVRM circular logo:
+// cream backdrop, warm champagne gold, deep espresso ink.
 const DEFAULTS: Settings = {
   company_name: "SVRM GROUP",
   tagline: "EVERY EXPERIENCE, UNIQUELY CURATED FOR YOU",
@@ -44,12 +47,13 @@ const DEFAULTS: Settings = {
   company_phone: "+27 73 064 1481",
   company_whatsapp: "+27 73 064 1481",
   website: "svrm.group",
-  brand_primary: "#d4b876",
-  brand_bg: "#1f1b18",
+  brand_primary: "#b8935a",
+  brand_bg: "#3b2e20",
   invoice_footer: "A 50% deposit is required to secure this booking. The remaining balance must be paid prior to the commencement of travel.",
   confirmation_footer: "This confirmation constitutes acceptance of the SVRM Group terms of service.",
   thank_you_message: "Thank you for choosing SVRM. Our concierge team will be in touch shortly with next steps.",
 };
+
 
 let cache: Settings | null = null;
 async function loadSettings(): Promise<Settings> {
