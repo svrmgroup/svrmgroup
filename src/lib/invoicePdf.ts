@@ -204,24 +204,38 @@ async function build(kind: PdfKind, b: InvoiceBooking) {
   doc.text(`Issue Date: ${issueDate}`, 40, y); y += 14;
   doc.text(`Booking Dates: ${bookingDates}`, 40, y); y += 30;
 
-  // CLIENT + CONCIERGE two-column
+  // CLIENT + CONCIERGE two-column — concierge = assigned staff (falls back to company)
+  const concierge = await loadConcierge(b.id);
+  const conciergeName = concierge?.name || s.company_name || "SVRM Group";
+  const conciergeRole = concierge?.role
+    ? String(concierge.role).replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
+    : null;
+  const conciergePhone = concierge?.phone || concierge?.whatsapp || s.company_phone;
+  const conciergeEmail = concierge?.email || s.company_email;
+
   doc.setFont("helvetica", "bold"); doc.setFontSize(9); doc.setTextColor(GOLD);
   doc.text("CLIENT", 40, y);
   doc.text("LEAD ORGANISER / CONCIERGE", w / 2, y);
   y += 14;
   doc.setFont("helvetica", "normal"); doc.setFontSize(10); doc.setTextColor(TEXT);
   doc.text(b.client_name || "—", 40, y);
-  doc.text(s.company_name || "SVRM Group", w / 2, y); y += 13;
-  if (b.client_email) { doc.text(b.client_email, 40, y); }
-  if (s.company_phone) doc.text(s.company_phone, w / 2, y);
+  doc.text(conciergeName, w / 2, y); y += 13;
+  if (conciergeRole) {
+    doc.setTextColor(MUTED); doc.setFontSize(9);
+    doc.text(conciergeRole, w / 2, y);
+    doc.setTextColor(TEXT); doc.setFontSize(10);
+  }
+  if (b.client_email) doc.text(b.client_email, 40, y);
   y += 13;
+  if (conciergeEmail) doc.text(conciergeEmail, w / 2, y - (conciergeRole ? 0 : 13));
   if (b.client_phone) doc.text(b.client_phone, 40, y);
-  if (s.website) doc.text(s.website.replace(/^https?:\/\//, ""), w / 2, y);
+  if (conciergePhone) doc.text(conciergePhone, w / 2, y);
   y += 24;
 
   // Hairline divider
-  doc.setDrawColor("#c9bfa8"); doc.setLineWidth(0.5); doc.line(40, y, w - 40, y);
+  doc.setDrawColor(GOLD); doc.setLineWidth(0.4); doc.line(40, y, w - 40, y);
   y += 24;
+
 
   // PACKAGE title
   doc.setFont("helvetica", "bold"); doc.setFontSize(11); doc.setTextColor(TEXT);
