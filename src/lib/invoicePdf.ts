@@ -202,7 +202,7 @@ async function build(kind: PdfKind, b: InvoiceBooking) {
 
   // Meta rows
   doc.setFont("helvetica", "normal"); doc.setFontSize(10); doc.setTextColor(TEXT);
-  const issueDate = new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+  const issueDate = b.issue_date_override || new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
   const bookingDates = b.start_date && b.end_date
     ? `${new Date(b.start_date).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })} – ${new Date(b.end_date).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}`
     : b.start_date || "Dates on request";
@@ -210,33 +210,44 @@ async function build(kind: PdfKind, b: InvoiceBooking) {
   doc.text(`Issue Date: ${issueDate}`, 40, y); y += 14;
   doc.text(`Booking Dates: ${bookingDates}`, 40, y); y += 30;
 
-  // CLIENT + CONCIERGE two-column — concierge = assigned staff (falls back to company)
-  const concierge = await loadConcierge(b.id);
+  // CLIENT + CONCIERGE two-column — override → assigned staff → company
+  const concierge = b.concierge_override ?? await loadConcierge(b.id);
   const conciergeName = concierge?.name || s.company_name || "SVRM Group";
   const conciergeRole = concierge?.role
     ? String(concierge.role).replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
     : null;
   const conciergePhone = concierge?.phone || concierge?.whatsapp || s.company_phone;
   const conciergeEmail = concierge?.email || s.company_email;
+  const conciergeDesc = concierge?.description;
 
   doc.setFont("helvetica", "bold"); doc.setFontSize(9); doc.setTextColor(GOLD);
   doc.text("CLIENT", 40, y);
   doc.text("LEAD ORGANISER / CONCIERGE", w / 2, y);
   y += 14;
+  const yBlockStart = y;
   doc.setFont("helvetica", "normal"); doc.setFontSize(10); doc.setTextColor(TEXT);
   doc.text(b.client_name || "—", 40, y);
-  doc.text(conciergeName, w / 2, y); y += 13;
+  doc.text(conciergeName, w / 2, y);
+  let yLeft = y + 13;
+  let yRight = y + 13;
   if (conciergeRole) {
     doc.setTextColor(MUTED); doc.setFontSize(9);
-    doc.text(conciergeRole, w / 2, y);
+    doc.text(conciergeRole, w / 2, yRight); yRight += 12;
     doc.setTextColor(TEXT); doc.setFontSize(10);
   }
-  if (b.client_email) doc.text(b.client_email, 40, y);
-  y += 13;
-  if (conciergeEmail) doc.text(conciergeEmail, w / 2, y - (conciergeRole ? 0 : 13));
-  if (b.client_phone) doc.text(b.client_phone, 40, y);
-  if (conciergePhone) doc.text(conciergePhone, w / 2, y);
-  y += 24;
+  if (b.client_email) { doc.text(b.client_email, 40, yLeft); yLeft += 13; }
+  if (b.client_phone) { doc.text(b.client_phone, 40, yLeft); yLeft += 13; }
+  if (conciergeEmail) { doc.text(conciergeEmail, w / 2, yRight); yRight += 13; }
+  if (conciergePhone) { doc.text(conciergePhone, w / 2, yRight); yRight += 13; }
+  if (conciergeDesc) {
+    doc.setFont("times", "italic"); doc.setFontSize(9); doc.setTextColor(MUTED);
+    const descLines = doc.splitTextToSize(conciergeDesc, w / 2 - 60);
+    doc.text(descLines, w / 2, yRight);
+    yRight += descLines.length * 11;
+    doc.setFont("helvetica", "normal"); doc.setFontSize(10); doc.setTextColor(TEXT);
+  }
+  y = Math.max(yLeft, yRight) + 6;
+
 
   // Hairline divider
   doc.setDrawColor(GOLD); doc.setLineWidth(0.4); doc.line(40, y, w - 40, y);
