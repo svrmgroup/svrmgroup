@@ -378,6 +378,9 @@ const AdminManualBookings = () => {
           })}
         </div>
       )}
+      {pdfEdit && (
+        <PdfEditorDialog booking={pdfEdit.booking} kind={pdfEdit.kind} onClose={() => setPdfEdit(null)}/>
+      )}
     </div>
   );
 };
