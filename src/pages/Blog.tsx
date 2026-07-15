@@ -7,6 +7,7 @@ import { posts, categories, type BlogCategory, type BlogPost } from "@/data/blog
 import { Seo } from "@/components/Seo";
 import SmartImage from "@/components/svrm/SmartImage";
 import { useCmsItems } from "@/hooks/useCmsItems";
+import { resolveImage } from "@/lib/cmsImages";
 
 const Blog = () => {
   const [params] = useSearchParams();
@@ -14,6 +15,7 @@ const Blog = () => {
   const { items: cmsBlogs } = useCmsItems("blogs");
 
   const merged: BlogPost[] = useMemo(() => {
+    const staticImageBySlug = new Map(posts.map((p) => [p.slug, p.image]));
     const cmsMapped: BlogPost[] = cmsBlogs.map((c) => ({
       slug: c.slug,
       title: c.title,
@@ -21,7 +23,7 @@ const Blog = () => {
       category: ((c.category as BlogCategory) || "Insights"),
       date: new Date(c.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }),
       publishedISO: c.created_at.slice(0, 10),
-      image: c.image_url || "",
+      image: resolveImage(c.image_url, staticImageBySlug.get(c.slug)) ?? "",
       readTime: "5 min read",
       intro: c.summary || "",
       sections: c.description ? [{ body: c.description }] : [],
@@ -56,7 +58,7 @@ const Blog = () => {
       url: `https://svrm.group/blog/${p.slug}`,
       datePublished: p.publishedISO ?? p.date,
       articleSection: p.category,
-      image: new URL(p.image, "https://svrm.group").toString(),
+      ...(p.image ? { image: new URL(p.image, "https://svrm.group").toString() } : {}),
     })),
   };
 

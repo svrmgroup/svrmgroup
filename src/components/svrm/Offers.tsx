@@ -17,6 +17,7 @@ import safari from "@/assets/svc-exp-safari.jpg";
 import villa from "@/assets/svc-stays-villa.jpg";
 import { useCurrency } from "@/lib/currency";
 import { useCmsItems } from "@/hooks/useCmsItems";
+import { resolveImage } from "@/lib/cmsImages";
 
 type Offer = {
   eyebrow: string;
@@ -98,6 +99,13 @@ const Offers = () => {
   const { format } = useCurrency();
   const { items: cmsOffers } = useCmsItems("offers");
 
+  const staticImageBySlug: Record<string, string> = {
+    "special-bmw-x3-self-drive": bmwx3,
+    "cape-honeymoon-signature": romantic,
+    "private-s-class-days": chauffeur,
+    "sabi-sand-signature": safari,
+    "camps-bay-villa-collection": villa,
+  };
   const cmsMapped: Offer[] = cmsOffers.map((c) => ({
     eyebrow: c.eyebrow || "Featured",
     title: c.title,
@@ -108,7 +116,7 @@ const Offers = () => {
     priceSuffix: c.price_suffix ?? undefined,
     cta: c.cta_label || "Learn more",
     to: c.cta_href || "/contact",
-    image: c.image_url || villa,
+    image: resolveImage(c.image_url, staticImageBySlug[c.slug] ?? villa) ?? villa,
     special: /special/i.test(c.eyebrow || ""),
   }));
   const displayOffers = cmsMapped.length > 0 ? cmsMapped : offers;

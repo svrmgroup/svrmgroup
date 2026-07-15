@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { buildWhatsAppUrlRaw } from "@/lib/whatsapp";
 import SmartImage from "@/components/svrm/SmartImage";
 import { supabase } from "@/integrations/supabase/client";
+import { resolveImage } from "@/lib/cmsImages";
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -21,12 +22,14 @@ const BlogPost = () => {
       const { data } = await (supabase as any).from("cms_items").select("*")
         .eq("kind", "blogs").eq("slug", slug).eq("published", true).maybeSingle();
       if (data) {
+        const staticMatch = posts.find((p) => p.slug === data.slug);
         setCmsPost({
           slug: data.slug, title: data.title, excerpt: data.summary || "",
           category: (data.category || "Insights") as any,
           date: new Date(data.created_at).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" }),
           publishedISO: data.created_at.slice(0, 10),
-          image: data.image_url || "", readTime: "5 min read",
+          image: resolveImage(data.image_url, staticMatch?.image) ?? "",
+          readTime: "5 min read",
           intro: data.summary || "",
           sections: data.description ? [{ body: data.description }] : [],
         });
@@ -69,7 +72,7 @@ const BlogPost = () => {
     "@type": "Article",
     headline: post.title,
     description: seoDescription,
-    image: [ogImage].map((u) => new URL(u, "https://svrm.group").toString()),
+    ...(ogImage ? { image: [ogImage].map((u) => new URL(u, "https://svrm.group").toString()) } : {}),
     datePublished: post.publishedISO ?? post.date,
     dateModified: post.publishedISO ?? post.date,
     articleSection: post.category,

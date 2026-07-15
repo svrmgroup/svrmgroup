@@ -11,13 +11,13 @@ import { securityOfferings } from "@/data/security";
 import { yachts } from "@/data/yachts";
 import { jets, helicopters } from "@/data/aviation";
 
-// Offer seeds mirror the fallback set in <Offers />. They are duplicated here
-// on purpose so seeding is decoupled from that component.
-import bmwx3 from "@/assets/vehicles/bmwx3.jpg";
-import romantic from "@/assets/tours/romantic.jpg";
-import chauffeur from "@/assets/svc-travel-sclass.jpg";
-import safariImg from "@/assets/svc-exp-safari.jpg";
-import villaImg from "@/assets/svc-stays-villa.jpg";
+// Note: seed rows intentionally omit `image_url` when the source is a
+// Vite-imported binary (e.g. `import img from "@/assets/foo.jpg"`). Those
+// imports resolve to build-hashed paths (`/assets/foo-<hash>.jpg`) that
+// change on every rebuild — persisting them into the DB creates permanently
+// broken image references. Consumer components use `resolveImage` from
+// `@/lib/cmsImages` to fall back to the static import by slug, so images
+// stay stable regardless of what's stored in the CMS row.
 
 export interface ResyncReport {
   table: string;
@@ -85,7 +85,7 @@ function toursSeed() {
       title: t.label,
       summary: t.blurb,
       description: t.description,
-      image_url: t.image,
+      
       price_from: cheapest ?? null,
       currency: "ZAR",
       duration: t.packages[0]?.duration ?? null,
@@ -101,7 +101,7 @@ function vehiclesSeed() {
     slug: v.slug,
     title: v.name,
     summary: v.tagline,
-    image_url: v.image,
+    
     price_per_day: v.fromZAR,
     currency: "ZAR",
     category: v.tier,
@@ -116,7 +116,6 @@ function staysSeed() {
     slug: s.slug,
     title: s.name,
     summary: s.blurb,
-    image_url: s.image,
     price_per_night: s.fromZAR,
     currency: "ZAR",
     bedrooms: parseInt((s.beds.match(/\d+/) || ["0"])[0], 10) || null,
@@ -135,7 +134,7 @@ function blogsSeed() {
     eyebrow: p.date,
     summary: p.excerpt,
     description: p.intro,
-    image_url: p.image,
+    
     category: p.category,
     cta_label: "Read article",
     cta_href: `/blog/${p.slug}`,
@@ -166,7 +165,7 @@ function offersSeed() {
       price_suffix: "/ day",
       cta_label: "Reserve the X3",
       cta_href: "/rentals",
-      image_url: bmwx3,
+      
     },
     {
       slug: "cape-honeymoon-signature",
@@ -177,7 +176,7 @@ function offersSeed() {
       price_prefix: "From ",
       cta_label: "See romantic packages",
       cta_href: "/tours/romantic",
-      image_url: romantic,
+      
     },
     {
       slug: "private-s-class-days",
@@ -189,7 +188,7 @@ function offersSeed() {
       price_suffix: "/ day",
       cta_label: "Book a chauffeur",
       cta_href: "/travel",
-      image_url: chauffeur,
+      
     },
     {
       slug: "sabi-sand-signature",
@@ -201,7 +200,7 @@ function offersSeed() {
       price_suffix: "/ pp",
       cta_label: "View safari tours",
       cta_href: "/tours/safari",
-      image_url: safariImg,
+      
     },
     {
       slug: "camps-bay-villa-collection",
@@ -211,7 +210,7 @@ function offersSeed() {
       price_zar: null,
       cta_label: "Browse stays",
       cta_href: "/stays",
-      image_url: villaImg,
+      
     },
   ];
   return rows.map((r, i) => ({ kind: "offers", published: true, sort_order: (i + 1) * 10, ...r }));
@@ -228,7 +227,7 @@ function aviationSeed() {
     title: a.name,
     summary: a.tagline,
     description: a.capacity,
-    image_url: a.image,
+    
     category: a.category,
     published: true,
     sort_order: (i + 1) * 10,
@@ -242,7 +241,7 @@ function yachtsSeed() {
     title: y.name,
     summary: y.tagline,
     description: y.capacity,
-    image_url: y.image,
+    
     published: true,
     sort_order: (i + 1) * 10,
   }));
@@ -255,7 +254,7 @@ function securitySeed() {
     title: s.name,
     summary: s.tagline,
     description: s.highlights.map((h) => `• ${h}`).join("\n"),
-    image_url: s.image,
+    
     category: s.category,
     published: true,
     sort_order: (i + 1) * 10,
