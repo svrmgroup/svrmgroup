@@ -11,13 +11,13 @@ import { securityOfferings } from "@/data/security";
 import { yachts } from "@/data/yachts";
 import { jets, helicopters } from "@/data/aviation";
 
-// Offer seeds mirror the fallback set in <Offers />. They are duplicated here
-// on purpose so seeding is decoupled from that component.
-import bmwx3 from "@/assets/vehicles/bmwx3.jpg";
-import romantic from "@/assets/tours/romantic.jpg";
-import chauffeur from "@/assets/svc-travel-sclass.jpg";
-import safariImg from "@/assets/svc-exp-safari.jpg";
-import villaImg from "@/assets/svc-stays-villa.jpg";
+// Note: seed rows intentionally omit `image_url` when the source is a
+// Vite-imported binary (e.g. `import img from "@/assets/foo.jpg"`). Those
+// imports resolve to build-hashed paths (`/assets/foo-<hash>.jpg`) that
+// change on every rebuild — persisting them into the DB creates permanently
+// broken image references. Consumer components use `resolveImage` from
+// `@/lib/cmsImages` to fall back to the static import by slug, so images
+// stay stable regardless of what's stored in the CMS row.
 
 export interface ResyncReport {
   table: string;
