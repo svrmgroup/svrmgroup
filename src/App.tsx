@@ -75,6 +75,7 @@ const App = () => (
                 <Route path="pnl" element={<AdminPnL />} />
                 <Route path="suppliers" element={<AdminSuppliers />} />
                 <Route path="tasks" element={<AdminTasks />} />
+                <Route path="directory" element={<AdminDirectory />} />
                 <Route path="calendar" element={<AdminCalendar />} />
                 <Route path="whatsapp" element={<AdminWhatsApp />} />
               </Route>
