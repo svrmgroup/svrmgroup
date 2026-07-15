@@ -153,7 +153,7 @@ const Offers = () => {
           className="relative"
         >
           <CarouselContent className="-ml-4 md:-ml-6">
-            {offers.map((o) => (
+            {displayOffers.map((o) => (
               <CarouselItem
                 key={o.title}
                 className="pl-4 md:pl-6 basis-full sm:basis-1/2 lg:basis-1/3"
