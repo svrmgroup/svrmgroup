@@ -60,15 +60,23 @@ const DEFAULTS: Settings = {
 
 
 let cache: Settings | null = null;
-async function loadSettings(override?: Partial<Settings> | null): Promise<Settings> {
+async function loadSettings(override?: Partial<Settings> | null, portalToken?: string | null): Promise<Settings> {
   if (override) {
     const base = cache || DEFAULTS;
     return { ...DEFAULTS, ...base, ...override };
   }
   if (cache) return cache;
   try {
-    const { data } = await supabase.from("app_settings" as any).select("*").eq("id", 1).maybeSingle();
-    cache = { ...DEFAULTS, ...(data as any) };
+    if (portalToken) {
+      // Client portal (unauthenticated) — fetch full invoice settings via token-scoped RPC.
+      const { data } = await (supabase as any).rpc("get_invoice_settings_by_token", { _token: portalToken });
+      const row = Array.isArray(data) ? data[0] : data;
+      cache = { ...DEFAULTS, ...(row as any) };
+    } else {
+      // Admin (authenticated) — direct table read allowed by RLS.
+      const { data } = await supabase.from("app_settings" as any).select("*").eq("id", 1).maybeSingle();
+      cache = { ...DEFAULTS, ...(data as any) };
+    }
   } catch { cache = DEFAULTS; }
   return cache!;
 }
