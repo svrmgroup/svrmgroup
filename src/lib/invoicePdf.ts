@@ -108,9 +108,10 @@ async function loadLogoDataUrl(overrideUrl?: string): Promise<string | null> {
   }
 }
 
-interface ConciergeInfo {
+export interface ConciergeInfo {
   name: string;
   role?: string | null;
+  description?: string | null;
   email?: string | null;
   phone?: string | null;
   whatsapp?: string | null;
@@ -121,7 +122,7 @@ async function loadConcierge(bookingId?: string): Promise<ConciergeInfo | null> 
   try {
     const { data } = await (supabase as any)
       .from("booking_assignments")
-      .select("role, staff:staff_id ( full_name, role, email, phone, whatsapp )")
+      .select("role, staff:staff_id ( full_name, role, custom_role_title, role_description, email, phone, whatsapp )")
       .eq("booking_id", bookingId)
       .order("created_at", { ascending: true })
       .limit(1)
@@ -130,7 +131,8 @@ async function loadConcierge(bookingId?: string): Promise<ConciergeInfo | null> 
     if (!st) return null;
     return {
       name: st.full_name,
-      role: data.role || st.role,
+      role: st.custom_role_title || data.role || st.role,
+      description: st.role_description,
       email: st.email,
       phone: st.phone,
       whatsapp: st.whatsapp,
