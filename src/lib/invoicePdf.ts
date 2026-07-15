@@ -12,6 +12,7 @@ import svrmLogo from "@/assets/svrm-logo.png.asset.json";
 const CURRENCY_SYMBOLS: Record<string, string> = { ZAR: "R", USD: "$", EUR: "€", GBP: "£" };
 
 export interface InvoiceBooking {
+  id?: string;
   booking_code: string;
   client_name: string;
   client_email?: string | null;
@@ -37,6 +38,8 @@ interface Settings {
   brand_primary?: string; brand_bg?: string;
 }
 
+// Palette lifted directly from the SVRM circular logo:
+// cream backdrop, warm champagne gold, deep espresso ink.
 const DEFAULTS: Settings = {
   company_name: "SVRM GROUP",
   tagline: "EVERY EXPERIENCE, UNIQUELY CURATED FOR YOU",
@@ -44,12 +47,13 @@ const DEFAULTS: Settings = {
   company_phone: "+27 73 064 1481",
   company_whatsapp: "+27 73 064 1481",
   website: "svrm.group",
-  brand_primary: "#d4b876",
-  brand_bg: "#1f1b18",
+  brand_primary: "#b8935a",
+  brand_bg: "#3b2e20",
   invoice_footer: "A 50% deposit is required to secure this booking. The remaining balance must be paid prior to the commencement of travel.",
   confirmation_footer: "This confirmation constitutes acceptance of the SVRM Group terms of service.",
   thank_you_message: "Thank you for choosing SVRM. Our concierge team will be in touch shortly with next steps.",
 };
+
 
 let cache: Settings | null = null;
 async function loadSettings(): Promise<Settings> {
@@ -61,8 +65,9 @@ async function loadSettings(): Promise<Settings> {
   return cache!;
 }
 
-// Cache the SVRM logo (or the settings override) as a data URL so jsPDF
-// renders it reliably regardless of CORS / same-origin quirks.
+// Cache a circularly-masked version of the SVRM logo as a data URL. The
+// source asset is a square image with a round mark inside it; we render it
+// through an offscreen canvas so the PDF only shows the circle.
 let logoDataUrlCache: { src: string; data: string } | null = null;
 async function loadLogoDataUrl(overrideUrl?: string): Promise<string | null> {
   const src = overrideUrl || svrmLogo.url;
@@ -71,12 +76,31 @@ async function loadLogoDataUrl(overrideUrl?: string): Promise<string | null> {
     const res = await fetch(src, { credentials: "omit" });
     if (!res.ok) return null;
     const blob = await res.blob();
-    const dataUrl: string = await new Promise((resolve, reject) => {
-      const r = new FileReader();
-      r.onload = () => resolve(r.result as string);
-      r.onerror = reject;
-      r.readAsDataURL(blob);
+    const img: HTMLImageElement = await new Promise((resolve, reject) => {
+      const url = URL.createObjectURL(blob);
+      const el = new Image();
+      el.crossOrigin = "anonymous";
+      el.onload = () => { URL.revokeObjectURL(url); resolve(el); };
+      el.onerror = (e) => { URL.revokeObjectURL(url); reject(e); };
+      el.src = url;
     });
+    const size = 512;
+    const canvas = document.createElement("canvas");
+    canvas.width = size; canvas.height = size;
+    const ctx = canvas.getContext("2d")!;
+    ctx.clearRect(0, 0, size, size);
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+    ctx.closePath();
+    ctx.clip();
+    // Cover-fit source
+    const s = Math.min(img.width, img.height);
+    const sx = (img.width - s) / 2;
+    const sy = (img.height - s) / 2;
+    ctx.drawImage(img, sx, sy, s, s, 0, 0, size, size);
+    ctx.restore();
+    const dataUrl = canvas.toDataURL("image/png");
     logoDataUrlCache = { src, data: dataUrl };
     return dataUrl;
   } catch {
@@ -84,18 +108,49 @@ async function loadLogoDataUrl(overrideUrl?: string): Promise<string | null> {
   }
 }
 
+interface ConciergeInfo {
+  name: string;
+  role?: string | null;
+  email?: string | null;
+  phone?: string | null;
+  whatsapp?: string | null;
+}
+
+async function loadConcierge(bookingId?: string): Promise<ConciergeInfo | null> {
+  if (!bookingId) return null;
+  try {
+    const { data } = await (supabase as any)
+      .from("booking_assignments")
+      .select("role, staff:staff_id ( full_name, role, email, phone, whatsapp )")
+      .eq("booking_id", bookingId)
+      .order("created_at", { ascending: true })
+      .limit(1)
+      .maybeSingle();
+    const st = data?.staff;
+    if (!st) return null;
+    return {
+      name: st.full_name,
+      role: data.role || st.role,
+      email: st.email,
+      phone: st.phone,
+      whatsapp: st.whatsapp,
+    };
+  } catch { return null; }
+}
+
 type PdfKind = "invoice" | "confirmation" | "thank_you";
 
 async function build(kind: PdfKind, b: InvoiceBooking) {
   const s = await loadSettings();
-  const GOLD = s.brand_primary || "#d4b876";
-  const DARK = s.brand_bg || "#1f1b18";
-  const CREAM = "#f8f1e4";
-  const CREAM_SOFT = "#efe6d3";
-  const TEXT = "#231f1c";
-  const MUTED = "#8a8478";
+  const GOLD = s.brand_primary || "#b8935a";
+  const DARK = s.brand_bg || "#3b2e20";
+  const CREAM = "#f3e9d2";
+  const CREAM_SOFT = "#e8dcbe";
+  const TEXT = "#2a2018";
+  const MUTED = "#8a7a63";
   const sym = CURRENCY_SYMBOLS[b.currency] || (b.currency + " ");
   const money = (n: number) => `${sym}${Number(n || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
 
   const doc = new jsPDF({ unit: "pt", format: "a4" });
   const w = doc.internal.pageSize.getWidth();
@@ -149,24 +204,38 @@ async function build(kind: PdfKind, b: InvoiceBooking) {
   doc.text(`Issue Date: ${issueDate}`, 40, y); y += 14;
   doc.text(`Booking Dates: ${bookingDates}`, 40, y); y += 30;
 
-  // CLIENT + CONCIERGE two-column
+  // CLIENT + CONCIERGE two-column — concierge = assigned staff (falls back to company)
+  const concierge = await loadConcierge(b.id);
+  const conciergeName = concierge?.name || s.company_name || "SVRM Group";
+  const conciergeRole = concierge?.role
+    ? String(concierge.role).replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
+    : null;
+  const conciergePhone = concierge?.phone || concierge?.whatsapp || s.company_phone;
+  const conciergeEmail = concierge?.email || s.company_email;
+
   doc.setFont("helvetica", "bold"); doc.setFontSize(9); doc.setTextColor(GOLD);
   doc.text("CLIENT", 40, y);
   doc.text("LEAD ORGANISER / CONCIERGE", w / 2, y);
   y += 14;
   doc.setFont("helvetica", "normal"); doc.setFontSize(10); doc.setTextColor(TEXT);
   doc.text(b.client_name || "—", 40, y);
-  doc.text(s.company_name || "SVRM Group", w / 2, y); y += 13;
-  if (b.client_email) { doc.text(b.client_email, 40, y); }
-  if (s.company_phone) doc.text(s.company_phone, w / 2, y);
+  doc.text(conciergeName, w / 2, y); y += 13;
+  if (conciergeRole) {
+    doc.setTextColor(MUTED); doc.setFontSize(9);
+    doc.text(conciergeRole, w / 2, y);
+    doc.setTextColor(TEXT); doc.setFontSize(10);
+  }
+  if (b.client_email) doc.text(b.client_email, 40, y);
   y += 13;
+  if (conciergeEmail) doc.text(conciergeEmail, w / 2, y - (conciergeRole ? 0 : 13));
   if (b.client_phone) doc.text(b.client_phone, 40, y);
-  if (s.website) doc.text(s.website.replace(/^https?:\/\//, ""), w / 2, y);
+  if (conciergePhone) doc.text(conciergePhone, w / 2, y);
   y += 24;
 
   // Hairline divider
-  doc.setDrawColor("#c9bfa8"); doc.setLineWidth(0.5); doc.line(40, y, w - 40, y);
+  doc.setDrawColor(GOLD); doc.setLineWidth(0.4); doc.line(40, y, w - 40, y);
   y += 24;
+
 
   // PACKAGE title
   doc.setFont("helvetica", "bold"); doc.setFontSize(11); doc.setTextColor(TEXT);
