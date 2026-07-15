@@ -50,8 +50,49 @@ const AdminSettings = () => {
     delete patch.id; delete patch.created_at; delete patch.updated_at;
     const { error } = await supabase.from("app_settings" as any).update(patch).eq("id", 1);
     if (error) return toast.error(error.message);
+    invalidateInvoiceSettingsCache();
     toast.success("Settings saved — invoices and emails will use these values");
   };
+
+  // ---- Live PDF preview ----
+  const [previewKind, setPreviewKind] = useState<PreviewKind>("invoice");
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [previewLoading, setPreviewLoading] = useState(false);
+  const previewSeq = useRef(0);
+
+  // Only re-render preview when the fields that actually affect the PDF change.
+  const previewKey = useMemo(() => JSON.stringify({
+    kind: previewKind,
+    logo_url: s.logo_url, brand_primary: s.brand_primary, brand_bg: s.brand_bg,
+    company_name: s.company_name, tagline: s.tagline,
+    company_email: s.company_email, company_phone: s.company_phone, company_whatsapp: s.company_whatsapp,
+    website: s.website, vat_number: s.vat_number,
+    bank_name: s.bank_name, bank_account: s.bank_account, bank_branch: s.bank_branch, bank_swift: s.bank_swift,
+    invoice_footer: s.invoice_footer, confirmation_footer: s.confirmation_footer, thank_you_message: s.thank_you_message,
+  }), [previewKind, s]);
+
+  useEffect(() => {
+    if (loading) return;
+    const seq = ++previewSeq.current;
+    const t = setTimeout(async () => {
+      setPreviewLoading(true);
+      try {
+        const blob = await renderPdfBlob(previewKind, SAMPLE_BOOKING, s);
+        if (seq !== previewSeq.current) return;
+        const url = URL.createObjectURL(blob);
+        setPreviewUrl((old) => { if (old) URL.revokeObjectURL(old); return url; });
+      } catch (e: any) {
+        console.error("PDF preview failed", e);
+      } finally {
+        if (seq === previewSeq.current) setPreviewLoading(false);
+      }
+    }, 350);
+    return () => clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [previewKey, loading]);
+
+  useEffect(() => () => { if (previewUrl) URL.revokeObjectURL(previewUrl); }, []); // eslint-disable-line
+
 
   if (loading) return <p className="text-sm text-muted-foreground">Loading…</p>;
 
