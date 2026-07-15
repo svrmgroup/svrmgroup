@@ -187,7 +187,11 @@ const AdminStaff = () => {
               <Input type="number" label="Hourly rate" value={String(editing.hourly_rate ?? "")} onChange={v => setEditing({ ...editing, hourly_rate: v ? Number(v) : null })}/>
               <Input label="Languages (comma separated)" value={langs} onChange={setLangs} className="md:col-span-2"/>
               <Input label="Specialties (comma separated)" value={specs} onChange={setSpecs} className="md:col-span-2"/>
-              <label className="md:col-span-2"><span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Notes</span>
+              <Input label="Custom job title (optional)" value={editing.custom_role_title || ""} onChange={v => setEditing({ ...editing, custom_role_title: v })} className="md:col-span-2"/>
+              <label className="md:col-span-2"><span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Role description (shown on invoices & profile)</span>
+                <textarea rows={3} value={editing.role_description || ""} onChange={e => setEditing({ ...editing, role_description: e.target.value })} className="input-luxury text-sm w-full mt-1" placeholder="e.g. Founder & Head of Concierge — oversees every SVRM experience end-to-end."/>
+              </label>
+              <label className="md:col-span-2"><span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Internal notes</span>
                 <textarea rows={3} value={editing.notes || ""} onChange={e => setEditing({ ...editing, notes: e.target.value })} className="input-luxury text-sm w-full mt-1"/>
               </label>
             </div>
