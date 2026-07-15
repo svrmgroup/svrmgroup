@@ -136,9 +136,12 @@ const AdminLayout = () => {
           <div className="absolute inset-0 bg-black/60" onClick={() => setOpen(false)} />
           <aside className="relative w-72 max-w-[85%] h-full bg-surface-deep border-r border-border/40 flex flex-col">
             <div className="p-5 border-b border-border/40 flex items-center justify-between">
-              <div>
-                <p className="eyebrow">SVRM</p>
-                <p className="font-serif text-lg mt-1">Concierge</p>
+              <div className="flex items-center gap-3">
+                <Logo size="sm" />
+                <div>
+                  <p className="eyebrow">SVRM</p>
+                  <p className="font-serif text-lg mt-0.5 leading-none">Concierge</p>
+                </div>
               </div>
               <button onClick={() => setOpen(false)} className="text-muted-foreground p-2"><X className="h-5 w-5" /></button>
             </div>
