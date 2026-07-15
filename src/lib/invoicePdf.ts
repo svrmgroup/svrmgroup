@@ -1,37 +1,53 @@
 import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
 import type { LineItem } from "@/lib/confirmationMessage";
 import { supabase } from "@/integrations/supabase/client";
+
+/**
+ * Branded PDF renderer — matches the SVRM Group template:
+ * cream background, gold accents, dark price panel, serif headings.
+ * Renders three variants: "invoice", "confirmation", "thank_you".
+ */
 
 const CURRENCY_SYMBOLS: Record<string, string> = { ZAR: "R", USD: "$", EUR: "€", GBP: "£" };
 
 export interface InvoiceBooking {
   booking_code: string;
   client_name: string;
-  client_email: string | null;
-  client_phone: string | null;
-  start_date: string | null;
-  end_date: string | null;
+  client_email?: string | null;
+  client_phone?: string | null;
+  start_date?: string | null;
+  end_date?: string | null;
   line_items: LineItem[];
   currency: string;
   subtotal: number;
   deposit_amount: number;
   balance_due: number;
-  notes: string | null;
-  created_at: string;
+  notes?: string | null;
+  confirmation_message?: string | null;
+  created_at?: string;
 }
 
 interface Settings {
-  company_name?: string; company_email?: string; company_phone?: string; company_address?: string;
+  company_name?: string; company_email?: string; company_phone?: string; company_whatsapp?: string;
+  company_address?: string; website?: string; tagline?: string; logo_url?: string;
   vat_number?: string; vat_rate?: number;
   bank_name?: string; bank_account?: string; bank_branch?: string; bank_swift?: string;
-  invoice_footer?: string; brand_primary?: string; brand_bg?: string;
+  invoice_footer?: string; confirmation_footer?: string; thank_you_message?: string;
+  brand_primary?: string; brand_bg?: string;
 }
 
 const DEFAULTS: Settings = {
-  company_name: "SVRM Group", company_email: "concierge@svrm.group", company_phone: "+27 73 064 1481",
-  brand_primary: "#c9a961", brand_bg: "#1f1b18",
-  invoice_footer: "Payment terms: deposit secures your booking. Balance due before service start.",
+  company_name: "SVRM GROUP",
+  tagline: "EVERY EXPERIENCE, UNIQUELY CURATED FOR YOU",
+  company_email: "concierge@svrm.group",
+  company_phone: "+27 73 064 1481",
+  company_whatsapp: "+27 73 064 1481",
+  website: "svrm.group",
+  brand_primary: "#d4b876",
+  brand_bg: "#1f1b18",
+  invoice_footer: "A 50% deposit is required to secure this booking. The remaining balance must be paid prior to the commencement of travel.",
+  confirmation_footer: "This confirmation constitutes acceptance of the SVRM Group terms of service.",
+  thank_you_message: "Thank you for choosing SVRM. Our concierge team will be in touch shortly with next steps.",
 };
 
 let cache: Settings | null = null;
@@ -44,107 +60,194 @@ async function loadSettings(): Promise<Settings> {
   return cache!;
 }
 
-async function build(kind: "invoice" | "confirmation", b: InvoiceBooking) {
+type PdfKind = "invoice" | "confirmation" | "thank_you";
+
+async function build(kind: PdfKind, b: InvoiceBooking) {
   const s = await loadSettings();
-  const GOLD = s.brand_primary || "#c9a961";
+  const GOLD = s.brand_primary || "#d4b876";
   const DARK = s.brand_bg || "#1f1b18";
+  const CREAM = "#f8f1e4";
+  const CREAM_SOFT = "#efe6d3";
+  const TEXT = "#231f1c";
   const MUTED = "#8a8478";
-  const sym = CURRENCY_SYMBOLS[b.currency] || b.currency + " ";
+  const sym = CURRENCY_SYMBOLS[b.currency] || (b.currency + " ");
   const money = (n: number) => `${sym}${Number(n || 0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
   const doc = new jsPDF({ unit: "pt", format: "a4" });
   const w = doc.internal.pageSize.getWidth();
+  const h = doc.internal.pageSize.getHeight();
 
-  // Header band
-  doc.setFillColor(DARK); doc.rect(0, 0, w, 90, "F");
-  doc.setTextColor(GOLD); doc.setFont("times", "bold"); doc.setFontSize(26);
-  doc.text("SVRM", 40, 50);
-  doc.setFont("helvetica", "normal"); doc.setFontSize(9); doc.setTextColor("#e9e2d5");
-  doc.text((s.company_name || "SVRM Group") + " — Luxury Lifestyle Management", 40, 68);
+  // Cream background
+  doc.setFillColor(CREAM); doc.rect(0, 0, w, h, "F");
 
-  doc.setFontSize(10); doc.text(kind === "invoice" ? "INVOICE" : "BOOKING CONFIRMATION", w - 40, 50, { align: "right" });
-  doc.setFontSize(11); doc.setTextColor(GOLD);
-  doc.text(b.booking_code, w - 40, 68, { align: "right" });
+  // Header — logo watermark + wordmark
+  const logoY = 40;
+  if (s.logo_url) {
+    try {
+      // jsPDF supports data URLs and same-origin images
+      doc.addImage(s.logo_url, "PNG", w / 2 - 26, logoY, 52, 52);
+    } catch { /* fall through — logo optional */ }
+  } else {
+    // Gold circular monogram fallback
+    doc.setFillColor(GOLD); doc.circle(w / 2, logoY + 26, 26, "F");
+    doc.setTextColor(DARK); doc.setFont("times", "bold"); doc.setFontSize(9);
+    doc.text("SVRM", w / 2, logoY + 30, { align: "center" });
+  }
 
-  // Meta block
-  let y = 120;
-  doc.setTextColor(DARK); doc.setFontSize(9); doc.setFont("helvetica", "bold");
-  doc.text(kind === "invoice" ? "BILLED TO" : "GUEST", 40, y);
-  doc.text("BOOKING", w / 2, y);
-  doc.setFont("helvetica", "normal"); doc.setFontSize(10);
+  // Company name + tagline
+  doc.setTextColor(TEXT); doc.setFont("helvetica", "bold"); doc.setFontSize(24);
+  doc.text((s.company_name || "SVRM GROUP").toUpperCase(), w / 2, logoY + 100, { align: "center" });
+  doc.setTextColor(GOLD); doc.setFont("helvetica", "normal"); doc.setFontSize(9);
+  doc.text((s.tagline || "").toUpperCase(), w / 2, logoY + 118, { align: "center" });
+
+  // Gold divider
+  doc.setDrawColor(GOLD); doc.setLineWidth(1);
+  doc.line(w / 2 - 40, logoY + 128, w / 2 + 40, logoY + 128);
+
+  // Section title
+  let y = logoY + 170;
+  const title = kind === "invoice" ? "INVOICE" : kind === "confirmation" ? "BOOKING CONFIRMATION" : "THANK YOU";
+  doc.setTextColor(TEXT); doc.setFont("helvetica", "bold"); doc.setFontSize(18);
+  doc.text(title, 40, y);
+  y += 24;
+
+  // Meta rows
+  doc.setFont("helvetica", "normal"); doc.setFontSize(10); doc.setTextColor(TEXT);
+  const issueDate = new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+  const bookingDates = b.start_date && b.end_date
+    ? `${new Date(b.start_date).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })} – ${new Date(b.end_date).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}`
+    : b.start_date || "Dates on request";
+  doc.text(`${kind === "invoice" ? "Invoice" : "Reference"} No: ${b.booking_code}`, 40, y); y += 14;
+  doc.text(`Issue Date: ${issueDate}`, 40, y); y += 14;
+  doc.text(`Booking Dates: ${bookingDates}`, 40, y); y += 30;
+
+  // CLIENT + CONCIERGE two-column
+  doc.setFont("helvetica", "bold"); doc.setFontSize(9); doc.setTextColor(GOLD);
+  doc.text("CLIENT", 40, y);
+  doc.text("LEAD ORGANISER / CONCIERGE", w / 2, y);
   y += 14;
+  doc.setFont("helvetica", "normal"); doc.setFontSize(10); doc.setTextColor(TEXT);
   doc.text(b.client_name || "—", 40, y);
-  const dates = b.start_date && b.end_date ? `${b.start_date} → ${b.end_date}` : b.start_date || "Dates TBC";
-  doc.text(dates, w / 2, y);
-  y += 12;
-  if (b.client_email) doc.text(b.client_email, 40, y);
-  doc.text(`Issued ${new Date(b.created_at).toLocaleDateString()}`, w / 2, y);
-  y += 12;
+  doc.text(s.company_name || "SVRM Group", w / 2, y); y += 13;
+  if (b.client_email) { doc.text(b.client_email, 40, y); }
+  if (s.company_phone) doc.text(s.company_phone, w / 2, y);
+  y += 13;
   if (b.client_phone) doc.text(b.client_phone, 40, y);
+  if (s.website) doc.text(s.website.replace(/^https?:\/\//, ""), w / 2, y);
+  y += 24;
 
-  // Items
-  autoTable(doc, {
-    startY: y + 24,
-    head: [["Item", "Qty", "Unit", "Amount"]],
-    body: (b.line_items || []).map((it) => [it.label, String(it.qty ?? 1), it.unit ?? "", money(Number(it.amount) || 0)]),
-    theme: "plain",
-    styles: { font: "helvetica", fontSize: 10, cellPadding: 8, textColor: DARK },
-    headStyles: { fillColor: DARK, textColor: GOLD, fontStyle: "bold", fontSize: 9 },
-    columnStyles: { 1: { halign: "center", cellWidth: 50 }, 2: { halign: "center", cellWidth: 70 }, 3: { halign: "right", cellWidth: 90 } },
-    margin: { left: 40, right: 40 },
+  // Hairline divider
+  doc.setDrawColor("#c9bfa8"); doc.setLineWidth(0.5); doc.line(40, y, w - 40, y);
+  y += 24;
+
+  // PACKAGE title
+  doc.setFont("helvetica", "bold"); doc.setFontSize(11); doc.setTextColor(TEXT);
+  doc.text("PACKAGE", 40, y);
+  y += 18;
+  const firstItem = (b.line_items || [])[0];
+  const packageTitle = firstItem?.label || "Bespoke SVRM experience";
+  doc.setFont("times", "italic"); doc.setFontSize(13); doc.setTextColor(TEXT);
+  const titleLines = doc.splitTextToSize(packageTitle, w - 80);
+  doc.text(titleLines, 40, y);
+  y += titleLines.length * 16 + 8;
+
+  // PACKAGE INCLUDES bullets
+  const includes = (b.line_items || []).slice(0, 8).map(it => {
+    const q = it.qty ? ` × ${it.qty}${it.unit ? ` ${it.unit}` : ""}` : "";
+    return `${it.label}${q}`;
   });
-
-  // @ts-expect-error jspdf-autotable augments doc at runtime
-  let ty = (doc.lastAutoTable?.finalY || y + 40) + 20;
-  const rightX = w - 40; const labelX = w - 200;
-  const row = (label: string, value: string, bold = false) => {
-    doc.setFont("helvetica", bold ? "bold" : "normal");
-    doc.setFontSize(bold ? 11 : 10);
-    doc.setTextColor(bold ? DARK : MUTED);
-    doc.text(label, labelX, ty);
-    doc.setTextColor(DARK);
-    doc.text(value, rightX, ty, { align: "right" });
-    ty += 16;
-  };
-  row("Subtotal", money(b.subtotal));
-  if (s.vat_rate && s.vat_rate > 0) {
-    const vat = (b.subtotal * s.vat_rate) / (100 + s.vat_rate);
-    row(`VAT (${s.vat_rate}% incl.)`, money(vat));
-  }
-  row("Deposit received", money(b.deposit_amount));
-  row("Balance due", money(b.balance_due), true);
-
-  // Banking / notes
-  ty += 10;
-  if (kind === "invoice" && (s.bank_name || s.bank_account)) {
-    doc.setFont("helvetica","bold"); doc.setFontSize(9); doc.setTextColor(DARK);
-    doc.text("BANKING", 40, ty); ty += 12;
-    doc.setFont("helvetica","normal"); doc.setFontSize(9); doc.setTextColor(MUTED);
-    if (s.bank_name) { doc.text(`Bank: ${s.bank_name}`, 40, ty); ty += 12; }
-    if (s.bank_account) { doc.text(`Account: ${s.bank_account}`, 40, ty); ty += 12; }
-    if (s.bank_branch) { doc.text(`Branch: ${s.bank_branch}`, 40, ty); ty += 12; }
-    if (s.bank_swift) { doc.text(`SWIFT: ${s.bank_swift}`, 40, ty); ty += 12; }
-    if (s.vat_number) { doc.text(`VAT No: ${s.vat_number}`, 40, ty); ty += 12; }
+  if (includes.length) {
+    doc.setFont("helvetica", "bold"); doc.setFontSize(9); doc.setTextColor(GOLD);
+    doc.text("PACKAGE INCLUDES", 40, y);
+    y += 14;
+    doc.setFont("helvetica", "normal"); doc.setFontSize(10); doc.setTextColor(TEXT);
+    includes.forEach(line => {
+      // gold bullet
+      doc.setFillColor(GOLD); doc.circle(46, y - 3, 1.6, "F");
+      const wrapped = doc.splitTextToSize(line, w - 100);
+      doc.text(wrapped, 58, y);
+      y += wrapped.length * 13;
+    });
+    y += 10;
   }
 
-  if (b.notes) {
-    ty += 6;
-    doc.setFont("helvetica","bold"); doc.setFontSize(9); doc.setTextColor(DARK);
-    doc.text("NOTES", 40, ty); ty += 12;
-    doc.setFont("helvetica","normal"); doc.setFontSize(10); doc.setTextColor(MUTED);
-    const wrapped = doc.splitTextToSize(b.notes, w - 80);
-    doc.text(wrapped, 40, ty);
+  // IMPORTANT NOTE callout (from notes)
+  if (b.notes && y < h - 260) {
+    const boxX = 40, boxW = w - 80;
+    doc.setFillColor(CREAM_SOFT);
+    const noteLines = doc.splitTextToSize(b.notes, boxW - 30);
+    const boxH = 24 + 14 + noteLines.length * 12 + 16;
+    doc.roundedRect(boxX, y, boxW, boxH, 6, 6, "F");
+    doc.setFont("helvetica", "bold"); doc.setFontSize(9); doc.setTextColor(TEXT);
+    doc.text("IMPORTANT NOTE", boxX + 16, y + 20);
+    doc.setFont("helvetica", "normal"); doc.setFontSize(10);
+    doc.text(noteLines, boxX + 16, y + 40);
+    y += boxH + 20;
+  }
+
+  // Dark price panel
+  const panelH = 90;
+  if (y > h - panelH - 100) y = h - panelH - 100;
+  doc.setFillColor(DARK);
+  doc.roundedRect(40, y, w - 80, panelH, 8, 8, "F");
+  doc.setFont("helvetica", "bold"); doc.setFontSize(9); doc.setTextColor(GOLD);
+  const label = kind === "thank_you" ? "AMOUNT PAID" : "TOTAL PACKAGE PRICE";
+  doc.text(label, 60, y + 26);
+  doc.setFont("helvetica", "bold"); doc.setFontSize(24); doc.setTextColor("#ffffff");
+  doc.text(money(b.subtotal), 60, y + 56);
+  doc.setFont("helvetica", "normal"); doc.setFontSize(9); doc.setTextColor("#cfc7b6");
+  if (kind !== "thank_you") {
+    doc.text(`Deposit Required (50%): ${money(b.deposit_amount)}`, 60, y + 78);
+    doc.text(`Remaining Balance: ${money(b.balance_due)}`, w - 60, y + 66, { align: "right" });
+    doc.setFontSize(8); doc.setTextColor("#a89e88");
+    doc.setFont("times", "italic");
+    doc.text("payable before trip commencement", w - 60, y + 80, { align: "right" });
+  }
+  y += panelH + 24;
+
+  // Payment terms / thank you body
+  if (kind === "invoice") {
+    doc.setFont("helvetica", "bold"); doc.setFontSize(10); doc.setTextColor(TEXT);
+    doc.text("PAYMENT TERMS", 40, y); y += 14;
+    doc.setFont("helvetica", "normal"); doc.setFontSize(10);
+    const pt = doc.splitTextToSize(s.invoice_footer || DEFAULTS.invoice_footer!, w - 80);
+    doc.text(pt, 40, y); y += pt.length * 13 + 10;
+
+    if (s.bank_name || s.bank_account) {
+      doc.setFont("helvetica", "bold"); doc.setFontSize(10);
+      doc.text("BANKING DETAILS", 40, y); y += 14;
+      doc.setFont("helvetica", "normal"); doc.setFontSize(9); doc.setTextColor(MUTED);
+      if (s.bank_name)    { doc.text(`Bank: ${s.bank_name}`, 40, y); y += 12; }
+      if (s.bank_account) { doc.text(`Account: ${s.bank_account}`, 40, y); y += 12; }
+      if (s.bank_branch)  { doc.text(`Branch: ${s.bank_branch}`, 40, y); y += 12; }
+      if (s.bank_swift)   { doc.text(`SWIFT: ${s.bank_swift}`, 40, y); y += 12; }
+      if (s.vat_number)   { doc.text(`VAT No: ${s.vat_number}`, 40, y); y += 12; }
+    }
+  } else if (kind === "confirmation") {
+    doc.setFont("helvetica", "bold"); doc.setFontSize(10); doc.setTextColor(TEXT);
+    doc.text("WHAT HAPPENS NEXT", 40, y); y += 14;
+    doc.setFont("helvetica", "normal"); doc.setFontSize(10);
+    const msg = s.thank_you_message || DEFAULTS.thank_you_message!;
+    const lines = doc.splitTextToSize(msg, w - 80);
+    doc.text(lines, 40, y); y += lines.length * 13 + 10;
+  } else {
+    doc.setFont("times", "italic"); doc.setFontSize(13); doc.setTextColor(TEXT);
+    const msg = s.thank_you_message || DEFAULTS.thank_you_message!;
+    const lines = doc.splitTextToSize(msg, w - 80);
+    doc.text(lines, w / 2, y, { align: "center" });
   }
 
   // Footer
-  const fy = doc.internal.pageSize.getHeight() - 50;
-  doc.setDrawColor(GOLD); doc.setLineWidth(0.5); doc.line(40, fy - 12, w - 40, fy - 12);
-  doc.setFont("helvetica","normal"); doc.setFontSize(8); doc.setTextColor(MUTED);
-  doc.text(`${s.company_name}  •  ${s.company_email}  •  ${s.company_phone}  •  svrm.group`, w / 2, fy, { align: "center" });
-  if (s.invoice_footer) doc.text(s.invoice_footer, w / 2, fy + 12, { align: "center" });
+  const fy = h - 40;
+  doc.setDrawColor("#c9bfa8"); doc.setLineWidth(0.5); doc.line(40, fy - 18, w - 40, fy - 18);
+  doc.setFont("helvetica", "normal"); doc.setFontSize(8); doc.setTextColor(MUTED);
+  const foot = [s.company_email, s.company_phone, (s.website || "").replace(/^https?:\/\//, "")].filter(Boolean).join("   •   ");
+  doc.text(foot, w / 2, fy, { align: "center" });
 
-  doc.save(`SVRM-${kind === "invoice" ? "INV" : "CONF"}-${b.booking_code}.pdf`);
+  const filenameKind = kind === "invoice" ? "INV" : kind === "confirmation" ? "CONF" : "THANKYOU";
+  doc.save(`SVRM-${filenameKind}-${b.booking_code}.pdf`);
 }
 
 export function downloadInvoicePdf(b: InvoiceBooking) { return build("invoice", b); }
 export function downloadConfirmationPdf(b: InvoiceBooking) { return build("confirmation", b); }
+export function downloadThankYouPdf(b: InvoiceBooking) { return build("thank_you", b); }

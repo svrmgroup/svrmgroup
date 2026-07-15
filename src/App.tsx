@@ -46,6 +46,7 @@ import AdminActivity from "./pages/admin/AdminActivity";
 import AdminRoles from "./pages/admin/AdminRoles";
 import AdminCMS from "./pages/admin/AdminCMS";
 import AdminChangeRequests from "./pages/admin/AdminChangeRequests";
+import AdminMedia from "./pages/admin/AdminMedia";
 
 const queryClient = new QueryClient();
 
@@ -75,6 +76,7 @@ const App = () => (
               <Route path="/contact" element={<Contact />} />
               <Route path="/faq" element={<Navigate to="/contact#faq" replace />} />
               <Route path="/booking/:token" element={<ClientPortal />} />
+              <Route path="/portal/:token" element={<ClientPortal />} />
               <Route path="/admin/login" element={<AdminLogin />} />
               <Route path="/admin" element={<AdminLayout />}>
                 <Route index element={<AdminAnalytics />} />
@@ -94,6 +96,7 @@ const App = () => (
                 <Route path="calendar" element={<AdminCalendar />} />
                 <Route path="whatsapp" element={<AdminWhatsApp />} />
                 <Route path="cms" element={<AdminCMS />} />
+                <Route path="media" element={<AdminMedia />} />
                 <Route path="email-templates" element={<AdminEmailTemplates />} />
                 <Route path="activity" element={<AdminActivity />} />
                 <Route path="roles" element={<AdminRoles />} />

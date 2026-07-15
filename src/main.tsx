@@ -4,9 +4,9 @@ import App from "./App.tsx";
 import "./index.css";
 import { registerPWA } from "./pwa/register";
 
-// Inject the PWA manifest only for admin visitors so the public site never
-// shows "Add to Home Screen" or gets a service worker.
-if (typeof window !== "undefined" && window.location.pathname.startsWith("/admin")) {
+// Inject the PWA manifest site-wide so both the public site and admin can be
+// installed as a home-screen app on iOS and Android.
+if (typeof window !== "undefined" && !document.querySelector('link[rel="manifest"]')) {
   const link = document.createElement("link");
   link.rel = "manifest";
   link.href = "/manifest.webmanifest";

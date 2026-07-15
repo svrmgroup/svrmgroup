@@ -107,12 +107,20 @@ export type Database = {
           company_email: string | null
           company_name: string | null
           company_phone: string | null
+          company_whatsapp: string | null
+          confirmation_footer: string | null
           created_at: string
           id: number
+          instagram_handle: string | null
           invoice_footer: string | null
+          logo_url: string | null
+          portal_expiry_days: number | null
+          tagline: string | null
+          thank_you_message: string | null
           updated_at: string
           vat_number: string | null
           vat_rate: number | null
+          website: string | null
         }
         Insert: {
           bank_account?: string | null
@@ -125,12 +133,20 @@ export type Database = {
           company_email?: string | null
           company_name?: string | null
           company_phone?: string | null
+          company_whatsapp?: string | null
+          confirmation_footer?: string | null
           created_at?: string
           id?: number
+          instagram_handle?: string | null
           invoice_footer?: string | null
+          logo_url?: string | null
+          portal_expiry_days?: number | null
+          tagline?: string | null
+          thank_you_message?: string | null
           updated_at?: string
           vat_number?: string | null
           vat_rate?: number | null
+          website?: string | null
         }
         Update: {
           bank_account?: string | null
@@ -143,12 +159,20 @@ export type Database = {
           company_email?: string | null
           company_name?: string | null
           company_phone?: string | null
+          company_whatsapp?: string | null
+          confirmation_footer?: string | null
           created_at?: string
           id?: number
+          instagram_handle?: string | null
           invoice_footer?: string | null
+          logo_url?: string | null
+          portal_expiry_days?: number | null
+          tagline?: string | null
+          thank_you_message?: string | null
           updated_at?: string
           vat_number?: string | null
           vat_rate?: number | null
+          website?: string | null
         }
         Relationships: []
       }
@@ -444,6 +468,7 @@ export type Database = {
           cta_label: string | null
           description: string | null
           eyebrow: string | null
+          gallery_urls: string[] | null
           id: string
           image_url: string | null
           kind: string
@@ -466,6 +491,7 @@ export type Database = {
           cta_label?: string | null
           description?: string | null
           eyebrow?: string | null
+          gallery_urls?: string[] | null
           id?: string
           image_url?: string | null
           kind: string
@@ -488,6 +514,7 @@ export type Database = {
           cta_label?: string | null
           description?: string | null
           eyebrow?: string | null
+          gallery_urls?: string[] | null
           id?: string
           image_url?: string | null
           kind?: string
@@ -900,6 +927,8 @@ export type Database = {
           id: string
           line_items: Json
           notes: string | null
+          portal_completed_at: string | null
+          portal_expires_at: string | null
           start_date: string | null
           status: string
           subtotal: number
@@ -921,6 +950,8 @@ export type Database = {
           id?: string
           line_items?: Json
           notes?: string | null
+          portal_completed_at?: string | null
+          portal_expires_at?: string | null
           start_date?: string | null
           status?: string
           subtotal?: number
@@ -942,6 +973,8 @@ export type Database = {
           id?: string
           line_items?: Json
           notes?: string | null
+          portal_completed_at?: string | null
+          portal_expires_at?: string | null
           start_date?: string | null
           status?: string
           subtotal?: number

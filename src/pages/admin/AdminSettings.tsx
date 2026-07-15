@@ -1,18 +1,10 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Save } from "lucide-react";
-
-interface Settings {
-  id: number; company_name: string; company_email: string; company_phone: string;
-  company_address: string | null; vat_number: string | null; vat_rate: number;
-  bank_name: string | null; bank_account: string | null; bank_branch: string | null;
-  bank_swift: string | null; invoice_footer: string | null;
-  brand_primary: string; brand_bg: string;
-}
+import { Save, Upload } from "lucide-react";
 
 const AdminSettings = () => {
-  const [s, setS] = useState<Partial<Settings>>({});
+  const [s, setS] = useState<any>({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => { (async () => {
@@ -22,56 +14,115 @@ const AdminSettings = () => {
     setS((data as any) || {});
   })(); }, []);
 
-  const save = async () => {
-    const { error } = await supabase.from("app_settings" as any).update({
-      company_name: s.company_name, company_email: s.company_email, company_phone: s.company_phone,
-      company_address: s.company_address, vat_number: s.vat_number, vat_rate: s.vat_rate,
-      bank_name: s.bank_name, bank_account: s.bank_account, bank_branch: s.bank_branch, bank_swift: s.bank_swift,
-      invoice_footer: s.invoice_footer, brand_primary: s.brand_primary, brand_bg: s.brand_bg,
-    }).eq("id", 1);
+  const uploadLogo = async (file: File) => {
+    const path = `branding/logo-${Date.now()}.${file.name.split(".").pop()}`;
+    const { error } = await supabase.storage.from("cms-media").upload(path, file, { upsert: true });
     if (error) return toast.error(error.message);
-    toast.success("Settings saved");
+    const { data } = supabase.storage.from("cms-media").getPublicUrl(path);
+    setS((prev: any) => ({ ...prev, logo_url: data.publicUrl }));
+    toast.success("Logo uploaded — remember to save");
+  };
+
+  const save = async () => {
+    const patch = { ...s };
+    delete patch.id; delete patch.created_at; delete patch.updated_at;
+    const { error } = await supabase.from("app_settings" as any).update(patch).eq("id", 1);
+    if (error) return toast.error(error.message);
+    toast.success("Settings saved — invoices and emails will use these values");
   };
 
   if (loading) return <p className="text-sm text-muted-foreground">Loading…</p>;
 
   return (
     <div className="space-y-6">
-      <header>
-        <p className="eyebrow">Settings</p>
-        <h1 className="font-serif text-3xl md:text-4xl mt-2">Company &amp; brand</h1>
+      <header className="flex items-baseline justify-between flex-wrap gap-3">
+        <div>
+          <p className="eyebrow">Settings</p>
+          <h1 className="font-serif text-3xl md:text-4xl mt-2">Business identity</h1>
+          <p className="text-xs text-muted-foreground mt-2 max-w-2xl">
+            One source of truth for everything the client sees — invoices, confirmations, PDFs, emails, portal, footer.
+            Edit here, changes flow everywhere.
+          </p>
+        </div>
+        <button onClick={save} className="btn-luxury text-xs flex items-center gap-2"><Save className="h-3.5 w-3.5"/> Save all</button>
       </header>
 
-      <div className="card-luxury p-5 grid md:grid-cols-2 gap-3">
-        <Sec title="Company">
-          <F l="Name"><input value={s.company_name || ""} onChange={e => setS({ ...s, company_name: e.target.value })} className="input-luxury text-sm w-full"/></F>
-          <F l="Email"><input value={s.company_email || ""} onChange={e => setS({ ...s, company_email: e.target.value })} className="input-luxury text-sm w-full"/></F>
-          <F l="Phone"><input value={s.company_phone || ""} onChange={e => setS({ ...s, company_phone: e.target.value })} className="input-luxury text-sm w-full"/></F>
-          <F l="Address"><textarea rows={3} value={s.company_address || ""} onChange={e => setS({ ...s, company_address: e.target.value })} className="input-luxury text-sm w-full"/></F>
-          <F l="VAT number"><input value={s.vat_number || ""} onChange={e => setS({ ...s, vat_number: e.target.value })} className="input-luxury text-sm w-full"/></F>
-          <F l="VAT rate %"><input type="number" step="0.01" value={s.vat_rate ?? 15} onChange={e => setS({ ...s, vat_rate: Number(e.target.value) })} className="input-luxury text-sm w-full"/></F>
-        </Sec>
-        <Sec title="Banking">
+      <div className="grid md:grid-cols-2 gap-4">
+        <div className="card-luxury p-5 space-y-3">
+          <p className="eyebrow">Company</p>
+          <F l="Company name"><input value={s.company_name || ""} onChange={e => setS({ ...s, company_name: e.target.value })} className="input-luxury text-sm w-full"/></F>
+          <F l="Tagline (appears under logo)"><input value={s.tagline || ""} onChange={e => setS({ ...s, tagline: e.target.value })} className="input-luxury text-sm w-full"/></F>
+          <F l="Address"><textarea rows={2} value={s.company_address || ""} onChange={e => setS({ ...s, company_address: e.target.value })} className="input-luxury text-sm w-full"/></F>
+          <div className="grid grid-cols-2 gap-3">
+            <F l="VAT number"><input value={s.vat_number || ""} onChange={e => setS({ ...s, vat_number: e.target.value })} className="input-luxury text-sm w-full"/></F>
+            <F l="VAT rate %"><input type="number" step="0.01" value={s.vat_rate ?? 15} onChange={e => setS({ ...s, vat_rate: Number(e.target.value) })} className="input-luxury text-sm w-full"/></F>
+          </div>
+        </div>
+
+        <div className="card-luxury p-5 space-y-3">
+          <p className="eyebrow">Contact channels</p>
+          <F l="Concierge email"><input value={s.company_email || ""} onChange={e => setS({ ...s, company_email: e.target.value })} className="input-luxury text-sm w-full"/></F>
+          <F l="Office phone"><input value={s.company_phone || ""} onChange={e => setS({ ...s, company_phone: e.target.value })} className="input-luxury text-sm w-full"/></F>
+          <F l="WhatsApp number (with country code)"><input value={s.company_whatsapp || ""} onChange={e => setS({ ...s, company_whatsapp: e.target.value })} className="input-luxury text-sm w-full" placeholder="+27 73 064 1481"/></F>
+          <F l="Website"><input value={s.website || ""} onChange={e => setS({ ...s, website: e.target.value })} className="input-luxury text-sm w-full" placeholder="https://svrm.group"/></F>
+          <F l="Instagram handle"><input value={s.instagram_handle || ""} onChange={e => setS({ ...s, instagram_handle: e.target.value })} className="input-luxury text-sm w-full"/></F>
+        </div>
+
+        <div className="card-luxury p-5 space-y-3">
+          <p className="eyebrow">Banking (appears on invoices)</p>
           <F l="Bank name"><input value={s.bank_name || ""} onChange={e => setS({ ...s, bank_name: e.target.value })} className="input-luxury text-sm w-full"/></F>
-          <F l="Account"><input value={s.bank_account || ""} onChange={e => setS({ ...s, bank_account: e.target.value })} className="input-luxury text-sm w-full"/></F>
-          <F l="Branch code"><input value={s.bank_branch || ""} onChange={e => setS({ ...s, bank_branch: e.target.value })} className="input-luxury text-sm w-full"/></F>
-          <F l="SWIFT/BIC"><input value={s.bank_swift || ""} onChange={e => setS({ ...s, bank_swift: e.target.value })} className="input-luxury text-sm w-full"/></F>
-          <F l="Invoice footer"><textarea rows={2} value={s.invoice_footer || ""} onChange={e => setS({ ...s, invoice_footer: e.target.value })} className="input-luxury text-sm w-full"/></F>
-        </Sec>
-        <Sec title="Brand">
-          <F l="Primary color"><input type="color" value={s.brand_primary || "#C9A961"} onChange={e => setS({ ...s, brand_primary: e.target.value })} className="input-luxury h-9 w-20"/></F>
-          <F l="Background"><input type="color" value={s.brand_bg || "#1F1B18"} onChange={e => setS({ ...s, brand_bg: e.target.value })} className="input-luxury h-9 w-20"/></F>
-        </Sec>
+          <F l="Account number"><input value={s.bank_account || ""} onChange={e => setS({ ...s, bank_account: e.target.value })} className="input-luxury text-sm w-full"/></F>
+          <div className="grid grid-cols-2 gap-3">
+            <F l="Branch code"><input value={s.bank_branch || ""} onChange={e => setS({ ...s, bank_branch: e.target.value })} className="input-luxury text-sm w-full"/></F>
+            <F l="SWIFT / BIC"><input value={s.bank_swift || ""} onChange={e => setS({ ...s, bank_swift: e.target.value })} className="input-luxury text-sm w-full"/></F>
+          </div>
+        </div>
+
+        <div className="card-luxury p-5 space-y-3">
+          <p className="eyebrow">Brand & PDFs</p>
+          <F l="Logo (used on invoices, emails, PDFs)">
+            <div className="flex items-center gap-3">
+              {s.logo_url && <img src={s.logo_url} alt="Logo" className="h-14 w-14 object-contain border border-border/40 bg-white/5 p-1"/>}
+              <label className="btn-ghost text-[10px] cursor-pointer flex items-center gap-1.5">
+                <Upload className="h-3 w-3"/> Upload logo
+                <input type="file" accept="image/*" className="hidden" onChange={e => { const f = e.target.files?.[0]; if (f) uploadLogo(f); }}/>
+              </label>
+            </div>
+            <input value={s.logo_url || ""} onChange={e => setS({ ...s, logo_url: e.target.value })} placeholder="Or paste URL" className="input-luxury text-xs w-full mt-2"/>
+          </F>
+          <div className="grid grid-cols-2 gap-3">
+            <F l="Primary (gold)"><input type="color" value={s.brand_primary || "#c9a961"} onChange={e => setS({ ...s, brand_primary: e.target.value })} className="input-luxury h-9 w-full"/></F>
+            <F l="Dark background"><input type="color" value={s.brand_bg || "#1f1b18"} onChange={e => setS({ ...s, brand_bg: e.target.value })} className="input-luxury h-9 w-full"/></F>
+          </div>
+        </div>
+
+        <div className="card-luxury p-5 space-y-3 md:col-span-2">
+          <p className="eyebrow">Client-facing messages</p>
+          <F l="Thank-you message (top of confirmation PDF & email)">
+            <textarea rows={2} value={s.thank_you_message || ""} onChange={e => setS({ ...s, thank_you_message: e.target.value })} className="input-luxury text-sm w-full"/>
+          </F>
+          <F l="Invoice footer (payment terms line)">
+            <textarea rows={2} value={s.invoice_footer || ""} onChange={e => setS({ ...s, invoice_footer: e.target.value })} className="input-luxury text-sm w-full"/>
+          </F>
+          <F l="Confirmation footer (legal note under PDF)">
+            <textarea rows={2} value={s.confirmation_footer || ""} onChange={e => setS({ ...s, confirmation_footer: e.target.value })} className="input-luxury text-sm w-full"/>
+          </F>
+          <div className="grid grid-cols-2 gap-3">
+            <F l="Client portal expiry (days after trip end)">
+              <input type="number" value={s.portal_expiry_days ?? 30} onChange={e => setS({ ...s, portal_expiry_days: Number(e.target.value) })} className="input-luxury text-sm w-full"/>
+            </F>
+            <div className="text-[10px] text-muted-foreground pt-6">
+              Portal links auto-expire this many days after the booking's end date. New bookings get their expiry set on creation.
+            </div>
+          </div>
+        </div>
       </div>
 
-      <button onClick={save} className="btn-luxury text-xs flex items-center gap-2"><Save className="h-3.5 w-3.5"/> Save settings</button>
+      <button onClick={save} className="btn-luxury text-xs flex items-center gap-2"><Save className="h-3.5 w-3.5"/> Save all</button>
     </div>
   );
 };
 
-const Sec = ({ title, children }: { title: string; children: React.ReactNode }) => (
-  <div className="space-y-3"><p className="eyebrow">{title}</p>{children}</div>
-);
 const F = ({ l, children }: { l: string; children: React.ReactNode }) => (
   <label className="block"><span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">{l}</span><div className="mt-1">{children}</div></label>
 );
