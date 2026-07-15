@@ -117,6 +117,8 @@ export type Database = {
           portal_expiry_days: number | null
           tagline: string | null
           thank_you_message: string | null
+          thank_you_signature: string | null
+          thank_you_title: string | null
           updated_at: string
           vat_number: string | null
           vat_rate: number | null
@@ -143,6 +145,8 @@ export type Database = {
           portal_expiry_days?: number | null
           tagline?: string | null
           thank_you_message?: string | null
+          thank_you_signature?: string | null
+          thank_you_title?: string | null
           updated_at?: string
           vat_number?: string | null
           vat_rate?: number | null
@@ -169,6 +173,8 @@ export type Database = {
           portal_expiry_days?: number | null
           tagline?: string | null
           thank_you_message?: string | null
+          thank_you_signature?: string | null
+          thank_you_title?: string | null
           updated_at?: string
           vat_number?: string | null
           vat_rate?: number | null
@@ -1416,6 +1422,8 @@ export type Database = {
           logo_url: string
           tagline: string
           thank_you_message: string
+          thank_you_signature: string
+          thank_you_title: string
           vat_number: string
           vat_rate: number
           website: string
@@ -1438,6 +1446,8 @@ export type Database = {
           portal_expiry_days: number
           tagline: string
           thank_you_message: string
+          thank_you_signature: string
+          thank_you_title: string
           website: string
         }[]
       }
