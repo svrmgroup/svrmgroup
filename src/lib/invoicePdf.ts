@@ -60,15 +60,23 @@ const DEFAULTS: Settings = {
 
 
 let cache: Settings | null = null;
-async function loadSettings(override?: Partial<Settings> | null): Promise<Settings> {
+async function loadSettings(override?: Partial<Settings> | null, portalToken?: string | null): Promise<Settings> {
   if (override) {
     const base = cache || DEFAULTS;
     return { ...DEFAULTS, ...base, ...override };
   }
   if (cache) return cache;
   try {
-    const { data } = await supabase.from("app_settings" as any).select("*").eq("id", 1).maybeSingle();
-    cache = { ...DEFAULTS, ...(data as any) };
+    if (portalToken) {
+      // Client portal (unauthenticated) — fetch full invoice settings via token-scoped RPC.
+      const { data } = await (supabase as any).rpc("get_invoice_settings_by_token", { _token: portalToken });
+      const row = Array.isArray(data) ? data[0] : data;
+      cache = { ...DEFAULTS, ...(row as any) };
+    } else {
+      // Admin (authenticated) — direct table read allowed by RLS.
+      const { data } = await supabase.from("app_settings" as any).select("*").eq("id", 1).maybeSingle();
+      cache = { ...DEFAULTS, ...(data as any) };
+    }
   } catch { cache = DEFAULTS; }
   return cache!;
 }
@@ -156,10 +164,11 @@ type PdfKind = "invoice" | "confirmation" | "thank_you";
 export interface RenderOpts {
   settingsOverride?: Partial<Settings> | null;
   output?: "save" | "blob";
+  portalToken?: string | null;
 }
 
 async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
-  const s = await loadSettings(opts.settingsOverride);
+  const s = await loadSettings(opts.settingsOverride, opts.portalToken);
   const GOLD = s.brand_primary || "#b8935a";
   const DARK = s.brand_bg || "#3b2e20";
   const CREAM = "#f3e9d2";
@@ -377,9 +386,9 @@ async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
   doc.save(`SVRM-${filenameKind}-${b.booking_code}.pdf`);
 }
 
-export function downloadInvoicePdf(b: InvoiceBooking) { return build("invoice", b); }
-export function downloadConfirmationPdf(b: InvoiceBooking) { return build("confirmation", b); }
-export function downloadThankYouPdf(b: InvoiceBooking) { return build("thank_you", b); }
+export function downloadInvoicePdf(b: InvoiceBooking, portalToken?: string | null) { return build("invoice", b, { portalToken }); }
+export function downloadConfirmationPdf(b: InvoiceBooking, portalToken?: string | null) { return build("confirmation", b, { portalToken }); }
+export function downloadThankYouPdf(b: InvoiceBooking, portalToken?: string | null) { return build("thank_you", b, { portalToken }); }
 export function renderPdfBlob(kind: PdfKind, b: InvoiceBooking, settingsOverride?: Partial<Settings> | null) {
   return build(kind, b, { output: "blob", settingsOverride }) as Promise<Blob>;
 }

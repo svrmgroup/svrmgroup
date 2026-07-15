@@ -35,13 +35,14 @@ const ClientPortal = () => {
     if (!token) return;
     const [{ data: bRows }, { data: s }] = await Promise.all([
       supabase.rpc("get_booking_by_token" as any, { _token: token }),
-      supabase.from("app_settings" as any).select("company_whatsapp,company_email,company_phone").eq("id", 1).maybeSingle(),
+      supabase.rpc("get_public_settings" as any),
     ]);
     setLoading(false);
     const b = Array.isArray(bRows) ? bRows[0] : bRows;
     if (!b) return toast.error("Booking not found");
     setBooking(b as any);
-    setSettings((s as any) || {});
+    const row = Array.isArray(s) ? s[0] : s;
+    setSettings((row as any) || {});
   })(); }, [token]);
 
   const submit = async () => {
@@ -165,9 +166,9 @@ const ClientPortal = () => {
 
           {/* Downloadable PDFs */}
           <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-2">
-            <button onClick={() => downloadInvoicePdf(booking as any)} className="btn-ghost text-xs flex items-center justify-center gap-2"><FileDown className="h-3.5 w-3.5"/>Invoice PDF</button>
-            <button onClick={() => downloadConfirmationPdf(booking as any)} className="btn-ghost text-xs flex items-center justify-center gap-2"><FileDown className="h-3.5 w-3.5"/>Confirmation</button>
-            <button onClick={() => downloadThankYouPdf(booking as any)} className="btn-ghost text-xs flex items-center justify-center gap-2"><FileDown className="h-3.5 w-3.5"/>Thank-you note</button>
+            <button onClick={() => downloadInvoicePdf(booking as any, token)} className="btn-ghost text-xs flex items-center justify-center gap-2"><FileDown className="h-3.5 w-3.5"/>Invoice PDF</button>
+            <button onClick={() => downloadConfirmationPdf(booking as any, token)} className="btn-ghost text-xs flex items-center justify-center gap-2"><FileDown className="h-3.5 w-3.5"/>Confirmation</button>
+            <button onClick={() => downloadThankYouPdf(booking as any, token)} className="btn-ghost text-xs flex items-center justify-center gap-2"><FileDown className="h-3.5 w-3.5"/>Thank-you note</button>
           </div>
 
           {wa && (
