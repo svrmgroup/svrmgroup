@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Plus, Trash2, Pencil, X, Eye, EyeOff, RefreshCw } from "lucide-react";
+import { Plus, Trash2, Pencil, Eye, EyeOff, RefreshCw } from "lucide-react";
 import { resyncAllCms } from "@/lib/cmsSeed";
+import AdminModal from "@/components/admin/AdminModal";
 
 // ---- Kind configuration ---------------------------------------------------
 
@@ -236,14 +237,19 @@ const AdminCMS = () => {
         )}
       </div>
 
-      {show && (
-        <div className="fixed inset-0 z-50 bg-black/70 flex items-start md:items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-surface-deep border border-border/60 w-full max-w-2xl my-8">
-            <div className="p-5 border-b border-border/40 flex items-center justify-between">
-              <h2 className="font-serif text-2xl">{editing.id ? "Edit" : "New"} {config.label}</h2>
-              <button onClick={() => setShow(false)}><X className="h-5 w-5 text-muted-foreground"/></button>
-            </div>
-            <div className="p-5 space-y-3">
+      <AdminModal
+        open={show}
+        onClose={() => setShow(false)}
+        title={<>{editing.id ? "Edit" : "New"} {config.label}</>}
+        maxWidth="2xl"
+        footer={
+          <>
+            <button onClick={() => setShow(false)} className="btn-ghost text-xs">Cancel</button>
+            <button onClick={save} className="btn-luxury text-xs">{editing.id ? "Save changes" : "Add"}</button>
+          </>
+        }
+      >
+        <div className="p-5 space-y-3">
               <F l="Title *"><input value={editing.title || ""} onChange={e => setEditing({ ...editing, title: e.target.value })} className="input-luxury text-sm w-full"/></F>
               <F l="Slug *"><input value={editing.slug || ""} onChange={e => setEditing({ ...editing, slug: e.target.value.toLowerCase().replace(/\s+/g,"-") })} className="input-luxury text-sm w-full"/></F>
 
@@ -321,14 +327,8 @@ const AdminCMS = () => {
                 <F l="Sort order"><input type="number" value={editing.sort_order || 0} onChange={e => setEditing({ ...editing, sort_order: Number(e.target.value) })} className="input-luxury text-sm w-full"/></F>
                 <label className="flex items-end pb-2 gap-2"><input type="checkbox" checked={!!editing.published} onChange={e => setEditing({ ...editing, published: e.target.checked })}/><span className="text-xs">Published</span></label>
               </div>
-            </div>
-            <div className="p-5 border-t border-border/40 flex justify-end gap-2">
-              <button onClick={() => setShow(false)} className="btn-ghost text-xs">Cancel</button>
-              <button onClick={save} className="btn-luxury text-xs">{editing.id ? "Save changes" : "Add"}</button>
-            </div>
-          </div>
         </div>
-      )}
+      </AdminModal>
     </div>
   );
 };
