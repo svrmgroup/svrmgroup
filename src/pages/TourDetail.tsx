@@ -80,7 +80,7 @@ const TourDetail = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12">
             <p className="eyebrow">Packages</p>
-            <h2 className="font-serif text-3xl md:text-4xl mt-4 text-foreground">From three days to bespoke.</h2>
+            <h2 className="font-serif text-3xl md:text-4xl mt-4 text-foreground">From one day to bespoke.</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {tour.packages.map((p) => (
