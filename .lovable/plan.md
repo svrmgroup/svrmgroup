@@ -1,108 +1,46 @@
-## 1. Per-page WhatsApp messages
+## Goal
 
-Add a single config so both the floating FAB and the nav "Enquire" button pull a route-specific pre-filled message.
+Make the WhatsApp entry point instantly recognizable and readable against any hero image or background, without changing link logic or per-page messages.
 
-**New file `src/lib/whatsappMessages.ts`**
+## Changes
 
-```ts
-export const WHATSAPP_MESSAGES: Record<string, string> = {
-  "/":                  "Hi SVRM Group, I'd like to enquire about your services.",
-  "/travel":            "Hi SVRM Group, I'd like to enquire about travel arrangements.",
-  "/rentals":           "Hi SVRM Group, I'd like to enquire about vehicle rentals.",
-  "/stays":             "Hi SVRM Group, I'd like to enquire about accommodation and villa stays.",
-  "/tours":             "Hi SVRM Group, I'd like to enquire about a private tour.",
-  "/security":          "Hi SVRM Group, I'd like to enquire about security services.",
-  "/custom":            "Hi SVRM Group, I'd like to enquire about a custom itinerary.",
-  "/airport-transfers": "Hi SVRM Group, I'd like to book an airport transfer.",
-  "/chauffeur":         "Hi SVRM Group, I'd like to enquire about chauffeur service.",
-  "/aquila-safari":     "Hi SVRM Group, I'd like to enquire about the Aquila safari day trip.",
-};
+### 1. Floating WhatsApp button — `src/components/svrm/WhatsAppFab.tsx`
 
-export const WHATSAPP_BASE = "https://wa.me/27730641481"; // svrmgroup short link not guaranteed to resolve
+- Replace the current `MessageCircle` (generic chat) with the official WhatsApp glyph as an inline SVG (speech bubble + handset), so it's unmistakably WhatsApp at small sizes. Keep the palette gold-on-black (not WhatsApp green).
+- Solid background fill `#1A1613` (black), gold icon `#C9A961`, thin `1px` gold border at ~60% opacity.
+- Size: `h-14 w-14` (56px) on desktop, `h-12 w-12` (48px) on mobile.
+- Soft drop shadow: `shadow-[0_10px_30px_-8px_rgba(0,0,0,0.55)]` plus a subtle gold glow ring on hover, so it lifts off busy photo backgrounds.
+- Keep fixed `bottom-6 right-6`, `z-40`, `target="_blank"`, and continue using `whatsappUrlFor(pathname)` — link behavior unchanged.
+- Desktop-only "Chat with us" pill label:
+  - Rendered to the left of the button, Jost font, gold text on black pill matching the FAB style.
+  - Shown on first render, auto-hides after 3.5s or on first `scroll` event (whichever comes first).
+  - Hidden on mobile (`hidden md:flex`).
+  - Uses `prefers-reduced-motion` to skip the fade transition.
+  - No persistence — appears once per page load, no localStorage flag.
 
-export function whatsappUrlFor(pathname: string): string {
-  // Exact match first, then first-segment fallback, then generic Home.
-  const exact = WHATSAPP_MESSAGES[pathname];
-  const seg = "/" + pathname.split("/").filter(Boolean)[0];
-  const msg = exact ?? WHATSAPP_MESSAGES[seg] ?? WHATSAPP_MESSAGES["/"];
-  return `${WHATSAPP_BASE}?text=${encodeURIComponent(msg)}`;
-}
-```
+### 2. Nav bar WhatsApp icon — `src/components/svrm/Nav.tsx`
 
-- Uses `encodeURIComponent` at runtime — no hardcoded encoded strings.
-- Contact (`/contact`) and Journal (`/blog`) aren't in the map, so they fall through to the generic Home message per the brief.
+- Add a dedicated WhatsApp icon button next to the EN / ZAR / ENQUIRE cluster (desktop) — currently there is no WhatsApp icon in the nav, only the text "Enquire" link.
+- Same solid-black circular chip with gold WhatsApp glyph and thin gold border, sized to match sibling controls (approx `h-9 w-9`), so it reads as strongly as EN / ZAR / ENQUIRE.
+- Uses the same `waHref` already computed in `Nav.tsx`, `target="_blank"`, `aria-label="Chat with SVRM on WhatsApp"`.
+- Keep the existing text "Enquire" link untouched — the icon is an additional, obvious tap target.
+- Mobile sheet's "Enquire on WhatsApp" CTA stays as-is (already high-contrast inside the sheet).
 
-**Wire into buttons** via `useLocation()`:
+### 3. Shared WhatsApp glyph — `src/components/svrm/WhatsAppGlyph.tsx` (new)
 
-- `src/components/svrm/WhatsAppFab.tsx` — replace the hardcoded `buildWhatsAppUrlRaw(...)` with `whatsappUrlFor(useLocation().pathname)`. Style, position, colour, `target="_blank"` unchanged.
-- `src/components/svrm/Nav.tsx` — same swap for both the desktop "Enquire" pill and the mobile sheet's "Enquire on WhatsApp" button.
+- Small reusable SVG component for the official WhatsApp mark (speech bubble + handset), colored via `currentColor` so both FAB and nav icon reuse it.
+- Accepts `className` and `size` props; default `strokeWidth`/fill tuned for legibility at 20-28px.
 
-The legacy `buildWhatsAppUrl` / `buildWhatsAppUrlRaw` helpers in `src/lib/whatsapp.ts` stay put (they're referenced from ~30 other components — enquiry forms, PDFs, etc.) so this change is scoped to the two buttons the brief calls out.
+## Out of scope
 
-## 2. Aquila Safari as a tour
+- No changes to `src/lib/whatsappMessages.ts` or route mappings.
+- No changes to the "Enquire" text link, footer CTAs, or any other page CTAs.
+- No changes to hero images, homepage layout, or z-index of other overlays.
 
-Create a new sub-tour under Tours rather than a standalone page (matches how every other tour is modelled, keeps routing clean).
+## Verification
 
-- Add an `aquila-safari` entry in `src/data/tours.ts` with `duration: "1 day"`, hero image, description, inclusions (game drive, lunch, hotel pickup), and a WhatsApp-first CTA.
-- Add it to the Tours nav dropdown in `src/lib/navCategories.ts` under a new **"Day trips"** heading (or as a top-level Tours item — see Q1 below).
-- Route already exists via the dynamic `/tours/:slug` — no `App.tsx` change needed.
-- Image: use `imagegen` (standard tier) to produce a photograph of white lions / a game-drive vehicle in Karoo landscape, saved as an `.asset.json` under `src/assets/tours/`.
-
-The brief's `/aquila-safari` route in the WhatsApp map is kept as-is — anyone landing there (e.g. from a marketing link) still gets the Aquila-specific message thanks to the exact-match config. If we redirect `/aquila-safari` → `/tours/aquila-safari`, the fallback logic still picks the Aquila message because `/tours` is the first-segment fallback… but Aquila is more specific, so I'll also add `/tours/aquila-safari` to the map.
-
-## 3. Sort tours by duration
-
-Every category in `src/data/tours.ts` has a `packages[]` array with a `duration` string like `"3 days"`, `"30 min"`, `"1 day"`. Add a `durationToHours()` helper and sort each category's packages ascending. Where `Tours.tsx` / `TourDetail.tsx` render packages, they'll pick up the pre-sorted array automatically (no component change needed).
-
-Parser handles: `N min`, `N hour(s)`, `N day(s)`, `N week(s)`. Unknown strings sort last.
-
-## 4. WhatsApp as primary contact
-
-Audit human-name / phone / email CTAs on public pages and replace with the WhatsApp button where they duplicate contact intent. Concretely:
-
-- `Footer.tsx`, `ClosingCTA.tsx`, `Contact.tsx`, `Hero.tsx`, category cards: swap `"Call our concierge"` / `"Email"` style CTAs to the route-aware WhatsApp button. Keep one small email + phone line in the footer for legitimacy, but demote it — WhatsApp becomes the primary call-to-action colour/size.
-- No admin pages touched (they already have their own tooling).
-
-Full list of files to touch will come from a `rg` sweep during build — locked to public routes only.
-
-## 5. Menu reorganisation
-
-Update `src/components/svrm/Nav.tsx` `links` order so "Custom" sits with service pages, not between Journal/Contact:
-
-```
-Home · Travel · Rentals · Stays · Tours · Security · Custom · Journal · Contact
-```
-
-It's already in that position 👍 — but visually "Custom" points at `/experiences`, which is inconsistent with everything else being top-level. Two options in Q2.
-
-**Add Airport Transfers under Travel** in `src/lib/navCategories.ts`:
-
-```ts
-"/travel": [
-  { label: "Chauffeured Cars",     to: "/travel?cat=cars" },
-  { label: "Airport Transfers — Small",  to: "/airport-transfers?size=small" },
-  { label: "Airport Transfers — Medium", to: "/airport-transfers?size=medium" },
-  { label: "Airport Transfers — Large / Van", to: "/airport-transfers?size=large" },
-  { label: "Private Jets",         to: "/travel?cat=jets" },
-  { label: "Helicopters",          to: "/travel?cat=helicopters" },
-  { label: "Yachts",               to: "/travel?cat=yachts" },
-],
-```
-
-New minimal page `src/pages/AirportTransfers.tsx` + route in `App.tsx`:
-- Reads `?size=` from the URL, shows a single enquiry card ("Small / Medium / Large / Van — enquire on WhatsApp") — **no per-vehicle listings**, per the brief.
-- Primary CTA is the route-aware WhatsApp button, which auto-fills the Aquila-style message.
-
-## Technical notes
-
-- No database or edge-function changes.
-- No new dependencies.
-- `useLocation()` is already used elsewhere; safe inside `Nav` and `WhatsAppFab` since they render inside `<BrowserRouter>`.
-- Sorting is done at module load time in `tours.ts`, so it costs nothing at render.
-
-## Open questions
-
-1. **Aquila nav placement** — add it as a plain Tours-dropdown item (`{ label: "Aquila Safari (Day)", to: "/tours/aquila-safari" }`) or split the dropdown into a "Day trips" subsection with Aquila under it? I'd default to plain item unless you want the subsection.
-2. **"Custom" label** — keep as `Custom` pointing at `/experiences`, or rename the route to `/custom` (redirect old URL) so nav slug and label match? Renaming is cleaner but requires updating internal links.
-
-I'll assume plain item + keep `/experiences` route (with `/custom` as an alias redirect) unless you say otherwise.
+- Load `/` (light-sky hero) and confirm FAB reads clearly with gold-on-black + shadow.
+- Load `/tours/aquila-safari` (dark hero) and `/rentals` (mixed) and confirm same clarity.
+- Confirm "Chat with us" label appears on desktop, disappears after ~3.5s or on scroll, and never appears on mobile.
+- Confirm nav WhatsApp icon is visible on desktop next to EN / ZAR / ENQUIRE at the same visual weight.
+- Confirm `href` still resolves to the correct per-page message via `whatsappUrlFor`.
