@@ -95,10 +95,21 @@ const Nav = () => {
             href={waHref}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Chat with SVRM on WhatsApp"
+            className="hidden sm:inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#C9A961]/60 bg-[#1A1613] text-[#C9A961] transition-colors hover:bg-[#252017]"
+          >
+            <WhatsAppGlyph className="h-4 w-4" />
+          </a>
+
+          <a
+            href={waHref}
+            target="_blank"
+            rel="noopener noreferrer"
             className="hidden sm:inline-block text-[11px] uppercase tracking-[0.28em] text-gold border border-primary/60 px-4 py-2.5 hover:bg-primary hover:text-primary-foreground transition-colors duration-500"
           >
             Enquire
           </a>
+
 
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
