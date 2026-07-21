@@ -5,6 +5,9 @@ export type NavCategory = { label: string; to: string };
 export const navCategories: Record<string, NavCategory[]> = {
   "/travel": [
     { label: "Chauffeured Cars", to: "/travel?cat=cars" },
+    { label: "Airport Transfer — Small", to: "/airport-transfers?size=small" },
+    { label: "Airport Transfer — Medium", to: "/airport-transfers?size=medium" },
+    { label: "Airport Transfer — Large / Van", to: "/airport-transfers?size=large" },
     { label: "Private Jets", to: "/travel?cat=jets" },
     { label: "Helicopters", to: "/travel?cat=helicopters" },
     { label: "Yachts", to: "/travel?cat=yachts" },
@@ -24,6 +27,7 @@ export const navCategories: Record<string, NavCategory[]> = {
     { label: "Buy & Sell", to: "/stays?cat=buysell" },
   ],
   "/tours": [
+    { label: "Aquila Safari (Day)", to: "/tours/aquila-safari" },
     { label: "Safari", to: "/tours/safari" },
     { label: "Garden Route", to: "/tours/garden-route" },
     { label: "Marine & Wildlife", to: "/tours/marine" },

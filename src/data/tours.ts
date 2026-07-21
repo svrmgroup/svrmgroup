@@ -12,6 +12,7 @@ import wellnessImg from "@/assets/tours/wellness.jpg";
 import photographyImg from "@/assets/tours/photography.jpg";
 import groupTravelImg from "@/assets/tours/group-travel.jpg";
 import romanticImg from "@/assets/tours/romantic.jpg";
+import aquilaImg from "@/assets/tours/aquila-safari.jpg";
 import safariVid from "@/assets/videos/tour-safari.mp4.asset.json";
 import huntingVid from "@/assets/videos/tour-hunting.mp4.asset.json";
 import culturalVid from "@/assets/videos/tour-cultural.mp4.asset.json";
@@ -25,6 +26,7 @@ import photographyVid from "@/assets/videos/tour-photography.mp4.asset.json";
 
 export type TourSlug =
   | "safari"
+  | "aquila-safari"
   | "hunting"
   | "cultural"
   | "adventure"
@@ -295,7 +297,58 @@ export const tours: TourCategory[] = [
       },
     ],
   },
+  {
+    slug: "aquila-safari",
+    label: "Aquila Safari — Day Trip",
+    blurb: "Big Five, one day, from Cape Town.",
+    description:
+      "A private day trip to Aquila Private Game Reserve in the Karoo — under two hours from Cape Town. Morning game drive in an open 4x4, chance sightings of lion, elephant, rhino, buffalo and leopard, buffet lunch at the lodge, and afternoon return. Hotel pickup and drop-off in a private chauffeured vehicle handled end to end.",
+    image: aquilaImg,
+    packages: [
+      {
+        duration: "1 day",
+        title: "Aquila Big Five day safari",
+        fromZAR: 4800,
+        inclusions: [
+          "Private hotel pickup & return (Cape Town)",
+          "Morning game drive at Aquila Private Game Reserve",
+          "Buffet lunch at the lodge",
+          "Chauffeured private vehicle, end to end",
+        ],
+      },
+    ],
+  },
 ];
+
+// ---- Ordering ---------------------------------------------------------------
+
+const DURATION_UNITS: Array<{ re: RegExp; hours: number }> = [
+  { re: /(\d+(?:\.\d+)?)\s*min/i, hours: 1 / 60 },
+  { re: /(\d+(?:\.\d+)?)\s*hour/i, hours: 1 },
+  { re: /half\s*day/i, hours: 6 },
+  { re: /(\d+(?:\.\d+)?)\s*day/i, hours: 24 },
+  { re: /(\d+(?:\.\d+)?)\s*week/i, hours: 24 * 7 },
+];
+
+/** Ascending-sortable numeric score for a package duration string. Unknown → Infinity (last). */
+export function durationToHours(input: string): number {
+  const s = (input || "").trim();
+  for (const { re, hours } of DURATION_UNITS) {
+    const m = s.match(re);
+    if (m) {
+      const n = m[1] ? Number(m[1]) : 1;
+      return (Number.isFinite(n) ? n : 1) * hours;
+    }
+  }
+  return Number.POSITIVE_INFINITY;
+}
+
+// Sort packages within each category by ascending duration so shorter offerings appear first.
+for (const t of tours) {
+  t.packages = [...t.packages].sort(
+    (a, b) => durationToHours(a.duration) - durationToHours(b.duration),
+  );
+}
 
 export const findTour = (slug: string) => tours.find((t) => t.slug === slug);
 

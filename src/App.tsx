@@ -27,6 +27,7 @@ const Contact = lazy(() => import("./pages/Contact.tsx"));
 const Rentals = lazy(() => import("./pages/Rentals.tsx"));
 const Security = lazy(() => import("./pages/Security.tsx"));
 const ClientPortal = lazy(() => import("./pages/ClientPortal"));
+const AirportTransfers = lazy(() => import("./pages/AirportTransfers.tsx"));
 
 // ---- Admin console: fully lazy — never ships to public visitors -----------
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
@@ -83,6 +84,10 @@ const App = () => (
                 <Route path="/tours/builder" element={<TourBuilderPage />} />
                 <Route path="/tours/:slug" element={<TourDetail />} />
                 <Route path="/experiences" element={<CustomExperiences />} />
+                <Route path="/custom" element={<Navigate to="/experiences" replace />} />
+                <Route path="/airport-transfers" element={<AirportTransfers />} />
+                <Route path="/chauffeur" element={<Navigate to="/travel?cat=cars" replace />} />
+                <Route path="/aquila-safari" element={<Navigate to="/tours/aquila-safari" replace />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:slug" element={<BlogPost />} />
                 <Route path="/contact" element={<Contact />} />

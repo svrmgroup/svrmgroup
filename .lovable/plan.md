@@ -1,32 +1,108 @@
-# Circular SVRM logo for Google search results
+## 1. Per-page WhatsApp messages
 
-Google shows a site icon next to your listing. Right now it's rendering as a square with a border because the favicon/logo you serve is a square image. To make it appear as a clean circle with no square background, the source image needs to be a **transparent PNG** where everything outside the circle is transparent — then Google crops it into its rounded shape and only the disc shows.
+Add a single config so both the floating FAB and the nav "Enquire" button pull a route-specific pre-filled message.
 
-## Steps
+**New file `src/lib/whatsappMessages.ts`**
 
-1. **Prepare the circular logo (preview first, no upload yet).**
-   - Take the uploaded `logo_2.jpeg` (the sunset/Table Mountain SVRM circle).
-   - Cut out the exact circle, discard everything outside it, save as a transparent PNG at 512×512.
-   - Save it to `/mnt/documents/svrm-logo-circle.png` so you can review it in chat before anything ships.
-   - Pause here for your approval.
+```ts
+export const WHATSAPP_MESSAGES: Record<string, string> = {
+  "/":                  "Hi SVRM Group, I'd like to enquire about your services.",
+  "/travel":            "Hi SVRM Group, I'd like to enquire about travel arrangements.",
+  "/rentals":           "Hi SVRM Group, I'd like to enquire about vehicle rentals.",
+  "/stays":             "Hi SVRM Group, I'd like to enquire about accommodation and villa stays.",
+  "/tours":             "Hi SVRM Group, I'd like to enquire about a private tour.",
+  "/security":          "Hi SVRM Group, I'd like to enquire about security services.",
+  "/custom":            "Hi SVRM Group, I'd like to enquire about a custom itinerary.",
+  "/airport-transfers": "Hi SVRM Group, I'd like to book an airport transfer.",
+  "/chauffeur":         "Hi SVRM Group, I'd like to enquire about chauffeur service.",
+  "/aquila-safari":     "Hi SVRM Group, I'd like to enquire about the Aquila safari day trip.",
+};
 
-2. **On approval, wire it into the site so Google picks it up.**
-   - Replace `public/favicon.ico` and add `public/favicon-32.png`, `public/favicon-192.png`, `public/favicon-512.png` (all transparent circles from the same source).
-   - Update `<link rel="icon">` and `<link rel="apple-touch-icon">` in `index.html` to point at the new files.
-   - Update the Organization JSON-LD `logo` field in `index.html` to the 512px transparent PNG URL.
-   - Update the sitewide `og:image` (only if you already had one — Google sometimes falls back to it).
-   - Do NOT touch the admin `/admin` PWA icons — those were locked to the admin console last turn and stay as they are.
+export const WHATSAPP_BASE = "https://wa.me/27730641481"; // svrmgroup short link not guaranteed to resolve
 
-3. **Tell Google to refresh.**
-   - Google re-crawls on its own schedule (days to weeks). To speed it up, submit the homepage URL via Search Console → URL Inspection → Request indexing after publish.
+export function whatsappUrlFor(pathname: string): string {
+  // Exact match first, then first-segment fallback, then generic Home.
+  const exact = WHATSAPP_MESSAGES[pathname];
+  const seg = "/" + pathname.split("/").filter(Boolean)[0];
+  const msg = exact ?? WHATSAPP_MESSAGES[seg] ?? WHATSAPP_MESSAGES["/"];
+  return `${WHATSAPP_BASE}?text=${encodeURIComponent(msg)}`;
+}
+```
 
-## Out of scope
+- Uses `encodeURIComponent` at runtime — no hardcoded encoded strings.
+- Contact (`/contact`) and Journal (`/blog`) aren't in the map, so they fall through to the generic Home message per the brief.
 
-- No layout, copy, or navigation changes.
-- No changes to the admin console icons.
-- No new logo variants (dark mode, monochrome, etc.) unless you ask.
+**Wire into buttons** via `useLocation()`:
+
+- `src/components/svrm/WhatsAppFab.tsx` — replace the hardcoded `buildWhatsAppUrlRaw(...)` with `whatsappUrlFor(useLocation().pathname)`. Style, position, colour, `target="_blank"` unchanged.
+- `src/components/svrm/Nav.tsx` — same swap for both the desktop "Enquire" pill and the mobile sheet's "Enquire on WhatsApp" button.
+
+The legacy `buildWhatsAppUrl` / `buildWhatsAppUrlRaw` helpers in `src/lib/whatsapp.ts` stay put (they're referenced from ~30 other components — enquiry forms, PDFs, etc.) so this change is scoped to the two buttons the brief calls out.
+
+## 2. Aquila Safari as a tour
+
+Create a new sub-tour under Tours rather than a standalone page (matches how every other tour is modelled, keeps routing clean).
+
+- Add an `aquila-safari` entry in `src/data/tours.ts` with `duration: "1 day"`, hero image, description, inclusions (game drive, lunch, hotel pickup), and a WhatsApp-first CTA.
+- Add it to the Tours nav dropdown in `src/lib/navCategories.ts` under a new **"Day trips"** heading (or as a top-level Tours item — see Q1 below).
+- Route already exists via the dynamic `/tours/:slug` — no `App.tsx` change needed.
+- Image: use `imagegen` (standard tier) to produce a photograph of white lions / a game-drive vehicle in Karoo landscape, saved as an `.asset.json` under `src/assets/tours/`.
+
+The brief's `/aquila-safari` route in the WhatsApp map is kept as-is — anyone landing there (e.g. from a marketing link) still gets the Aquila-specific message thanks to the exact-match config. If we redirect `/aquila-safari` → `/tours/aquila-safari`, the fallback logic still picks the Aquila message because `/tours` is the first-segment fallback… but Aquila is more specific, so I'll also add `/tours/aquila-safari` to the map.
+
+## 3. Sort tours by duration
+
+Every category in `src/data/tours.ts` has a `packages[]` array with a `duration` string like `"3 days"`, `"30 min"`, `"1 day"`. Add a `durationToHours()` helper and sort each category's packages ascending. Where `Tours.tsx` / `TourDetail.tsx` render packages, they'll pick up the pre-sorted array automatically (no component change needed).
+
+Parser handles: `N min`, `N hour(s)`, `N day(s)`, `N week(s)`. Unknown strings sort last.
+
+## 4. WhatsApp as primary contact
+
+Audit human-name / phone / email CTAs on public pages and replace with the WhatsApp button where they duplicate contact intent. Concretely:
+
+- `Footer.tsx`, `ClosingCTA.tsx`, `Contact.tsx`, `Hero.tsx`, category cards: swap `"Call our concierge"` / `"Email"` style CTAs to the route-aware WhatsApp button. Keep one small email + phone line in the footer for legitimacy, but demote it — WhatsApp becomes the primary call-to-action colour/size.
+- No admin pages touched (they already have their own tooling).
+
+Full list of files to touch will come from a `rg` sweep during build — locked to public routes only.
+
+## 5. Menu reorganisation
+
+Update `src/components/svrm/Nav.tsx` `links` order so "Custom" sits with service pages, not between Journal/Contact:
+
+```
+Home · Travel · Rentals · Stays · Tours · Security · Custom · Journal · Contact
+```
+
+It's already in that position 👍 — but visually "Custom" points at `/experiences`, which is inconsistent with everything else being top-level. Two options in Q2.
+
+**Add Airport Transfers under Travel** in `src/lib/navCategories.ts`:
+
+```ts
+"/travel": [
+  { label: "Chauffeured Cars",     to: "/travel?cat=cars" },
+  { label: "Airport Transfers — Small",  to: "/airport-transfers?size=small" },
+  { label: "Airport Transfers — Medium", to: "/airport-transfers?size=medium" },
+  { label: "Airport Transfers — Large / Van", to: "/airport-transfers?size=large" },
+  { label: "Private Jets",         to: "/travel?cat=jets" },
+  { label: "Helicopters",          to: "/travel?cat=helicopters" },
+  { label: "Yachts",               to: "/travel?cat=yachts" },
+],
+```
+
+New minimal page `src/pages/AirportTransfers.tsx` + route in `App.tsx`:
+- Reads `?size=` from the URL, shows a single enquiry card ("Small / Medium / Large / Van — enquire on WhatsApp") — **no per-vehicle listings**, per the brief.
+- Primary CTA is the route-aware WhatsApp button, which auto-fills the Aquila-style message.
 
 ## Technical notes
 
-- Google's site-icon spec: square, ≥ 48×48, same origin as the page, referenced from `<link rel="icon">` or `schema.org` Organization `logo`. Transparent PNG lets Google's own circular crop show only the disc, which is what removes the "square border" look.
-- Favicon replacement usually takes 1–4 weeks to appear in search results even after re-indexing.
+- No database or edge-function changes.
+- No new dependencies.
+- `useLocation()` is already used elsewhere; safe inside `Nav` and `WhatsAppFab` since they render inside `<BrowserRouter>`.
+- Sorting is done at module load time in `tours.ts`, so it costs nothing at render.
+
+## Open questions
+
+1. **Aquila nav placement** — add it as a plain Tours-dropdown item (`{ label: "Aquila Safari (Day)", to: "/tours/aquila-safari" }`) or split the dropdown into a "Day trips" subsection with Aquila under it? I'd default to plain item unless you want the subsection.
+2. **"Custom" label** — keep as `Custom` pointing at `/experiences`, or rename the route to `/custom` (redirect old URL) so nav slug and label match? Renaming is cleaner but requires updating internal links.
+
+I'll assume plain item + keep `/experiences` route (with `/custom` as an alias redirect) unless you say otherwise.

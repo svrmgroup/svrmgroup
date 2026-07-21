@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { Menu } from "lucide-react";
 import Logo from "./Logo";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import CurrencySwitch from "./CurrencySwitch";
 import LanguageSwitch from "./LanguageSwitch";
-import { buildWhatsAppUrlRaw } from "@/lib/whatsapp";
+import { whatsappUrlFor } from "@/lib/whatsappMessages";
 
 import { navCategories } from "@/lib/navCategories";
 
@@ -18,7 +18,6 @@ const links = [
   { to: "/security", label: "Security" },
   { to: "/experiences", label: "Custom" },
   { to: "/blog", label: "Journal" },
-  
   { to: "/contact", label: "Contact" },
 ];
 
@@ -30,6 +29,8 @@ const linkClass = ({ isActive }: { isActive: boolean }) =>
   }`;
 
 const Nav = () => {
+  const { pathname } = useLocation();
+  const waHref = whatsappUrlFor(pathname);
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -91,7 +92,7 @@ const Nav = () => {
           <CurrencySwitch className="hidden md:block" />
 
           <a
-            href={buildWhatsAppUrlRaw("Hi SVRM Group, I'd like to make a concierge enquiry. Please assist me with availability and booking details.")}
+            href={waHref}
             target="_blank"
             rel="noopener noreferrer"
             className="hidden sm:inline-block text-[11px] uppercase tracking-[0.28em] text-gold border border-primary/60 px-4 py-2.5 hover:bg-primary hover:text-primary-foreground transition-colors duration-500"
@@ -131,7 +132,7 @@ const Nav = () => {
                 ))}
                 <div className="pt-2 flex flex-col gap-3"><LanguageSwitch /><CurrencySwitch /></div>
                 <a
-                  href={buildWhatsAppUrlRaw("Hi SVRM Group, I'd like to make a concierge enquiry. Please assist me with availability and booking details.")}
+                  href={waHref}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-4 text-center text-xs uppercase tracking-[0.28em] text-primary-foreground bg-primary px-5 py-4"
