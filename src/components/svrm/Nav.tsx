@@ -29,6 +29,8 @@ const linkClass = ({ isActive }: { isActive: boolean }) =>
   }`;
 
 const Nav = () => {
+  const { pathname } = useLocation();
+  const waHref = whatsappUrlFor(pathname);
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
