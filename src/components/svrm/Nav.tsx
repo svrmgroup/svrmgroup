@@ -92,7 +92,7 @@ const Nav = () => {
           <CurrencySwitch className="hidden md:block" />
 
           <a
-            href={buildWhatsAppUrlRaw("Hi SVRM Group, I'd like to make a concierge enquiry. Please assist me with availability and booking details.")}
+            href={waHref}
             target="_blank"
             rel="noopener noreferrer"
             className="hidden sm:inline-block text-[11px] uppercase tracking-[0.28em] text-gold border border-primary/60 px-4 py-2.5 hover:bg-primary hover:text-primary-foreground transition-colors duration-500"
@@ -132,7 +132,7 @@ const Nav = () => {
                 ))}
                 <div className="pt-2 flex flex-col gap-3"><LanguageSwitch /><CurrencySwitch /></div>
                 <a
-                  href={buildWhatsAppUrlRaw("Hi SVRM Group, I'd like to make a concierge enquiry. Please assist me with availability and booking details.")}
+                  href={waHref}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-4 text-center text-xs uppercase tracking-[0.28em] text-primary-foreground bg-primary px-5 py-4"
