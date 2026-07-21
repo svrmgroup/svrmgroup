@@ -33,16 +33,13 @@ const ClientPortal = () => {
 
   useEffect(() => { (async () => {
     if (!token) return;
-    const [{ data: bRows }, { data: s }] = await Promise.all([
-      supabase.rpc("get_booking_by_token" as any, { _token: token }),
-      supabase.rpc("get_public_settings" as any),
-    ]);
+    const { data, error } = await supabase.functions.invoke("portal-data", {
+      body: { token, include: ["booking", "public_settings"] },
+    });
     setLoading(false);
-    const b = Array.isArray(bRows) ? bRows[0] : bRows;
-    if (!b) return toast.error("Booking not found");
-    setBooking(b as any);
-    const row = Array.isArray(s) ? s[0] : s;
-    setSettings((row as any) || {});
+    if (error || !data?.booking) return toast.error("Booking not found");
+    setBooking(data.booking as any);
+    setSettings((data.public_settings as any) || {});
   })(); }, [token]);
 
   const submit = async () => {
