@@ -71,9 +71,11 @@ async function loadSettings(override?: Partial<Settings> | null, portalToken?: s
   if (cache) return cache;
   try {
     if (portalToken) {
-      // Client portal (unauthenticated) — fetch full invoice settings via token-scoped RPC.
-      const { data } = await (supabase as any).rpc("get_invoice_settings_by_token", { _token: portalToken });
-      const row = Array.isArray(data) ? data[0] : data;
+      // Client portal (unauthenticated) — fetch full invoice settings via edge function proxy.
+      const { data } = await supabase.functions.invoke("portal-data", {
+        body: { token: portalToken, include: ["invoice_settings"] },
+      });
+      const row = (data as any)?.invoice_settings;
       cache = { ...DEFAULTS, ...(row as any) };
     } else {
       // Admin (authenticated) — direct table read allowed by RLS.
