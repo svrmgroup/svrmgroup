@@ -1,40 +1,50 @@
 import { useMemo, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Seo } from "@/components/Seo";
-import PageHero from "@/components/svrm/PageHero";
 import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
-import KenBurnsImage from "@/components/svrm/KenBurnsImage";
 import { WHATSAPP_BASE } from "@/lib/whatsappMessages";
-import { MessageCircle, Users, Luggage, MapPin, CalendarClock } from "lucide-react";
-import vclass from "@/assets/vehicles/vclass.jpg";
-import staria from "@/assets/vehicles/staria.jpg";
-import eclass from "@/assets/vehicles/eclass.jpg";
-import bmwx3 from "@/assets/vehicles/bmwx3.jpg";
-import cclass from "@/assets/vehicles/cclass.jpg";
-import corolla from "@/assets/vehicles/corolla.jpg";
-import sclass from "@/assets/vehicles/sclass.jpg";
-import sprinter16 from "@/assets/vehicles/sprinter16.jpg";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
+import { MessageCircle, Users, Luggage, MapPin, CalendarClock, Send } from "lucide-react";
+import hero from "@/assets/airport-transfers-hero.jpg";
 
-type Car = { name: string; image: string; seats: string; bags: string; blurb: string };
-
-const CARS: Car[] = [
-  { name: "Mercedes V-Class", image: vclass, seats: "1–7 guests", bags: "6+ bags", blurb: "Lounge-seating people-mover for families and executives." },
-  { name: "Hyundai Staria", image: staria, seats: "1–9 guests", bags: "7+ bags", blurb: "Modern van, ideal for larger parties with full luggage." },
-  { name: "Mercedes E-Class", image: eclass, seats: "1–3 guests", bags: "2–3 bags", blurb: "Discreet executive sedan for solo travellers and couples." },
-  { name: "Mercedes S-Class", image: sclass, seats: "1–3 guests", bags: "2–3 bags", blurb: "Flagship chauffeured sedan — the quiet standard." },
-  { name: "BMW X3", image: bmwx3, seats: "1–4 guests", bags: "3–4 bags", blurb: "Compact SUV with room for a small family and luggage." },
-  { name: "Mercedes C-Class", image: cclass, seats: "1–3 guests", bags: "2 bags", blurb: "Understated daily-driver sedan for city transfers." },
-  { name: "Toyota Corolla", image: corolla, seats: "1–3 guests", bags: "2 bags", blurb: "Value pick — reliable, comfortable, budget-friendly." },
-  { name: "Sprinter · 16-seater", image: sprinter16, seats: "8–16 guests", bags: "Full luggage", blurb: "Group transfer with executive seating and space to spare." },
+// Common Cape Town pickup / drop-off points for autofill.
+const PLACES = [
+  "Cape Town International Airport (CPT)",
+  "V&A Waterfront",
+  "Camps Bay",
+  "Clifton",
+  "Sea Point",
+  "Green Point",
+  "City Bowl / CBD",
+  "Constantia",
+  "Bantry Bay",
+  "Bo-Kaap",
+  "Hout Bay",
+  "Stellenbosch",
+  "Franschhoek",
+  "Table Mountain Cableway",
+  "Cape Grace Hotel",
+  "One&Only Cape Town",
+  "The Silo Hotel",
+  "Ellerman House",
+  "Mount Nelson Hotel",
+  "Cape Winelands",
 ];
 
 const AirportTransfers = () => {
+  const location = useLocation();
   const [pax, setPax] = useState("2");
   const [bags, setBags] = useState("2");
   const [when, setWhen] = useState("");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
-  const [prefCar, setPrefCar] = useState<string>("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [done, setDone] = useState(false);
 
   const message = useMemo(() => {
     const lines = [
@@ -45,155 +55,232 @@ const AirportTransfers = () => {
       bags ? `Luggage: ${bags} bags` : null,
       from ? `From: ${from}` : null,
       to ? `To: ${to}` : null,
-      prefCar ? `Preferred vehicle: ${prefCar}` : null,
     ].filter(Boolean);
     return lines.join("\n");
-  }, [when, pax, bags, from, to, prefCar]);
+  }, [when, pax, bags, from, to]);
 
   const waHref = `${WHATSAPP_BASE}?text=${encodeURIComponent(message)}`;
+
+  const submitEnquiry = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name.trim() || !email.trim()) {
+      toast.error("Please add your name and email.");
+      return;
+    }
+    setSubmitting(true);
+    const body = [
+      when ? `Date/time: ${when}` : null,
+      pax ? `Passengers: ${pax}` : null,
+      bags ? `Luggage: ${bags} bags` : null,
+      from ? `From: ${from}` : null,
+      to ? `To: ${to}` : null,
+    ].filter(Boolean).join("\n");
+    const { error } = await supabase.from("enquiries").insert({
+      name: name.trim(),
+      email: email.trim(),
+      phone: phone.trim() || null,
+      subject: "Airport transfer enquiry",
+      message: body || "Airport transfer enquiry",
+      source_page: location.pathname,
+    });
+    setSubmitting(false);
+    if (error) {
+      toast.error("Couldn't send. Please try WhatsApp instead.");
+      return;
+    }
+    setDone(true);
+    toast.success("Enquiry received. We'll respond within hours.");
+  };
+
+  const inputCls =
+    "bg-surface-raised/60 border border-border/60 px-4 py-3 text-sm text-foreground focus:border-primary outline-none [color-scheme:dark]";
 
   return (
     <>
       <Seo
         title="Airport Transfers · SVRM Group | Cape Town"
-        description="Private, chauffeured airport transfers in Cape Town. Choose your vehicle, tell us your route and party size, and we'll confirm on WhatsApp within minutes."
+        description="Private, chauffeured airport transfers in Cape Town. Share your route and party size, and we'll confirm on WhatsApp within minutes."
         path="/airport-transfers"
       />
       <Nav />
-      <PageHero
-        eyebrow="Travel"
-        title="Airport transfers"
-        subtitle="Choose your vehicle. Share the route. We handle the rest — chauffeured, on time, on WhatsApp."
-      />
 
-      <main className="max-w-6xl mx-auto px-6 lg:px-10 py-16 md:py-24 space-y-16">
-        {/* Enquiry form */}
-        <section className="card-luxury p-6 md:p-10">
-          <p className="eyebrow">Enquire</p>
-          <h2 className="font-serif text-3xl md:text-4xl mt-2">Tell us about your transfer</h2>
-          <p className="text-sm text-muted-foreground mt-3 max-w-2xl">
-            Fill in what you know — flight number, hotel, party size. Send it straight to
-            our concierge on WhatsApp and we'll confirm the vehicle, driver and quote.
+      {/* Hero image */}
+      <header className="relative w-full h-[52vh] min-h-[380px] max-h-[640px] overflow-hidden">
+        <img
+          src={hero}
+          alt="Black Mercedes V-Class with luggage at Cape Town International Airport"
+          width={1920}
+          height={960}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-background/10" />
+        <div className="relative z-10 h-full max-w-6xl mx-auto px-6 lg:px-10 flex flex-col justify-end pb-10 md:pb-16">
+          <p className="eyebrow text-gold">Travel</p>
+          <h1 className="font-serif text-4xl md:text-6xl mt-3 text-foreground max-w-3xl">
+            Airport transfers
+          </h1>
+          <p className="mt-4 max-w-2xl text-sm md:text-base text-muted-foreground">
+            Chauffeured, on time, on WhatsApp. Share the route — we handle the rest.
           </p>
+        </div>
+      </header>
 
-          <div className="mt-8 grid md:grid-cols-2 gap-4">
-            <label className="flex flex-col gap-1.5">
-              <span className="eyebrow flex items-center gap-2"><CalendarClock className="h-3.5 w-3.5" /> Date & time</span>
-              <input
-                type="datetime-local"
-                value={when}
-                onChange={(e) => setWhen(e.target.value)}
-                className="bg-transparent border border-border/60 px-4 py-3 text-sm focus:border-primary outline-none"
-              />
-            </label>
-            <label className="flex flex-col gap-1.5">
-              <span className="eyebrow flex items-center gap-2"><Users className="h-3.5 w-3.5" /> Passengers</span>
-              <input
-                type="number"
-                min={1}
-                value={pax}
-                onChange={(e) => setPax(e.target.value)}
-                className="bg-transparent border border-border/60 px-4 py-3 text-sm focus:border-primary outline-none"
-              />
-            </label>
-            <label className="flex flex-col gap-1.5">
-              <span className="eyebrow flex items-center gap-2"><Luggage className="h-3.5 w-3.5" /> Luggage (bags)</span>
-              <input
-                type="number"
-                min={0}
-                value={bags}
-                onChange={(e) => setBags(e.target.value)}
-                className="bg-transparent border border-border/60 px-4 py-3 text-sm focus:border-primary outline-none"
-              />
-            </label>
-            <label className="flex flex-col gap-1.5">
-              <span className="eyebrow">Preferred vehicle (optional)</span>
-              <select
-                value={prefCar}
-                onChange={(e) => setPrefCar(e.target.value)}
-                className="bg-transparent border border-border/60 px-4 py-3 text-sm focus:border-primary outline-none"
-              >
-                <option value="">Any — recommend for me</option>
-                {CARS.map((c) => (
-                  <option key={c.name} value={c.name}>{c.name}</option>
-                ))}
-              </select>
-            </label>
-            <label className="flex flex-col gap-1.5">
-              <span className="eyebrow flex items-center gap-2"><MapPin className="h-3.5 w-3.5" /> From</span>
-              <input
-                type="text"
-                placeholder="Hotel, address or CTIA"
-                value={from}
-                onChange={(e) => setFrom(e.target.value)}
-                className="bg-transparent border border-border/60 px-4 py-3 text-sm focus:border-primary outline-none"
-              />
-            </label>
-            <label className="flex flex-col gap-1.5">
-              <span className="eyebrow flex items-center gap-2"><MapPin className="h-3.5 w-3.5" /> To</span>
-              <input
-                type="text"
-                placeholder="Airport, hotel or address"
-                value={to}
-                onChange={(e) => setTo(e.target.value)}
-                className="bg-transparent border border-border/60 px-4 py-3 text-sm focus:border-primary outline-none"
-              />
-            </label>
-          </div>
-
-          <div className="mt-8 flex flex-col sm:flex-row gap-3">
+      <main className="max-w-6xl mx-auto px-6 lg:px-10 py-16 md:py-24 space-y-10">
+        {done ? (
+          <div className="card-luxury p-8 md:p-12 text-center">
+            <p className="eyebrow">Thank you</p>
+            <h2 className="font-serif text-3xl md:text-4xl mt-3">Your enquiry is with us.</h2>
+            <p className="mt-4 text-sm text-muted-foreground max-w-xl mx-auto">
+              Our concierge will confirm the vehicle, driver and quote personally, within hours.
+              For anything urgent, message us directly on WhatsApp.
+            </p>
             <a
               href={waHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-3 flex-1 bg-[#25D366] text-black font-medium tracking-[0.18em] uppercase text-sm px-6 py-5 hover:brightness-95 transition"
+              className="mt-6 inline-flex items-center gap-2 bg-[#25D366] text-black font-medium tracking-[0.18em] uppercase text-sm px-6 py-4"
             >
-              <MessageCircle className="h-5 w-5" />
-              Send on WhatsApp
-            </a>
-            <a
-              href={`mailto:concierge@svrm.group?subject=${encodeURIComponent("Airport transfer enquiry")}&body=${encodeURIComponent(message)}`}
-              className="inline-flex items-center justify-center flex-1 border border-primary/60 text-gold uppercase tracking-[0.24em] text-xs px-6 py-5 hover:bg-primary hover:text-primary-foreground transition-colors"
-            >
-              Enquire by email
+              <MessageCircle className="h-5 w-5" /> Message on WhatsApp
             </a>
           </div>
-        </section>
+        ) : (
+          <form onSubmit={submitEnquiry} className="card-luxury p-6 md:p-10">
+            <p className="eyebrow">Enquire</p>
+            <h2 className="font-serif text-3xl md:text-4xl mt-2">Tell us about your transfer</h2>
+            <p className="text-sm text-muted-foreground mt-3 max-w-2xl">
+              Fill in what you know — flight number, hotel, party size. Send it to
+              our concierge and we'll confirm the vehicle, driver and quote.
+            </p>
 
-        {/* Vehicle picker */}
-        <section>
-          <p className="eyebrow">Choose your vehicle</p>
-          <h2 className="font-serif text-3xl md:text-4xl mt-2">Our transfer fleet</h2>
-          <p className="text-sm text-muted-foreground mt-3 max-w-2xl">
-            Every transfer is chauffeured. Pick a vehicle to preview, or leave it to us
-            and we'll match to your party and luggage.
-          </p>
+            {/* Trip details */}
+            <div className="mt-8 grid md:grid-cols-2 gap-4">
+              <label className="flex flex-col gap-1.5">
+                <span className="eyebrow flex items-center gap-2"><CalendarClock className="h-3.5 w-3.5" /> Date & time</span>
+                <input
+                  type="datetime-local"
+                  value={when}
+                  onChange={(e) => setWhen(e.target.value)}
+                  onClick={(e) => {
+                    // Modern browsers support showPicker() — force the native picker to open on click.
+                    const el = e.currentTarget as HTMLInputElement & { showPicker?: () => void };
+                    try { el.showPicker?.(); } catch { /* noop */ }
+                  }}
+                  className={inputCls + " cursor-pointer"}
+                />
+              </label>
+              <label className="flex flex-col gap-1.5">
+                <span className="eyebrow flex items-center gap-2"><Users className="h-3.5 w-3.5" /> Passengers</span>
+                <input
+                  type="number"
+                  min={1}
+                  value={pax}
+                  onChange={(e) => setPax(e.target.value)}
+                  className={inputCls}
+                />
+              </label>
+              <label className="flex flex-col gap-1.5">
+                <span className="eyebrow flex items-center gap-2"><Luggage className="h-3.5 w-3.5" /> Luggage (bags)</span>
+                <input
+                  type="number"
+                  min={0}
+                  value={bags}
+                  onChange={(e) => setBags(e.target.value)}
+                  className={inputCls}
+                />
+              </label>
+              <div className="hidden md:block" />
+              <label className="flex flex-col gap-1.5">
+                <span className="eyebrow flex items-center gap-2"><MapPin className="h-3.5 w-3.5" /> From</span>
+                <input
+                  type="text"
+                  list="svrm-places"
+                  autoComplete="on"
+                  placeholder="Hotel, address or CTIA"
+                  value={from}
+                  onChange={(e) => setFrom(e.target.value)}
+                  className={inputCls}
+                />
+              </label>
+              <label className="flex flex-col gap-1.5">
+                <span className="eyebrow flex items-center gap-2"><MapPin className="h-3.5 w-3.5" /> To</span>
+                <input
+                  type="text"
+                  list="svrm-places"
+                  autoComplete="on"
+                  placeholder="Airport, hotel or address"
+                  value={to}
+                  onChange={(e) => setTo(e.target.value)}
+                  className={inputCls}
+                />
+              </label>
+              <datalist id="svrm-places">
+                {PLACES.map((p) => <option key={p} value={p} />)}
+              </datalist>
+            </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-            {CARS.map((c, i) => (
-              <article
-                key={c.name}
-                className={`group bg-surface-raised border ${prefCar === c.name ? "border-primary/70" : "border-border/40"} flex flex-col cursor-pointer transition-colors`}
-                onClick={() => setPrefCar(c.name)}
+            {/* Contact */}
+            <div className="mt-8 pt-8 border-t border-border/40">
+              <p className="eyebrow">Your details</p>
+              <div className="mt-4 grid md:grid-cols-3 gap-4">
+                <label className="flex flex-col gap-1.5">
+                  <span className="eyebrow">Name</span>
+                  <input
+                    type="text"
+                    required
+                    autoComplete="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className={inputCls}
+                  />
+                </label>
+                <label className="flex flex-col gap-1.5">
+                  <span className="eyebrow">Email</span>
+                  <input
+                    type="email"
+                    required
+                    autoComplete="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className={inputCls}
+                  />
+                </label>
+                <label className="flex flex-col gap-1.5">
+                  <span className="eyebrow">Phone (optional)</span>
+                  <input
+                    type="tel"
+                    autoComplete="tel"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    className={inputCls}
+                  />
+                </label>
+              </div>
+            </div>
+
+            <div className="mt-8 flex flex-col sm:flex-row gap-3">
+              <a
+                href={waHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-3 flex-1 bg-[#25D366] text-black font-medium tracking-[0.18em] uppercase text-sm px-6 py-5 hover:brightness-95 transition"
               >
-                <KenBurnsImage src={c.image} alt={c.name} className="aspect-[16/10]" direction={(i % 4) as 0 | 1 | 2 | 3} />
-                <div className="p-5 flex-1 flex flex-col">
-                  <p className="eyebrow">{c.seats} · {c.bags}</p>
-                  <h3 className="font-serif text-xl mt-2 text-foreground">{c.name}</h3>
-                  <p className="text-sm text-muted-foreground mt-2 flex-1">{c.blurb}</p>
-                  <div className="mt-4 text-[10px] uppercase tracking-[0.24em] text-gold">
-                    {prefCar === c.name ? "Selected" : "Tap to select"}
-                  </div>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <p className="text-xs text-muted-foreground max-w-2xl">
-          WhatsApp is the fastest way to reach our concierge. Share your flight number,
-          pickup point and party size — we'll confirm within minutes.
-        </p>
+                <MessageCircle className="h-5 w-5" />
+                Send on WhatsApp
+              </a>
+              <button
+                type="submit"
+                disabled={submitting}
+                className="inline-flex items-center justify-center gap-2 flex-1 bg-primary text-primary-foreground uppercase tracking-[0.24em] text-xs px-6 py-5 hover:brightness-110 transition disabled:opacity-60"
+              >
+                <Send className="h-4 w-4" />
+                {submitting ? "Sending…" : "Enquire"}
+              </button>
+            </div>
+            <p className="mt-4 text-xs text-muted-foreground">
+              Pressing Enquire sends your request straight to our admin console — we reply within hours.
+            </p>
+          </form>
+        )}
       </main>
 
       <Footer />
