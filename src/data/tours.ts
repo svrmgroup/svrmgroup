@@ -297,8 +297,6 @@ export const tours: TourCategory[] = [
       },
     ],
   },
-];
-
   {
     slug: "aquila-safari",
     label: "Aquila Safari — Day Trip",
