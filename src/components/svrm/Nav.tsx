@@ -6,6 +6,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import CurrencySwitch from "./CurrencySwitch";
 import LanguageSwitch from "./LanguageSwitch";
 import { whatsappUrlFor } from "@/lib/whatsappMessages";
+import WhatsAppGlyph from "./WhatsAppGlyph";
 
 import { navCategories } from "@/lib/navCategories";
 
