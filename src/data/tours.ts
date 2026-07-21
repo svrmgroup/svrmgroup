@@ -307,12 +307,34 @@ export const tours: TourCategory[] = [
     packages: [
       {
         duration: "1 day",
-        title: "Aquila Big Five day safari",
-        fromZAR: 4800,
+        title: "Aquila Big Five day safari (morning)",
+        fromZAR: null,
         inclusions: [
-          "Private hotel pickup & return (Cape Town)",
+          "Private hotel pickup at dawn & return early afternoon",
           "Morning game drive at Aquila Private Game Reserve",
           "Buffet lunch at the lodge",
+          "Chauffeured private vehicle, end to end",
+        ],
+      },
+      {
+        duration: "1 day",
+        title: "Aquila Big Five safari (midday)",
+        fromZAR: null,
+        inclusions: [
+          "Late-morning hotel pickup, mid-afternoon return",
+          "Midday game drive in an open 4x4",
+          "Buffet lunch at the lodge",
+          "Chauffeured private vehicle, end to end",
+        ],
+      },
+      {
+        duration: "1 day",
+        title: "Aquila sunset safari",
+        fromZAR: null,
+        inclusions: [
+          "Afternoon hotel pickup, late-evening return",
+          "Golden-hour & sunset game drive",
+          "Dinner at the lodge",
           "Chauffeured private vehicle, end to end",
         ],
       },
