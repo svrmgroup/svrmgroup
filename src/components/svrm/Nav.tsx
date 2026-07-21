@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { Menu } from "lucide-react";
 import Logo from "./Logo";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import CurrencySwitch from "./CurrencySwitch";
 import LanguageSwitch from "./LanguageSwitch";
-import { buildWhatsAppUrlRaw } from "@/lib/whatsapp";
+import { whatsappUrlFor } from "@/lib/whatsappMessages";
 
 import { navCategories } from "@/lib/navCategories";
 
@@ -18,7 +18,6 @@ const links = [
   { to: "/security", label: "Security" },
   { to: "/experiences", label: "Custom" },
   { to: "/blog", label: "Journal" },
-  
   { to: "/contact", label: "Contact" },
 ];
 
