@@ -125,7 +125,7 @@ const AirportTransfers = () => {
         title="Cape Town Airport Transfers | Private Chauffeur | SVRM Group"
         description="Private chauffeured airport transfers in Cape Town — Mercedes V-Class, E-Class, BMW X3, Sprinter. Flat rates, on-time meet & greet, book on WhatsApp in minutes."
         path="/airport-transfers"
-        keywords={["Cape Town airport transfer", "CPT airport transfer", "private chauffeur Cape Town", "Mercedes V-Class transfer", "luxury airport pickup Cape Town", "SVRM Group"]}
+        keywords="Cape Town airport transfer, CPT airport transfer, private chauffeur Cape Town, Mercedes V-Class transfer, luxury airport pickup Cape Town, SVRM Group"
       />
       <Nav />
 
