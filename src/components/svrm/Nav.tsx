@@ -97,7 +97,7 @@ const Nav = () => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Chat with SVRM on WhatsApp"
-            className="hidden sm:inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#C9A961]/60 bg-[#1A1613] text-[#C9A961] transition-colors hover:bg-[#252017]"
+            className="hidden sm:inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#25D366] text-black transition-all hover:brightness-95 shadow-[0_4px_14px_-4px_rgba(37,211,102,0.55)]"
           >
             <WhatsAppGlyph className="h-4 w-4" />
           </a>
@@ -147,8 +147,9 @@ const Nav = () => {
                   href={waHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-4 text-center text-xs uppercase tracking-[0.28em] text-primary-foreground bg-primary px-5 py-4"
+                  className="mt-4 inline-flex items-center justify-center gap-2 text-center text-xs uppercase tracking-[0.28em] text-black bg-[#25D366] px-5 py-4 hover:brightness-95 transition"
                 >
+                  <WhatsAppGlyph className="h-4 w-4" />
                   Enquire on WhatsApp
                 </a>
               </div>
