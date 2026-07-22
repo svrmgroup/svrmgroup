@@ -122,9 +122,10 @@ const AirportTransfers = () => {
   return (
     <>
       <Seo
-        title="Airport Transfers · SVRM Group | Cape Town"
-        description="Private, chauffeured airport transfers in Cape Town. Share your route and party size, and we'll confirm on WhatsApp within minutes."
+        title="Cape Town Airport Transfers | Private Chauffeur | SVRM Group"
+        description="Private chauffeured airport transfers in Cape Town — Mercedes V-Class, E-Class, BMW X3, Sprinter. Flat rates, on-time meet & greet, book on WhatsApp in minutes."
         path="/airport-transfers"
+        keywords={["Cape Town airport transfer", "CPT airport transfer", "private chauffeur Cape Town", "Mercedes V-Class transfer", "luxury airport pickup Cape Town", "SVRM Group"]}
       />
       <Nav />
 
@@ -266,11 +267,12 @@ const AirportTransfers = () => {
                   type="text"
                   list="svrm-places"
                   autoComplete="on"
-                  placeholder="Hotel, address or CTIA"
+                  placeholder="Type any address, hotel or CTIA — or pick from list"
                   value={from}
                   onChange={(e) => setFrom(e.target.value)}
                   className={inputCls}
                 />
+                <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground/70">Custom location? Just type it in.</span>
               </label>
               <label className="flex flex-col gap-1.5">
                 <span className="eyebrow flex items-center gap-2"><MapPin className="h-3.5 w-3.5" /> To</span>
@@ -278,13 +280,15 @@ const AirportTransfers = () => {
                   type="text"
                   list="svrm-places"
                   autoComplete="on"
-                  placeholder="Airport, hotel or address"
+                  placeholder="Type any address, hotel or CTIA — or pick from list"
                   value={to}
                   onChange={(e) => setTo(e.target.value)}
                   className={inputCls}
                 />
+                <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground/70">Custom location? Just type it in.</span>
               </label>
               <datalist id="svrm-places">
+                <option value="Custom location — type your own" />
                 {PLACES.map((p) => <option key={p} value={p} />)}
               </datalist>
             </div>

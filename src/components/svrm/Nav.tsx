@@ -147,8 +147,9 @@ const Nav = () => {
                   href={waHref}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-4 text-center text-xs uppercase tracking-[0.28em] text-primary-foreground bg-primary px-5 py-4"
+                  className="mt-4 inline-flex items-center justify-center gap-2 text-center text-xs uppercase tracking-[0.28em] text-black bg-[#25D366] px-5 py-4 hover:brightness-95 transition"
                 >
+                  <WhatsAppGlyph className="h-4 w-4" />
                   Enquire on WhatsApp
                 </a>
               </div>
