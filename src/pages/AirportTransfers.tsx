@@ -180,17 +180,64 @@ const AirportTransfers = () => {
             <div className="mt-8 grid md:grid-cols-2 gap-4">
               <label className="flex flex-col gap-1.5">
                 <span className="eyebrow flex items-center gap-2"><CalendarClock className="h-3.5 w-3.5" /> Date & time</span>
-                <input
-                  type="datetime-local"
-                  value={when}
-                  onChange={(e) => setWhen(e.target.value)}
-                  onClick={(e) => {
-                    // Modern browsers support showPicker() — force the native picker to open on click.
-                    const el = e.currentTarget as HTMLInputElement & { showPicker?: () => void };
-                    try { el.showPicker?.(); } catch { /* noop */ }
-                  }}
-                  className={inputCls + " cursor-pointer"}
-                />
+                <Popover open={dateOpen} onOpenChange={setDateOpen}>
+                  <PopoverTrigger asChild>
+                    <button
+                      type="button"
+                      className={cn(
+                        inputCls,
+                        "cursor-pointer flex items-center justify-between gap-3 text-left w-full",
+                        !when && "text-muted-foreground"
+                      )}
+                    >
+                      <span className="flex items-center gap-3 min-w-0">
+                        <CalendarIcon className="h-4 w-4 text-gold shrink-0" />
+                        <span className="truncate">
+                          {when
+                            ? `${formatDate(selectedDate ?? new Date(), { day: "numeric", month: "short", year: "numeric" })} at ${selectedTime}`
+                            : "Pick a date & time"}
+                        </span>
+                      </span>
+                      {when && (
+                        <span
+                          role="button"
+                          tabIndex={0}
+                          onClick={(e) => { e.stopPropagation(); setWhen(""); }}
+                          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.stopPropagation(); setWhen(""); }}}
+                          className="text-muted-foreground hover:text-gold text-xs uppercase tracking-wider"
+                        >
+                          Clear
+                        </span>
+                      )}
+                    </button>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0 bg-surface-raised border-border/60" align="start">
+                    <div className="p-3 pointer-events-auto">
+                      <Calendar
+                        mode="single"
+                        selected={selectedDate}
+                        onSelect={(d) => {
+                          if (!d) return;
+                          setWhen(formatWhen(d, selectedTime));
+                        }}
+                        defaultMonth={selectedDate ?? startOfToday()}
+                        disabled={(d) => d < startOfToday()}
+                        initialFocus
+                        className="p-0"
+                      />
+                      <div className="mt-3 pt-3 border-t border-border/40 flex items-center gap-2 px-1">
+                        <Clock className="h-4 w-4 text-gold" />
+                        <span className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Time</span>
+                        <input
+                          type="time"
+                          value={selectedTime}
+                          onChange={(e) => setWhen(formatWhen(selectedDate, e.target.value))}
+                          className={cn(inputCls, "ml-auto w-[116px] py-2 px-2 text-center")}
+                        />
+                      </div>
+                    </div>
+                  </PopoverContent>
+                </Popover>
               </label>
               <label className="flex flex-col gap-1.5">
                 <span className="eyebrow flex items-center gap-2"><Users className="h-3.5 w-3.5" /> Passengers</span>
