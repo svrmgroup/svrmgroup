@@ -37,6 +37,23 @@ const PLACES = [
   "Cape Winelands",
 ];
 
+const startOfToday = () => new Date(new Date().setHours(0, 0, 0, 0));
+
+const parseWhen = (value: string): { date?: Date; time: string } => {
+  if (!value) return { time: "12:00" };
+  const [datePart, timePart] = value.split("T");
+  const date = new Date(datePart + "T00:00:00");
+  return { date: Number.isNaN(date.getTime()) ? undefined : date, time: timePart || "12:00" };
+};
+
+const formatWhen = (date?: Date, time = "12:00") => {
+  if (!date) return "";
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, "0");
+  const d = String(date.getDate()).padStart(2, "0");
+  return `${y}-${m}-${d}T${time}`;
+};
+
 const AirportTransfers = () => {
   const location = useLocation();
   const [pax, setPax] = useState("2");
@@ -49,6 +66,9 @@ const AirportTransfers = () => {
   const [phone, setPhone] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
+  const [dateOpen, setDateOpen] = useState(false);
+
+  const { date: selectedDate, time: selectedTime } = parseWhen(when);
 
   const message = useMemo(() => {
     const lines = [
