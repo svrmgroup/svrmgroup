@@ -6,7 +6,11 @@ import Footer from "@/components/svrm/Footer";
 import { WHATSAPP_BASE } from "@/lib/whatsappMessages";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { MessageCircle, Users, Luggage, MapPin, CalendarClock, Send } from "lucide-react";
+import { MessageCircle, Users, Luggage, MapPin, CalendarClock, Send, CalendarIcon, Clock } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { formatDate } from "@/lib/locale";
 import hero from "@/assets/airport-transfers-hero.jpg";
 
 // Common Cape Town pickup / drop-off points for autofill.
