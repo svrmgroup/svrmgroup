@@ -224,7 +224,7 @@ async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
 
   // Header — SVRM logo (settings override → bundled brand asset → monogram)
   const logoY = 40;
-  const logoData = await loadLogoDataUrl(s.logo_url);
+  const logoData = await loadLogoDataUrl(s.logo_url, CREAM);
   if (logoData) {
     try {
       doc.addImage(logoData, "PNG", w / 2 - 32, logoY, 64, 64);
