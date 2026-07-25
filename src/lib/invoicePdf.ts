@@ -1,7 +1,7 @@
 import jsPDF from "jspdf";
 import type { LineItem } from "@/lib/confirmationMessage";
 import { supabase } from "@/integrations/supabase/client";
-import svrmLogo from "@/assets/svrm-logo.png.asset.json";
+import svrmLogo from "@/assets/svrm-logo-circle.png.asset.json";
 
 /**
  * Branded PDF renderer — matches the SVRM Group template:

@@ -26,7 +26,6 @@ const BlogPost = lazy(() => import("./pages/BlogPost.tsx"));
 const Contact = lazy(() => import("./pages/Contact.tsx"));
 const Rentals = lazy(() => import("./pages/Rentals.tsx"));
 const Security = lazy(() => import("./pages/Security.tsx"));
-const ClientPortal = lazy(() => import("./pages/ClientPortal"));
 const AirportTransfers = lazy(() => import("./pages/AirportTransfers.tsx"));
 
 // ---- Admin console: fully lazy — never ships to public visitors -----------
@@ -92,8 +91,6 @@ const App = () => (
                 <Route path="/blog/:slug" element={<BlogPost />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/faq" element={<Navigate to="/contact#faq" replace />} />
-                <Route path="/booking/:token" element={<ClientPortal />} />
-                <Route path="/portal/:token" element={<ClientPortal />} />
                 <Route path="/admin/login" element={<AdminLogin />} />
                 <Route path="/admin" element={<AdminLayout />}>
                   <Route index element={<AdminAnalytics />} />
