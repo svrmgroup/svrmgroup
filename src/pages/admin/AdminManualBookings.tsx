@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Plus, Trash2, Copy, MessageCircle, ChevronDown, FileDown, Link as LinkIcon, Clock, CheckCircle2 } from "lucide-react";
+import { Plus, Trash2, Copy, MessageCircle, ChevronDown, FileDown, CheckCircle2 } from "lucide-react";
 import { buildConfirmationMessage, type LineItem } from "@/lib/confirmationMessage";
 import { downloadInvoicePdf, downloadConfirmationPdf, downloadThankYouPdf } from "@/lib/invoicePdf";
 import PdfEditorDialog from "@/components/svrm/PdfEditorDialog";
@@ -26,8 +26,6 @@ interface Booking {
   notes: string | null;
   confirmation_message: string | null;
   client_token: string | null;
-  portal_expires_at?: string | null;
-  portal_completed_at?: string | null;
   created_at: string;
 }
 

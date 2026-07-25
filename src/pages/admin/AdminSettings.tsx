@@ -104,7 +104,7 @@ const AdminSettings = () => {
           <p className="eyebrow">Settings</p>
           <h1 className="font-serif text-3xl md:text-4xl mt-2">Business identity</h1>
           <p className="text-xs text-muted-foreground mt-2 max-w-2xl">
-            One source of truth for everything the client sees — invoices, confirmations, PDFs, emails, portal, footer.
+            One source of truth for everything the client sees — invoices, confirmations, PDFs, emails, footer.
             Edit here, changes flow everywhere.
           </p>
         </div>
@@ -177,14 +177,6 @@ const AdminSettings = () => {
           <F l="Confirmation footer (legal note under PDF)">
             <textarea rows={2} value={s.confirmation_footer || ""} onChange={e => setS({ ...s, confirmation_footer: e.target.value })} className="input-luxury text-sm w-full"/>
           </F>
-          <div className="grid grid-cols-2 gap-3">
-            <F l="Client portal expiry (days after trip end)">
-              <input type="number" value={s.portal_expiry_days ?? 30} onChange={e => setS({ ...s, portal_expiry_days: Number(e.target.value) })} className="input-luxury text-sm w-full"/>
-            </F>
-            <div className="text-[10px] text-muted-foreground pt-6">
-              Portal links auto-expire this many days after the booking's end date. New bookings get their expiry set on creation.
-            </div>
-          </div>
         </div>
       </div>
 
