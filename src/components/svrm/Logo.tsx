@@ -1,4 +1,4 @@
-import logoAsset from "@/assets/svrm-logo.png.asset.json";
+import logoAsset from "@/assets/svrm-logo-circle.png.asset.json";
 
 interface Props {
   size?: "sm" | "md" | "lg" | "xl";

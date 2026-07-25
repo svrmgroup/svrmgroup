@@ -1,7 +1,7 @@
 import jsPDF from "jspdf";
 import type { LineItem } from "@/lib/confirmationMessage";
 import { supabase } from "@/integrations/supabase/client";
-import svrmLogo from "@/assets/svrm-logo.png.asset.json";
+import svrmLogo from "@/assets/svrm-logo-circle.png.asset.json";
 
 /**
  * Branded PDF renderer — matches the SVRM Group template:
@@ -63,25 +63,15 @@ const DEFAULTS: Settings = {
 
 
 let cache: Settings | null = null;
-async function loadSettings(override?: Partial<Settings> | null, portalToken?: string | null): Promise<Settings> {
+async function loadSettings(override?: Partial<Settings> | null): Promise<Settings> {
   if (override) {
     const base = cache || DEFAULTS;
     return { ...DEFAULTS, ...base, ...override };
   }
   if (cache) return cache;
   try {
-    if (portalToken) {
-      // Client portal (unauthenticated) — fetch full invoice settings via edge function proxy.
-      const { data } = await supabase.functions.invoke("portal-data", {
-        body: { token: portalToken, include: ["invoice_settings"] },
-      });
-      const row = (data as any)?.invoice_settings;
-      cache = { ...DEFAULTS, ...(row as any) };
-    } else {
-      // Admin (authenticated) — direct table read allowed by RLS.
-      const { data } = await supabase.from("app_settings" as any).select("*").eq("id", 1).maybeSingle();
-      cache = { ...DEFAULTS, ...(data as any) };
-    }
+    const { data } = await supabase.from("app_settings" as any).select("*").eq("id", 1).maybeSingle();
+    cache = { ...DEFAULTS, ...(data as any) };
   } catch { cache = DEFAULTS; }
   return cache!;
 }
@@ -89,13 +79,14 @@ async function loadSettings(override?: Partial<Settings> | null, portalToken?: s
 /** Force the next PDF render to re-read app_settings (used after Save). */
 export function invalidateInvoiceSettingsCache() { cache = null; logoDataUrlCache = null; }
 
-// Cache a circularly-masked version of the SVRM logo as a data URL. The
-// source asset is a square image with a round mark inside it; we render it
-// through an offscreen canvas so the PDF only shows the circle.
-let logoDataUrlCache: { src: string; data: string } | null = null;
-async function loadLogoDataUrl(overrideUrl?: string): Promise<string | null> {
+// Cache a circularly-masked version of the SVRM logo as a data URL.
+// The source may be a square image with a round mark inside it (dark corners
+// or padding); we auto-detect the mark's bounding box and clip a circle to it
+// so the PDF only ever shows the circular logo — never a square/black border.
+let logoDataUrlCache: { src: string; bg: string; data: string } | null = null;
+async function loadLogoDataUrl(overrideUrl?: string, bg = "#f3e9d2"): Promise<string | null> {
   const src = overrideUrl || svrmLogo.url;
-  if (logoDataUrlCache && logoDataUrlCache.src === src) return logoDataUrlCache.data;
+  if (logoDataUrlCache && logoDataUrlCache.src === src && logoDataUrlCache.bg === bg) return logoDataUrlCache.data;
   try {
     const res = await fetch(src, { credentials: "omit" });
     if (!res.ok) return null;
@@ -108,6 +99,45 @@ async function loadLogoDataUrl(overrideUrl?: string): Promise<string | null> {
       el.onerror = (e) => { URL.revokeObjectURL(url); reject(e); };
       el.src = url;
     });
+
+    // 1. Measure the mark: crop away transparent / near-black padding.
+    let sx = 0, sy = 0, sw = img.width, sh = img.height;
+    try {
+      const probe = document.createElement("canvas");
+      probe.width = img.width; probe.height = img.height;
+      const pctx = probe.getContext("2d")!;
+      pctx.drawImage(img, 0, 0);
+      const { data } = pctx.getImageData(0, 0, img.width, img.height);
+      let minX = img.width, minY = img.height, maxX = -1, maxY = -1;
+      for (let y = 0; y < img.height; y++) {
+        for (let x = 0; x < img.width; x++) {
+          const i = (y * img.width + x) * 4;
+          const a = data[i + 3];
+          const lum = Math.max(data[i], data[i + 1], data[i + 2]);
+          if (a > 24 && lum > 70) {
+            if (x < minX) minX = x;
+            if (x > maxX) maxX = x;
+            if (y < minY) minY = y;
+            if (y > maxY) maxY = y;
+          }
+        }
+      }
+      if (maxX > minX && maxY > minY) {
+        // Square up the detected box around its centre.
+        const cx = (minX + maxX) / 2, cy = (minY + maxY) / 2;
+        const side = Math.max(maxX - minX, maxY - minY) + 1;
+        sw = sh = side;
+        sx = Math.max(0, cx - side / 2);
+        sy = Math.max(0, cy - side / 2);
+      }
+    } catch { /* tainted canvas — fall back to centre crop */ }
+
+    if (sw === img.width && sh === img.height) {
+      const s = Math.min(img.width, img.height);
+      sx = (img.width - s) / 2; sy = (img.height - s) / 2; sw = sh = s;
+    }
+
+    // 2. Draw the crop clipped to a circle, on the page background colour.
     const size = 512;
     const canvas = document.createElement("canvas");
     canvas.width = size; canvas.height = size;
@@ -115,22 +145,23 @@ async function loadLogoDataUrl(overrideUrl?: string): Promise<string | null> {
     ctx.clearRect(0, 0, size, size);
     ctx.save();
     ctx.beginPath();
-    ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+    ctx.arc(size / 2, size / 2, size / 2 - 1, 0, Math.PI * 2);
     ctx.closePath();
     ctx.clip();
-    // Cover-fit source
-    const s = Math.min(img.width, img.height);
-    const sx = (img.width - s) / 2;
-    const sy = (img.height - s) / 2;
-    ctx.drawImage(img, sx, sy, s, s, 0, 0, size, size);
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, size, size);
+    // Slight inward zoom removes any residual dark rim from the source.
+    const inset = sw * 0.012;
+    ctx.drawImage(img, sx + inset, sy + inset, sw - inset * 2, sh - inset * 2, 0, 0, size, size);
     ctx.restore();
     const dataUrl = canvas.toDataURL("image/png");
-    logoDataUrlCache = { src, data: dataUrl };
+    logoDataUrlCache = { src, bg, data: dataUrl };
     return dataUrl;
   } catch {
     return null;
   }
 }
+
 
 export interface ConciergeInfo {
   name: string;
@@ -169,11 +200,11 @@ type PdfKind = "invoice" | "confirmation" | "thank_you";
 export interface RenderOpts {
   settingsOverride?: Partial<Settings> | null;
   output?: "save" | "blob";
-  portalToken?: string | null;
 }
 
 async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
-  const s = await loadSettings(opts.settingsOverride, opts.portalToken);
+  const s = await loadSettings(opts.settingsOverride);
+
   const GOLD = s.brand_primary || "#b8935a";
   const DARK = s.brand_bg || "#3b2e20";
   const CREAM = "#f3e9d2";
@@ -193,7 +224,7 @@ async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
 
   // Header — SVRM logo (settings override → bundled brand asset → monogram)
   const logoY = 40;
-  const logoData = await loadLogoDataUrl(s.logo_url);
+  const logoData = await loadLogoDataUrl(s.logo_url, CREAM);
   if (logoData) {
     try {
       doc.addImage(logoData, "PNG", w / 2 - 32, logoY, 64, 64);
@@ -402,9 +433,10 @@ async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
   doc.save(`SVRM-${filenameKind}-${b.booking_code}.pdf`);
 }
 
-export function downloadInvoicePdf(b: InvoiceBooking, portalToken?: string | null) { return build("invoice", b, { portalToken }); }
-export function downloadConfirmationPdf(b: InvoiceBooking, portalToken?: string | null) { return build("confirmation", b, { portalToken }); }
-export function downloadThankYouPdf(b: InvoiceBooking, portalToken?: string | null) { return build("thank_you", b, { portalToken }); }
+export function downloadInvoicePdf(b: InvoiceBooking) { return build("invoice", b); }
+export function downloadConfirmationPdf(b: InvoiceBooking) { return build("confirmation", b); }
+export function downloadThankYouPdf(b: InvoiceBooking) { return build("thank_you", b); }
+
 export function renderPdfBlob(kind: PdfKind, b: InvoiceBooking, settingsOverride?: Partial<Settings> | null) {
   return build(kind, b, { output: "blob", settingsOverride }) as Promise<Blob>;
 }

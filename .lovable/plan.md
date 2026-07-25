@@ -1,46 +1,31 @@
-## Goal
+## 1. Logo: circle only, no black square
 
-Make the WhatsApp entry point instantly recognizable and readable against any hero image or background, without changing link logic or per-page messages.
+Upload the new logo file as a Lovable Asset and replace the current `svrm-logo` pointer used by both the PDFs and the site `Logo` component.
 
-## Changes
+Fix the crop so no black border ever shows:
+- In `src/lib/invoicePdf.ts`, extend the existing canvas masking step (`loadLogoDataUrl`) to first auto-detect the logo's real bounding box by scanning for non-black/non-transparent pixels, then clip a circle to that box instead of the full square.
+- Result: only the cream/gold circular mark is drawn on the PDF page — no dark ring, no square edge.
+- Same helper is used by invoice, confirmation, and thank-you PDFs plus the live preview in Admin Settings, so all three stay consistent.
+- Apply the same tight circular asset to `src/components/svrm/Logo.tsx` (nav, footer, admin) and the favicon so branding matches.
 
-### 1. Floating WhatsApp button — `src/components/svrm/WhatsAppFab.tsx`
+## 2. Remove the client portal concept
 
-- Replace the current `MessageCircle` (generic chat) with the official WhatsApp glyph as an inline SVG (speech bubble + handset), so it's unmistakably WhatsApp at small sizes. Keep the palette gold-on-black (not WhatsApp green).
-- Solid background fill `#1A1613` (black), gold icon `#C9A961`, thin `1px` gold border at ~60% opacity.
-- Size: `h-14 w-14` (56px) on desktop, `h-12 w-12` (48px) on mobile.
-- Soft drop shadow: `shadow-[0_10px_30px_-8px_rgba(0,0,0,0.55)]` plus a subtle gold glow ring on hover, so it lifts off busy photo backgrounds.
-- Keep fixed `bottom-6 right-6`, `z-40`, `target="_blank"`, and continue using `whatsappUrlFor(pathname)` — link behavior unchanged.
-- Desktop-only "Chat with us" pill label:
-  - Rendered to the left of the button, Jost font, gold text on black pill matching the FAB style.
-  - Shown on first render, auto-hides after 3.5s or on first `scroll` event (whichever comes first).
-  - Hidden on mobile (`hidden md:flex`).
-  - Uses `prefers-reduced-motion` to skip the fade transition.
-  - No persistence — appears once per page load, no localStorage flag.
+- Delete `src/pages/ClientPortal.tsx` and its two routes (`/portal/:token`, `/booking/:token`) from `App.tsx`.
+- Remove portal UI from `AdminManualBookings.tsx`: "Copy portal link", "Mark complete" (portal wording), and the expiry/completed status line.
+- Remove the "Client portal expiry (days)" field and portal wording from `AdminSettings.tsx`.
+- PDFs become admin-generated only: drop the `portalToken` path from `src/lib/invoicePdf.ts` so settings are always read directly (admin session), and delete the now-unused `portal-data` edge function.
+- Database columns (`client_token`, `portal_expires_at`, `portal_completed_at`) stay in place, unused — no destructive migration. Change-request table stays too; nothing writes to it from the public site anymore.
 
-### 2. Nav bar WhatsApp icon — `src/components/svrm/Nav.tsx`
+Admins keep full PDF generation for every booking (invoice / confirmation / thank-you) with the manual edit dialog before download.
 
-- Add a dedicated WhatsApp icon button next to the EN / ZAR / ENQUIRE cluster (desktop) — currently there is no WhatsApp icon in the nav, only the text "Enquire" link.
-- Same solid-black circular chip with gold WhatsApp glyph and thin gold border, sized to match sibling controls (approx `h-9 w-9`), so it reads as strongly as EN / ZAR / ENQUIRE.
-- Uses the same `waHref` already computed in `Nav.tsx`, `target="_blank"`, `aria-label="Chat with SVRM on WhatsApp"`.
-- Keep the existing text "Enquire" link untouched — the icon is an additional, obvious tap target.
-- Mobile sheet's "Enquire on WhatsApp" CTA stays as-is (already high-contrast inside the sheet).
+## 3. Smoother website
 
-### 3. Shared WhatsApp glyph — `src/components/svrm/WhatsAppGlyph.tsx` (new)
+Frontend-only performance pass, no behaviour change:
+- Lazy-load the jsPDF bundle only when a PDF is actually generated (currently pulled into the admin bundle eagerly).
+- Add `loading="lazy"` / `decoding="async"` and explicit dimensions to remaining gallery and card images that lack them, to stop layout shift.
+- Make hero/section videos `preload="metadata"` + `playsInline` and only autoplay when in viewport, so scroll stays smooth on mobile.
+- Memoise the heavy tour/stay list filtering and sorting so tab switching doesn't re-sort on every render.
 
-- Small reusable SVG component for the official WhatsApp mark (speech bubble + handset), colored via `currentColor` so both FAB and nav icon reuse it.
-- Accepts `className` and `size` props; default `strokeWidth`/fill tuned for legibility at 20-28px.
+## Technical notes
 
-## Out of scope
-
-- No changes to `src/lib/whatsappMessages.ts` or route mappings.
-- No changes to the "Enquire" text link, footer CTAs, or any other page CTAs.
-- No changes to hero images, homepage layout, or z-index of other overlays.
-
-## Verification
-
-- Load `/` (light-sky hero) and confirm FAB reads clearly with gold-on-black + shadow.
-- Load `/tours/aquila-safari` (dark hero) and `/rentals` (mixed) and confirm same clarity.
-- Confirm "Chat with us" label appears on desktop, disappears after ~3.5s or on scroll, and never appears on mobile.
-- Confirm nav WhatsApp icon is visible on desktop next to EN / ZAR / ENQUIRE at the same visual weight.
-- Confirm `href` still resolves to the correct per-page message via `whatsappUrlFor`.
+Files touched: `src/lib/invoicePdf.ts`, `src/components/svrm/Logo.tsx`, `src/App.tsx`, `src/pages/admin/AdminManualBookings.tsx`, `src/pages/admin/AdminSettings.tsx`, new `src/assets/svrm-logo.png.asset.json`, plus deletion of `src/pages/ClientPortal.tsx` and `supabase/functions/portal-data/`.
