@@ -275,9 +275,11 @@ async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
   let y = logoY + 170;
   const title = kind === "invoice"
     ? "INVOICE"
-    : kind === "confirmation"
-      ? "BOOKING CONFIRMATION"
-      : (s.thank_you_title || DEFAULTS.thank_you_title || "THANK YOU");
+    : kind === "quotation"
+      ? "QUOTATION"
+      : kind === "confirmation"
+        ? "BOOKING CONFIRMATION"
+        : (s.thank_you_title || DEFAULTS.thank_you_title || "THANK YOU");
   doc.setTextColor(TEXT); doc.setFont("helvetica", "bold"); doc.setFontSize(18);
   doc.text(title, 40, y);
   y += 24;
@@ -288,9 +290,15 @@ async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
   const bookingDates = b.start_date && b.end_date
     ? `${new Date(b.start_date).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })} – ${new Date(b.end_date).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}`
     : b.start_date || "Dates on request";
-  doc.text(`${kind === "invoice" ? "Invoice" : "Reference"} No: ${b.booking_code}`, 40, y); y += 14;
+  const refLabel = kind === "invoice" ? "Invoice" : kind === "quotation" ? "Quotation" : "Reference";
+  doc.text(`${refLabel} No: ${b.booking_code}`, 40, y); y += 14;
   doc.text(`Issue Date: ${issueDate}`, 40, y); y += 14;
-  doc.text(`Booking Dates: ${bookingDates}`, 40, y); y += 30;
+  if (kind === "quotation") {
+    const days = Number(s.quotation_validity_days ?? 14) || 14;
+    const until = new Date(Date.now() + days * 864e5).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+    doc.text(`Valid Until: ${until}  (${days} days)`, 40, y); y += 14;
+  }
+  doc.text(`${kind === "quotation" ? "Proposed Dates" : "Booking Dates"}: ${bookingDates}`, 40, y); y += 30;
 
   // CLIENT + CONCIERGE two-column — override → assigned staff → company
   const concierge = b.concierge_override ?? await loadConcierge(b.id);
