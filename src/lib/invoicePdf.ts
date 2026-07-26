@@ -396,20 +396,38 @@ async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
     doc.setFillColor(DARK);
     doc.roundedRect(40, y, w - 80, panelH, 8, 8, "F");
     doc.setFont("helvetica", "bold"); doc.setFontSize(9); doc.setTextColor(GOLD);
-    doc.text("TOTAL PACKAGE PRICE", 60, y + 26);
+    doc.text(kind === "quotation" ? "QUOTED PACKAGE PRICE" : "TOTAL PACKAGE PRICE", 60, y + 26);
     doc.setFont("helvetica", "bold"); doc.setFontSize(24); doc.setTextColor("#ffffff");
     doc.text(money(b.subtotal), 60, y + 56);
     doc.setFont("helvetica", "normal"); doc.setFontSize(9); doc.setTextColor("#cfc7b6");
-    doc.text(`Deposit Required (50%): ${money(b.deposit_amount)}`, 60, y + 78);
-    doc.text(`Remaining Balance: ${money(b.balance_due)}`, w - 60, y + 66, { align: "right" });
-    doc.setFontSize(8); doc.setTextColor("#a89e88");
-    doc.setFont("times", "italic");
-    doc.text("payable before trip commencement", w - 60, y + 80, { align: "right" });
+    if (kind === "quotation") {
+      doc.text(`Deposit to secure (50%): ${money(b.deposit_amount)}`, 60, y + 78);
+      doc.setFontSize(8); doc.setTextColor("#a89e88");
+      doc.setFont("times", "italic");
+      doc.text("estimate — not yet a confirmed booking", w - 60, y + 78, { align: "right" });
+    } else {
+      doc.text(`Deposit Required (50%): ${money(b.deposit_amount)}`, 60, y + 78);
+      doc.text(`Remaining Balance: ${money(b.balance_due)}`, w - 60, y + 66, { align: "right" });
+      doc.setFontSize(8); doc.setTextColor("#a89e88");
+      doc.setFont("times", "italic");
+      doc.text("payable before trip commencement", w - 60, y + 80, { align: "right" });
+    }
     y += panelH + 24;
   }
 
   // Payment terms / thank you body
-  if (kind === "invoice") {
+  if (kind === "quotation") {
+    doc.setFont("helvetica", "bold"); doc.setFontSize(10); doc.setTextColor(TEXT);
+    doc.text("TERMS OF THIS QUOTATION", 40, y); y += 14;
+    doc.setFont("helvetica", "normal"); doc.setFontSize(10);
+    const qt = doc.splitTextToSize(
+      s.quotation_footer || "This quotation is an estimate and does not constitute a confirmed booking. Rates are subject to availability at the time of confirmation.",
+      w - 80,
+    );
+    doc.text(qt, 40, y); y += qt.length * 13 + 10;
+    doc.setFont("times", "italic"); doc.setFontSize(9); doc.setTextColor(MUTED);
+    doc.text("To accept this quotation, reply to this document or message us on WhatsApp and we will issue your invoice.", 40, y);
+  } else if (kind === "invoice") {
     doc.setFont("helvetica", "bold"); doc.setFontSize(10); doc.setTextColor(TEXT);
     doc.text("PAYMENT TERMS", 40, y); y += 14;
     doc.setFont("helvetica", "normal"); doc.setFontSize(10);
