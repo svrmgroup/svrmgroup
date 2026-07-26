@@ -120,10 +120,11 @@ const AdminLayout = () => {
       <aside className="hidden md:flex flex-col border-r border-border/40 bg-surface-deep md:min-h-screen sticky top-0 max-h-screen">
         <div className="p-6 border-b border-border/40 flex items-center gap-3">
           <Logo size="md" />
-          <div>
+          <div className="flex-1">
             <p className="eyebrow">SVRM</p>
             <p className="font-serif text-xl mt-0.5 leading-none">Concierge</p>
           </div>
+          <NotificationBell />
         </div>
         {nav}
         <div className="p-4 border-t border-border/40">
