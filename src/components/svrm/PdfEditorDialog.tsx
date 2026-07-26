@@ -82,19 +82,48 @@ export default function PdfEditorDialog({ booking, kind, onClose }: Props) {
   const addItem = () =>
     setItems((prev) => [...prev, { label: "New item", qty: 1, unit: "", subtotal: 0 } as any]);
 
+  const payload = (): InvoiceBooking => ({
+    ...b,
+    line_items: items,
+    concierge_override: concierge.name ? concierge : null,
+    package_title_override: packageTitle || null,
+    issue_date_override: issueDate || null,
+  });
+
   const download = async () => {
     setDownloading(true);
     try {
-      const payload: InvoiceBooking = {
-        ...b,
-        line_items: items,
-        concierge_override: concierge.name ? concierge : null,
-        package_title_override: packageTitle || null,
-        issue_date_override: issueDate || null,
-      };
-      if (kind === "invoice") await downloadInvoicePdf(payload);
-      else if (kind === "confirmation") await downloadConfirmationPdf(payload);
-      else await downloadThankYouPdf(payload);
+      const p = payload();
+      if (kind === "invoice") await downloadInvoicePdf(p);
+      else if (kind === "quotation") await downloadQuotationPdf(p);
+      else if (kind === "confirmation") await downloadConfirmationPdf(p);
+      else await downloadThankYouPdf(p);
+      onClose();
+    } finally {
+      setDownloading(false);
+    }
+  };
+
+  /** Downloads the PDF and opens WhatsApp with a ready-to-send message to the client. */
+  const sendToClient = async () => {
+    setDownloading(true);
+    try {
+      const p = payload();
+      if (kind === "quotation") await downloadQuotationPdf(p);
+      else if (kind === "invoice") await downloadInvoicePdf(p);
+      else if (kind === "confirmation") await downloadConfirmationPdf(p);
+      else await downloadThankYouPdf(p);
+
+      const label = kind === "quotation" ? "quotation" : kind === "invoice" ? "invoice" : "document";
+      const msg = kind === "quotation"
+        ? `Good day ${p.client_name},\n\nThank you for your interest in SVRM Group. Please find attached your quotation (${p.booking_code}). It is valid for 14 days and remains subject to availability.\n\nHappy to adjust anything — just let me know.\n\n${concierge.name || "SVRM Group"}`
+        : `Good day ${p.client_name},\n\nPlease find attached your ${label} (${p.booking_code}) from SVRM Group.\n\n${concierge.name || "SVRM Group"}`;
+      const phone = (b.client_phone || "").replace(/[^\d]/g, "");
+      const url = phone
+        ? `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`
+        : `https://wa.me/27730641481?text=${encodeURIComponent(msg)}`;
+      window.open(url, "_blank", "noopener,noreferrer");
+      toast.success("PDF downloaded — attach it in WhatsApp to send.");
       onClose();
     } finally {
       setDownloading(false);
