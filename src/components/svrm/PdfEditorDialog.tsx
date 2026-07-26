@@ -209,8 +209,11 @@ export default function PdfEditorDialog({ booking, kind, onClose }: Props) {
           </label>
         </div>
 
-        <div className="p-5 border-t border-border/40 flex justify-end gap-2">
+        <div className="p-5 border-t border-border/40 flex flex-wrap justify-end gap-2">
           <button onClick={onClose} className="btn-ghost text-xs">Cancel</button>
+          <button onClick={sendToClient} disabled={downloading} className="text-xs flex items-center gap-2 text-gold border border-primary/40 px-3 py-2 hover:bg-primary/10 transition-colors disabled:opacity-50">
+            <MessageCircle className="h-3.5 w-3.5"/> Send to client
+          </button>
           <button onClick={download} disabled={downloading} className="btn-luxury text-xs flex items-center gap-2 disabled:opacity-50">
             <FileDown className="h-3.5 w-3.5"/> {downloading ? "Rendering…" : "Download PDF"}
           </button>
