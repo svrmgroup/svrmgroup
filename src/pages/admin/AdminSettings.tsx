@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { Save, Upload, FileText } from "lucide-react";
 import { renderPdfBlob, invalidateInvoiceSettingsCache, type InvoiceBooking } from "@/lib/invoicePdf";
 
-type PreviewKind = "invoice" | "confirmation" | "thank_you";
+type PreviewKind = "invoice" | "quotation" | "confirmation" | "thank_you";
 
 const SAMPLE_BOOKING: InvoiceBooking = {
   booking_code: "SVRM-PREVIEW",
@@ -195,7 +195,7 @@ const AdminSettings = () => {
             {previewLoading && <span className="text-[10px] text-muted-foreground">Rendering…</span>}
           </div>
           <div className="flex gap-1">
-            {(["invoice", "confirmation", "thank_you"] as PreviewKind[]).map((k) => (
+            {(["invoice", "quotation", "confirmation", "thank_you"] as PreviewKind[]).map((k) => (
               <button
                 key={k}
                 onClick={() => setPreviewKind(k)}
