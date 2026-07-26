@@ -23,6 +23,7 @@ export default defineConfig(({ mode }) => ({
       devOptions: { enabled: false },
       manifest: false, // we ship our own /public/manifest.webmanifest
       workbox: {
+        importScripts: ["/notify-sw.js"],
         navigateFallback: "/index.html",
         navigateFallbackDenylist: [/^\/~oauth/, /^\/api\//, /^\/__l5e\//],
         globPatterns: ["**/*.{js,css,html,ico,png,svg,webmanifest}"],

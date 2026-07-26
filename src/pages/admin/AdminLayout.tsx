@@ -9,6 +9,7 @@ import {
   Image as ImageIcon,
 } from "lucide-react";
 import Logo from "@/components/svrm/Logo";
+import NotificationBell from "@/components/svrm/NotificationBell";
 
 const AdminLayout = () => {
   const { session, isAdmin, loading, signOut } = useAdminAuth();
@@ -107,19 +108,23 @@ const AdminLayout = () => {
             <p className="font-serif text-sm text-foreground leading-tight">Admin</p>
           </div>
         </div>
-        <button onClick={signOut} className="text-muted-foreground hover:text-foreground p-2 -mr-2">
-          <LogOut className="h-4 w-4" />
-        </button>
+        <div className="flex items-center">
+          <NotificationBell />
+          <button onClick={signOut} className="text-muted-foreground hover:text-foreground p-2 -mr-2">
+            <LogOut className="h-4 w-4" />
+          </button>
+        </div>
       </header>
 
       {/* Desktop sidebar */}
       <aside className="hidden md:flex flex-col border-r border-border/40 bg-surface-deep md:min-h-screen sticky top-0 max-h-screen">
         <div className="p-6 border-b border-border/40 flex items-center gap-3">
           <Logo size="md" />
-          <div>
+          <div className="flex-1">
             <p className="eyebrow">SVRM</p>
             <p className="font-serif text-xl mt-0.5 leading-none">Concierge</p>
           </div>
+          <NotificationBell />
         </div>
         {nav}
         <div className="p-4 border-t border-border/40">

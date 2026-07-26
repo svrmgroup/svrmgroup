@@ -2,27 +2,78 @@ import { useEffect, useMemo, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Download } from "lucide-react";
 
+type Period = "month" | "last_month" | "quarter" | "ytd" | "all" | "custom";
+
+const PERIODS: { key: Period; label: string }[] = [
+  { key: "month", label: "This month" },
+  { key: "last_month", label: "Last month" },
+  { key: "quarter", label: "This quarter" },
+  { key: "ytd", label: "Year to date" },
+  { key: "all", label: "All time" },
+  { key: "custom", label: "Custom" },
+];
+
+const iso = (d: Date) => d.toISOString().slice(0, 10);
+
+/** Returns [startDate, endDateExclusive] as YYYY-MM-DD, or nulls for all-time. */
+function rangeFor(period: Period, month: string, from: string, to: string): [string | null, string | null] {
+  const now = new Date();
+  if (period === "all") return [null, null];
+  if (period === "custom") return [from || null, to ? iso(new Date(new Date(to).getTime() + 864e5)) : null];
+  if (period === "ytd") return [`${now.getFullYear()}-01-01`, iso(new Date(now.getFullYear() + 1, 0, 1))];
+  if (period === "quarter") {
+    const q = Math.floor(now.getMonth() / 3);
+    return [iso(new Date(now.getFullYear(), q * 3, 1)), iso(new Date(now.getFullYear(), q * 3 + 3, 1))];
+  }
+  if (period === "last_month") {
+    const start = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+    return [iso(start), iso(new Date(now.getFullYear(), now.getMonth(), 1))];
+  }
+  // explicit month picker
+  const start = `${month}-01`;
+  const s = new Date(start);
+  return [start, iso(new Date(s.getFullYear(), s.getMonth() + 1, 1))];
+}
+
 const AdminPnL = () => {
+  const [period, setPeriod] = useState<Period>("month");
   const [month, setMonth] = useState(new Date().toISOString().slice(0, 7));
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
   const [currency, setCurrency] = useState("ZAR");
   const [bookings, setBookings] = useState<any[]>([]);
   const [expenses, setExpenses] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const [start, end] = useMemo(() => rangeFor(period, month, from, to), [period, month, from, to]);
+
+  const periodLabel = period === "all"
+    ? "all time"
+    : period === "custom"
+      ? `${from || "start"} → ${to || "today"}`
+      : period === "month"
+        ? month
+        : PERIODS.find((p) => p.key === period)!.label.toLowerCase();
+
   useEffect(() => {
     (async () => {
       setLoading(true);
-      const start = `${month}-01`;
-      const end = new Date(new Date(start).setMonth(new Date(start).getMonth() + 1)).toISOString().slice(0, 10);
-      const [{ data: mb }, { data: ex }] = await Promise.all([
-        supabase.from("manual_bookings").select("id, booking_code, client_name, subtotal, currency, start_date, created_at, status").eq("currency", currency).gte("created_at", start).lt("created_at", end + "T00:00:00Z"),
-        supabase.from("expenses").select("id, amount, currency, category, manual_booking_id, date").eq("currency", currency).gte("date", start).lt("date", end),
-      ]);
+      let bq = supabase
+        .from("manual_bookings")
+        .select("id, booking_code, client_name, subtotal, currency, start_date, created_at, status")
+        .eq("currency", currency);
+      let eq = supabase
+        .from("expenses")
+        .select("id, amount, currency, category, manual_booking_id, date")
+        .eq("currency", currency);
+      if (start) { bq = bq.gte("created_at", start); eq = eq.gte("date", start); }
+      if (end) { bq = bq.lt("created_at", end + "T00:00:00Z"); eq = eq.lt("date", end); }
+      const [{ data: mb }, { data: ex }] = await Promise.all([bq, eq]);
       setBookings(mb || []);
       setExpenses(ex || []);
       setLoading(false);
     })();
-  }, [month, currency]);
+  }, [currency, start, end]);
 
   const revenue = bookings.reduce((s, b) => s + Number(b.subtotal || 0), 0);
   const expensesTotal = expenses.reduce((s, e) => s + Number(e.amount || 0), 0);
@@ -42,6 +93,7 @@ const AdminPnL = () => {
 
   const fmt = (n: number) => `${currency} ${n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
+
   const exportCsv = () => {
     const lines = [
       ["Section", "Label", "Amount"].join(","),
@@ -60,7 +112,7 @@ const AdminPnL = () => {
     const blob = new Blob([lines], { type: "text/csv" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = `pnl-${currency}-${month}.csv`;
+    a.download = `pnl-${currency}-${period === "month" ? month : period}.csv`;
     a.click();
   };
 
@@ -70,9 +122,21 @@ const AdminPnL = () => {
         <div>
           <p className="eyebrow">Money in / money out</p>
           <h1 className="font-serif text-3xl md:text-4xl mt-2">Profit &amp; Loss</h1>
+          <p className="text-xs text-muted-foreground mt-2">Showing {periodLabel}</p>
         </div>
-        <div className="flex items-center gap-2">
-          <input type="month" value={month} onChange={(e) => setMonth(e.target.value)} className="input-luxury text-sm" />
+        <div className="flex items-center gap-2 flex-wrap">
+          <select value={period} onChange={(e) => setPeriod(e.target.value as Period)} className="input-luxury text-sm">
+            {PERIODS.map((p) => <option key={p.key} value={p.key}>{p.label}</option>)}
+          </select>
+          {period === "month" && (
+            <input type="month" value={month} onChange={(e) => setMonth(e.target.value)} className="input-luxury text-sm" />
+          )}
+          {period === "custom" && (
+            <>
+              <input type="date" value={from} onChange={(e) => setFrom(e.target.value)} className="input-luxury text-sm" />
+              <input type="date" value={to} onChange={(e) => setTo(e.target.value)} className="input-luxury text-sm" />
+            </>
+          )}
           <select value={currency} onChange={(e) => setCurrency(e.target.value)} className="input-luxury text-sm">
             <option>ZAR</option><option>USD</option><option>EUR</option><option>GBP</option>
           </select>
@@ -108,7 +172,7 @@ const AdminPnL = () => {
           <section>
             <p className="eyebrow mb-3">Per-booking profit</p>
             <div className="card-luxury overflow-hidden">
-              {perBooking.length === 0 ? <p className="p-6 text-xs text-muted-foreground">No bookings in {month}</p> : (
+              {perBooking.length === 0 ? <p className="p-6 text-xs text-muted-foreground">No bookings for {periodLabel}</p> : (
                 <table className="w-full text-sm">
                   <thead className="bg-surface-deep text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
                     <tr>

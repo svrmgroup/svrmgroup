@@ -40,6 +40,7 @@ interface Settings {
   bank_name?: string; bank_account?: string; bank_branch?: string; bank_swift?: string;
   invoice_footer?: string; confirmation_footer?: string; thank_you_message?: string;
   thank_you_title?: string; thank_you_signature?: string;
+  quotation_footer?: string; quotation_validity_days?: number;
   brand_primary?: string; brand_bg?: string;
 }
 
@@ -84,13 +85,33 @@ export function invalidateInvoiceSettingsCache() { cache = null; logoDataUrlCach
 // or padding); we auto-detect the mark's bounding box and clip a circle to it
 // so the PDF only ever shows the circular logo — never a square/black border.
 let logoDataUrlCache: { src: string; bg: string; data: string } | null = null;
+
+/**
+ * Loads the brand mark for PDFs. Tries the settings logo first, then always
+ * falls back to the bundled SVRM circular logo so a broken/private settings
+ * URL can never downgrade PDFs to the plain "SVRM" text circle.
+ */
 async function loadLogoDataUrl(overrideUrl?: string, bg = "#f3e9d2"): Promise<string | null> {
-  const src = overrideUrl || svrmLogo.url;
+  const candidates = [overrideUrl, svrmLogo.url].filter(Boolean) as string[];
+  for (const candidate of candidates) {
+    const data = await loadLogoFrom(candidate, bg);
+    if (data) return data;
+  }
+  return null;
+}
+
+/** True when the given logo URL can actually be loaded (used by settings UI). */
+export async function checkLogoUrl(url: string): Promise<boolean> {
+  return !!(await loadLogoFrom(url, "#f3e9d2"));
+}
+
+async function loadLogoFrom(src: string, bg: string): Promise<string | null> {
   if (logoDataUrlCache && logoDataUrlCache.src === src && logoDataUrlCache.bg === bg) return logoDataUrlCache.data;
   try {
     const res = await fetch(src, { credentials: "omit" });
     if (!res.ok) return null;
     const blob = await res.blob();
+    if (!blob.type.startsWith("image/") && blob.size < 128) return null;
     const img: HTMLImageElement = await new Promise((resolve, reject) => {
       const url = URL.createObjectURL(blob);
       const el = new Image();
@@ -195,7 +216,7 @@ async function loadConcierge(bookingId?: string): Promise<ConciergeInfo | null> 
   } catch { return null; }
 }
 
-type PdfKind = "invoice" | "confirmation" | "thank_you";
+type PdfKind = "invoice" | "confirmation" | "thank_you" | "quotation";
 
 export interface RenderOpts {
   settingsOverride?: Partial<Settings> | null;
@@ -254,9 +275,11 @@ async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
   let y = logoY + 170;
   const title = kind === "invoice"
     ? "INVOICE"
-    : kind === "confirmation"
-      ? "BOOKING CONFIRMATION"
-      : (s.thank_you_title || DEFAULTS.thank_you_title || "THANK YOU");
+    : kind === "quotation"
+      ? "QUOTATION"
+      : kind === "confirmation"
+        ? "BOOKING CONFIRMATION"
+        : (s.thank_you_title || DEFAULTS.thank_you_title || "THANK YOU");
   doc.setTextColor(TEXT); doc.setFont("helvetica", "bold"); doc.setFontSize(18);
   doc.text(title, 40, y);
   y += 24;
@@ -267,9 +290,15 @@ async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
   const bookingDates = b.start_date && b.end_date
     ? `${new Date(b.start_date).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })} – ${new Date(b.end_date).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" })}`
     : b.start_date || "Dates on request";
-  doc.text(`${kind === "invoice" ? "Invoice" : "Reference"} No: ${b.booking_code}`, 40, y); y += 14;
+  const refLabel = kind === "invoice" ? "Invoice" : kind === "quotation" ? "Quotation" : "Reference";
+  doc.text(`${refLabel} No: ${b.booking_code}`, 40, y); y += 14;
   doc.text(`Issue Date: ${issueDate}`, 40, y); y += 14;
-  doc.text(`Booking Dates: ${bookingDates}`, 40, y); y += 30;
+  if (kind === "quotation") {
+    const days = Number(s.quotation_validity_days ?? 14) || 14;
+    const until = new Date(Date.now() + days * 864e5).toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+    doc.text(`Valid Until: ${until}  (${days} days)`, 40, y); y += 14;
+  }
+  doc.text(`${kind === "quotation" ? "Proposed Dates" : "Booking Dates"}: ${bookingDates}`, 40, y); y += 30;
 
   // CLIENT + CONCIERGE two-column — override → assigned staff → company
   const concierge = b.concierge_override ?? await loadConcierge(b.id);
@@ -367,20 +396,38 @@ async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
     doc.setFillColor(DARK);
     doc.roundedRect(40, y, w - 80, panelH, 8, 8, "F");
     doc.setFont("helvetica", "bold"); doc.setFontSize(9); doc.setTextColor(GOLD);
-    doc.text("TOTAL PACKAGE PRICE", 60, y + 26);
+    doc.text(kind === "quotation" ? "QUOTED PACKAGE PRICE" : "TOTAL PACKAGE PRICE", 60, y + 26);
     doc.setFont("helvetica", "bold"); doc.setFontSize(24); doc.setTextColor("#ffffff");
     doc.text(money(b.subtotal), 60, y + 56);
     doc.setFont("helvetica", "normal"); doc.setFontSize(9); doc.setTextColor("#cfc7b6");
-    doc.text(`Deposit Required (50%): ${money(b.deposit_amount)}`, 60, y + 78);
-    doc.text(`Remaining Balance: ${money(b.balance_due)}`, w - 60, y + 66, { align: "right" });
-    doc.setFontSize(8); doc.setTextColor("#a89e88");
-    doc.setFont("times", "italic");
-    doc.text("payable before trip commencement", w - 60, y + 80, { align: "right" });
+    if (kind === "quotation") {
+      doc.text(`Deposit to secure (50%): ${money(b.deposit_amount)}`, 60, y + 78);
+      doc.setFontSize(8); doc.setTextColor("#a89e88");
+      doc.setFont("times", "italic");
+      doc.text("estimate — not yet a confirmed booking", w - 60, y + 78, { align: "right" });
+    } else {
+      doc.text(`Deposit Required (50%): ${money(b.deposit_amount)}`, 60, y + 78);
+      doc.text(`Remaining Balance: ${money(b.balance_due)}`, w - 60, y + 66, { align: "right" });
+      doc.setFontSize(8); doc.setTextColor("#a89e88");
+      doc.setFont("times", "italic");
+      doc.text("payable before trip commencement", w - 60, y + 80, { align: "right" });
+    }
     y += panelH + 24;
   }
 
   // Payment terms / thank you body
-  if (kind === "invoice") {
+  if (kind === "quotation") {
+    doc.setFont("helvetica", "bold"); doc.setFontSize(10); doc.setTextColor(TEXT);
+    doc.text("TERMS OF THIS QUOTATION", 40, y); y += 14;
+    doc.setFont("helvetica", "normal"); doc.setFontSize(10);
+    const qt = doc.splitTextToSize(
+      s.quotation_footer || "This quotation is an estimate and does not constitute a confirmed booking. Rates are subject to availability at the time of confirmation.",
+      w - 80,
+    );
+    doc.text(qt, 40, y); y += qt.length * 13 + 10;
+    doc.setFont("times", "italic"); doc.setFontSize(9); doc.setTextColor(MUTED);
+    doc.text("To accept this quotation, reply to this document or message us on WhatsApp and we will issue your invoice.", 40, y);
+  } else if (kind === "invoice") {
     doc.setFont("helvetica", "bold"); doc.setFontSize(10); doc.setTextColor(TEXT);
     doc.text("PAYMENT TERMS", 40, y); y += 14;
     doc.setFont("helvetica", "normal"); doc.setFontSize(10);
@@ -426,7 +473,7 @@ async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
   const foot = [s.company_email, s.company_phone, (s.website || "").replace(/^https?:\/\//, "")].filter(Boolean).join("   •   ");
   doc.text(foot, w / 2, fy, { align: "center" });
 
-  const filenameKind = kind === "invoice" ? "INV" : kind === "confirmation" ? "CONF" : "THANKYOU";
+  const filenameKind = kind === "invoice" ? "INV" : kind === "quotation" ? "QUOTE" : kind === "confirmation" ? "CONF" : "THANKYOU";
   if (opts.output === "blob") {
     return doc.output("blob") as Blob;
   }
@@ -436,7 +483,10 @@ async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
 export function downloadInvoicePdf(b: InvoiceBooking) { return build("invoice", b); }
 export function downloadConfirmationPdf(b: InvoiceBooking) { return build("confirmation", b); }
 export function downloadThankYouPdf(b: InvoiceBooking) { return build("thank_you", b); }
+export function downloadQuotationPdf(b: InvoiceBooking) { return build("quotation", b); }
 
 export function renderPdfBlob(kind: PdfKind, b: InvoiceBooking, settingsOverride?: Partial<Settings> | null) {
   return build(kind, b, { output: "blob", settingsOverride }) as Promise<Blob>;
 }
+
+export type { PdfKind };

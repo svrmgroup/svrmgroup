@@ -4,7 +4,7 @@ import { toast } from "sonner";
 import { Save, Upload, FileText } from "lucide-react";
 import { renderPdfBlob, invalidateInvoiceSettingsCache, type InvoiceBooking } from "@/lib/invoicePdf";
 
-type PreviewKind = "invoice" | "confirmation" | "thank_you";
+type PreviewKind = "invoice" | "quotation" | "confirmation" | "thank_you";
 
 const SAMPLE_BOOKING: InvoiceBooking = {
   booking_code: "SVRM-PREVIEW",
@@ -69,6 +69,7 @@ const AdminSettings = () => {
     website: s.website, vat_number: s.vat_number,
     bank_name: s.bank_name, bank_account: s.bank_account, bank_branch: s.bank_branch, bank_swift: s.bank_swift,
     invoice_footer: s.invoice_footer, confirmation_footer: s.confirmation_footer,
+    quotation_footer: s.quotation_footer, quotation_validity_days: s.quotation_validity_days,
     thank_you_message: s.thank_you_message, thank_you_title: s.thank_you_title, thank_you_signature: s.thank_you_signature,
   }), [previewKind, s]);
 
@@ -177,6 +178,12 @@ const AdminSettings = () => {
           <F l="Confirmation footer (legal note under PDF)">
             <textarea rows={2} value={s.confirmation_footer || ""} onChange={e => setS({ ...s, confirmation_footer: e.target.value })} className="input-luxury text-sm w-full"/>
           </F>
+          <F l="Quotation footer (terms under quotation PDF)">
+            <textarea rows={2} value={s.quotation_footer || ""} onChange={e => setS({ ...s, quotation_footer: e.target.value })} placeholder="This quotation is an estimate and does not constitute a confirmed booking." className="input-luxury text-sm w-full"/>
+          </F>
+          <F l="Quotation validity (days)">
+            <input type="number" min={1} value={s.quotation_validity_days ?? 14} onChange={e => setS({ ...s, quotation_validity_days: Number(e.target.value) })} className="input-luxury text-sm w-full"/>
+          </F>
         </div>
       </div>
 
@@ -188,7 +195,7 @@ const AdminSettings = () => {
             {previewLoading && <span className="text-[10px] text-muted-foreground">Rendering…</span>}
           </div>
           <div className="flex gap-1">
-            {(["invoice", "confirmation", "thank_you"] as PreviewKind[]).map((k) => (
+            {(["invoice", "quotation", "confirmation", "thank_you"] as PreviewKind[]).map((k) => (
               <button
                 key={k}
                 onClick={() => setPreviewKind(k)}
