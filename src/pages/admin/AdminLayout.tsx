@@ -108,9 +108,12 @@ const AdminLayout = () => {
             <p className="font-serif text-sm text-foreground leading-tight">Admin</p>
           </div>
         </div>
-        <button onClick={signOut} className="text-muted-foreground hover:text-foreground p-2 -mr-2">
-          <LogOut className="h-4 w-4" />
-        </button>
+        <div className="flex items-center">
+          <NotificationBell />
+          <button onClick={signOut} className="text-muted-foreground hover:text-foreground p-2 -mr-2">
+            <LogOut className="h-4 w-4" />
+          </button>
+        </div>
       </header>
 
       {/* Desktop sidebar */}
