@@ -9,6 +9,7 @@ import {
   Image as ImageIcon,
 } from "lucide-react";
 import Logo from "@/components/svrm/Logo";
+import NotificationBell from "@/components/svrm/NotificationBell";
 
 const AdminLayout = () => {
   const { session, isAdmin, loading, signOut } = useAdminAuth();
