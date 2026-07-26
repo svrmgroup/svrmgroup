@@ -112,7 +112,7 @@ const AdminPnL = () => {
     const blob = new Blob([lines], { type: "text/csv" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = `pnl-${currency}-${month}.csv`;
+    a.download = `pnl-${currency}-${period === "month" ? month : period}.csv`;
     a.click();
   };
 
@@ -122,9 +122,21 @@ const AdminPnL = () => {
         <div>
           <p className="eyebrow">Money in / money out</p>
           <h1 className="font-serif text-3xl md:text-4xl mt-2">Profit &amp; Loss</h1>
+          <p className="text-xs text-muted-foreground mt-2">Showing {periodLabel}</p>
         </div>
-        <div className="flex items-center gap-2">
-          <input type="month" value={month} onChange={(e) => setMonth(e.target.value)} className="input-luxury text-sm" />
+        <div className="flex items-center gap-2 flex-wrap">
+          <select value={period} onChange={(e) => setPeriod(e.target.value as Period)} className="input-luxury text-sm">
+            {PERIODS.map((p) => <option key={p.key} value={p.key}>{p.label}</option>)}
+          </select>
+          {period === "month" && (
+            <input type="month" value={month} onChange={(e) => setMonth(e.target.value)} className="input-luxury text-sm" />
+          )}
+          {period === "custom" && (
+            <>
+              <input type="date" value={from} onChange={(e) => setFrom(e.target.value)} className="input-luxury text-sm" />
+              <input type="date" value={to} onChange={(e) => setTo(e.target.value)} className="input-luxury text-sm" />
+            </>
+          )}
           <select value={currency} onChange={(e) => setCurrency(e.target.value)} className="input-luxury text-sm">
             <option>ZAR</option><option>USD</option><option>EUR</option><option>GBP</option>
           </select>
