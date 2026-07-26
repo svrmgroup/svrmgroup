@@ -115,6 +115,8 @@ export type Database = {
           invoice_footer: string | null
           logo_url: string | null
           portal_expiry_days: number | null
+          quotation_footer: string | null
+          quotation_validity_days: number | null
           tagline: string | null
           thank_you_message: string | null
           thank_you_signature: string | null
@@ -143,6 +145,8 @@ export type Database = {
           invoice_footer?: string | null
           logo_url?: string | null
           portal_expiry_days?: number | null
+          quotation_footer?: string | null
+          quotation_validity_days?: number | null
           tagline?: string | null
           thank_you_message?: string | null
           thank_you_signature?: string | null
@@ -171,6 +175,8 @@ export type Database = {
           invoice_footer?: string | null
           logo_url?: string | null
           portal_expiry_days?: number | null
+          quotation_footer?: string | null
+          quotation_validity_days?: number | null
           tagline?: string | null
           thank_you_message?: string | null
           thank_you_signature?: string | null
