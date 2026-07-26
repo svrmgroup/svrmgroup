@@ -16,7 +16,7 @@ export function useAdminNotifications(enabled: boolean) {
       if (!isNew) return;
       toast(title, { description: body });
       playChime();
-      void showOsNotification(title, body, `${kind}:${id}`);
+      void showOsNotification(title, body, `${kind}:${id}`, href);
     };
 
     const channel = supabase

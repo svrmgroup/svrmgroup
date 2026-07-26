@@ -136,17 +136,18 @@ export async function requestNotificationPermission(): Promise<"unsupported" | N
  * Shows an OS pop-up. Prefers the service worker registration, which is the
  * only path that works for an installed home-screen app on iOS.
  */
-export async function showOsNotification(title: string, body: string, tag: string) {
+export async function showOsNotification(title: string, body: string, tag: string, href = "/admin") {
   if (typeof Notification === "undefined" || Notification.permission !== "granted") return;
-  const opts: NotificationOptions = {
+  const opts: NotificationOptions & { data?: unknown } = {
     body,
     icon: "/svrm-icon-192.png",
     badge: "/svrm-icon-192.png",
     tag,
+    data: { href },
   };
   try {
     if ("serviceWorker" in navigator) {
-      const reg = await navigator.serviceWorker.getRegistration("/admin-sw.js");
+      const reg = await navigator.serviceWorker.getRegistration();
       if (reg) {
         await reg.showNotification(title, opts);
         return;
