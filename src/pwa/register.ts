@@ -1,7 +1,7 @@
 // Guarded PWA registration. Admin-only scope.
 // Registers only when the visitor is inside /admin, on the real published origin, in production.
 
-const SW_URL = "/admin-sw.js";
+const SW_URL = "/sw.js";
 
 function shouldRefuse(): boolean {
   if (!import.meta.env.PROD) return true;
