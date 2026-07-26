@@ -473,7 +473,7 @@ async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
   const foot = [s.company_email, s.company_phone, (s.website || "").replace(/^https?:\/\//, "")].filter(Boolean).join("   •   ");
   doc.text(foot, w / 2, fy, { align: "center" });
 
-  const filenameKind = kind === "invoice" ? "INV" : kind === "confirmation" ? "CONF" : "THANKYOU";
+  const filenameKind = kind === "invoice" ? "INV" : kind === "quotation" ? "QUOTE" : kind === "confirmation" ? "CONF" : "THANKYOU";
   if (opts.output === "blob") {
     return doc.output("blob") as Blob;
   }
@@ -483,7 +483,10 @@ async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
 export function downloadInvoicePdf(b: InvoiceBooking) { return build("invoice", b); }
 export function downloadConfirmationPdf(b: InvoiceBooking) { return build("confirmation", b); }
 export function downloadThankYouPdf(b: InvoiceBooking) { return build("thank_you", b); }
+export function downloadQuotationPdf(b: InvoiceBooking) { return build("quotation", b); }
 
 export function renderPdfBlob(kind: PdfKind, b: InvoiceBooking, settingsOverride?: Partial<Settings> | null) {
   return build(kind, b, { output: "blob", settingsOverride }) as Promise<Blob>;
 }
+
+export type { PdfKind };
