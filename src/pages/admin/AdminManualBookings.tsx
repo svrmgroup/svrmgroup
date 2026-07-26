@@ -44,7 +44,7 @@ const AdminManualBookings = () => {
   const [rows, setRows] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
   const [openId, setOpenId] = useState<string | null>(null);
-  const [pdfEdit, setPdfEdit] = useState<{ booking: Booking; kind: "invoice" | "confirmation" | "thank_you" } | null>(null);
+  const [pdfEdit, setPdfEdit] = useState<{ booking: Booking; kind: "invoice" | "confirmation" | "thank_you" | "quotation" } | null>(null);
   const [showForm, setShowForm] = useState(false);
 
   // form state
@@ -295,6 +295,12 @@ const AdminManualBookings = () => {
                     </div>
 
                     <div className="flex flex-wrap gap-2">
+                      <button
+                        onClick={() => setPdfEdit({ booking: r, kind: "quotation" })}
+                        className="flex items-center gap-1.5 text-xs text-gold border border-primary/40 px-3 py-1.5 hover:bg-primary/10 transition-colors"
+                      >
+                        <FileDown className="h-3 w-3" /> Quotation PDF
+                      </button>
                       <button
                         onClick={() => setPdfEdit({ booking: r, kind: "invoice" })}
                         className="flex items-center gap-1.5 text-xs text-gold border border-primary/40 px-3 py-1.5 hover:bg-primary/10 transition-colors"
