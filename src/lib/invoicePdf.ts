@@ -84,13 +84,33 @@ export function invalidateInvoiceSettingsCache() { cache = null; logoDataUrlCach
 // or padding); we auto-detect the mark's bounding box and clip a circle to it
 // so the PDF only ever shows the circular logo — never a square/black border.
 let logoDataUrlCache: { src: string; bg: string; data: string } | null = null;
+
+/**
+ * Loads the brand mark for PDFs. Tries the settings logo first, then always
+ * falls back to the bundled SVRM circular logo so a broken/private settings
+ * URL can never downgrade PDFs to the plain "SVRM" text circle.
+ */
 async function loadLogoDataUrl(overrideUrl?: string, bg = "#f3e9d2"): Promise<string | null> {
-  const src = overrideUrl || svrmLogo.url;
+  const candidates = [overrideUrl, svrmLogo.url].filter(Boolean) as string[];
+  for (const candidate of candidates) {
+    const data = await loadLogoFrom(candidate, bg);
+    if (data) return data;
+  }
+  return null;
+}
+
+/** True when the given logo URL can actually be loaded (used by settings UI). */
+export async function checkLogoUrl(url: string): Promise<boolean> {
+  return !!(await loadLogoFrom(url, "#f3e9d2"));
+}
+
+async function loadLogoFrom(src: string, bg: string): Promise<string | null> {
   if (logoDataUrlCache && logoDataUrlCache.src === src && logoDataUrlCache.bg === bg) return logoDataUrlCache.data;
   try {
     const res = await fetch(src, { credentials: "omit" });
     if (!res.ok) return null;
     const blob = await res.blob();
+    if (!blob.type.startsWith("image/") && blob.size < 128) return null;
     const img: HTMLImageElement = await new Promise((resolve, reject) => {
       const url = URL.createObjectURL(blob);
       const el = new Image();
