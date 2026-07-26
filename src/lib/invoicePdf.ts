@@ -40,6 +40,7 @@ interface Settings {
   bank_name?: string; bank_account?: string; bank_branch?: string; bank_swift?: string;
   invoice_footer?: string; confirmation_footer?: string; thank_you_message?: string;
   thank_you_title?: string; thank_you_signature?: string;
+  quotation_footer?: string; quotation_validity_days?: number;
   brand_primary?: string; brand_bg?: string;
 }
 
@@ -215,7 +216,7 @@ async function loadConcierge(bookingId?: string): Promise<ConciergeInfo | null> 
   } catch { return null; }
 }
 
-type PdfKind = "invoice" | "confirmation" | "thank_you";
+type PdfKind = "invoice" | "confirmation" | "thank_you" | "quotation";
 
 export interface RenderOpts {
   settingsOverride?: Partial<Settings> | null;
