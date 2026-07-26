@@ -172,7 +172,7 @@ const AdminPnL = () => {
           <section>
             <p className="eyebrow mb-3">Per-booking profit</p>
             <div className="card-luxury overflow-hidden">
-              {perBooking.length === 0 ? <p className="p-6 text-xs text-muted-foreground">No bookings in {month}</p> : (
+              {perBooking.length === 0 ? <p className="p-6 text-xs text-muted-foreground">No bookings for {periodLabel}</p> : (
                 <table className="w-full text-sm">
                   <thead className="bg-surface-deep text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
                     <tr>
