@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { X, FileDown, Plus, Trash2 } from "lucide-react";
+import { X, FileDown, Plus, Trash2, MessageCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { downloadInvoicePdf, downloadConfirmationPdf, downloadThankYouPdf, type InvoiceBooking, type ConciergeInfo } from "@/lib/invoicePdf";
+import { toast } from "sonner";
+import { downloadInvoicePdf, downloadConfirmationPdf, downloadThankYouPdf, downloadQuotationPdf, type InvoiceBooking, type ConciergeInfo } from "@/lib/invoicePdf";
 import type { LineItem } from "@/lib/confirmationMessage";
 
-type Kind = "invoice" | "confirmation" | "thank_you";
+type Kind = "invoice" | "confirmation" | "thank_you" | "quotation";
 
 interface Props {
   booking: any;
@@ -16,6 +17,7 @@ const titles: Record<Kind, string> = {
   invoice: "Edit invoice",
   confirmation: "Edit confirmation",
   thank_you: "Edit thank-you note",
+  quotation: "Edit quotation",
 };
 
 /** Modal that lets an admin tweak every field on a PDF right before downloading. */
