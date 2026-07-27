@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Mail, ChevronDown, Trash2 } from "lucide-react";
+import { Mail, ChevronDown, Trash2, Plus, FileText, FileSignature, X } from "lucide-react";
+import RentalAgreementDialog from "@/components/svrm/RentalAgreementDialog";
+import PdfEditorDialog from "@/components/svrm/PdfEditorDialog";
 
 type Status = "new" | "in_progress" | "done" | "archived";
 
@@ -35,6 +37,9 @@ const AdminBookings = () => {
   const [rows, setRows] = useState<Row[]>([]);
   const [loading, setLoading] = useState(true);
   const [openId, setOpenId] = useState<string | null>(null);
+  const [creating, setCreating] = useState(false);
+  const [agreementFor, setAgreementFor] = useState<Row | null>(null);
+  const [quoteFor, setQuoteFor] = useState<Row | null>(null);
 
   const load = async () => {
     setLoading(true);
@@ -71,7 +76,12 @@ const AdminBookings = () => {
           <p className="eyebrow">Fleet</p>
           <h1 className="font-serif text-3xl md:text-4xl mt-2">Rental bookings</h1>
         </div>
-        <p className="text-xs text-muted-foreground">{rows.length} total</p>
+        <div className="flex items-center gap-4">
+          <p className="text-xs text-muted-foreground">{rows.length} total</p>
+          <button onClick={() => setCreating(true)} className="btn-luxury text-xs flex items-center gap-2">
+            <Plus className="h-3.5 w-3.5" /> New rental request
+          </button>
+        </div>
       </div>
 
       {loading ? (
@@ -149,8 +159,14 @@ const AdminBookings = () => {
                       />
                     </label>
 
-                    <div className="flex justify-end">
-                      <button onClick={() => remove(r.id)} className="flex items-center gap-2 text-xs text-destructive hover:underline">
+                    <div className="flex flex-wrap justify-end gap-3">
+                      <button onClick={() => setQuoteFor(r)} className="flex items-center gap-2 text-xs text-gold border border-primary/40 px-3 py-2 hover:bg-primary/10 transition-colors">
+                        <FileText className="h-3.5 w-3.5" /> Quotation PDF
+                      </button>
+                      <button onClick={() => setAgreementFor(r)} className="flex items-center gap-2 text-xs text-gold border border-primary/40 px-3 py-2 hover:bg-primary/10 transition-colors">
+                        <FileSignature className="h-3.5 w-3.5" /> Rental agreement
+                      </button>
+                      <button onClick={() => remove(r.id)} className="flex items-center gap-2 text-xs text-destructive hover:underline px-3 py-2">
                         <Trash2 className="h-3.5 w-3.5" /> Delete
                       </button>
                     </div>
@@ -161,8 +177,130 @@ const AdminBookings = () => {
           })}
         </div>
       )}
+
+      {creating && <NewRentalRequest onClose={() => setCreating(false)} onCreated={load} />}
+
+      {agreementFor && (
+        <RentalAgreementDialog
+          initial={{
+            renter_name: agreementFor.name,
+            renter_email: agreementFor.email,
+            renter_phone: agreementFor.phone || "",
+            vehicle: agreementFor.vehicle_name,
+            collection_at: agreementFor.pickup_date,
+            return_at: agreementFor.return_date,
+            collection_location: agreementFor.pickup_location,
+            return_location: agreementFor.pickup_location,
+            currency: agreementFor.currency,
+            total: agreementFor.estimated_total ?? 0,
+            balance_due: agreementFor.estimated_total ?? 0,
+            days: Math.max(1, Math.round((new Date(agreementFor.return_date).getTime() - new Date(agreementFor.pickup_date).getTime()) / 864e5)),
+            notes: agreementFor.extras?.length ? `Extras: ${agreementFor.extras.join(", ")}` : "",
+          }}
+          onClose={() => setAgreementFor(null)}
+        />
+      )}
+
+      {quoteFor && (
+        <PdfEditorDialog
+          kind="quotation"
+          booking={{
+            booking_code: `Q-${quoteFor.id.slice(0, 6).toUpperCase()}`,
+            client_name: quoteFor.name,
+            client_email: quoteFor.email,
+            client_phone: quoteFor.phone,
+            start_date: quoteFor.pickup_date,
+            end_date: quoteFor.return_date,
+            currency: quoteFor.currency,
+            subtotal: quoteFor.estimated_total ?? 0,
+            deposit_amount: Math.round((quoteFor.estimated_total ?? 0) * 0.5),
+            balance_due: Math.round((quoteFor.estimated_total ?? 0) * 0.5),
+            notes: quoteFor.message,
+            line_items: [
+              { label: `${quoteFor.vehicle_name} self-drive rental`, qty: 1, unit: "rental", subtotal: quoteFor.estimated_total ?? 0 },
+              ...(quoteFor.extras || []).map((e) => ({ label: e, qty: 1, unit: "", subtotal: 0 })),
+            ],
+          }}
+          onClose={() => setQuoteFor(null)}
+        />
+      )}
     </div>
   );
 };
+
+/** Manual rental request entry — same shape as a request submitted from the site. */
+function NewRentalRequest({ onClose, onCreated }: { onClose: () => void; onCreated: () => void }) {
+  const today = new Date().toISOString().slice(0, 10);
+  const [f, setF] = useState({
+    name: "", email: "", phone: "", vehicle_name: "", pickup_date: today, return_date: today,
+    pickup_location: "", currency: "ZAR", estimated_total: "", extras: "", message: "",
+  });
+  const [saving, setSaving] = useState(false);
+  const set = (k: string, v: string) => setF((p) => ({ ...p, [k]: v }));
+
+  const save = async () => {
+    if (!f.name.trim() || !f.vehicle_name.trim()) return toast.error("Client name and vehicle are required");
+    setSaving(true);
+    const { error } = await supabase.from("rental_requests").insert({
+      name: f.name.trim(),
+      email: f.email.trim() || "manual@svrm.group",
+      phone: f.phone.trim() || null,
+      vehicle_name: f.vehicle_name.trim(),
+      vehicle_slug: f.vehicle_name.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-"),
+      pickup_date: f.pickup_date,
+      return_date: f.return_date,
+      pickup_location: f.pickup_location.trim() || "TBC",
+      currency: f.currency,
+      estimated_total: f.estimated_total ? Number(f.estimated_total) : null,
+      extras: f.extras ? f.extras.split(",").map((x) => x.trim()).filter(Boolean) : [],
+      message: f.message.trim() || null,
+    });
+    setSaving(false);
+    if (error) return toast.error(error.message);
+    toast.success("Rental request added");
+    onCreated();
+    onClose();
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 bg-black/70 flex items-start md:items-center justify-center p-4 overflow-y-auto">
+      <div className="bg-surface-deep border border-border/60 w-full max-w-2xl my-8">
+        <div className="p-5 border-b border-border/40 flex items-center justify-between">
+          <h2 className="font-serif text-2xl">New rental request</h2>
+          <button onClick={onClose}><X className="h-5 w-5 text-muted-foreground" /></button>
+        </div>
+        <div className="p-5 grid md:grid-cols-2 gap-3 max-h-[70vh] overflow-y-auto">
+          <In label="Client name" value={f.name} onChange={(v) => set("name", v)} />
+          <In label="Email" value={f.email} onChange={(v) => set("email", v)} />
+          <In label="Phone" value={f.phone} onChange={(v) => set("phone", v)} />
+          <In label="Vehicle" value={f.vehicle_name} onChange={(v) => set("vehicle_name", v)} />
+          <In label="Pickup date" type="date" value={f.pickup_date} onChange={(v) => set("pickup_date", v)} />
+          <In label="Return date" type="date" value={f.return_date} onChange={(v) => set("return_date", v)} />
+          <In label="Pickup location" value={f.pickup_location} onChange={(v) => set("pickup_location", v)} />
+          <In label="Currency" value={f.currency} onChange={(v) => set("currency", v)} />
+          <In label="Estimated total" type="number" value={f.estimated_total} onChange={(v) => set("estimated_total", v)} />
+          <In label="Extras (comma separated)" value={f.extras} onChange={(v) => set("extras", v)} />
+          <label className="md:col-span-2 block">
+            <span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Notes</span>
+            <textarea rows={3} value={f.message} onChange={(e) => set("message", e.target.value)} className="input-luxury text-sm w-full mt-1" />
+          </label>
+        </div>
+        <div className="p-5 border-t border-border/40 flex justify-end gap-2">
+          <button onClick={onClose} className="btn-ghost text-xs">Cancel</button>
+          <button onClick={save} disabled={saving} className="btn-luxury text-xs disabled:opacity-50">{saving ? "Saving…" : "Add request"}</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function In({ label, value, onChange, type = "text" }: { label: string; value: string; onChange: (v: string) => void; type?: string }) {
+  return (
+    <label className="block">
+      <span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">{label}</span>
+      <input type={type} value={value} onChange={(e) => onChange(e.target.value)} className="input-luxury text-sm w-full mt-1" />
+    </label>
+  );
+}
 
 export default AdminBookings;

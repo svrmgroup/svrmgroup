@@ -64,7 +64,7 @@ const DEFAULTS: Settings = {
 
 
 let cache: Settings | null = null;
-async function loadSettings(override?: Partial<Settings> | null): Promise<Settings> {
+export async function loadSettings(override?: Partial<Settings> | null): Promise<Settings> {
   if (override) {
     const base = cache || DEFAULTS;
     return { ...DEFAULTS, ...base, ...override };
@@ -91,7 +91,7 @@ let logoDataUrlCache: { src: string; bg: string; data: string } | null = null;
  * falls back to the bundled SVRM circular logo so a broken/private settings
  * URL can never downgrade PDFs to the plain "SVRM" text circle.
  */
-async function loadLogoDataUrl(overrideUrl?: string, bg = "#f3e9d2"): Promise<string | null> {
+export async function loadLogoDataUrl(overrideUrl?: string, bg = "#f3e9d2"): Promise<string | null> {
   const candidates = [overrideUrl, svrmLogo.url].filter(Boolean) as string[];
   for (const candidate of candidates) {
     const data = await loadLogoFrom(candidate, bg);
@@ -400,18 +400,24 @@ async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
     doc.setFont("helvetica", "bold"); doc.setFontSize(24); doc.setTextColor("#ffffff");
     doc.text(money(b.subtotal), 60, y + 56);
     doc.setFont("helvetica", "normal"); doc.setFontSize(9); doc.setTextColor("#cfc7b6");
+    // Percentage always reflects the deposit amount actually entered.
+    const depPct = Number(b.subtotal) > 0
+      ? Math.round((Number(b.deposit_amount || 0) / Number(b.subtotal)) * 100)
+      : 0;
+    const depLabel = depPct > 0 ? ` (${depPct}%)` : "";
     if (kind === "quotation") {
-      doc.text(`Deposit to secure (50%): ${money(b.deposit_amount)}`, 60, y + 78);
+      doc.text(`Deposit to secure${depLabel}: ${money(b.deposit_amount)}`, 60, y + 78);
       doc.setFontSize(8); doc.setTextColor("#a89e88");
       doc.setFont("times", "italic");
       doc.text("estimate — not yet a confirmed booking", w - 60, y + 78, { align: "right" });
     } else {
-      doc.text(`Deposit Required (50%): ${money(b.deposit_amount)}`, 60, y + 78);
+      doc.text(`Deposit Required${depLabel}: ${money(b.deposit_amount)}`, 60, y + 78);
       doc.text(`Remaining Balance: ${money(b.balance_due)}`, w - 60, y + 66, { align: "right" });
       doc.setFontSize(8); doc.setTextColor("#a89e88");
       doc.setFont("times", "italic");
       doc.text("payable before trip commencement", w - 60, y + 80, { align: "right" });
     }
+
     y += panelH + 24;
   }
 
@@ -483,10 +489,10 @@ async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
 export function downloadInvoicePdf(b: InvoiceBooking) { return build("invoice", b); }
 export function downloadConfirmationPdf(b: InvoiceBooking) { return build("confirmation", b); }
 export function downloadThankYouPdf(b: InvoiceBooking) { return build("thank_you", b); }
-export function downloadQuotationPdf(b: InvoiceBooking) { return build("quotation", b); }
+export function downloadQuotationPdf(b: InvoiceBooking, settingsOverride?: Partial<Settings> | null) { return build("quotation", b, { settingsOverride }); }
 
 export function renderPdfBlob(kind: PdfKind, b: InvoiceBooking, settingsOverride?: Partial<Settings> | null) {
   return build(kind, b, { output: "blob", settingsOverride }) as Promise<Blob>;
 }
 
-export type { PdfKind };
+export type { PdfKind, Settings as PdfSettings };
