@@ -93,12 +93,19 @@ export default function PdfEditorDialog({ booking, kind, onClose }: Props) {
     issue_date_override: issueDate || null,
   });
 
+  const quoteOverride = () => {
+    const o: any = {};
+    if (quoteTerms.trim()) o.quotation_footer = quoteTerms.trim();
+    if (quoteValidity.trim()) o.quotation_validity_days = Number(quoteValidity) || undefined;
+    return Object.keys(o).length ? o : null;
+  };
+
   const download = async () => {
     setDownloading(true);
     try {
       const p = payload();
       if (kind === "invoice") await downloadInvoicePdf(p);
-      else if (kind === "quotation") await downloadQuotationPdf(p);
+      else if (kind === "quotation") await downloadQuotationPdf(p, quoteOverride());
       else if (kind === "confirmation") await downloadConfirmationPdf(p);
       else await downloadThankYouPdf(p);
       onClose();
@@ -112,7 +119,7 @@ export default function PdfEditorDialog({ booking, kind, onClose }: Props) {
     setDownloading(true);
     try {
       const p = payload();
-      if (kind === "quotation") await downloadQuotationPdf(p);
+      if (kind === "quotation") await downloadQuotationPdf(p, quoteOverride());
       else if (kind === "invoice") await downloadInvoicePdf(p);
       else if (kind === "confirmation") await downloadConfirmationPdf(p);
       else await downloadThankYouPdf(p);
@@ -205,6 +212,17 @@ export default function PdfEditorDialog({ booking, kind, onClose }: Props) {
             <Field label="Deposit" value={String(b.deposit_amount ?? 0)} type="number" onChange={(v) => setB({ ...b, deposit_amount: Number(v) })}/>
             <Field label="Balance due" value={String(b.balance_due ?? 0)} type="number" onChange={(v) => setB({ ...b, balance_due: Number(v) })}/>
           </section>
+
+          {kind === "quotation" && (
+            <section className="space-y-3">
+              <p className="eyebrow">Quotation options</p>
+              <Field label="Valid for (days)" type="number" value={quoteValidity} onChange={setQuoteValidity} placeholder="Blank = default from settings"/>
+              <label className="block">
+                <span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Terms of this quotation</span>
+                <textarea rows={3} value={quoteTerms} onChange={(e) => setQuoteTerms(e.target.value)} placeholder="Blank = default from settings" className="input-luxury text-sm w-full mt-1"/>
+              </label>
+            </section>
+          )}
 
           <label className="block">
             <span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Important note (callout box)</span>
