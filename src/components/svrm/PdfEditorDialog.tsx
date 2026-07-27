@@ -26,10 +26,13 @@ export default function PdfEditorDialog({ booking, kind, onClose }: Props) {
   const [items, setItems] = useState<LineItem[]>(booking.line_items || []);
   const [issueDate, setIssueDate] = useState<string>("");
   const [packageTitle, setPackageTitle] = useState<string>((booking.line_items || [])[0]?.label || "");
+  const [quoteTerms, setQuoteTerms] = useState<string>("");
+  const [quoteValidity, setQuoteValidity] = useState<string>("");
   const [concierge, setConcierge] = useState<ConciergeInfo>({ name: "" });
   const [staffList, setStaffList] = useState<any[]>([]);
   const [selectedStaffId, setSelectedStaffId] = useState<string>("");
   const [downloading, setDownloading] = useState(false);
+
 
   useEffect(() => {
     // Load staff for concierge picker + preselect current assignment.
