@@ -400,18 +400,24 @@ async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
     doc.setFont("helvetica", "bold"); doc.setFontSize(24); doc.setTextColor("#ffffff");
     doc.text(money(b.subtotal), 60, y + 56);
     doc.setFont("helvetica", "normal"); doc.setFontSize(9); doc.setTextColor("#cfc7b6");
+    // Percentage always reflects the deposit amount actually entered.
+    const depPct = Number(b.subtotal) > 0
+      ? Math.round((Number(b.deposit_amount || 0) / Number(b.subtotal)) * 100)
+      : 0;
+    const depLabel = depPct > 0 ? ` (${depPct}%)` : "";
     if (kind === "quotation") {
-      doc.text(`Deposit to secure (50%): ${money(b.deposit_amount)}`, 60, y + 78);
+      doc.text(`Deposit to secure${depLabel}: ${money(b.deposit_amount)}`, 60, y + 78);
       doc.setFontSize(8); doc.setTextColor("#a89e88");
       doc.setFont("times", "italic");
       doc.text("estimate — not yet a confirmed booking", w - 60, y + 78, { align: "right" });
     } else {
-      doc.text(`Deposit Required (50%): ${money(b.deposit_amount)}`, 60, y + 78);
+      doc.text(`Deposit Required${depLabel}: ${money(b.deposit_amount)}`, 60, y + 78);
       doc.text(`Remaining Balance: ${money(b.balance_due)}`, w - 60, y + 66, { align: "right" });
       doc.setFontSize(8); doc.setTextColor("#a89e88");
       doc.setFont("times", "italic");
       doc.text("payable before trip commencement", w - 60, y + 80, { align: "right" });
     }
+
     y += panelH + 24;
   }
 
