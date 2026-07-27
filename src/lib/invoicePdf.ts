@@ -64,7 +64,7 @@ const DEFAULTS: Settings = {
 
 
 let cache: Settings | null = null;
-async function loadSettings(override?: Partial<Settings> | null): Promise<Settings> {
+export async function loadSettings(override?: Partial<Settings> | null): Promise<Settings> {
   if (override) {
     const base = cache || DEFAULTS;
     return { ...DEFAULTS, ...base, ...override };
@@ -91,7 +91,7 @@ let logoDataUrlCache: { src: string; bg: string; data: string } | null = null;
  * falls back to the bundled SVRM circular logo so a broken/private settings
  * URL can never downgrade PDFs to the plain "SVRM" text circle.
  */
-async function loadLogoDataUrl(overrideUrl?: string, bg = "#f3e9d2"): Promise<string | null> {
+export async function loadLogoDataUrl(overrideUrl?: string, bg = "#f3e9d2"): Promise<string | null> {
   const candidates = [overrideUrl, svrmLogo.url].filter(Boolean) as string[];
   for (const candidate of candidates) {
     const data = await loadLogoFrom(candidate, bg);
@@ -489,10 +489,10 @@ async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
 export function downloadInvoicePdf(b: InvoiceBooking) { return build("invoice", b); }
 export function downloadConfirmationPdf(b: InvoiceBooking) { return build("confirmation", b); }
 export function downloadThankYouPdf(b: InvoiceBooking) { return build("thank_you", b); }
-export function downloadQuotationPdf(b: InvoiceBooking) { return build("quotation", b); }
+export function downloadQuotationPdf(b: InvoiceBooking, settingsOverride?: Partial<Settings> | null) { return build("quotation", b, { settingsOverride }); }
 
 export function renderPdfBlob(kind: PdfKind, b: InvoiceBooking, settingsOverride?: Partial<Settings> | null) {
   return build(kind, b, { output: "blob", settingsOverride }) as Promise<Blob>;
 }
 
-export type { PdfKind };
+export type { PdfKind, Settings as PdfSettings };
