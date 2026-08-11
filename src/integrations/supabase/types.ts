@@ -924,6 +924,7 @@ export type Database = {
       }
       manual_bookings: {
         Row: {
+          amount_paid: number
           balance_due: number
           booking_code: string
           client_email: string | null
@@ -947,6 +948,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          amount_paid?: number
           balance_due?: number
           booking_code?: string
           client_email?: string | null
@@ -970,6 +972,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          amount_paid?: number
           balance_due?: number
           booking_code?: string
           client_email?: string | null
@@ -1380,6 +1383,7 @@ export type Database = {
       get_booking_by_token: {
         Args: { _token: string }
         Returns: {
+          amount_paid: number
           balance_due: number
           booking_code: string
           client_email: string | null

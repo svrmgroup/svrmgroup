@@ -218,11 +218,15 @@ export default function PdfEditorDialog({ booking, kind, onClose }: Props) {
             </div>
           </section>
 
-          <section className="grid md:grid-cols-3 gap-3">
+          <section className="grid md:grid-cols-4 gap-3">
             <Field label="Subtotal" value={String(b.subtotal ?? 0)} type="number" onChange={(v) => setB({ ...b, subtotal: Number(v) })}/>
             <Field label="Deposit" value={String(b.deposit_amount ?? 0)} type="number" onChange={(v) => setB({ ...b, deposit_amount: Number(v) })}/>
+            <Field label="Amount paid" value={String(b.amount_paid ?? 0)} type="number" onChange={(v) => setB({ ...b, amount_paid: Number(v) })}/>
             <Field label="Balance due" value={String(b.balance_due ?? 0)} type="number" onChange={(v) => setB({ ...b, balance_due: Number(v) })}/>
           </section>
+          {Number(b.subtotal) > 0 && Number(b.amount_paid || 0) >= Number(b.subtotal) && (
+            <p className="text-[10px] uppercase tracking-[0.24em] text-gold">This invoice will show “Paid in full”.</p>
+          )}
 
           {kind === "quotation" && (
             <section className="space-y-3">

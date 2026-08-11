@@ -26,6 +26,7 @@ export interface InvoiceBooking {
   currency: string;
   subtotal: number;
   deposit_amount: number;
+  amount_paid?: number;
   balance_due: number;
   notes?: string | null;
   confirmation_message?: string | null;
@@ -422,11 +423,28 @@ async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
       doc.setFont("times", "italic");
       doc.text("estimate — not yet a confirmed booking", w - 60, y + 78, { align: "right" });
     } else {
-      doc.text(`Deposit Required${depLabel}: ${money(b.deposit_amount)}`, 60, y + 78);
-      doc.text(`Remaining Balance: ${money(b.balance_due)}`, w - 60, y + 66, { align: "right" });
-      doc.setFontSize(8); doc.setTextColor("#a89e88");
-      doc.setFont("times", "italic");
-      doc.text("payable before trip commencement", w - 60, y + 80, { align: "right" });
+      const paidAmt = Number(b.amount_paid || 0);
+      const fullyPaid = Number(b.subtotal) > 0 && paidAmt >= Number(b.subtotal);
+      if (fullyPaid) {
+        doc.text(`Amount Paid: ${money(paidAmt)}`, 60, y + 78);
+        // Gold "PAID IN FULL" badge
+        doc.setFillColor(GOLD);
+        doc.roundedRect(w - 190, y + 46, 130, 26, 6, 6, "F");
+        doc.setFont("helvetica", "bold"); doc.setFontSize(11); doc.setTextColor(DARK);
+        doc.text("PAID IN FULL", w - 125, y + 63, { align: "center" });
+      } else if (paidAmt > 0) {
+        doc.text(`Amount Paid: ${money(paidAmt)}`, 60, y + 78);
+        doc.text(`Remaining Balance: ${money(Math.max(0, Number(b.subtotal) - paidAmt))}`, w - 60, y + 66, { align: "right" });
+        doc.setFontSize(8); doc.setTextColor("#a89e88");
+        doc.setFont("times", "italic");
+        doc.text("payable before trip commencement", w - 60, y + 80, { align: "right" });
+      } else {
+        doc.text(`Deposit Required${depLabel}: ${money(b.deposit_amount)}`, 60, y + 78);
+        doc.text(`Remaining Balance: ${money(b.balance_due)}`, w - 60, y + 66, { align: "right" });
+        doc.setFontSize(8); doc.setTextColor("#a89e88");
+        doc.setFont("times", "italic");
+        doc.text("payable before trip commencement", w - 60, y + 80, { align: "right" });
+      }
     }
 
     y += panelH + 24;

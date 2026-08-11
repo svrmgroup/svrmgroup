@@ -20,6 +20,7 @@ interface Booking {
   currency: string;
   subtotal: number;
   deposit_amount: number;
+  amount_paid: number;
   balance_due: number;
   start_date: string | null;
   end_date: string | null;
@@ -47,6 +48,7 @@ const AdminManualBookings = () => {
   const [openId, setOpenId] = useState<string | null>(null);
   const [pdfEdit, setPdfEdit] = useState<{ booking: Booking; kind: "invoice" | "confirmation" | "thank_you" | "quotation" } | null>(null);
   const [showForm, setShowForm] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
 
   // form state
   const [form, setForm] = useState({
@@ -57,6 +59,7 @@ const AdminManualBookings = () => {
     start_date: "",
     end_date: "",
     deposit_amount: 0,
+    amount_paid: 0,
     notes: "",
   });
   const [items, setItems] = useState<LineItem[]>([emptyItem()]);
@@ -76,24 +79,96 @@ const AdminManualBookings = () => {
   useEffect(() => { load(); }, []);
 
   const subtotal = items.reduce((s, i) => s + (Number(i.amount) || 0), 0);
-  const balance = Math.max(0, subtotal - (Number(form.deposit_amount) || 0));
+  const paid = Number(form.amount_paid) || 0;
+  // Balance follows what has actually been paid; falls back to the deposit when nothing is logged.
+  const balance = Math.max(0, subtotal - (paid > 0 ? paid : Number(form.deposit_amount) || 0));
 
   const resetForm = () => {
-    setForm({ client_name: "", client_email: "", client_phone: "", currency: "ZAR", start_date: "", end_date: "", deposit_amount: 0, notes: "" });
+    setForm({ client_name: "", client_email: "", client_phone: "", currency: "ZAR", start_date: "", end_date: "", deposit_amount: 0, amount_paid: 0, notes: "" });
     setItems([emptyItem()]);
     setPendingStaff([]);
+    setEditingId(null);
+  };
+
+  const startEdit = (r: Booking) => {
+    setEditingId(r.id);
+    setForm({
+      client_name: r.client_name || "",
+      client_email: r.client_email || "",
+      client_phone: r.client_phone || "",
+      currency: r.currency || "ZAR",
+      start_date: r.start_date || "",
+      end_date: r.end_date || "",
+      deposit_amount: Number(r.deposit_amount) || 0,
+      amount_paid: Number(r.amount_paid) || 0,
+      notes: r.notes || "",
+    });
+    setItems(r.line_items?.length ? r.line_items.map((i) => ({ ...i })) : [emptyItem()]);
+    setShowForm(true);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const cleanedItems = () =>
+    items.filter((i) => i.label.trim()).map((i) => ({
+      label: i.label.trim(),
+      qty: Number(i.qty) || undefined,
+      unit: i.unit?.trim() || undefined,
+      amount: Number(i.amount) || 0,
+    }));
+
+  const saveEdit = async () => {
+    if (!editingId) return;
+    if (!form.client_name.trim()) return toast.error("Client name required");
+    const cleanItems = cleanedItems();
+    if (!cleanItems.length) return toast.error("Add at least one line item");
+
+    const patch = {
+      client_name: form.client_name.trim(),
+      client_email: form.client_email.trim() || null,
+      client_phone: form.client_phone.trim() || null,
+      currency: form.currency,
+      line_items: cleanItems as any,
+      subtotal,
+      deposit_amount: Number(form.deposit_amount) || 0,
+      amount_paid: paid,
+      balance_due: balance,
+      start_date: form.start_date || null,
+      end_date: form.end_date || null,
+      notes: form.notes.trim() || null,
+    };
+
+    const existing = rows.find((r) => r.id === editingId);
+    const confirmation_message = buildConfirmationMessage({
+      booking_code: existing?.booking_code || "",
+      client_name: patch.client_name,
+      currency: patch.currency,
+      line_items: cleanItems,
+      subtotal,
+      deposit_amount: patch.deposit_amount,
+      amount_paid: paid,
+      balance_due: balance,
+      start_date: patch.start_date,
+      end_date: patch.end_date,
+      notes: patch.notes,
+    });
+
+    const { error } = await supabase
+      .from("manual_bookings")
+      .update({ ...patch, confirmation_message } as any)
+      .eq("id", editingId);
+    if (error) return toast.error(error.message);
+
+    setRows((r) => r.map((x) => (x.id === editingId ? ({ ...x, ...patch, confirmation_message } as any) : x)));
+    toast.success("Booking updated");
+    setShowForm(false);
+    resetForm();
   };
 
   const create = async () => {
     if (!form.client_name.trim()) return toast.error("Client name required");
     if (items.length === 0 || items.every((i) => !i.label.trim())) return toast.error("Add at least one line item");
 
-    const cleanItems = items.filter((i) => i.label.trim()).map((i) => ({
-      label: i.label.trim(),
-      qty: Number(i.qty) || undefined,
-      unit: i.unit?.trim() || undefined,
-      amount: Number(i.amount) || 0,
-    }));
+    const cleanItems = cleanedItems();
 
     const { data: userData } = await supabase.auth.getUser();
     const { data, error } = await supabase.from("manual_bookings").insert({
@@ -104,12 +179,13 @@ const AdminManualBookings = () => {
       line_items: cleanItems as any,
       subtotal,
       deposit_amount: Number(form.deposit_amount) || 0,
+      amount_paid: paid,
       balance_due: balance,
       start_date: form.start_date || null,
       end_date: form.end_date || null,
       notes: form.notes.trim() || null,
       created_by: userData.user?.id,
-    }).select().single();
+    } as any).select().single();
 
     if (error) return toast.error(error.message);
 
@@ -121,6 +197,7 @@ const AdminManualBookings = () => {
       line_items: cleanItems,
       subtotal: Number(data.subtotal),
       deposit_amount: Number(data.deposit_amount),
+      amount_paid: paid,
       balance_due: Number(data.balance_due),
       start_date: data.start_date,
       end_date: data.end_date,
@@ -176,7 +253,7 @@ const AdminManualBookings = () => {
           <h1 className="font-serif text-3xl md:text-4xl mt-2">Manual bookings</h1>
         </div>
         <button
-          onClick={() => setShowForm((v) => !v)}
+          onClick={() => { if (showForm) { setShowForm(false); resetForm(); } else { resetForm(); setShowForm(true); } }}
           className="flex items-center gap-2 px-4 py-2.5 bg-primary text-primary-foreground text-xs uppercase tracking-[0.24em] hover:bg-primary-glow transition-colors"
         >
           <Plus className="h-4 w-4" /> {showForm ? "Cancel" : "New booking"}
@@ -185,6 +262,11 @@ const AdminManualBookings = () => {
 
       {showForm && (
         <div className="border border-border/40 bg-surface-raised p-6 mb-8 space-y-5">
+          {editingId && (
+            <p className="text-[10px] uppercase tracking-[0.24em] text-gold">
+              Editing {rows.find((r) => r.id === editingId)?.booking_code}
+            </p>
+          )}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Field label="Client name *">
               <input value={form.client_name} onChange={(e) => setForm((f) => ({ ...f, client_name: e.target.value }))} className={inputCls} />
@@ -242,9 +324,16 @@ const AdminManualBookings = () => {
             <Field label="Deposit amount">
               <input type="number" value={form.deposit_amount || ""} onChange={(e) => setForm((f) => ({ ...f, deposit_amount: Number(e.target.value) || 0 }))} className={inputCls} />
             </Field>
+            <Field label="Amount paid">
+              <input type="number" value={form.amount_paid || ""} onChange={(e) => setForm((f) => ({ ...f, amount_paid: Number(e.target.value) || 0 }))} className={inputCls} />
+            </Field>
             <div className="text-xs space-y-1">
               <p className="text-muted-foreground">Subtotal: <span className="text-foreground">{form.currency} {subtotal.toLocaleString()}</span></p>
-              <p className="text-muted-foreground">Balance due: <span className="text-gold">{form.currency} {balance.toLocaleString()}</span></p>
+              {subtotal > 0 && paid >= subtotal ? (
+                <p className="text-gold uppercase tracking-[0.2em] text-[10px]">Paid in full</p>
+              ) : (
+                <p className="text-muted-foreground">Balance due: <span className="text-gold">{form.currency} {balance.toLocaleString()}</span></p>
+              )}
             </div>
           </div>
 
@@ -252,13 +341,14 @@ const AdminManualBookings = () => {
             <textarea rows={2} value={form.notes} onChange={(e) => setForm((f) => ({ ...f, notes: e.target.value }))} className={inputCls} />
           </Field>
 
-          <div className="border-t border-border/40 pt-4">
-            <StaffAssigner value={pendingStaff} onChange={setPendingStaff} />
-          </div>
+          {!editingId && (
+            <div className="border-t border-border/40 pt-4">
+              <StaffAssigner value={pendingStaff} onChange={setPendingStaff} />
+            </div>
+          )}
 
-
-          <button onClick={create} className="w-full px-6 py-3 bg-primary text-primary-foreground text-xs uppercase tracking-[0.28em] hover:bg-primary-glow transition-colors">
-            Create booking & generate message
+          <button onClick={editingId ? saveEdit : create} className="w-full px-6 py-3 bg-primary text-primary-foreground text-xs uppercase tracking-[0.28em] hover:bg-primary-glow transition-colors">
+            {editingId ? "Save changes" : "Create booking & generate message"}
           </button>
         </div>
       )}
@@ -292,10 +382,20 @@ const AdminManualBookings = () => {
                       <Info label="Client">{r.client_name}</Info>
                       <Info label="Email">{r.client_email || "—"}</Info>
                       <Info label="Phone">{r.client_phone || "—"}</Info>
-                      <Info label="Deposit / Balance">{r.currency} {Number(r.deposit_amount).toLocaleString()} / {Number(r.balance_due).toLocaleString()}</Info>
+                      <Info label="Paid / Balance">
+                        {Number(r.subtotal) > 0 && Number(r.amount_paid || 0) >= Number(r.subtotal)
+                          ? <span className="text-gold">Paid in full</span>
+                          : <>{r.currency} {Number(r.amount_paid || 0).toLocaleString()} / {Number(r.balance_due).toLocaleString()}</>}
+                      </Info>
                     </div>
 
                     <div className="flex flex-wrap gap-2">
+                      <button
+                        onClick={() => startEdit(r)}
+                        className="flex items-center gap-2 px-3 py-2 border border-primary/40 text-gold text-[10px] uppercase tracking-[0.2em] hover:bg-primary/10 transition-colors"
+                      >
+                        Edit booking
+                      </button>
                       <button
                         onClick={() => setPdfEdit({ booking: r, kind: "quotation" })}
                         className="flex items-center gap-1.5 text-xs text-gold border border-primary/40 px-3 py-1.5 hover:bg-primary/10 transition-colors"

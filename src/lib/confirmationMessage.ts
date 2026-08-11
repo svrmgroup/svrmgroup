@@ -12,6 +12,7 @@ export interface BookingForMessage {
   line_items: LineItem[];
   subtotal: number;
   deposit_amount: number;
+  amount_paid?: number;
   balance_due: number;
   start_date?: string | null;
   end_date?: string | null;
@@ -41,14 +42,25 @@ export function buildConfirmationMessage(b: BookingForMessage): string {
   }
   lines.push("");
   lines.push(`*Subtotal:* ${fmt(b.currency, b.subtotal)}`);
-  if (b.deposit_amount > 0) {
+  const paid = Number(b.amount_paid || 0);
+  const fullyPaid = b.subtotal > 0 && paid >= b.subtotal;
+  if (fullyPaid) {
+    lines.push(`*Paid in full:* ${fmt(b.currency, paid)} — thank you, no balance outstanding.`);
+  } else if (paid > 0) {
+    lines.push(`*Amount paid:* ${fmt(b.currency, paid)}`);
+    lines.push(`*Balance due:* ${fmt(b.currency, Math.max(0, b.subtotal - paid))}`);
+  } else if (b.deposit_amount > 0) {
     lines.push(`*Deposit due now:* ${fmt(b.currency, b.deposit_amount)}`);
     lines.push(`*Balance due:* ${fmt(b.currency, b.balance_due)}`);
   } else {
     lines.push(`*Total due:* ${fmt(b.currency, b.balance_due || b.subtotal)}`);
   }
   lines.push("");
-  lines.push(`Payment details will follow in a separate message. Kindly quote reference ${b.booking_code} on your transfer.`);
+  if (fullyPaid) {
+    lines.push(`Your booking is settled in full. Kindly retain reference ${b.booking_code} for your records.`);
+  } else {
+    lines.push(`Payment details will follow in a separate message. Kindly quote reference ${b.booking_code} on your transfer.`);
+  }
   if (b.notes) {
     lines.push("");
     lines.push(`Additional notes: ${b.notes}`);
