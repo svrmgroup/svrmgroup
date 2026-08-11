@@ -117,20 +117,25 @@ const Nav = () => {
                 {l.label}
               </NavLink>
               {l.sub && (
-                <div className="absolute left-1/2 -translate-x-1/2 top-full pt-2 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 focus-within:opacity-100 focus-within:visible transition-all duration-200">
-                  <div className="min-w-56 bg-surface-deep/98 backdrop-blur-xl border border-border/80 rounded-sm py-2 shadow-2xl">
+                <div className="absolute left-1/2 -translate-x-1/2 top-full pt-3 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 focus-within:opacity-100 focus-within:visible transition-all duration-200">
+                  <div className="min-w-64 bg-surface-deep border border-gold/30 rounded-md py-2 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.8)]">
+                    <div className="px-5 pb-2 mb-1 border-b border-border/60 text-[10px] uppercase tracking-[0.28em] text-gold/80">
+                      {l.label}
+                    </div>
                     {l.sub.map((s) => (
                       <Link
                         key={s.to + s.label}
                         to={s.to}
-                        className="block px-5 py-2.5 text-[11px] uppercase tracking-[0.18em] text-foreground/95 hover:text-gold hover:bg-primary/10 transition-colors whitespace-nowrap"
+                        className="group/item flex items-center gap-2 px-5 py-3 text-[12px] font-medium tracking-[0.12em] text-foreground hover:text-gold hover:bg-gold/10 border-l-2 border-transparent hover:border-gold transition-all whitespace-nowrap"
                       >
+                        <span className="h-1 w-1 rounded-full bg-gold/40 group-hover/item:bg-gold transition-colors" />
                         {s.label}
                       </Link>
                     ))}
                   </div>
                 </div>
               )}
+
             </div>
           ))}
         </nav>
