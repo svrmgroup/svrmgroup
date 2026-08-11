@@ -190,13 +190,13 @@ const Nav = () => {
                       {l.label}
                     </NavLink>
                     {l.sub && (
-                      <div className="flex flex-col gap-2.5 pl-4 border-l border-border/60">
+                      <div className="flex flex-col gap-2.5 pl-4 border-l border-border/80">
                         {l.sub.map((s) => (
                           <Link
                             key={s.to + s.label}
                             to={s.to}
                             onClick={() => setOpen(false)}
-                            className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground hover:text-gold transition-colors"
+                            className="text-[11px] uppercase tracking-[0.2em] text-foreground/95 hover:text-gold transition-colors"
                           >
                             {s.label}
                           </Link>
