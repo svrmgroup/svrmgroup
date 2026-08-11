@@ -7,7 +7,7 @@ const Anniversary = () => (
   <main className="bg-background text-foreground min-h-screen">
     <Seo
       title="Luxury Anniversary Cape Town | Bespoke Experiences — SVRM"
-      description="A luxury anniversary experience in Cape Town, arranged by SVRM — Maybach chauffeur, private villa, yacht days, a Cape Peninsula tour and quietly handled romantic details."
+      description="Bespoke luxury anniversary experiences in Cape Town by SVRM — Maybach chauffeur, private villas, yacht days and quietly handled romantic details."
       path="/anniversary-cape-town"
       keywords="luxury anniversary Cape Town, anniversary Cape Town, luxury anniversary experience Cape Town, luxury anniversary experiences South Africa, romantic anniversary Cape Town, anniversary concierge Cape Town"
       image={heroHeaderImg}

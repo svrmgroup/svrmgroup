@@ -126,6 +126,25 @@ const AirportTransfers = () => {
         description="Private chauffeured airport transfers in Cape Town — Mercedes V-Class, E-Class, BMW X3, Sprinter. Flat rates, on-time meet & greet, book on WhatsApp in minutes."
         path="/airport-transfers"
         keywords="Cape Town airport transfer, CPT airport transfer, private chauffeur Cape Town, Mercedes V-Class transfer, luxury airport pickup Cape Town, SVRM Group"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          serviceType: "Private Airport Transfer",
+          name: "Cape Town Airport Transfers",
+          description:
+            "Private chauffeured airport transfers in Cape Town with meet & greet, flight monitoring and a luxury fleet including Mercedes V-Class, E-Class and BMW X3.",
+          provider: {
+            "@type": "Organization",
+            name: "SVRM Group",
+            url: "https://svrm.group/",
+            telephone: "+27730641481",
+          },
+          areaServed: [
+            { "@type": "City", name: "Cape Town" },
+            { "@type": "AdministrativeArea", name: "Western Cape" },
+          ],
+          url: "https://svrm.group/airport-transfers",
+        }}
       />
       <Nav />
 
