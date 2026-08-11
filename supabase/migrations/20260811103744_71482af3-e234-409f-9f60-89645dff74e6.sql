@@ -1,0 +1,1 @@
+REVOKE ALL ON FUNCTION public.set_activity_actor() FROM PUBLIC, anon, authenticated;
