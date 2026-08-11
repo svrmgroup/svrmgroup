@@ -324,9 +324,16 @@ const AdminManualBookings = () => {
             <Field label="Deposit amount">
               <input type="number" value={form.deposit_amount || ""} onChange={(e) => setForm((f) => ({ ...f, deposit_amount: Number(e.target.value) || 0 }))} className={inputCls} />
             </Field>
+            <Field label="Amount paid">
+              <input type="number" value={form.amount_paid || ""} onChange={(e) => setForm((f) => ({ ...f, amount_paid: Number(e.target.value) || 0 }))} className={inputCls} />
+            </Field>
             <div className="text-xs space-y-1">
               <p className="text-muted-foreground">Subtotal: <span className="text-foreground">{form.currency} {subtotal.toLocaleString()}</span></p>
-              <p className="text-muted-foreground">Balance due: <span className="text-gold">{form.currency} {balance.toLocaleString()}</span></p>
+              {subtotal > 0 && paid >= subtotal ? (
+                <p className="text-gold uppercase tracking-[0.2em] text-[10px]">Paid in full</p>
+              ) : (
+                <p className="text-muted-foreground">Balance due: <span className="text-gold">{form.currency} {balance.toLocaleString()}</span></p>
+              )}
             </div>
           </div>
 
@@ -334,13 +341,14 @@ const AdminManualBookings = () => {
             <textarea rows={2} value={form.notes} onChange={(e) => setForm((f) => ({ ...f, notes: e.target.value }))} className={inputCls} />
           </Field>
 
-          <div className="border-t border-border/40 pt-4">
-            <StaffAssigner value={pendingStaff} onChange={setPendingStaff} />
-          </div>
+          {!editingId && (
+            <div className="border-t border-border/40 pt-4">
+              <StaffAssigner value={pendingStaff} onChange={setPendingStaff} />
+            </div>
+          )}
 
-
-          <button onClick={create} className="w-full px-6 py-3 bg-primary text-primary-foreground text-xs uppercase tracking-[0.28em] hover:bg-primary-glow transition-colors">
-            Create booking & generate message
+          <button onClick={editingId ? saveEdit : create} className="w-full px-6 py-3 bg-primary text-primary-foreground text-xs uppercase tracking-[0.28em] hover:bg-primary-glow transition-colors">
+            {editingId ? "Save changes" : "Create booking & generate message"}
           </button>
         </div>
       )}
