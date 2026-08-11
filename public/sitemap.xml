@@ -6,7 +6,11 @@
   <url><loc>https://svrm.group/security</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://svrm.group/stays</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://svrm.group/tours</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://svrm.group/airport-transfers</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://svrm.group/honeymoon-cape-town</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://svrm.group/anniversary-cape-town</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
   <url><loc>https://svrm.group/tours/builder</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://svrm.group/tours/cape-peninsula</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://svrm.group/tours/safari</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://svrm.group/tours/hunting</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://svrm.group/tours/cultural</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
@@ -18,6 +22,8 @@
   <url><loc>https://svrm.group/tours/wellness</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://svrm.group/tours/photography</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://svrm.group/tours/group-travel</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://svrm.group/tours/romantic</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://svrm.group/tours/aquila-safari</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://svrm.group/lifestyle</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://svrm.group/experiences</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://svrm.group/blog</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
@@ -27,5 +33,34 @@
   <url><loc>https://svrm.group/blog/long-term-cape-town-residences</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://svrm.group/blog/chauffeured-vs-self-drive</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://svrm.group/blog/request-only-the-svrm-way</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/private-jet-charter-cape-town</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/helicopter-transfers-cape-winelands</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/private-chef-cape-town</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/cape-town-summer-season-guide</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/garden-route-in-four-days</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/wellness-recovery-cape-town</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/buying-property-cape-town</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/shopping-cape-town-private</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/mercedes-maybach-s-class-chauffeur-cape-town</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/luxury-chauffeur-service-cape-town-guide</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/cape-town-airport-transfer-luxury-guide</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/best-luxury-cars-to-rent-cape-town</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/vip-security-cape-town-what-to-expect</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/luxury-honeymoon-cape-town-guide</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/luxury-anniversary-ideas-cape-town</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/cape-peninsula-one-day-private-tour-guide</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/cape-town-wedding-transport-guide</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/cape-town-winelands-private-tour</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/safari-from-cape-town-how-to-plan</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/luxury-villa-rental-cape-town-guide</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/cape-town-concierge-service-what-it-covers</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/private-jet-charter-cape-town-guide</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/helicopter-charter-cape-town</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/yacht-charter-cape-town-guide</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/best-time-to-visit-cape-town-luxury</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/cape-town-private-chef-dining-guide</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/executive-travel-cape-town-business-guide</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/armoured-vehicles-south-africa-guide</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://svrm.group/blog/long-term-luxury-rental-cape-town</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://svrm.group/contact</loc><changefreq>yearly</changefreq><priority>0.7</priority></url>
 </urlset>

@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
+import RelatedLinks from "@/components/svrm/RelatedLinks";
 import PageHero from "@/components/svrm/PageHero";
 import EnquiryForm from "@/components/svrm/EnquiryForm";
 import VehicleCard from "@/components/svrm/VehicleCard";
+import MaybachFlagship, { MAYBACH_SLUG } from "@/components/svrm/MaybachFlagship";
 import CategoryCard from "@/components/svrm/CategoryCard";
 import { vehicles, vehicleTiers } from "@/data/vehicles";
 import { jets, helicopters } from "@/data/aviation";
@@ -40,10 +42,10 @@ const Travel = () => {
   return (
     <main className="bg-background text-foreground min-h-screen">
       <Seo
-        title={"Luxury Chauffeur, Private Jets, Helicopters & Yachts Cape Town — SVRM"}
-        description={"Discreet chauffeur-driven Mercedes S-Class, BMW 7, Range Rover and Rolls-Royce, plus private jets, helicopter transfers and superyacht charters across Cape Town, the Winelands and beyond. NDA-bound, uniformed, 24/7."}
+        title={"Luxury Chauffeur Cape Town | Maybach & S-Class — SVRM"}
+        description={"VIP chauffeur service in Cape Town led by our flagship Mercedes-Maybach S-Class from R22,000/day, plus S-Class, Range Rover, Rolls-Royce, private jets, helicopters and yachts. NDA-bound, 24/7."}
         path="/travel"
-        keywords="luxury chauffeur Cape Town, VIP chauffeur service, private airport transfer Cape Town, Mercedes S-Class chauffeur, BMW 7 Series with driver, Rolls-Royce Phantom chauffeur, Range Rover chauffeur Cape Town, executive transfers South Africa, private jet charter Cape Town, empty leg jet Cape Town, helicopter transfer Cape Town, scenic helicopter flight, superyacht charter Cape Town, V&A Waterfront yacht hire, wedding car hire Cape Town, corporate roadshow transport, celebrity chauffeur Cape Town, close protection driver, group transfers Sprinter, luxury Winelands day trip"
+        keywords="chauffeur service Cape Town, luxury chauffeur Cape Town, Maybach chauffeur Cape Town, Mercedes-Maybach chauffeur Cape Town, Maybach S-Class Cape Town, S Class chauffeur Cape Town, private driver Cape Town, VIP chauffeur Cape Town, luxury airport transfer Cape Town, VIP chauffeur service, private airport transfer Cape Town, Mercedes S-Class chauffeur, BMW 7 Series with driver, Rolls-Royce Phantom chauffeur, Range Rover chauffeur Cape Town, executive transfers South Africa, private jet charter Cape Town, empty leg jet Cape Town, helicopter transfer Cape Town, scenic helicopter flight, superyacht charter Cape Town, V&A Waterfront yacht hire, wedding car hire Cape Town, corporate roadshow transport, celebrity chauffeur Cape Town, close protection driver, group transfers Sprinter, luxury Winelands day trip"
 
         image={travelOg}
         jsonLd={[{
@@ -115,9 +117,11 @@ const Travel = () => {
             </TabsList>
 
             <TabsContent value="cars" className="mt-0">
+              <MaybachFlagship />
               <p className="text-xs text-muted-foreground/80 tracking-wide max-w-2xl mb-6">
                 Every chauffeured rate is quoted on request once we know route, hours and add-ons.
               </p>
+
               <div className="flex flex-wrap gap-2 mb-10">
                 {(["All", ...vehicleTiers] as const).map((t) => (
                   <button
@@ -135,7 +139,7 @@ const Travel = () => {
                 ))}
               </div>
               {(carTier === "All" ? vehicleTiers : [carTier as typeof vehicleTiers[number]]).map((tier) => {
-                const list = vehicles.filter((v) => v.tier === tier);
+                const list = vehicles.filter((v) => v.tier === tier && v.slug !== MAYBACH_SLUG);
                 if (list.length === 0) return null;
                 return (
                   <div key={tier} className="mb-16 md:mb-20">
@@ -264,6 +268,18 @@ const Travel = () => {
           <EnquiryForm subject="Travel" />
         </div>
       </section>
+
+      <RelatedLinks
+        links={[
+          { to: "/airport-transfers", label: "Luxury airport transfers" },
+          { to: "/tours/cape-peninsula", label: "Cape Peninsula private tour" },
+          { to: "/rentals", label: "Luxury car rental" },
+          { to: "/security", label: "VIP security" },
+          { to: "/honeymoon-cape-town", label: "Honeymoon experiences" },
+          { to: "/anniversary-cape-town", label: "Anniversary experiences" },
+          { to: "/experiences", label: "Luxury concierge" },
+        ]}
+      />
 
       <Footer />
     </main>
