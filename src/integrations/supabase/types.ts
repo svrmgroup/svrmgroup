@@ -942,6 +942,7 @@ export type Database = {
           notes: string | null
           portal_completed_at: string | null
           portal_expires_at: string | null
+          quoted_total: number | null
           start_date: string | null
           status: string
           subtotal: number
@@ -966,6 +967,7 @@ export type Database = {
           notes?: string | null
           portal_completed_at?: string | null
           portal_expires_at?: string | null
+          quoted_total?: number | null
           start_date?: string | null
           status?: string
           subtotal?: number
@@ -990,6 +992,7 @@ export type Database = {
           notes?: string | null
           portal_completed_at?: string | null
           portal_expires_at?: string | null
+          quoted_total?: number | null
           start_date?: string | null
           status?: string
           subtotal?: number
@@ -1401,6 +1404,7 @@ export type Database = {
           notes: string | null
           portal_completed_at: string | null
           portal_expires_at: string | null
+          quoted_total: number | null
           start_date: string | null
           status: string
           subtotal: number
