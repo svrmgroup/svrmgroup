@@ -15,7 +15,7 @@ const Security = () => {
     <main className="bg-background text-foreground min-h-screen">
       <Seo
         title={"Security Services Cape Town | VIP & Executive Protection"}
-        description={"VIP security and executive protection in Cape Town — close protection officers, armoured vehicles, residential, event and luxury travel security across South Africa. Discreet, on request."}
+        description={"VIP security and executive protection in Cape Town — close protection, armoured vehicles and residential security across South Africa."}
         path="/security"
         keywords="security services Cape Town, VIP security Cape Town, executive security Cape Town, executive protection Cape Town, private security Cape Town, close protection Cape Town, luxury travel security South Africa, armed close protection Cape Town, bodyguard Cape Town, executive protection South Africa, armoured vehicle hire, bullet proof BMW 7 Series, armoured BMW X5, Mercedes G63 convoy, residential security Cape Town, event security, secure airport transfer, PSiRA security, VIP protection South Africa"
         image={bmw7}
