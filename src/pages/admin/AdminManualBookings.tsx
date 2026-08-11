@@ -42,6 +42,15 @@ const STATUS_META: Record<Status, { label: string; className: string }> = {
   cancelled: { label: "Cancelled", className: "bg-destructive/10 text-destructive border-destructive/30" },
 };
 
+/** Invoice payment status derived from total due vs amount paid. */
+function payMeta(total: number, paid: number) {
+  if (total > 0 && paid >= total) return { label: "Paid", className: "bg-green-500/15 text-green-300 border-green-500/40" };
+  if (paid > 0) return { label: "Partially paid", className: "bg-yellow-500/15 text-yellow-300 border-yellow-500/40" };
+  return { label: "Unpaid", className: "bg-destructive/10 text-destructive border-destructive/40" };
+}
+
+
+
 const emptyItem = (): LineItem => ({ label: "", qty: 1, unit: "night", amount: 0 });
 
 const AdminManualBookings = () => {
