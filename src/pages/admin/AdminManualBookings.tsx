@@ -19,9 +19,11 @@ interface Booking {
   line_items: LineItem[];
   currency: string;
   subtotal: number;
+  quoted_total: number | null;
   deposit_amount: number;
   amount_paid: number;
   balance_due: number;
+
   start_date: string | null;
   end_date: string | null;
   status: Status;
@@ -60,6 +62,8 @@ const AdminManualBookings = () => {
     end_date: "",
     deposit_amount: 0,
     amount_paid: 0,
+    total_override: "" as string,
+    quoted_total: "" as string,
     notes: "",
   });
   const [items, setItems] = useState<LineItem[]>([emptyItem()]);
@@ -78,13 +82,16 @@ const AdminManualBookings = () => {
 
   useEffect(() => { load(); }, []);
 
-  const subtotal = items.reduce((s, i) => s + (Number(i.amount) || 0), 0);
+  const itemsTotal = items.reduce((s, i) => s + (Number(i.amount) || 0), 0);
+  // Total due can be overridden manually; otherwise it follows the line items.
+  const subtotal = form.total_override.trim() !== "" ? Number(form.total_override) || 0 : itemsTotal;
+  const quotedTotal = form.quoted_total.trim() !== "" ? Number(form.quoted_total) || 0 : null;
   const paid = Number(form.amount_paid) || 0;
   // Balance follows what has actually been paid; falls back to the deposit when nothing is logged.
   const balance = Math.max(0, subtotal - (paid > 0 ? paid : Number(form.deposit_amount) || 0));
 
   const resetForm = () => {
-    setForm({ client_name: "", client_email: "", client_phone: "", currency: "ZAR", start_date: "", end_date: "", deposit_amount: 0, amount_paid: 0, notes: "" });
+    setForm({ client_name: "", client_email: "", client_phone: "", currency: "ZAR", start_date: "", end_date: "", deposit_amount: 0, amount_paid: 0, total_override: "", quoted_total: "", notes: "" });
     setItems([emptyItem()]);
     setPendingStaff([]);
     setEditingId(null);
@@ -92,6 +99,7 @@ const AdminManualBookings = () => {
 
   const startEdit = (r: Booking) => {
     setEditingId(r.id);
+    const lineTotal = (r.line_items || []).reduce((s, i) => s + (Number(i.amount) || 0), 0);
     setForm({
       client_name: r.client_name || "",
       client_email: r.client_email || "",
@@ -101,12 +109,15 @@ const AdminManualBookings = () => {
       end_date: r.end_date || "",
       deposit_amount: Number(r.deposit_amount) || 0,
       amount_paid: Number(r.amount_paid) || 0,
+      total_override: Number(r.subtotal) !== lineTotal ? String(Number(r.subtotal) || 0) : "",
+      quoted_total: r.quoted_total != null ? String(Number(r.quoted_total)) : "",
       notes: r.notes || "",
     });
     setItems(r.line_items?.length ? r.line_items.map((i) => ({ ...i })) : [emptyItem()]);
     setShowForm(true);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
 
   const cleanedItems = () =>
     items.filter((i) => i.label.trim()).map((i) => ({
@@ -129,6 +140,8 @@ const AdminManualBookings = () => {
       currency: form.currency,
       line_items: cleanItems as any,
       subtotal,
+      quoted_total: quotedTotal,
+
       deposit_amount: Number(form.deposit_amount) || 0,
       amount_paid: paid,
       balance_due: balance,
@@ -178,6 +191,8 @@ const AdminManualBookings = () => {
       currency: form.currency,
       line_items: cleanItems as any,
       subtotal,
+      quoted_total: quotedTotal,
+
       deposit_amount: Number(form.deposit_amount) || 0,
       amount_paid: paid,
       balance_due: balance,
@@ -321,6 +336,18 @@ const AdminManualBookings = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+            <Field label={`Total amount due (auto ${form.currency} ${itemsTotal.toLocaleString()})`}>
+              <input type="number" placeholder={String(itemsTotal)} value={form.total_override}
+                onChange={(e) => setForm((f) => ({ ...f, total_override: e.target.value }))} className={inputCls} />
+            </Field>
+            <Field label="Original quote given">
+              <input type="number" placeholder="Optional" value={form.quoted_total}
+                onChange={(e) => setForm((f) => ({ ...f, quoted_total: e.target.value }))} className={inputCls} />
+            </Field>
+            <div />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
             <Field label="Deposit amount">
               <input type="number" value={form.deposit_amount || ""} onChange={(e) => setForm((f) => ({ ...f, deposit_amount: Number(e.target.value) || 0 }))} className={inputCls} />
             </Field>
@@ -328,13 +355,17 @@ const AdminManualBookings = () => {
               <input type="number" value={form.amount_paid || ""} onChange={(e) => setForm((f) => ({ ...f, amount_paid: Number(e.target.value) || 0 }))} className={inputCls} />
             </Field>
             <div className="text-xs space-y-1">
-              <p className="text-muted-foreground">Subtotal: <span className="text-foreground">{form.currency} {subtotal.toLocaleString()}</span></p>
+              <p className="text-muted-foreground">Total due: <span className="text-foreground">{form.currency} {subtotal.toLocaleString()}</span></p>
+              {quotedTotal !== null && quotedTotal !== subtotal && (
+                <p className="text-muted-foreground">Original quote: <span className="line-through">{form.currency} {quotedTotal.toLocaleString()}</span></p>
+              )}
               {subtotal > 0 && paid >= subtotal ? (
                 <p className="text-gold uppercase tracking-[0.2em] text-[10px]">Paid in full</p>
               ) : (
                 <p className="text-muted-foreground">Balance due: <span className="text-gold">{form.currency} {balance.toLocaleString()}</span></p>
               )}
             </div>
+
           </div>
 
           <Field label="Internal notes">
@@ -387,7 +418,12 @@ const AdminManualBookings = () => {
                           ? <span className="text-gold">Paid in full</span>
                           : <>{r.currency} {Number(r.amount_paid || 0).toLocaleString()} / {Number(r.balance_due).toLocaleString()}</>}
                       </Info>
+                      <Info label="Total due">{r.currency} {Number(r.subtotal).toLocaleString()}</Info>
+                      {r.quoted_total != null && (
+                        <Info label="Original quote">{r.currency} {Number(r.quoted_total).toLocaleString()}</Info>
+                      )}
                     </div>
+
 
                     <div className="flex flex-wrap gap-2">
                       <button
