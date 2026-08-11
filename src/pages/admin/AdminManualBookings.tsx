@@ -253,7 +253,7 @@ const AdminManualBookings = () => {
           <h1 className="font-serif text-3xl md:text-4xl mt-2">Manual bookings</h1>
         </div>
         <button
-          onClick={() => setShowForm((v) => !v)}
+          onClick={() => { if (showForm) { setShowForm(false); resetForm(); } else { resetForm(); setShowForm(true); } }}
           className="flex items-center gap-2 px-4 py-2.5 bg-primary text-primary-foreground text-xs uppercase tracking-[0.24em] hover:bg-primary-glow transition-colors"
         >
           <Plus className="h-4 w-4" /> {showForm ? "Cancel" : "New booking"}
@@ -262,6 +262,11 @@ const AdminManualBookings = () => {
 
       {showForm && (
         <div className="border border-border/40 bg-surface-raised p-6 mb-8 space-y-5">
+          {editingId && (
+            <p className="text-[10px] uppercase tracking-[0.24em] text-gold">
+              Editing {rows.find((r) => r.id === editingId)?.booking_code}
+            </p>
+          )}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Field label="Client name *">
               <input value={form.client_name} onChange={(e) => setForm((f) => ({ ...f, client_name: e.target.value }))} className={inputCls} />
