@@ -336,6 +336,18 @@ const AdminManualBookings = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+            <Field label={`Total amount due (auto ${form.currency} ${itemsTotal.toLocaleString()})`}>
+              <input type="number" placeholder={String(itemsTotal)} value={form.total_override}
+                onChange={(e) => setForm((f) => ({ ...f, total_override: e.target.value }))} className={inputCls} />
+            </Field>
+            <Field label="Original quote given">
+              <input type="number" placeholder="Optional" value={form.quoted_total}
+                onChange={(e) => setForm((f) => ({ ...f, quoted_total: e.target.value }))} className={inputCls} />
+            </Field>
+            <div />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
             <Field label="Deposit amount">
               <input type="number" value={form.deposit_amount || ""} onChange={(e) => setForm((f) => ({ ...f, deposit_amount: Number(e.target.value) || 0 }))} className={inputCls} />
             </Field>
@@ -343,13 +355,17 @@ const AdminManualBookings = () => {
               <input type="number" value={form.amount_paid || ""} onChange={(e) => setForm((f) => ({ ...f, amount_paid: Number(e.target.value) || 0 }))} className={inputCls} />
             </Field>
             <div className="text-xs space-y-1">
-              <p className="text-muted-foreground">Subtotal: <span className="text-foreground">{form.currency} {subtotal.toLocaleString()}</span></p>
+              <p className="text-muted-foreground">Total due: <span className="text-foreground">{form.currency} {subtotal.toLocaleString()}</span></p>
+              {quotedTotal !== null && quotedTotal !== subtotal && (
+                <p className="text-muted-foreground">Original quote: <span className="line-through">{form.currency} {quotedTotal.toLocaleString()}</span></p>
+              )}
               {subtotal > 0 && paid >= subtotal ? (
                 <p className="text-gold uppercase tracking-[0.2em] text-[10px]">Paid in full</p>
               ) : (
                 <p className="text-muted-foreground">Balance due: <span className="text-gold">{form.currency} {balance.toLocaleString()}</span></p>
               )}
             </div>
+
           </div>
 
           <Field label="Internal notes">
