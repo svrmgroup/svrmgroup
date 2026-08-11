@@ -1,4 +1,11 @@
-export type FaqItem = { q: string; a: string };
+export type FaqItem = {
+  q: string;
+  a: string;
+  /** Hidden search keywords / synonyms so the right FAQ surfaces for common terms. */
+  keywords?: string[];
+  /** Optional tags for grouping or boosting search results. */
+  tags?: string[];
+};
 export type FaqGroup = { id: string; title: string; items: FaqItem[] };
 
 export const faqGroups: FaqGroup[] = [
