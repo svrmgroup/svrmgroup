@@ -7,6 +7,8 @@ import { Seo } from "@/components/Seo";
 import { findTour } from "@/data/tours";
 import SmartImage from "@/components/svrm/SmartImage";
 import WellnessCustomBuilder from "@/components/svrm/WellnessCustomBuilder";
+import BackgroundVideo from "@/components/svrm/BackgroundVideo";
+
 
 const TourDetail = () => {
   const { slug } = useParams<{ slug: string }>();
