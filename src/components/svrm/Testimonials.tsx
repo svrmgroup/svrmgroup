@@ -21,6 +21,7 @@ const Testimonials = () => (
     <div className="max-w-7xl mx-auto px-6">
       <div className="text-center mb-20">
         <p className="eyebrow">In their words</p>
+        <h2 className="font-serif text-3xl md:text-4xl text-foreground mt-5">Client Experiences</h2>
         <div className="gold-divider w-16 mx-auto mt-6" />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-10">
