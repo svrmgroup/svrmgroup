@@ -8,12 +8,9 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import bmwx3 from "@/assets/vehicles/bmwx3.jpg";
 import SmartImage from "@/components/svrm/SmartImage";
 import CurrencySwitch from "@/components/svrm/CurrencySwitch";
 import romantic from "@/assets/tours/romantic.jpg";
-import chauffeur from "@/assets/svc-travel-sclass.jpg";
-import safari from "@/assets/svc-exp-safari.jpg";
 import maybach from "@/assets/vehicles/maybach.jpg";
 import capePeninsula from "@/assets/tours/cape-peninsula.jpg";
 import securityImg from "@/assets/security/bmw7-armored.jpg";
@@ -88,59 +85,6 @@ const offers: Offer[] = [
     to: "/security",
     image: securityImg,
   },
-  {
-    eyebrow: "Special Offer · Self-drive",
-    title: "BMW X3",
-    detail: "Compact luxury SUV, dialled in. Free delivery within Cape Town.",
-    priceZAR: 2000,
-    originalZAR: 3000,
-    priceSuffix: "/ day",
-    cta: "Reserve the X3",
-    to: "/rentals",
-    image: bmwx3,
-    special: true,
-  },
-  {
-    eyebrow: "New · Romantic",
-    title: "Cape Honeymoon Signature",
-    detail: "3 nights, hot-air balloon, helicopter beach picnic, petal turndowns.",
-    priceZAR: 48000,
-    pricePrefix: "From ",
-    cta: "See romantic packages",
-    to: "/tours/romantic",
-    image: romantic,
-  },
-  {
-    eyebrow: "Chauffeur",
-    title: "Private S-Class Days",
-    detail: "Executive chauffeur with S-Class or E-Class, up to 8 hours in-city.",
-    priceZAR: 6500,
-    pricePrefix: "From ",
-    priceSuffix: "/ day",
-    cta: "Book a chauffeur",
-    to: "/travel",
-    image: chauffeur,
-  },
-  {
-    eyebrow: "Safari",
-    title: "Sabi Sand Signature",
-    detail: "4 nights premium lodge, twice-daily game drives, flights included.",
-    priceZAR: 28000,
-    pricePrefix: "From ",
-    priceSuffix: "/ pp",
-    cta: "View safari tours",
-    to: "/tours/safari",
-    image: safari,
-  },
-  {
-    eyebrow: "Stays",
-    title: "Camps Bay Villa",
-    detail: "Curated villas and residences across the Cape's best addresses.",
-    priceZAR: null,
-    cta: "Browse stays",
-    to: "/stays",
-    image: villa,
-  },
 ];
 
 const Offers = () => {
@@ -151,11 +95,6 @@ const Offers = () => {
   const { items: cmsOffers } = useCmsItems("offers");
 
   const staticImageBySlug: Record<string, string> = {
-    "special-bmw-x3-self-drive": bmwx3,
-    "cape-honeymoon-signature": romantic,
-    "private-s-class-days": chauffeur,
-    "sabi-sand-signature": safari,
-    "camps-bay-villa-collection": villa,
     "maybach-flagship-chauffeur": maybach,
     "luxury-honeymoon-cape-town": romantic,
     "luxury-anniversary-experience": villa,
