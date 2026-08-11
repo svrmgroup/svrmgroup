@@ -202,63 +202,6 @@ function offersSeed() {
       cta_label: "Request Security",
       cta_href: "/security",
     },
-    {
-      slug: "special-bmw-x3-self-drive",
-      title: "BMW X3",
-      eyebrow: "Special Offer · Self-drive",
-      summary: "Compact luxury SUV, dialled in. Free delivery within Cape Town.",
-      price_zar: 2000,
-      original_price_zar: 3000,
-      price_suffix: "/ day",
-      cta_label: "Reserve the X3",
-      cta_href: "/rentals",
-      
-    },
-    {
-      slug: "cape-honeymoon-signature",
-      title: "Cape Honeymoon Signature",
-      eyebrow: "New · Romantic",
-      summary: "3 nights, hot-air balloon, helicopter beach picnic, petal turndowns.",
-      price_zar: 48000,
-      price_prefix: "From ",
-      cta_label: "See romantic packages",
-      cta_href: "/tours/romantic",
-      
-    },
-    {
-      slug: "private-s-class-days",
-      title: "Private S-Class Days",
-      eyebrow: "Chauffeur",
-      summary: "Executive chauffeur with S-Class or E-Class, up to 8 hours in-city.",
-      price_zar: 6500,
-      price_prefix: "From ",
-      price_suffix: "/ day",
-      cta_label: "Book a chauffeur",
-      cta_href: "/travel",
-      
-    },
-    {
-      slug: "sabi-sand-signature",
-      title: "Sabi Sand Signature",
-      eyebrow: "Safari",
-      summary: "4 nights premium lodge, twice-daily game drives, flights included.",
-      price_zar: 28000,
-      price_prefix: "From ",
-      price_suffix: "/ pp",
-      cta_label: "View safari tours",
-      cta_href: "/tours/safari",
-      
-    },
-    {
-      slug: "camps-bay-villa-collection",
-      title: "Camps Bay Villa",
-      eyebrow: "Stays",
-      summary: "Curated villas and residences across the Cape's best addresses.",
-      price_zar: null,
-      cta_label: "Browse stays",
-      cta_href: "/stays",
-      
-    },
   ];
   return rows.map((r, i) => ({ kind: "offers", published: true, sort_order: (i + 1) * 10, ...r }));
 }
