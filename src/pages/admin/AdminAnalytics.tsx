@@ -175,7 +175,8 @@ const AdminAnalytics = () => {
             <Stat label="Rental requests" value={rentals.length} />
             <Stat label="Bookings" value={bookings.length} />
             <Stat label="WhatsApp clicks" value={wa.length} />
-            <Stat label="Revenue" value={`R ${totalRevenue.toLocaleString()}`} />
+            <Stat label="Revenue (paid)" value={`R ${totalRevenue.toLocaleString()}`} />
+            <Stat label="Outstanding" value={`R ${outstanding.toLocaleString()}`} />
             <Stat label="Expenses" value={`R ${totalExpenses.toLocaleString()}`} />
             <Stat label="Net profit" value={`R ${netProfit.toLocaleString()}`} accent={netProfit >= 0 ? "text-gold" : "text-destructive"} />
             <Stat label="Active leads" value={leads.filter(l => l.status !== "signed" && l.status !== "declined").length} />
