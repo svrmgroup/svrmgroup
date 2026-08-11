@@ -64,7 +64,9 @@ const AdminAnalytics = () => {
     setLoading(false);
   };
 
-  const totalRevenue = useMemo(() => bookings.reduce((s, x: any) => s + Number(x.subtotal || 0), 0), [bookings]);
+  const totalRevenue = useMemo(() => bookings.reduce((s, x: any) => s + Number(x.amount_paid || 0), 0), [bookings]);
+  const totalBooked = useMemo(() => bookings.reduce((s, x: any) => s + Number(x.subtotal || 0), 0), [bookings]);
+  const outstanding = Math.max(0, totalBooked - totalRevenue);
   const totalExpenses = useMemo(() => expenses.reduce((s, x: any) => s + Number(x.amount || 0), 0), [expenses]);
   const netProfit = totalRevenue - totalExpenses;
 
