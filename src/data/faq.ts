@@ -19,7 +19,7 @@ export const faqGroups: FaqGroup[] = [
       { q: "How do I make a booking?", a: "The quickest route is WhatsApp on +27 73 064 1481. You can also email concierge@svrm.group or use the enquiry form on this page. We typically reply the same day." },
       { q: "Why don't you publish prices?", a: "Every itinerary is composed for the guest — vehicle, route, wait time, season, party size and discretion all shape the rate. A published number would be wrong for almost everyone, so we send a written quote within 24 hours instead." },
       { q: "Which currencies can I be quoted in?", a: "We quote in ZAR by default and can present the same quote in GBP or USD. The site has a currency switcher in the top navigation." },
-      { q: "How do I pay? Is a deposit required?", a: "We accept EFT, card and international wire. A deposit is typically required to confirm; the balance is settled before or on the day of service. Specific terms are on every written quote." },
+      { q: "How do I pay? Is a deposit required?", a: "We accept EFT, card, international wire and a secure payment link. A deposit is typically required to confirm; the balance is settled before or on the day of service. Specific terms are on every written quote." },
       { q: "What is your cancellation policy?", a: "Terms are set per booking and clearly stated on the quote. As a general guide, cancellations made well in advance are refundable; short-notice cancellations may be partially or non-refundable, especially for tours, charters and seasonal stays." },
       { q: "How far in advance should I book?", a: "For peak season (December–February and Easter) we recommend 4–8 weeks. Off-peak we can often arrange transport, tours and stays within 24–72 hours." },
     ],
@@ -87,6 +87,21 @@ export const faqGroups: FaqGroup[] = [
     title: "Hours",
     items: [
       { q: "What are your hours?", a: "Concierge support runs 24 hours, seven days a week. Active bookings (transport, security, ongoing itineraries) are supported 24/7 by the on-duty team." },
+    ],
+  },
+  {
+    id: "terms",
+    title: "Booking Terms",
+    items: [
+      { q: "How do I make a booking?", a: "Bookings and enquiries can be made through WhatsApp, email, our website, or other communication channels provided by SVRM Group. Once your requirements have been confirmed, SVRM Group will provide the relevant pricing, availability, payment requirements and booking details." },
+      { q: "How much is the deposit?", a: "A 50% deposit is generally required to secure and confirm a booking. The remaining balance must be paid in accordance with the payment terms provided for your booking.\n\nIn certain circumstances, SVRM Group may, at its discretion, agree to an alternative deposit or payment arrangement. Any such exception must be agreed and confirmed in writing." },
+      { q: "What is your cancellation policy?", a: "Bookings may be cancelled within 72 hours of the booking being confirmed.\n\nOnce the 72-hour cancellation period has passed, the booking becomes fully non-refundable, and any payments or deposits made will not be refunded.\n\nThis policy applies because SVRM Group may reserve vehicles, accommodation, chauffeurs, personnel, guides, suppliers and other services specifically for your booking." },
+      { q: "Are refunds subject to payment fees?", a: "Yes. Where a refund is approved, the refund will be issued less the payment processing fees originally charged to SVRM Group when receiving the payment.\n\nSVRM Group's payment processing fees are typically approximately 5% of the transaction amount, depending on the payment method and payment provider.\n\nThese fees are deducted because they are costs incurred by SVRM Group when processing the original payment and are generally non-refundable to SVRM Group." },
+      { q: "Can I make a special arrangement with SVRM?", a: "Yes. SVRM Group may, at its discretion, agree to special arrangements regarding a booking, including payment terms, deposits, services, vehicles, timings or other requirements.\n\nAny special arrangement or amendment must be agreed in writing by SVRM Group." },
+      { q: "Do WhatsApp messages, emails and other written communications form part of my booking?", a: "Yes. Written communications relating to your booking may form part of the official booking record and may be relied upon as evidence of the terms, instructions, arrangements or agreements made between you and SVRM Group.\n\nThis includes, but is not limited to:\n\n• WhatsApp messages\n• Email correspondence\n• SMS or text messages\n• Written booking confirmations\n• Written quotations\n• Payment correspondence\n• Written confirmations of amendments or special arrangements\n\nAny amendment, variation or special agreement confirmed in writing between the client and SVRM Group may form part of the booking terms.\n\nWhere a specific written agreement for a particular booking differs from the standard SVRM Group policy, the specific written agreement may take precedence for that booking.\n\nClients should retain copies of their booking communications and confirmations." },
+      { q: "Can SVRM make exceptions to the cancellation policy?", a: "SVRM Group may, at its sole discretion, make exceptions to the standard cancellation or payment policy in exceptional circumstances.\n\nAny exception is discretionary and does not create an obligation or precedent for future bookings." },
+      { q: "What happens if SVRM has to cancel my booking?", a: "In the unlikely event that SVRM Group has to cancel a booking, SVRM Group will work with the client to provide an appropriate alternative or refund, subject to the circumstances and any applicable third-party supplier terms." },
+      { q: "By making a booking, do I accept these terms?", a: "Yes. By making a booking, paying a deposit, or otherwise confirming services with SVRM Group, the client acknowledges that they have read, understood and accepted the SVRM Group Cancellation & Deposit Policy, including the provisions relating to deposits, cancellations, payment processing fees, written communications, amendments and special arrangements." },
     ],
   },
 ];

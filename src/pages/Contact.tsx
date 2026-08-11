@@ -138,7 +138,7 @@ const Contact = () => {
                       <AccordionTrigger className="text-left font-serif text-lg md:text-xl text-foreground hover:text-gold hover:no-underline py-5">
                         {item.q}
                       </AccordionTrigger>
-                      <AccordionContent className="text-muted-foreground leading-[1.85] text-base pb-6">
+                      <AccordionContent className="text-muted-foreground leading-[1.85] text-base pb-6 whitespace-pre-wrap">
                         {item.a}
                       </AccordionContent>
                     </AccordionItem>
