@@ -1,7 +1,7 @@
 import { Seo } from "@/components/Seo";
 import OccasionPage from "@/components/svrm/OccasionPage";
 import heroImg from "@/assets/anniversary-hero.jpg";
-import heroSecondaryImg from "@/assets/anniversary-hero-2.jpg";
+import heroHeaderImg from "@/assets/anniversary-villa-roses.jpg";
 
 const Anniversary = () => (
   <main className="bg-background text-foreground min-h-screen">
@@ -10,7 +10,7 @@ const Anniversary = () => (
       description="A luxury anniversary experience in Cape Town, arranged by SVRM — Maybach chauffeur, private villa, yacht days, a Cape Peninsula tour and quietly handled romantic details."
       path="/anniversary-cape-town"
       keywords="luxury anniversary Cape Town, anniversary Cape Town, luxury anniversary experience Cape Town, luxury anniversary experiences South Africa, romantic anniversary Cape Town, anniversary concierge Cape Town"
-      image={heroImg}
+      image={heroHeaderImg}
       jsonLd={{
         "@context": "https://schema.org",
         "@type": "Service",
@@ -29,7 +29,7 @@ const Anniversary = () => (
       h1="Luxury anniversary experiences"
       intro="One night or one week — a bespoke anniversary in the Cape, arranged around the two of you and nothing else."
       heroImage={heroImg}
-      heroHeaderImage={heroSecondaryImg}
+      heroHeaderImage={heroHeaderImg}
       heroAlt="Luxury anniversary experience in Cape Town arranged by SVRM Group"
       lede="Anniversaries are easy to get slightly wrong and very easy to get right with the correct hands on them. We take the brief — the year you're marking, what you loved last time, what you'd rather avoid — and build a day or a week around it. The Maybach at the door, a residence instead of a room, a table already held, and no logistics for either of you to carry."
       pillars={[
