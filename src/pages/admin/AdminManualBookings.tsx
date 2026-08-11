@@ -20,6 +20,7 @@ interface Booking {
   currency: string;
   subtotal: number;
   deposit_amount: number;
+  amount_paid: number;
   balance_due: number;
   start_date: string | null;
   end_date: string | null;
@@ -47,6 +48,7 @@ const AdminManualBookings = () => {
   const [openId, setOpenId] = useState<string | null>(null);
   const [pdfEdit, setPdfEdit] = useState<{ booking: Booking; kind: "invoice" | "confirmation" | "thank_you" | "quotation" } | null>(null);
   const [showForm, setShowForm] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
 
   // form state
   const [form, setForm] = useState({
@@ -57,6 +59,7 @@ const AdminManualBookings = () => {
     start_date: "",
     end_date: "",
     deposit_amount: 0,
+    amount_paid: 0,
     notes: "",
   });
   const [items, setItems] = useState<LineItem[]>([emptyItem()]);
