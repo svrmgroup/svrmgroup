@@ -56,6 +56,7 @@ const links: NavItem[] = [
       { to: "/tours/garden-route", label: "Garden Route" },
       { to: "/tours/aerial", label: "Helicopter & Aerial" },
       { to: "/tours/culinary", label: "Wine & Culinary" },
+      { to: "/tours/bo-kaap-cooking-tour", label: "Bo-Kaap Cooking Tour" },
       { to: "/tours/cultural", label: "Cultural & Heritage" },
       { to: "/tours/wellness", label: "Wellness" },
       { to: "/tours/builder", label: "Build Your Own Tour" },

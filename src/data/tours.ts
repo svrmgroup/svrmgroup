@@ -14,6 +14,7 @@ import groupTravelImg from "@/assets/tours/group-travel.jpg";
 import romanticImg from "@/assets/tours/romantic.jpg";
 import aquilaImg from "@/assets/tours/aquila-safari.jpg";
 import capePeninsulaImg from "@/assets/tours/cape-peninsula.jpg";
+import boKaapImg from "@/assets/tours/bo-kaap-cooking.jpg";
 import safariVid from "@/assets/videos/tour-safari.mp4.asset.json";
 import huntingVid from "@/assets/videos/tour-hunting.mp4.asset.json";
 import culturalVid from "@/assets/videos/tour-cultural.mp4.asset.json";
@@ -28,6 +29,7 @@ import photographyVid from "@/assets/videos/tour-photography.mp4.asset.json";
 export type TourSlug =
   | "safari"
   | "cape-peninsula"
+  | "bo-kaap-cooking-tour"
   | "aquila-safari"
   | "hunting"
   | "cultural"
@@ -61,6 +63,40 @@ export interface TourCategory {
 }
 
 export const tours: TourCategory[] = [
+  {
+    slug: "bo-kaap-cooking-tour",
+    label: "Bo-Kaap Cultural & Cooking Tour",
+    blurb: "Cape Malay cooking, in the Cape's most colourful quarter.",
+    description:
+      "A private, chauffeured half-day in the Bo-Kaap — Cape Town's Cape Malay quarter of cobbled streets, candy-coloured heritage houses and centuries of culinary tradition. You walk the neighbourhood with a local host, visit a spice merchant to learn the blends that define Cape Malay cooking, then cook in a family home: roti pressed by hand, a curry or bobotie built from scratch, koeksisters to finish. You sit down and eat what you made. Private groups only, with your chauffeur and vehicle on hand throughout, and vegetarian and halal preferences catered for on request.",
+    image: boKaapImg,
+    packages: [
+      {
+        duration: "Half day",
+        title: "Bo-Kaap cultural & cooking experience",
+        fromZAR: null,
+        inclusions: [
+          "Private chauffeur & vehicle, hotel pick-up and drop-off",
+          "Guided walk of the Bo-Kaap with a local host",
+          "Spice merchant visit & Cape Malay spice tasting",
+          "Hands-on cooking class in a Cape Malay family home",
+          "Sit-down lunch of the dishes you prepared",
+          "Halal and vegetarian options on request",
+        ],
+      },
+      {
+        duration: "1 day",
+        title: "Bo-Kaap & Cape Town heritage day",
+        fromZAR: null,
+        inclusions: [
+          "Bo-Kaap walk, spice tasting and cooking class",
+          "Company's Garden, Castle of Good Hope & city heritage stops",
+          "Private chauffeur for the full day",
+          "Entry fees and reservations arranged",
+        ],
+      },
+    ],
+  },
   {
     slug: "cape-peninsula",
     label: "Cape Peninsula — One Day Private Tour",
