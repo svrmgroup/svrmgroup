@@ -19,7 +19,7 @@ export const faqGroups: FaqGroup[] = [
       { q: "How do I make a booking?", a: "The quickest route is WhatsApp on +27 73 064 1481. You can also email concierge@svrm.group or use the enquiry form on this page. We typically reply the same day." },
       { q: "Why don't you publish prices?", a: "Every itinerary is composed for the guest — vehicle, route, wait time, season, party size and discretion all shape the rate. A published number would be wrong for almost everyone, so we send a written quote within 24 hours instead." },
       { q: "Which currencies can I be quoted in?", a: "We quote in ZAR by default and can present the same quote in GBP or USD. The site has a currency switcher in the top navigation." },
-      { q: "How do I pay? Is a deposit required?", a: "We accept EFT, card and international wire. A deposit is typically required to confirm; the balance is settled before or on the day of service. Specific terms are on every written quote." },
+      { q: "How do I pay? Is a deposit required?", a: "We accept EFT, card, international wire and a secure payment link. A deposit is typically required to confirm; the balance is settled before or on the day of service. Specific terms are on every written quote." },
       { q: "What is your cancellation policy?", a: "Terms are set per booking and clearly stated on the quote. As a general guide, cancellations made well in advance are refundable; short-notice cancellations may be partially or non-refundable, especially for tours, charters and seasonal stays." },
       { q: "How far in advance should I book?", a: "For peak season (December–February and Easter) we recommend 4–8 weeks. Off-peak we can often arrange transport, tours and stays within 24–72 hours." },
     ],
