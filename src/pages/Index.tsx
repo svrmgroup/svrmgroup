@@ -76,7 +76,6 @@ const Index = () => (
         ],
       }}
     />
-    <PromoBar />
     <Nav />
     <Hero />
     <Offers />
