@@ -19,27 +19,19 @@ async function clearAppCaches() {
 
 async function removeLegacyWorkers() {
   if (!("serviceWorker" in navigator)) return;
-
-  // Registering the same path forces Safari's old Workbox worker to fetch the
-  // replacement kill-switch. Do not immediately unregister it: its activate
-  // handler must run so it can clear the stale shell first.
-  await navigator.serviceWorker.register("/sw.js", {
-    scope: "/",
-    updateViaCache: "none",
-  }).catch(() => undefined);
-
   const registrations = await navigator.serviceWorker.getRegistrations();
-  await Promise.allSettled(
-    registrations
-      .filter((registration) => {
-        const url = registration.active?.scriptURL
-          || registration.waiting?.scriptURL
-          || registration.installing?.scriptURL
-          || "";
-        return url.endsWith("/service-worker.js");
-      })
-      .map((registration) => registration.unregister()),
-  );
+  for (const registration of registrations) {
+    const url = registration.active?.scriptURL
+      || registration.waiting?.scriptURL
+      || registration.installing?.scriptURL
+      || "";
+    if (url.endsWith("/sw.js")) {
+      // Fetch the same-path kill-switch and let its activate handler finish.
+      await registration.update().catch(() => undefined);
+    } else if (url.endsWith("/service-worker.js")) {
+      await registration.unregister().catch(() => false);
+    }
+  }
 }
 
 function reloadCurrentBuild(version: string) {
@@ -62,7 +54,7 @@ async function checkBuildVersion() {
 
   const savedVersion = localStorage.getItem(VERSION_STORAGE_KEY);
   localStorage.setItem(VERSION_STORAGE_KEY, liveVersion);
-  if (!savedVersion || savedVersion === liveVersion || liveVersion === __BUILD_VERSION__) return;
+  if (liveVersion === __BUILD_VERSION__ || savedVersion === liveVersion) return;
 
   await removeLegacyWorkers();
   await clearAppCaches();
