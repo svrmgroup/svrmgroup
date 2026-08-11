@@ -15,7 +15,7 @@ const Index = () => (
       title="SVRM Group | Luxury Concierge & Chauffeur — Cape Town"
       description="SVRM is Cape Town's private lifestyle management group — luxury chauffeur, private tours, honeymoon packages, villas, car rental, armed security and bespoke concierge across South Africa."
       path="/"
-      keywords="BMW X3 rental Cape Town, BMW X3 R2000 per day, cheap BMW rental Cape Town, luxury SUV rental Cape Town, self-drive BMW Cape Town, SVRM special offer, SVRM promotions, romantic packages Cape Town, honeymoon packages South Africa, proposal packages Cape Town, hot air balloon Winelands, private chauffeur Cape Town, S-Class chauffeur, safari packages Cape Town, Sabi Sand safari, villa rentals Camps Bay, SVRM, SVRM Group, luxury concierge Cape Town, lifestyle management South Africa, airport transfer Cape Town, private tours Cape Town, luxury villa rental Cape Town, armed close protection, armoured vehicles, private jet charter, helicopter charter, yacht charter, bespoke concierge, VIP services Cape Town"
+      keywords="luxury concierge Cape Town, Mercedes-Maybach S-Class Cape Town, Maybach chauffeur Cape Town, luxury chauffeur Cape Town, VIP security Cape Town, executive protection Cape Town, luxury honeymoon Cape Town, luxury anniversary Cape Town, Cape Peninsula private tour, luxury villa rental Cape Town, BMW X3 rental Cape Town, BMW X3 R2000 per day, cheap BMW rental Cape Town, luxury SUV rental Cape Town, self-drive BMW Cape Town, SVRM special offer, SVRM promotions, romantic packages Cape Town, honeymoon packages South Africa, proposal packages Cape Town, hot air balloon Winelands, private chauffeur Cape Town, S-Class chauffeur, safari packages Cape Town, Sabi Sand safari, villa rentals Camps Bay, SVRM, SVRM Group, luxury concierge Cape Town, lifestyle management South Africa, airport transfer Cape Town, private tours Cape Town, luxury villa rental Cape Town, armed close protection, armoured vehicles, private jet charter, helicopter charter, yacht charter, bespoke concierge, VIP services Cape Town"
       jsonLd={{
         "@context": "https://schema.org",
         "@graph": [
@@ -27,6 +27,23 @@ const Index = () => (
               { "@type": "City", name: "Cape Town" },
               { "@type": "Country", name: "South Africa" },
             ],
+          },
+          {
+            "@type": "Offer",
+            name: "Mercedes-Maybach S-Class chauffeur — SVRM flagship",
+            description:
+              "SVRM's flagship chauffeur experience: Mercedes-Maybach S-Class with a private chauffeur in Cape Town, for executives, airport transfers, weddings and honeymoons.",
+            price: "22000",
+            priceCurrency: "ZAR",
+            priceSpecification: {
+              "@type": "UnitPriceSpecification",
+              price: "22000",
+              priceCurrency: "ZAR",
+              unitCode: "DAY",
+            },
+            availability: "https://schema.org/InStock",
+            url: "https://svrm.group/travel",
+            seller: { "@type": "Organization", name: "SVRM Group" },
           },
           {
             "@type": "Offer",
