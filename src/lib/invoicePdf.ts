@@ -25,9 +25,12 @@ export interface InvoiceBooking {
   line_items: LineItem[];
   currency: string;
   subtotal: number;
+  /** Original quote given to the client, when the current total differs. */
+  quoted_total?: number | null;
   deposit_amount: number;
   amount_paid?: number;
   balance_due: number;
+
   notes?: string | null;
   confirmation_message?: string | null;
   created_at?: string;
