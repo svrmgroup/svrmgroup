@@ -79,12 +79,89 @@ const AdminManualBookings = () => {
   useEffect(() => { load(); }, []);
 
   const subtotal = items.reduce((s, i) => s + (Number(i.amount) || 0), 0);
-  const balance = Math.max(0, subtotal - (Number(form.deposit_amount) || 0));
+  const paid = Number(form.amount_paid) || 0;
+  // Balance follows what has actually been paid; falls back to the deposit when nothing is logged.
+  const balance = Math.max(0, subtotal - (paid > 0 ? paid : Number(form.deposit_amount) || 0));
 
   const resetForm = () => {
-    setForm({ client_name: "", client_email: "", client_phone: "", currency: "ZAR", start_date: "", end_date: "", deposit_amount: 0, notes: "" });
+    setForm({ client_name: "", client_email: "", client_phone: "", currency: "ZAR", start_date: "", end_date: "", deposit_amount: 0, amount_paid: 0, notes: "" });
     setItems([emptyItem()]);
     setPendingStaff([]);
+    setEditingId(null);
+  };
+
+  const startEdit = (r: Booking) => {
+    setEditingId(r.id);
+    setForm({
+      client_name: r.client_name || "",
+      client_email: r.client_email || "",
+      client_phone: r.client_phone || "",
+      currency: r.currency || "ZAR",
+      start_date: r.start_date || "",
+      end_date: r.end_date || "",
+      deposit_amount: Number(r.deposit_amount) || 0,
+      amount_paid: Number(r.amount_paid) || 0,
+      notes: r.notes || "",
+    });
+    setItems(r.line_items?.length ? r.line_items.map((i) => ({ ...i })) : [emptyItem()]);
+    setShowForm(true);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const cleanedItems = () =>
+    items.filter((i) => i.label.trim()).map((i) => ({
+      label: i.label.trim(),
+      qty: Number(i.qty) || undefined,
+      unit: i.unit?.trim() || undefined,
+      amount: Number(i.amount) || 0,
+    }));
+
+  const saveEdit = async () => {
+    if (!editingId) return;
+    if (!form.client_name.trim()) return toast.error("Client name required");
+    const cleanItems = cleanedItems();
+    if (!cleanItems.length) return toast.error("Add at least one line item");
+
+    const patch = {
+      client_name: form.client_name.trim(),
+      client_email: form.client_email.trim() || null,
+      client_phone: form.client_phone.trim() || null,
+      currency: form.currency,
+      line_items: cleanItems as any,
+      subtotal,
+      deposit_amount: Number(form.deposit_amount) || 0,
+      amount_paid: paid,
+      balance_due: balance,
+      start_date: form.start_date || null,
+      end_date: form.end_date || null,
+      notes: form.notes.trim() || null,
+    };
+
+    const existing = rows.find((r) => r.id === editingId);
+    const confirmation_message = buildConfirmationMessage({
+      booking_code: existing?.booking_code || "",
+      client_name: patch.client_name,
+      currency: patch.currency,
+      line_items: cleanItems,
+      subtotal,
+      deposit_amount: patch.deposit_amount,
+      amount_paid: paid,
+      balance_due: balance,
+      start_date: patch.start_date,
+      end_date: patch.end_date,
+      notes: patch.notes,
+    });
+
+    const { error } = await supabase
+      .from("manual_bookings")
+      .update({ ...patch, confirmation_message } as any)
+      .eq("id", editingId);
+    if (error) return toast.error(error.message);
+
+    setRows((r) => r.map((x) => (x.id === editingId ? ({ ...x, ...patch, confirmation_message } as any) : x)));
+    toast.success("Booking updated");
+    setShowForm(false);
+    resetForm();
   };
 
   const create = async () => {
