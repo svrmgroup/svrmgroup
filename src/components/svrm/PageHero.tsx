@@ -51,6 +51,16 @@ const PageHero = ({ eyebrow, title, subtitle, videoSrc, posterSrc, imageSrc, ima
             {subtitle}
           </p>
         )}
+        {imageSrc && (
+          <div className="relative mt-12 md:mt-16 aspect-[16/9] overflow-hidden bg-surface-raised">
+            <SmartImage
+              src={imageSrc}
+              alt={imageAlt || title}
+              wrapperClassName="absolute inset-0 w-full h-full"
+              className="w-full h-full object-cover"
+            />
+          </div>
+        )}
       </div>
     </section>
   );
