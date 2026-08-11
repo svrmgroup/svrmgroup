@@ -73,7 +73,7 @@ const Stays = () => {
 
       <PageHero
         eyebrow="Stays · Luxury Villas, Apartments & Hotels in Cape Town"
-        title="Short-term, long-term, or your own."
+        title="Luxury Villas & Accommodation Cape Town"
         subtitle="Hand-picked luxury villas, apartments and hotel suites — Camps Bay, Clifton, Bantry Bay, V&A, Constantia and the Winelands. Nightly stays, furnished long-term residences and discreet buy & sell."
         videoSrc={heroVideo.url}
       />
@@ -94,7 +94,7 @@ const Stays = () => {
             </TabsList>
 
             <TabsContent value="short" className="mt-0">
-
+              <h2 className="font-serif text-3xl md:text-4xl mb-8 text-foreground">Short-term luxury stays</h2>
 
               <Tabs value={sub} onValueChange={(v) => setSub(v as StayType)} className="w-full">
                 <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
@@ -106,8 +106,9 @@ const Stays = () => {
                     ))}
                   </TabsList>
                   <div className="flex items-center gap-3">
-                    <label className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground/80">Sort</label>
+                    <label htmlFor="stay-sort" className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground/80">Sort</label>
                     <select
+                      id="stay-sort"
                       value={sort}
                       onChange={(e) => setSort(e.target.value as SortMode)}
                       className="bg-surface-raised border border-border/60 text-xs uppercase tracking-[0.18em] px-3 py-2 text-foreground focus:outline-none focus:border-primary"
@@ -145,10 +146,12 @@ const Stays = () => {
             </TabsContent>
 
             <TabsContent value="long" className="mt-0 pb-12">
+              <h2 className="font-serif text-3xl md:text-4xl mb-8 text-foreground">Long-term residences</h2>
               <LongTermStayForm />
             </TabsContent>
 
             <TabsContent value="buysell" className="mt-0 pb-12">
+              <h2 className="font-serif text-3xl md:text-4xl mb-8 text-foreground">Buy & sell property</h2>
               <BuySellPropertyForm />
             </TabsContent>
           </Tabs>

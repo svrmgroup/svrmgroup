@@ -27,7 +27,7 @@ const Hero = () => {
           className="font-serif text-foreground mt-8 text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.05] max-w-5xl animate-fade-up"
           style={{ animationDelay: "0.3s" }}
         >
-          Curated luxury across South Africa.
+          SVRM Group — Luxury Concierge & Lifestyle Management South Africa
         </h1>
 
         <p

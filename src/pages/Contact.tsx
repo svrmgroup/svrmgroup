@@ -173,7 +173,7 @@ const Contact = () => {
       <Nav />
       <PageHero
         eyebrow="Contact · Luxury Concierge Cape Town"
-        title="Begin a conversation."
+        title="Contact SVRM Concierge & FAQ"
         subtitle="Booking is by request. Tell us what you need — a single Cape Town transfer or a complete itinerary — and our concierge team will respond personally, within hours."
       />
 

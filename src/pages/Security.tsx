@@ -25,7 +25,7 @@ const Security = () => {
 
       <PageHero
         eyebrow="Security · Armed Close Protection & Armoured Transport"
-        title="Protection, quietly arranged."
+        title="VIP Security & Executive Protection Cape Town"
         subtitle="VIP security, executive protection and travel security in Cape Town and across South Africa — vetted close protection officers, armoured vehicles, residential and event coverage, coordinated end-to-end by SVRM."
         videoSrc={heroVideo.url}
       />

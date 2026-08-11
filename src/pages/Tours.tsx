@@ -15,7 +15,7 @@ const Tours = () => (
     <Nav />
     <PageHero
       eyebrow="Tours · Private Guided Cape Town & South Africa"
-      title="South Africa, taken seriously."
+      title="Private Guided Tours Cape Town"
       subtitle="Privately guided Cape Town tours — safari, Garden Route, marine & wildlife, cultural, aerial and wellness — assembled by theme and duration, or composed entirely around you."
       videoSrc={heroVideo.url}
     />
