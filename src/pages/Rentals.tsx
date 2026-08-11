@@ -41,8 +41,8 @@ const Rentals = () => {
   return (
     <main className="bg-background text-foreground min-h-screen">
       <Seo
-        title={"Luxury Car Rental Cape Town | Self-Drive BMW, Mercedes, Range Rover — SVRM"}
-        description={"Rent a luxury or everyday car in Cape Town, delivered to your door, hotel or airport. BMW, Mercedes, Range Rover, Porsche, Rolls-Royce and value picks — daily, weekly and monthly rates, insured and fully valeted. Book online in minutes."}
+        title={"Luxury Car Rental Cape Town | Self-Drive — SVRM"}
+        description={"Rent luxury and everyday cars in Cape Town, delivered to your door. BMW, Mercedes, Range Rover, Porsche and Rolls-Royce — daily, weekly and monthly."}
         path="/rentals"
         keywords="luxury car rental Cape Town, self-drive car hire Cape Town, rent BMW Cape Town, Mercedes E-Class rental, Range Rover Sport hire, Porsche Cayenne rental, Rolls-Royce self drive, G-Wagon rental Cape Town, exotic car hire South Africa, weekend car rental Cape Town, monthly car rental, airport car delivery Cape Town, CTIA car hire, chauffeur optional, cheap luxury rental Cape Town, honeymoon car hire, wedding car rental, film production car hire, business traveller car rental Cape Town, best car rental Cape Town"
         image={rentalsOg}

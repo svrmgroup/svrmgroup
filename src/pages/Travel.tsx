@@ -43,7 +43,7 @@ const Travel = () => {
     <main className="bg-background text-foreground min-h-screen">
       <Seo
         title={"Luxury Chauffeur Cape Town | Maybach & S-Class — SVRM"}
-        description={"VIP chauffeur service in Cape Town led by our flagship Mercedes-Maybach S-Class from R22,000/day, plus S-Class, Range Rover, Rolls-Royce, private jets, helicopters and yachts. NDA-bound, 24/7."}
+        description={"VIP chauffeur service in Cape Town with Mercedes-Maybach S-Class, S-Class, Range Rover and Rolls-Royce. NDA-bound, 24/7."}
         path="/travel"
         keywords="chauffeur service Cape Town, luxury chauffeur Cape Town, Maybach chauffeur Cape Town, Mercedes-Maybach chauffeur Cape Town, Maybach S-Class Cape Town, S Class chauffeur Cape Town, private driver Cape Town, VIP chauffeur Cape Town, luxury airport transfer Cape Town, VIP chauffeur service, private airport transfer Cape Town, Mercedes S-Class chauffeur, BMW 7 Series with driver, Rolls-Royce Phantom chauffeur, Range Rover chauffeur Cape Town, executive transfers South Africa, private jet charter Cape Town, empty leg jet Cape Town, helicopter transfer Cape Town, scenic helicopter flight, superyacht charter Cape Town, V&A Waterfront yacht hire, wedding car hire Cape Town, corporate roadshow transport, celebrity chauffeur Cape Town, close protection driver, group transfers Sprinter, luxury Winelands day trip"
 
