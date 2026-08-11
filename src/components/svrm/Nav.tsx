@@ -8,14 +8,70 @@ import LanguageSwitch from "./LanguageSwitch";
 import { whatsappUrlFor } from "@/lib/whatsappMessages";
 import WhatsAppGlyph from "./WhatsAppGlyph";
 
-const links = [
+type SubLink = { to: string; label: string };
+type NavItem = { to: string; label: string; sub?: SubLink[] };
+
+const links: NavItem[] = [
   { to: "/", label: "Home" },
-  { to: "/travel", label: "Travel" },
-  { to: "/rentals", label: "Rentals" },
-  { to: "/stays", label: "Stays" },
-  { to: "/tours", label: "Tours" },
+  {
+    to: "/travel",
+    label: "Travel",
+    sub: [
+      { to: "/travel?cat=cars", label: "Chauffeur & Fleet" },
+      { to: "/airport-transfers", label: "Airport Transfers" },
+      { to: "/travel?cat=jets", label: "Private Jets" },
+      { to: "/travel?cat=helicopters", label: "Helicopters" },
+      { to: "/travel?cat=yachts", label: "Yachts" },
+    ],
+  },
+  {
+    to: "/rentals",
+    label: "Rentals",
+    sub: [
+      { to: "/rentals?cat=Signature", label: "Signature" },
+      { to: "/rentals?cat=Premium SUV", label: "Premium SUV" },
+      { to: "/rentals?cat=Executive", label: "Executive" },
+      { to: "/rentals?cat=Everyday", label: "Everyday" },
+      { to: "/rentals?cat=Budget", label: "Budget" },
+      { to: "/rentals?cat=Custom", label: "Custom Request" },
+    ],
+  },
+  {
+    to: "/stays",
+    label: "Stays",
+    sub: [
+      { to: "/stays?cat=short", label: "Short-Term Villas" },
+      { to: "/stays?cat=long", label: "Long-Term Rentals" },
+      { to: "/stays?cat=buysell", label: "Buy & Sell Property" },
+    ],
+  },
+  {
+    to: "/tours",
+    label: "Tours",
+    sub: [
+      { to: "/tours/cape-peninsula", label: "Cape Peninsula" },
+      { to: "/tours/safari", label: "Safari" },
+      { to: "/tours/aquila-safari", label: "Aquila Safari" },
+      { to: "/tours/marine", label: "Marine & Wildlife" },
+      { to: "/tours/garden-route", label: "Garden Route" },
+      { to: "/tours/aerial", label: "Helicopter & Aerial" },
+      { to: "/tours/culinary", label: "Wine & Culinary" },
+      { to: "/tours/cultural", label: "Cultural & Heritage" },
+      { to: "/tours/wellness", label: "Wellness" },
+      { to: "/tours/builder", label: "Build Your Own Tour" },
+    ],
+  },
   { to: "/security", label: "Security" },
-  { to: "/experiences", label: "Custom" },
+  {
+    to: "/experiences",
+    label: "Custom",
+    sub: [
+      { to: "/honeymoon-cape-town", label: "Honeymoon" },
+      { to: "/anniversary-cape-town", label: "Anniversary" },
+      { to: "/lifestyle", label: "Lifestyle & Events" },
+      { to: "/experiences", label: "Bespoke Concierge" },
+    ],
+  },
   { to: "/blog", label: "Journal" },
   { to: "/contact", label: "Contact" },
 ];
@@ -26,6 +82,7 @@ const linkClass = ({ isActive }: { isActive: boolean }) =>
       ? "text-foreground border-primary"
       : "text-muted-foreground border-transparent hover:text-foreground"
   }`;
+
 
 const Nav = () => {
   const { pathname } = useLocation();
@@ -54,11 +111,29 @@ const Nav = () => {
 
         <nav className="hidden lg:flex items-center gap-7">
           {links.map((l) => (
-            <NavLink key={l.to} to={l.to} className={linkClass} end={l.to === "/"}>
-              {l.label}
-            </NavLink>
+            <div key={l.to} className="relative group py-6">
+              <NavLink to={l.to} className={linkClass} end={l.to === "/"}>
+                {l.label}
+              </NavLink>
+              {l.sub && (
+                <div className="absolute left-1/2 -translate-x-1/2 top-full pt-2 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 focus-within:opacity-100 focus-within:visible transition-all duration-200">
+                  <div className="min-w-56 bg-surface-deep/95 backdrop-blur-md border border-border/60 py-2 shadow-xl">
+                    {l.sub.map((s) => (
+                      <Link
+                        key={s.to + s.label}
+                        to={s.to}
+                        className="block px-5 py-2.5 text-[11px] uppercase tracking-[0.18em] text-muted-foreground hover:text-gold hover:bg-primary/5 transition-colors whitespace-nowrap"
+                      >
+                        {s.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
           ))}
         </nav>
+
 
 
         <div className="flex items-center gap-3">
@@ -99,22 +174,38 @@ const Nav = () => {
                 <Logo size="sm" />
                 <span className="font-serif text-xl text-foreground">SVRM Group</span>
               </div>
-              <div className="mt-12 flex flex-col gap-7">
+              <div className="mt-10 flex flex-col gap-6 overflow-y-auto max-h-[70vh] pr-2">
                 {links.map((l) => (
-                  <NavLink
-                    key={l.to}
-                    to={l.to}
-                    onClick={() => setOpen(false)}
-                    className={({ isActive }) =>
-                      `text-sm uppercase tracking-[0.28em] ${
-                        isActive ? "text-gold" : "text-foreground"
-                      }`
-                    }
-                    end={l.to === "/"}
-                  >
-                    {l.label}
-                  </NavLink>
+                  <div key={l.to} className="flex flex-col gap-3">
+                    <NavLink
+                      to={l.to}
+                      onClick={() => setOpen(false)}
+                      className={({ isActive }) =>
+                        `text-sm uppercase tracking-[0.28em] ${
+                          isActive ? "text-gold" : "text-foreground"
+                        }`
+                      }
+                      end={l.to === "/"}
+                    >
+                      {l.label}
+                    </NavLink>
+                    {l.sub && (
+                      <div className="flex flex-col gap-2.5 pl-4 border-l border-border/60">
+                        {l.sub.map((s) => (
+                          <Link
+                            key={s.to + s.label}
+                            to={s.to}
+                            onClick={() => setOpen(false)}
+                            className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground hover:text-gold transition-colors"
+                          >
+                            {s.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 ))}
+
                 <div className="pt-2 flex flex-col gap-3"><LanguageSwitch /><CurrencySwitch /></div>
                 <a
                   href={waHref}
