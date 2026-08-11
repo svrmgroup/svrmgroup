@@ -39,8 +39,23 @@ const PageHero = ({ eyebrow, title, subtitle, videoSrc, posterSrc, imageSrc, ima
   }
 
   return (
-    <section className="pt-40 pb-16 md:pt-48 md:pb-24 bg-surface-deep">
-      <div className="max-w-5xl mx-auto px-6 text-center">
+    <section className="relative pt-40 pb-16 md:pt-48 md:pb-24 overflow-hidden">
+      {imageSrc && (
+        <div className="absolute inset-0 z-0">
+          <SmartImage
+            src={imageSrc}
+            alt={imageAlt || title}
+            wrapperClassName="absolute inset-0 w-full h-full"
+            className="w-full h-full object-cover"
+          />
+          <div
+            className="absolute inset-0"
+            style={{ background: "var(--gradient-hero-overlay)" }}
+            aria-hidden="true"
+          />
+        </div>
+      )}
+      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
         <p className="eyebrow">{eyebrow}</p>
         <h1 className="font-serif text-5xl md:text-7xl mt-6 text-foreground leading-[1.05]">
           {title}
@@ -50,16 +65,6 @@ const PageHero = ({ eyebrow, title, subtitle, videoSrc, posterSrc, imageSrc, ima
           <p className="mt-8 text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             {subtitle}
           </p>
-        )}
-        {imageSrc && (
-          <div className="relative mt-12 md:mt-16 aspect-[16/9] overflow-hidden bg-surface-raised">
-            <SmartImage
-              src={imageSrc}
-              alt={imageAlt || title}
-              wrapperClassName="absolute inset-0 w-full h-full"
-              className="w-full h-full object-cover"
-            />
-          </div>
         )}
       </div>
     </section>
