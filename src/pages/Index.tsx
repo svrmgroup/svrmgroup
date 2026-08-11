@@ -12,8 +12,8 @@ import { Seo } from "@/components/Seo";
 const Index = () => (
   <main className="bg-background text-foreground">
     <Seo
-      title="SVRM Group"
-      description="SVRM is Cape Town's private lifestyle management group — luxury chauffeur, private tours, villas, car rental, armed security and bespoke concierge across South Africa."
+      title="SVRM Group | Private Lifestyle Management Cape Town"
+      description="SVRM is Cape Town's private lifestyle management group — luxury chauffeur, tours, villas, car rental, security and bespoke concierge in South Africa."
       path="/"
       keywords="luxury concierge Cape Town, Mercedes-Maybach S-Class Cape Town, Maybach chauffeur Cape Town, luxury chauffeur Cape Town, VIP security Cape Town, executive protection Cape Town, luxury honeymoon Cape Town, luxury anniversary Cape Town, Cape Peninsula private tour, luxury villa rental Cape Town, BMW X3 rental Cape Town, BMW X3 R2000 per day, cheap BMW rental Cape Town, luxury SUV rental Cape Town, self-drive BMW Cape Town, SVRM special offer, SVRM promotions, romantic packages Cape Town, honeymoon packages South Africa, proposal packages Cape Town, hot air balloon Winelands, private chauffeur Cape Town, S-Class chauffeur, safari packages Cape Town, Sabi Sand safari, villa rentals Camps Bay, SVRM, SVRM Group, luxury concierge Cape Town, lifestyle management South Africa, airport transfer Cape Town, private tours Cape Town, luxury villa rental Cape Town, armed close protection, armoured vehicles, private jet charter, helicopter charter, yacht charter, bespoke concierge, VIP services Cape Town"
       jsonLd={{
