@@ -1,4 +1,5 @@
 import BackgroundVideo from "@/components/svrm/BackgroundVideo";
+import SmartImage from "@/components/svrm/SmartImage";
 
 interface Props {
   eyebrow: string;
@@ -6,9 +7,11 @@ interface Props {
   subtitle?: string;
   videoSrc?: string;
   posterSrc?: string;
+  imageSrc?: string;
+  imageAlt?: string;
 }
 
-const PageHero = ({ eyebrow, title, subtitle, videoSrc, posterSrc }: Props) => {
+const PageHero = ({ eyebrow, title, subtitle, videoSrc, posterSrc, imageSrc, imageAlt }: Props) => {
   if (videoSrc) {
     return (
       <section className="relative pt-40 pb-20 md:pt-56 md:pb-32 overflow-hidden bg-surface-deep">
@@ -47,6 +50,16 @@ const PageHero = ({ eyebrow, title, subtitle, videoSrc, posterSrc }: Props) => {
           <p className="mt-8 text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             {subtitle}
           </p>
+        )}
+        {imageSrc && (
+          <div className="relative mt-12 md:mt-16 aspect-[16/9] overflow-hidden bg-surface-raised">
+            <SmartImage
+              src={imageSrc}
+              alt={imageAlt || title}
+              wrapperClassName="absolute inset-0 w-full h-full"
+              className="w-full h-full object-cover"
+            />
+          </div>
         )}
       </div>
     </section>

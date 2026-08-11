@@ -23,6 +23,8 @@ interface Props {
   intro: string;
   heroImage: string;
   heroAlt: string;
+  /** Optional separate image for the hero header. Falls back to heroImage. */
+  heroHeaderImage?: string;
   /** Optional looping background video for the hero section. */
   heroVideo?: string;
   lede: string;
@@ -46,6 +48,7 @@ const OccasionPage = ({
   intro,
   heroImage,
   heroAlt,
+  heroHeaderImage,
   heroVideo,
   lede,
   pillars,
@@ -59,7 +62,7 @@ const OccasionPage = ({
 }: Props) => (
   <>
     <Nav />
-    <PageHero eyebrow={eyebrow} title={h1} subtitle={intro} videoSrc={heroVideo} posterSrc={heroImage} />
+    <PageHero eyebrow={eyebrow} title={h1} subtitle={intro} videoSrc={heroVideo} posterSrc={heroImage} imageSrc={heroHeaderImage || heroImage} imageAlt={heroAlt} />
 
     <section className="py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
