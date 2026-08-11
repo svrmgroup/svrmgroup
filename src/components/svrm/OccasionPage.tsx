@@ -23,6 +23,8 @@ interface Props {
   intro: string;
   heroImage: string;
   heroAlt: string;
+  /** Optional separate image for the hero header. Falls back to heroImage. */
+  heroHeaderImage?: string;
   /** Optional looping background video for the hero section. */
   heroVideo?: string;
   lede: string;
@@ -46,6 +48,7 @@ const OccasionPage = ({
   intro,
   heroImage,
   heroAlt,
+  heroHeaderImage,
   heroVideo,
   lede,
   pillars,
