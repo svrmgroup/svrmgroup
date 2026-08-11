@@ -174,22 +174,38 @@ const Nav = () => {
                 <Logo size="sm" />
                 <span className="font-serif text-xl text-foreground">SVRM Group</span>
               </div>
-              <div className="mt-12 flex flex-col gap-7">
+              <div className="mt-10 flex flex-col gap-6 overflow-y-auto max-h-[70vh] pr-2">
                 {links.map((l) => (
-                  <NavLink
-                    key={l.to}
-                    to={l.to}
-                    onClick={() => setOpen(false)}
-                    className={({ isActive }) =>
-                      `text-sm uppercase tracking-[0.28em] ${
-                        isActive ? "text-gold" : "text-foreground"
-                      }`
-                    }
-                    end={l.to === "/"}
-                  >
-                    {l.label}
-                  </NavLink>
+                  <div key={l.to} className="flex flex-col gap-3">
+                    <NavLink
+                      to={l.to}
+                      onClick={() => setOpen(false)}
+                      className={({ isActive }) =>
+                        `text-sm uppercase tracking-[0.28em] ${
+                          isActive ? "text-gold" : "text-foreground"
+                        }`
+                      }
+                      end={l.to === "/"}
+                    >
+                      {l.label}
+                    </NavLink>
+                    {l.sub && (
+                      <div className="flex flex-col gap-2.5 pl-4 border-l border-border/60">
+                        {l.sub.map((s) => (
+                          <Link
+                            key={s.to + s.label}
+                            to={s.to}
+                            onClick={() => setOpen(false)}
+                            className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground hover:text-gold transition-colors"
+                          >
+                            {s.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 ))}
+
                 <div className="pt-2 flex flex-col gap-3"><LanguageSwitch /><CurrencySwitch /></div>
                 <a
                   href={waHref}
