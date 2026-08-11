@@ -64,7 +64,9 @@ const AdminAnalytics = () => {
     setLoading(false);
   };
 
-  const totalRevenue = useMemo(() => bookings.reduce((s, x: any) => s + Number(x.subtotal || 0), 0), [bookings]);
+  const totalRevenue = useMemo(() => bookings.reduce((s, x: any) => s + Number(x.amount_paid || 0), 0), [bookings]);
+  const totalBooked = useMemo(() => bookings.reduce((s, x: any) => s + Number(x.subtotal || 0), 0), [bookings]);
+  const outstanding = Math.max(0, totalBooked - totalRevenue);
   const totalExpenses = useMemo(() => expenses.reduce((s, x: any) => s + Number(x.amount || 0), 0), [expenses]);
   const netProfit = totalRevenue - totalExpenses;
 
@@ -78,7 +80,7 @@ const AdminAnalytics = () => {
     }
     bookings.forEach((b: any) => {
       const d = format(new Date(b.created_at), step === 1 ? "MMM d" : "MMM yy");
-      const v = map.get(d); if (v) v.rev += Number(b.subtotal || 0);
+      const v = map.get(d); if (v) v.rev += Number(b.amount_paid || 0);
     });
     expenses.forEach((e: any) => {
       const d = format(new Date(e.date), step === 1 ? "MMM d" : "MMM yy");
@@ -122,7 +124,9 @@ const AdminAnalytics = () => {
       ["Enquiries", String(enquiries.length)],
       ["Rental requests", String(rentals.length)],
       ["Manual bookings", String(bookings.length)],
-      ["Revenue booked", String(totalRevenue)],
+      ["Revenue collected", String(totalRevenue)],
+      ["Booked value", String(totalBooked)],
+      ["Outstanding", String(outstanding)],
       ["Expenses", String(totalExpenses)],
       ["Net profit", String(netProfit)],
       ["WhatsApp clicks", String(wa.length)],
@@ -171,7 +175,8 @@ const AdminAnalytics = () => {
             <Stat label="Rental requests" value={rentals.length} />
             <Stat label="Bookings" value={bookings.length} />
             <Stat label="WhatsApp clicks" value={wa.length} />
-            <Stat label="Revenue" value={`R ${totalRevenue.toLocaleString()}`} />
+            <Stat label="Revenue (paid)" value={`R ${totalRevenue.toLocaleString()}`} />
+            <Stat label="Outstanding" value={`R ${outstanding.toLocaleString()}`} />
             <Stat label="Expenses" value={`R ${totalExpenses.toLocaleString()}`} />
             <Stat label="Net profit" value={`R ${netProfit.toLocaleString()}`} accent={netProfit >= 0 ? "text-gold" : "text-destructive"} />
             <Stat label="Active leads" value={leads.filter(l => l.status !== "signed" && l.status !== "declined").length} />

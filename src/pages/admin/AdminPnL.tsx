@@ -60,7 +60,7 @@ const AdminPnL = () => {
       setLoading(true);
       let bq = supabase
         .from("manual_bookings")
-        .select("id, booking_code, client_name, subtotal, currency, start_date, created_at, status")
+        .select("id, booking_code, client_name, subtotal, amount_paid, currency, start_date, created_at, status")
         .eq("currency", currency);
       let eq = supabase
         .from("expenses")
@@ -75,7 +75,9 @@ const AdminPnL = () => {
     })();
   }, [currency, start, end]);
 
-  const revenue = bookings.reduce((s, b) => s + Number(b.subtotal || 0), 0);
+  const revenue = bookings.reduce((s, b) => s + Number(b.amount_paid || 0), 0);
+  const booked = bookings.reduce((s, b) => s + Number(b.subtotal || 0), 0);
+  const outstanding = Math.max(0, booked - revenue);
   const expensesTotal = expenses.reduce((s, e) => s + Number(e.amount || 0), 0);
   const net = revenue - expensesTotal;
   const margin = revenue > 0 ? (net / revenue) * 100 : 0;
@@ -88,7 +90,7 @@ const AdminPnL = () => {
 
   const perBooking = useMemo(() => bookings.map((b) => {
     const linked = expenses.filter((e) => e.manual_booking_id === b.id).reduce((s, e) => s + Number(e.amount), 0);
-    return { ...b, expenses: linked, profit: Number(b.subtotal || 0) - linked };
+    return { ...b, expenses: linked, paid: Number(b.amount_paid || 0), profit: Number(b.amount_paid || 0) - linked };
   }), [bookings, expenses]);
 
   const fmt = (n: number) => `${currency} ${n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
@@ -97,7 +99,9 @@ const AdminPnL = () => {
   const exportCsv = () => {
     const lines = [
       ["Section", "Label", "Amount"].join(","),
-      ["Summary", "Revenue", revenue].join(","),
+      ["Summary", "Revenue (paid)", revenue].join(","),
+      ["Summary", "Booked value", booked].join(","),
+      ["Summary", "Outstanding", outstanding].join(","),
       ["Summary", "Expenses", expensesTotal].join(","),
       ["Summary", "Net profit", net].join(","),
       ["Summary", "Margin %", margin.toFixed(2)].join(","),
@@ -106,8 +110,8 @@ const AdminPnL = () => {
       ...byCategory.map(([c, v]) => ["", c, v].join(",")),
       "",
       "Per booking,,,",
-      ["Code", "Client", "Revenue", "Expenses", "Profit"].join(","),
-      ...perBooking.map((b) => [b.booking_code, b.client_name, b.subtotal, b.expenses, b.profit].join(",")),
+      ["Code", "Client", "Booked", "Paid", "Expenses", "Profit"].join(","),
+      ...perBooking.map((b) => [b.booking_code, b.client_name, b.subtotal, b.paid, b.expenses, b.profit].join(",")),
     ].join("\n");
     const blob = new Blob([lines], { type: "text/csv" });
     const a = document.createElement("a");
@@ -149,11 +153,12 @@ const AdminPnL = () => {
       {loading ? <p className="text-xs text-muted-foreground">Loading…</p> : (
         <>
           <div className="grid md:grid-cols-4 gap-4">
-            <div className="card-luxury p-5"><p className="eyebrow">Revenue</p><p className="font-serif text-2xl mt-2">{fmt(revenue)}</p></div>
+            <div className="card-luxury p-5"><p className="eyebrow">Revenue (paid)</p><p className="font-serif text-2xl mt-2">{fmt(revenue)}</p><p className="text-[10px] text-muted-foreground mt-1">Booked {fmt(booked)} · Outstanding {fmt(outstanding)}</p></div>
             <div className="card-luxury p-5"><p className="eyebrow">Expenses</p><p className="font-serif text-2xl mt-2 text-destructive/80">{fmt(expensesTotal)}</p></div>
             <div className="card-luxury p-5"><p className="eyebrow">Net profit</p><p className={`font-serif text-2xl mt-2 ${net >= 0 ? "text-gold" : "text-destructive"}`}>{fmt(net)}</p></div>
             <div className="card-luxury p-5"><p className="eyebrow">Margin</p><p className="font-serif text-2xl mt-2">{margin.toFixed(1)}%</p></div>
           </div>
+
 
           <section>
             <p className="eyebrow mb-3">Expenses by category</p>
@@ -178,7 +183,8 @@ const AdminPnL = () => {
                     <tr>
                       <th className="px-4 py-3 text-left">Code</th>
                       <th className="px-4 py-3 text-left">Client</th>
-                      <th className="px-4 py-3 text-right">Revenue</th>
+                      <th className="px-4 py-3 text-right">Booked</th>
+                      <th className="px-4 py-3 text-right">Paid</th>
                       <th className="px-4 py-3 text-right">Expenses</th>
                       <th className="px-4 py-3 text-right">Profit</th>
                     </tr>
@@ -188,12 +194,14 @@ const AdminPnL = () => {
                       <tr key={b.id} className="border-t border-border/40">
                         <td className="px-4 py-3 font-mono text-xs">{b.booking_code}</td>
                         <td className="px-4 py-3">{b.client_name}</td>
-                        <td className="px-4 py-3 text-right font-mono">{fmt(Number(b.subtotal))}</td>
+                        <td className="px-4 py-3 text-right font-mono text-muted-foreground">{fmt(Number(b.subtotal))}</td>
+                        <td className="px-4 py-3 text-right font-mono">{fmt(b.paid)}</td>
                         <td className="px-4 py-3 text-right font-mono text-destructive/80">{fmt(b.expenses)}</td>
                         <td className={`px-4 py-3 text-right font-mono ${b.profit >= 0 ? "text-gold" : "text-destructive"}`}>{fmt(b.profit)}</td>
                       </tr>
                     ))}
                   </tbody>
+
                 </table>
               )}
             </div>
