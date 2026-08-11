@@ -22,6 +22,82 @@ const TourDetail = () => {
 
   const datesSuffix = "";
 
+  const SITE = "https://svrm.group";
+  const tourUrl = `${SITE}/tours/${slug}`;
+  const imageUrl = new URL(tour.image, SITE).toString();
+  const provider = { "@type": "Organization", name: "SVRM Group", url: `${SITE}/` };
+
+  const pricedPackages = tour.packages.filter((p) => typeof p.fromZAR === "number");
+  const lowPrice = pricedPackages.length
+    ? Math.min(...pricedPackages.map((p) => p.fromZAR as number))
+    : null;
+  const highPrice = pricedPackages.length
+    ? Math.max(...pricedPackages.map((p) => p.fromZAR as number))
+    : null;
+
+  const offers = tour.packages.map((p) => ({
+    "@type": "Offer",
+    name: `${p.title} · ${p.duration}`,
+    url: tourUrl,
+    priceCurrency: "ZAR",
+    ...(typeof p.fromZAR === "number"
+      ? { price: p.fromZAR, availability: "https://schema.org/InStock" }
+      : { availability: "https://schema.org/PreOrder" }),
+    category: p.duration,
+    description: p.inclusions.join(", "),
+    seller: provider,
+  }));
+
+  const tourSchema: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": ["TouristTrip", "Product"],
+    "@id": `${tourUrl}#tour`,
+    name: tour.label,
+    description: String(tour.description ?? description),
+    disambiguatingDescription: tour.blurb,
+    touristType: "Luxury private travellers",
+    provider,
+    brand: provider,
+    image: imageUrl,
+    url: tourUrl,
+    itinerary: {
+      "@type": "ItemList",
+      itemListElement: tour.packages.map((p, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: `${p.title} (${p.duration})`,
+        description: p.inclusions.join(", "),
+      })),
+    },
+    offers:
+      lowPrice !== null
+        ? {
+            "@type": "AggregateOffer",
+            priceCurrency: "ZAR",
+            lowPrice,
+            ...(highPrice !== null ? { highPrice } : {}),
+            offerCount: tour.packages.length,
+            availability: "https://schema.org/InStock",
+            offers,
+            seller: provider,
+          }
+        : offers,
+    areaServed: [
+      { "@type": "City", name: "Cape Town" },
+      { "@type": "Country", name: "South Africa" },
+    ],
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: `${SITE}/` },
+      { "@type": "ListItem", position: 2, name: "Tours", item: `${SITE}/tours` },
+      { "@type": "ListItem", position: 3, name: tour.label, item: tourUrl },
+    ],
+  };
+
   return (
     <main className="bg-background text-foreground min-h-screen">
       <Seo
@@ -29,17 +105,9 @@ const TourDetail = () => {
         description={String(description).slice(0, 158)}
         path={`/tours/${slug}`}
         image={tour.image}
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "TouristTrip",
-          name: tour.label,
-          description: String(description),
-          touristType: "Luxury private travellers",
-          provider: { "@type": "Organization", name: "SVRM Group", url: "https://svrm.group/" },
-          image: new URL(tour.image, "https://svrm.group").toString(),
-          url: `https://svrm.group/tours/${slug}`,
-        }}
+        jsonLd={[tourSchema, breadcrumbSchema]}
       />
+
       <Nav />
       <section className="relative h-[60vh] min-h-[420px] w-full overflow-hidden">
         {tour.video ? (
