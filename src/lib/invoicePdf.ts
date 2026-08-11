@@ -17,6 +17,9 @@ export interface InvoiceBooking {
   client_name: string;
   client_email?: string | null;
   client_phone?: string | null;
+  /** Optional billing details shown under the client block. */
+  client_company?: string | null;
+  client_address?: string | null;
   start_date?: string | null;
   end_date?: string | null;
   line_items: LineItem[];

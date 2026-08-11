@@ -6,6 +6,7 @@ import { buildConfirmationMessage, type LineItem } from "@/lib/confirmationMessa
 import { downloadInvoicePdf, downloadConfirmationPdf, downloadThankYouPdf } from "@/lib/invoicePdf";
 import PdfEditorDialog from "@/components/svrm/PdfEditorDialog";
 import StaffAssigner, { type PendingAssignment } from "@/components/svrm/StaffAssigner";
+import BookingExpenses from "@/components/svrm/BookingExpenses";
 
 type Status = "draft" | "sent" | "deposit_paid" | "confirmed" | "completed" | "cancelled";
 
