@@ -170,7 +170,7 @@ const Offers = () => {
     originalZAR: c.original_price_zar ?? undefined,
     pricePrefix: c.price_prefix ?? undefined,
     priceSuffix: c.price_suffix ?? undefined,
-    cta: c.cta_label || "Learn more",
+    cta: c.cta_label || `View ${c.title} details`,
     to: c.cta_href || "/contact",
     image: resolveImage(c.image_url, staticImageBySlug[c.slug] ?? villa) ?? villa,
     special: /special/i.test(c.eyebrow || ""),
