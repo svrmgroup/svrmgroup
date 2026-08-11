@@ -90,7 +90,7 @@ const Travel = () => {
       <Nav />
       <PageHero
         eyebrow="Travel · Cape Town Chauffeur, Jets, Helicopters & Yachts"
-        title="Arrive without thinking about it."
+        title="Cape Town Chauffeur & Private Aviation"
         subtitle="Private chauffeur-driven cars across Cape Town and the Western Cape, plus private jets, helicopters and luxury yacht charter — switch the category and send the brief."
         videoSrc={heroVideo.url}
       />
@@ -212,7 +212,7 @@ const Travel = () => {
         <div className="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-10">
           <div>
             <p className="eyebrow">Chauffeur</p>
-            <h3 className="font-serif text-3xl mt-4 text-foreground">English-speaking, NDA-bound.</h3>
+            <h2 className="font-serif text-3xl mt-4 text-foreground">English-speaking, NDA-bound.</h2>
             <p className="text-muted-foreground mt-4">
               Hourly hire, airport transfers and inter-city journeys with a discreet chauffeur on call
               for the length of your stay.
@@ -220,7 +220,7 @@ const Travel = () => {
           </div>
           <div>
             <p className="eyebrow">Crew</p>
-            <h3 className="font-serif text-3xl mt-4 text-foreground">Pilots, captains, hosts.</h3>
+            <h2 className="font-serif text-3xl mt-4 text-foreground">Pilots, captains, hosts.</h2>
             <p className="text-muted-foreground mt-4">
               Jets, helicopters and yachts are sourced through vetted operators — fully crewed, fully
               compliant, fully briefed.

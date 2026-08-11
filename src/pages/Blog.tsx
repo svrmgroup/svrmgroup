@@ -68,7 +68,7 @@ const Blog = () => {
     <Nav />
       <PageHero
         eyebrow="Journal · Luxury Travel & Lifestyle Notes from Cape Town"
-        title="Notes from the concierge."
+        title="The SVRM Journal — Luxury Travel Insights"
         subtitle="Field notes on luxury travel, private tours, stays and lifestyle in Cape Town — published as we have something worth saying."
       />
 

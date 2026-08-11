@@ -14,7 +14,7 @@ const Lifestyle = () => (
     <Nav />
     <PageHero
       eyebrow="Lifestyle · Private Yachting & Curated Days in Cape Town"
-      title="A day on the water. A table no-one else has."
+      title="Private Yachting & Lifestyle Management"
       subtitle="Private yachting and day charters along the Cape Town coast, plus luxury lifestyle management — with the discretion and curation that defines SVRM."
       videoSrc={heroVideo.url}
     />
