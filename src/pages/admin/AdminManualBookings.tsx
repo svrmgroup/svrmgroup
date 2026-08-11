@@ -382,10 +382,20 @@ const AdminManualBookings = () => {
                       <Info label="Client">{r.client_name}</Info>
                       <Info label="Email">{r.client_email || "—"}</Info>
                       <Info label="Phone">{r.client_phone || "—"}</Info>
-                      <Info label="Deposit / Balance">{r.currency} {Number(r.deposit_amount).toLocaleString()} / {Number(r.balance_due).toLocaleString()}</Info>
+                      <Info label="Paid / Balance">
+                        {Number(r.subtotal) > 0 && Number(r.amount_paid || 0) >= Number(r.subtotal)
+                          ? <span className="text-gold">Paid in full</span>
+                          : <>{r.currency} {Number(r.amount_paid || 0).toLocaleString()} / {Number(r.balance_due).toLocaleString()}</>}
+                      </Info>
                     </div>
 
                     <div className="flex flex-wrap gap-2">
+                      <button
+                        onClick={() => startEdit(r)}
+                        className="flex items-center gap-2 px-3 py-2 border border-primary/40 text-gold text-[10px] uppercase tracking-[0.2em] hover:bg-primary/10 transition-colors"
+                      >
+                        Edit booking
+                      </button>
                       <button
                         onClick={() => setPdfEdit({ booking: r, kind: "quotation" })}
                         className="flex items-center gap-1.5 text-xs text-gold border border-primary/40 px-3 py-1.5 hover:bg-primary/10 transition-colors"
