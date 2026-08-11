@@ -463,8 +463,6 @@ async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
       }
     }
 
-    }
-
     y += panelH + 24;
   }
 
