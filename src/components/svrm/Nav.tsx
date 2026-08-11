@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { Menu } from "lucide-react";
 import Logo from "./Logo";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -7,8 +7,6 @@ import CurrencySwitch from "./CurrencySwitch";
 import LanguageSwitch from "./LanguageSwitch";
 import { whatsappUrlFor } from "@/lib/whatsappMessages";
 import WhatsAppGlyph from "./WhatsAppGlyph";
-
-import { navCategories } from "@/lib/navCategories";
 
 const links = [
   { to: "/", label: "Home" },
