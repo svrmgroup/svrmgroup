@@ -153,11 +153,12 @@ const AdminPnL = () => {
       {loading ? <p className="text-xs text-muted-foreground">Loading…</p> : (
         <>
           <div className="grid md:grid-cols-4 gap-4">
-            <div className="card-luxury p-5"><p className="eyebrow">Revenue</p><p className="font-serif text-2xl mt-2">{fmt(revenue)}</p></div>
+            <div className="card-luxury p-5"><p className="eyebrow">Revenue (paid)</p><p className="font-serif text-2xl mt-2">{fmt(revenue)}</p><p className="text-[10px] text-muted-foreground mt-1">Booked {fmt(booked)} · Outstanding {fmt(outstanding)}</p></div>
             <div className="card-luxury p-5"><p className="eyebrow">Expenses</p><p className="font-serif text-2xl mt-2 text-destructive/80">{fmt(expensesTotal)}</p></div>
             <div className="card-luxury p-5"><p className="eyebrow">Net profit</p><p className={`font-serif text-2xl mt-2 ${net >= 0 ? "text-gold" : "text-destructive"}`}>{fmt(net)}</p></div>
             <div className="card-luxury p-5"><p className="eyebrow">Margin</p><p className="font-serif text-2xl mt-2">{margin.toFixed(1)}%</p></div>
           </div>
+
 
           <section>
             <p className="eyebrow mb-3">Expenses by category</p>
