@@ -418,7 +418,12 @@ const AdminManualBookings = () => {
                           ? <span className="text-gold">Paid in full</span>
                           : <>{r.currency} {Number(r.amount_paid || 0).toLocaleString()} / {Number(r.balance_due).toLocaleString()}</>}
                       </Info>
+                      <Info label="Total due">{r.currency} {Number(r.subtotal).toLocaleString()}</Info>
+                      {r.quoted_total != null && (
+                        <Info label="Original quote">{r.currency} {Number(r.quoted_total).toLocaleString()}</Info>
+                      )}
                     </div>
+
 
                     <div className="flex flex-wrap gap-2">
                       <button
