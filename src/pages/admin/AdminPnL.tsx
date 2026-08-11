@@ -183,7 +183,8 @@ const AdminPnL = () => {
                     <tr>
                       <th className="px-4 py-3 text-left">Code</th>
                       <th className="px-4 py-3 text-left">Client</th>
-                      <th className="px-4 py-3 text-right">Revenue</th>
+                      <th className="px-4 py-3 text-right">Booked</th>
+                      <th className="px-4 py-3 text-right">Paid</th>
                       <th className="px-4 py-3 text-right">Expenses</th>
                       <th className="px-4 py-3 text-right">Profit</th>
                     </tr>
@@ -193,12 +194,14 @@ const AdminPnL = () => {
                       <tr key={b.id} className="border-t border-border/40">
                         <td className="px-4 py-3 font-mono text-xs">{b.booking_code}</td>
                         <td className="px-4 py-3">{b.client_name}</td>
-                        <td className="px-4 py-3 text-right font-mono">{fmt(Number(b.subtotal))}</td>
+                        <td className="px-4 py-3 text-right font-mono text-muted-foreground">{fmt(Number(b.subtotal))}</td>
+                        <td className="px-4 py-3 text-right font-mono">{fmt(b.paid)}</td>
                         <td className="px-4 py-3 text-right font-mono text-destructive/80">{fmt(b.expenses)}</td>
                         <td className={`px-4 py-3 text-right font-mono ${b.profit >= 0 ? "text-gold" : "text-destructive"}`}>{fmt(b.profit)}</td>
                       </tr>
                     ))}
                   </tbody>
+
                 </table>
               )}
             </div>
