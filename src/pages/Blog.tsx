@@ -64,7 +64,7 @@ const Blog = () => {
 
   return (
     <main className="bg-background text-foreground min-h-screen">
-      <Seo title={"The SVRM Journal — Luxury Travel & Lifestyle Cape Town"} description={"The SVRM Journal — field notes, luxury travel recommendations and observations from our Cape Town concierge team. Insights on tours, stays, chauffeur and bespoke experiences."} path="/blog" keywords="SVRM Journal, Cape Town luxury travel blog, South Africa travel guide, safari blog, Garden Route guide, luxury villa guide Cape Town, concierge insights, Cape Town travel tips" jsonLd={blogJsonLd} />
+      <Seo title={"The SVRM Journal — Luxury Travel & Lifestyle Cape Town"} description={"Field notes from SVRM's Cape Town concierge team — luxury travel insights on private tours, villas, chauffeur service and bespoke experiences."} path="/blog" keywords="SVRM Journal, Cape Town luxury travel blog, South Africa travel guide, safari blog, Garden Route guide, luxury villa guide Cape Town, concierge insights, Cape Town travel tips" jsonLd={blogJsonLd} />
     <Nav />
       <PageHero
         eyebrow="Journal · Luxury Travel & Lifestyle Notes from Cape Town"
