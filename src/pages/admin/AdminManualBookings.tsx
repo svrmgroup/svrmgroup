@@ -168,12 +168,7 @@ const AdminManualBookings = () => {
     if (!form.client_name.trim()) return toast.error("Client name required");
     if (items.length === 0 || items.every((i) => !i.label.trim())) return toast.error("Add at least one line item");
 
-    const cleanItems = items.filter((i) => i.label.trim()).map((i) => ({
-      label: i.label.trim(),
-      qty: Number(i.qty) || undefined,
-      unit: i.unit?.trim() || undefined,
-      amount: Number(i.amount) || 0,
-    }));
+    const cleanItems = cleanedItems();
 
     const { data: userData } = await supabase.auth.getUser();
     const { data, error } = await supabase.from("manual_bookings").insert({
@@ -184,12 +179,13 @@ const AdminManualBookings = () => {
       line_items: cleanItems as any,
       subtotal,
       deposit_amount: Number(form.deposit_amount) || 0,
+      amount_paid: paid,
       balance_due: balance,
       start_date: form.start_date || null,
       end_date: form.end_date || null,
       notes: form.notes.trim() || null,
       created_by: userData.user?.id,
-    }).select().single();
+    } as any).select().single();
 
     if (error) return toast.error(error.message);
 
@@ -201,6 +197,7 @@ const AdminManualBookings = () => {
       line_items: cleanItems,
       subtotal: Number(data.subtotal),
       deposit_amount: Number(data.deposit_amount),
+      amount_paid: paid,
       balance_due: Number(data.balance_due),
       start_date: data.start_date,
       end_date: data.end_date,
