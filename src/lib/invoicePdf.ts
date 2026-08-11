@@ -436,27 +436,33 @@ async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
       doc.text("estimate — not yet a confirmed booking", w - 60, y + 78, { align: "right" });
     } else {
       const paidAmt = Number(b.amount_paid || 0);
-      const fullyPaid = Number(b.subtotal) > 0 && paidAmt >= Number(b.subtotal);
+      const total = Number(b.subtotal) || 0;
+      const fullyPaid = total > 0 && paidAmt >= total;
+
+      // Payment status badge: Paid / Partially Paid / Unpaid
+      const badge = fullyPaid
+        ? { text: "PAID IN FULL", fill: GOLD, fg: DARK }
+        : paidAmt > 0
+          ? { text: "PARTIALLY PAID", fill: "#c9922f", fg: "#1a1613" }
+          : { text: "UNPAID", fill: "#8f3a32", fg: "#ffffff" };
+      doc.setFillColor(badge.fill);
+      doc.roundedRect(w - 190, y + 40, 130, 24, 6, 6, "F");
+      doc.setFont("helvetica", "bold"); doc.setFontSize(badge.text.length > 12 ? 9 : 11);
+      doc.setTextColor(badge.fg);
+      doc.text(badge.text, w - 125, y + 56, { align: "center" });
+
+      doc.setFont("helvetica", "normal"); doc.setFontSize(9); doc.setTextColor("#cfc7b6");
       if (fullyPaid) {
         doc.text(`Amount Paid: ${money(paidAmt)}`, 60, y + 78);
-        // Gold "PAID IN FULL" badge
-        doc.setFillColor(GOLD);
-        doc.roundedRect(w - 190, y + 46, 130, 26, 6, 6, "F");
-        doc.setFont("helvetica", "bold"); doc.setFontSize(11); doc.setTextColor(DARK);
-        doc.text("PAID IN FULL", w - 125, y + 63, { align: "center" });
       } else if (paidAmt > 0) {
         doc.text(`Amount Paid: ${money(paidAmt)}`, 60, y + 78);
-        doc.text(`Remaining Balance: ${money(Math.max(0, Number(b.subtotal) - paidAmt))}`, w - 60, y + 66, { align: "right" });
-        doc.setFontSize(8); doc.setTextColor("#a89e88");
-        doc.setFont("times", "italic");
-        doc.text("payable before trip commencement", w - 60, y + 80, { align: "right" });
+        doc.text(`Remaining Balance: ${money(Math.max(0, total - paidAmt))}`, w - 60, y + 78, { align: "right" });
       } else {
         doc.text(`Deposit Required${depLabel}: ${money(b.deposit_amount)}`, 60, y + 78);
-        doc.text(`Remaining Balance: ${money(b.balance_due)}`, w - 60, y + 66, { align: "right" });
-        doc.setFontSize(8); doc.setTextColor("#a89e88");
-        doc.setFont("times", "italic");
-        doc.text("payable before trip commencement", w - 60, y + 80, { align: "right" });
+        doc.text(`Remaining Balance: ${money(b.balance_due)}`, w - 60, y + 78, { align: "right" });
       }
+    }
+
     }
 
     y += panelH + 24;
