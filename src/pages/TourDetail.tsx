@@ -7,6 +7,8 @@ import { Seo } from "@/components/Seo";
 import { findTour } from "@/data/tours";
 import SmartImage from "@/components/svrm/SmartImage";
 import WellnessCustomBuilder from "@/components/svrm/WellnessCustomBuilder";
+import BackgroundVideo from "@/components/svrm/BackgroundVideo";
+
 
 const TourDetail = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -41,16 +43,8 @@ const TourDetail = () => {
       <Nav />
       <section className="relative h-[60vh] min-h-[420px] w-full overflow-hidden">
         {tour.video ? (
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster={tour.image}
-            className="absolute inset-0 w-full h-full object-cover"
-          >
-            <source src={tour.video} type="video/mp4" />
-          </video>
+          <BackgroundVideo src={tour.video} poster={tour.image} />
+
         ) : (
           <SmartImage src={tour.image} alt={tour.label} priority wrapperClassName="absolute inset-0 w-full h-full" className="absolute inset-0 w-full h-full object-cover" />
         )}
