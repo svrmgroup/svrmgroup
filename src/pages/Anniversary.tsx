@@ -1,6 +1,7 @@
 import { Seo } from "@/components/Seo";
 import OccasionPage from "@/components/svrm/OccasionPage";
 import heroImg from "@/assets/anniversary-hero.jpg";
+import heroSecondaryImg from "@/assets/anniversary-hero-2.jpg";
 
 const Anniversary = () => (
   <main className="bg-background text-foreground min-h-screen">

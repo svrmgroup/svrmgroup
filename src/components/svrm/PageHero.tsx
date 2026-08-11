@@ -1,4 +1,5 @@
 import BackgroundVideo from "@/components/svrm/BackgroundVideo";
+import SmartImage from "@/components/svrm/SmartImage";
 
 interface Props {
   eyebrow: string;
@@ -6,9 +7,11 @@ interface Props {
   subtitle?: string;
   videoSrc?: string;
   posterSrc?: string;
+  imageSrc?: string;
+  imageAlt?: string;
 }
 
-const PageHero = ({ eyebrow, title, subtitle, videoSrc, posterSrc }: Props) => {
+const PageHero = ({ eyebrow, title, subtitle, videoSrc, posterSrc, imageSrc, imageAlt }: Props) => {
   if (videoSrc) {
     return (
       <section className="relative pt-40 pb-20 md:pt-56 md:pb-32 overflow-hidden bg-surface-deep">
