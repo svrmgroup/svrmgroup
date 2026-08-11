@@ -8,14 +8,70 @@ import LanguageSwitch from "./LanguageSwitch";
 import { whatsappUrlFor } from "@/lib/whatsappMessages";
 import WhatsAppGlyph from "./WhatsAppGlyph";
 
-const links = [
+type SubLink = { to: string; label: string };
+type NavItem = { to: string; label: string; sub?: SubLink[] };
+
+const links: NavItem[] = [
   { to: "/", label: "Home" },
-  { to: "/travel", label: "Travel" },
-  { to: "/rentals", label: "Rentals" },
-  { to: "/stays", label: "Stays" },
-  { to: "/tours", label: "Tours" },
+  {
+    to: "/travel",
+    label: "Travel",
+    sub: [
+      { to: "/travel?cat=cars", label: "Chauffeur & Fleet" },
+      { to: "/airport-transfers", label: "Airport Transfers" },
+      { to: "/travel?cat=jets", label: "Private Jets" },
+      { to: "/travel?cat=helicopters", label: "Helicopters" },
+      { to: "/travel?cat=yachts", label: "Yachts" },
+    ],
+  },
+  {
+    to: "/rentals",
+    label: "Rentals",
+    sub: [
+      { to: "/rentals?cat=Signature", label: "Signature" },
+      { to: "/rentals?cat=Premium SUV", label: "Premium SUV" },
+      { to: "/rentals?cat=Executive", label: "Executive" },
+      { to: "/rentals?cat=Everyday", label: "Everyday" },
+      { to: "/rentals?cat=Budget", label: "Budget" },
+      { to: "/rentals?cat=Custom", label: "Custom Request" },
+    ],
+  },
+  {
+    to: "/stays",
+    label: "Stays",
+    sub: [
+      { to: "/stays?cat=short", label: "Short-Term Villas" },
+      { to: "/stays?cat=long", label: "Long-Term Rentals" },
+      { to: "/stays?cat=buysell", label: "Buy & Sell Property" },
+    ],
+  },
+  {
+    to: "/tours",
+    label: "Tours",
+    sub: [
+      { to: "/tours/cape-peninsula", label: "Cape Peninsula" },
+      { to: "/tours/safari", label: "Safari" },
+      { to: "/tours/aquila-safari", label: "Aquila Safari" },
+      { to: "/tours/marine", label: "Marine & Wildlife" },
+      { to: "/tours/garden-route", label: "Garden Route" },
+      { to: "/tours/aerial", label: "Helicopter & Aerial" },
+      { to: "/tours/culinary", label: "Wine & Culinary" },
+      { to: "/tours/cultural", label: "Cultural & Heritage" },
+      { to: "/tours/wellness", label: "Wellness" },
+      { to: "/tours/builder", label: "Build Your Own Tour" },
+    ],
+  },
   { to: "/security", label: "Security" },
-  { to: "/experiences", label: "Custom" },
+  {
+    to: "/experiences",
+    label: "Custom",
+    sub: [
+      { to: "/honeymoon-cape-town", label: "Honeymoon" },
+      { to: "/anniversary-cape-town", label: "Anniversary" },
+      { to: "/lifestyle", label: "Lifestyle & Events" },
+      { to: "/experiences", label: "Bespoke Concierge" },
+    ],
+  },
   { to: "/blog", label: "Journal" },
   { to: "/contact", label: "Contact" },
 ];
@@ -26,6 +82,7 @@ const linkClass = ({ isActive }: { isActive: boolean }) =>
       ? "text-foreground border-primary"
       : "text-muted-foreground border-transparent hover:text-foreground"
   }`;
+
 
 const Nav = () => {
   const { pathname } = useLocation();
