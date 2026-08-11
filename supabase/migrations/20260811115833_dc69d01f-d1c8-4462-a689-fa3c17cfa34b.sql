@@ -1,0 +1,1 @@
+ALTER TABLE public.manual_bookings ADD COLUMN IF NOT EXISTS amount_paid numeric NOT NULL DEFAULT 0;
