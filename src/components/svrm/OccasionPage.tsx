@@ -23,6 +23,8 @@ interface Props {
   intro: string;
   heroImage: string;
   heroAlt: string;
+  /** Optional looping background video for the hero section. */
+  heroVideo?: string;
   lede: string;
   pillars: OccasionPillar[];
   itineraryTitle: string;
