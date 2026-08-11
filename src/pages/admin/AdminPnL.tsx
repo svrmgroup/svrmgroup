@@ -60,7 +60,7 @@ const AdminPnL = () => {
       setLoading(true);
       let bq = supabase
         .from("manual_bookings")
-        .select("id, booking_code, client_name, subtotal, currency, start_date, created_at, status")
+        .select("id, booking_code, client_name, subtotal, amount_paid, currency, start_date, created_at, status")
         .eq("currency", currency);
       let eq = supabase
         .from("expenses")
