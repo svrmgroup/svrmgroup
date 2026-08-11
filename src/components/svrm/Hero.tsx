@@ -1,6 +1,7 @@
 import heroPoster from "@/assets/hero-poster.jpg";
 import droneVideo from "@/assets/hero-drone.mp4.asset.json";
 import { buildWhatsAppUrlRaw } from "@/lib/whatsapp";
+import BackgroundVideo from "@/components/svrm/BackgroundVideo";
 
 const Hero = () => {
   return (
@@ -8,24 +9,8 @@ const Hero = () => {
       id="top"
       className="relative h-screen min-h-[640px] w-full overflow-hidden bg-surface-deep"
     >
-      <video
-        className="absolute inset-0 w-full h-full object-cover motion-reduce:hidden"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        poster={heroPoster}
-        aria-hidden="true"
-      >
-        <source src={droneVideo.url} type="video/mp4" />
-      </video>
-      <img
-        src={heroPoster}
-        alt=""
-        aria-hidden="true"
-        className="absolute inset-0 w-full h-full object-cover hidden motion-reduce:block"
-      />
+      <BackgroundVideo src={droneVideo.url} poster={heroPoster} />
+
 
       <div
         className="absolute inset-0"
