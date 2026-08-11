@@ -414,9 +414,18 @@ async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
     doc.text(kind === "quotation" ? "QUOTED PACKAGE PRICE" : "TOTAL PACKAGE PRICE", 60, y + 26);
     doc.setFont("helvetica", "bold"); doc.setFontSize(24); doc.setTextColor("#ffffff");
     doc.text(money(b.subtotal), 60, y + 56);
+
+    // Original quote, when the total due has since been adjusted.
+    const quoted = b.quoted_total == null ? null : Number(b.quoted_total);
+    if (quoted != null && quoted > 0 && quoted !== Number(b.subtotal)) {
+      doc.setFont("helvetica", "normal"); doc.setFontSize(8); doc.setTextColor("#a89e88");
+      doc.text(`ORIGINAL QUOTE: ${money(quoted)}`, w - 60, y + 26, { align: "right" });
+    }
+
     doc.setFont("helvetica", "normal"); doc.setFontSize(9); doc.setTextColor("#cfc7b6");
     // Percentage always reflects the deposit amount actually entered.
     const depPct = Number(b.subtotal) > 0
+
       ? Math.round((Number(b.deposit_amount || 0) / Number(b.subtotal)) * 100)
       : 0;
     const depLabel = depPct > 0 ? ` (${depPct}%)` : "";
