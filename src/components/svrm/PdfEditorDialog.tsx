@@ -158,6 +158,17 @@ export default function PdfEditorDialog({ booking, kind, onClose }: Props) {
             <Field label="Client name" value={b.client_name} onChange={(v) => setB({ ...b, client_name: v })}/>
             <Field label="Client email" value={b.client_email || ""} onChange={(v) => setB({ ...b, client_email: v })}/>
             <Field label="Client phone" value={b.client_phone || ""} onChange={(v) => setB({ ...b, client_phone: v })}/>
+            <Field label="Company (optional)" value={(b as any).client_company || ""} onChange={(v) => setB({ ...b, client_company: v } as any)} placeholder="Company / billing name"/>
+            <label className="md:col-span-2">
+              <span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Billing address (optional)</span>
+              <textarea
+                rows={2}
+                value={(b as any).client_address || ""}
+                onChange={(e) => setB({ ...b, client_address: e.target.value } as any)}
+                placeholder="Street, city, postal code, country"
+                className="input-luxury text-sm w-full mt-1"
+              />
+            </label>
             <Field label="Start date" value={b.start_date || ""} type="date" onChange={(v) => setB({ ...b, start_date: v })}/>
             <Field label="End date" value={b.end_date || ""} type="date" onChange={(v) => setB({ ...b, end_date: v })}/>
             <Field label="Currency" value={b.currency} onChange={(v) => setB({ ...b, currency: v })}/>

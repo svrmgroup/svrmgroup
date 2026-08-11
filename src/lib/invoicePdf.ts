@@ -17,6 +17,9 @@ export interface InvoiceBooking {
   client_name: string;
   client_email?: string | null;
   client_phone?: string | null;
+  /** Optional billing details shown under the client block. */
+  client_company?: string | null;
+  client_address?: string | null;
   start_date?: string | null;
   end_date?: string | null;
   line_items: LineItem[];
@@ -323,6 +326,14 @@ async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
   if (conciergeRole) {
     doc.setTextColor(MUTED); doc.setFontSize(9);
     doc.text(conciergeRole, w / 2, yRight); yRight += 12;
+    doc.setTextColor(TEXT); doc.setFontSize(10);
+  }
+  if (b.client_company) { doc.text(String(b.client_company), 40, yLeft); yLeft += 13; }
+  if (b.client_address) {
+    doc.setTextColor(MUTED); doc.setFontSize(9);
+    const addrLines = doc.splitTextToSize(String(b.client_address), w / 2 - 70);
+    doc.text(addrLines, 40, yLeft);
+    yLeft += addrLines.length * 11 + 2;
     doc.setTextColor(TEXT); doc.setFontSize(10);
   }
   if (b.client_email) { doc.text(b.client_email, 40, yLeft); yLeft += 13; }

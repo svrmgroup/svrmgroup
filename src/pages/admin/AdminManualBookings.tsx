@@ -6,6 +6,7 @@ import { buildConfirmationMessage, type LineItem } from "@/lib/confirmationMessa
 import { downloadInvoicePdf, downloadConfirmationPdf, downloadThankYouPdf } from "@/lib/invoicePdf";
 import PdfEditorDialog from "@/components/svrm/PdfEditorDialog";
 import StaffAssigner, { type PendingAssignment } from "@/components/svrm/StaffAssigner";
+import BookingExpenses from "@/components/svrm/BookingExpenses";
 
 type Status = "draft" | "sent" | "deposit_paid" | "confirmed" | "completed" | "cancelled";
 
@@ -363,6 +364,10 @@ const AdminManualBookings = () => {
 
                     <div className="border-t border-border/40 pt-4">
                       <StaffAssigner bookingId={r.id} />
+                    </div>
+
+                    <div className="border-t border-border/40 pt-4">
+                      <BookingExpenses bookingId={r.id} currency={r.currency} />
                     </div>
 
                     <label className="block">
