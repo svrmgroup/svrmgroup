@@ -117,12 +117,12 @@ const Nav = () => {
               </NavLink>
               {l.sub && (
                 <div className="absolute left-1/2 -translate-x-1/2 top-full pt-2 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 focus-within:opacity-100 focus-within:visible transition-all duration-200">
-                  <div className="min-w-56 bg-surface-deep/95 backdrop-blur-md border border-border/60 py-2 shadow-xl">
+                  <div className="min-w-56 bg-surface-deep/98 backdrop-blur-xl border border-border/80 rounded-sm py-2 shadow-2xl">
                     {l.sub.map((s) => (
                       <Link
                         key={s.to + s.label}
                         to={s.to}
-                        className="block px-5 py-2.5 text-[11px] uppercase tracking-[0.18em] text-muted-foreground hover:text-gold hover:bg-primary/5 transition-colors whitespace-nowrap"
+                        className="block px-5 py-2.5 text-[11px] uppercase tracking-[0.18em] text-foreground/95 hover:text-gold hover:bg-primary/10 transition-colors whitespace-nowrap"
                       >
                         {s.label}
                       </Link>
@@ -190,13 +190,13 @@ const Nav = () => {
                       {l.label}
                     </NavLink>
                     {l.sub && (
-                      <div className="flex flex-col gap-2.5 pl-4 border-l border-border/60">
+                      <div className="flex flex-col gap-2.5 pl-4 border-l border-border/80">
                         {l.sub.map((s) => (
                           <Link
                             key={s.to + s.label}
                             to={s.to}
                             onClick={() => setOpen(false)}
-                            className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground hover:text-gold transition-colors"
+                            className="text-[11px] uppercase tracking-[0.2em] text-foreground/95 hover:text-gold transition-colors"
                           >
                             {s.label}
                           </Link>
