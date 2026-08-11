@@ -19,9 +19,11 @@ interface Booking {
   line_items: LineItem[];
   currency: string;
   subtotal: number;
+  quoted_total: number | null;
   deposit_amount: number;
   amount_paid: number;
   balance_due: number;
+
   start_date: string | null;
   end_date: string | null;
   status: Status;
