@@ -191,6 +191,8 @@ const AdminManualBookings = () => {
       currency: form.currency,
       line_items: cleanItems as any,
       subtotal,
+      quoted_total: quotedTotal,
+
       deposit_amount: Number(form.deposit_amount) || 0,
       amount_paid: paid,
       balance_due: balance,
