@@ -111,11 +111,29 @@ const Nav = () => {
 
         <nav className="hidden lg:flex items-center gap-7">
           {links.map((l) => (
-            <NavLink key={l.to} to={l.to} className={linkClass} end={l.to === "/"}>
-              {l.label}
-            </NavLink>
+            <div key={l.to} className="relative group py-6">
+              <NavLink to={l.to} className={linkClass} end={l.to === "/"}>
+                {l.label}
+              </NavLink>
+              {l.sub && (
+                <div className="absolute left-1/2 -translate-x-1/2 top-full pt-2 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 focus-within:opacity-100 focus-within:visible transition-all duration-200">
+                  <div className="min-w-56 bg-surface-deep/95 backdrop-blur-md border border-border/60 py-2 shadow-xl">
+                    {l.sub.map((s) => (
+                      <Link
+                        key={s.to + s.label}
+                        to={s.to}
+                        className="block px-5 py-2.5 text-[11px] uppercase tracking-[0.18em] text-muted-foreground hover:text-gold hover:bg-primary/5 transition-colors whitespace-nowrap"
+                      >
+                        {s.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
           ))}
         </nav>
+
 
 
         <div className="flex items-center gap-3">
