@@ -23,6 +23,8 @@ interface Props {
   intro: string;
   heroImage: string;
   heroAlt: string;
+  /** Optional looping background video for the hero section. */
+  heroVideo?: string;
   lede: string;
   pillars: OccasionPillar[];
   itineraryTitle: string;
@@ -44,6 +46,7 @@ const OccasionPage = ({
   intro,
   heroImage,
   heroAlt,
+  heroVideo,
   lede,
   pillars,
   itineraryTitle,
@@ -56,7 +59,7 @@ const OccasionPage = ({
 }: Props) => (
   <>
     <Nav />
-    <PageHero eyebrow={eyebrow} title={h1} subtitle={intro} posterSrc={heroImage} />
+    <PageHero eyebrow={eyebrow} title={h1} subtitle={intro} videoSrc={heroVideo} posterSrc={heroImage} />
 
     <section className="py-16 md:py-24">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
