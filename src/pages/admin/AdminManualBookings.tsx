@@ -62,6 +62,8 @@ const AdminManualBookings = () => {
     end_date: "",
     deposit_amount: 0,
     amount_paid: 0,
+    total_override: "" as string,
+    quoted_total: "" as string,
     notes: "",
   });
   const [items, setItems] = useState<LineItem[]>([emptyItem()]);
@@ -80,13 +82,16 @@ const AdminManualBookings = () => {
 
   useEffect(() => { load(); }, []);
 
-  const subtotal = items.reduce((s, i) => s + (Number(i.amount) || 0), 0);
+  const itemsTotal = items.reduce((s, i) => s + (Number(i.amount) || 0), 0);
+  // Total due can be overridden manually; otherwise it follows the line items.
+  const subtotal = form.total_override.trim() !== "" ? Number(form.total_override) || 0 : itemsTotal;
+  const quotedTotal = form.quoted_total.trim() !== "" ? Number(form.quoted_total) || 0 : null;
   const paid = Number(form.amount_paid) || 0;
   // Balance follows what has actually been paid; falls back to the deposit when nothing is logged.
   const balance = Math.max(0, subtotal - (paid > 0 ? paid : Number(form.deposit_amount) || 0));
 
   const resetForm = () => {
-    setForm({ client_name: "", client_email: "", client_phone: "", currency: "ZAR", start_date: "", end_date: "", deposit_amount: 0, amount_paid: 0, notes: "" });
+    setForm({ client_name: "", client_email: "", client_phone: "", currency: "ZAR", start_date: "", end_date: "", deposit_amount: 0, amount_paid: 0, total_override: "", quoted_total: "", notes: "" });
     setItems([emptyItem()]);
     setPendingStaff([]);
     setEditingId(null);
@@ -94,6 +99,7 @@ const AdminManualBookings = () => {
 
   const startEdit = (r: Booking) => {
     setEditingId(r.id);
+    const lineTotal = (r.line_items || []).reduce((s, i) => s + (Number(i.amount) || 0), 0);
     setForm({
       client_name: r.client_name || "",
       client_email: r.client_email || "",
@@ -103,12 +109,15 @@ const AdminManualBookings = () => {
       end_date: r.end_date || "",
       deposit_amount: Number(r.deposit_amount) || 0,
       amount_paid: Number(r.amount_paid) || 0,
+      total_override: Number(r.subtotal) !== lineTotal ? String(Number(r.subtotal) || 0) : "",
+      quoted_total: r.quoted_total != null ? String(Number(r.quoted_total)) : "",
       notes: r.notes || "",
     });
     setItems(r.line_items?.length ? r.line_items.map((i) => ({ ...i })) : [emptyItem()]);
     setShowForm(true);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
 
   const cleanedItems = () =>
     items.filter((i) => i.label.trim()).map((i) => ({
