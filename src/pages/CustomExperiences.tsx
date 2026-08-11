@@ -22,21 +22,26 @@ const CustomExperiences = () => (
     <Nav />
     <PageHero
       eyebrow="Custom Experiences · Bespoke Concierge in Cape Town"
-      title="Whatever life requires."
+      title="Custom Experiences & Bespoke Concierge in Cape Town"
       subtitle="Bespoke concierge for Cape Town and beyond — private chefs, events, sourcing, last-minute essentials and the requests that don't fit a category, for individuals and businesses alike."
       videoSrc={heroVideo.url}
     />
 
     <section className="py-20 md:py-28 bg-surface-deep">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {cards.map((c, i) => (
-          <div key={c.title} className="border border-border/40 bg-surface-raised p-8">
-            <p className="eyebrow">0{i + 1}</p>
-            <h3 className="font-serif text-2xl mt-4 text-foreground">{c.title}</h3>
-            <div className="gold-divider w-10 my-5" />
-            <p className="text-sm text-muted-foreground leading-relaxed">{c.body}</p>
-          </div>
-        ))}
+      <div className="max-w-7xl mx-auto px-6">
+        <h2 className="font-serif text-3xl md:text-4xl text-foreground text-center mb-12">
+          Bespoke lifestyle services, arranged for you
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {cards.map((c, i) => (
+            <div key={c.title} className="border border-border/40 bg-surface-raised p-8">
+              <p className="eyebrow">0{i + 1}</p>
+              <h3 className="font-serif text-2xl mt-4 text-foreground">{c.title}</h3>
+              <div className="gold-divider w-10 my-5" />
+              <p className="text-sm text-muted-foreground leading-relaxed">{c.body}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
 
