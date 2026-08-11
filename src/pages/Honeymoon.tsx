@@ -1,6 +1,7 @@
 import { Seo } from "@/components/Seo";
 import OccasionPage from "@/components/svrm/OccasionPage";
 import heroImg from "@/assets/tours/romantic.jpg";
+import honeymoonHeroVideo from "@/assets/honeymoon-hero.mp4.asset.json";
 
 const Honeymoon = () => (
   <main className="bg-background text-foreground min-h-screen">
