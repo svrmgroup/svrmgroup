@@ -42,6 +42,15 @@ const STATUS_META: Record<Status, { label: string; className: string }> = {
   cancelled: { label: "Cancelled", className: "bg-destructive/10 text-destructive border-destructive/30" },
 };
 
+/** Invoice payment status derived from total due vs amount paid. */
+function payMeta(total: number, paid: number) {
+  if (total > 0 && paid >= total) return { label: "Paid", className: "bg-green-500/15 text-green-300 border-green-500/40" };
+  if (paid > 0) return { label: "Partially paid", className: "bg-yellow-500/15 text-yellow-300 border-yellow-500/40" };
+  return { label: "Unpaid", className: "bg-destructive/10 text-destructive border-destructive/40" };
+}
+
+
+
 const emptyItem = (): LineItem => ({ label: "", qty: 1, unit: "night", amount: 0 });
 
 const AdminManualBookings = () => {
@@ -393,10 +402,12 @@ const AdminManualBookings = () => {
           {rows.map((r) => {
             const open = openId === r.id;
             const meta = STATUS_META[r.status] || STATUS_META.draft;
+            const pay = payMeta(Number(r.subtotal) || 0, Number(r.amount_paid) || 0);
             return (
               <div key={r.id} className="border border-border/40 bg-surface-raised">
                 <button onClick={() => setOpenId(open ? null : r.id)} className="w-full text-left p-5 flex items-center gap-4">
                   <span className={`px-2.5 py-1 text-[9px] uppercase tracking-[0.2em] border ${meta.className}`}>{meta.label}</span>
+                  <span className={`px-2.5 py-1 text-[9px] uppercase tracking-[0.2em] border ${pay.className}`}>{pay.label}</span>
                   <div className="flex-1 min-w-0">
                     <p className="font-serif text-lg truncate">{r.booking_code} · {r.client_name}</p>
                     <p className="text-xs text-muted-foreground truncate">
