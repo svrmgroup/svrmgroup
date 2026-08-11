@@ -29,6 +29,7 @@ const Anniversary = () => (
       h1="Luxury anniversary experiences"
       intro="One night or one week — a bespoke anniversary in the Cape, arranged around the two of you and nothing else."
       heroImage={heroImg}
+      heroHeaderImage={heroSecondaryImg}
       heroAlt="Luxury anniversary experience in Cape Town arranged by SVRM Group"
       lede="Anniversaries are easy to get slightly wrong and very easy to get right with the correct hands on them. We take the brief — the year you're marking, what you loved last time, what you'd rather avoid — and build a day or a week around it. The Maybach at the door, a residence instead of a room, a table already held, and no logistics for either of you to carry."
       pillars={[
