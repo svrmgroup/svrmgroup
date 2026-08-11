@@ -26,6 +26,7 @@ export interface InvoiceBooking {
   currency: string;
   subtotal: number;
   deposit_amount: number;
+  amount_paid?: number;
   balance_due: number;
   notes?: string | null;
   confirmation_message?: string | null;
