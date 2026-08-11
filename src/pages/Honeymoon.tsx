@@ -29,6 +29,7 @@ const Honeymoon = () => (
       h1="Luxury honeymoon in Cape Town"
       intro="A honeymoon shaped around the two of you — private chauffeur, a villa with the right view, and the Cape at the pace you want it."
       heroImage={heroImg}
+      heroVideo={honeymoonHeroVideo.url}
       heroAlt="Luxury honeymoon in Cape Town arranged by SVRM Group"
       lede="Most couples arrive with three fixed points and a lot of empty space between them. We fill that space properly: a chauffeur who already knows your week, a private residence rather than a hotel corridor, a sunset the guidebooks don't send people to. Nothing is booked without your sign-off, and one concierge stays with you from the first message to the last transfer."
       pillars={[
