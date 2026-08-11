@@ -80,7 +80,7 @@ const AdminAnalytics = () => {
     }
     bookings.forEach((b: any) => {
       const d = format(new Date(b.created_at), step === 1 ? "MMM d" : "MMM yy");
-      const v = map.get(d); if (v) v.rev += Number(b.subtotal || 0);
+      const v = map.get(d); if (v) v.rev += Number(b.amount_paid || 0);
     });
     expenses.forEach((e: any) => {
       const d = format(new Date(e.date), step === 1 ? "MMM d" : "MMM yy");
