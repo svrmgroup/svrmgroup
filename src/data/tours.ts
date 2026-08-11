@@ -13,6 +13,7 @@ import photographyImg from "@/assets/tours/photography.jpg";
 import groupTravelImg from "@/assets/tours/group-travel.jpg";
 import romanticImg from "@/assets/tours/romantic.jpg";
 import aquilaImg from "@/assets/tours/aquila-safari.jpg";
+import capePeninsulaImg from "@/assets/tours/cape-peninsula.jpg";
 import safariVid from "@/assets/videos/tour-safari.mp4.asset.json";
 import huntingVid from "@/assets/videos/tour-hunting.mp4.asset.json";
 import culturalVid from "@/assets/videos/tour-cultural.mp4.asset.json";
@@ -26,6 +27,7 @@ import photographyVid from "@/assets/videos/tour-photography.mp4.asset.json";
 
 export type TourSlug =
   | "safari"
+  | "cape-peninsula"
   | "aquila-safari"
   | "hunting"
   | "cultural"
@@ -59,6 +61,50 @@ export interface TourCategory {
 }
 
 export const tours: TourCategory[] = [
+  {
+    slug: "cape-peninsula",
+    label: "Cape Peninsula — One Day Private Tour",
+    blurb: "The Cape's coastline, in a single unhurried day.",
+    description:
+      "A private chauffeur-driven journey through Cape Town's most iconic coastal scenery. From the city we run the Atlantic seaboard through Camps Bay and Clifton to Hout Bay, over Chapman's Peak Drive to Noordhoek, down to Cape Point and the Cape of Good Hope, then back via the African penguin colony at Boulders Beach and the naval village of Simon's Town. Pace, stops and lunch are yours to set — and the Mercedes-Maybach S-Class can be requested for the day.",
+    image: capePeninsulaImg,
+    packages: [
+      {
+        duration: "1 day",
+        title: "Cape Peninsula private tour",
+        fromZAR: 8500,
+        inclusions: [
+          "Private chauffeur & luxury sedan or SUV for the day",
+          "Camps Bay, Clifton, Hout Bay & Chapman's Peak Drive",
+          "Cape Point, Cape of Good Hope & Noordhoek",
+          "Boulders Beach penguins & Simon's Town",
+          "Entry fees and lunch reservation arranged",
+        ],
+      },
+      {
+        duration: "1 day",
+        title: "Cape Peninsula · Maybach flagship",
+        fromZAR: 22000,
+        inclusions: [
+          "Mercedes-Maybach S-Class with chauffeur, full day",
+          "The complete Peninsula route at your pace",
+          "Entry fees, refreshments and lunch reservation",
+          "24/7 concierge on the day",
+        ],
+      },
+      {
+        duration: "2 days",
+        title: "Peninsula & Winelands",
+        fromZAR: 21000,
+        inclusions: [
+          "Day one: full Cape Peninsula route",
+          "Day two: Winelands estates & tastings",
+          "Private chauffeur throughout",
+          "Restaurant reservations arranged",
+        ],
+      },
+    ],
+  },
   {
     slug: "safari",
     label: "Safari Experiences",

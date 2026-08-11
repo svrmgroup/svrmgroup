@@ -7,6 +7,7 @@ import urus from "@/assets/vehicles/urus.jpg";
 import bmwx5 from "@/assets/vehicles/bmwx5.jpg";
 import bmwx3 from "@/assets/vehicles/bmwx3.jpg";
 import sclass from "@/assets/vehicles/sclass.jpg";
+import maybach from "@/assets/vehicles/maybach.jpg";
 import vclass from "@/assets/vehicles/vclass.jpg";
 import staria from "@/assets/vehicles/staria.jpg";
 import rangerover from "@/assets/vehicles/rangerover.jpg";
@@ -41,7 +42,8 @@ export interface Vehicle {
 }
 
 export const vehicles: Vehicle[] = [
-  // Signature
+  // Signature — flagship first
+  { slug: "mercedes-maybach-s-class", name: "Mercedes-Maybach S-Class", tagline: "SVRM's flagship chauffeur experience.", fromZAR: 22000, image: maybach, tier: "Signature", selfDrive: false },
   { slug: "rolls-royce-phantom", name: "Rolls-Royce Phantom", tagline: "The pinnacle of motoring, chauffeured.", fromZAR: 30500, image: phantom, tier: "Signature", selfDrive: false },
   { slug: "rolls-royce-cullinan", name: "Rolls-Royce Cullinan", tagline: "The summit of the SVRM fleet.", fromZAR: 37500, image: cullinan, tier: "Signature", selfDrive: false },
   { slug: "rolls-royce-ghost", name: "Rolls-Royce Ghost", tagline: "Silent presence, chauffeured.", fromZAR: 30000, image: ghost, tier: "Signature", selfDrive: false },

@@ -1,5 +1,6 @@
 import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
+import RelatedLinks from "@/components/svrm/RelatedLinks";
 import PageHero from "@/components/svrm/PageHero";
 import KenBurnsImage from "@/components/svrm/KenBurnsImage";
 import { Seo } from "@/components/Seo";
@@ -13,10 +14,10 @@ const Security = () => {
   return (
     <main className="bg-background text-foreground min-h-screen">
       <Seo
-        title={"Armed Close Protection & Armoured Vehicles Cape Town — SVRM"}
-        description={"Armed close protection officers, armoured BMW 7 Series & X5, G63 convoys, residential and event security across Cape Town and South Africa. Confidential, price on request."}
+        title={"Security Services Cape Town | VIP & Executive Protection"}
+        description={"VIP security and executive protection in Cape Town — close protection officers, armoured vehicles, residential, event and luxury travel security across South Africa. Discreet, on request."}
         path="/security"
-        keywords="armed close protection Cape Town, bodyguard Cape Town, executive protection South Africa, armoured vehicle hire, bullet proof BMW 7 Series, armoured BMW X5, Mercedes G63 convoy, residential security Cape Town, event security, secure airport transfer, PSiRA security, VIP protection South Africa"
+        keywords="security services Cape Town, VIP security Cape Town, executive security Cape Town, executive protection Cape Town, private security Cape Town, close protection Cape Town, luxury travel security South Africa, armed close protection Cape Town, bodyguard Cape Town, executive protection South Africa, armoured vehicle hire, bullet proof BMW 7 Series, armoured BMW X5, Mercedes G63 convoy, residential security Cape Town, event security, secure airport transfer, PSiRA security, VIP protection South Africa"
         image={bmw7}
         jsonLd={{ "@context": "https://schema.org", "@type": "Service", serviceType: "Executive Protection & Armoured Transport", provider: { "@type": "Organization", name: "SVRM Group", url: "https://svrm.group/" }, areaServed: { "@type": "Country", name: "South Africa" } }}
       />
@@ -25,7 +26,7 @@ const Security = () => {
       <PageHero
         eyebrow="Security · Armed Close Protection & Armoured Transport"
         title="Protection, quietly arranged."
-        subtitle="Armoured vehicles, vetted close protection officers, residential and event security in Cape Town and across South Africa — coordinated end-to-end by SVRM."
+        subtitle="VIP security, executive protection and travel security in Cape Town and across South Africa — vetted close protection officers, armoured vehicles, residential and event coverage, coordinated end-to-end by SVRM."
         videoSrc={heroVideo.url}
       />
 
@@ -97,6 +98,17 @@ const Security = () => {
           </section>
         );
       })}
+
+      <RelatedLinks
+        links={[
+          { to: "/travel?cat=cars", label: "Chauffeur service" },
+          { to: "/travel?cat=cars", label: "Mercedes-Maybach S-Class" },
+          { to: "/airport-transfers", label: "Secure airport transfers" },
+          { to: "/experiences", label: "Luxury concierge" },
+          { to: "/stays", label: "Villas & stays" },
+          { to: "/tours/cape-peninsula", label: "Cape Peninsula tour" },
+        ]}
+      />
 
       <Footer />
     </main>

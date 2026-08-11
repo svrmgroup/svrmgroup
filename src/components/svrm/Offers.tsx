@@ -14,6 +14,9 @@ import CurrencySwitch from "@/components/svrm/CurrencySwitch";
 import romantic from "@/assets/tours/romantic.jpg";
 import chauffeur from "@/assets/svc-travel-sclass.jpg";
 import safari from "@/assets/svc-exp-safari.jpg";
+import maybach from "@/assets/vehicles/maybach.jpg";
+import capePeninsula from "@/assets/tours/cape-peninsula.jpg";
+import securityImg from "@/assets/security/bmw7-armored.jpg";
 import villa from "@/assets/svc-stays-villa.jpg";
 import { useCurrency } from "@/lib/currency";
 import { useCmsItems } from "@/hooks/useCmsItems";
@@ -37,6 +40,54 @@ type Offer = {
 };
 
 const offers: Offer[] = [
+  {
+    eyebrow: "Flagship · Chauffeur",
+    title: "Mercedes-Maybach S-Class",
+    detail: "SVRM's flagship chauffeur experience — VIP transfers, events and full days.",
+    priceZAR: 22000,
+    priceSuffix: "/ day",
+    cta: "Request Maybach",
+    to: "/travel?cat=cars",
+    image: maybach,
+    special: true,
+  },
+  {
+    eyebrow: "Honeymoon",
+    title: "Luxury Honeymoon in Cape Town",
+    detail: "Chauffeur, private villa, romantic experiences and the Cape — arranged end to end.",
+    priceZAR: null,
+    cta: "Plan Your Honeymoon",
+    to: "/honeymoon-cape-town",
+    image: romantic,
+  },
+  {
+    eyebrow: "Anniversary",
+    title: "Luxury Anniversary Experience",
+    detail: "A bespoke celebration: Maybach chauffeur, private stay, yacht or Peninsula day.",
+    priceZAR: null,
+    cta: "Plan Your Anniversary",
+    to: "/anniversary-cape-town",
+    image: villa,
+  },
+  {
+    eyebrow: "Private Tour",
+    title: "Cape Peninsula — One Day Private Tour",
+    detail: "Chapman's Peak, Cape Point, Boulders Beach and Simon's Town, chauffeur-driven.",
+    priceZAR: 8500,
+    pricePrefix: "From ",
+    cta: "Book Private Tour",
+    to: "/tours/cape-peninsula",
+    image: capePeninsula,
+  },
+  {
+    eyebrow: "Security & Protection",
+    title: "VIP Security & Close Protection",
+    detail: "Executive protection, travel security and discreet coordination in Cape Town.",
+    priceZAR: null,
+    cta: "Request Security",
+    to: "/security",
+    image: securityImg,
+  },
   {
     eyebrow: "Special Offer · Self-drive",
     title: "BMW X3",
@@ -105,6 +156,11 @@ const Offers = () => {
     "private-s-class-days": chauffeur,
     "sabi-sand-signature": safari,
     "camps-bay-villa-collection": villa,
+    "maybach-flagship-chauffeur": maybach,
+    "luxury-honeymoon-cape-town": romantic,
+    "luxury-anniversary-experience": villa,
+    "cape-peninsula-one-day-private-tour": capePeninsula,
+    "vip-security-close-protection": securityImg,
   };
   const cmsMapped: Offer[] = cmsOffers.map((c) => ({
     eyebrow: c.eyebrow || "Featured",
