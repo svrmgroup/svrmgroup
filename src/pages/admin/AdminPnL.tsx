@@ -99,7 +99,9 @@ const AdminPnL = () => {
   const exportCsv = () => {
     const lines = [
       ["Section", "Label", "Amount"].join(","),
-      ["Summary", "Revenue", revenue].join(","),
+      ["Summary", "Revenue (paid)", revenue].join(","),
+      ["Summary", "Booked value", booked].join(","),
+      ["Summary", "Outstanding", outstanding].join(","),
       ["Summary", "Expenses", expensesTotal].join(","),
       ["Summary", "Net profit", net].join(","),
       ["Summary", "Margin %", margin.toFixed(2)].join(","),
@@ -108,8 +110,8 @@ const AdminPnL = () => {
       ...byCategory.map(([c, v]) => ["", c, v].join(",")),
       "",
       "Per booking,,,",
-      ["Code", "Client", "Revenue", "Expenses", "Profit"].join(","),
-      ...perBooking.map((b) => [b.booking_code, b.client_name, b.subtotal, b.expenses, b.profit].join(",")),
+      ["Code", "Client", "Booked", "Paid", "Expenses", "Profit"].join(","),
+      ...perBooking.map((b) => [b.booking_code, b.client_name, b.subtotal, b.paid, b.expenses, b.profit].join(",")),
     ].join("\n");
     const blob = new Blob([lines], { type: "text/csv" });
     const a = document.createElement("a");
