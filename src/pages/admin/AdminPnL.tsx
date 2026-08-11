@@ -75,7 +75,9 @@ const AdminPnL = () => {
     })();
   }, [currency, start, end]);
 
-  const revenue = bookings.reduce((s, b) => s + Number(b.subtotal || 0), 0);
+  const revenue = bookings.reduce((s, b) => s + Number(b.amount_paid || 0), 0);
+  const booked = bookings.reduce((s, b) => s + Number(b.subtotal || 0), 0);
+  const outstanding = Math.max(0, booked - revenue);
   const expensesTotal = expenses.reduce((s, e) => s + Number(e.amount || 0), 0);
   const net = revenue - expensesTotal;
   const margin = revenue > 0 ? (net / revenue) * 100 : 0;
@@ -88,7 +90,7 @@ const AdminPnL = () => {
 
   const perBooking = useMemo(() => bookings.map((b) => {
     const linked = expenses.filter((e) => e.manual_booking_id === b.id).reduce((s, e) => s + Number(e.amount), 0);
-    return { ...b, expenses: linked, profit: Number(b.subtotal || 0) - linked };
+    return { ...b, expenses: linked, paid: Number(b.amount_paid || 0), profit: Number(b.amount_paid || 0) - linked };
   }), [bookings, expenses]);
 
   const fmt = (n: number) => `${currency} ${n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
