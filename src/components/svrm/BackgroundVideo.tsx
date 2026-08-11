@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { resolveVideoSource } from "@/lib/videoSources";
 
 interface Props {
   src: string;
@@ -54,10 +55,16 @@ const BackgroundVideo = ({ src, poster, className = "", posterClassName }: Props
   const [ready, setReady] = useState(false);
   const [inView, setInView] = useState(false);
   const [saveData, setSaveData] = useState(false);
+  // Resolved on the client so the chosen rendition matches the real device/network.
+  const [resolvedSrc, setResolvedSrc] = useState(src);
 
   useEffect(() => {
     setSaveData(isSaveData());
   }, []);
+
+  useEffect(() => {
+    setResolvedSrc(resolveVideoSource(src));
+  }, [src]);
 
   const enabled = !reduced && !saveData;
 
@@ -124,8 +131,9 @@ const BackgroundVideo = ({ src, poster, className = "", posterClassName }: Props
           aria-hidden="true"
           onLoadedData={() => setReady(true)}
           onCanPlay={() => setReady(true)}
+          key={resolvedSrc}
         >
-          <source src={src} type="video/mp4" />
+          <source src={resolvedSrc} type="video/mp4" />
         </video>
       )}
     </div>
