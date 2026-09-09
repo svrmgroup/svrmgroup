@@ -1,6 +1,6 @@
 import KenBurnsImage from "./KenBurnsImage";
-import { Vehicle, rentalRate } from "@/data/vehicles";
-import { useCurrency } from "@/lib/currency";
+import { Vehicle } from "@/data/vehicles";
+
 
 interface Props {
   vehicle: Vehicle;
@@ -9,9 +9,8 @@ interface Props {
 }
 
 const RentalCard = ({ vehicle, index, onBook }: Props) => {
-  const { format } = useCurrency();
-  const rate = rentalRate(vehicle);
   return (
+
     <article className="group bg-surface-raised border border-border/40 flex flex-col">
       <KenBurnsImage
         src={vehicle.image}
@@ -25,10 +24,11 @@ const RentalCard = ({ vehicle, index, onBook }: Props) => {
         <p className="text-sm text-muted-foreground mt-2 flex-1">{vehicle.tagline}</p>
         <div className="mt-5 flex items-end justify-between gap-4">
           <div>
-            <p className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground/70">From / day · guide</p>
-            <p className="font-serif text-xl text-gold">{format(rate)}</p>
-            <p className="text-[10px] tracking-wide text-muted-foreground/60 mt-1">Rough guide — final quote often lower</p>
+            <p className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground/70">Pricing</p>
+            <p className="font-serif text-xl text-gold">On enquiry</p>
+            <p className="text-[10px] tracking-wide text-muted-foreground/60 mt-1">Quote sent back personally</p>
           </div>
+
 
           <button
             type="button"
