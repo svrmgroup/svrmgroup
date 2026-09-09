@@ -127,8 +127,9 @@ const Rentals = () => {
               return (
                 <TabsContent key={t} value={t} className="mt-0">
                   <p className="text-xs text-muted-foreground/80 tracking-wide max-w-2xl mb-8">
-                    Indicative self-drive rates per day — calendar shows pickup → return dates. Final quote confirmed on enquiry.
+                    Select your pickup and return dates. Final quote confirmed on enquiry.
                   </p>
+
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                     {list.map((v, i) => (
                       <RentalCard key={v.slug} vehicle={v} index={i} onBook={openSheet} />
