@@ -6,7 +6,7 @@ import bmw7 from "@/assets/vehicles/bmw7.jpg";
 import urus from "@/assets/vehicles/urus.jpg";
 import bmwx5 from "@/assets/vehicles/bmwx5.jpg";
 import bmwx3 from "@/assets/vehicles/bmwx3.jpg";
-import sclass from "@/assets/vehicles/sclass.jpg";
+import sclass from "@/assets/vehicles/sclass-svrm.jpg";
 import maybach from "@/assets/vehicles/maybach.jpg";
 import vclass from "@/assets/vehicles/vclass.jpg";
 import staria from "@/assets/vehicles/staria.jpg";
