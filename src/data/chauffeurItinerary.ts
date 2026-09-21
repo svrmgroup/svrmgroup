@@ -1,6 +1,6 @@
 import day1 from "@/assets/svc-transport-airport.jpg";
 import day2 from "@/assets/tours/cape-peninsula.jpg";
-import day3 from "@/assets/tours/culinary.jpg";
+import day3 from "@/assets/tours/wine-farms.jpg";
 import day4 from "@/assets/chauffeur/day4-table-mountain.jpg";
 import day5 from "@/assets/chauffeur/day5-beach-leisure.jpg";
 import day6 from "@/assets/tours/aquila-safari.jpg";
@@ -21,7 +21,7 @@ export const SEVEN_DAY_DISCOUNT = 0.1;
 export const chauffeurItinerary: ItineraryDay[] = [
   {
     day: 1,
-    title: "Arrival, Hotel Check-In & Atlantic Seaboard Sunset",
+    title: "Airport Arrival & Atlantic Seaboard Sunset",
     eyebrow: "Day 1 · Arrival",
     description:
       "Your chauffeur meets you inside Cape Town International with a name board, handles the luggage and drives you straight to your hotel or villa. Once you've settled, we take the coast road for your first sunset — Sea Point, Bantry Bay, Clifton and Camps Bay — with a sundowner stop booked in advance.",
@@ -49,7 +49,7 @@ export const chauffeurItinerary: ItineraryDay[] = [
   },
   {
     day: 3,
-    title: "Wine Farms — Stellenbosch or Franschhoek",
+    title: "Wine Farms in Stellenbosch & Franschhoek",
     eyebrow: "Day 3 · Winelands",
     description:
       "A full day in the Cape Winelands with your chauffeur waiting between estates, so nobody has to think about driving. Two or three tastings, a long lunch at an estate restaurant and time in the village afterwards.",
@@ -63,7 +63,7 @@ export const chauffeurItinerary: ItineraryDay[] = [
   },
   {
     day: 4,
-    title: "Table Mountain, Kirstenbosch & Atlantic Seaboard",
+    title: "Table Mountain & Kirstenbosch",
     eyebrow: "Day 4 · Icons",
     description:
       "Cape Town's landmark day. We watch the cableway conditions and time your ascent for the clearest window, then the indigenous gardens of Kirstenbosch, the Bo-Kaap and the V&A Waterfront — with your chauffeur on call between every stop.",
@@ -77,7 +77,7 @@ export const chauffeurItinerary: ItineraryDay[] = [
   },
   {
     day: 5,
-    title: "Beach, Leisure & Scenic Lifestyle Day",
+    title: "Beach, Leisure & Scenic Drives",
     eyebrow: "Day 5 · Leisure",
     description:
       "A slower day shaped around you. Beach club at Camps Bay or Clifton 4th, spa or in-villa wellness, shopping, a yacht hour out of the V&A, or simply a scenic drive up to Llandudno and Hout Bay — your chauffeur stays on call all day.",
@@ -105,7 +105,7 @@ export const chauffeurItinerary: ItineraryDay[] = [
   },
   {
     day: 7,
-    title: "Final Morning, Last Stops & Departure",
+    title: "Last Stops & Departure Transfer",
     eyebrow: "Day 7 · Departure",
     description:
       "A relaxed final morning: late check-out where possible, last gift and wine stops, a coffee with a view, then a calm chauffeured run to the airport with luggage handled and timing built around your flight.",
