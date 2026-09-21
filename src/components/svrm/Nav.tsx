@@ -17,6 +17,8 @@ const links: NavItem[] = [
     to: "/travel",
     label: "Travel",
     sub: [
+      { to: "/chauffeur", label: "Chauffeur Service" },
+      { to: "/chauffeur", label: "7-Day Itinerary · 10% Off" },
       { to: "/travel?cat=cars", label: "Chauffeur & Fleet" },
       { to: "/airport-transfers", label: "Airport Transfers" },
       { to: "/travel?cat=jets", label: "Private Jets" },

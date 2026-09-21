@@ -11,7 +11,7 @@ export const WHATSAPP_MESSAGES: Record<string, string> = {
   "/custom": "Hi SVRM Group, I'd like to enquire about a custom itinerary.",
   "/experiences": "Hi SVRM Group, I'd like to enquire about a custom itinerary.",
   "/airport-transfers": "Hi SVRM Group, I'd like to book an airport transfer.",
-  "/chauffeur": "Hi SVRM Group, I'd like to enquire about chauffeur service.",
+  "/chauffeur": "Hi SVRM Group, I'd like to enquire about chauffeur service in Cape Town.",
   "/aquila-safari": "Hi SVRM Group, I'd like to enquire about the Aquila safari day trip.",
   "/tours/aquila-safari": "Hi SVRM Group, I'd like to enquire about the Aquila safari day trip.",
 };
