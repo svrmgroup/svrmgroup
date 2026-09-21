@@ -380,12 +380,15 @@ const AiItineraryPlanner = () => {
                 <WhatsAppGlyph className="h-4 w-4" />
                 Send this to SVRM
               </a>
-              <a
-                href="#chauffeur-enquiry"
-                className="inline-flex items-center justify-center text-xs uppercase tracking-[0.28em] text-gold border border-primary/60 px-6 py-4 hover:bg-primary hover:text-primary-foreground transition-colors"
+              <button
+                type="button"
+                onClick={sendToAdmin}
+                disabled={sending}
+                className="inline-flex items-center justify-center gap-2 text-xs uppercase tracking-[0.28em] text-gold border border-primary/60 px-6 py-4 hover:bg-primary hover:text-primary-foreground transition-colors disabled:opacity-60"
               >
-                Send the brief
-              </a>
+                {sending && <Loader2 className="h-4 w-4 animate-spin" />}
+                {sent ? "Itinerary sent" : "Send this itinerary to SVRM"}
+              </button>
             </div>
 
             <p className="text-[11px] text-muted-foreground/70 mt-6 leading-relaxed">
