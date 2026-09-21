@@ -8,7 +8,7 @@ import BookingSheet from "./BookingSheet";
 
 const StayCard = ({ stay }: { stay: Stay; index?: number }) => {
   const { format } = useCurrency();
-  const showPrice = stay.nox;
+  const showPrice = stay.showPrice ?? stay.nox;
   const [open, setOpen] = useState(false);
 
   const gallery = stayGalleries[stay.slug];
