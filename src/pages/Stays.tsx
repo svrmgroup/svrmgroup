@@ -17,9 +17,10 @@ import heroVideo from "@/assets/videos/stays.mp4.asset.json";
 import staysOg from "@/assets/svc-stays-villa.jpg";
 import StaySearchBar from "@/components/svrm/StaySearchBar";
 import CustomStayBar from "@/components/svrm/CustomStayBar";
+import PropertyManagementSection from "@/components/svrm/PropertyManagementSection";
 
 const SUB_TYPES: StayType[] = ["villa", "apartment", "hotel"];
-type TopMode = "short" | "long" | "buysell";
+type TopMode = "short" | "long" | "manage" | "buysell";
 type SortMode = "popular" | "asc" | "desc";
 
 const Stays = () => {
@@ -30,7 +31,7 @@ const Stays = () => {
 
   useEffect(() => {
     const cat = params.get("cat");
-    if (cat && (["short","long","buysell"] as const).includes(cat as TopMode)) {
+    if (cat && (["short","long","manage","buysell"] as const).includes(cat as TopMode)) {
       setMode(cat as TopMode);
     }
   }, [params]);
@@ -41,7 +42,7 @@ const Stays = () => {
         title={"Luxury Villas & Accommodation Cape Town — SVRM Stays"}
         description={"Luxury villas, apartments and hotel suites in Cape Town — Camps Bay, Clifton, V&A and the Winelands. Short-term, long-term and buy/sell by SVRM."}
         path="/stays"
-        keywords="luxury villa Cape Town, Camps Bay villa rental, Clifton villa, Bantry Bay accommodation, V&A Waterfront apartment, Constantia estate rental, Winelands accommodation, luxury hotel suite Cape Town, long-term rental Cape Town, short-term let Cape Town, property for sale Cape Town, buy property Cape Town, Atlantic Seaboard villa, Sea Point penthouse rental, Mouille Point apartment, Green Point apartment, Llandudno beach villa, Higgovale villa, De Waterkant apartment, Cape Quarter apartment, Waterclub apartment Cape Town, Azura Atlantic Green Point, Alpha Sunsets Sea Point, Skyshore Mouille Point, Rock Residence Camps Bay, Buddha Retreat Camps Bay, Solmara House Llandudno, Hamaya villa Cape Town, Iliwa villa, Stonewood at The Granger, Sandstone Higgovale, Nox Rentals Cape Town, Nox luxury apartments, holiday villa Cape Town with pool, family villa Camps Bay, ocean view apartment Cape Town, penthouse with sea view Cape Town"
+        keywords="luxury villa Cape Town, Camps Bay villa rental, Clifton villa, Bantry Bay accommodation, V&A Waterfront apartment, Constantia estate rental, Winelands accommodation, luxury hotel suite Cape Town, long-term rental Cape Town, short-term let Cape Town, property for sale Cape Town, buy property Cape Town, Atlantic Seaboard villa, Sea Point penthouse rental, Mouille Point apartment, Green Point apartment, Llandudno beach villa, Higgovale villa, De Waterkant apartment, Cape Quarter apartment, Waterclub apartment Cape Town, Azura Atlantic Green Point, Alpha Sunsets Sea Point, Skyshore Mouille Point, Rock Residence Camps Bay, Buddha Retreat Camps Bay, Solmara House Llandudno, Hamaya villa Cape Town, Iliwa villa, Stonewood at The Granger, Sandstone Higgovale, Nox Rentals Cape Town, Nox luxury apartments, holiday villa Cape Town with pool, family villa Camps Bay, ocean view apartment Cape Town, penthouse with sea view Cape Town, property management Cape Town, luxury property management Cape Town, villa management Cape Town, short term rental management Cape Town, Airbnb management Cape Town, rent out my villa Cape Town, hands-free property income, holiday home management Camps Bay"
         image={staysOg}
         jsonLd={{
           "@context": "https://schema.org",
@@ -82,13 +83,13 @@ const Stays = () => {
         <div className="max-w-7xl mx-auto px-6">
           <Tabs value={mode} onValueChange={(v) => setMode(v as TopMode)} className="w-full">
             <TabsList className="flex flex-wrap h-auto bg-transparent justify-start gap-2 p-0 mb-8">
-              {(["short", "long", "buysell"] as TopMode[]).map((m) => (
+              {(["short", "long", "manage", "buysell"] as TopMode[]).map((m) => (
                 <TabsTrigger
                   key={m}
                   value={m}
                   className="text-[11px] uppercase tracking-[0.24em] px-4 py-2 border border-border/60 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary rounded-none"
                 >
-                  {m === "short" ? "Short-term" : m === "long" ? "Long-term" : "Buy & Sell"}
+                  {m === "short" ? "Short-term" : m === "long" ? "Long-term" : m === "manage" ? "Property Management" : "Buy & Sell"}
                 </TabsTrigger>
               ))}
             </TabsList>
@@ -149,6 +150,10 @@ const Stays = () => {
             <TabsContent value="long" className="mt-0 pb-12">
               <h2 className="font-serif text-3xl md:text-4xl mb-8 text-foreground">Long-term residences</h2>
               <LongTermStayForm />
+            </TabsContent>
+
+            <TabsContent value="manage" className="mt-0 pb-12">
+              <PropertyManagementSection />
             </TabsContent>
 
             <TabsContent value="buysell" className="mt-0 pb-12">
