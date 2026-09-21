@@ -1,11 +1,11 @@
 // AUTO-GENERATED — Nox property galleries
-import u_camps_bay_living from "@/assets/stays/user/camps-bay-5bed-Living_room_1.webp.asset.json";
-import u_camps_bay_dining from "@/assets/stays/user/camps-bay-5bed-Dining_area_3.webp.asset.json";
-import u_camps_bay_kitchen from "@/assets/stays/user/camps-bay-5bed-Kitchen_1.webp.asset.json";
-import u_camps_bay_pool from "@/assets/stays/user/camps-bay-5bed-Pool_and_hot_tub_1.webp.asset.json";
-import u_camps_bay_bathroom from "@/assets/stays/user/camps-bay-5bed-Primary_bathroom_1.webp.asset.json";
-import u_camps_bay_bedroom from "@/assets/stays/user/camps-bay-5bed-Primary_bedroom_1.webp.asset.json";
-import u_camps_bay_landing from "@/assets/stays/user/camps-bay-5bed-Upstairs_landing.webp.asset.json";
+import u_camps_bay_living from "@/assets/stays/villa-camps-bay/Living_room_1.webp";
+import u_camps_bay_dining from "@/assets/stays/villa-camps-bay/Dining_area_3.webp";
+import u_camps_bay_kitchen from "@/assets/stays/villa-camps-bay/Kitchen_1.webp";
+import u_camps_bay_pool from "@/assets/stays/villa-camps-bay/Pool_and_hot_tub_1.webp";
+import u_camps_bay_bathroom from "@/assets/stays/villa-camps-bay/Primary_bathroom_1.webp";
+import u_camps_bay_bedroom from "@/assets/stays/villa-camps-bay/Primary_bedroom_1.webp";
+import u_camps_bay_landing from "@/assets/stays/villa-camps-bay/Upstairs_landing.webp";
 import spp_hero from "@/assets/stays/nox/sea-point-penthouse/hero.jpg.asset.json";
 import spp_bedroom from "@/assets/stays/nox/sea-point-penthouse/bedroom.jpg.asset.json";
 import spp_terrace from "@/assets/stays/nox/sea-point-penthouse/terrace.jpg.asset.json";
@@ -194,5 +194,5 @@ export const stayGalleries: Record<string, string[]> = {
   "nox-mouille-point-1-bed-w-sea-views-skyshore-apartment": [g_mouille_point_1_bed_w_sea_views_skyshore_apartment_00.url, g_mouille_point_1_bed_w_sea_views_skyshore_apartment_01.url, g_mouille_point_1_bed_w_sea_views_skyshore_apartment_03.url, g_mouille_point_1_bed_w_sea_views_skyshore_apartment_04.url, g_mouille_point_1_bed_w_sea_views_skyshore_apartment_05.url, g_mouille_point_1_bed_w_sea_views_skyshore_apartment_06.url, g_mouille_point_1_bed_w_sea_views_skyshore_apartment_07.url],
   "nox-mountain-view-holiday-villa-w-garden-pool-iliwa": [g_mountain_view_holiday_villa_w_garden_pool_iliwa_00.url, g_mountain_view_holiday_villa_w_garden_pool_iliwa_01.url, g_mountain_view_holiday_villa_w_garden_pool_iliwa_03.url, g_mountain_view_holiday_villa_w_garden_pool_iliwa_04.url, g_mountain_view_holiday_villa_w_garden_pool_iliwa_05.url, g_mountain_view_holiday_villa_w_garden_pool_iliwa_06.url, g_mountain_view_holiday_villa_w_garden_pool_iliwa_07.url],
   "nox-old-cape-quarter-1-bedroom-units": [g_old_cape_quarter_1_bedroom_units_00.url, g_old_cape_quarter_1_bedroom_units_01.url, g_old_cape_quarter_1_bedroom_units_03.url, g_old_cape_quarter_1_bedroom_units_04.url, g_old_cape_quarter_1_bedroom_units_05.url, g_old_cape_quarter_1_bedroom_units_06.url, g_old_cape_quarter_1_bedroom_units_07.url],
-  "camps-bay-5-bed-signature-villa": [u_camps_bay_living.url, u_camps_bay_bedroom.url, u_camps_bay_bathroom.url, u_camps_bay_dining.url, u_camps_bay_kitchen.url, u_camps_bay_pool.url, u_camps_bay_landing.url],
+  "camps-bay-5-bed-signature-villa": [u_camps_bay_living, u_camps_bay_bedroom, u_camps_bay_bathroom, u_camps_bay_dining, u_camps_bay_kitchen, u_camps_bay_pool, u_camps_bay_landing],
 };

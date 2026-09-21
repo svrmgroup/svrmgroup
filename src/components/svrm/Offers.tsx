@@ -15,7 +15,7 @@ import maybach from "@/assets/vehicles/maybach.jpg";
 import capePeninsula from "@/assets/tours/cape-peninsula.jpg";
 import securityImg from "@/assets/security/bmw7-armored.jpg";
 import villa from "@/assets/svc-stays-villa.jpg";
-import campsBayVilla from "@/assets/stays/user/camps-bay-5bed-Living_room_1.webp.asset.json";
+import campsBayVilla from "@/assets/stays/villa-camps-bay/Living_room_1.webp";
 import { useCurrency } from "@/lib/currency";
 import { useCmsItems } from "@/hooks/useCmsItems";
 import { resolveImage } from "@/lib/cmsImages";
@@ -98,7 +98,7 @@ const featuredVilla: Offer = {
   priceSuffix: "/ night",
   cta: "View Villa",
   to: "/stays",
-  image: campsBayVilla.url,
+  image: campsBayVilla,
   special: true,
 };
 

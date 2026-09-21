@@ -1,5 +1,5 @@
 // Featured user uploads
-import campsBay5BedLiving from "@/assets/stays/user/camps-bay-5bed-Living_room_1.webp.asset.json";
+import campsBay5BedLiving from "@/assets/stays/villa-camps-bay/Living_room_1.webp";
 
 // Hotel imports (unchanged)
 import hotelCapeGrace from "@/assets/stays/hotel-capegrace.jpg";
@@ -61,7 +61,7 @@ export const stays: Stay[] = [
     area: "Camps Bay",
     beds: "5 bed · 5 bath · pool · sea view",
     fromZAR: 25000,
-    image: campsBay5BedLiving.url,
+    image: campsBay5BedLiving,
     blurb: "A curated five-bedroom Camps Bay residence with panoramic Atlantic views, private pool and direct beach access moments away.",
     type: "villa",
     featured: true,
