@@ -9,7 +9,7 @@ import rentals from "@/assets/vehicles/rangerover.jpg";
 import security from "@/assets/security/close-protection.jpg";
 
 const services = [
-  { img: travel, title: "Travel", body: "Chauffeured cars, private jets and helicopters — orchestrated end to end.", to: "/travel" },
+  { img: travel, title: "Chauffeur & Fleet", body: "Chauffeured cars, private jets, helicopters and yachts — orchestrated end to end.", to: "/chauffeur" },
   { img: rentals, title: "Car Rentals", body: "Self-drive the fleet — Range Rover, AMG, BMW, Mercedes. Book your dates.", to: "/rentals" },
   { img: stays, title: "Stays & Residences", body: "Curated villas, apartments and hotel rooms across the Cape's best addresses.", to: "/stays" },
   { img: tours, title: "Tours", body: "Safari, cultural, adventure — or build your own bespoke itinerary.", to: "/tours" },

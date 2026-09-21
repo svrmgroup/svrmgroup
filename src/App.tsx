@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -27,8 +27,13 @@ const Contact = lazy(() => import("./pages/Contact.tsx"));
 const Rentals = lazy(() => import("./pages/Rentals.tsx"));
 const Security = lazy(() => import("./pages/Security.tsx"));
 const AirportTransfers = lazy(() => import("./pages/AirportTransfers.tsx"));
-const Chauffeur = lazy(() => import("./pages/Chauffeur.tsx"));
 const Honeymoon = lazy(() => import("./pages/Honeymoon.tsx"));
+
+// /travel is retired — the chauffeur & fleet page now lives at /chauffeur.
+const TravelRedirect = () => {
+  const { search } = useLocation();
+  return <Navigate to={`/chauffeur${search}`} replace />;
+};
 const Anniversary = lazy(() => import("./pages/Anniversary.tsx"));
 
 // ---- Admin console: fully lazy — never ships to public visitors -----------
@@ -77,7 +82,8 @@ const App = () => (
             <Suspense fallback={<RouteFallback />}>
               <Routes>
                 <Route path="/" element={<Index />} />
-                <Route path="/travel" element={<Travel />} />
+                <Route path="/travel" element={<TravelRedirect />} />
+                <Route path="/travel/*" element={<TravelRedirect />} />
                 <Route path="/rentals" element={<Rentals />} />
                 <Route path="/security" element={<Security />} />
                 <Route path="/lifestyle" element={<Lifestyle />} />
@@ -88,7 +94,7 @@ const App = () => (
                 <Route path="/experiences" element={<CustomExperiences />} />
                 <Route path="/custom" element={<Navigate to="/experiences" replace />} />
                 <Route path="/airport-transfers" element={<AirportTransfers />} />
-                <Route path="/chauffeur" element={<Chauffeur />} />
+                <Route path="/chauffeur" element={<Travel />} />
                 <Route path="/chauffeur-service-cape-town" element={<Navigate to="/chauffeur" replace />} />
                 <Route path="/aquila-safari" element={<Navigate to="/tours/aquila-safari" replace />} />
                 <Route path="/honeymoon-cape-town" element={<Honeymoon />} />

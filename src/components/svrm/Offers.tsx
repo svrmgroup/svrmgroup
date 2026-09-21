@@ -44,7 +44,7 @@ const offers: Offer[] = [
     priceZAR: 22000,
     priceSuffix: "/ day",
     cta: "Request Maybach",
-    to: "/travel?cat=cars",
+    to: "/chauffeur?cat=cars",
     image: maybach,
     special: true,
   },

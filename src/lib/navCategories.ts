@@ -3,12 +3,12 @@
 export type NavCategory = { label: string; to: string };
 
 export const navCategories: Record<string, NavCategory[]> = {
-  "/travel": [
-    { label: "Chauffeured Cars", to: "/travel?cat=cars" },
+  "/chauffeur": [
+    { label: "Chauffeured Cars", to: "/chauffeur?cat=cars" },
     { label: "Airport Transfers", to: "/airport-transfers" },
-    { label: "Private Jets", to: "/travel?cat=jets" },
-    { label: "Helicopters", to: "/travel?cat=helicopters" },
-    { label: "Yachts", to: "/travel?cat=yachts" },
+    { label: "Private Jets", to: "/chauffeur?cat=jets" },
+    { label: "Helicopters", to: "/chauffeur?cat=helicopters" },
+    { label: "Yachts", to: "/chauffeur?cat=yachts" },
   ],
   "/rentals": [
     { label: "All Vehicles", to: "/rentals?cat=All" },

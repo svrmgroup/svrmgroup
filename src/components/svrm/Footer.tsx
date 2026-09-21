@@ -4,7 +4,7 @@ import { Instagram } from "lucide-react";
 import { buildWhatsAppUrlRaw, CONCIERGE_EMAIL, INSTAGRAM_URL, TIKTOK_URL, SOCIAL_HANDLE } from "@/lib/whatsapp";
 
 const explore = [
-  { to: "/travel", label: "Travel" },
+  { to: "/chauffeur", label: "Chauffeur & Fleet" },
   { to: "/lifestyle", label: "Lifestyle" },
   { to: "/stays", label: "Stays & Residences" },
   { to: "/tours", label: "Tours" },

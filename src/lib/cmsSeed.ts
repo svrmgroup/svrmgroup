@@ -163,7 +163,7 @@ function offersSeed() {
       price_zar: 22000,
       price_suffix: "/ day",
       cta_label: "Request Maybach",
-      cta_href: "/travel?cat=cars",
+      cta_href: "/chauffeur?cat=cars",
     },
     {
       slug: "luxury-honeymoon-cape-town",

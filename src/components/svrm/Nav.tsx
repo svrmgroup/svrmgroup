@@ -14,14 +14,15 @@ type NavItem = { to: string; label: string; sub?: SubLink[] };
 const links: NavItem[] = [
   { to: "/", label: "Home" },
   {
-    to: "/travel",
-    label: "Travel",
+    to: "/chauffeur",
+    label: "Chauffeur",
     sub: [
-      { to: "/travel?cat=cars", label: "Chauffeur & Fleet" },
+      { to: "/chauffeur?cat=cars", label: "Chauffeur & Fleet" },
+      { to: "/chauffeur?cat=itinerary", label: "7-Day Itinerary · 10% Off" },
       { to: "/airport-transfers", label: "Airport Transfers" },
-      { to: "/travel?cat=jets", label: "Private Jets" },
-      { to: "/travel?cat=helicopters", label: "Helicopters" },
-      { to: "/travel?cat=yachts", label: "Yachts" },
+      { to: "/chauffeur?cat=jets", label: "Private Jets" },
+      { to: "/chauffeur?cat=helicopters", label: "Helicopters" },
+      { to: "/chauffeur?cat=yachts", label: "Yachts" },
     ],
   },
   {

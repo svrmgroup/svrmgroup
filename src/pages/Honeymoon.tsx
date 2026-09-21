@@ -68,12 +68,12 @@ const Honeymoon = () => (
         "Extension — a safari, the Garden Route, or a few nights somewhere we'll recommend once we know you.",
       ]}
       links={[
-        { to: "/travel?cat=cars", label: "Chauffeur service" },
-        { to: "/travel?cat=cars", label: "Mercedes-Maybach S-Class" },
+        { to: "/chauffeur?cat=cars", label: "Chauffeur service" },
+        { to: "/chauffeur?cat=cars", label: "Mercedes-Maybach S-Class" },
         { to: "/stays", label: "Villas & stays" },
         { to: "/tours/cape-peninsula", label: "Cape Peninsula tour" },
         { to: "/tours/romantic", label: "Romantic packages" },
-        { to: "/travel?cat=yachts", label: "Yacht charter" },
+        { to: "/chauffeur?cat=yachts", label: "Yacht charter" },
         { to: "/experiences", label: "Build your own experience" },
         { to: "/anniversary-cape-town", label: "Anniversary experiences" },
       ]}
