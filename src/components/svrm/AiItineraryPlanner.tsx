@@ -71,6 +71,7 @@ const AiItineraryPlanner = () => {
     setLoading(true);
     setError(null);
     setPlan(null);
+    setSent(false);
     try {
       const { data, error: fnError } = await supabase.functions.invoke("ai-itinerary", {
         body: {
