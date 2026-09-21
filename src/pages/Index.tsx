@@ -13,7 +13,7 @@ const Index = () => (
   <main className="bg-background text-foreground">
     <Seo
       title="SVRM Group | Luxury Chauffeur Service & Villa Rentals Cape Town"
-      description="Private chauffeur service across Cape Town, including the V&A Waterfront — Mercedes-Maybach, S-Class and V-Class with professional chauffeurs, airport transfers and private tours, plus luxury villa rentals on the Atlantic Seaboard."
+      description="Private chauffeur service across Cape Town — V&A Waterfront, Camps Bay, Clifton, Bantry Bay, Sea Point, Atlantic Seaboard, City Bowl, Stellenbosch and Franschhoek — with Mercedes-Maybach, S-Class and V-Class, airport transfers, private tours and luxury villa rentals."
       path="/"
       keywords="luxury chauffeur Cape Town, chauffeur service Cape Town, private chauffeur Cape Town, chauffeur hire Cape Town, V&A Waterfront chauffeur, V&A Waterfront transfer, Waterfront chauffeur Cape Town, Mercedes-Maybach S-Class Cape Town, Maybach chauffeur Cape Town, S-Class chauffeur, executive chauffeur Cape Town, chauffeur driven tours Cape Town, airport transfer Cape Town, airport transfers Cape Town, luxury villa rentals Cape Town, luxury villa rental Cape Town, villa rentals Camps Bay, Camps Bay villa rental, Clifton villa rental, Atlantic Seaboard villa rental, V&A Waterfront villa, V&A Waterfront apartment, V&A Waterfront accommodation, V&A Waterfront transfer, Waterfront Cape Town concierge, holiday villa Cape Town, private villa with pool Cape Town, 5 bedroom villa Camps Bay, luxury concierge Cape Town, VIP security Cape Town, executive protection Cape Town, luxury honeymoon Cape Town, luxury anniversary Cape Town, Cape Peninsula private tour, SVRM special offer, SVRM promotions, romantic packages Cape Town, honeymoon packages South Africa, proposal packages Cape Town, hot air balloon Winelands, safari packages Cape Town, Sabi Sand safari, SVRM, SVRM Group, lifestyle management South Africa, private tours Cape Town, armed close protection, armoured vehicles, private jet charter, helicopter charter, yacht charter, bespoke concierge, VIP services Cape Town, luxury services Cape Town, luxury travel company Cape Town, concierge company South Africa, chauffeur and villa packages Cape Town, luxury holiday Cape Town, VIP travel Cape Town, property management Cape Town, luxury car hire Cape Town, honeymoon and anniversary Cape Town, private tours and safari Cape Town, close protection Cape Town"
 
@@ -26,7 +26,7 @@ const Index = () => (
             name: "SVRM Group",
             url: "https://svrm.group/",
             description:
-              "Luxury chauffeur service and villa rentals across Cape Town, including the V&A Waterfront — Mercedes-Maybach and S-Class chauffeur, airport transfers, private tours and Atlantic Seaboard villas.",
+              "Luxury chauffeur service and villa rentals across Cape Town — V&A Waterfront, Camps Bay, Clifton, Bantry Bay, Sea Point, Atlantic Seaboard, City Bowl, Stellenbosch and Franschhoek — with Mercedes-Maybach and S-Class chauffeur, airport transfers, private tours and villas.",
             telephone: "+27730641481",
             priceRange: "$$$$",
             currenciesAccepted: "ZAR, USD, EUR, GBP",
