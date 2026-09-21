@@ -9,7 +9,7 @@ const Anniversary = () => (
       title="Luxury Anniversary Cape Town | Bespoke Experiences — SVRM"
       description="Bespoke luxury anniversary experiences in Cape Town by SVRM — Maybach chauffeur, private villas, yacht days and quietly handled romantic details."
       path="/anniversary-cape-town"
-      keywords="luxury anniversary Cape Town, anniversary Cape Town, luxury anniversary experience Cape Town, luxury anniversary experiences South Africa, romantic anniversary Cape Town, anniversary concierge Cape Town"
+      keywords="luxury anniversary Cape Town, anniversary Cape Town, luxury anniversary experience Cape Town, luxury anniversary experiences South Africa, romantic anniversary Cape Town, anniversary concierge Cape Town, anniversary ideas Cape Town, anniversary dinner Cape Town, anniversary weekend away Cape Town, anniversary getaway South Africa, romantic anniversary surprise Cape Town, anniversary villa Camps Bay, anniversary yacht charter Cape Town, anniversary helicopter flight Cape Town, anniversary chauffeur Cape Town, Maybach anniversary Cape Town, wedding anniversary package South Africa, anniversary Winelands tour, private chef anniversary Cape Town, anniversary proposal planner Cape Town, luxury celebration planner Cape Town, milestone anniversary celebration South Africa"
       image={heroHeaderImg}
       jsonLd={{
         "@context": "https://schema.org",

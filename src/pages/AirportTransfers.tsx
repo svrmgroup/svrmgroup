@@ -124,10 +124,10 @@ const AirportTransfers = () => {
   return (
     <>
       <Seo
-        title="Cape Town Airport Transfers | SVRM"
-        description="Private chauffeured airport transfers in Cape Town — Mercedes V-Class, E-Class, BMW X3, Sprinter. Flat rates, on-time meet & greet, book on WhatsApp in minutes."
+        title="Cape Town Airport Transfers | Private Chauffeur Pickup — SVRM"
+        description="Private chauffeured airport transfers in Cape Town — CPT to Camps Bay, V&A, Sea Point, Stellenbosch and the Winelands. Flat rates, flight monitoring, meet & greet, child seats and extra luggage. Book on WhatsApp in minutes."
         path="/airport-transfers"
-        keywords="Cape Town airport transfer, CPT airport transfer, private chauffeur Cape Town, Mercedes V-Class transfer, luxury airport pickup Cape Town, SVRM Group"
+        keywords="Cape Town airport transfer, CPT airport transfer, private chauffeur Cape Town, Mercedes V-Class transfer, luxury airport pickup Cape Town, SVRM Group, airport transfer Cape Town, Cape Town International airport transfer, CPT airport pickup, airport shuttle Cape Town luxury, private airport transfer Cape Town price, airport transfer Camps Bay, airport transfer Stellenbosch, airport transfer Franschhoek, airport transfer V&A Waterfront, airport transfer Sea Point, airport transfer Constantia, hotel airport transfer Cape Town, meet and greet airport Cape Town, chauffeur airport pickup Cape Town, family airport transfer with child seats Cape Town, group airport transfer Sprinter Cape Town, extra luggage airport transfer Cape Town, flight delay free waiting Cape Town, corporate airport transfer Cape Town, cruise terminal transfer Cape Town, Hermanus transfer, Paarl transfer, Somerset West transfer, early morning airport transfer Cape Town, book airport transfer WhatsApp Cape Town"
         jsonLd={{
           "@context": "https://schema.org",
           "@type": "Service",
