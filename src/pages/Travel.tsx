@@ -114,6 +114,12 @@ const Travel = () => {
               >
                 Airport Transfers
               </Link>
+              <Link
+                to="/chauffeur"
+                className="text-[11px] uppercase tracking-[0.24em] px-4 py-2 border border-gold/50 rounded-none text-gold hover:bg-primary hover:text-primary-foreground transition-colors"
+              >
+                7-Day Itinerary · 10% Off
+              </Link>
             </TabsList>
 
             <TabsContent value="cars" className="mt-0">
@@ -271,6 +277,7 @@ const Travel = () => {
 
       <RelatedLinks
         links={[
+          { to: "/chauffeur", label: "Chauffeur service & 7-day itinerary" },
           { to: "/airport-transfers", label: "Luxury airport transfers" },
           { to: "/tours/cape-peninsula", label: "Cape Peninsula private tour" },
           { to: "/rentals", label: "Luxury car rental" },
