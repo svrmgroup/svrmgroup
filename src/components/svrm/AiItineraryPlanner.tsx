@@ -299,7 +299,23 @@ const AiItineraryPlanner = () => {
             <WhatsAppGlyph className="h-4 w-4" />
             Enquire on WhatsApp
           </a>
+          <button
+            type="button"
+            onClick={sendToAdmin}
+            disabled={sending}
+            className="inline-flex items-center justify-center gap-2 text-xs uppercase tracking-[0.28em] text-primary-foreground bg-primary px-6 py-4 hover:brightness-110 transition disabled:opacity-60"
+          >
+            {sending && <Loader2 className="h-4 w-4 animate-spin" />}
+            {sent ? "Request sent" : "Send my request"}
+          </button>
         </div>
+
+        {sent && (
+          <p className="flex items-center gap-2 text-sm text-gold mt-5">
+            <Check className="h-4 w-4" />
+            Received — your concierge will reply with confirmed timings and pricing.
+          </p>
+        )}
 
         {error && <p className="text-sm text-destructive mt-5">{error}</p>}
       </form>
