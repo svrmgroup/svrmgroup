@@ -106,6 +106,68 @@ const AiItineraryPlanner = () => {
     }
   };
 
+  const briefLines = () =>
+    [
+      startDate ? `Arrival: ${startDate}` : null,
+      endDate ? `Departure: ${endDate}` : null,
+      `Guests: ${groupSize}`,
+      luggage ? `Luggage: ${luggage}` : null,
+      pickup ? `Pickup: ${pickup}` : null,
+      dropoff ? `Staying / drop-off: ${dropoff}` : null,
+      interests.length ? `Interests: ${interests.join(", ")}` : null,
+      notes ? `Notes: ${notes}` : null,
+    ].filter(Boolean) as string[];
+
+  const planText = (p: Plan) =>
+    [
+      `Recommended vehicle: ${p.vehicle.name} — ${p.vehicle.why}`,
+      p.vehicle.alternative ? `Alternative: ${p.vehicle.alternative}` : null,
+      "",
+      p.summary,
+      "",
+      ...p.days.map((d) =>
+        [
+          `Day ${d.day}${d.date ? ` (${d.date})` : ""}: ${d.title}`,
+          d.description,
+          ...(d.highlights ?? []).map((h) => `  • ${h}`),
+        ].join("\n"),
+      ),
+    ]
+      .filter((l) => l !== null)
+      .join("\n");
+
+  const sendToAdmin = async () => {
+    if (!name.trim() || !email.trim()) {
+      toast.error("Please add your name and email so we can reply.");
+      return;
+    }
+    setSending(true);
+    const message = [
+      "CHAUFFEURED ITINERARY REQUEST",
+      "",
+      ...briefLines(),
+      ...(plan ? ["", "— DRAFT ITINERARY —", planText(plan)] : []),
+    ].join("\n");
+    const { error: dbError } = await supabase.from("enquiries").insert({
+      name: name.trim(),
+      email: email.trim(),
+      phone: phone.trim() || null,
+      subject: plan
+        ? `Chauffeur itinerary · ${dayCount} day(s) · ${plan.vehicle.name}`
+        : `Chauffeur itinerary · ${dayCount} day(s)`,
+      message,
+      source_page: "/chauffeur",
+    });
+    setSending(false);
+    if (dbError) {
+      toast.error("Couldn't send. Please try WhatsApp instead.");
+      return;
+    }
+    setSent(true);
+    toast.success("Request received. Your concierge will reply shortly.");
+  };
+
+
   const waHref = plan
     ? `${WHATSAPP_BASE}?text=${encodeURIComponent(
         [
