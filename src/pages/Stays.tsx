@@ -17,9 +17,10 @@ import heroVideo from "@/assets/videos/stays.mp4.asset.json";
 import staysOg from "@/assets/svc-stays-villa.jpg";
 import StaySearchBar from "@/components/svrm/StaySearchBar";
 import CustomStayBar from "@/components/svrm/CustomStayBar";
+import PropertyManagementSection from "@/components/svrm/PropertyManagementSection";
 
 const SUB_TYPES: StayType[] = ["villa", "apartment", "hotel"];
-type TopMode = "short" | "long" | "buysell";
+type TopMode = "short" | "long" | "manage" | "buysell";
 type SortMode = "popular" | "asc" | "desc";
 
 const Stays = () => {
