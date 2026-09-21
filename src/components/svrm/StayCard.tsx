@@ -47,8 +47,19 @@ const StayCard = ({ stay }: { stay: Stay; index?: number }) => {
   );
 
   return (
-    <article className="group bg-surface-raised border border-border/40 flex flex-col overflow-hidden">
+    <article
+      className={`group bg-surface-raised flex flex-col overflow-hidden ${
+        stay.featured
+          ? "border-2 border-primary/80 shadow-[0_0_0_1px_hsl(var(--primary)/0.15),0_20px_60px_-20px_hsl(var(--primary)/0.4)]"
+          : "border border-border/40"
+      }`}
+    >
       <div className="relative aspect-[16/10] overflow-hidden bg-surface-deep">
+        {stay.featured && (
+          <div className="absolute top-3 left-3 z-20 bg-primary text-primary-foreground px-3 py-1.5 text-[10px] tracking-[0.2em] uppercase font-medium shadow-lg">
+            Featured
+          </div>
+        )}
         <div className="embla h-full" ref={emblaRef}>
           <div className="flex h-full">
             {images.map((src, i) => (

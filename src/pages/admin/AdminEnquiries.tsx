@@ -28,6 +28,22 @@ const STATUS_META: Record<Status, { label: string; className: string }> = {
   archived: { label: "Archived", className: "bg-muted/20 text-muted-foreground border-border/40" },
 };
 
+const SAST = "Africa/Johannesburg";
+const fmtDate = (iso: string) =>
+  new Date(iso).toLocaleDateString("en-ZA", {
+    timeZone: SAST,
+    weekday: "short",
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
+const fmtTime = (iso: string) =>
+  new Date(iso).toLocaleTimeString("en-ZA", {
+    timeZone: SAST,
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
 const AdminEnquiries = () => {
   const [rows, setRows] = useState<Row[]>([]);
   const [loading, setLoading] = useState(true);
@@ -122,8 +138,9 @@ const AdminEnquiries = () => {
 
                     </p>
                   </div>
-                  <span className="text-[10px] text-muted-foreground whitespace-nowrap">
-                    {new Date(r.created_at).toLocaleString()}
+                  <span className="text-right whitespace-nowrap leading-tight">
+                    <span className="block text-[10px] text-foreground/80">{fmtDate(r.created_at)}</span>
+                    <span className="block text-[10px] text-gold">{fmtTime(r.created_at)}</span>
                   </span>
                   <ChevronDown
                     className={`h-4 w-4 text-muted-foreground transition-transform ${open ? "rotate-180" : ""}`}
@@ -132,6 +149,13 @@ const AdminEnquiries = () => {
 
                 {open && (
                   <div className="border-t border-border/40 p-6 space-y-5">
+                    <div className="border border-primary/30 bg-primary/5 px-4 py-3">
+                      <p className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Request received</p>
+                      <p className="text-sm text-foreground mt-1">
+                        {fmtDate(r.created_at)} · {fmtTime(r.created_at)}{" "}
+                        <span className="text-muted-foreground">(South Africa time)</span>
+                      </p>
+                    </div>
                     <div className="flex flex-wrap gap-4 text-xs">
                       <a href={`mailto:${r.email}?subject=Re: ${encodeURIComponent(r.subject)}`}
                          className="flex items-center gap-2 text-gold hover:underline">
