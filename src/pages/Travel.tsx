@@ -89,9 +89,9 @@ const Travel = () => {
 
       <Nav />
       <PageHero
-        eyebrow="Travel · Cape Town Chauffeur, Jets, Helicopters & Yachts"
-        title="Cape Town Chauffeur & Private Aviation"
-        subtitle="Private chauffeur-driven cars across Cape Town and the Western Cape, plus private jets, helicopters and luxury yacht charter — switch the category and send the brief."
+        eyebrow="Travel · Cape Town Fleet, Jets, Helicopters & Yachts"
+        title="Private Fleet, Aviation & Yachts"
+        subtitle="Chauffeured cars, private jets, helicopter transfers and luxury yacht charter across Cape Town and the Western Cape — switch the category and send the brief."
         videoSrc={heroVideo.url}
       />
 
