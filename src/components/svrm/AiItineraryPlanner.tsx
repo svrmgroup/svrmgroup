@@ -38,6 +38,11 @@ const INTERESTS = [
 ];
 
 const AiItineraryPlanner = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [groupSize, setGroupSize] = useState("2");
