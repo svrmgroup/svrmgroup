@@ -203,7 +203,22 @@ const AiItineraryPlanner = () => {
       </div>
 
       <form onSubmit={submit} className="border border-gold/30 bg-surface-raised p-6 md:p-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div>
+            <label className={label} htmlFor="ai-name">Your name</label>
+            <input id="ai-name" value={name} onChange={(e) => setName(e.target.value)} className={field} autoComplete="name" />
+          </div>
+          <div>
+            <label className={label} htmlFor="ai-email">Email</label>
+            <input id="ai-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} className={field} autoComplete="email" />
+          </div>
+          <div>
+            <label className={label} htmlFor="ai-phone">Phone / WhatsApp</label>
+            <input id="ai-phone" value={phone} onChange={(e) => setPhone(e.target.value)} className={field} autoComplete="tel" />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
           <div>
             <label className={label} htmlFor="ai-start">Arrival date</label>
             <input id="ai-start" type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} className={field} required />
