@@ -3,7 +3,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { vehicles } from "@/data/vehicles";
 import { WHATSAPP_BASE } from "@/lib/whatsappMessages";
 import WhatsAppGlyph from "@/components/svrm/WhatsAppGlyph";
-import { Loader2 } from "lucide-react";
+import { Loader2, Check } from "lucide-react";
+import { toast } from "sonner";
 
 interface PlannedDay {
   day: number;
