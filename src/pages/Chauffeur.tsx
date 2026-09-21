@@ -14,6 +14,7 @@ import { useCurrency } from "@/lib/currency";
 import { vehicles, vehicleTiers } from "@/data/vehicles";
 import { chauffeurItinerary, SEVEN_DAY_DISCOUNT } from "@/data/chauffeurItinerary";
 import { WHATSAPP_BASE } from "@/lib/whatsappMessages";
+import AiItineraryPlanner from "@/components/svrm/AiItineraryPlanner";
 import heroImage from "@/assets/svc-travel-sclass.jpg";
 
 const tierBlurbs: Record<string, string> = {
@@ -148,6 +149,12 @@ const Chauffeur = () => {
               >
                 Chauffeur Fleet
               </TabsTrigger>
+              <TabsTrigger
+                value="planner"
+                className="text-[11px] uppercase tracking-[0.24em] px-4 py-2 border border-border/60 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary rounded-none"
+              >
+                Plan My Itinerary
+              </TabsTrigger>
               <Link
                 to="/airport-transfers"
                 className="text-[11px] uppercase tracking-[0.24em] px-4 py-2 border border-border/60 rounded-none text-muted-foreground hover:text-foreground hover:border-primary transition-colors"
@@ -273,6 +280,11 @@ const Chauffeur = () => {
                   </article>
                 ))}
               </div>
+            </TabsContent>
+
+            {/* ---------------- AI planner ---------------- */}
+            <TabsContent value="planner" className="mt-0">
+              <AiItineraryPlanner />
             </TabsContent>
 
             {/* ---------------- Fleet ---------------- */}
