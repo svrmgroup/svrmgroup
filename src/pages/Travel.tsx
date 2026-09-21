@@ -42,43 +42,43 @@ const Travel = () => {
   return (
     <main className="bg-background text-foreground min-h-screen">
       <Seo
-        title={"Luxury Chauffeur Cape Town | Maybach & S-Class — SVRM"}
-        description={"VIP chauffeur service in Cape Town with Mercedes-Maybach S-Class, S-Class, Range Rover and Rolls-Royce. NDA-bound, 24/7."}
+        title={"Private Fleet, Jets & Yachts Cape Town | SVRM Group"}
+        description={"Cape Town's private travel fleet under one concierge — chauffeured cars, private jets, helicopter transfers and superyacht charter. One brief, everything arranged."}
         path="/travel"
-        keywords="chauffeur service Cape Town, luxury chauffeur Cape Town, Maybach chauffeur Cape Town, Mercedes-Maybach chauffeur Cape Town, Maybach S-Class Cape Town, S Class chauffeur Cape Town, Mercedes GLS hire Cape Town, Mercedes-Benz GLS chauffeur Cape Town, GLS with driver Cape Town, luxury 7 seater SUV chauffeur, premium SUV transfer Cape Town, private driver Cape Town, VIP chauffeur Cape Town, luxury airport transfer Cape Town, VIP chauffeur service, private airport transfer Cape Town, Mercedes S-Class chauffeur, BMW 7 Series with driver, Rolls-Royce Phantom chauffeur, Range Rover chauffeur Cape Town, executive transfers South Africa, private jet charter Cape Town, empty leg jet Cape Town, helicopter transfer Cape Town, scenic helicopter flight, superyacht charter Cape Town, V&A Waterfront yacht hire, wedding car hire Cape Town, corporate roadshow transport, celebrity chauffeur Cape Town, close protection driver, group transfers Sprinter, luxury Winelands day trip"
+        keywords="luxury car fleet Cape Town, private jet charter Cape Town, empty leg jet Cape Town, helicopter transfer Cape Town, scenic helicopter flight Cape Town, superyacht charter Cape Town, yacht hire V&A Waterfront, private aviation Cape Town, helicopter charter Western Cape, luxury yacht charter South Africa, private boat charter Cape Town, jet charter South Africa, executive travel Cape Town, corporate roadshow transport, group transfers Sprinter, luxury Winelands day trip, private travel concierge Cape Town, chauffeured fleet Cape Town, wedding car hire Cape Town"
 
         image={travelOg}
-        jsonLd={[{
+         jsonLd={[{
           "@context": "https://schema.org",
           "@type": "FAQPage",
           mainEntity: [
             {
               "@type": "Question",
-              name: "Do you do Cape Town airport transfers?",
-              acceptedAnswer: { "@type": "Answer", text: "Yes — Cape Town International (CPT) to any address in the city, Winelands or the Atlantic seaboard. Meet-and-greet inside the terminal, luggage handled, child seats on request." },
+              name: "Can you charter a private jet to Cape Town?",
+              acceptedAnswer: { "@type": "Answer", text: "Yes — light, midsize and long-range jets into Cape Town International or a private terminal, positioned from anywhere. Send the routing and dates and we quote tail options within hours." },
             },
             {
               "@type": "Question",
-              name: "What's the difference between a chauffeur and a private driver in Cape Town?",
-              acceptedAnswer: { "@type": "Answer", text: "SVRM chauffeurs are professional drivers in suit, NDA-bound, with English fluency and local knowledge. We place the same chauffeur with you for the length of your stay so they learn your preferences." },
+              name: "Do you offer helicopter transfers and scenic flights?",
+              acceptedAnswer: { "@type": "Answer", text: "Both. Transfers between the city, Winelands estates and private lodges, plus scenic flights over Table Mountain, the Twelve Apostles and Cape Point." },
             },
             {
               "@type": "Question",
-              name: "Can I book a chauffeured car by the hour or just for the day?",
-              acceptedAnswer: { "@type": "Answer", text: "Both. Half-day (4 hours), full-day (8 hours) and multi-day arrangements are standard. Single transfers are also quoted on request." },
+              name: "Can I charter a yacht in Cape Town?",
+              acceptedAnswer: { "@type": "Answer", text: "Yes — day charters from the V&A Waterfront, sunset cruises and multi-day superyacht itineraries along the peninsula, crewed and catered." },
             },
           ],
         }, {
           "@context": "https://schema.org",
           "@type": "Service",
-          serviceType: "Luxury Chauffeur & Private Aviation",
+          serviceType: "Private Fleet, Aviation & Yacht Charter",
           provider: { "@type": "Organization", name: "SVRM Group", url: "https://svrm.group/" },
           areaServed: [{ "@type": "City", name: "Cape Town" }, { "@type": "Country", name: "South Africa" }],
           hasOfferCatalog: {
             "@type": "OfferCatalog",
             name: "Travel",
             itemListElement: [
-              { "@type": "Offer", itemOffered: { "@type": "Service", name: "Chauffeur-driven luxury cars" } },
+              { "@type": "Offer", itemOffered: { "@type": "Service", name: "Chauffeur-driven luxury car fleet" } },
               { "@type": "Offer", itemOffered: { "@type": "Service", name: "Private jet charter" } },
               { "@type": "Offer", itemOffered: { "@type": "Service", name: "Helicopter transfers & scenic flights" } },
               { "@type": "Offer", itemOffered: { "@type": "Service", name: "Yacht & superyacht charter" } },
@@ -89,9 +89,9 @@ const Travel = () => {
 
       <Nav />
       <PageHero
-        eyebrow="Travel · Cape Town Chauffeur, Jets, Helicopters & Yachts"
-        title="Cape Town Chauffeur & Private Aviation"
-        subtitle="Private chauffeur-driven cars across Cape Town and the Western Cape, plus private jets, helicopters and luxury yacht charter — switch the category and send the brief."
+        eyebrow="Travel · Cape Town Fleet, Jets, Helicopters & Yachts"
+        title="Private Fleet, Aviation & Yachts"
+        subtitle="Chauffeured cars, private jets, helicopter transfers and luxury yacht charter across Cape Town and the Western Cape — switch the category and send the brief."
         videoSrc={heroVideo.url}
       />
 
