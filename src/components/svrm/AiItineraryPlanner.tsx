@@ -3,7 +3,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { vehicles } from "@/data/vehicles";
 import { WHATSAPP_BASE } from "@/lib/whatsappMessages";
 import WhatsAppGlyph from "@/components/svrm/WhatsAppGlyph";
-import { Loader2 } from "lucide-react";
+import { Loader2, Check } from "lucide-react";
+import { toast } from "sonner";
 
 interface PlannedDay {
   day: number;
@@ -37,6 +38,11 @@ const INTERESTS = [
 ];
 
 const AiItineraryPlanner = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [groupSize, setGroupSize] = useState("2");
@@ -65,6 +71,7 @@ const AiItineraryPlanner = () => {
     setLoading(true);
     setError(null);
     setPlan(null);
+    setSent(false);
     try {
       const { data, error: fnError } = await supabase.functions.invoke("ai-itinerary", {
         body: {
@@ -98,6 +105,68 @@ const AiItineraryPlanner = () => {
       setLoading(false);
     }
   };
+
+  const briefLines = () =>
+    [
+      startDate ? `Arrival: ${startDate}` : null,
+      endDate ? `Departure: ${endDate}` : null,
+      `Guests: ${groupSize}`,
+      luggage ? `Luggage: ${luggage}` : null,
+      pickup ? `Pickup: ${pickup}` : null,
+      dropoff ? `Staying / drop-off: ${dropoff}` : null,
+      interests.length ? `Interests: ${interests.join(", ")}` : null,
+      notes ? `Notes: ${notes}` : null,
+    ].filter(Boolean) as string[];
+
+  const planText = (p: Plan) =>
+    [
+      `Recommended vehicle: ${p.vehicle.name} — ${p.vehicle.why}`,
+      p.vehicle.alternative ? `Alternative: ${p.vehicle.alternative}` : null,
+      "",
+      p.summary,
+      "",
+      ...p.days.map((d) =>
+        [
+          `Day ${d.day}${d.date ? ` (${d.date})` : ""}: ${d.title}`,
+          d.description,
+          ...(d.highlights ?? []).map((h) => `  • ${h}`),
+        ].join("\n"),
+      ),
+    ]
+      .filter((l) => l !== null)
+      .join("\n");
+
+  const sendToAdmin = async () => {
+    if (!name.trim() || !email.trim()) {
+      toast.error("Please add your name and email so we can reply.");
+      return;
+    }
+    setSending(true);
+    const message = [
+      "CHAUFFEURED ITINERARY REQUEST",
+      "",
+      ...briefLines(),
+      ...(plan ? ["", "— DRAFT ITINERARY —", planText(plan)] : []),
+    ].join("\n");
+    const { error: dbError } = await supabase.from("enquiries").insert({
+      name: name.trim(),
+      email: email.trim(),
+      phone: phone.trim() || null,
+      subject: plan
+        ? `Chauffeur itinerary · ${dayCount} day(s) · ${plan.vehicle.name}`
+        : `Chauffeur itinerary · ${dayCount} day(s)`,
+      message,
+      source_page: "/chauffeur",
+    });
+    setSending(false);
+    if (dbError) {
+      toast.error("Couldn't send. Please try WhatsApp instead.");
+      return;
+    }
+    setSent(true);
+    toast.success("Request received. Your concierge will reply shortly.");
+  };
+
 
   const waHref = plan
     ? `${WHATSAPP_BASE}?text=${encodeURIComponent(
@@ -134,7 +203,22 @@ const AiItineraryPlanner = () => {
       </div>
 
       <form onSubmit={submit} className="border border-gold/30 bg-surface-raised p-6 md:p-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div>
+            <label className={label} htmlFor="ai-name">Your name</label>
+            <input id="ai-name" value={name} onChange={(e) => setName(e.target.value)} className={field} autoComplete="name" />
+          </div>
+          <div>
+            <label className={label} htmlFor="ai-email">Email</label>
+            <input id="ai-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} className={field} autoComplete="email" />
+          </div>
+          <div>
+            <label className={label} htmlFor="ai-phone">Phone / WhatsApp</label>
+            <input id="ai-phone" value={phone} onChange={(e) => setPhone(e.target.value)} className={field} autoComplete="tel" />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
           <div>
             <label className={label} htmlFor="ai-start">Arrival date</label>
             <input id="ai-start" type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} className={field} required />
@@ -215,7 +299,23 @@ const AiItineraryPlanner = () => {
             <WhatsAppGlyph className="h-4 w-4" />
             Enquire on WhatsApp
           </a>
+          <button
+            type="button"
+            onClick={sendToAdmin}
+            disabled={sending}
+            className="inline-flex items-center justify-center gap-2 text-xs uppercase tracking-[0.28em] text-primary-foreground bg-primary px-6 py-4 hover:brightness-110 transition disabled:opacity-60"
+          >
+            {sending && <Loader2 className="h-4 w-4 animate-spin" />}
+            {sent ? "Request sent" : "Send my request"}
+          </button>
         </div>
+
+        {sent && (
+          <p className="flex items-center gap-2 text-sm text-gold mt-5">
+            <Check className="h-4 w-4" />
+            Received — your concierge will reply with confirmed timings and pricing.
+          </p>
+        )}
 
         {error && <p className="text-sm text-destructive mt-5">{error}</p>}
       </form>
@@ -280,12 +380,15 @@ const AiItineraryPlanner = () => {
                 <WhatsAppGlyph className="h-4 w-4" />
                 Send this to SVRM
               </a>
-              <a
-                href="#chauffeur-enquiry"
-                className="inline-flex items-center justify-center text-xs uppercase tracking-[0.28em] text-gold border border-primary/60 px-6 py-4 hover:bg-primary hover:text-primary-foreground transition-colors"
+              <button
+                type="button"
+                onClick={sendToAdmin}
+                disabled={sending}
+                className="inline-flex items-center justify-center gap-2 text-xs uppercase tracking-[0.28em] text-gold border border-primary/60 px-6 py-4 hover:bg-primary hover:text-primary-foreground transition-colors disabled:opacity-60"
               >
-                Send the brief
-              </a>
+                {sending && <Loader2 className="h-4 w-4 animate-spin" />}
+                {sent ? "Itinerary sent" : "Send this itinerary to SVRM"}
+              </button>
             </div>
 
             <p className="text-[11px] text-muted-foreground/70 mt-6 leading-relaxed">
