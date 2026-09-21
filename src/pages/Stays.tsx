@@ -39,8 +39,8 @@ const Stays = () => {
   return (
     <main className="bg-background text-foreground min-h-screen">
       <Seo
-        title={"Luxury Villas & Accommodation Cape Town — SVRM Stays"}
-        description={"Luxury villas, apartments and hotel suites in Cape Town — Camps Bay, Clifton, V&A and the Winelands. Short-term, long-term and buy/sell by SVRM."}
+        title={"Luxury Villas Cape Town & Property Management — SVRM Stays"}
+        description={"Luxury villas, apartments and hotel suites in Camps Bay, Clifton, V&A and the Winelands. Short-term and long-term rentals, full property management for owners, and discreet buy & sell with SVRM."}
         path="/stays"
         keywords="luxury villa Cape Town, Camps Bay villa rental, Clifton villa, Bantry Bay accommodation, V&A Waterfront apartment, Constantia estate rental, Winelands accommodation, luxury hotel suite Cape Town, long-term rental Cape Town, short-term let Cape Town, property for sale Cape Town, buy property Cape Town, Atlantic Seaboard villa, Sea Point penthouse rental, Mouille Point apartment, Green Point apartment, Llandudno beach villa, Higgovale villa, De Waterkant apartment, Cape Quarter apartment, Waterclub apartment Cape Town, Azura Atlantic Green Point, Alpha Sunsets Sea Point, Skyshore Mouille Point, Rock Residence Camps Bay, Buddha Retreat Camps Bay, Solmara House Llandudno, Hamaya villa Cape Town, Iliwa villa, Stonewood at The Granger, Sandstone Higgovale, Nox Rentals Cape Town, Nox luxury apartments, holiday villa Cape Town with pool, family villa Camps Bay, ocean view apartment Cape Town, penthouse with sea view Cape Town, property management Cape Town, luxury property management Cape Town, villa management Cape Town, short term rental management Cape Town, Airbnb management Cape Town, rent out my villa Cape Town, hands-free property income, holiday home management Camps Bay"
         image={staysOg}
