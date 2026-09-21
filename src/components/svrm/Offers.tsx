@@ -129,7 +129,10 @@ const Offers = () => {
     image: resolveImage(c.image_url, staticImageBySlug[c.slug] ?? villa) ?? villa,
     special: /special/i.test(c.eyebrow || ""),
   }));
-  const displayOffers = cmsMapped.length > 0 ? cmsMapped : offers;
+  const base = cmsMapped.length > 0 ? cmsMapped : offers;
+  const displayOffers = base.some((o) => o.title === featuredVilla.title)
+    ? base
+    : [featuredVilla, ...base];
 
 
 
