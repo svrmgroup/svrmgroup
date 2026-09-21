@@ -39,19 +39,70 @@ const Stays = () => {
   return (
     <main className="bg-background text-foreground min-h-screen">
       <Seo
-        title={"Luxury Villas & Accommodation Cape Town — SVRM Stays"}
-        description={"Luxury villas, apartments and hotel suites in Cape Town — Camps Bay, Clifton, V&A and the Winelands. Short-term, long-term and buy/sell by SVRM."}
+        title={"Luxury Villas Cape Town & Property Management — SVRM Stays"}
+        description={"Luxury villas, apartments and hotel suites in Camps Bay, Clifton, V&A and the Winelands. Short-term and long-term rentals, full property management for owners, and discreet buy & sell with SVRM."}
         path="/stays"
-        keywords="luxury villa Cape Town, Camps Bay villa rental, Clifton villa, Bantry Bay accommodation, V&A Waterfront apartment, Constantia estate rental, Winelands accommodation, luxury hotel suite Cape Town, long-term rental Cape Town, short-term let Cape Town, property for sale Cape Town, buy property Cape Town, Atlantic Seaboard villa, Sea Point penthouse rental, Mouille Point apartment, Green Point apartment, Llandudno beach villa, Higgovale villa, De Waterkant apartment, Cape Quarter apartment, Waterclub apartment Cape Town, Azura Atlantic Green Point, Alpha Sunsets Sea Point, Skyshore Mouille Point, Rock Residence Camps Bay, Buddha Retreat Camps Bay, Solmara House Llandudno, Hamaya villa Cape Town, Iliwa villa, Stonewood at The Granger, Sandstone Higgovale, Nox Rentals Cape Town, Nox luxury apartments, holiday villa Cape Town with pool, family villa Camps Bay, ocean view apartment Cape Town, penthouse with sea view Cape Town, property management Cape Town, luxury property management Cape Town, villa management Cape Town, short term rental management Cape Town, Airbnb management Cape Town, rent out my villa Cape Town, hands-free property income, holiday home management Camps Bay"
+        keywords="luxury villa Cape Town, Camps Bay villa rental, Clifton villa, Bantry Bay accommodation, V&A Waterfront apartment, Constantia estate rental, Winelands accommodation, luxury hotel suite Cape Town, long-term rental Cape Town, short-term let Cape Town, property for sale Cape Town, buy property Cape Town, Atlantic Seaboard villa, Sea Point penthouse rental, Mouille Point apartment, Green Point apartment, Llandudno beach villa, Higgovale villa, De Waterkant apartment, Cape Quarter apartment, Waterclub apartment Cape Town, Azura Atlantic Green Point, Alpha Sunsets Sea Point, Skyshore Mouille Point, Rock Residence Camps Bay, Buddha Retreat Camps Bay, Solmara House Llandudno, Hamaya villa Cape Town, Iliwa villa, Stonewood at The Granger, Sandstone Higgovale, Nox Rentals Cape Town, Nox luxury apartments, holiday villa Cape Town with pool, family villa Camps Bay, ocean view apartment Cape Town, penthouse with sea view Cape Town, property management Cape Town, luxury property management Cape Town, villa management Cape Town, short term rental management Cape Town, Airbnb management Cape Town, rent out my villa Cape Town, hands-free property income, holiday home management Camps Bay, property management company Cape Town, rental management Atlantic Seaboard, letting agent Cape Town, holiday rental management Clifton, Airbnb co-hosting Cape Town, guest management Cape Town, villa maintenance Cape Town, property caretaking Cape Town, passive rental income Cape Town, best property management Cape Town, luxury letting agents Camps Bay, manage my holiday home Cape Town, full service property management South Africa, luxury real estate Cape Town, villa for sale Camps Bay, sell my villa Cape Town, luxury property agents Atlantic Seaboard, investment property Cape Town, luxury apartment for sale V&A Waterfront, monthly rental villa Cape Town, furnished monthly rental Cape Town, executive rental Cape Town"
         image={staysOg}
-        jsonLd={{
-          "@context": "https://schema.org",
-          "@type": "LodgingBusiness",
-          name: "SVRM Stays — Cape Town Villas & Apartments",
-          url: "https://svrm.group/stays",
-          areaServed: { "@type": "City", name: "Cape Town" },
-          priceRange: "$$$$",
-        }}
+        jsonLd={[
+          {
+            "@context": "https://schema.org",
+            "@type": "LodgingBusiness",
+            name: "SVRM Stays — Cape Town Villas & Apartments",
+            url: "https://svrm.group/stays",
+            areaServed: { "@type": "City", name: "Cape Town" },
+            priceRange: "$$$$",
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            serviceType: "Luxury property management in Cape Town",
+            name: "SVRM Property Management",
+            url: "https://svrm.group/stays?cat=manage",
+            provider: { "@type": "Organization", name: "SVRM Group", url: "https://svrm.group" },
+            areaServed: { "@type": "City", name: "Cape Town" },
+            description:
+              "Fully hands-free management of luxury homes in Cape Town: maintenance, housekeeping, guest vetting, marketing to private clients and monthly owner income.",
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "RealEstateAgent",
+            name: "SVRM Group — Luxury Property, Cape Town",
+            url: "https://svrm.group/stays?cat=buysell",
+            areaServed: { "@type": "City", name: "Cape Town" },
+            priceRange: "$$$$",
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "Do you manage luxury properties in Cape Town?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes. SVRM looks after your home end to end — maintenance, housekeeping, vetted guests and marketing to our private client base — while you receive a monthly income, completely hands-free.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Which areas do you cover for property management?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Camps Bay, Clifton, Bantry Bay, Bakoven, Llandudno, Sea Point, Green Point, V&A Waterfront, Constantia and the Winelands.",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "Can SVRM help me buy or sell a luxury property in Cape Town?",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "Yes — we handle discreet off-market buying and selling of luxury homes and apartments across Cape Town. Terms are confirmed on enquiry.",
+                },
+              },
+            ],
+          },
+        ]}
       />
       <Nav />
 
