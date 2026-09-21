@@ -11,7 +11,9 @@ import { cn } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { formatDate } from "@/lib/locale";
+import PhoneField from "@/components/svrm/PhoneField";
 import hero from "@/assets/airport-transfers-hero.jpg";
+
 
 // Common Cape Town pickup / drop-off points for autofill.
 const PLACES = [
@@ -340,14 +342,14 @@ const AirportTransfers = () => {
                 </label>
                 <label className="flex flex-col gap-1.5">
                   <span className="eyebrow">Phone (optional)</span>
-                  <input
-                    type="tel"
-                    autoComplete="tel"
+                  <PhoneField
                     value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
+                    onChange={setPhone}
                     className={inputCls}
+                    placeholder="Phone number"
                   />
                 </label>
+
               </div>
             </div>
 

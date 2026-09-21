@@ -5,6 +5,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import ExtrasPicker from "./ExtrasPicker";
+import PhoneField from "./PhoneField";
+
 import { Extra } from "@/data/extras";
 
 const schema = z.object({
@@ -107,8 +109,14 @@ const EnquiryForm = ({ subject, defaultMessage = "", compact = false, extras, ex
         </div>
       </div>
       <div>
-        <input className={inputBase} placeholder="Phone (optional)" value={form.phone} onChange={update("phone")} maxLength={40} aria-label="Phone" />
+        <PhoneField
+          value={form.phone}
+          onChange={(v) => setForm((f) => ({ ...f, phone: v }))}
+          className={inputBase}
+          placeholder="Phone (optional)"
+        />
       </div>
+
       <div>
         <textarea
           className={`${inputBase} resize-none min-h-[140px]`}

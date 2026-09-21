@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Mail, Phone, ChevronDown, Trash2 } from "lucide-react";
+import { countryLabel } from "@/lib/countryCodes";
+
 
 type Status = "new" | "in_progress" | "done" | "archived";
 
@@ -116,6 +118,8 @@ const AdminEnquiries = () => {
                     <p className="font-serif text-lg truncate">{r.subject}</p>
                     <p className="text-xs text-muted-foreground truncate">
                       {r.name} · {r.email} {r.phone ? `· ${r.phone}` : ""}
+                      {countryLabel(r.phone) ? ` · ${countryLabel(r.phone)}` : ""}
+
                     </p>
                   </div>
                   <span className="text-[10px] text-muted-foreground whitespace-nowrap">

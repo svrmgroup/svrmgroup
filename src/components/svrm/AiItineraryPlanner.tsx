@@ -3,6 +3,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { vehicles } from "@/data/vehicles";
 import { WHATSAPP_BASE } from "@/lib/whatsappMessages";
 import WhatsAppGlyph from "@/components/svrm/WhatsAppGlyph";
+import PhoneField from "@/components/svrm/PhoneField";
+
 import { Loader2, Check } from "lucide-react";
 import { toast } from "sonner";
 
@@ -214,7 +216,8 @@ const AiItineraryPlanner = () => {
           </div>
           <div>
             <label className={label} htmlFor="ai-phone">Phone / WhatsApp</label>
-            <input id="ai-phone" value={phone} onChange={(e) => setPhone(e.target.value)} className={field} autoComplete="tel" />
+            <PhoneField id="ai-phone" value={phone} onChange={setPhone} className={field} placeholder="Phone number" ariaLabel="Phone or WhatsApp number" />
+
           </div>
         </div>
 
