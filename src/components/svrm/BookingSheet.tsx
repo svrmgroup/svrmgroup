@@ -216,13 +216,13 @@ const BookingSheet = ({
               maxLength={255}
             />
           </div>
-          <input
-            placeholder="Phone (optional)"
+          <PhoneField
             value={form.phone}
-            onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
+            onChange={(v) => setForm((f) => ({ ...f, phone: v }))}
             className="w-full bg-transparent border-b border-border/60 py-3 text-sm focus:border-primary focus:outline-none"
-            maxLength={40}
+            placeholder="Phone (optional)"
           />
+
           <textarea
             placeholder="Anything else? (preferences, arrival time, occasion)"
             value={form.message}
