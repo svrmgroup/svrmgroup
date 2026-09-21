@@ -1,4 +1,11 @@
 // AUTO-GENERATED — Nox property galleries
+import u_camps_bay_living from "@/assets/stays/user/camps-bay-5bed-Living_room_1.webp.asset.json";
+import u_camps_bay_dining from "@/assets/stays/user/camps-bay-5bed-Dining_area_3.webp.asset.json";
+import u_camps_bay_kitchen from "@/assets/stays/user/camps-bay-5bed-Kitchen_1.webp.asset.json";
+import u_camps_bay_pool from "@/assets/stays/user/camps-bay-5bed-Pool_and_hot_tub_1.webp.asset.json";
+import u_camps_bay_bathroom from "@/assets/stays/user/camps-bay-5bed-Primary_bathroom_1.webp.asset.json";
+import u_camps_bay_bedroom from "@/assets/stays/user/camps-bay-5bed-Primary_bedroom_1.webp.asset.json";
+import u_camps_bay_landing from "@/assets/stays/user/camps-bay-5bed-Upstairs_landing.webp.asset.json";
 import spp_hero from "@/assets/stays/nox/sea-point-penthouse/hero.jpg.asset.json";
 import spp_bedroom from "@/assets/stays/nox/sea-point-penthouse/bedroom.jpg.asset.json";
 import spp_terrace from "@/assets/stays/nox/sea-point-penthouse/terrace.jpg.asset.json";
