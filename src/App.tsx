@@ -82,7 +82,8 @@ const App = () => (
             <Suspense fallback={<RouteFallback />}>
               <Routes>
                 <Route path="/" element={<Index />} />
-                <Route path="/travel" element={<Travel />} />
+                <Route path="/travel" element={<TravelRedirect />} />
+                <Route path="/travel/*" element={<TravelRedirect />} />
                 <Route path="/rentals" element={<Rentals />} />
                 <Route path="/security" element={<Security />} />
                 <Route path="/lifestyle" element={<Lifestyle />} />
