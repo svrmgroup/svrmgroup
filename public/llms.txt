@@ -10,6 +10,8 @@ SVRM is a Cape Town–based concierge and lifestyle management service. We arran
 - [Chauffeur & Fleet](/chauffeur): Chauffeuring, private jets, helicopters, yachts and the 7-day itinerary.
 - [Lifestyle](/lifestyle): Yacht charters and on-water experiences.
 - [Stays](/stays): Luxury villas, residences, and accommodation.
+- [Property Management](/stays?cat=manage): Hands-free luxury property management in Cape Town — maintenance, housekeeping, vetted guests and monthly owner income.
+- [Buy & Sell Property](/stays?cat=buysell): Discreet buying and selling of luxury Cape Town homes and apartments.
 - [Tours](/tours): Safari, hunting, cultural, and adventure tours.
 - [Tour Builder](/tours/builder): Design a custom tour with indicative pricing.
 - [Custom Experiences](/experiences): Private chefs, cleaners, and bespoke requests.
