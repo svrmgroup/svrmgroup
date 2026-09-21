@@ -340,14 +340,14 @@ const AirportTransfers = () => {
                 </label>
                 <label className="flex flex-col gap-1.5">
                   <span className="eyebrow">Phone (optional)</span>
-                  <input
-                    type="tel"
-                    autoComplete="tel"
+                  <PhoneField
                     value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
+                    onChange={setPhone}
                     className={inputCls}
+                    placeholder="Phone number"
                   />
                 </label>
+
               </div>
             </div>
 

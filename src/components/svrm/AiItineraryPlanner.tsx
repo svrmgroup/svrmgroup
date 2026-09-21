@@ -214,7 +214,8 @@ const AiItineraryPlanner = () => {
           </div>
           <div>
             <label className={label} htmlFor="ai-phone">Phone / WhatsApp</label>
-            <input id="ai-phone" value={phone} onChange={(e) => setPhone(e.target.value)} className={field} autoComplete="tel" />
+            <PhoneField id="ai-phone" value={phone} onChange={setPhone} className={field} placeholder="Phone number" ariaLabel="Phone or WhatsApp number" />
+
           </div>
         </div>
 
