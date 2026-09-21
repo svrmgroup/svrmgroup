@@ -204,7 +204,7 @@ const AiItineraryPlanner = () => {
             className="inline-flex items-center justify-center gap-2 text-xs uppercase tracking-[0.28em] text-gold border border-primary/60 px-6 py-4 hover:bg-primary hover:text-primary-foreground transition-colors disabled:opacity-60"
           >
             {loading && <Loader2 className="h-4 w-4 animate-spin" />}
-            {loading ? "Designing your days…" : `Create my ${dayCount}-day itinerary`}
+            {loading ? "Designing your itinerary…" : "Create my itinerary"}
           </button>
           <a
             href={waHref}
