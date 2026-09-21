@@ -42,10 +42,10 @@ const Travel = () => {
   return (
     <main className="bg-background text-foreground min-h-screen">
       <Seo
-        title={"Luxury Chauffeur Cape Town | Maybach & S-Class — SVRM"}
-        description={"VIP chauffeur service in Cape Town with Mercedes-Maybach S-Class, S-Class, Range Rover and Rolls-Royce. NDA-bound, 24/7."}
+        title={"Private Fleet, Jets & Yachts Cape Town | SVRM Group"}
+        description={"Cape Town's private travel fleet under one concierge — chauffeured cars, private jets, helicopter transfers and superyacht charter. One brief, everything arranged."}
         path="/travel"
-        keywords="chauffeur service Cape Town, luxury chauffeur Cape Town, Maybach chauffeur Cape Town, Mercedes-Maybach chauffeur Cape Town, Maybach S-Class Cape Town, S Class chauffeur Cape Town, Mercedes GLS hire Cape Town, Mercedes-Benz GLS chauffeur Cape Town, GLS with driver Cape Town, luxury 7 seater SUV chauffeur, premium SUV transfer Cape Town, private driver Cape Town, VIP chauffeur Cape Town, luxury airport transfer Cape Town, VIP chauffeur service, private airport transfer Cape Town, Mercedes S-Class chauffeur, BMW 7 Series with driver, Rolls-Royce Phantom chauffeur, Range Rover chauffeur Cape Town, executive transfers South Africa, private jet charter Cape Town, empty leg jet Cape Town, helicopter transfer Cape Town, scenic helicopter flight, superyacht charter Cape Town, V&A Waterfront yacht hire, wedding car hire Cape Town, corporate roadshow transport, celebrity chauffeur Cape Town, close protection driver, group transfers Sprinter, luxury Winelands day trip"
+        keywords="luxury car fleet Cape Town, private jet charter Cape Town, empty leg jet Cape Town, helicopter transfer Cape Town, scenic helicopter flight Cape Town, superyacht charter Cape Town, yacht hire V&A Waterfront, private aviation Cape Town, helicopter charter Western Cape, luxury yacht charter South Africa, private boat charter Cape Town, jet charter South Africa, executive travel Cape Town, corporate roadshow transport, group transfers Sprinter, luxury Winelands day trip, private travel concierge Cape Town, chauffeured fleet Cape Town, wedding car hire Cape Town"
 
         image={travelOg}
         jsonLd={[{
