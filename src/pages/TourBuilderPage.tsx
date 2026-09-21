@@ -6,7 +6,7 @@ import { Seo } from "@/components/Seo";
 
 const TourBuilderPage = () => (
   <main className="bg-background text-foreground min-h-screen">
-    <Seo title={"Build a Custom Cape Town Tour | Bespoke Itinerary — SVRM"} description={"Design a bespoke Cape Town or South African tour — pick activities, duration and travellers, see an indicative range, and SVRM quotes against your exact brief."} path="/tours/builder" keywords="custom Cape Town tour, bespoke itinerary South Africa, tour builder, private tour planner Cape Town, design my safari, tailor-made Garden Route trip" />
+    <Seo title={"Build a Custom Cape Town Tour | Bespoke Itinerary — SVRM"} description={"Design a bespoke Cape Town or South African tour — pick activities, duration and travellers, see an indicative range, and SVRM quotes against your exact brief."} path="/tours/builder" keywords="custom Cape Town tour, bespoke itinerary South Africa, tour builder, private tour planner Cape Town, design my safari, tailor-made Garden Route trip, build my own Cape Town tour, custom safari itinerary South Africa, private itinerary planner Cape Town, multi day Cape Town itinerary, tailor made South Africa holiday, plan a trip to Cape Town with a guide, custom Garden Route itinerary, group itinerary Cape Town" />
     <Nav />
     <PageHero
       eyebrow="Create your own"

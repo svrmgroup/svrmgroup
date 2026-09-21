@@ -9,7 +9,7 @@ const Honeymoon = () => (
       title="Luxury Honeymoon Cape Town | Private Concierge — SVRM"
       description="A luxury honeymoon in Cape Town arranged end to end by SVRM — private chauffeur, villa stays, romantic experiences, yacht days and the Cape Peninsula. Discreet, bespoke, handled."
       path="/honeymoon-cape-town"
-      keywords="luxury honeymoon Cape Town, honeymoon Cape Town, luxury honeymoon South Africa, romantic experiences Cape Town, honeymoon concierge Cape Town, private honeymoon planner South Africa"
+      keywords="luxury honeymoon Cape Town, honeymoon Cape Town, luxury honeymoon South Africa, romantic experiences Cape Town, honeymoon concierge Cape Town, private honeymoon planner South Africa, honeymoon packages Cape Town, honeymoon packages South Africa, best honeymoon destination South Africa, luxury honeymoon planner Cape Town, honeymoon villa Camps Bay, honeymoon safari South Africa, honeymoon chauffeur Cape Town, private honeymoon tour Cape Town, romantic getaway Cape Town, romantic dinner Cape Town, sunset cruise for couples Cape Town, couples spa Cape Town, honeymoon hotel Cape Town, honeymoon itinerary Cape Town 7 days, all inclusive honeymoon South Africa, honeymoon yacht charter Cape Town, helicopter proposal Cape Town, Winelands honeymoon, honeymoon photographer Cape Town, luxury couples experiences Western Cape"
       image={heroImg}
       jsonLd={{
         "@context": "https://schema.org",
