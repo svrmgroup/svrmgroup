@@ -299,8 +299,9 @@ const AdminManualBookings = () => {
               <input type="email" value={form.client_email} onChange={(e) => setForm((f) => ({ ...f, client_email: e.target.value }))} className={inputCls} />
             </Field>
             <Field label="Phone (WhatsApp)">
-              <input placeholder="+27..." value={form.client_phone} onChange={(e) => setForm((f) => ({ ...f, client_phone: e.target.value }))} className={inputCls} />
+              <PhoneField value={form.client_phone} onChange={(v) => setForm((f) => ({ ...f, client_phone: v }))} className={inputCls} placeholder="82 123 4567" />
             </Field>
+
             <Field label="Currency">
               <select value={form.currency} onChange={(e) => setForm((f) => ({ ...f, currency: e.target.value }))} className={inputCls}>
                 <option>ZAR</option><option>USD</option><option>EUR</option><option>GBP</option>
@@ -424,6 +425,8 @@ const AdminManualBookings = () => {
                       <Info label="Client">{r.client_name}</Info>
                       <Info label="Email">{r.client_email || "—"}</Info>
                       <Info label="Phone">{r.client_phone || "—"}</Info>
+                      <Info label="Country">{countryLabel(r.client_phone) || "—"}</Info>
+
                       <Info label="Paid / Balance">
                         {Number(r.subtotal) > 0 && Number(r.amount_paid || 0) >= Number(r.subtotal)
                           ? <span className="text-gold">Paid in full</span>
