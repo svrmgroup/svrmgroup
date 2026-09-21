@@ -8,3 +8,5 @@ project_id = "fgwpievpzhybyiugsnhy"
 
 
 
+  [functions.ai-itinerary]
+    verify_jwt = false
