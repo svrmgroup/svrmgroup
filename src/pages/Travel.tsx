@@ -153,6 +153,12 @@ const Travel = () => {
                   {m === "cars" ? "Cars" : m === "jets" ? "Private Jets" : m === "helicopters" ? "Helicopters" : "Yachts"}
                 </TabsTrigger>
               ))}
+              <Link
+                to="/airport-transfers"
+                className="text-[11px] uppercase tracking-[0.24em] px-4 py-2 border border-border/60 rounded-none text-muted-foreground hover:text-foreground hover:border-primary transition-colors"
+              >
+                Airport Transfers
+              </Link>
               <TabsTrigger
                 value="itinerary"
                 className="text-[11px] uppercase tracking-[0.24em] px-4 py-2 border border-gold/50 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary rounded-none text-gold"
@@ -165,12 +171,6 @@ const Travel = () => {
               >
                 Plan My Itinerary
               </TabsTrigger>
-              <Link
-                to="/airport-transfers"
-                className="text-[11px] uppercase tracking-[0.24em] px-4 py-2 border border-border/60 rounded-none text-muted-foreground hover:text-foreground hover:border-primary transition-colors"
-              >
-                Airport Transfers
-              </Link>
             </TabsList>
 
             <TabsContent value="cars" className="mt-0">
