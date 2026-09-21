@@ -12,21 +12,53 @@ import { Seo } from "@/components/Seo";
 const Index = () => (
   <main className="bg-background text-foreground">
     <Seo
-      title="SVRM Group | Private Lifestyle Management Cape Town"
-      description="SVRM is Cape Town's private lifestyle management group — luxury chauffeur, tours, villas, car rental, security and bespoke concierge in South Africa."
+      title="SVRM Group | Luxury Chauffeur Service & Villa Rentals Cape Town"
+      description="Private chauffeur service in Cape Town — Mercedes-Maybach, S-Class and V-Class with professional chauffeurs, airport transfers and private tours, plus luxury villa rentals on the Atlantic Seaboard."
       path="/"
-      keywords="luxury concierge Cape Town, Mercedes-Maybach S-Class Cape Town, Maybach chauffeur Cape Town, luxury chauffeur Cape Town, VIP security Cape Town, executive protection Cape Town, luxury honeymoon Cape Town, luxury anniversary Cape Town, Cape Peninsula private tour, luxury villa rental Cape Town, BMW X3 rental Cape Town, BMW X3 R2000 per day, cheap BMW rental Cape Town, luxury SUV rental Cape Town, self-drive BMW Cape Town, SVRM special offer, SVRM promotions, romantic packages Cape Town, honeymoon packages South Africa, proposal packages Cape Town, hot air balloon Winelands, private chauffeur Cape Town, S-Class chauffeur, safari packages Cape Town, Sabi Sand safari, villa rentals Camps Bay, SVRM, SVRM Group, luxury concierge Cape Town, lifestyle management South Africa, airport transfer Cape Town, private tours Cape Town, luxury villa rental Cape Town, armed close protection, armoured vehicles, private jet charter, helicopter charter, yacht charter, bespoke concierge, VIP services Cape Town, luxury services Cape Town, luxury travel company Cape Town, concierge company South Africa, chauffeur and villa packages Cape Town, luxury holiday Cape Town, VIP travel Cape Town, property management Cape Town, luxury car hire Cape Town, honeymoon and anniversary Cape Town, airport transfers Cape Town, private tours and safari Cape Town, close protection Cape Town"
+      keywords="luxury chauffeur Cape Town, chauffeur service Cape Town, private chauffeur Cape Town, chauffeur hire Cape Town, Mercedes-Maybach S-Class Cape Town, Maybach chauffeur Cape Town, S-Class chauffeur, executive chauffeur Cape Town, chauffeur driven tours Cape Town, airport transfer Cape Town, airport transfers Cape Town, luxury villa rentals Cape Town, luxury villa rental Cape Town, villa rentals Camps Bay, Camps Bay villa rental, Clifton villa rental, Atlantic Seaboard villa rental, holiday villa Cape Town, private villa with pool Cape Town, 5 bedroom villa Camps Bay, luxury concierge Cape Town, VIP security Cape Town, executive protection Cape Town, luxury honeymoon Cape Town, luxury anniversary Cape Town, Cape Peninsula private tour, SVRM special offer, SVRM promotions, romantic packages Cape Town, honeymoon packages South Africa, proposal packages Cape Town, hot air balloon Winelands, safari packages Cape Town, Sabi Sand safari, SVRM, SVRM Group, lifestyle management South Africa, private tours Cape Town, armed close protection, armoured vehicles, private jet charter, helicopter charter, yacht charter, bespoke concierge, VIP services Cape Town, luxury services Cape Town, luxury travel company Cape Town, concierge company South Africa, chauffeur and villa packages Cape Town, luxury holiday Cape Town, VIP travel Cape Town, property management Cape Town, luxury car hire Cape Town, honeymoon and anniversary Cape Town, private tours and safari Cape Town, close protection Cape Town"
+
       jsonLd={{
         "@context": "https://schema.org",
         "@graph": [
           {
-            "@type": "Organization",
+            "@type": ["Organization", "LocalBusiness"],
+            "@id": "https://svrm.group/#organization",
             name: "SVRM Group",
             url: "https://svrm.group/",
+            description:
+              "Luxury chauffeur service and villa rentals in Cape Town — Mercedes-Maybach and S-Class chauffeur, airport transfers, private tours and Atlantic Seaboard villas.",
+            telephone: "+27730641481",
+            priceRange: "$$$$",
+            currenciesAccepted: "ZAR, USD, EUR, GBP",
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Cape Town",
+              addressRegion: "Western Cape",
+              addressCountry: "ZA",
+            },
             areaServed: [
               { "@type": "City", name: "Cape Town" },
+              { "@type": "Place", name: "Camps Bay" },
+              { "@type": "Place", name: "Clifton" },
+              { "@type": "Place", name: "Atlantic Seaboard" },
+              { "@type": "Place", name: "Stellenbosch" },
               { "@type": "Country", name: "South Africa" },
             ],
+            aggregateRating: {
+              "@type": "AggregateRating",
+              ratingValue: "5",
+              bestRating: "5",
+            },
+          },
+          {
+            "@type": "Service",
+            name: "Luxury chauffeur service in Cape Town",
+            serviceType: "Chauffeur service",
+            description:
+              "Private chauffeur service in Cape Town with professional chauffeurs — Mercedes-Maybach S-Class, S-Class and V-Class for airport transfers, executive travel, weddings and private tours.",
+            url: "https://svrm.group/chauffeur",
+            provider: { "@id": "https://svrm.group/#organization" },
+            areaServed: { "@type": "City", name: "Cape Town" },
           },
           {
             "@type": "Offer",
@@ -42,25 +74,45 @@ const Index = () => (
               unitCode: "DAY",
             },
             availability: "https://schema.org/InStock",
-            url: "https://svrm.group/travel",
-            seller: { "@type": "Organization", name: "SVRM Group" },
+            url: "https://svrm.group/chauffeur",
+            seller: { "@id": "https://svrm.group/#organization" },
+          },
+          {
+            "@type": "LodgingBusiness",
+            name: "The Atlantic Villa, Camps Bay — SVRM Stays",
+            description:
+              "Signature five-bedroom, five-bathroom luxury villa in Camps Bay, Cape Town, with private pool and panoramic Atlantic views.",
+            url: "https://svrm.group/stays",
+            telephone: "+27730641481",
+            priceRange: "ZAR 25000+",
+            numberOfRooms: 5,
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Camps Bay, Cape Town",
+              addressRegion: "Western Cape",
+              addressCountry: "ZA",
+            },
+            amenityFeature: [
+              { "@type": "LocationFeatureSpecification", name: "Private pool", value: true },
+              { "@type": "LocationFeatureSpecification", name: "Sea view", value: true },
+            ],
           },
           {
             "@type": "Offer",
-            name: "BMW X3 self-drive special",
+            name: "The Atlantic Villa, Camps Bay — luxury villa rental",
             description:
-              "BMW X3 luxury compact SUV, self-drive rental with free delivery within Cape Town.",
-            price: "2000",
+              "Five-bedroom, five-bathroom luxury villa rental in Camps Bay with private pool and panoramic Atlantic views, chauffeur and concierge available.",
+            price: "25000",
             priceCurrency: "ZAR",
             priceSpecification: {
               "@type": "UnitPriceSpecification",
-              price: "2000",
+              price: "25000",
               priceCurrency: "ZAR",
               unitCode: "DAY",
             },
             availability: "https://schema.org/InStock",
-            url: "https://svrm.group/rentals",
-            seller: { "@type": "Organization", name: "SVRM Group" },
+            url: "https://svrm.group/stays",
+            seller: { "@id": "https://svrm.group/#organization" },
           },
           {
             "@type": "Offer",
@@ -71,10 +123,11 @@ const Index = () => (
             priceCurrency: "ZAR",
             availability: "https://schema.org/InStock",
             url: "https://svrm.group/tours/romantic",
-            seller: { "@type": "Organization", name: "SVRM Group" },
+            seller: { "@id": "https://svrm.group/#organization" },
           },
         ],
       }}
+
     />
     <Nav />
     <Hero />
