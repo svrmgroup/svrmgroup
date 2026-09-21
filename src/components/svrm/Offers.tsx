@@ -15,6 +15,7 @@ import maybach from "@/assets/vehicles/maybach.jpg";
 import capePeninsula from "@/assets/tours/cape-peninsula.jpg";
 import securityImg from "@/assets/security/bmw7-armored.jpg";
 import villa from "@/assets/svc-stays-villa.jpg";
+import campsBayVilla from "@/assets/stays/user/camps-bay-5bed-Living_room_1.webp.asset.json";
 import { useCurrency } from "@/lib/currency";
 import { useCmsItems } from "@/hooks/useCmsItems";
 import { resolveImage } from "@/lib/cmsImages";
@@ -86,6 +87,20 @@ const offers: Offer[] = [
     image: securityImg,
   },
 ];
+
+/** Always shown, even when CMS offers are configured. */
+const featuredVilla: Offer = {
+  eyebrow: "Featured Villa",
+  title: "The Atlantic Villa, Camps Bay",
+  detail: "Five bedrooms, five bathrooms, private pool and panoramic Atlantic views.",
+  priceZAR: 25000,
+  pricePrefix: "From ",
+  priceSuffix: "/ night",
+  cta: "View Villa",
+  to: "/stays",
+  image: campsBayVilla.url,
+  special: true,
+};
 
 const Offers = () => {
   const autoplay = useRef(
