@@ -31,7 +31,7 @@ const Stays = () => {
 
   useEffect(() => {
     const cat = params.get("cat");
-    if (cat && (["short","long","buysell"] as const).includes(cat as TopMode)) {
+    if (cat && (["short","long","manage","buysell"] as const).includes(cat as TopMode)) {
       setMode(cat as TopMode);
     }
   }, [params]);
@@ -83,13 +83,13 @@ const Stays = () => {
         <div className="max-w-7xl mx-auto px-6">
           <Tabs value={mode} onValueChange={(v) => setMode(v as TopMode)} className="w-full">
             <TabsList className="flex flex-wrap h-auto bg-transparent justify-start gap-2 p-0 mb-8">
-              {(["short", "long", "buysell"] as TopMode[]).map((m) => (
+              {(["short", "long", "manage", "buysell"] as TopMode[]).map((m) => (
                 <TabsTrigger
                   key={m}
                   value={m}
                   className="text-[11px] uppercase tracking-[0.24em] px-4 py-2 border border-border/60 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary rounded-none"
                 >
-                  {m === "short" ? "Short-term" : m === "long" ? "Long-term" : "Buy & Sell"}
+                  {m === "short" ? "Short-term" : m === "long" ? "Long-term" : m === "manage" ? "Property Management" : "Buy & Sell"}
                 </TabsTrigger>
               ))}
             </TabsList>
@@ -150,6 +150,10 @@ const Stays = () => {
             <TabsContent value="long" className="mt-0 pb-12">
               <h2 className="font-serif text-3xl md:text-4xl mb-8 text-foreground">Long-term residences</h2>
               <LongTermStayForm />
+            </TabsContent>
+
+            <TabsContent value="manage" className="mt-0 pb-12">
+              <PropertyManagementSection />
             </TabsContent>
 
             <TabsContent value="buysell" className="mt-0 pb-12">
