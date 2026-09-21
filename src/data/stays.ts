@@ -45,9 +45,25 @@ export interface Stay {
   type: StayType;
   /** Sourced via SVRM's Nox Rentals partnership */
   nox?: boolean;
+  /** Pin to the top of the list */
+  featured?: boolean;
+  /** Show the fromZAR price on the card (defaults to nox) */
+  showPrice?: boolean;
 }
 
 export const stays: Stay[] = [
+  {
+    slug: "camps-bay-5-bed-signature-villa",
+    name: "The Atlantic Villa, Camps Bay",
+    area: "Camps Bay",
+    beds: "5 bed · 5 bath · pool · sea view",
+    fromZAR: 25000,
+    image: (await import("@/assets/stays/user/camps-bay-5bed-Living_room_1.webp.asset.json")).default.url,
+    blurb: "A curated five-bedroom Camps Bay residence with panoramic Atlantic views, private pool and direct beach access moments away.",
+    type: "villa",
+    featured: true,
+    showPrice: true,
+  },
   { slug: "nox-1bed-cape-town-apt-stonewood-at-the-granger", name: "Stonewood at The Granger", area: "City Centre", beds: "1 bed \u00b7 CBD", fromZAR: 1800, image: nx_1bed_cape_town_apt_stonewood_at_the_granger.url, blurb: "Compact CBD studio at The Granger \u2014 walk to everywhere, budget entry.", type: "apartment", nox: true },
   { slug: "nox-beautifully-decorated-apartment-in-cape-town-urban-signature", name: "Urban Signature Apartment", area: "City Centre", beds: "1 bed \u00b7 designer", fromZAR: 2100, image: nx_beautifully_decorated_apartment_in_cape_town_urban_signature.url, blurb: "Beautifully styled 1-bed in the heart of the city.", type: "apartment", nox: true },
   { slug: "nox-old-cape-quarter-1-bedroom-units", name: "Old Cape Quarter Residences", area: "De Waterkant", beds: "1 bed \u00b7 village", fromZAR: 2400, image: nx_old_cape_quarter_1_bedroom_units.url, blurb: "Old Cape Quarter 1-bed with village caf\u00e9s at your doorstep.", type: "apartment", nox: true },
