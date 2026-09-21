@@ -122,12 +122,13 @@ const Stays = () => {
 
                 {SUB_TYPES.map((t) => {
                   const list = stays.filter((s) => s.type === t);
-                  const sorted =
+                  const byPrice =
                     sort === "asc"
                       ? [...list].sort((a, b) => a.fromZAR - b.fromZAR)
                       : sort === "desc"
                         ? [...list].sort((a, b) => b.fromZAR - a.fromZAR)
                         : list;
+                  const sorted = [...byPrice].sort((a, b) => Number(b.featured) - Number(a.featured));
                   return (
                     <TabsContent key={t} value={t} className="mt-0">
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
