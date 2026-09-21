@@ -128,6 +128,38 @@ const Travel = () => {
               name: "Can you arrange private jets, helicopters and yachts too?",
               acceptedAnswer: { "@type": "Answer", text: "Yes — jets, helicopter transfers and superyacht charters are sourced through vetted operators, fully crewed and briefed, all under the same concierge." },
             },
+            {
+              "@type": "Question",
+              name: "What is the hourly rate for a chauffeur in Cape Town?",
+              acceptedAnswer: { "@type": "Answer", text: "Hourly chauffeur hire is available with a minimum booking, and the rate depends on the vehicle — Mercedes V-Class, S-Class, GLS, Range Rover or the Mercedes-Maybach S-Class. Send your hours and route and we quote in writing before you commit." },
+            },
+            {
+              "@type": "Question",
+              name: "Which areas of Cape Town do your chauffeurs cover?",
+              acceptedAnswer: { "@type": "Answer", text: "All of Cape Town — the V&A Waterfront, Camps Bay, Clifton, Bantry Bay, Sea Point, the Atlantic Seaboard, City Bowl, Constantia, Hout Bay and Bishopscourt — plus the Winelands at Stellenbosch, Franschhoek and Paarl, the Cape Peninsula and the Garden Route." },
+            },
+            {
+              "@type": "Question",
+              name: "Do you provide English-speaking chauffeurs for international guests?",
+              acceptedAnswer: { "@type": "Answer", text: "Yes. Every SVRM chauffeur is English-speaking, professionally trained, NDA-bound and briefed on your itinerary before arrival, with local knowledge of restaurants, wine estates and routes." },
+            },
+            {
+              "@type": "Question",
+              name: "Can I book a chauffeur for a wedding or corporate event in Cape Town?",
+              acceptedAnswer: { "@type": "Answer", text: "Yes — wedding cars, matric dances, corporate roadshows, conference and delegation transfers, and multi-vehicle convoys with a single point of contact and a written schedule per vehicle." },
+            },
+            {
+              "@type": "Question",
+              name: "Can a chauffeur drive us to the Winelands for a wine tour?",
+              acceptedAnswer: { "@type": "Answer", text: "Yes — full-day chauffeured wine tours to Stellenbosch, Franschhoek and Constantia, with tastings booked ahead and no one in your party needing to drive." },
+            },
+          ],
+        }, {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://svrm.group/" },
+            { "@type": "ListItem", position: 2, name: "Chauffeur Service Cape Town", item: "https://svrm.group/chauffeur" },
           ],
         }]}
       />
@@ -411,6 +443,86 @@ const Travel = () => {
       </section>
 
       <section className="bg-background py-20 md:py-24 border-t border-border/40">
+        <div className="max-w-5xl mx-auto px-6">
+          <p className="eyebrow">Chauffeur hire · Cape Town</p>
+          <h2 className="font-serif text-3xl md:text-4xl mt-4 text-foreground">
+            Private chauffeur service across Cape Town.
+          </h2>
+          <p className="text-muted-foreground text-sm md:text-base leading-relaxed mt-5 max-w-3xl">
+            SVRM Group is a luxury chauffeur company in Cape Town offering chauffeur-driven cars by the
+            hour, the day, the week or the length of your stay. Our fleet runs from the Mercedes-Maybach
+            S-Class and Mercedes S-Class to the GLS, V-Class and Range Rover, each with a professionally
+            trained, English-speaking, NDA-bound chauffeur who knows the city — airport transfers from Cape
+            Town International, executive and corporate transfers, wedding cars, private Cape Peninsula and
+            Table Mountain tours, and chauffeured wine tours through Stellenbosch and Franschhoek.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-12">
+            <div>
+              <h3 className="font-serif text-2xl text-foreground">Areas we chauffeur</h3>
+              <ul className="mt-5 space-y-2 text-sm text-foreground/90">
+                {[
+                  "V&A Waterfront & City Bowl",
+                  "Camps Bay, Clifton, Bantry Bay & Sea Point",
+                  "Atlantic Seaboard & Hout Bay",
+                  "Constantia, Bishopscourt & Southern Suburbs",
+                  "Cape Town International Airport (CPT)",
+                  "Stellenbosch, Franschhoek & Paarl Winelands",
+                  "Cape Peninsula, Cape Point & Simon's Town",
+                  "Hermanus, Garden Route & inter-city journeys",
+                ].map((a) => (
+                  <li key={a} className="flex items-start gap-3">
+                    <span className="mt-2 h-1 w-1 rounded-full bg-gold shrink-0" />
+                    {a}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-serif text-2xl text-foreground">What guests book us for</h3>
+              <ul className="mt-5 space-y-2 text-sm text-foreground/90">
+                {[
+                  "Luxury airport transfers with meet-and-greet",
+                  "Hourly, full-day & multi-day chauffeur hire",
+                  "Executive, corporate & roadshow transfers",
+                  "Wedding, anniversary & matric dance cars",
+                  "Private guided tours with a driver-guide",
+                  "Chauffeured Winelands wine tours",
+                  "Discreet VIP & close-protection driving",
+                  "Yacht, helicopter & private jet transfers",
+                ].map((a) => (
+                  <li key={a} className="flex items-start gap-3">
+                    <span className="mt-2 h-1 w-1 rounded-full bg-gold shrink-0" />
+                    {a}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <p className="text-muted-foreground text-sm leading-relaxed mt-10 max-w-3xl">
+            Prefer a single vehicle and chauffeur for your whole stay? Our{" "}
+            <a href="#itinerary-top" className="text-gold underline-offset-4 hover:underline">
+              seven-day chauffeured Cape Town itinerary
+            </a>{" "}
+            takes 10% off the vehicle total, and pairs naturally with our{" "}
+            <Link to="/airport-transfers" className="text-gold underline-offset-4 hover:underline">
+              airport transfers
+            </Link>
+            ,{" "}
+            <Link to="/tours" className="text-gold underline-offset-4 hover:underline">
+              private tours
+            </Link>{" "}
+            and{" "}
+            <Link to="/stays" className="text-gold underline-offset-4 hover:underline">
+              luxury villas in Camps Bay and the Atlantic Seaboard
+            </Link>
+            .
+          </p>
+        </div>
+      </section>
+
+      <section className="bg-background py-20 md:py-24 border-t border-border/40">
         <div className="max-w-4xl mx-auto px-6">
           <p className="eyebrow">Frequently asked · Chauffeur hire Cape Town</p>
           <h2 className="font-serif text-3xl md:text-4xl mt-4 text-foreground">Chauffeur questions.</h2>
@@ -439,6 +551,26 @@ const Travel = () => {
               {
                 q: "Can you arrange private jets, helicopters and yachts too?",
                 a: "Yes — everything on this page sits under one concierge. Jets, helicopter transfers and superyacht charters are sourced through vetted operators, fully crewed and fully briefed.",
+              },
+              {
+                q: "What is the hourly rate for a chauffeur in Cape Town?",
+                a: "Hourly hire is available with a minimum booking and the rate follows the vehicle — V-Class, S-Class, GLS, Range Rover or the Mercedes-Maybach S-Class. Send us your hours and route and you get a written quote before anything is confirmed.",
+              },
+              {
+                q: "Which areas of Cape Town do you cover?",
+                a: "All of Cape Town — V&A Waterfront, Camps Bay, Clifton, Bantry Bay, Sea Point, the Atlantic Seaboard, City Bowl, Constantia and Hout Bay — plus Stellenbosch, Franschhoek and Paarl in the Winelands, the Cape Peninsula, Hermanus and the Garden Route.",
+              },
+              {
+                q: "Are your chauffeurs English-speaking?",
+                a: "Yes. Every chauffeur is English-speaking, professionally trained, NDA-bound and briefed on your itinerary before you land, with real local knowledge of restaurants, estates and routes.",
+              },
+              {
+                q: "Can I book a chauffeur for a wedding or corporate event?",
+                a: "Yes — wedding cars, matric dances, corporate roadshows, conference and delegation transfers, and multi-vehicle convoys with one point of contact and a written schedule per vehicle.",
+              },
+              {
+                q: "Can a chauffeur take us on a Winelands wine tour?",
+                a: "Yes — full-day chauffeured wine tours through Stellenbosch, Franschhoek and Constantia, with tastings arranged ahead and nobody in your party needing to drive.",
               },
             ].map((f) => (
               <div key={f.q} className="py-6">
