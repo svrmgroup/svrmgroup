@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -27,8 +27,13 @@ const Contact = lazy(() => import("./pages/Contact.tsx"));
 const Rentals = lazy(() => import("./pages/Rentals.tsx"));
 const Security = lazy(() => import("./pages/Security.tsx"));
 const AirportTransfers = lazy(() => import("./pages/AirportTransfers.tsx"));
-const Chauffeur = lazy(() => import("./pages/Chauffeur.tsx"));
 const Honeymoon = lazy(() => import("./pages/Honeymoon.tsx"));
+
+// /travel is retired — the chauffeur & fleet page now lives at /chauffeur.
+const TravelRedirect = () => {
+  const { search } = useLocation();
+  return <Navigate to={`/chauffeur${search}`} replace />;
+};
 const Anniversary = lazy(() => import("./pages/Anniversary.tsx"));
 
 // ---- Admin console: fully lazy — never ships to public visitors -----------
