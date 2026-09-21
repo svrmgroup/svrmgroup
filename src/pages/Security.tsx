@@ -101,8 +101,8 @@ const Security = () => {
 
       <RelatedLinks
         links={[
-          { to: "/travel?cat=cars", label: "Chauffeur service" },
-          { to: "/travel?cat=cars", label: "Mercedes-Maybach S-Class" },
+          { to: "/chauffeur?cat=cars", label: "Chauffeur service" },
+          { to: "/chauffeur?cat=cars", label: "Mercedes-Maybach S-Class" },
           { to: "/airport-transfers", label: "Secure airport transfers" },
           { to: "/experiences", label: "Luxury concierge" },
           { to: "/stays", label: "Villas & stays" },

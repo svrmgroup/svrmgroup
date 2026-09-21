@@ -67,11 +67,11 @@ const Anniversary = () => (
         "A milestone week — Cape Town, the Winelands and a safari extension, sequenced end to end.",
       ]}
       links={[
-        { to: "/travel?cat=cars", label: "Mercedes-Maybach S-Class" },
-        { to: "/travel?cat=cars", label: "Chauffeur service" },
+        { to: "/chauffeur?cat=cars", label: "Mercedes-Maybach S-Class" },
+        { to: "/chauffeur?cat=cars", label: "Chauffeur service" },
         { to: "/stays", label: "Villas & stays" },
         { to: "/tours/cape-peninsula", label: "Cape Peninsula tour" },
-        { to: "/travel?cat=yachts", label: "Yacht charter" },
+        { to: "/chauffeur?cat=yachts", label: "Yacht charter" },
         { to: "/tours/romantic", label: "Romantic packages" },
         { to: "/experiences", label: "Build your own experience" },
         { to: "/honeymoon-cape-town", label: "Honeymoon experiences" },

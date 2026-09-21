@@ -3,7 +3,7 @@
 
 export const WHATSAPP_MESSAGES: Record<string, string> = {
   "/": "Hi SVRM Group, I'd like to enquire about your services.",
-  "/travel": "Hi SVRM Group, I'd like to enquire about travel arrangements.",
+  "/chauffeur": "Hi SVRM Group, I'd like to enquire about travel arrangements.",
   "/rentals": "Hi SVRM Group, I'd like to enquire about vehicle rentals.",
   "/stays": "Hi SVRM Group, I'd like to enquire about accommodation and villa stays.",
   "/tours": "Hi SVRM Group, I'd like to enquire about a private tour.",
