@@ -20,7 +20,7 @@ const Hero = () => {
 
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
         <p className="eyebrow animate-fade-up" style={{ animationDelay: "0.1s" }}>
-          Cape Town · Lifestyle Management
+          Cape Town & V&A Waterfront · Lifestyle Management
         </p>
 
         <h1
