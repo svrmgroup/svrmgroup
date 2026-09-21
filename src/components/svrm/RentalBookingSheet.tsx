@@ -11,6 +11,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import ExtrasPicker from "./ExtrasPicker";
 import TwoStepDateRange from "./TwoStepDateRange";
+import PhoneField from "./PhoneField";
+
 
 const schema = z.object({
   name: z.string().trim().min(1).max(100),
@@ -148,13 +150,13 @@ const RentalBookingSheet = ({ vehicle, open, onOpenChange }: Props) => {
                 maxLength={255}
               />
             </div>
-            <input
-              placeholder="Phone (optional)"
+            <PhoneField
               value={form.phone}
-              onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
+              onChange={(v) => setForm((f) => ({ ...f, phone: v }))}
               className="w-full bg-transparent border-b border-border/60 py-3 text-sm focus:border-primary focus:outline-none"
-              maxLength={40}
+              placeholder="Phone (optional)"
             />
+
             <textarea
               placeholder="Anything else?"
               value={form.message}
