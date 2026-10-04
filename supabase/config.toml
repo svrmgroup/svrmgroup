@@ -10,3 +10,6 @@ project_id = "fgwpievpzhybyiugsnhy"
 
   [functions.ai-itinerary]
     verify_jwt = false
+
+  [functions.itinerary-parse]
+    verify_jwt = false
