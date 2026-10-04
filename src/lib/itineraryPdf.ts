@@ -29,6 +29,12 @@ async function build(d: ItData): Promise<jsPDF> {
   const CW = W - M * 2;
   const BOTTOM = H - 64;
 
+  // jsPDF centers text without counting charSpace, which shifts spaced text
+  // off-centre; compensate by moving the anchor left by half the added spacing.
+  const centered = (t: string, yPos: number, charSpace = 0) => {
+    doc.text(t, W / 2 - (charSpace * t.length) / 2, yPos, { align: "center", charSpace });
+  };
+
   // ---------- COVER ----------
   doc.setFillColor(CHARCOAL); doc.rect(0, 0, W, H, "F");
   if (d.cover?.path) {
@@ -38,17 +44,17 @@ async function build(d: ItData): Promise<jsPDF> {
   const logo = await loadLogoDataUrl(s.logo_url, CHARCOAL);
   if (logo) doc.addImage(logo, "PNG", W / 2 - 40, 150, 80, 80);
   doc.setTextColor(CREAM); doc.setFont("helvetica", "bold"); doc.setFontSize(13);
-  doc.text((s.company_name || "SVRM GROUP").toUpperCase(), W / 2, 260, { align: "center", charSpace: 3 });
+  centered((s.company_name || "SVRM GROUP").toUpperCase(), 260, 3);
   doc.setDrawColor(GOLD); doc.setLineWidth(0.8); doc.line(W / 2 - 40, 278, W / 2 + 40, 278);
 
   doc.setTextColor(GOLD); doc.setFont("helvetica", "normal"); doc.setFontSize(10);
-  doc.text("PERSONALISED ITINERARY", W / 2, H / 2 - 10, { align: "center", charSpace: 4 });
+  centered("PERSONALISED ITINERARY", H / 2 - 10, 4);
   doc.setTextColor(CREAM); doc.setFont("times", "normal"); doc.setFontSize(38);
   const nameLines = doc.splitTextToSize(d.client.name || "Valued Guest", CW);
   doc.text(nameLines, W / 2, H / 2 + 34, { align: "center" });
   let cy = H / 2 + 34 + (nameLines.length - 1) * 40 + 30;
   doc.setFont("helvetica", "normal"); doc.setFontSize(11); doc.setTextColor(CREAM);
-  if (d.client.destination) { doc.text(d.client.destination.toUpperCase(), W / 2, cy, { align: "center", charSpace: 2 }); cy += 18; }
+  if (d.client.destination) { centered(d.client.destination.toUpperCase(), cy, 2); cy += 18; }
   const firstDate = d.client.arrival || d.days.find((x) => x.date)?.date;
   const lastDate = d.client.departure || [...d.days].reverse().find((x) => x.date)?.date;
   if (firstDate) {
@@ -58,7 +64,7 @@ async function build(d: ItData): Promise<jsPDF> {
   }
   if (d.client.ref) { doc.setFontSize(9); doc.setTextColor(MUTED); doc.text(`Ref ${d.client.ref}`, W / 2, cy, { align: "center" }); }
   doc.setTextColor(GOLD); doc.setFontSize(8.5);
-  doc.text("CHAUFFEUR  •  CONCIERGE  •  EXPERIENCES  •  ACCOMMODATION", W / 2, H - 90, { align: "center", charSpace: 1.5 });
+  centered("CHAUFFEUR  •  CONCIERGE  •  EXPERIENCES  •  ACCOMMODATION", H - 90, 1.5);
 
   // ---------- CONTENT PAGES ----------
   let y = 0;
