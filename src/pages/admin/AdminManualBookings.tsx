@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Plus, Trash2, Copy, MessageCircle, ChevronDown, FileDown, CheckCircle2 } from "lucide-react";
@@ -59,7 +60,12 @@ const emptyItem = (): LineItem => ({ label: "", qty: 1, unit: "night", amount: 0
 const AdminManualBookings = () => {
   const [rows, setRows] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
-  const [openId, setOpenId] = useState<string | null>(null);
+  const [openId, setOpenId] = useState<string | null>(() => new URLSearchParams(window.location.search).get("open"));
+  const [itinFor, setItinFor] = useState<Record<string, string>>({});
+  useEffect(() => {
+    (supabase as any).from("itineraries").select("id, booking_id").not("booking_id", "is", null).order("updated_at", { ascending: true })
+      .then(({ data }: any) => { const m: Record<string, string> = {}; (data || []).forEach((x: any) => { m[x.booking_id] = x.id; }); setItinFor(m); });
+  }, []);
   const [pdfEdit, setPdfEdit] = useState<{ booking: Booking; kind: "invoice" | "confirmation" | "thank_you" | "quotation" } | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
@@ -467,6 +473,12 @@ const AdminManualBookings = () => {
                       >
                         <FileDown className="h-3 w-3" /> Confirmation PDF
                       </button>
+                      <Link
+                        to={itinFor[r.id] ? `/admin/itineraries?id=${itinFor[r.id]}` : `/admin/itineraries?booking=${r.id}`}
+                        className="flex items-center gap-1.5 text-xs text-gold border border-primary/40 px-3 py-1.5 hover:bg-primary/10 transition-colors"
+                      >
+                        <FileDown className="h-3 w-3" /> {itinFor[r.id] ? "Itinerary" : "Create itinerary"}
+                      </Link>
                       <button
                         onClick={() => setPdfEdit({ booking: r, kind: "thank_you" })}
                         className="flex items-center gap-1.5 text-xs text-gold border border-primary/40 px-3 py-1.5 hover:bg-primary/10 transition-colors"

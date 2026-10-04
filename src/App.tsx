@@ -60,6 +60,7 @@ const AdminActivity = lazy(() => import("./pages/admin/AdminActivity"));
 const AdminRoles = lazy(() => import("./pages/admin/AdminRoles"));
 const AdminCMS = lazy(() => import("./pages/admin/AdminCMS"));
 const AdminChangeRequests = lazy(() => import("./pages/admin/AdminChangeRequests"));
+const AdminItineraries = lazy(() => import("./pages/admin/AdminItineraries"));
 const AdminMedia = lazy(() => import("./pages/admin/AdminMedia"));
 
 const queryClient = new QueryClient();
@@ -125,6 +126,7 @@ const App = () => (
                   <Route path="whatsapp" element={<AdminWhatsApp />} />
                   <Route path="cms" element={<AdminCMS />} />
                   <Route path="media" element={<AdminMedia />} />
+                  <Route path="itineraries" element={<AdminItineraries />} />
                   <Route path="email-templates" element={<AdminEmailTemplates />} />
                   <Route path="activity" element={<AdminActivity />} />
                   <Route path="roles" element={<AdminRoles />} />
