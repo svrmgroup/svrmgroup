@@ -29,6 +29,12 @@ async function build(d: ItData): Promise<jsPDF> {
   const CW = W - M * 2;
   const BOTTOM = H - 64;
 
+  // jsPDF centers text without counting charSpace, which shifts spaced text
+  // off-centre; compensate by moving the anchor left by half the added spacing.
+  const centered = (t: string, yPos: number, charSpace = 0) => {
+    doc.text(t, W / 2 - (charSpace * t.length) / 2, yPos, { align: "center", charSpace });
+  };
+
   // ---------- COVER ----------
   doc.setFillColor(CHARCOAL); doc.rect(0, 0, W, H, "F");
   if (d.cover?.path) {
