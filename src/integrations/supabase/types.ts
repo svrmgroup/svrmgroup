@@ -922,6 +922,83 @@ export type Database = {
           },
         ]
       }
+      itineraries: {
+        Row: {
+          booking_code: string | null
+          booking_id: string | null
+          client_name: string
+          created_at: string
+          created_by: string | null
+          data: Json
+          end_date: string | null
+          id: string
+          start_date: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          booking_code?: string | null
+          booking_id?: string | null
+          client_name?: string
+          created_at?: string
+          created_by?: string | null
+          data?: Json
+          end_date?: string | null
+          id?: string
+          start_date?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          booking_code?: string | null
+          booking_id?: string | null
+          client_name?: string
+          created_at?: string
+          created_by?: string | null
+          data?: Json
+          end_date?: string | null
+          id?: string
+          start_date?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "itineraries_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: false
+            referencedRelation: "manual_bookings"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      itinerary_images: {
+        Row: {
+          category: string
+          created_at: string
+          id: string
+          path: string
+          tags: string[]
+          title: string | null
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          id?: string
+          path: string
+          tags?: string[]
+          title?: string | null
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          id?: string
+          path?: string
+          tags?: string[]
+          title?: string | null
+        }
+        Relationships: []
+      }
       manual_bookings: {
         Row: {
           amount_paid: number
