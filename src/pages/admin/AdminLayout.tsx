@@ -6,7 +6,7 @@ import {
   LogOut, Inbox, Car, Calendar as CalIcon, MessageCircle, FileText,
   Building2, BarChart3, Receipt, Wallet, Users, ListChecks, Menu, X, Share, BookUser,
   UserCog, ClipboardList, Mail, ShieldCheck, Settings, Activity, ImagePlus, GitPullRequest, Contact as ContactIcon,
-  Image as ImageIcon, Map,
+  Image as ImageIcon, Map as MapIcon,
 } from "lucide-react";
 import Logo from "@/components/svrm/Logo";
 import NotificationBell from "@/components/svrm/NotificationBell";
@@ -75,7 +75,7 @@ const AdminLayout = () => {
 
       <p className={groupLabel}>Operations</p>
       <NavLink to="/admin/tasks" className={linkClass} onClick={close}><ListChecks className="h-4 w-4" /> Tasks</NavLink>
-      <NavLink to="/admin/itineraries" className={linkClass} onClick={close}><Map className="h-4 w-4" /> Itinerary Maker</NavLink>
+      <NavLink to="/admin/itineraries" className={linkClass} onClick={close}><MapIcon className="h-4 w-4" /> Itinerary Maker</NavLink>
 
       <p className={groupLabel}>Growth</p>
       <NavLink to="/admin/directory" className={linkClass} onClick={close}><BookUser className="h-4 w-4" /> Directory</NavLink>
