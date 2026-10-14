@@ -26,6 +26,12 @@ import sprinter16 from "@/assets/vehicles/sprinter16.jpg";
 import midibus22 from "@/assets/vehicles/midibus22.jpg";
 import bus32 from "@/assets/vehicles/bus32.jpg";
 import coach from "@/assets/vehicles/coach.jpg";
+import maybachVExterior from "@/assets/vehicles/maybach-vclass-exterior.webp.asset.json";
+import maybachVSeating from "@/assets/vehicles/maybach-vclass-seating.webp.asset.json";
+import maybachVEntertainment from "@/assets/vehicles/maybach-vclass-entertainment.webp.asset.json";
+import maybachVExterior4k from "@/assets/vehicles/maybach-vclass-exterior-4k.jpg.asset.json";
+import maybachVSeating4k from "@/assets/vehicles/maybach-vclass-seating-4k.jpg.asset.json";
+import maybachVEntertainment4k from "@/assets/vehicles/maybach-vclass-entertainment-4k.jpg.asset.json";
 
 export type VehicleTier = "Signature" | "Premium SUV" | "Executive" | "Everyday" | "Budget" | "Group Travel";
 
@@ -38,6 +44,7 @@ export interface Vehicle {
   /** Self-drive day rate in ZAR (Rentals page). Falls back to fromZAR when omitted. */
   rentalZAR?: number;
   image: string;
+  gallery?: { src: string; fullSrc: string; alt: string }[];
   tier: VehicleTier;
   selfDrive: boolean;
 }
@@ -45,6 +52,13 @@ export interface Vehicle {
 export const vehicles: Vehicle[] = [
   // Signature — flagship first
   { slug: "mercedes-maybach-s-class", name: "Mercedes-Maybach S-Class", tagline: "SVRM's flagship chauffeur experience.", fromZAR: 22000, image: maybach, tier: "Signature", selfDrive: false },
+  { slug: "maybach-v-class", name: "Maybach V-Class", tagline: "A private lounge on the move — quilted leather, reclining seats and a panoramic cabin for refined chauffeur journeys across Cape Town.", fromZAR: 20000, image: maybachVExterior.url, tier: "Signature", selfDrive: false,
+    gallery: [
+      { src: maybachVExterior.url, fullSrc: maybachVExterior4k.url, alt: "Two-tone exterior with SVRM number plate" },
+      { src: maybachVSeating.url, fullSrc: maybachVSeating4k.url, alt: "Quilted reclining lounge seating" },
+      { src: maybachVEntertainment.url, fullSrc: maybachVEntertainment4k.url, alt: "Private entertainment cabin" },
+    ],
+  },
   { slug: "rolls-royce-phantom", name: "Rolls-Royce Phantom", tagline: "The pinnacle of motoring, chauffeured.", fromZAR: 30500, image: phantom, tier: "Signature", selfDrive: false },
   { slug: "rolls-royce-cullinan", name: "Rolls-Royce Cullinan", tagline: "The summit of the SVRM fleet.", fromZAR: 37500, image: cullinan, tier: "Signature", selfDrive: false },
   { slug: "rolls-royce-ghost", name: "Rolls-Royce Ghost", tagline: "Silent presence, chauffeured.", fromZAR: 30000, image: ghost, tier: "Signature", selfDrive: false },

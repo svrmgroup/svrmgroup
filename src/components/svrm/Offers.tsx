@@ -19,6 +19,7 @@ import campsBayVilla from "@/assets/stays/villa-camps-bay/Living_room_1.webp";
 import { useCurrency } from "@/lib/currency";
 import { useCmsItems } from "@/hooks/useCmsItems";
 import { resolveImage } from "@/lib/cmsImages";
+import { vehicles } from "@/data/vehicles";
 
 type Offer = {
   eyebrow: string;
@@ -110,6 +111,7 @@ const Offers = () => {
   const { items: cmsOffers } = useCmsItems("offers");
 
   const staticImageBySlug: Record<string, string> = {
+    "maybach-v-class-chauffeur": vehicles.find((v) => v.slug === "maybach-v-class")?.image ?? maybach,
     "maybach-flagship-chauffeur": maybach,
     "luxury-honeymoon-cape-town": romantic,
     "luxury-anniversary-experience": villa,
@@ -130,9 +132,17 @@ const Offers = () => {
     special: /special/i.test(c.eyebrow || ""),
   }));
   const base = cmsMapped.length > 0 ? cmsMapped : offers;
-  const displayOffers = base.some((o) => o.title === featuredVilla.title)
+  const withVilla = base.some((o) => o.title === featuredVilla.title)
     ? base
     : [featuredVilla, ...base];
+  const maybachV = vehicles.find((v) => v.slug === "maybach-v-class");
+  const displayOffers: Offer[] = maybachV && !withVilla.some((o) => o.title === maybachV.name)
+    ? [...withVilla.slice(0, 1), {
+        eyebrow: "Signature · Chauffeur", title: maybachV.name, detail: maybachV.tagline,
+        priceZAR: maybachV.fromZAR, priceSuffix: "/ day", cta: "View Maybach V-Class",
+        to: "/chauffeur?cat=cars&vehicle=maybach-v-class#maybach-v-class", image: maybachV.image,
+      }, ...withVilla.slice(1)]
+    : withVilla;
 
 
 
