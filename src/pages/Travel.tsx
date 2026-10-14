@@ -60,6 +60,15 @@ const Travel = () => {
     }
   }, [params]);
 
+  useEffect(() => {
+    const slug = params.get("vehicle");
+    if (!slug || !vehicles.some((v) => v.slug === slug)) return;
+    setMode("cars");
+    setCarTier("All");
+    const timer = window.setTimeout(() => document.getElementById(slug)?.scrollIntoView({ block: "start" }), 200);
+    return () => window.clearTimeout(timer);
+  }, [params]);
+
   return (
     <main className="bg-background text-foreground min-h-screen">
       <Seo

@@ -107,7 +107,8 @@ function vehiclesSeed() {
     category: v.tier,
     published: true,
     sort_order: (i + 1) * 10,
-    data: { rentalZAR: v.rentalZAR ?? null, selfDrive: v.selfDrive },
+    ...(v.gallery ? { image_url: v.image } : {}),
+    data: { rentalZAR: v.rentalZAR ?? null, selfDrive: v.selfDrive, ...(v.gallery ? { gallery: v.gallery } : {}) },
   }));
 }
 
@@ -154,7 +155,15 @@ function blogsSeed() {
 }
 
 function offersSeed() {
+  const maybachV = vehicles.find((v) => v.slug === "maybach-v-class");
   const rows = [
+    ...(maybachV ? [{
+      slug: "maybach-v-class-chauffeur", title: maybachV.name,
+      eyebrow: "Signature · Chauffeur", summary: maybachV.tagline,
+      price_zar: maybachV.fromZAR, price_suffix: "/ day", image_url: maybachV.image,
+      cta_label: "View Maybach V-Class", cta_href: "/chauffeur?cat=cars&vehicle=maybach-v-class#maybach-v-class",
+      gallery_urls: maybachV.gallery?.map((photo) => photo.fullSrc),
+    }] : []),
     {
       slug: "maybach-flagship-chauffeur",
       title: "Mercedes-Maybach S-Class",

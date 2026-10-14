@@ -3,18 +3,20 @@ import KenBurnsImage from "./KenBurnsImage";
 import { Vehicle } from "@/data/vehicles";
 import BookingSheet from "./BookingSheet";
 import { useCurrency } from "@/lib/currency";
+import VehicleGallery from "./VehicleGallery";
+import { Button } from "@/components/ui/button";
 
 const VehicleCard = ({ vehicle, index }: { vehicle: Vehicle; index: number }) => {
   const [open, setOpen] = useState(false);
   const { format } = useCurrency();
   return (
-    <article className="group bg-surface-raised border border-border/40 flex flex-col">
-      <KenBurnsImage
+    <article id={vehicle.slug} className="group bg-surface-raised border border-border/40 flex flex-col scroll-mt-28">
+      {vehicle.gallery?.length ? <VehicleGallery vehicle={vehicle} /> : <KenBurnsImage
         src={vehicle.image}
         alt={vehicle.name}
         className="aspect-[16/10]"
         direction={(index % 4) as 0 | 1 | 2 | 3}
-      />
+      />}
       <div className="p-6 flex-1 flex flex-col">
         <p className="eyebrow">Vehicle</p>
         <h3 className="font-serif text-2xl mt-2 text-foreground">{vehicle.name}</h3>
@@ -28,13 +30,13 @@ const VehicleCard = ({ vehicle, index }: { vehicle: Vehicle; index: number }) =>
             <p className="text-[10px] tracking-wide text-muted-foreground/60 mt-1">Rough guide — final quote often lower</p>
           </div>
 
-          <button
+          <Button
             type="button"
             onClick={() => setOpen(true)}
             className="text-[10px] uppercase tracking-[0.24em] px-4 py-3 bg-primary text-primary-foreground hover:bg-primary-glow transition-colors"
           >
             Book dates
-          </button>
+          </Button>
         </div>
       </div>
       <BookingSheet
