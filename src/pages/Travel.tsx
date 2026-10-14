@@ -73,7 +73,7 @@ const Travel = () => {
     <main className="bg-background text-foreground min-h-screen">
       <Seo
         title={"Chauffeur Service Cape Town | Private Chauffeur & Fleet — SVRM"}
-        description={"Private chauffeur hire across Cape Town — V&A Waterfront, Camps Bay, Clifton, Bantry Bay, Sea Point, Atlantic Seaboard, City Bowl, Stellenbosch, Franschhoek: Maybach, S-Class, Range Rover and GLS with an NDA-bound chauffeur, plus jets, helicopters, yachts and a 7-day chauffeured itinerary at 10% off."}
+        description={"Private chauffeur service across Cape Town. Maybach V-Class with TV and reclining massage seats, luxury airport transfers, wine tours and executive travel."}
         path="/chauffeur"
         keywords="chauffeur service Cape Town, chauffeur Cape Town, chauffeur company Cape Town, chauffeur service near me, best chauffeur service Cape Town, private chauffeur Cape Town, chauffeur hire Cape Town, chauffeur driven car hire Cape Town, chauffeur hire Cape Town prices, hourly chauffeur rates Cape Town, chauffeur service Camps Bay, chauffeur service Clifton, chauffeur service Sea Point, chauffeur service Constantia, chauffeur service Hout Bay, chauffeur Stellenbosch, chauffeur Franschhoek, chauffeur Paarl, chauffeur driven wine tour Cape Town, private driver for the day Cape Town, chauffeur for a week Cape Town, professional chauffeur Cape Town, NDA chauffeur Cape Town, Cape Town International airport chauffeur meet and greet, conference transfers Cape Town, delegation transport Cape Town, V&A Waterfront chauffeur, Waterfront private chauffeur Cape Town, V&A Waterfront transfer, luxury chauffeur Cape Town, luxury chauffeur South Africa, chauffeur driven car Cape Town, hire a driver Cape Town, personal driver Cape Town, English speaking driver Cape Town, VIP chauffeur Cape Town, executive chauffeur Cape Town, corporate chauffeur Cape Town, Maybach chauffeur Cape Town, Mercedes-Maybach chauffeur Cape Town, Maybach S-Class Cape Town, Mercedes S-Class chauffeur Cape Town, S Class chauffeur Cape Town, Mercedes GLS hire Cape Town, Mercedes-Benz GLS chauffeur Cape Town, GLS with driver Cape Town, luxury 7 seater SUV chauffeur, premium SUV transfer Cape Town, Mercedes V-Class chauffeur Cape Town, BMW 7 Series with driver, Rolls-Royce chauffeur Cape Town, Rolls-Royce Phantom chauffeur, Range Rover chauffeur Cape Town, wedding chauffeur Cape Town, matric dance chauffeur Cape Town, hourly chauffeur hire Cape Town, full day chauffeur Cape Town, multi day chauffeur Cape Town, weekly chauffeur hire Cape Town, 7 day Cape Town itinerary, 7 day chauffeured tour Cape Town, one week Cape Town itinerary with driver, private driver and guide Cape Town, Cape Town Winelands chauffeur, Stellenbosch wine tour with driver, Franschhoek wine tour chauffeur, Cape Peninsula chauffeur tour, Table Mountain private tour driver, Aquila safari transfer Cape Town, luxury airport transfer Cape Town, Cape Town airport chauffeur, close protection driver Cape Town, discreet chauffeur Cape Town, chauffeur for celebrities Cape Town, chauffeur rates Cape Town, private jet charter Cape Town, empty leg jet Cape Town, helicopter transfer Cape Town, scenic helicopter flight Cape Town, superyacht charter Cape Town, yacht hire V&A Waterfront, luxury car fleet Cape Town, executive transfers South Africa, corporate roadshow transport, group transfers Sprinter, luxury Winelands day trip, chauffeur Cape Town price per day, book a chauffeur Cape Town, chauffeur service near me Cape Town, luxury transfer Winelands, airport chauffeur Camps Bay, chauffeur for wedding Cape Town price"
         image={travelOg}
@@ -88,6 +88,22 @@ const Travel = () => {
             "@type": "OfferCatalog",
             name: "Chauffeur & Travel",
             itemListElement: [
+              {
+                "@type": "Offer",
+                name: "Maybach V-Class chauffeur hire — daily guide rate",
+                price: 20000,
+                priceCurrency: "ZAR",
+                url: "https://svrm.group/chauffeur?cat=cars&vehicle=maybach-v-class#maybach-v-class",
+                description: "R20,000 per day guide rate; final quote confirmed on enquiry for your dates, hours and route.",
+                itemOffered: {
+                  "@type": "Service",
+                  name: "Maybach V-Class chauffeur service Cape Town",
+                  serviceType: "Luxury chauffeur-driven van hire",
+                  description: "Private chauffeur journeys across Cape Town in a Maybach V-Class with onboard TV, reclining massage seats and quilted leather seating. Airport transfers, executive travel and private Winelands tours.",
+                  areaServed: { "@type": "City", name: "Cape Town" },
+                  provider: { "@type": "Organization", name: "SVRM Group", url: "https://svrm.group/" },
+                },
+              },
               { "@type": "Offer", itemOffered: { "@type": "Service", name: "Hourly & full-day chauffeur hire" } },
               { "@type": "Offer", itemOffered: { "@type": "Service", name: "Airport transfers with chauffeur" } },
               { "@type": "Offer", itemOffered: { "@type": "Service", name: "7-day chauffeured Cape Town itinerary" } },
@@ -460,11 +476,29 @@ const Travel = () => {
           <p className="text-muted-foreground text-sm md:text-base leading-relaxed mt-5 max-w-3xl">
             SVRM Group is a luxury chauffeur company in Cape Town offering chauffeur-driven cars by the
             hour, the day, the week or the length of your stay. Our fleet runs from the Mercedes-Maybach
-            S-Class and Mercedes S-Class to the GLS, V-Class and Range Rover, each with a professionally
+            S-Class and Maybach V-Class to the Mercedes S-Class, GLS, V-Class and Range Rover, each with a professionally
             trained, English-speaking, NDA-bound chauffeur who knows the city — airport transfers from Cape
             Town International, executive and corporate transfers, wedding cars, private Cape Peninsula and
             Table Mountain tours, and chauffeured wine tours through Stellenbosch and Franschhoek.
           </p>
+
+          <div className="mt-10 max-w-3xl">
+            <h3 className="font-serif text-2xl text-foreground">Maybach V-Class chauffeur hire in Cape Town</h3>
+            <p className="mt-4 text-muted-foreground text-sm md:text-base leading-relaxed">
+              Settle into reclining massage seats, switch on the onboard TV and let the city unfold
+              beyond your private lounge. Our Maybach V-Class pairs quilted-leather comfort with a
+              personal chauffeur for luxury airport transfers, executive journeys, wedding travel
+              and private days in the Winelands. Travel across Cape Town — V&A Waterfront, Camps Bay,
+              Clifton, Bantry Bay, Sea Point and Constantia — or enjoy a chauffeured day in
+              Stellenbosch or Franschhoek.
+            </p>
+            <p className="mt-4 text-sm text-muted-foreground">
+              From {format(20000)} per day. Your final quote is confirmed on enquiry for your dates, hours and route.
+            </p>
+            <Link to="/chauffeur?cat=cars&vehicle=maybach-v-class#maybach-v-class" className="inline-flex mt-5 text-gold underline underline-offset-4">
+              Explore the Maybach V-Class
+            </Link>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-12">
             <div>

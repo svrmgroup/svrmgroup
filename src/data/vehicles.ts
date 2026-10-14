@@ -52,11 +52,11 @@ export interface Vehicle {
 export const vehicles: Vehicle[] = [
   // Signature — flagship first
   { slug: "mercedes-maybach-s-class", name: "Mercedes-Maybach S-Class", tagline: "SVRM's flagship chauffeur experience.", fromZAR: 22000, image: maybach, tier: "Signature", selfDrive: false },
-  { slug: "maybach-v-class", name: "Maybach V-Class", tagline: "A private lounge on the move — quilted leather, reclining seats and a panoramic cabin for refined chauffeur journeys across Cape Town.", fromZAR: 20000, image: maybachVExterior.url, tier: "Signature", selfDrive: false,
+  { slug: "maybach-v-class", name: "Maybach V-Class", tagline: "Your private lounge across Cape Town — unwind in reclining massage seats, enjoy onboard TV and travel in quilted-leather comfort with your own chauffeur.", fromZAR: 20000, image: maybachVExterior.url, tier: "Signature", selfDrive: false,
     gallery: [
       { src: maybachVExterior.url, fullSrc: maybachVExterior4k.url, alt: "Two-tone exterior with SVRM number plate" },
-      { src: maybachVSeating.url, fullSrc: maybachVSeating4k.url, alt: "Quilted reclining lounge seating" },
-      { src: maybachVEntertainment.url, fullSrc: maybachVEntertainment4k.url, alt: "Private entertainment cabin" },
+      { src: maybachVSeating.url, fullSrc: maybachVSeating4k.url, alt: "Quilted leather reclining massage seats" },
+      { src: maybachVEntertainment.url, fullSrc: maybachVEntertainment4k.url, alt: "Onboard TV in the private chauffeur lounge" },
     ],
   },
   { slug: "rolls-royce-phantom", name: "Rolls-Royce Phantom", tagline: "The pinnacle of motoring, chauffeured.", fromZAR: 30500, image: phantom, tier: "Signature", selfDrive: false },
