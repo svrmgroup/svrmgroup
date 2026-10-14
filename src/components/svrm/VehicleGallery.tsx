@@ -27,7 +27,7 @@ const VehicleGallery = ({ vehicle }: { vehicle: Vehicle }) => {
         <CarouselContent className="ml-0">
           {photos.map((image, index) => (
             <CarouselItem key={image.src} className="pl-0">
-              <SmartImage src={image.src} alt={`${vehicle.name} — ${image.alt}`} wrapperClassName="aspect-[16/10]" className="w-full h-full object-contain bg-surface-deep" loading={index === 0 ? "eager" : "lazy"} />
+              <SmartImage src={image.src} alt={`${vehicle.name} — ${image.alt}`} wrapperClassName="aspect-[16/10]" className="absolute inset-0 w-full h-full object-cover" loading={index === 0 ? "eager" : "lazy"} />
             </CarouselItem>
           ))}
         </CarouselContent>
@@ -37,10 +37,10 @@ const VehicleGallery = ({ vehicle }: { vehicle: Vehicle }) => {
         <Button size="icon" variant="outline" className="absolute bottom-3 right-3 bg-background/90" title="View 4K photo" aria-label="View 4K photo" onClick={() => setExpanded(true)}><Maximize2 className="h-4 w-4" /></Button>
       </Carousel>
       <Dialog open={expanded} onOpenChange={setExpanded}>
-        <DialogContent className="max-w-5xl p-4">
-          <DialogTitle>{vehicle.name} — {photo?.alt}</DialogTitle>
-          {photo && <SmartImage src={photo.fullSrc} alt={`${vehicle.name} — ${photo.alt}`} priority wrapperClassName="h-[65vh]" className="w-full h-full object-contain" />}
-          <div className="flex items-center justify-between">
+        <DialogContent className="h-[100dvh] max-w-none gap-0 border-0 p-0 sm:rounded-none [&>button]:z-10 [&>button]:bg-background/90 [&>button]:p-2">
+          <DialogTitle className="sr-only">{vehicle.name} — {photo?.alt}</DialogTitle>
+          {photo && <SmartImage src={photo.fullSrc} alt={`${vehicle.name} — ${photo.alt}`} priority wrapperClassName="absolute inset-0 h-full w-full" className="absolute inset-0 w-full h-full object-cover" />}
+          <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between bg-background/90 p-3">
             <Button variant="outline" size="icon" title="Previous photo" aria-label="Previous photo" onClick={() => move(-1)}><ChevronLeft /></Button>
             <span className="text-sm text-muted-foreground">{selected + 1} / {photos.length}</span>
             <Button variant="outline" size="icon" title="Next photo" aria-label="Next photo" onClick={() => move(1)}><ChevronRight /></Button>
