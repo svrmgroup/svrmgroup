@@ -21,7 +21,7 @@ import { useCurrency } from "@/lib/currency";
 import { WHATSAPP_BASE, whatsappUrlFor } from "@/lib/whatsappMessages";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Seo } from "@/components/Seo";
-import heroVideo from "@/assets/videos/travel.mp4.asset.json";
+import heroVideo from "@/assets/videos/chauffeur-sunset.mp4.asset.json";
 import travelOg from "@/assets/svc-travel-fleet.jpg";
 
 const tierBlurbs: Record<string, string> = {
