@@ -52,7 +52,10 @@ export const navCategories: Record<string, NavCategory[]> = {
     { label: "Insights", to: "/blog?cat=Insights" },
   ],
   "/contact": [
+    { label: "Concierge & WhatsApp", to: "/contact#concierge" },
+    { label: "Enquiry Form", to: "/contact#enquiry" },
     { label: "FAQ", to: "/contact#faq" },
+    { label: "TikTok", to: "/contact#tiktok" },
   ],
 };
 
