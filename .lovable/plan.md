@@ -4,7 +4,7 @@ Implements the uploaded brief in priority order, keeping the design, logo, booki
 
 ## Your decisions
 - **5-star rating stays** in the search data, as it is now.
-- **SVRM owns its vehicles.** Fleet wording presents them as SVRM's own fleet, including the Range Rover and BMW X5.
+- **Vehicles are simply presented**, including the Range Rover and BMW X5, with no wording either way about ownership.
 - **SVRM is the provider** for every service. No "partner" or "arranged through partners" wording anywhere; existing partner wording in the FAQs and pages will be rewritten.
 - **No street address** in the search data. The site will show a Cape Town service area only.
 - **Blog:** no mass publishing. The site gets a list of 8 article ideas for you to review, plus at most 2 finished articles where we already have real facts (chauffeur guide, chauffeur vs self-drive).
@@ -25,7 +25,7 @@ Implements the uploaded brief in priority order, keeping the design, logo, booki
 - Remove duplicate or conflicting search data between the fallback homepage file and individual pages.
 
 ## 4. About and trust
-- Expand the About section on the home page: SVRM's own fleet and services, discretion and personal service. No invented testimonials, press or credentials.
+- Expand the About section on the home page: SVRM's fleet and services, discretion and personal service. No invented testimonials, press or credentials.
 
 ## 5. AI search answers
 - Add the brief's six customer questions to the FAQ. Each gets a real answer and the clickable WhatsApp number, using the existing FAQ system.
