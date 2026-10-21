@@ -8,6 +8,7 @@ import { Seo } from "@/components/Seo";
 import SmartImage from "@/components/svrm/SmartImage";
 import { useCmsItems } from "@/hooks/useCmsItems";
 import { resolveImage } from "@/lib/cmsImages";
+import heroVideo from "@/assets/videos/journal-interior.mp4.asset.json";
 
 const Blog = () => {
   const [params] = useSearchParams();
@@ -73,6 +74,7 @@ const Blog = () => {
         eyebrow="Journal · Luxury Travel & Lifestyle Notes from Cape Town"
         title="The SVRM Journal — Luxury Travel Insights"
         subtitle="Field notes on luxury travel, private tours, stays and lifestyle in Cape Town — published as we have something worth saying."
+        videoSrc={heroVideo.url}
       />
 
       <section className="pb-28">
