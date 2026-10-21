@@ -5,7 +5,7 @@ import Footer from "@/components/svrm/Footer";
 import { Seo } from "@/components/Seo";
 import { posts, type BlogPost as BlogPostType } from "@/data/blog";
 import { Button } from "@/components/ui/button";
-import { buildWhatsAppUrlRaw } from "@/lib/whatsapp";
+import { buildWhatsAppUrlRaw, WHATSAPP_URL } from "@/lib/whatsapp";
 import SmartImage from "@/components/svrm/SmartImage";
 import { supabase } from "@/integrations/supabase/client";
 import { resolveImage } from "@/lib/cmsImages";
@@ -158,6 +158,14 @@ const BlogPost = () => {
                 </p>
               </div>
             )}
+
+            <p className="mt-10 text-base text-foreground/90 leading-[1.85]">
+              WhatsApp us on{" "}
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" data-wa-source="Journal article number" className="text-gold underline underline-offset-4 hover:text-primary-glow">
+                +27 73 064 1481
+              </a>{" "}
+              for availability and a written quote.
+            </p>
 
             {/* CTA */}
             <div className="mt-16 flex flex-col sm:flex-row gap-4 items-start">
