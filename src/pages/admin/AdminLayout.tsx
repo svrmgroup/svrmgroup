@@ -9,6 +9,7 @@ import {
   Image as ImageIcon, Map as MapIcon,
 } from "lucide-react";
 import Logo from "@/components/svrm/Logo";
+import { Helmet } from "react-helmet-async";
 import NotificationBell from "@/components/svrm/NotificationBell";
 
 const AdminLayout = () => {
@@ -97,6 +98,7 @@ const AdminLayout = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground md:grid md:grid-cols-[240px_1fr]" style={{ paddingTop: "env(safe-area-inset-top)" }}>
+      <Helmet><meta name="robots" content="noindex, nofollow" /></Helmet>
       {/* Mobile header */}
       <header className="md:hidden sticky top-0 z-30 bg-surface-deep border-b border-border/40 flex items-center justify-between px-4 h-14">
         <button onClick={() => setOpen(true)} className="text-muted-foreground hover:text-foreground p-2 -ml-2">
