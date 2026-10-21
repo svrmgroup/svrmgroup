@@ -7,6 +7,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { CurrencyProvider } from "@/lib/currency";
 import WhatsAppFab from "@/components/svrm/WhatsAppFab";
 import WhatsAppClickTracker from "@/components/WhatsAppClickTracker";
+import CookieConsent from "@/components/CookieConsent";
+import Privacy from "./pages/Privacy";
 import ScrollToTop from "@/components/ScrollToTop";
 // Landing eagerly loaded — needed instantly for first paint.
 import Index from "./pages/Index.tsx";
@@ -80,6 +82,7 @@ const App = () => (
           <AdminAuthProvider>
             <ScrollToTop />
             <WhatsAppClickTracker />
+            <CookieConsent />
             <Suspense fallback={<RouteFallback />}>
               <Routes>
                 <Route path="/" element={<Index />} />
@@ -105,6 +108,7 @@ const App = () => (
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:slug" element={<BlogPost />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/privacy" element={<Privacy />} />
                 <Route path="/faq" element={<Navigate to="/contact#faq" replace />} />
                 <Route path="/admin/login" element={<AdminLogin />} />
                 <Route path="/admin" element={<AdminLayout />}>

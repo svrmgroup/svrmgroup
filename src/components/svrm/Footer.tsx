@@ -1,3 +1,4 @@
+import { openCookieSettings } from "@/components/CookieConsent";
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
 import { Instagram } from "lucide-react";
@@ -97,7 +98,7 @@ const Footer = () => (
     </div>
     <div className="border-t border-border/60">
       <div className="max-w-7xl mx-auto px-6 py-6 text-xs uppercase tracking-[0.28em] text-muted-foreground/70 flex flex-col sm:flex-row gap-2 justify-between">
-        <span>© {new Date().getFullYear()} SVRM Group</span>
+        <span>© {new Date().getFullYear()} SVRM Group · <Link to="/privacy" className="hover:text-gold">Privacy</Link> · <button type="button" onClick={openCookieSettings} className="uppercase tracking-[0.28em] hover:text-gold">Cookie settings</button></span>
         <span className="text-gold/60">Curated, without compromise.</span>
       </div>
     </div>
