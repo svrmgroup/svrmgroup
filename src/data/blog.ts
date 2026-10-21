@@ -19,6 +19,8 @@ import securityImg from "@/assets/svc-custom.jpg";
 import romanticImg from "@/assets/tours/romantic.jpg";
 import capePeninsulaImg from "@/assets/tours/cape-peninsula.jpg";
 import wineImg from "@/assets/svc-exp-wine.jpg";
+import maybachVExterior from "@/assets/vehicles/maybach-vclass-exterior.webp.asset.json";
+import maybachVEntertainment from "@/assets/vehicles/maybach-vclass-entertainment.webp.asset.json";
 
 
 export type BlogCategory = "Travel" | "Tours" | "Lifestyle" | "Properties" | "Insights";
@@ -1436,6 +1438,91 @@ export const posts: BlogPost[] = [
     ],
     closing:
       "Tell us the duration, the budget and who is travelling. We will shortlist properties and manage the lease.",
+  },
+  {
+    slug: "mercedes-maybach-v-class-chauffeur-cape-town",
+    publishedISO: "2026-10-21",
+    seoTitle: "Maybach V-Class Chauffeur Cape Town | TV & Massage Seats",
+    seoDescription: "Mercedes-Maybach V-Class with a private chauffeur in Cape Town: TV, reclining massage seats and quilted leather. Guide rate R20,000 per day. WhatsApp SVRM.",
+    seoKeywords: "Maybach V-Class Cape Town, Mercedes-Maybach V-Class chauffeur, Maybach van hire Cape Town, luxury van with TV Cape Town, chauffeur massage seats Cape Town, reclining seats chauffeur van, VIP van hire Cape Town, luxury group transport Cape Town, Maybach airport transfer Cape Town, executive van chauffeur Cape Town",
+    title: "Inside the Mercedes-Maybach V-Class: a private lounge on the move",
+    excerpt:
+      "TV, reclining massage seats and quilted leather — the Maybach V-Class with a private chauffeur across Cape Town.",
+    category: "Travel",
+    date: "October 2026",
+    image: maybachVExterior.url,
+    readTime: "5 min read",
+    intro:
+      "Most people carriers are built to move a group. The Mercedes-Maybach V-Class is built to make the journey itself the best part of the day. With a private SVRM chauffeur, it turns an airport run, a Winelands day or a city of meetings into time you actually enjoy.",
+    sections: [
+      {
+        heading: "Reclining massage seats",
+        body:
+          "The rear cabin is laid out like a first-class lounge. Quilted leather seats recline properly and massage while you travel, so a long-haul arrival at Cape Town International or a full day between Stellenbosch and Franschhoek ends with you rested rather than worn out.",
+      },
+      {
+        heading: "A TV and entertainment cabin",
+        body:
+          "A screen in the rear cabin lets you watch, present or simply unwind between stops. Families keep children entertained on the coast road to Cape Point; executives review a deck on the way from the V&A Waterfront to a meeting in the City Bowl.",
+      },
+      {
+        heading: "Space for the whole party",
+        body:
+          "Unlike a sedan, the V-Class carries a small group and their luggage in one vehicle, so nobody is split across cars. It suits couples who want room to stretch out, families, wedding parties, golf days and corporate teams moving together.",
+      },
+      {
+        heading: "Where guests use it",
+        body:
+          "Airport meet-and-greet transfers, Atlantic Seaboard evenings in Camps Bay and Clifton, Cape Peninsula private tours, Winelands tastings, Hermanus whale days and executive roadshows. Your chauffeur plans the route, handles parking and timing, and keeps the car close all day.",
+      },
+      {
+        heading: "Rates",
+        body:
+          "The Maybach V-Class has a guide rate of R20,000 per day with a chauffeur. Your final price is confirmed in a written quote once we know your dates, route and hours.",
+      },
+    ],
+    closing:
+      "Send us your dates and pickup on WhatsApp and we will confirm the Maybach V-Class and your chauffeur in writing.",
+  },
+  {
+    slug: "corporate-chauffeur-executive-roadshows-cape-town",
+    publishedISO: "2026-10-21",
+    seoTitle: "Corporate Chauffeur Cape Town | Executive Roadshows — SVRM",
+    seoDescription: "Corporate chauffeur service in Cape Town for executives, roadshows and delegations: airport to boardroom, multi-vehicle logistics and discreet chauffeurs.",
+    seoKeywords: "corporate chauffeur Cape Town, executive chauffeur Cape Town, roadshow transport Cape Town, business chauffeur Cape Town, delegation transport Cape Town, conference transfers Cape Town, CTICC chauffeur, VIP executive transport South Africa",
+    title: "Executive roadshows and corporate chauffeur travel in Cape Town",
+    excerpt:
+      "How to run a smooth business trip in Cape Town — airport to boardroom, multiple meetings and whole delegations.",
+    category: "Insights",
+    date: "October 2026",
+    image: maybachVEntertainment.url,
+    readTime: "5 min read",
+    intro:
+      "A business trip lives or dies on timing. In Cape Town, meetings are spread between the City Bowl, the V&A Waterfront, Century City and the Winelands, and traffic can turn a tight day into a lost one. A dedicated chauffeur removes that risk.",
+    sections: [
+      {
+        heading: "Airport to boardroom",
+        body:
+          "Your chauffeur tracks your flight, meets you in arrivals and takes care of the luggage. Many executives go straight to the first meeting, so the vehicle doubles as a quiet place to take calls and prepare.",
+      },
+      {
+        heading: "Roadshows and back-to-back meetings",
+        body:
+          "On a roadshow day the car is held for you throughout. Your chauffeur gets the full schedule in advance, plans each route around the traffic and waits close by, so you move from one meeting to the next without searching for a ride.",
+      },
+      {
+        heading: "Delegations and conferences",
+        body:
+          "For teams and conference groups at the CTICC or hotels on the Waterfront, we coordinate several vehicles to one timetable — a Maybach S-Class for principals, and V-Class or Maybach V-Class for the wider team.",
+      },
+      {
+        heading: "Discretion",
+        body:
+          "Conversations in the car stay in the car. Chauffeurs are professional, punctual and smartly presented, and client details are kept private.",
+      },
+    ],
+    closing:
+      "Share your schedule on WhatsApp and we will send a written quote for the vehicles and hours you need.",
   },
 ];
 
