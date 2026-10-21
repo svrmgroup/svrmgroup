@@ -1,3 +1,4 @@
+import { reportConversion } from "@/lib/adsConsent";
 import { useState } from "react";
 import { z } from "zod";
 import { useLocation } from "react-router-dom";
@@ -75,6 +76,7 @@ const EnquiryForm = ({ subject, defaultMessage = "", compact = false, extras, ex
     }
     setDone(true);
     toast.success("Enquiry received. We'll respond personally, within hours.");
+    void reportConversion("enquiry");
   };
 
   if (done) {

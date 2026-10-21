@@ -1,3 +1,4 @@
+import { reportConversion } from "@/lib/adsConsent";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { vehicles } from "@/data/vehicles";
@@ -167,6 +168,7 @@ const AiItineraryPlanner = () => {
     }
     setSent(true);
     toast.success("Request received. Your concierge will reply shortly.");
+    void reportConversion("enquiry");
   };
 
 

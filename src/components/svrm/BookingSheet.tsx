@@ -1,3 +1,4 @@
+import { reportConversion } from "@/lib/adsConsent";
 import { useState } from "react";
 import { format, differenceInCalendarDays } from "date-fns";
 import { z } from "zod";
@@ -138,6 +139,7 @@ const BookingSheet = ({
       return;
     }
     toast.success("Booking request received. We'll confirm availability within hours.");
+    void reportConversion("enquiry");
     onOpenChange(false);
     reset();
   };

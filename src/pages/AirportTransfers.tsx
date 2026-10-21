@@ -1,3 +1,4 @@
+import { reportConversion } from "@/lib/adsConsent";
 import { useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Seo } from "@/components/Seo";
@@ -116,6 +117,7 @@ const AirportTransfers = () => {
     }
     setDone(true);
     toast.success("Enquiry received. We'll respond within hours.");
+    void reportConversion("enquiry");
   };
 
   const inputCls =
