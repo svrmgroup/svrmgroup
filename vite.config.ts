@@ -3,18 +3,20 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 import fs from "fs";
-import { PRERENDER_ROUTES, PRERENDER_CONTACT } from "./src/seo/prerenderRoutes";
+import { PRERENDER_ROUTES, PRERENDER_CONTACT } from "./src/seo/prerenderRoutes.ts";
 
 const esc = (v: string) => v.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
 
 // Writes dist/<route>/index.html with that page's head and a readable summary in #root
 // (React replaces it on load), so non-JS crawlers see real content per page.
 function prerenderPlugin(): Plugin {
+  let outDir = "";
   return {
     name: "svrm-static-route-heads",
     apply: "build",
+    configResolved(c) { outDir = path.resolve(c.root, c.build.outDir); },
     closeBundle() {
-      const dist = path.resolve(__dirname, "dist");
+      const dist = outDir;
       const file = path.join(dist, "index.html");
       if (!fs.existsSync(file)) return;
       const base = fs.readFileSync(file, "utf8");
