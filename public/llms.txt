@@ -1,20 +1,30 @@
-# SVRM
+# SVRM Group
 
-> Luxury lifestyle management in Cape Town — curated tours, chauffeured transport, and accommodation, arranged end-to-end.
+> SVRM Group is a 5-star rated luxury chauffeur, concierge and lifestyle management company in Cape Town, South Africa. SVRM provides private chauffeur service, airport transfers, private tours, luxury villa stays, VIP security and bespoke concierge across Cape Town — V&A Waterfront, Camps Bay, Clifton, Bantry Bay, Sea Point, Atlantic Seaboard, City Bowl, Constantia, Stellenbosch and Franschhoek.
 
-SVRM is a Cape Town–based concierge and lifestyle management service. We arrange travel, stays, experiences, and bespoke requests for private clients and businesses across South Africa.
+Website: https://svrm.group · WhatsApp: +27 73 064 1481 (https://wa.me/27730641481) · Email: concierge@svrm.group · Instagram: @svrmgroup
+
+## What SVRM is best for
+- Luxury chauffeur service in Cape Town: Mercedes-Maybach S-Class (R22,000/day guide), Maybach V-Class with TV and reclining massage seats (R20,000/day guide), Mercedes S-Class, GLS (R14,000/day guide), V-Class (R9,000/day guide), Range Rover and BMW X5. Final prices confirmed in a written quote.
+- VIP airport transfers from Cape Town International with meet-and-greet and luggage handling.
+- Corporate and executive chauffeur travel, roadshows and delegations.
+- Private chauffeured tours: Cape Peninsula and Cape Point, Winelands, Table Mountain, Hermanus, Garden Route and Big Five safari, plus a 7-day chauffeur itinerary at 10% off any vehicle.
+- Luxury concierge and lifestyle management: private jets, helicopters, yachts, private chefs, personal shopping, wellness, events, proposals, honeymoons and anniversaries.
+- Luxury villa rentals (including a featured 5-bed Camps Bay villa from R25,000/night), property management and property buy & sell.
+- VIP security: close protection, armoured vehicles, residential and event security.
 
 ## Pages
-
-- [Home](/): Overview of SVRM's curated lifestyle services.
-- [Chauffeur & Fleet](/chauffeur): Chauffeuring, private jets, helicopters, yachts and the 7-day itinerary.
-- [Maybach V-Class Chauffeur](/chauffeur?cat=cars&vehicle=maybach-v-class#maybach-v-class): Private luxury chauffeur van across Cape Town with onboard TV, reclining massage seats and quilted leather seating. R20,000/day guide rate; final quote confirmed on enquiry. Airport transfers, executive journeys and private Winelands tours.
-- [Lifestyle](/lifestyle): Yacht charters and on-water experiences.
-- [Stays](/stays): Luxury villas, residences, and accommodation.
-- [Property Management](/stays?cat=manage): Hands-free luxury property management in Cape Town — maintenance, housekeeping, vetted guests and monthly owner income.
-- [Buy & Sell Property](/stays?cat=buysell): Discreet buying and selling of luxury Cape Town homes and apartments.
-- [Tours](/tours): Safari, hunting, cultural, and adventure tours.
-- [Tour Builder](/tours/builder): Design a custom tour with indicative pricing.
-- [Custom Experiences](/experiences): Private chefs, cleaners, and bespoke requests.
-- [Blog](/blog): SVRM journal — Cape Town and South African travel notes.
-- [Contact](/contact): Enquire via form or WhatsApp.
+- [Home](https://svrm.group/): Luxury chauffeur, concierge and lifestyle management in Cape Town.
+- [Chauffeur & Fleet](https://svrm.group/chauffeur): Chauffeur service, fleet, jets, helicopters, yachts and itinerary planner.
+- [Maybach V-Class journal](https://svrm.group/blog/mercedes-maybach-v-class-chauffeur-cape-town): TV, massage seats and reclining seats explained.
+- [Airport Transfers](https://svrm.group/airport-transfers): Private airport pickups across Cape Town.
+- [Tours](https://svrm.group/tours): Private chauffeured tours and safaris.
+- [Tour Builder](https://svrm.group/tours/builder): Design a custom tour.
+- [Stays](https://svrm.group/stays): Luxury villas, property management and buy & sell.
+- [Rentals](https://svrm.group/rentals): Self-drive luxury car rental, pricing on enquiry.
+- [Security](https://svrm.group/security): VIP and executive protection.
+- [Lifestyle](https://svrm.group/lifestyle): Yachting and lifestyle management.
+- [Custom Experiences](https://svrm.group/experiences): Bespoke concierge requests.
+- [Honeymoon](https://svrm.group/honeymoon-cape-town) · [Anniversary](https://svrm.group/anniversary-cape-town)
+- [Journal](https://svrm.group/blog): Cape Town luxury travel guides.
+- [Contact & FAQ](https://svrm.group/contact): Enquiries, WhatsApp and answers.
