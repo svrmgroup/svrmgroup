@@ -18,7 +18,7 @@ import { jets, helicopters } from "@/data/aviation";
 import { yachts } from "@/data/yachts";
 import { chauffeurItinerary, SEVEN_DAY_DISCOUNT } from "@/data/chauffeurItinerary";
 import { useCurrency } from "@/lib/currency";
-import { WHATSAPP_BASE } from "@/lib/whatsappMessages";
+import { WHATSAPP_BASE, whatsappUrlFor } from "@/lib/whatsappMessages";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Seo } from "@/components/Seo";
 import heroVideo from "@/assets/videos/travel.mp4.asset.json";
@@ -503,7 +503,7 @@ const Travel = () => {
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8">
             {[
-              ["Airport collections", "Meet-and-greet at Cape Town International Airport, luggage handled and a direct drive to your villa, hotel or meeting. We track your flight, so delays are covered."],
+              ["Airport collections", "Meet-and-greet at Cape Town International Airport, luggage handled and a direct drive to your villa, hotel or meeting."],
               ["Executive & corporate travel", "Discreet, punctual transport for board meetings, roadshows, conferences and delegations, with a chauffeur on standby between appointments."],
               ["Full-day chauffeurs", "A private driver for the whole day — shopping at the V&A Waterfront, lunch in Camps Bay, sunset on the Atlantic Seaboard — on your timetable."],
               ["Private tours with a driver", "Cape Peninsula and Cape Point, Boulders Beach, Table Mountain, Stellenbosch and Franschhoek wine estates, Hermanus and the Garden Route, planned around you."],
@@ -524,7 +524,7 @@ const Travel = () => {
               <li>We reply with availability and a written quote for your hours and route.</li>
               <li>Confirm with a deposit; your chauffeur's details arrive before pickup.</li>
             </ol>
-            <a href={waHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 mt-6 text-gold underline underline-offset-4">
+            <a href={whatsappUrlFor("/chauffeur")} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 mt-6 text-gold underline underline-offset-4">
               <WhatsAppGlyph className="h-4 w-4" /> Ask about availability on WhatsApp
             </a>
           </div>
