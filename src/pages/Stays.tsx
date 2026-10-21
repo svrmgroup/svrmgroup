@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { completeFaq, faqSchema } from "@/lib/faq";
+import ServiceFaq from "@/components/svrm/ServiceFaq";
 import { useSearchParams } from "react-router-dom";
 import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
@@ -22,6 +24,12 @@ import PropertyManagementSection from "@/components/svrm/PropertyManagementSecti
 const SUB_TYPES: StayType[] = ["villa", "apartment", "hotel"];
 type TopMode = "short" | "long" | "manage" | "buysell";
 type SortMode = "popular" | "asc" | "desc";
+
+const staysFaqs = [
+  { q: "Do you manage luxury properties in Cape Town?", a: "SVRM Group coordinates property management across Cape Town, with maintenance, housekeeping and guest arrangements tailored to your home. Request a private proposal covering responsibilities, letting arrangements and owner reporting. Income depends on the agreed terms and occupancy rather than being guaranteed.", link: { to: "/stays?cat=manage", label: "property management" } },
+  { q: "Which areas do you cover for property management?", a: "Enquire about property management across Cape Town: Camps Bay, Clifton, Bantry Bay, Bakoven, Llandudno, Sea Point, Green Point, V&A Waterfront and Constantia. Winelands requests can also be assessed. SVRM Group confirms the property's location, required services and proposed management scope before an agreement is made." },
+  { q: "Can SVRM help me buy or sell a luxury property in Cape Town?", a: "SVRM Group facilitates luxury property enquiries across Cape Town through partner agents and requested off-market introductions. Share your preferred area, budget or property details so our concierge can coordinate a suitable introduction. Agent responsibilities, availability and transaction terms are confirmed separately.", link: { to: "/stays?cat=buysell", label: "buy and sell enquiries" } },
+].map((item, index) => completeFaq(item, index));
 
 const Stays = () => {
   const [params] = useSearchParams();
@@ -72,36 +80,7 @@ const Stays = () => {
             areaServed: { "@type": "City", name: "Cape Town" },
             priceRange: "$$$$",
           },
-          {
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: [
-              {
-                "@type": "Question",
-                name: "Do you manage luxury properties in Cape Town?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "Yes. SVRM looks after your home end to end — maintenance, housekeeping, vetted guests and marketing to our private client base — while you receive a monthly income, completely hands-free.",
-                },
-              },
-              {
-                "@type": "Question",
-                name: "Which areas do you cover for property management?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "Camps Bay, Clifton, Bantry Bay, Bakoven, Llandudno, Sea Point, Green Point, V&A Waterfront, Constantia and the Winelands.",
-                },
-              },
-              {
-                "@type": "Question",
-                name: "Can SVRM help me buy or sell a luxury property in Cape Town?",
-                acceptedAnswer: {
-                  "@type": "Answer",
-                  text: "Yes — we handle discreet off-market buying and selling of luxury homes and apartments across Cape Town. Terms are confirmed on enquiry.",
-                },
-              },
-            ],
-          },
+          faqSchema(staysFaqs),
         ]}
       />
       <Nav />
@@ -232,6 +211,12 @@ const Stays = () => {
         </div>
       </section>
 
+      <section className="py-20 border-t border-border/40">
+        <div className="max-w-3xl mx-auto px-6">
+          <h2 className="font-serif text-3xl md:text-4xl mb-8">Stays & property questions.</h2>
+          <ServiceFaq items={staysFaqs} />
+        </div>
+      </section>
       <Footer />
     </main>
   );

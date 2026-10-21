@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import FaqAnswer from "@/components/svrm/FaqAnswer";
 import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
 import PageHero from "@/components/svrm/PageHero";
@@ -63,7 +64,7 @@ interface ScoredItem extends FaqItem {
 }
 
 function scoreItem(item: FaqItem, groupTitle: string, query: string, tokens: string[], expanded: string[]): ScoredItem | null {
-  const haystack = `${item.q} ${item.a} ${(item.keywords || []).join(" ")} ${groupTitle}`.toLowerCase();
+  const haystack = `${item.q} $<FaqAnswer item={item} /> ${(item.keywords || []).join(" ")} ${groupTitle}`.toLowerCase();
   const qLower = query.toLowerCase().trim();
 
   let score = 0;
@@ -165,7 +166,7 @@ const Contact = () => {
     <main className="bg-background text-foreground min-h-screen">
       <Seo
         title={"Contact SVRM | Cape Town Luxury Concierge — Enquiries & FAQ"}
-        description={"Contact SVRM, Cape Town's luxury concierge. WhatsApp +27 73 064 1481. Includes a complete FAQ on bookings, pricing, travel, tours, stays and security."}
+        description={"Contact SVRM, Cape Town's luxury concierge. WhatsApp +27 73 064 1481. Explore chauffeur, private tour, airport transfer, VIP transport and booking FAQs."}
         path="/contact"
         keywords="contact SVRM, SVRM concierge contact, Cape Town concierge WhatsApp, luxury concierge enquiry, lifestyle management Cape Town contact, FAQ luxury services, concierge phone number Cape Town, SVRM Group Cape Town, luxury concierge near me Cape Town, best concierge company Cape Town, book chauffeur WhatsApp Cape Town, enquire luxury villa Cape Town, concierge enquiry South Africa, SVRM WhatsApp number, luxury services quote Cape Town"
         jsonLd={faqJsonLd}
@@ -297,7 +298,7 @@ const Contact = () => {
                           {item.q}
                         </AccordionTrigger>
                         <AccordionContent className="text-muted-foreground leading-[1.85] text-base pb-6 whitespace-pre-wrap">
-                          {item.a}
+                          <FaqAnswer item={item} />
                         </AccordionContent>
                       </AccordionItem>
                     ))}
@@ -321,7 +322,7 @@ const Contact = () => {
                     </AccordionTrigger>
                     <AccordionContent className="text-muted-foreground leading-[1.85] text-base pb-6 whitespace-pre-wrap">
                       <p className="eyebrow text-gold text-xs mb-3">{item.groupTitle}</p>
-                      {highlight(item.a, tokens)}
+                      <FaqAnswer item={item} renderText={(text) => highlight(text, tokens)} />
                     </AccordionContent>
                   </AccordionItem>
                 ))}

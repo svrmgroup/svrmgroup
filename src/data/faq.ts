@@ -1,5 +1,9 @@
+import { completeFaq, faqSchema, type FaqLink } from "@/lib/faq";
+import { expandedFaqGroups } from "@/data/faqExpansion";
+
 export type FaqItem = {
   q: string;
+  link?: FaqLink;
   a: string;
   /** Hidden search keywords / synonyms so the right FAQ surfaces for common terms. */
   keywords?: string[];
@@ -8,7 +12,7 @@ export type FaqItem = {
 };
 export type FaqGroup = { id: string; title: string; items: FaqItem[] };
 
-export const faqGroups: FaqGroup[] = [
+const existingGroups: FaqGroup[] = [
   {
     id: "general",
     title: "About SVRM",
@@ -24,10 +28,10 @@ export const faqGroups: FaqGroup[] = [
     title: "Booking & Pricing",
     items: [
       { q: "How do I make a booking?", a: "The quickest route is WhatsApp on +27 73 064 1481. You can also email concierge@svrm.group or use the enquiry form on this page. We typically reply the same day.", keywords: ["book", "booking", "reserve", "how to book", "make a booking", "enquiry", "contact"] },
-      { q: "Why don't you publish prices?", a: "Every itinerary is composed for the guest — vehicle, route, wait time, season, party size and discretion all shape the rate. A published number would be wrong for almost everyone, so we send a written quote within 24 hours instead.", keywords: ["price", "cost", "rate", "quote", "why no prices", "how much", "pricing"] },
+      { q: "Are your published chauffeur prices final?", a: "Our Cape Town chauffeur fleet shows indicative day rates. Your dates, vehicle, route, hours, waiting time and extras determine the final written quotation. Rentals remain priced on enquiry. SVRM Group confirms inclusions and payment terms before you book, so you can compare arrangements with confidence.", keywords: ["price", "cost", "rate", "quote", "why no prices", "how much", "pricing"] },
       { q: "Which currencies can I be quoted in?", a: "We quote in ZAR by default and can present the same quote in GBP or USD. The site has a currency switcher in the top navigation.", keywords: ["currency", "zar", "gbp", "usd", "dollar", "rand", "pound", "payment currency"] },
       { q: "How do I pay? Is a deposit required?", a: "We accept EFT, card, international wire and a secure payment link. A deposit is typically required to confirm; the balance is settled before or on the day of service. Specific terms are on every written quote.", keywords: ["pay", "payment", "deposit", "eft", "card", "credit card", "payment link", "wire", "bank transfer", "how to pay"] },
-      { q: "What is your cancellation policy?", a: "Terms are set per booking and clearly stated on the quote. As a general guide, cancellations made well in advance are refundable; short-notice cancellations may be partially or non-refundable, especially for tours, charters and seasonal stays.", keywords: ["cancel", "cancellation", "refund", "policy", "change booking", "modify"] },
+      { q: "What is your cancellation policy?", a: "Please refer to the detailed Cancellation & Deposit Policy in Booking Terms below and the written terms for your particular booking. SVRM Group confirms any agreed exceptions in writing.", keywords: ["cancel", "cancellation", "refund", "policy", "change booking", "modify"] },
       { q: "How far in advance should I book?", a: "For peak season (December–February and Easter) we recommend 4–8 weeks. Off-peak we can often arrange transport, tours and stays within 24–72 hours.", keywords: ["advance", "how early", "peak season", "availability", "last minute", "when to book"] },
     ],
   },
@@ -37,8 +41,8 @@ export const faqGroups: FaqGroup[] = [
     items: [
       { q: "What does your chauffeured travel include?", a: "A professional, NDA-bound chauffeur, the vehicle of your choice, fuel, tolls, water on board and in-trip support from the concierge. Wait time, child seats and additional stops are arranged on request.", keywords: ["chauffeur", "driver", "travel", "car", "vehicle", "included", "fuel", "tolls", "water"] },
       { q: "Do you offer airport transfers?", a: "Yes — to and from Cape Town International, private FBOs and regional airports. Flight tracking is standard so we adjust automatically for early or delayed arrivals.", keywords: ["airport", "transfer", "cape town international", "flight", "pickup", "drop off", "airport pickup", "ctia"] },
-      { q: "Can I hire a vehicle without a chauffeur?", a: "Yes. Self-drive hire is available through the Rentals page and is priced lower than the chauffeured equivalent. A valid licence, ID/passport and a refundable deposit are required.", keywords: ["self drive", "rental", "hire", "without driver", "self-drive", "car hire", "licence", "deposit"] },
-      { q: "Do you offer private jets, helicopters or yachts?", a: "Yes — through trusted partners. We arrange private jet charter, scenic and transfer helicopters, and motor or sailing yachts from the V&A Waterfront. See the Travel page categories.", keywords: ["private jet", "helicopter", "yacht", "charter", "scenic flight", "va waterfront", "boat", "luxury travel"] },
+      { q: "Can I hire a vehicle without a chauffeur?", a: "Yes. Self-drive hire is available through the Rentals page, with pricing confirmed on enquiry. A valid licence, ID/passport and a refundable deposit are required.", keywords: ["self drive", "rental", "hire", "without driver", "self-drive", "car hire", "licence", "deposit"] },
+      { q: "Do you offer private jets, helicopters or yachts?", a: "Yes — through trusted partners. We arrange private jet charter, scenic and transfer helicopters, and motor or sailing yachts from the V&A Waterfront. See the aviation and yacht categories on our Chauffeur & Fleet page.", keywords: ["private jet", "helicopter", "yacht", "charter", "scenic flight", "va waterfront", "boat", "luxury travel"] },
       { q: "Do you offer group transport?", a: "Yes. 16-seater Sprinters, 22-seater midibuses, 32-seater touring buses and full luxury coaches for weddings, corporate groups and tours.", keywords: ["group", "bus", "coach", "sprinter", "minibus", "wedding transport", "corporate group", "large group"] },
     ],
   },
@@ -49,7 +53,7 @@ export const faqGroups: FaqGroup[] = [
       { q: "What kinds of tours do you offer?", a: "Safari, marine and wildlife, Garden Route road trips, aerial and scenic flights, culinary experiences, wellness retreats, photography tours, cultural and adventure days, and fully custom itineraries.", keywords: ["tours", "safari", "garden route", "wildlife", "marine", "culinary", "wellness", "photography", "adventure", "itinerary"] },
       { q: "Are your tours private?", a: "Yes — every SVRM tour is private to your party. We do not run shared or group-with-strangers tours.", keywords: ["private tour", "group tour", "shared tour", "exclusive", "personal"] },
       { q: "Can you build a custom itinerary?", a: "Yes. Use the Tour Builder on the Tours page or message the concierge with dates, party size and the feeling you want from the trip. We return a first sketch within a day.", keywords: ["custom", "bespoke", "tailor made", "itinerary", "plan", "tour builder", "personalised"] },
-      { q: "Do you offer wine tours?", a: "No. We do not offer alcohol-led tours. We do offer culinary experiences, vineyard landscapes and Cape Winelands scenery where alcohol is not the focus.", keywords: ["wine tour", "winelands", "vineyard", "alcohol", "culinary", "stellenbosch", "franschhoek"] },
+      { q: "Do you offer wine tours?", a: "SVRM Group coordinates private Stellenbosch and Franschhoek Winelands visits, with scenic estates, dining and a chauffeur route tailored to your interests. Tasting appointments are requested through the estates and confirmed separately. Guests who prefer an alcohol-free experience can request vineyard scenery, food and cultural stops instead.", keywords: ["wine tour", "winelands", "vineyard", "alcohol", "culinary", "stellenbosch", "franschhoek"] },
     ],
   },
   {
@@ -75,7 +79,7 @@ export const faqGroups: FaqGroup[] = [
     id: "scope",
     title: "What we don't offer",
     items: [
-      { q: "Is there anything SVRM won't arrange?", a: "We do not arrange anything illegal, unsafe or in conflict with the wellbeing of guests, staff or wildlife. We do not run alcohol-led tours, we do not work with unlicensed operators, and we do not accept bookings we cannot deliver to our standard.", keywords: ["won't", "don't offer", "not available", "restrictions", "rules", "limits"] },
+      { q: "Is there anything SVRM won't arrange?", a: "We do not arrange anything illegal, unsafe or in conflict with the wellbeing of guests, staff or wildlife. We respect guest preferences and applicable operator requirements, and we do not accept bookings we cannot deliver to our standard.", keywords: ["won't", "don't offer", "not available", "restrictions", "rules", "limits"] },
       { q: "Do you offer hunting tours?", a: "We facilitate ethical, legally licensed game experiences only. We do not arrange any activity that contravenes South African wildlife or firearms law.", keywords: ["hunting", "game", "firearms", "wildlife law", "ethical"] },
       { q: "Do you sell tickets to public events?", a: "We don't operate as a ticket agency. We do arrange private access, hospitality and transport around major Cape Town events when capacity allows.", keywords: ["tickets", "events", "public events", "ticket agency", "private access"] },
     ],
@@ -113,14 +117,16 @@ export const faqGroups: FaqGroup[] = [
   },
 ];
 
-export const faqJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqGroups.flatMap((g) =>
-    g.items.map((i) => ({
-      "@type": "Question",
-      name: i.q,
-      acceptedAnswer: { "@type": "Answer", text: i.a },
-    }))
-  ),
+const serviceLinks: Record<string, FaqLink> = {
+  travel: { to: "/chauffeur", label: "chauffeur services and fleet" },
+  tours: { to: "/tours", label: "private tours" },
+  stays: { to: "/stays", label: "luxury stays" },
+  security: { to: "/security", label: "security arrangements" },
 };
+
+export const faqGroups: FaqGroup[] = [...expandedFaqGroups, ...existingGroups].map((group) => ({
+  ...group,
+  items: group.items.map((item, index) => completeFaq({ ...item, link: item.link ?? serviceLinks[group.id] }, index)),
+}));
+
+export const faqJsonLd = faqSchema(faqGroups.flatMap((group) => group.items));

@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { completeFaq, faqSchema } from "@/lib/faq";
+import ServiceFaq from "@/components/svrm/ServiceFaq";
 import { useSearchParams, Link } from "react-router-dom";
 import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
@@ -32,6 +34,53 @@ const tierBlurbs: Record<string, string> = {
 };
 
 type Mode = "cars" | "jets" | "helicopters" | "yachts" | "itinerary" | "planner";
+
+const chauffeurFaqs = [
+              {
+                q: "How much does a chauffeur cost in Cape Town?",
+                a: "It depends on the vehicle, the hours and the route. Day rates on this page are an indicative guide; the 7-day itinerary takes 10% off the vehicle total for any car in the fleet, and every brief is quoted in writing before you commit.",
+              },
+              {
+                q: "Do you do Cape Town airport transfers?",
+                a: "Yes — Cape Town International (CPT) to any address in the city, Winelands or the Atlantic seaboard. Meet-and-greet inside the terminal, luggage handled, child seats on request. Booked as a single transfer or as part of a full-stay chauffeur arrangement.",
+              },
+              {
+                q: "Can I book one chauffeur for a whole week?",
+                a: "Yes — that's the point of the 7-day itinerary. The same NDA-bound chauffeur stays with you for the week, so they learn your timing, preferences and the places you keep going back to.",
+              },
+              {
+                q: "Can the 7-day itinerary be changed?",
+                a: "Completely. Swap the safari for the Garden Route, add a yacht day, move the Winelands to a different day, or extend beyond seven days — the discount still applies to the vehicle total.",
+              },
+              {
+                q: "Are entrance fees and the safari included?",
+                a: "No — the discount is on the chauffeured vehicle. Cableway tickets, tastings, restaurants and the Aquila Big Five safari are quoted separately, with safari pricing on request.",
+              },
+              {
+                q: "Can you arrange private jets, helicopters and yachts too?",
+                a: "Yes — everything on this page sits under one concierge. Jets, helicopter transfers and superyacht charters are sourced through vetted operators, fully crewed and fully briefed.",
+              },
+              {
+                q: "What is the hourly rate for a chauffeur in Cape Town?",
+                a: "Hourly hire is available with a minimum booking and the rate follows the vehicle — V-Class, S-Class, GLS, Range Rover or the Mercedes-Maybach S-Class. Send us your hours and route and you get a written quote before anything is confirmed.",
+              },
+              {
+                q: "Which areas of Cape Town do you cover?",
+                a: "All of Cape Town — V&A Waterfront, Camps Bay, Clifton, Bantry Bay, Sea Point, the Atlantic Seaboard, City Bowl, Constantia and Hout Bay — plus Stellenbosch, Franschhoek and Paarl in the Winelands, the Cape Peninsula, Hermanus and the Garden Route.",
+              },
+              {
+                q: "Are your chauffeurs English-speaking?",
+                a: "Yes. Every chauffeur is English-speaking, professionally trained, NDA-bound and briefed on your itinerary before you land, with real local knowledge of restaurants, estates and routes.",
+              },
+              {
+                q: "Can I book a chauffeur for a wedding or corporate event?",
+                a: "Yes — wedding cars, matric dances, corporate roadshows, conference and delegation transfers, and multi-vehicle convoys with one point of contact and a written schedule per vehicle.",
+              },
+              {
+                q: "Can a chauffeur take us on a Winelands wine tour?",
+                a: "Yes — full-day chauffeured wine tours through Stellenbosch, Franschhoek and Constantia, with tastings arranged ahead and nobody in your party needing to drive.",
+              },
+            ].map((item, index) => completeFaq(item, index));
 
 const Travel = () => {
   const [params] = useSearchParams();
@@ -130,55 +179,7 @@ const Travel = () => {
             })),
           },
         }, {
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: [
-            {
-              "@type": "Question",
-              name: "How much does a chauffeur cost in Cape Town?",
-              acceptedAnswer: { "@type": "Answer", text: "Chauffeured day rates depend on the vehicle, hours and route. Our 7-day itinerary applies a 10% discount to the vehicle total for any car in the fleet, and every brief is quoted before you commit." },
-            },
-            {
-              "@type": "Question",
-              name: "Do you do Cape Town airport transfers?",
-              acceptedAnswer: { "@type": "Answer", text: "Yes — Cape Town International (CPT) to any address in the city, Winelands or the Atlantic seaboard. Meet-and-greet inside the terminal, luggage handled, child seats on request." },
-            },
-            {
-              "@type": "Question",
-              name: "Can I book one chauffeur for a whole week in Cape Town?",
-              acceptedAnswer: { "@type": "Answer", text: "Yes. The same NDA-bound chauffeur stays with you for the length of your stay so they learn your preferences, timing and routes. Seven-day bookings receive a 10% discount on the vehicle total." },
-            },
-            {
-              "@type": "Question",
-              name: "Can you arrange private jets, helicopters and yachts too?",
-              acceptedAnswer: { "@type": "Answer", text: "Yes — jets, helicopter transfers and superyacht charters are sourced through vetted operators, fully crewed and briefed, all under the same concierge." },
-            },
-            {
-              "@type": "Question",
-              name: "What is the hourly rate for a chauffeur in Cape Town?",
-              acceptedAnswer: { "@type": "Answer", text: "Hourly chauffeur hire is available with a minimum booking, and the rate depends on the vehicle — Mercedes V-Class, S-Class, GLS, Range Rover or the Mercedes-Maybach S-Class. Send your hours and route and we quote in writing before you commit." },
-            },
-            {
-              "@type": "Question",
-              name: "Which areas of Cape Town do your chauffeurs cover?",
-              acceptedAnswer: { "@type": "Answer", text: "All of Cape Town — the V&A Waterfront, Camps Bay, Clifton, Bantry Bay, Sea Point, the Atlantic Seaboard, City Bowl, Constantia, Hout Bay and Bishopscourt — plus the Winelands at Stellenbosch, Franschhoek and Paarl, the Cape Peninsula and the Garden Route." },
-            },
-            {
-              "@type": "Question",
-              name: "Do you provide English-speaking chauffeurs for international guests?",
-              acceptedAnswer: { "@type": "Answer", text: "Yes. Every SVRM chauffeur is English-speaking, professionally trained, NDA-bound and briefed on your itinerary before arrival, with local knowledge of restaurants, wine estates and routes." },
-            },
-            {
-              "@type": "Question",
-              name: "Can I book a chauffeur for a wedding or corporate event in Cape Town?",
-              acceptedAnswer: { "@type": "Answer", text: "Yes — wedding cars, matric dances, corporate roadshows, conference and delegation transfers, and multi-vehicle convoys with a single point of contact and a written schedule per vehicle." },
-            },
-            {
-              "@type": "Question",
-              name: "Can a chauffeur drive us to the Winelands for a wine tour?",
-              acceptedAnswer: { "@type": "Answer", text: "Yes — full-day chauffeured wine tours to Stellenbosch, Franschhoek and Constantia, with tastings booked ahead and no one in your party needing to drive." },
-            },
-          ],
+          ...faqSchema(chauffeurFaqs),
         }, {
           "@context": "https://schema.org",
           "@type": "BreadcrumbList",
@@ -570,57 +571,7 @@ const Travel = () => {
           <p className="eyebrow">Frequently asked · Chauffeur hire Cape Town</p>
           <h2 className="font-serif text-3xl md:text-4xl mt-4 text-foreground">Chauffeur questions.</h2>
           <div className="mt-10 divide-y divide-border/40 border-y border-border/40">
-            {[
-              {
-                q: "How much does a chauffeur cost in Cape Town?",
-                a: "It depends on the vehicle, the hours and the route. Day rates on this page are an indicative guide; the 7-day itinerary takes 10% off the vehicle total for any car in the fleet, and every brief is quoted in writing before you commit.",
-              },
-              {
-                q: "Do you do Cape Town airport transfers?",
-                a: "Yes — Cape Town International (CPT) to any address in the city, Winelands or the Atlantic seaboard. Meet-and-greet inside the terminal, luggage handled, child seats on request. Booked as a single transfer or as part of a full-stay chauffeur arrangement.",
-              },
-              {
-                q: "Can I book one chauffeur for a whole week?",
-                a: "Yes — that's the point of the 7-day itinerary. The same NDA-bound chauffeur stays with you for the week, so they learn your timing, preferences and the places you keep going back to.",
-              },
-              {
-                q: "Can the 7-day itinerary be changed?",
-                a: "Completely. Swap the safari for the Garden Route, add a yacht day, move the Winelands to a different day, or extend beyond seven days — the discount still applies to the vehicle total.",
-              },
-              {
-                q: "Are entrance fees and the safari included?",
-                a: "No — the discount is on the chauffeured vehicle. Cableway tickets, tastings, restaurants and the Aquila Big Five safari are quoted separately, with safari pricing on request.",
-              },
-              {
-                q: "Can you arrange private jets, helicopters and yachts too?",
-                a: "Yes — everything on this page sits under one concierge. Jets, helicopter transfers and superyacht charters are sourced through vetted operators, fully crewed and fully briefed.",
-              },
-              {
-                q: "What is the hourly rate for a chauffeur in Cape Town?",
-                a: "Hourly hire is available with a minimum booking and the rate follows the vehicle — V-Class, S-Class, GLS, Range Rover or the Mercedes-Maybach S-Class. Send us your hours and route and you get a written quote before anything is confirmed.",
-              },
-              {
-                q: "Which areas of Cape Town do you cover?",
-                a: "All of Cape Town — V&A Waterfront, Camps Bay, Clifton, Bantry Bay, Sea Point, the Atlantic Seaboard, City Bowl, Constantia and Hout Bay — plus Stellenbosch, Franschhoek and Paarl in the Winelands, the Cape Peninsula, Hermanus and the Garden Route.",
-              },
-              {
-                q: "Are your chauffeurs English-speaking?",
-                a: "Yes. Every chauffeur is English-speaking, professionally trained, NDA-bound and briefed on your itinerary before you land, with real local knowledge of restaurants, estates and routes.",
-              },
-              {
-                q: "Can I book a chauffeur for a wedding or corporate event?",
-                a: "Yes — wedding cars, matric dances, corporate roadshows, conference and delegation transfers, and multi-vehicle convoys with one point of contact and a written schedule per vehicle.",
-              },
-              {
-                q: "Can a chauffeur take us on a Winelands wine tour?",
-                a: "Yes — full-day chauffeured wine tours through Stellenbosch, Franschhoek and Constantia, with tastings arranged ahead and nobody in your party needing to drive.",
-              },
-            ].map((f) => (
-              <div key={f.q} className="py-6">
-                <p className="font-serif text-xl text-foreground">{f.q}</p>
-                <p className="text-muted-foreground text-sm leading-relaxed mt-3">{f.a}</p>
-              </div>
-            ))}
+            <ServiceFaq items={chauffeurFaqs} />
           </div>
         </div>
       </section>
