@@ -25,7 +25,7 @@ Implements the uploaded brief in priority order, keeping the design, logo, booki
 - Remove duplicate or conflicting search data between the fallback homepage file and individual pages.
 
 ## 4. About and trust
-- Expand the About section on the home page: what SVRM does directly, what partners provide, discretion and personal service. No invented testimonials, press or credentials.
+- Expand the About section on the home page: SVRM's own fleet and services, discretion and personal service. No invented testimonials, press or credentials.
 
 ## 5. AI search answers
 - Add the brief's six customer questions to the FAQ. Each gets a real answer and the clickable WhatsApp number, using the existing FAQ system.
