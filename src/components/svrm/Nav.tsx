@@ -75,7 +75,16 @@ const links: NavItem[] = [
     ],
   },
   { to: "/blog", label: "Journal" },
-  { to: "/contact", label: "Contact" },
+  {
+    to: "/contact",
+    label: "Contact",
+    sub: [
+      { to: "/contact#concierge", label: "Concierge & WhatsApp" },
+      { to: "/contact#enquiry", label: "Enquiry Form" },
+      { to: "/contact#faq", label: "FAQ" },
+      { to: "/contact#tiktok", label: "TikTok" },
+    ],
+  },
 ];
 
 const linkClass = ({ isActive }: { isActive: boolean }) =>

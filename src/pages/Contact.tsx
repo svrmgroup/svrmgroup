@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import FaqAnswer from "@/components/svrm/FaqAnswer";
+import TikTokSection from "@/components/svrm/TikTokSection";
 import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
 import PageHero from "@/components/svrm/PageHero";
@@ -180,7 +181,7 @@ const Contact = () => {
 
       <section className="pb-24">
         <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-20">
-          <aside className="lg:col-span-2 space-y-10">
+          <aside id="concierge" className="lg:col-span-2 space-y-10 scroll-mt-24">
             <div>
               <p className="eyebrow">Concierge</p>
               <a
@@ -222,7 +223,7 @@ const Contact = () => {
             </div>
           </aside>
 
-          <div className="lg:col-span-3">
+          <div id="enquiry" className="lg:col-span-3 scroll-mt-24">
             <EnquiryForm subject="General enquiry" />
           </div>
         </div>
@@ -336,6 +337,8 @@ const Contact = () => {
           </p>
         </div>
       </section>
+
+      <TikTokSection />
 
       <Footer />
     </main>
