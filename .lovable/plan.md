@@ -45,7 +45,7 @@ Implements the uploaded brief in priority order, keeping the design, logo, booki
 
 ## Technical details
 - `src/lib/business.ts` holds the business details; JSON-LD builders reuse it.
-- `Index.tsx` drops `aggregateRating`; deduplicate JSON-LD against `index.html`.
+- `Index.tsx` keeps `aggregateRating`; deduplicate JSON-LD against `index.html`. Replace partner wording found via `rg -i partner` in `src/data` and `src/pages`.
 - A Vite `closeBundle` plugin writes `dist/<route>/index.html` from a route-meta table (title, description, canonical, JSON-LD, `<noscript>` summary). Needs a check that the hosting serves nested index.html files before the SPA fallback.
-- FAQ additions go in `src/data/faqExpansion.ts` and must pass the existing `faq.test.ts`. Add a test that the homepage schema has no `aggregateRating`, and one that every sitemap URL is a real route.
+- FAQ additions go in `src/data/faqExpansion.ts` and must pass the existing `faq.test.ts`. Add a test that every sitemap URL is a real route.
 - Update `AGENTS.md` (business-details rule, prerender rule) and `roadmap.md`.
