@@ -461,8 +461,8 @@ const Travel = () => {
             <p className="eyebrow">Crew</p>
             <h2 className="font-serif text-3xl mt-4 text-foreground">Pilots, captains, hosts.</h2>
             <p className="text-muted-foreground mt-4">
-              Jets, helicopters and yachts are sourced through vetted operators — fully crewed, fully
-              compliant, fully briefed.
+              Every jet, helicopter and yacht journey is fully crewed, fully compliant and fully
+              briefed by SVRM Group.
             </p>
           </div>
         </div>
@@ -499,6 +499,34 @@ const Travel = () => {
             <Link to="/chauffeur?cat=cars&vehicle=maybach-v-class#maybach-v-class" className="inline-flex mt-5 text-gold underline underline-offset-4">
               Explore the Maybach V-Class
             </Link>
+          </div>
+
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8">
+            {[
+              ["Airport collections", "Meet-and-greet at Cape Town International Airport, luggage handled and a direct drive to your villa, hotel or meeting. We track your flight, so delays are covered."],
+              ["Executive & corporate travel", "Discreet, punctual transport for board meetings, roadshows, conferences and delegations, with a chauffeur on standby between appointments."],
+              ["Full-day chauffeurs", "A private driver for the whole day — shopping at the V&A Waterfront, lunch in Camps Bay, sunset on the Atlantic Seaboard — on your timetable."],
+              ["Private tours with a driver", "Cape Peninsula and Cape Point, Boulders Beach, Table Mountain, Stellenbosch and Franschhoek wine estates, Hermanus and the Garden Route, planned around you."],
+              ["Multi-day transport", "One chauffeur and vehicle for your whole stay, or our 7-day itinerary at 10% off — ideal for families, honeymooners and business trips."],
+              ["International visitors", "Guests from the UK, US, UAE, Saudi Arabia and beyond book before they fly. Share your flight and hotel; we confirm everything in writing, including family needs and halal-conscious dining stops."],
+            ].map(([t, d]) => (
+              <div key={t}>
+                <h3 className="font-serif text-2xl text-foreground">{t}</h3>
+                <p className="mt-3 text-muted-foreground text-sm md:text-base leading-relaxed">{d}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-12 max-w-3xl">
+            <h3 className="font-serif text-2xl text-foreground">How booking works</h3>
+            <ol className="mt-4 space-y-2 text-sm md:text-base text-muted-foreground list-decimal pl-5">
+              <li>Send your dates, pickup point, group size and preferred vehicle on WhatsApp or the enquiry form.</li>
+              <li>We reply with availability and a written quote for your hours and route.</li>
+              <li>Confirm with a deposit; your chauffeur's details arrive before pickup.</li>
+            </ol>
+            <a href={waHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 mt-6 text-gold underline underline-offset-4">
+              <WhatsAppGlyph className="h-4 w-4" /> Ask about availability on WhatsApp
+            </a>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-12">
