@@ -5,6 +5,6 @@
 - [x] Highlight confirmed Maybach amenities and improve chauffeur search content, then verify.
 
 # FAQ expansion
-- [ ] Expand service FAQs while preserving booking terms and factual service scope.
-- [ ] Add visible clickable WhatsApp and internal links to all FAQ answers, matching structured data.
-- [ ] Verify search, FAQ links and desktop/mobile layouts.
+- [x] Expand service FAQs while preserving booking terms and factual service scope.
+- [x] Add visible clickable WhatsApp and internal links to all FAQ answers, matching structured data.
+- [x] Verify search, FAQ links and desktop/mobile layouts.
