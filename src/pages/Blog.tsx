@@ -30,7 +30,10 @@ const Blog = () => {
     }));
     // CMS entries override same-slug static posts
     const cmsSlugs = new Set(cmsMapped.map(p => p.slug));
-    return [...cmsMapped, ...posts.filter(p => !cmsSlugs.has(p.slug))];
+    const all = [...cmsMapped, ...posts.filter(p => !cmsSlugs.has(p.slug))];
+    // Pin the Maybach V-Class journal to the top.
+    const PINNED = "mercedes-maybach-v-class-chauffeur-cape-town";
+    return [...all.filter(p => p.slug === PINNED), ...all.filter(p => p.slug !== PINNED)];
   }, [cmsBlogs]);
 
   const filtered = active === "All" ? merged : merged.filter((p) => p.category === active);
