@@ -255,33 +255,33 @@ export const posts: BlogPost[] = [
   {
     slug: "request-only-the-svrm-way",
     publishedISO: "2025-12-15",
-    seoTitle: "Why SVRM Prices Are on Request \u2014 The Concierge View",
-    seoDescription: "How SVRM quotes bespoke luxury services in Cape Town \u2014 what to expect after the first WhatsApp message and why published rates would be wrong.",
+    seoTitle: "SVRM Chauffeur Guide Rates & Personalised Quotes",
+    seoDescription: "Understand SVRM's Cape Town chauffeur guide rates, final written quotations and rental prices on enquiry. Plan your vehicle, route and extras with our concierge.",
     seoKeywords: "SVRM pricing, luxury concierge quote, bespoke Cape Town concierge, private lifestyle management pricing, NDA concierge South Africa",
-    title: "Request-only: why we don't publish prices",
+    title: "Chauffeur guide rates and your personalised quotation",
     excerpt:
-      "Every itinerary is personal. Here's what to expect when you send the first message.",
+      "Published chauffeur day rates help you plan. Your final written quotation confirms the journey, inclusions and extras; rental prices remain on enquiry.",
     category: "Insights",
     date: "December 2025",
     image: customImg,
     readTime: "3 min read",
     intro:
-      "We are often asked why our pricing sits behind a conversation. The honest answer: a published rate would be wrong for almost every guest.",
+      "SVRM Group publishes indicative chauffeur day rates to help you plan private travel across Cape Town. These guide rates are a starting point, not a final quotation for every itinerary. Your chosen vehicle, dates, route, hours and extras shape the written quote. Self-drive rental prices remain on enquiry.",
     sections: [
       {
-        heading: "Each booking is composed",
+        heading: "From a guide rate to a confirmed quotation",
         body:
-          "A chauffeured day is not a fixed hourly rate. It is a vehicle, a chauffeur, a route, a wait time, a return, and the discretion that wraps around all of it. The same applies to tours, stays and security.",
+          "A chauffeur day rate helps you compare vehicles. Your quotation then sets out the agreed dates, hours, route, waiting time and requested extras, with inclusions and any additional charges made clear. Review that written scope before confirming; a displayed guide rate alone does not reserve a vehicle or confirm availability.",
       },
       {
-        heading: "Discretion is part of the price",
+        heading: "Personal service, clearly agreed",
         body:
-          "Our clients pay for an NDA-bound team that does not appear in tagged photos or guest lists. That is a real cost — and one we honour by not publishing the names of vendors, vehicles or villas we use.",
+          "A personalised quotation brings your transport preferences and itinerary into one clear brief. SVRM Group treats client arrangements discreetly while confirming the selected vehicle and agreed services with you. Specialist services arranged through external partners are specified separately, so you know what your booking covers.",
       },
       {
         heading: "What to expect from the first message",
         body:
-          "A short WhatsApp reply, usually the same day. A few sensible questions. A written quote within twenty-four hours, valid for seven days, with no obligation. No follow-up unless invited.",
+          "Send your dates, preferred vehicle, passenger numbers, luggage and collection details. Our concierge checks the arrangements and prepares a written quotation stating availability, inclusions, payment terms and any quote expiry. For rental enquiries, we confirm pricing individually rather than displaying self-drive rates on the Rentals page.",
       },
     ],
     closing:
