@@ -7,7 +7,7 @@ import { Seo } from "@/components/Seo";
 import { securityOfferings, securityCategories } from "@/data/security";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import { ShieldCheck, MessageCircle } from "lucide-react";
-import heroVideo from "@/assets/videos/security.mp4.asset.json";
+import heroVideo from "@/assets/videos/security-convoy.mp4.asset.json";
 import bmw7 from "@/assets/security/bmw7-armored.jpg";
 
 const Security = () => {
