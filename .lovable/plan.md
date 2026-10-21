@@ -2,10 +2,10 @@
 
 Implements the uploaded brief in priority order, keeping the design, logo, booking forms, admin, WhatsApp links and /chauffeur URL unchanged.
 
-## Decisions taken from the brief
-- **Star rating removed from search data.** The homepage currently tells Google "5.0 stars" with no reviews behind it on the site. The brief forbids unbacked ratings, and Google already flagged it. Reviews will keep living on your Google profile.
-- **Range Rover and BMW X5:** described as "available on request, subject to availability". The site won't claim you own them.
-- **Partner services** (jets, helicopters, yachts, security, safaris): worded as "arranged through trusted specialist partners".
+## Your decisions
+- **5-star rating stays** in the search data, as it is now.
+- **SVRM owns its vehicles.** Fleet wording presents them as SVRM's own fleet, including the Range Rover and BMW X5.
+- **SVRM is the provider** for every service. No "partner" or "arranged through partners" wording anywhere; existing partner wording in the FAQs and pages will be rewritten.
 - **No street address** in the search data. The site will show a Cape Town service area only.
 - **Blog:** no mass publishing. The site gets a list of 8 article ideas for you to review, plus at most 2 finished articles where we already have real facts (chauffeur guide, chauffeur vs self-drive).
 
@@ -25,7 +25,7 @@ Implements the uploaded brief in priority order, keeping the design, logo, booki
 - Remove duplicate or conflicting search data between the fallback homepage file and individual pages.
 
 ## 4. About and trust
-- Expand the About section on the home page: what SVRM does directly, what partners provide, discretion and personal service. No invented testimonials, press or credentials.
+- Expand the About section on the home page: SVRM's own fleet and services, discretion and personal service. No invented testimonials, press or credentials.
 
 ## 5. AI search answers
 - Add the brief's six customer questions to the FAQ. Each gets a real answer and the clickable WhatsApp number, using the existing FAQ system.
@@ -45,7 +45,7 @@ Implements the uploaded brief in priority order, keeping the design, logo, booki
 
 ## Technical details
 - `src/lib/business.ts` holds the business details; JSON-LD builders reuse it.
-- `Index.tsx` drops `aggregateRating`; deduplicate JSON-LD against `index.html`.
+- `Index.tsx` keeps `aggregateRating`; deduplicate JSON-LD against `index.html`. Replace partner wording found via `rg -i partner` in `src/data` and `src/pages`.
 - A Vite `closeBundle` plugin writes `dist/<route>/index.html` from a route-meta table (title, description, canonical, JSON-LD, `<noscript>` summary). Needs a check that the hosting serves nested index.html files before the SPA fallback.
-- FAQ additions go in `src/data/faqExpansion.ts` and must pass the existing `faq.test.ts`. Add a test that the homepage schema has no `aggregateRating`, and one that every sitemap URL is a real route.
+- FAQ additions go in `src/data/faqExpansion.ts` and must pass the existing `faq.test.ts`. Add a test that every sitemap URL is a real route.
 - Update `AGENTS.md` (business-details rule, prerender rule) and `roadmap.md`.
