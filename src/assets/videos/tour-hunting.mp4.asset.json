@@ -1,9 +1,11 @@
 {
   "version": 1,
-  "asset_id": "5087bef7-f4bc-4f92-8f7a-a79593a3086e",
+  "asset_id": "28c6dba4-f789-4737-87cf-b3c24c7dac3d",
   "project_id": "62a87004-c403-46e9-b02d-a73f0358e326",
-  "url": "/__l5e/assets-v1/5087bef7-f4bc-4f92-8f7a-a79593a3086e/tour-hunting.mp4",
+  "url": "/__l5e/assets-v1/28c6dba4-f789-4737-87cf-b3c24c7dac3d/tour-hunting.mp4",
+  "r2_key": "a/v1/62a87004-c403-46e9-b02d-a73f0358e326/28c6dba4-f789-4737-87cf-b3c24c7dac3d/tour-hunting.mp4",
   "original_filename": "tour-hunting.mp4",
-  "size": 5682847,
-  "created_at": "2026-06-27T22:09:22Z"
+  "size": 7786054,
+  "content_type": "video/mp4",
+  "created_at": "2026-10-21T17:33:46Z"
 }
