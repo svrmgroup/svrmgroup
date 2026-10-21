@@ -28,7 +28,7 @@ const BuySellPropertyForm = () => {
       <h3 className="font-serif text-3xl md:text-4xl mt-3 text-foreground">Own in Cape Town.</h3>
       <p className="text-sm text-muted-foreground mt-3 max-w-2xl">
         Off-market and on-market acquisitions, disposals and investment opportunities — handled
-        discreetly with our property partners.
+        discreetly by SVRM Group.
       </p>
 
       <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-5">
