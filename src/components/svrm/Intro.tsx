@@ -17,6 +17,12 @@ const Intro = () => (
         Garden Route week, a private safari, a villa above Camps Bay or a helicopter flip over the
         Twelve Apostles — every brief is handled by one team, on one number.
       </p>
+      <p className="mt-6 text-muted-foreground/80 leading-relaxed max-w-2xl mx-auto text-sm">
+        Our speciality is luxury chauffeur service in Cape Town: Mercedes-Maybach, S-Class, V-Class,
+        GLS, Range Rover and BMW X5 with professional, NDA-bound chauffeurs, plus private Cape Peninsula,
+        Winelands and Garden Route tours. Every journey is planned personally, confirmed in writing and
+        handled with complete discretion.
+      </p>
 
     </div>
   </section>

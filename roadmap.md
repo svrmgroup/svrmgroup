@@ -8,3 +8,10 @@
 - [x] Expand service FAQs while preserving booking terms and factual service scope.
 - [x] Add visible clickable WhatsApp and internal links to all FAQ answers, matching structured data.
 - [x] Verify search, FAQ links and desktop/mobile layouts.
+# Google SEO & AI search brief
+- [x] Chauffeur page title/H1, service sections, booking steps, WhatsApp CTA.
+- [x] Tours metadata and "Why go private" section.
+- [x] Remove partner wording; neutral vehicle wording; keep 5-star rating.
+- [x] Six AI-search FAQ answers; admin noindex; static per-route HTML; sitemap test.
+- [x] Implementation report in marketing documents.
+- [ ] Publish, Search Console re-inspection, Business Profile and Bing setup (needs you).

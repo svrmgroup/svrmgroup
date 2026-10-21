@@ -276,7 +276,7 @@ export const posts: BlogPost[] = [
       {
         heading: "Personal service, clearly agreed",
         body:
-          "A personalised quotation brings your transport preferences and itinerary into one clear brief. SVRM Group treats client arrangements discreetly while confirming the selected vehicle and agreed services with you. Specialist services arranged through external partners are specified separately, so you know what your booking covers.",
+          "A personalised quotation brings your transport preferences and itinerary into one clear brief. SVRM Group treats client arrangements discreetly while confirming the selected vehicle and agreed services with you. Every additional service is specified separately, so you know what your booking covers.",
       },
       {
         heading: "What to expect from the first message",

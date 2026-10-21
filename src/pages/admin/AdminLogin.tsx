@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useState, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -45,6 +46,7 @@ const AdminLogin = () => {
   return (
     <main className="min-h-screen bg-background text-foreground flex items-center justify-center p-6">
       <Seo title="Admin · SVRM" description="SVRM admin console login for managing bookings, enquiries, invoices, staff and website content securely." path="/admin/login" />
+      <Helmet><meta name="robots" content="noindex, nofollow" /></Helmet>
       <div className="w-full max-w-md bg-surface-raised border border-border/40 p-10">
         <div className="flex flex-col items-center text-center mb-2">
           <Logo size="xl" />

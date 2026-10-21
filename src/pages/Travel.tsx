@@ -18,7 +18,7 @@ import { jets, helicopters } from "@/data/aviation";
 import { yachts } from "@/data/yachts";
 import { chauffeurItinerary, SEVEN_DAY_DISCOUNT } from "@/data/chauffeurItinerary";
 import { useCurrency } from "@/lib/currency";
-import { WHATSAPP_BASE } from "@/lib/whatsappMessages";
+import { WHATSAPP_BASE, whatsappUrlFor } from "@/lib/whatsappMessages";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Seo } from "@/components/Seo";
 import heroVideo from "@/assets/videos/travel.mp4.asset.json";
@@ -121,7 +121,7 @@ const Travel = () => {
   return (
     <main className="bg-background text-foreground min-h-screen">
       <Seo
-        title={"Chauffeur Service Cape Town | Private Chauffeur & Fleet — SVRM"}
+        title={"Luxury Chauffeur Services Cape Town | SVRM Group"}
         description={"Private chauffeur service across Cape Town. Maybach V-Class with TV and reclining massage seats, luxury airport transfers, wine tours and executive travel."}
         path="/chauffeur"
         keywords="chauffeur service Cape Town, chauffeur Cape Town, chauffeur company Cape Town, chauffeur service near me, best chauffeur service Cape Town, private chauffeur Cape Town, chauffeur hire Cape Town, chauffeur driven car hire Cape Town, chauffeur hire Cape Town prices, hourly chauffeur rates Cape Town, chauffeur service Camps Bay, chauffeur service Clifton, chauffeur service Sea Point, chauffeur service Constantia, chauffeur service Hout Bay, chauffeur Stellenbosch, chauffeur Franschhoek, chauffeur Paarl, chauffeur driven wine tour Cape Town, private driver for the day Cape Town, chauffeur for a week Cape Town, professional chauffeur Cape Town, NDA chauffeur Cape Town, Cape Town International airport chauffeur meet and greet, conference transfers Cape Town, delegation transport Cape Town, V&A Waterfront chauffeur, Waterfront private chauffeur Cape Town, V&A Waterfront transfer, luxury chauffeur Cape Town, luxury chauffeur South Africa, chauffeur driven car Cape Town, hire a driver Cape Town, personal driver Cape Town, English speaking driver Cape Town, VIP chauffeur Cape Town, executive chauffeur Cape Town, corporate chauffeur Cape Town, Maybach chauffeur Cape Town, Mercedes-Maybach chauffeur Cape Town, Maybach S-Class Cape Town, Mercedes S-Class chauffeur Cape Town, S Class chauffeur Cape Town, Mercedes GLS hire Cape Town, Mercedes-Benz GLS chauffeur Cape Town, GLS with driver Cape Town, luxury 7 seater SUV chauffeur, premium SUV transfer Cape Town, Mercedes V-Class chauffeur Cape Town, BMW 7 Series with driver, Rolls-Royce chauffeur Cape Town, Rolls-Royce Phantom chauffeur, Range Rover chauffeur Cape Town, wedding chauffeur Cape Town, matric dance chauffeur Cape Town, hourly chauffeur hire Cape Town, full day chauffeur Cape Town, multi day chauffeur Cape Town, weekly chauffeur hire Cape Town, 7 day Cape Town itinerary, 7 day chauffeured tour Cape Town, one week Cape Town itinerary with driver, private driver and guide Cape Town, Cape Town Winelands chauffeur, Stellenbosch wine tour with driver, Franschhoek wine tour chauffeur, Cape Peninsula chauffeur tour, Table Mountain private tour driver, Aquila safari transfer Cape Town, luxury airport transfer Cape Town, Cape Town airport chauffeur, close protection driver Cape Town, discreet chauffeur Cape Town, chauffeur for celebrities Cape Town, chauffeur rates Cape Town, private jet charter Cape Town, empty leg jet Cape Town, helicopter transfer Cape Town, scenic helicopter flight Cape Town, superyacht charter Cape Town, yacht hire V&A Waterfront, luxury car fleet Cape Town, executive transfers South Africa, corporate roadshow transport, group transfers Sprinter, luxury Winelands day trip, chauffeur Cape Town price per day, book a chauffeur Cape Town, chauffeur service near me Cape Town, luxury transfer Winelands, airport chauffeur Camps Bay, chauffeur for wedding Cape Town price, Maybach V-Class Cape Town, Maybach V Class chauffeur Cape Town, Maybach V-Class hire Cape Town, Maybach V-Class with driver Cape Town, luxury V-Class chauffeur Cape Town, VIP van hire Cape Town, luxury chauffeur van Cape Town, chauffeur van with TV Cape Town, chauffeur vehicle with massage seats Cape Town, reclining seats chauffeur Cape Town, Maybach V-Class airport transfer Cape Town, Maybach V-Class Camps Bay, Maybach V-Class V&A Waterfront, Maybach V-Class Clifton, Maybach V-Class wine tour Stellenbosch, Maybach V-Class Franschhoek chauffeur, Maybach V-Class day rate Cape Town, luxury family chauffeur Cape Town, executive van transfer Cape Town"
@@ -193,7 +193,7 @@ const Travel = () => {
       <Nav />
       <PageHero
         eyebrow="Chauffeur & Fleet · Cape Town, Jets, Helicopters & Yachts"
-        title="Chauffeur Service in Cape Town"
+        title="Luxury Chauffeur Services in Cape Town"
         subtitle="A private, NDA-bound chauffeur and the vehicle of your choice across Cape Town — V&A Waterfront, Camps Bay, Clifton, Bantry Bay, Sea Point, Atlantic Seaboard, City Bowl, Stellenbosch and Franschhoek — by the hour, the day, or across our signature 7-day itinerary at 10% off. Jets, helicopters and yachts under the same concierge."
         videoSrc={heroVideo.url}
       />
@@ -461,8 +461,8 @@ const Travel = () => {
             <p className="eyebrow">Crew</p>
             <h2 className="font-serif text-3xl mt-4 text-foreground">Pilots, captains, hosts.</h2>
             <p className="text-muted-foreground mt-4">
-              Jets, helicopters and yachts are sourced through vetted operators — fully crewed, fully
-              compliant, fully briefed.
+              Every jet, helicopter and yacht journey is fully crewed, fully compliant and fully
+              briefed by SVRM Group.
             </p>
           </div>
         </div>
@@ -499,6 +499,34 @@ const Travel = () => {
             <Link to="/chauffeur?cat=cars&vehicle=maybach-v-class#maybach-v-class" className="inline-flex mt-5 text-gold underline underline-offset-4">
               Explore the Maybach V-Class
             </Link>
+          </div>
+
+          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8">
+            {[
+              ["Airport collections", "Meet-and-greet at Cape Town International Airport, luggage handled and a direct drive to your villa, hotel or meeting."],
+              ["Executive & corporate travel", "Discreet, punctual transport for board meetings, roadshows, conferences and delegations, with a chauffeur on standby between appointments."],
+              ["Full-day chauffeurs", "A private driver for the whole day — shopping at the V&A Waterfront, lunch in Camps Bay, sunset on the Atlantic Seaboard — on your timetable."],
+              ["Private tours with a driver", "Cape Peninsula and Cape Point, Boulders Beach, Table Mountain, Stellenbosch and Franschhoek wine estates, Hermanus and the Garden Route, planned around you."],
+              ["Multi-day transport", "One chauffeur and vehicle for your whole stay, or our 7-day itinerary at 10% off — ideal for families, honeymooners and business trips."],
+              ["International visitors", "Guests from the UK, US, UAE, Saudi Arabia and beyond book before they fly. Share your flight and hotel; we confirm everything in writing, including family needs and halal-conscious dining stops."],
+            ].map(([t, d]) => (
+              <div key={t}>
+                <h3 className="font-serif text-2xl text-foreground">{t}</h3>
+                <p className="mt-3 text-muted-foreground text-sm md:text-base leading-relaxed">{d}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-12 max-w-3xl">
+            <h3 className="font-serif text-2xl text-foreground">How booking works</h3>
+            <ol className="mt-4 space-y-2 text-sm md:text-base text-muted-foreground list-decimal pl-5">
+              <li>Send your dates, pickup point, group size and preferred vehicle on WhatsApp or the enquiry form.</li>
+              <li>We reply with availability and a written quote for your hours and route.</li>
+              <li>Confirm with a deposit; your chauffeur's details arrive before pickup.</li>
+            </ol>
+            <a href={whatsappUrlFor("/chauffeur")} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 mt-6 text-gold underline underline-offset-4">
+              <WhatsAppGlyph className="h-4 w-4" /> Ask about availability on WhatsApp
+            </a>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-12">

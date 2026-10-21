@@ -30,7 +30,7 @@ const CustomRentalRequest = () => {
       <p className="eyebrow">Don't see the right car?</p>
       <h3 className="font-serif text-3xl md:text-4xl mt-3 text-foreground">Tell us what you need.</h3>
       <p className="text-sm text-muted-foreground mt-3 max-w-2xl">
-        Set your budget and preferences — we source from our wider fleet and partners and confirm
+        Set your budget and preferences — we source from our wider fleet and confirm
         availability within hours.
       </p>
 

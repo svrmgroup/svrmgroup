@@ -18,7 +18,7 @@ const existingGroups: FaqGroup[] = [
     title: "About SVRM",
     items: [
       { q: "What is SVRM?", a: "SVRM is a Cape Town–based luxury lifestyle management and concierge service. We curate transport, tours, stays, security and bespoke experiences for private clients and businesses — locally and across South Africa.", keywords: ["about", "who", "what is svrm", "company", "concierge", "lifestyle management", "cape town"] },
-      { q: "Where are you based and where do you operate?", a: "We are headquartered in Cape Town. Our chauffeured travel, tours, security and stays operate across the Western Cape as standard, and nationally on request. International planning and onward arrangements can be coordinated through our partner network.", keywords: ["location", "based", "operate", "western cape", "south africa", "area", "where"] },
+      { q: "Where are you based and where do you operate?", a: "We are headquartered in Cape Town. Our chauffeured travel, tours, security and stays operate across the Western Cape as standard, and nationally on request. International planning and onward arrangements are handled by our concierge team.", keywords: ["location", "based", "operate", "western cape", "south africa", "area", "where"] },
       { q: "Do you work with businesses as well as private clients?", a: "Yes. We support corporate visits, executive transport, roadshows, conference logistics, group travel, private events and ongoing retainers. Speak to the concierge for a tailored proposal.", keywords: ["corporate", "business", "executive", "roadshow", "events", "company", "private client"] },
       { q: "Is SVRM discreet? Will my booking be private?", a: "Discretion is fundamental. Our team is NDA-bound, our vehicles are unbranded, and we do not publish client names, itineraries or images without written consent.", keywords: ["privacy", "discretion", "nda", "confidential", "private", "secret", "unbranded"] },
     ],
@@ -42,7 +42,7 @@ const existingGroups: FaqGroup[] = [
       { q: "What does your chauffeured travel include?", a: "A professional, NDA-bound chauffeur, the vehicle of your choice, fuel, tolls, water on board and in-trip support from the concierge. Wait time, child seats and additional stops are arranged on request.", keywords: ["chauffeur", "driver", "travel", "car", "vehicle", "included", "fuel", "tolls", "water"] },
       { q: "Do you offer airport transfers?", a: "Yes — to and from Cape Town International, private FBOs and regional airports. Flight tracking is standard so we adjust automatically for early or delayed arrivals.", keywords: ["airport", "transfer", "cape town international", "flight", "pickup", "drop off", "airport pickup", "ctia"] },
       { q: "Can I hire a vehicle without a chauffeur?", a: "Yes. Self-drive hire is available through the Rentals page, with pricing confirmed on enquiry. A valid licence, ID/passport and a refundable deposit are required.", keywords: ["self drive", "rental", "hire", "without driver", "self-drive", "car hire", "licence", "deposit"] },
-      { q: "Do you offer private jets, helicopters or yachts?", a: "Yes — through trusted partners. We arrange private jet charter, scenic and transfer helicopters, and motor or sailing yachts from the V&A Waterfront. See the aviation and yacht categories on our Chauffeur & Fleet page.", keywords: ["private jet", "helicopter", "yacht", "charter", "scenic flight", "va waterfront", "boat", "luxury travel"] },
+      { q: "Do you offer private jets, helicopters or yachts?", a: "Yes. SVRM Group provides private jet charter, scenic and transfer helicopters, and motor or sailing yachts from the V&A Waterfront. See the aviation and yacht categories on our Chauffeur & Fleet page.", keywords: ["private jet", "helicopter", "yacht", "charter", "scenic flight", "va waterfront", "boat", "luxury travel"] },
       { q: "Do you offer group transport?", a: "Yes. 16-seater Sprinters, 22-seater midibuses, 32-seater touring buses and full luxury coaches for weddings, corporate groups and tours.", keywords: ["group", "bus", "coach", "sprinter", "minibus", "wedding transport", "corporate group", "large group"] },
     ],
   },
@@ -62,7 +62,7 @@ const existingGroups: FaqGroup[] = [
     items: [
       { q: "What types of stays do you arrange?", a: "Private villas, serviced apartments, boutique hotels and long-term residences across Cape Town and the Cape Peninsula. Short-term, long-term and seasonal options are all available.", keywords: ["stay", "accommodation", "villa", "apartment", "hotel", "residence", "cape peninsula", "where to stay"] },
       { q: "Can you find a stay that fits my specific budget?", a: "Yes. Use the Custom Stay bar on the Stays page — tell us dates, party, neighbourhood and budget, and we return a curated shortlist.", keywords: ["budget", "cheap", "affordable", "custom stay", "shortlist", "find accommodation"] },
-      { q: "Do you help with buying or selling property?", a: "Yes. We facilitate residential sales, off-market introductions and long-term lease negotiations in partnership with vetted Cape Town agents.", keywords: ["property", "buy", "sell", "real estate", "lease", "off market", "residential"] },
+      { q: "Do you help with buying or selling property?", a: "Yes. We facilitate residential sales, off-market introductions and long-term lease negotiations across Cape Town.", keywords: ["property", "buy", "sell", "real estate", "lease", "off market", "residential"] },
       { q: "Can I add a chef, housekeeper or chauffeur to my stay?", a: "Yes — see the Stay Extras options. Private chefs, housekeeping, in-residence trainers, chauffeurs on call and security can all be arranged.", keywords: ["chef", "housekeeper", "butler", "extras", "private chef", "housekeeping", "trainer", "in residence"] },
     ],
   },
@@ -71,7 +71,7 @@ const existingGroups: FaqGroup[] = [
     title: "Security",
     items: [
       { q: "What security services do you offer?", a: "Armoured vehicle transport (BMW 7 Series, X5, Mercedes G63), armed and unarmed close protection, residential security, event security and secure airport transfers.", keywords: ["security", "bodyguard", "close protection", "armoured car", "g63", "bmw", "residential security", "event security", "psira"] },
-      { q: "Is your security team licensed?", a: "Yes — our protection partners operate under PSiRA-registered firms with vetted personnel. Specifics for any deployment are confirmed in writing before service.", keywords: ["licensed", "psira", "registered", "vetting", "qualified", "legal"] },
+      { q: "Is your security team licensed?", a: "Yes — our protection personnel are PSiRA-registered and vetted. Specifics for any deployment are confirmed in writing before service.", keywords: ["licensed", "psira", "registered", "vetting", "qualified", "legal"] },
       { q: "Can security be added to any booking?", a: "Yes. Close protection, secure transport and venue advance work can be layered onto any travel, tour, stay or event.", keywords: ["add security", "extra security", "venue advance", "secure transport", "protection"] },
     ],
   },
