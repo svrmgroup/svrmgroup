@@ -1,9 +1,9 @@
 import { TIKTOK_URL, SOCIAL_HANDLE } from "@/lib/whatsapp";
 
 const videos = [
-  { id: "7692917244375960854", title: "Cape Town, chauffeured" },
-  { id: "7683999741947972886", title: "Behind the wheel at SVRM" },
-  { id: "7684334622863346966", title: "Luxury, without compromise" },
+  { id: "7692917244375960854", title: "Inside the Maybach V-Class" },
+  { id: "7683999741947972886", title: "On the streets of Cape Town" },
+  { id: "7684334622863346966", title: "Ocean views, chauffeured" },
 ];
 
 const videoUrl = (id: string) => `https://www.tiktok.com/@svrmgroup/video/${id}`;
