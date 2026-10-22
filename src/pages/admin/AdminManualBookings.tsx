@@ -413,6 +413,7 @@ const AdminManualBookings = () => {
             const open = openId === r.id;
             const meta = STATUS_META[r.status] || STATUS_META.draft;
             const pay = payMeta(Number(r.subtotal) || 0, Number(r.amount_paid) || 0);
+            const confirmationMessage = buildConfirmationMessage(r);
             return (
               <div key={r.id} className="border border-border/40 bg-surface-raised">
                 <button onClick={() => setOpenId(open ? null : r.id)} className="w-full text-left p-5 flex items-center gap-4">
@@ -513,17 +514,17 @@ const AdminManualBookings = () => {
                         <div className="flex items-center justify-between mb-2">
                           <p className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">Confirmation message</p>
                           <div className="flex gap-2">
-                            <button onClick={() => copyMsg(r.confirmation_message!)} className="flex items-center gap-1.5 text-xs text-gold hover:underline">
+                            <button onClick={() => copyMsg(confirmationMessage)} className="flex items-center gap-1.5 text-xs text-gold hover:underline">
                               <Copy className="h-3 w-3" /> Copy
                             </button>
                             {r.client_phone && (
-                              <a href={whatsAppTo(r.client_phone, r.confirmation_message)} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs text-gold hover:underline">
+                              <a href={whatsAppTo(r.client_phone, confirmationMessage)} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-xs text-gold hover:underline">
                                 <MessageCircle className="h-3 w-3" /> Send via WhatsApp
                               </a>
                             )}
                           </div>
                         </div>
-                        <pre className="text-xs whitespace-pre-wrap bg-background border border-border/40 p-4 font-sans max-h-80 overflow-y-auto">{r.confirmation_message}</pre>
+                        <pre className="text-xs whitespace-pre-wrap bg-background border border-border/40 p-4 font-sans max-h-80 overflow-y-auto">{confirmationMessage}</pre>
                       </div>
                     )}
 

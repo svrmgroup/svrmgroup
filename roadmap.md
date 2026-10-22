@@ -1,3 +1,8 @@
+# Cancellation policy
+- [x] Update existing FAQ and reconcile conflicting refund terms.
+- [x] Add compact shared terms to all booking confirmations and invoices.
+- [x] Test refund boundaries and verify FAQ and document output.
+
 # Maybach V-Class
 - [x] Edit supplied photos and create optimised 4K gallery assets.
 - [x] Add R20,000/day chauffeur vehicle, gallery and homepage offer with CMS seed entries.
