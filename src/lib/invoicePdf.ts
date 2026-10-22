@@ -2,6 +2,8 @@ import jsPDF from "jspdf";
 import type { LineItem } from "@/lib/confirmationMessage";
 import { supabase } from "@/integrations/supabase/client";
 import svrmLogo from "@/assets/svrm-logo-circle.png.asset.json";
+import { CANCELLATION_POLICY_COMPACT, CANCELLATION_CONTACT, CANCELLATION_WHATSAPP_URL } from "@/lib/cancellationPolicy";
+import { WHATSAPP_DISPLAY_NUMBER } from "@/lib/whatsapp";
 
 /**
  * Branded PDF renderer — matches the SVRM Group template:
@@ -515,6 +517,27 @@ async function build(kind: PdfKind, b: InvoiceBooking, opts: RenderOpts = {}) {
       const sigLines = doc.splitTextToSize(sig, w - 120);
       doc.text(sigLines, w / 2, y, { align: "center" });
     }
+  }
+
+  if (kind === "invoice" || kind === "confirmation") {
+    doc.setFont("helvetica", "normal"); doc.setFontSize(9);
+    const policyLines = doc.splitTextToSize(CANCELLATION_POLICY_COMPACT, w - 80);
+    const contactLines = doc.splitTextToSize(CANCELLATION_CONTACT, w - 80);
+    const policyHeight = 30 + (policyLines.length + contactLines.length) * 12 + 20;
+    if (y + policyHeight > h - 70) {
+      doc.addPage();
+      doc.setFillColor(CREAM); doc.rect(0, 0, w, h, "F");
+      y = 60;
+    } else {
+      y += 10;
+    }
+    doc.setFont("helvetica", "bold"); doc.setFontSize(10); doc.setTextColor(TEXT);
+    doc.text("CANCELLATION & REFUND POLICY", 40, y); y += 16;
+    doc.setFont("helvetica", "normal"); doc.setFontSize(9);
+    doc.text(policyLines, 40, y); y += policyLines.length * 12 + 8;
+    doc.text(contactLines, 40, y); y += contactLines.length * 12 + 5;
+    doc.setTextColor(GOLD);
+    doc.textWithLink(`WhatsApp ${WHATSAPP_DISPLAY_NUMBER}`, 40, y, { url: CANCELLATION_WHATSAPP_URL });
   }
 
   // Footer

@@ -1,3 +1,6 @@
+import { CANCELLATION_POLICY_COMPACT, CANCELLATION_CONTACT, CANCELLATION_WHATSAPP_URL } from "@/lib/cancellationPolicy";
+import { WHATSAPP_DISPLAY_NUMBER, CONCIERGE_EMAIL } from "@/lib/whatsapp";
+
 export interface LineItem {
   label: string;
   qty?: number;
@@ -66,10 +69,15 @@ export function buildConfirmationMessage(b: BookingForMessage): string {
     lines.push(`Additional notes: ${b.notes}`);
   }
   lines.push("");
+  lines.push("*Cancellation & Refund Policy*");
+  lines.push(CANCELLATION_POLICY_COMPACT);
+  lines.push(CANCELLATION_CONTACT);
+  lines.push(CANCELLATION_WHATSAPP_URL);
+  lines.push("");
   lines.push(`Your concierge is on standby for anything you need before, during, or after your stay — arrivals, transfers, in-villa dining, security, private aviation.`);
   lines.push("");
   lines.push(`With warm regards,`);
   lines.push(`SVRM Group Concierge`);
-  lines.push(`+27 73 064 1481 · concierge@svrm.group · svrm.group`);
+  lines.push(`${WHATSAPP_DISPLAY_NUMBER} · ${CONCIERGE_EMAIL} · svrm.group`);
   return lines.join("\n");
 }
