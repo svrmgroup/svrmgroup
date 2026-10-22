@@ -1,8 +1,7 @@
-# Maybach V-Class
 # Cancellation policy
-- [ ] Update existing FAQ and reconcile conflicting refund terms.
-- [ ] Add compact shared terms to all booking confirmations and invoices.
-- [ ] Test refund boundaries and verify FAQ and document output.
+- [x] Update existing FAQ and reconcile conflicting refund terms.
+- [x] Add compact shared terms to all booking confirmations and invoices.
+- [x] Test refund boundaries and verify FAQ and document output.
 
 # Maybach V-Class
 - [x] Edit supplied photos and create optimised 4K gallery assets.
