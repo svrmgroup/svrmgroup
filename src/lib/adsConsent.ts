@@ -9,7 +9,7 @@ declare global {
 export const ADS_IDS = ["AW-18529194342", "AW-18245038892"] as const;
 export const CONVERSIONS = {
   whatsapp: ["AW-18529194342/xrjyCNDU6aQdEOaitINF", "AW-18245038892/rByJCMiI39QcEKzm9PtD"],
-  enquiry: ["AW-18529194342/vzroCNPU6aQdEOaitINF"],
+  enquiry: ["AW-18529194342/vzroCNPU6aQdEOaitINF", "AW-18245038892/tGk6CPzmk6YdEKzm9PtD"],
 } as const;
 
 export const STORAGE_KEY = "cookie_consent";
