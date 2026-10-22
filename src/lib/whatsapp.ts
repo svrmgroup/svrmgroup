@@ -1,5 +1,6 @@
 // Single source of truth for SVRM contact endpoints.
 export const WHATSAPP_NUMBER = "27730641481";
+export const WHATSAPP_DISPLAY_NUMBER = "+27 73 064 1481";
 export const CONCIERGE_EMAIL = "concierge@svrm.group";
 export const SOCIAL_HANDLE = "@SVRMGROUP";
 export const INSTAGRAM_URL = "https://www.instagram.com/svrmgroup/";
