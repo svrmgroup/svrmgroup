@@ -65,7 +65,7 @@ interface ScoredItem extends FaqItem {
 }
 
 function scoreItem(item: FaqItem, groupTitle: string, query: string, tokens: string[], expanded: string[]): ScoredItem | null {
-  const haystack = `${item.q} $<FaqAnswer item={item} /> ${(item.keywords || []).join(" ")} ${groupTitle}`.toLowerCase();
+  const haystack = `${item.q} ${item.a} ${(item.keywords || []).join(" ")} ${groupTitle}`.toLowerCase();
   const qLower = query.toLowerCase().trim();
 
   let score = 0;
