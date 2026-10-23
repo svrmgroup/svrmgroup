@@ -125,7 +125,7 @@ function highlight(text: string, tokens: string[]): (string | JSX.Element)[] {
   const parts = text.split(pattern);
   return parts.map((part, i) =>
     tokens.some((t) => part.toLowerCase() === t.toLowerCase()) ? (
-      <mark key={i} className="bg-gold/20 text-foreground rounded px-0.5">
+      <mark key={i} className="bg-primary/25 text-primary font-semibold rounded px-0.5" style={{ color: "hsl(var(--primary))" }}>
         {part}
       </mark>
     ) : (
