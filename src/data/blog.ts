@@ -598,7 +598,7 @@ export const posts: BlogPost[] = [
     slug: "mercedes-maybach-s-class-chauffeur-cape-town",
     publishedISO: "2026-08-01",
     seoTitle: "Maybach S-Class Chauffeur Service in Cape Town | SVRM",
-    seoDescription: "SVRM's flagship Mercedes-Maybach S-Class with a private chauffeur in Cape Town — R22,000 per day. Airport transfers, executive travel, weddings and honeymoons.",
+    seoDescription: "SVRM's flagship Mercedes-Maybach S-Class with a private chauffeur in Cape Town — airport transfers, executive travel, weddings and honeymoons. WhatsApp +27 73 064 1481.",
     seoKeywords: "Mercedes-Maybach S-Class Cape Town, Maybach chauffeur Cape Town, luxury chauffeur Cape Town, executive chauffeur South Africa, VIP chauffeur Cape Town, Maybach hire Cape Town, private chauffeur service Cape Town",
     title: "Mercedes-Maybach S-Class chauffeur service in Cape Town",
     excerpt:
@@ -608,7 +608,7 @@ export const posts: BlogPost[] = [
     image: maybachImg,
     readTime: "7 min read",
     intro:
-      "There are cars that move people and cars that change the shape of a day. The Mercedes-Maybach S-Class is the second kind, and it is the vehicle we place at the head of the SVRM fleet in Cape Town. Chauffeured, at R22,000 per day, it is the quietest way we know to make travel disappear as a problem.",
+      "There are cars that move people and cars that change the shape of a day. The Mercedes-Maybach S-Class is the second kind, and it is the vehicle we place at the head of the SVRM fleet in Cape Town. Chauffeured, it is the quietest way we know to make travel disappear as a problem.",
     sections: [
       {
         heading: "Why the Maybach and not simply an S-Class",
@@ -626,9 +626,9 @@ export const posts: BlogPost[] = [
           "A Maybach day runs on your schedule, not a meter. Your chauffeur is briefed on the full itinerary in advance, holds the car within a short call of wherever you are, and manages parking, timing and routing without being asked. Airport meet-and-greet, luggage handling and route changes on the day are included in the way we work.",
       },
       {
-        heading: "Rates and combinations",
+        heading: "Booking and combinations",
         body:
-          "R22,000 per day in Cape Town, quoted in ZAR and converted live to USD, GBP or EUR on our site. Half-day and multi-day arrangements are available on request, and the Maybach can be requested as an upgrade on our Cape Peninsula private tour, our honeymoon and anniversary itineraries, and any airport transfer.",
+          "Half-day, full-day and multi-day arrangements are available, and the Maybach can be requested as an upgrade on our Cape Peninsula private tour, our honeymoon and anniversary itineraries, and any airport transfer. WhatsApp +27 73 064 1481 for availability and a written quote.",
       },
     ],
     closing:
@@ -1443,7 +1443,7 @@ export const posts: BlogPost[] = [
     slug: "mercedes-maybach-v-class-chauffeur-cape-town",
     publishedISO: "2026-10-21",
     seoTitle: "Maybach V-Class Chauffeur Cape Town | TV & Massage Seats",
-    seoDescription: "Mercedes-Maybach V-Class with a private chauffeur in Cape Town: TV, reclining massage seats and quilted leather. Guide rate R20,000 per day. WhatsApp SVRM.",
+    seoDescription: "Mercedes-Maybach V-Class with a private chauffeur in Cape Town: TV, reclining massage seats and quilted leather. WhatsApp SVRM on +27 73 064 1481.",
     seoKeywords: "Maybach V-Class Cape Town, Mercedes-Maybach V-Class chauffeur, Maybach van hire Cape Town, luxury van with TV Cape Town, chauffeur massage seats Cape Town, reclining seats chauffeur van, VIP van hire Cape Town, luxury group transport Cape Town, Maybach airport transfer Cape Town, executive van chauffeur Cape Town",
     title: "Inside the Mercedes-Maybach V-Class: a private lounge on the move",
     excerpt:
