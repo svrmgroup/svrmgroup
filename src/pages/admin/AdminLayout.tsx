@@ -65,6 +65,7 @@ const AdminLayout = () => {
       <NavLink to="/admin/calendar" className={linkClass} onClick={close}><CalIcon className="h-4 w-4" /> Calendar</NavLink>
 
       <p className={groupLabel}>People</p>
+      <NavLink to="/admin/contacts" className={linkClass} onClick={close}><BookUser className="h-4 w-4" /> Contacts database</NavLink>
       <NavLink to="/admin/clients" className={linkClass} onClick={close}><ContactIcon className="h-4 w-4" /> Clients (CRM)</NavLink>
       <NavLink to="/admin/staff" className={linkClass} onClick={close}><UserCog className="h-4 w-4" /> Staff</NavLink>
       <NavLink to="/admin/assignments" className={linkClass} onClick={close}><ClipboardList className="h-4 w-4" /> Assignments</NavLink>

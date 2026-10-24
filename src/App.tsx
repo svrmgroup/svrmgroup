@@ -57,6 +57,7 @@ const AdminStaff = lazy(() => import("./pages/admin/AdminStaff"));
 const AdminAssignments = lazy(() => import("./pages/admin/AdminAssignments"));
 const AdminEmailTemplates = lazy(() => import("./pages/admin/AdminEmailTemplates"));
 const AdminClients = lazy(() => import("./pages/admin/AdminClients"));
+const AdminContacts = lazy(() => import("./pages/admin/AdminContacts"));
 const AdminSettings = lazy(() => import("./pages/admin/AdminSettings"));
 const AdminActivity = lazy(() => import("./pages/admin/AdminActivity"));
 const AdminRoles = lazy(() => import("./pages/admin/AdminRoles"));
@@ -118,6 +119,7 @@ const App = () => (
                   <Route path="manual" element={<AdminManualBookings />} />
                   <Route path="change-requests" element={<AdminChangeRequests />} />
                   <Route path="clients" element={<AdminClients />} />
+                  <Route path="contacts" element={<AdminContacts />} />
                   <Route path="leads" element={<AdminLeads />} />
                   <Route path="expenses" element={<AdminExpenses />} />
                   <Route path="pnl" element={<AdminPnL />} />
