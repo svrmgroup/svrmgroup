@@ -694,6 +694,54 @@ export type Database = {
         }
         Relationships: []
       }
+      contacts: {
+        Row: {
+          country: string | null
+          country_iso: string | null
+          created_at: string
+          email: string
+          enquiry_count: number
+          first_enquiry_at: string
+          id: string
+          last_enquiry_at: string
+          name: string
+          notes: string | null
+          phone: string | null
+          source_page: string | null
+          updated_at: string
+        }
+        Insert: {
+          country?: string | null
+          country_iso?: string | null
+          created_at?: string
+          email: string
+          enquiry_count?: number
+          first_enquiry_at?: string
+          id?: string
+          last_enquiry_at?: string
+          name: string
+          notes?: string | null
+          phone?: string | null
+          source_page?: string | null
+          updated_at?: string
+        }
+        Update: {
+          country?: string | null
+          country_iso?: string | null
+          created_at?: string
+          email?: string
+          enquiry_count?: number
+          first_enquiry_at?: string
+          id?: string
+          last_enquiry_at?: string
+          name?: string
+          notes?: string | null
+          phone?: string | null
+          source_page?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       email_send_log: {
         Row: {
           created_at: string
@@ -1451,6 +1499,13 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      country_from_phone: {
+        Args: { _phone: string }
+        Returns: {
+          country: string
+          iso: string
+        }[]
+      }
       delete_email: {
         Args: { message_id: number; queue_name: string }
         Returns: boolean
