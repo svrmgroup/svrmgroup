@@ -77,7 +77,7 @@ const Partners = () => {
       }
       const cleanDetails = Object.fromEntries(Object.entries(details).filter(([k, v]) => v.trim() && EXTRA[r.data.category].some((x) => x.key === k)).map(([k, v]) => [k, v.trim().slice(0, 200)]));
       const { error } = await supabase.from("partner_applications").insert({
-        ...r.data,
+        ...(r.data as Required<typeof r.data>),
         business_name: r.data.business_name || null,
         details: cleanDetails,
         photo_paths,
