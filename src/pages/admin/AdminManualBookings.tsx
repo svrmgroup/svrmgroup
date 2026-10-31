@@ -339,13 +339,13 @@ const AdminManualBookings = () => {
                     className={`${inputCls} col-span-12 lg:col-span-4`} />
                   <input type="number" placeholder="Qty" value={item.qty ?? ""}
                     onChange={(e) => setItems((it) => it.map((x, j) => j === i ? { ...x, qty: Number(e.target.value) || undefined } : x))}
-                    className={`${inputCls} col-span-3 lg:col-span-2`} />
+                    className={`${inputCls} col-span-6 sm:col-span-3 lg:col-span-2`} />
                   <input placeholder="Unit" value={item.unit ?? ""}
                     onChange={(e) => setItems((it) => it.map((x, j) => j === i ? { ...x, unit: e.target.value } : x))}
-                    className={`${inputCls} col-span-3 lg:col-span-2`} />
+                    className={`${inputCls} col-span-6 sm:col-span-3 lg:col-span-2`} />
                   <input type="number" placeholder="Amount" value={item.amount || ""}
                     onChange={(e) => setItems((it) => it.map((x, j) => j === i ? { ...x, amount: Number(e.target.value) || 0 } : x))}
-                    className={`${inputCls} col-span-5 lg:col-span-3`} />
+                    className={`${inputCls} col-span-11 sm:col-span-5 lg:col-span-3`} />
                   <button onClick={() => setItems((it) => it.filter((_, j) => j !== i))} className="col-span-1 text-destructive hover:text-destructive/80 flex justify-center">
                     <Trash2 className="h-4 w-4" />
                   </button>

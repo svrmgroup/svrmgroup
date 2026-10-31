@@ -209,9 +209,9 @@ export default function PdfEditorDialog({ booking, kind, onClose }: Props) {
               {items.map((it, i) => (
                 <div key={i} className="grid grid-cols-12 gap-2 items-end">
                   <div className="col-span-12 sm:col-span-4"><Field label={i === 0 ? "Label" : ""} value={it.label} onChange={(v) => updateItem(i, { label: v })}/></div>
-                  <div className="col-span-3 sm:col-span-2"><Field label={i === 0 ? "Qty" : ""} value={String(it.qty ?? "")} onChange={(v) => updateItem(i, { qty: v ? Number(v) : undefined } as any)}/></div>
-                  <div className="col-span-3 sm:col-span-2"><Field label={i === 0 ? "Unit" : ""} value={it.unit || ""} onChange={(v) => updateItem(i, { unit: v } as any)}/></div>
-                  <div className="col-span-5 sm:col-span-3"><Field label={i === 0 ? "Amount" : ""} value={String((it as any).subtotal ?? "")} onChange={(v) => updateItem(i, { subtotal: v ? Number(v) : 0 } as any)}/></div>
+                  <div className="col-span-6 sm:col-span-2"><Field label={i === 0 ? "Qty" : ""} value={String(it.qty ?? "")} onChange={(v) => updateItem(i, { qty: v ? Number(v) : undefined } as any)}/></div>
+                  <div className="col-span-6 sm:col-span-2"><Field label={i === 0 ? "Unit" : ""} value={it.unit || ""} onChange={(v) => updateItem(i, { unit: v } as any)}/></div>
+                  <div className="col-span-11 sm:col-span-3"><Field label={i === 0 ? "Amount" : ""} value={String((it as any).subtotal ?? "")} onChange={(v) => updateItem(i, { subtotal: v ? Number(v) : 0 } as any)}/></div>
                   <button onClick={() => removeItem(i)} className="col-span-1 h-9 flex items-center justify-center text-muted-foreground hover:text-destructive"><Trash2 className="h-3.5 w-3.5"/></button>
                 </div>
               ))}
