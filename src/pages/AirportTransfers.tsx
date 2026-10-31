@@ -346,7 +346,7 @@ const AirportTransfers = () => {
                   />
                 </label>
                 <label className="flex flex-col gap-1.5">
-                  <span className="eyebrow">Phone (optional)</span>
+                  <span className="eyebrow">Phone / WhatsApp (required)</span>
                   <PhoneField
                     value={phone}
                     onChange={setPhone}

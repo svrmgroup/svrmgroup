@@ -155,7 +155,7 @@ const RentalBookingSheet = ({ vehicle, open, onOpenChange }: Props) => {
               value={form.phone}
               onChange={(v) => setForm((f) => ({ ...f, phone: v }))}
               className="w-full bg-transparent border-b border-border/60 py-3 text-sm focus:border-primary focus:outline-none"
-              placeholder="Phone (optional)"
+              placeholder="Phone / WhatsApp (required)"
             />
 
             <textarea

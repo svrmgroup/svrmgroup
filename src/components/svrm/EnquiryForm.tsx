@@ -116,7 +116,7 @@ const EnquiryForm = ({ subject, defaultMessage = "", compact = false, extras, ex
           value={form.phone}
           onChange={(v) => setForm((f) => ({ ...f, phone: v }))}
           className={inputBase}
-          placeholder="Phone (optional)"
+          placeholder="Phone / WhatsApp (required)"
         />
       </div>
 
