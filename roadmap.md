@@ -1,3 +1,7 @@
+# Notifications and brand search
+- [ ] Keep the admin notification panel inside the screen and verify signed-in interaction.
+- [ ] Add consistent svrmgroup brand search signals and verify search metadata.
+
 # Cancellation policy
 - [x] Update existing FAQ and reconcile conflicting refund terms.
 - [x] Add compact shared terms to all booking confirmations and invoices.
