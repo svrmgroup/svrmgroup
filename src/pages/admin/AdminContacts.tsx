@@ -201,8 +201,7 @@ const AdminContacts = () => {
                   <div className="flex-1 min-w-0">
                     <p className="font-serif text-lg truncate">{r.name}</p>
                     <p className="text-xs text-muted-foreground truncate">
-                      {r.email}
-                      {r.phone ? ` · ${r.phone}` : ""}
+                      {[r.email, r.phone].filter(Boolean).join(" · ")}
                     </p>
                   </div>
                   {country ? (
@@ -217,12 +216,12 @@ const AdminContacts = () => {
                 </div>
 
                 <div className="mt-3 flex flex-wrap gap-4 text-xs">
-                  <a
+                  {r.email && <a
                     href={`mailto:${r.email}`}
                     className="flex items-center gap-1.5 text-gold hover:underline"
                   >
                     <Mail className="h-3 w-3" /> Email
-                  </a>
+                  </a>}
                   {r.phone && (
                     <a
                       href={`https://wa.me/${r.phone.replace(/[^0-9]/g, "")}`}
