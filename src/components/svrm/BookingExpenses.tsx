@@ -87,9 +87,9 @@ export default function BookingExpenses({ bookingId, currency = "ZAR" }: { booki
       ) : rows.length > 0 ? (
         <div className="space-y-1.5 mb-3">
           {rows.map((r) => (
-            <div key={r.id} className="flex items-center gap-3 text-xs border border-border/40 px-3 py-2">
-              <span className="text-muted-foreground w-24 shrink-0">{r.date}</span>
-              <span className="capitalize w-24 shrink-0">{r.category}</span>
+            <div key={r.id} className="flex flex-wrap items-center gap-3 text-xs border border-border/40 px-3 py-2">
+              <span className="text-muted-foreground shrink-0">{r.date}</span>
+              <span className="capitalize shrink-0">{r.category}</span>
               <span className="flex-1 min-w-0 truncate text-muted-foreground">{r.note || "—"}</span>
               <span className="shrink-0">{r.currency} {Number(r.amount).toLocaleString()}</span>
               <button onClick={() => remove(r.id)} className="text-destructive hover:text-destructive/80 shrink-0">
@@ -102,7 +102,7 @@ export default function BookingExpenses({ bookingId, currency = "ZAR" }: { booki
         <p className="text-xs text-muted-foreground mb-3">No expenses logged for this booking yet.</p>
       )}
 
-      <div className="grid grid-cols-2 md:grid-cols-6 gap-2 items-center">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2 items-center">
         <input type="date" value={form.date} onChange={(e) => setForm({ ...form, date: e.target.value })} className={inputCls} />
         <select value={form.category} onChange={(e) => setForm({ ...form, category: e.target.value })} className={`${inputCls} capitalize`}>
           {CATEGORIES.map((c) => <option key={c} value={c}>{c}</option>)}

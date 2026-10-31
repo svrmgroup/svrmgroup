@@ -141,7 +141,7 @@ export default function PdfEditorDialog({ booking, kind, onClose }: Props) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/70 flex items-start md:items-center justify-center p-4 overflow-y-auto">
+    <div className="admin-form fixed inset-0 z-50 bg-black/70 flex items-start justify-center p-4 overflow-y-auto">
       <div className="bg-surface-deep border border-border/60 w-full max-w-3xl my-8">
         <div className="p-5 border-b border-border/40 flex items-center justify-between">
           <div>
@@ -208,10 +208,10 @@ export default function PdfEditorDialog({ booking, kind, onClose }: Props) {
               </div>
               {items.map((it, i) => (
                 <div key={i} className="grid grid-cols-12 gap-2 items-end">
-                  <div className="col-span-6"><Field label={i === 0 ? "Label" : ""} value={it.label} onChange={(v) => updateItem(i, { label: v })}/></div>
-                  <div className="col-span-2"><Field label={i === 0 ? "Qty" : ""} value={String(it.qty ?? "")} onChange={(v) => updateItem(i, { qty: v ? Number(v) : undefined } as any)}/></div>
-                  <div className="col-span-2"><Field label={i === 0 ? "Unit" : ""} value={it.unit || ""} onChange={(v) => updateItem(i, { unit: v } as any)}/></div>
-                  <div className="col-span-1"><Field label={i === 0 ? "Amount" : ""} value={String((it as any).subtotal ?? "")} onChange={(v) => updateItem(i, { subtotal: v ? Number(v) : 0 } as any)}/></div>
+                  <div className="col-span-12 sm:col-span-4"><Field label={i === 0 ? "Label" : ""} value={it.label} onChange={(v) => updateItem(i, { label: v })}/></div>
+                  <div className="col-span-6 sm:col-span-2"><Field label={i === 0 ? "Qty" : ""} value={String(it.qty ?? "")} onChange={(v) => updateItem(i, { qty: v ? Number(v) : undefined } as any)}/></div>
+                  <div className="col-span-6 sm:col-span-2"><Field label={i === 0 ? "Unit" : ""} value={it.unit || ""} onChange={(v) => updateItem(i, { unit: v } as any)}/></div>
+                  <div className="col-span-11 sm:col-span-3"><Field label={i === 0 ? "Amount" : ""} value={String((it as any).subtotal ?? "")} onChange={(v) => updateItem(i, { subtotal: v ? Number(v) : 0 } as any)}/></div>
                   <button onClick={() => removeItem(i)} className="col-span-1 h-9 flex items-center justify-center text-muted-foreground hover:text-destructive"><Trash2 className="h-3.5 w-3.5"/></button>
                 </div>
               ))}
@@ -263,7 +263,7 @@ export default function PdfEditorDialog({ booking, kind, onClose }: Props) {
 
 function Field({ label, value, onChange, type = "text", placeholder }: { label: string; value: string; onChange: (v: string) => void; type?: string; placeholder?: string }) {
   return (
-    <label>
+    <label className="block min-w-0">
       {label && <span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">{label}</span>}
       <input type={type} value={value} placeholder={placeholder} onChange={(e) => onChange(e.target.value)} className="input-luxury text-sm w-full mt-1"/>
     </label>

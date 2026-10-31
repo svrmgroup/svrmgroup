@@ -6,3 +6,4 @@
 - Business contact constants live in `src/lib/whatsapp.ts`; reuse them instead of re-typing contact details.
 - Cancellation tiers and FAQ/document terms share `src/lib/cancellationPolicy.ts`; invoices, confirmation PDFs and freshly generated admin confirmation messages consume it so terms cannot drift. Keep thank-you PDFs unchanged.
 - Google Ads loading and conversions go through `src/lib/adsConsent.ts` (regional consent banner route, both Ads accounts); never add static Ads tags to index.html.
+- Customer phone controls merge caller classes with explicit country/number sizing and wrap in narrow containers; admin grids use shrinkable tracks and scoped field sizing so entered details remain visible.

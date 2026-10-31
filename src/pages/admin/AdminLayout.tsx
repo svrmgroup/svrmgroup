@@ -98,7 +98,7 @@ const AdminLayout = () => {
 
 
   return (
-    <div className="min-h-screen bg-background text-foreground md:grid md:grid-cols-[240px_1fr]" style={{ paddingTop: "env(safe-area-inset-top)" }}>
+    <div className="admin-form min-h-screen bg-background text-foreground md:grid md:grid-cols-[240px_minmax(0,1fr)]" style={{ paddingTop: "env(safe-area-inset-top)" }}>
       <Helmet><meta name="robots" content="noindex, nofollow" /></Helmet>
       {/* Mobile header */}
       <header className="md:hidden sticky top-0 z-30 bg-surface-deep border-b border-border/40 flex items-center justify-between px-4 h-14">
@@ -162,7 +162,7 @@ const AdminLayout = () => {
         </div>
       )}
 
-      <main className="p-4 md:p-10 max-w-6xl w-full" style={{ paddingBottom: "calc(env(safe-area-inset-bottom) + 1rem)" }}>
+      <main className="min-w-0 p-4 md:p-10 max-w-6xl w-full" style={{ paddingBottom: "calc(env(safe-area-inset-bottom) + 1rem)" }}>
         {showInstallHint && (
           <div className="mb-6 card-luxury p-4 flex items-start gap-3">
             <Share className="h-4 w-4 text-primary mt-0.5 shrink-0" />
