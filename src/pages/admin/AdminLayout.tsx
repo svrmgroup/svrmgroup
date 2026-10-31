@@ -4,7 +4,7 @@ import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { useAdminNotifications } from "@/hooks/useAdminNotifications";
 import {
   LogOut, Inbox, Car, Calendar as CalIcon, MessageCircle, FileText,
-  Building2, BarChart3, Receipt, Wallet, Users, ListChecks, Menu, X, Share, BookUser,
+  Building2, BarChart3, Receipt, Wallet, Users, Handshake, ListChecks, Menu, X, Share, BookUser,
   UserCog, ClipboardList, Mail, ShieldCheck, Settings, Activity, ImagePlus, GitPullRequest, Contact as ContactIcon,
   Image as ImageIcon, Map as MapIcon,
 } from "lucide-react";
@@ -74,6 +74,7 @@ const AdminLayout = () => {
       <NavLink to="/admin/expenses" className={linkClass} onClick={close}><Receipt className="h-4 w-4" /> Expenses</NavLink>
       <NavLink to="/admin/pnl" className={linkClass} onClick={close}><Wallet className="h-4 w-4" /> P&amp;L</NavLink>
       <NavLink to="/admin/suppliers" className={linkClass} onClick={close}><Users className="h-4 w-4" /> Suppliers</NavLink>
+      <NavLink to="/admin/partners" className={linkClass} onClick={close}><Handshake className="h-4 w-4" /> Partners</NavLink>
 
       <p className={groupLabel}>Operations</p>
       <NavLink to="/admin/tasks" className={linkClass} onClick={close}><ListChecks className="h-4 w-4" /> Tasks</NavLink>

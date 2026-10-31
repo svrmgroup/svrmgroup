@@ -83,6 +83,7 @@ const links: NavItem[] = [
       { to: "/contact#enquiry", label: "Enquiry Form" },
       { to: "/contact#faq", label: "FAQ" },
       { to: "/contact#tiktok", label: "TikTok" },
+      { to: "/contact/partners", label: "Become a Partner" },
     ],
   },
 ];
