@@ -15,6 +15,13 @@
       "when": 1792850833559,
       "tag": "0001_create_contacts_auto_capture",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793476079104,
+      "tag": "0002_phone_required_email_optional",
+      "breakpoints": true
     }
   ]
 }
