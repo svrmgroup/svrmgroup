@@ -190,6 +190,20 @@ input, textarea, select { font-size: 16px; } /* prevents iOS zoom on focus */
 .pb-safe { padding-bottom: max(1rem, env(safe-area-inset-bottom)); }
 .pt-safe { padding-top: max(1rem, env(safe-area-inset-top)); }
 
+/* Keep admin fields inside their grid cells, including native date controls.
+   A 16px font also avoids iOS zoom hiding neighbouring fields while typing. */
+.admin-form .grid > *,
+.admin-form label {
+  min-width: 0;
+}
+.admin-form input:not([type="checkbox"]):not([type="radio"]),
+.admin-form textarea,
+.admin-form select {
+  min-width: 0;
+  max-width: 100%;
+  font-size: 16px;
+}
+
 /* Larger touch targets on mobile */
 @media (max-width: 767px) {
   .btn-luxury, .btn-ghost { min-height: 44px; }

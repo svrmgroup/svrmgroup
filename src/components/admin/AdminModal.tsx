@@ -39,7 +39,7 @@ const AdminModal = ({ open, onClose, title, children, footer, maxWidth = "2xl" }
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-black/70 overflow-y-auto overscroll-contain"
+      className="admin-form fixed inset-0 z-50 bg-black/70 overflow-y-auto overscroll-contain"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
@@ -59,7 +59,7 @@ const AdminModal = ({ open, onClose, title, children, footer, maxWidth = "2xl" }
             {children}
           </div>
           {footer && (
-            <div className="p-5 border-t border-border/40 flex justify-end gap-2 shrink-0">
+            <div className="p-5 border-t border-border/40 flex flex-wrap justify-end gap-2 shrink-0">
               {footer}
             </div>
           )}

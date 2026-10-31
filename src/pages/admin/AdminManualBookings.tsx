@@ -294,13 +294,13 @@ const AdminManualBookings = () => {
       </div>
 
       {showForm && (
-        <div className="border border-border/40 bg-surface-raised p-6 mb-8 space-y-5">
+        <div className="border border-border/40 bg-surface-raised p-4 sm:p-6 mb-8 space-y-5">
           {editingId && (
             <p className="text-[10px] uppercase tracking-[0.24em] text-gold">
               Editing {rows.find((r) => r.id === editingId)?.booking_code}
             </p>
           )}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4">
             <Field label="Client name *">
               <input value={form.client_name} onChange={(e) => setForm((f) => ({ ...f, client_name: e.target.value }))} className={inputCls} />
             </Field>
@@ -336,16 +336,16 @@ const AdminManualBookings = () => {
                 <div key={i} className="grid grid-cols-12 gap-2 items-center">
                   <input placeholder="e.g. Range Rover Sport" value={item.label}
                     onChange={(e) => setItems((it) => it.map((x, j) => j === i ? { ...x, label: e.target.value } : x))}
-                    className={`${inputCls} col-span-5`} />
+                    className={`${inputCls} col-span-12 lg:col-span-4`} />
                   <input type="number" placeholder="Qty" value={item.qty ?? ""}
                     onChange={(e) => setItems((it) => it.map((x, j) => j === i ? { ...x, qty: Number(e.target.value) || undefined } : x))}
-                    className={`${inputCls} col-span-1`} />
+                    className={`${inputCls} col-span-3 lg:col-span-2`} />
                   <input placeholder="Unit" value={item.unit ?? ""}
                     onChange={(e) => setItems((it) => it.map((x, j) => j === i ? { ...x, unit: e.target.value } : x))}
-                    className={`${inputCls} col-span-2`} />
+                    className={`${inputCls} col-span-3 lg:col-span-2`} />
                   <input type="number" placeholder="Amount" value={item.amount || ""}
                     onChange={(e) => setItems((it) => it.map((x, j) => j === i ? { ...x, amount: Number(e.target.value) || 0 } : x))}
-                    className={`${inputCls} col-span-3`} />
+                    className={`${inputCls} col-span-5 lg:col-span-3`} />
                   <button onClick={() => setItems((it) => it.filter((_, j) => j !== i))} className="col-span-1 text-destructive hover:text-destructive/80 flex justify-center">
                     <Trash2 className="h-4 w-4" />
                   </button>
@@ -562,10 +562,10 @@ const AdminManualBookings = () => {
   );
 };
 
-const inputCls = "w-full bg-background border border-border/60 px-3 py-2 text-sm focus:border-primary focus:outline-none";
+const inputCls = "w-full min-w-0 bg-background border border-border/60 px-3 py-2 text-sm focus:border-primary focus:outline-none";
 
 const Field = ({ label, children }: { label: string; children: React.ReactNode }) => (
-  <label className="block">
+  <label className="block min-w-0">
     <span className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">{label}</span>
     <div className="mt-2">{children}</div>
   </label>

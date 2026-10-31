@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { COUNTRIES, DEFAULT_COUNTRY, joinPhone, splitPhone } from "@/lib/countryCodes";
+import { cn } from "@/lib/utils";
 
 interface Props {
   value: string;
@@ -38,12 +39,12 @@ const PhoneField = ({ value, onChange, className = "", placeholder = "Phone numb
   };
 
   return (
-    <div className="flex gap-2">
+    <div className="flex w-full min-w-0 flex-wrap gap-2">
       <select
         aria-label="Country code"
         value={dial}
         onChange={(e) => push(e.target.value, local)}
-        className={`${className} shrink-0 w-[7.5rem]`}
+        className={cn(className, "w-24 max-w-full shrink-0")}
       >
         {COUNTRIES.map((c) => (
           <option key={c.iso} value={c.dial}>{`${c.flag} ${c.dial}`}</option>
@@ -60,7 +61,7 @@ const PhoneField = ({ value, onChange, className = "", placeholder = "Phone numb
         value={local}
         maxLength={20}
         onChange={(e) => push(dial, e.target.value)}
-        className={`${className} flex-1 min-w-0`}
+        className={cn(className, "w-0 min-w-0 flex-[1_1_9rem]")}
       />
     </div>
   );
