@@ -24,6 +24,7 @@ const Index = () => (
             "@type": ["Organization", "LocalBusiness"],
             "@id": "https://svrm.group/#organization",
             name: "SVRM Group",
+            alternateName: ["SVRM", "svrmgroup", "SVRMGroup"],
             url: "https://svrm.group/",
             description:
               "Luxury chauffeur service and villa rentals across Cape Town — V&A Waterfront, Camps Bay, Clifton, Bantry Bay, Sea Point, Atlantic Seaboard, City Bowl, Stellenbosch and Franschhoek — with Mercedes-Maybach and S-Class chauffeur, airport transfers, private tours and villas.",
@@ -52,6 +53,14 @@ const Index = () => (
               ratingValue: "5",
               bestRating: "5",
             },
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://svrm.group/#website",
+            name: "SVRM Group",
+            alternateName: ["svrmgroup", "SVRMGroup", "SVRM"],
+            url: "https://svrm.group/",
+            publisher: { "@id": "https://svrm.group/#organization" },
           },
           {
             "@type": "Service",

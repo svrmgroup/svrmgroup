@@ -7,3 +7,5 @@
 - Cancellation tiers and FAQ/document terms share `src/lib/cancellationPolicy.ts`; invoices, confirmation PDFs and freshly generated admin confirmation messages consume it so terms cannot drift. Keep thank-you PDFs unchanged.
 - Google Ads loading and conversions go through `src/lib/adsConsent.ts` (regional consent banner route, both Ads accounts); never add static Ads tags to index.html.
 - Customer phone controls merge caller classes with explicit country/number sizing and wrap in narrow containers; admin grids use shrinkable tracks and scoped field sizing so entered details remain visible.
+- Admin notification panels use the shared portalled, collision-aware Popover with viewport-constrained height and a scrolling list so sidebar and mobile triggers cannot push alerts off-screen.
+- Keep Organization and WebSite brand aliases consistent in static head and homepage JSON-LD so crawlers and client rendering identify the same business.
