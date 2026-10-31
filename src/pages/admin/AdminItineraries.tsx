@@ -1,3 +1,4 @@
+import { sharePdfToWhatsApp } from "@/lib/sharePdf";
 import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -343,6 +344,7 @@ const Editor = ({ id, onBack }: { id: string; onBack: () => void }) => {
           {saving ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Save className="h-3.5 w-3.5" />} {dirty ? "Save" : "Saved"}
         </button>
         <button onClick={() => downloadItineraryPdf(d)} className="inline-flex items-center gap-1.5 bg-primary text-primary-foreground px-3 py-1.5 text-[11px] uppercase tracking-[0.18em]"><FileDown className="h-3.5 w-3.5" /> Download PDF</button>
+        <button onClick={async () => { const blob = await renderItineraryBlob(d); await sharePdfToWhatsApp({ blob, fileName: fileName(d), phone: d.client.phone, message: `Good day ${d.client.name},\n\nPlease find attached your SVRM Group itinerary${d.client.ref ? ` (${d.client.ref})` : ""}.\n\nSVRM Group` }); }} className="inline-flex items-center gap-1.5 border border-primary/40 text-gold px-3 py-1.5 text-[11px] uppercase tracking-[0.18em]"><MessageCircle className="h-3.5 w-3.5" /> Send via WhatsApp</button>
         <button onClick={() => setMobilePreview(true)} className="lg:hidden inline-flex items-center gap-1.5 border border-border/60 px-3 py-1.5 text-[11px] uppercase tracking-[0.18em]"><Eye className="h-3.5 w-3.5" /> Preview</button>
       </div>
 
