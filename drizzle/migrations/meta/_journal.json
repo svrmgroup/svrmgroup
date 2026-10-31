@@ -29,6 +29,13 @@
       "when": 1793476257768,
       "tag": "0003_enquiry_policies_email_optional",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1793476658210,
+      "tag": "0004_partner_applications",
+      "breakpoints": true
     }
   ]
 }

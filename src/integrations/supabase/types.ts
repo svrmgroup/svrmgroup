@@ -1125,6 +1125,66 @@ export type Database = {
         }
         Relationships: []
       }
+      partner_applications: {
+        Row: {
+          admin_notes: string | null
+          availability: string
+          business_name: string | null
+          category: string
+          consent: boolean
+          created_at: string
+          description: string
+          details: Json
+          email: string
+          full_name: string
+          id: string
+          location: string
+          phone: string
+          photo_paths: string[]
+          proposed_rates: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          admin_notes?: string | null
+          availability: string
+          business_name?: string | null
+          category: string
+          consent?: boolean
+          created_at?: string
+          description: string
+          details?: Json
+          email: string
+          full_name: string
+          id?: string
+          location: string
+          phone: string
+          photo_paths?: string[]
+          proposed_rates: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          admin_notes?: string | null
+          availability?: string
+          business_name?: string | null
+          category?: string
+          consent?: boolean
+          created_at?: string
+          description?: string
+          details?: Json
+          email?: string
+          full_name?: string
+          id?: string
+          location?: string
+          phone?: string
+          photo_paths?: string[]
+          proposed_rates?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       rental_requests: {
         Row: {
           admin_notes: string | null
