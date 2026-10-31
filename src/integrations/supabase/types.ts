@@ -699,7 +699,7 @@ export type Database = {
           country: string | null
           country_iso: string | null
           created_at: string
-          email: string
+          email: string | null
           enquiry_count: number
           first_enquiry_at: string
           id: string
@@ -714,7 +714,7 @@ export type Database = {
           country?: string | null
           country_iso?: string | null
           created_at?: string
-          email: string
+          email?: string | null
           enquiry_count?: number
           first_enquiry_at?: string
           id?: string
@@ -729,7 +729,7 @@ export type Database = {
           country?: string | null
           country_iso?: string | null
           created_at?: string
-          email?: string
+          email?: string | null
           enquiry_count?: number
           first_enquiry_at?: string
           id?: string
@@ -870,7 +870,7 @@ export type Database = {
           admin_notes: string | null
           booking_date: string | null
           created_at: string
-          email: string
+          email: string | null
           id: string
           message: string
           name: string
@@ -884,7 +884,7 @@ export type Database = {
           admin_notes?: string | null
           booking_date?: string | null
           created_at?: string
-          email: string
+          email?: string | null
           id?: string
           message: string
           name: string
@@ -898,7 +898,7 @@ export type Database = {
           admin_notes?: string | null
           booking_date?: string | null
           created_at?: string
-          email?: string
+          email?: string | null
           id?: string
           message?: string
           name?: string
@@ -1130,7 +1130,7 @@ export type Database = {
           admin_notes: string | null
           created_at: string
           currency: string
-          email: string
+          email: string | null
           estimated_total: number | null
           extras: string[]
           id: string
@@ -1149,7 +1149,7 @@ export type Database = {
           admin_notes?: string | null
           created_at?: string
           currency?: string
-          email: string
+          email?: string | null
           estimated_total?: number | null
           extras?: string[]
           id?: string
@@ -1168,7 +1168,7 @@ export type Database = {
           admin_notes?: string | null
           created_at?: string
           currency?: string
-          email?: string
+          email?: string | null
           estimated_total?: number | null
           extras?: string[]
           id?: string

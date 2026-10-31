@@ -1,4 +1,5 @@
 import { reportConversion } from "@/lib/adsConsent";
+import { requiredPhone, optionalEmail, emailOrNull, PHONE_REQUIRED_MSG } from "@/lib/contactValidation";
 import { useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Seo } from "@/components/Seo";
@@ -90,8 +91,8 @@ const AirportTransfers = () => {
 
   const submitEnquiry = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !email.trim()) {
-      toast.error("Please add your name and email.");
+    if (!name.trim() || !requiredPhone.safeParse(phone).success || !optionalEmail.safeParse(email).success) {
+      toast.error(PHONE_REQUIRED_MSG);
       return;
     }
     setSubmitting(true);
@@ -104,8 +105,8 @@ const AirportTransfers = () => {
     ].filter(Boolean).join("\n");
     const { error } = await supabase.from("enquiries").insert({
       name: name.trim(),
-      email: email.trim(),
-      phone: phone.trim() || null,
+      email: emailOrNull(email),
+      phone: phone.trim(),
       subject: "Airport transfer enquiry",
       message: body || "Airport transfer enquiry",
       source_page: location.pathname,
@@ -334,10 +335,9 @@ const AirportTransfers = () => {
                   />
                 </label>
                 <label className="flex flex-col gap-1.5">
-                  <span className="eyebrow">Email</span>
+                  <span className="eyebrow">Email (optional)</span>
                   <input
                     type="email"
-                    required
                     autoComplete="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -345,7 +345,7 @@ const AirportTransfers = () => {
                   />
                 </label>
                 <label className="flex flex-col gap-1.5">
-                  <span className="eyebrow">Phone (optional)</span>
+                  <span className="eyebrow">Phone / WhatsApp (required)</span>
                   <PhoneField
                     value={phone}
                     onChange={setPhone}

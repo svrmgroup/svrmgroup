@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { X, FileDown, Plus, Trash2, MessageCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { downloadInvoicePdf, downloadConfirmationPdf, downloadThankYouPdf, downloadQuotationPdf, type InvoiceBooking, type ConciergeInfo } from "@/lib/invoicePdf";
+import { downloadInvoicePdf, downloadConfirmationPdf, downloadThankYouPdf, downloadQuotationPdf, renderPdfBlob, type InvoiceBooking, type ConciergeInfo } from "@/lib/invoicePdf";
+import { sharePdfToWhatsApp } from "@/lib/sharePdf";
 import type { LineItem } from "@/lib/confirmationMessage";
 
 type Kind = "invoice" | "confirmation" | "thank_you" | "quotation";
@@ -114,27 +115,19 @@ export default function PdfEditorDialog({ booking, kind, onClose }: Props) {
     }
   };
 
-  /** Downloads the PDF and opens WhatsApp with a ready-to-send message to the client. */
+  /** Shares the PDF to the client's WhatsApp (phone share sheet) or downloads + opens WhatsApp. */
   const sendToClient = async () => {
     setDownloading(true);
     try {
       const p = payload();
-      if (kind === "quotation") await downloadQuotationPdf(p, quoteOverride());
-      else if (kind === "invoice") await downloadInvoicePdf(p);
-      else if (kind === "confirmation") await downloadConfirmationPdf(p);
-      else await downloadThankYouPdf(p);
-
+      const blob = await renderPdfBlob(kind as any, p, kind === "quotation" ? quoteOverride() : null);
       const label = kind === "quotation" ? "quotation" : kind === "invoice" ? "invoice" : "document";
       const msg = kind === "quotation"
         ? `Good day ${p.client_name},\n\nThank you for your interest in SVRM Group. Please find attached your quotation (${p.booking_code}). It is valid for 14 days and remains subject to availability.\n\nHappy to adjust anything — just let me know.\n\n${concierge.name || "SVRM Group"}`
         : `Good day ${p.client_name},\n\nPlease find attached your ${label} (${p.booking_code}) from SVRM Group.\n\n${concierge.name || "SVRM Group"}`;
-      const phone = (b.client_phone || "").replace(/[^\d]/g, "");
-      const url = phone
-        ? `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`
-        : `https://wa.me/27730641481?text=${encodeURIComponent(msg)}`;
-      window.open(url, "_blank", "noopener,noreferrer");
-      toast.success("PDF downloaded — attach it in WhatsApp to send.");
-      onClose();
+      const fileKind = kind === "thank_you" ? "THANK-YOU" : String(kind).toUpperCase();
+      const r = await sharePdfToWhatsApp({ blob, fileName: `SVRM-${fileKind}-${p.booking_code}.pdf`, phone: b.client_phone, message: msg });
+      if (r !== "cancelled") onClose();
     } finally {
       setDownloading(false);
     }
@@ -250,7 +243,7 @@ export default function PdfEditorDialog({ booking, kind, onClose }: Props) {
         <div className="p-5 border-t border-border/40 flex flex-wrap justify-end gap-2">
           <button onClick={onClose} className="btn-ghost text-xs">Cancel</button>
           <button onClick={sendToClient} disabled={downloading} className="text-xs flex items-center gap-2 text-gold border border-primary/40 px-3 py-2 hover:bg-primary/10 transition-colors disabled:opacity-50">
-            <MessageCircle className="h-3.5 w-3.5"/> Send to client
+            <MessageCircle className="h-3.5 w-3.5"/> Send via WhatsApp
           </button>
           <button onClick={download} disabled={downloading} className="btn-luxury text-xs flex items-center gap-2 disabled:opacity-50">
             <FileDown className="h-3.5 w-3.5"/> {downloading ? "Rendering…" : "Download PDF"}

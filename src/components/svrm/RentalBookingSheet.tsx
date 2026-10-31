@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { requiredPhone, optionalEmail, emailOrNull, PHONE_REQUIRED_MSG } from "@/lib/contactValidation";
 import { format, differenceInCalendarDays } from "date-fns";
 import { formatDate } from "@/lib/locale";
 import { z } from "zod";
@@ -16,8 +17,8 @@ import PhoneField from "./PhoneField";
 
 const schema = z.object({
   name: z.string().trim().min(1).max(100),
-  email: z.string().trim().email().max(255),
-  phone: z.string().trim().max(40).optional().or(z.literal("")),
+  email: optionalEmail,
+  phone: requiredPhone,
   message: z.string().trim().max(2000).optional().or(z.literal("")),
 });
 
@@ -58,7 +59,7 @@ const RentalBookingSheet = ({ vehicle, open, onOpenChange }: Props) => {
     }
     const parsed = schema.safeParse(form);
     if (!parsed.success) {
-      toast.error("Please add a name and valid email.");
+      toast.error(PHONE_REQUIRED_MSG);
       return;
     }
     setSubmitting(true);
@@ -70,8 +71,8 @@ const RentalBookingSheet = ({ vehicle, open, onOpenChange }: Props) => {
       pickup_location: pickup,
       extras,
       name: parsed.data.name,
-      email: parsed.data.email,
-      phone: parsed.data.phone || null,
+      email: emailOrNull(parsed.data.email),
+      phone: parsed.data.phone,
       message: parsed.data.message || null,
       currency,
       estimated_total: estimatedZAR,
@@ -142,7 +143,7 @@ const RentalBookingSheet = ({ vehicle, open, onOpenChange }: Props) => {
                 maxLength={100}
               />
               <input
-                placeholder="Email"
+                placeholder="Email (optional)"
                 type="email"
                 value={form.email}
                 onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
@@ -154,7 +155,7 @@ const RentalBookingSheet = ({ vehicle, open, onOpenChange }: Props) => {
               value={form.phone}
               onChange={(v) => setForm((f) => ({ ...f, phone: v }))}
               className="w-full bg-transparent border-b border-border/60 py-3 text-sm focus:border-primary focus:outline-none"
-              placeholder="Phone (optional)"
+              placeholder="Phone / WhatsApp (required)"
             />
 
             <textarea

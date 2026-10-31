@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { X, FileDown, MessageCircle } from "lucide-react";
 import { toast } from "sonner";
-import { downloadRentalAgreementPdf, DEFAULT_RENTAL_TERMS, type RentalAgreementData } from "@/lib/rentalAgreementPdf";
+import { buildRentalAgreementPdf, downloadRentalAgreementPdf, DEFAULT_RENTAL_TERMS, type RentalAgreementData } from "@/lib/rentalAgreementPdf";
+import { sharePdfToWhatsApp } from "@/lib/sharePdf";
 
 interface Props {
   initial: Partial<RentalAgreementData>;
@@ -70,12 +71,10 @@ export default function RentalAgreementDialog({ initial, onClose }: Props) {
   const sendToClient = async () => {
     setBusy(true);
     try {
-      await downloadRentalAgreementPdf(d);
+      const blob = (await buildRentalAgreementPdf(d, "blob")) as Blob;
       const msg = `Good day ${d.renter_name},\n\nPlease find attached your SVRM Group self-drive rental agreement (${d.agreement_no}) for the ${d.vehicle}. Kindly sign and return it before collection.\n\nSVRM Group`;
-      const phone = (d.renter_phone || "").replace(/[^\d]/g, "");
-      window.open(`https://wa.me/${phone || "27730641481"}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
-      toast.success("PDF downloaded — attach it in WhatsApp to send.");
-      onClose();
+      const r = await sharePdfToWhatsApp({ blob, fileName: `SVRM-RENTAL-AGREEMENT-${d.agreement_no}.pdf`, phone: d.renter_phone, message: msg });
+      if (r !== "cancelled") onClose();
     } finally { setBusy(false); }
   };
 
