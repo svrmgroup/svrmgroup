@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { X, FileDown, MessageCircle } from "lucide-react";
 import { toast } from "sonner";
-import { downloadRentalAgreementPdf, DEFAULT_RENTAL_TERMS, type RentalAgreementData } from "@/lib/rentalAgreementPdf";
+import { buildRentalAgreementPdf, downloadRentalAgreementPdf, DEFAULT_RENTAL_TERMS, type RentalAgreementData } from "@/lib/rentalAgreementPdf";
+import { sharePdfToWhatsApp } from "@/lib/sharePdf";
 
 interface Props {
   initial: Partial<RentalAgreementData>;
