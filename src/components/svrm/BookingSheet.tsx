@@ -1,4 +1,5 @@
 import { reportConversion } from "@/lib/adsConsent";
+import { requiredPhone, optionalEmail, emailOrNull, PHONE_REQUIRED_MSG } from "@/lib/contactValidation";
 import { useState } from "react";
 import { format, differenceInCalendarDays } from "date-fns";
 import { z } from "zod";
@@ -21,8 +22,8 @@ import PhoneField from "./PhoneField";
 
 const schema = z.object({
   name: z.string().trim().min(1).max(100),
-  email: z.string().trim().email().max(255),
-  phone: z.string().trim().max(40).optional().or(z.literal("")),
+  email: optionalEmail,
+  phone: requiredPhone,
   message: z.string().trim().max(1500).optional().or(z.literal("")),
 });
 
@@ -121,14 +122,14 @@ const BookingSheet = ({
     }
     const parsed = schema.safeParse(form);
     if (!parsed.success) {
-      toast.error("Please add a name and valid email.");
+      toast.error(PHONE_REQUIRED_MSG);
       return;
     }
     setSubmitting(true);
     const { error } = await supabase.from("enquiries").insert({
       name: parsed.data.name,
-      email: parsed.data.email,
-      phone: parsed.data.phone || null,
+      email: emailOrNull(parsed.data.email),
+      phone: parsed.data.phone,
       subject,
       message: composedMessage || summary || name,
       source_page: `/${kind}/${slug}`,
@@ -212,7 +213,7 @@ const BookingSheet = ({
               maxLength={100}
             />
             <input
-              placeholder="Email"
+              placeholder="Email (optional)"
               type="email"
               value={form.email}
               onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}

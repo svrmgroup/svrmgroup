@@ -1,4 +1,5 @@
 import { reportConversion } from "@/lib/adsConsent";
+import { requiredPhone, optionalEmail, emailOrNull, PHONE_REQUIRED_MSG } from "@/lib/contactValidation";
 import { useState } from "react";
 import { z } from "zod";
 import { useLocation } from "react-router-dom";
@@ -12,8 +13,8 @@ import { Extra } from "@/data/extras";
 
 const schema = z.object({
   name: z.string().trim().min(1, "Required").max(100),
-  email: z.string().trim().email("Valid email required").max(255),
-  phone: z.string().trim().max(40).optional().or(z.literal("")),
+  email: optionalEmail,
+  phone: requiredPhone,
   message: z.string().trim().min(1, "Required").max(2000),
 });
 
@@ -63,8 +64,8 @@ const EnquiryForm = ({ subject, defaultMessage = "", compact = false, extras, ex
     const fullMessage = parsed.data.message + extrasSummary();
     const { error } = await supabase.from("enquiries").insert({
       name: parsed.data.name,
-      email: parsed.data.email,
-      phone: parsed.data.phone || null,
+      email: emailOrNull(parsed.data.email),
+      phone: parsed.data.phone,
       subject,
       message: fullMessage,
       source_page: location.pathname,
@@ -106,7 +107,7 @@ const EnquiryForm = ({ subject, defaultMessage = "", compact = false, extras, ex
           {errors.name && <p className="mt-1 text-xs text-destructive">{errors.name}</p>}
         </div>
         <div>
-          <input className={inputBase} placeholder="Email" type="email" value={form.email} onChange={update("email")} maxLength={255} aria-label="Email" />
+          <input className={inputBase} placeholder="Email (optional)" type="email" value={form.email} onChange={update("email")} maxLength={255} aria-label="Email" />
           {errors.email && <p className="mt-1 text-xs text-destructive">{errors.email}</p>}
         </div>
       </div>

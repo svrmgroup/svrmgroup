@@ -1,4 +1,5 @@
 import { reportConversion } from "@/lib/adsConsent";
+import { requiredPhone, optionalEmail, emailOrNull, PHONE_REQUIRED_MSG } from "@/lib/contactValidation";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { vehicles } from "@/data/vehicles";
@@ -140,8 +141,8 @@ const AiItineraryPlanner = () => {
       .join("\n");
 
   const sendToAdmin = async () => {
-    if (!name.trim() || !email.trim()) {
-      toast.error("Please add your name and email so we can reply.");
+    if (!name.trim() || !requiredPhone.safeParse(phone).success || !optionalEmail.safeParse(email).success) {
+      toast.error(PHONE_REQUIRED_MSG);
       return;
     }
     setSending(true);
@@ -153,8 +154,8 @@ const AiItineraryPlanner = () => {
     ].join("\n");
     const { error: dbError } = await supabase.from("enquiries").insert({
       name: name.trim(),
-      email: email.trim(),
-      phone: phone.trim() || null,
+      email: emailOrNull(email),
+      phone: phone.trim(),
       subject: plan
         ? `Chauffeur itinerary · ${dayCount} day(s) · ${plan.vehicle.name}`
         : `Chauffeur itinerary · ${dayCount} day(s)`,
@@ -213,11 +214,11 @@ const AiItineraryPlanner = () => {
             <input id="ai-name" value={name} onChange={(e) => setName(e.target.value)} className={field} autoComplete="name" />
           </div>
           <div>
-            <label className={label} htmlFor="ai-email">Email</label>
+            <label className={label} htmlFor="ai-email">Email (optional)</label>
             <input id="ai-email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} className={field} autoComplete="email" />
           </div>
           <div>
-            <label className={label} htmlFor="ai-phone">Phone / WhatsApp</label>
+            <label className={label} htmlFor="ai-phone">Phone / WhatsApp *</label>
             <PhoneField id="ai-phone" value={phone} onChange={setPhone} className={field} placeholder="Phone number" ariaLabel="Phone or WhatsApp number" />
 
           </div>
