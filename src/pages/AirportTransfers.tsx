@@ -335,10 +335,9 @@ const AirportTransfers = () => {
                   />
                 </label>
                 <label className="flex flex-col gap-1.5">
-                  <span className="eyebrow">Email</span>
+                  <span className="eyebrow">Email (optional)</span>
                   <input
                     type="email"
-                    required
                     autoComplete="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}

@@ -118,6 +118,7 @@ const EnquiryForm = ({ subject, defaultMessage = "", compact = false, extras, ex
           className={inputBase}
           placeholder="Phone / WhatsApp (required)"
         />
+        {errors.phone && <p className="mt-1 text-xs text-destructive">{errors.phone}</p>}
       </div>
 
       <div>
