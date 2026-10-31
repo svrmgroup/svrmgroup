@@ -7,7 +7,7 @@ import { countryLabel } from "@/lib/countryCodes";
 interface ContactRow {
   id: string;
   name: string;
-  email: string;
+  email: string | null;
   phone: string | null;
   country: string | null;
   country_iso: string | null;

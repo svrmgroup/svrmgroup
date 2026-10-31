@@ -6,11 +6,11 @@ import { toast } from "sonner";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import {
   Plus, FilePlus2, ClipboardPaste, Link2, Search, Copy, Trash2, FileDown, ChevronUp, ChevronDown,
-  GripVertical, Save, Eye, X, Loader2, RefreshCw, ArrowLeft, Sparkles,
+  GripVertical, Save, Eye, X, Loader2, RefreshCw, ArrowLeft, Sparkles, MessageCircle,
 } from "lucide-react";
 import {
   type ItData, type ItDay, type ItActivity, type ItStatus, STATUSES, normalise, emptyData, emptyDay, emptyActivity,
-  daysFromAi, aiParse, buildFromBooking, bookingFacts, bookingDiff, INCLUSION_PRESETS, INFO_PRESETS, uid, defaultIntro, type BookingRow,
+  daysFromAi, aiParse, buildFromBooking, bookingFacts, bookingDiff, INCLUSION_PRESETS, INFO_PRESETS, uid, defaultIntro, type BookingRow, fileName,
 } from "@/lib/itinerary";
 import { renderItineraryBlob, downloadItineraryPdf } from "@/lib/itineraryPdf";
 import { ImageStrip, inputCls } from "@/components/admin/itinerary/ItineraryImages";
