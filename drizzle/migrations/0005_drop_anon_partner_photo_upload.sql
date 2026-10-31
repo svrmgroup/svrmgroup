@@ -1,0 +1,1 @@
+DROP POLICY IF EXISTS "Anyone uploads partner photos" ON storage.objects;
