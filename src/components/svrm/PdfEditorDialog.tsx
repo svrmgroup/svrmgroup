@@ -114,27 +114,19 @@ export default function PdfEditorDialog({ booking, kind, onClose }: Props) {
     }
   };
 
-  /** Downloads the PDF and opens WhatsApp with a ready-to-send message to the client. */
+  /** Shares the PDF to the client's WhatsApp (phone share sheet) or downloads + opens WhatsApp. */
   const sendToClient = async () => {
     setDownloading(true);
     try {
       const p = payload();
-      if (kind === "quotation") await downloadQuotationPdf(p, quoteOverride());
-      else if (kind === "invoice") await downloadInvoicePdf(p);
-      else if (kind === "confirmation") await downloadConfirmationPdf(p);
-      else await downloadThankYouPdf(p);
-
+      const blob = await renderPdfBlob(kind as any, p, kind === "quotation" ? quoteOverride() : null);
       const label = kind === "quotation" ? "quotation" : kind === "invoice" ? "invoice" : "document";
       const msg = kind === "quotation"
         ? `Good day ${p.client_name},\n\nThank you for your interest in SVRM Group. Please find attached your quotation (${p.booking_code}). It is valid for 14 days and remains subject to availability.\n\nHappy to adjust anything — just let me know.\n\n${concierge.name || "SVRM Group"}`
         : `Good day ${p.client_name},\n\nPlease find attached your ${label} (${p.booking_code}) from SVRM Group.\n\n${concierge.name || "SVRM Group"}`;
-      const phone = (b.client_phone || "").replace(/[^\d]/g, "");
-      const url = phone
-        ? `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`
-        : `https://wa.me/27730641481?text=${encodeURIComponent(msg)}`;
-      window.open(url, "_blank", "noopener,noreferrer");
-      toast.success("PDF downloaded — attach it in WhatsApp to send.");
-      onClose();
+      const fileKind = kind === "thank_you" ? "THANK-YOU" : String(kind).toUpperCase();
+      const r = await sharePdfToWhatsApp({ blob, fileName: `SVRM-${fileKind}-${p.booking_code}.pdf`, phone: b.client_phone, message: msg });
+      if (r !== "cancelled") onClose();
     } finally {
       setDownloading(false);
     }
