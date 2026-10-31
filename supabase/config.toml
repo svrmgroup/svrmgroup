@@ -13,3 +13,6 @@ project_id = "fgwpievpzhybyiugsnhy"
 
   [functions.itinerary-parse]
     verify_jwt = false
+
+  [functions.upload-partner-photo]
+    verify_jwt = false

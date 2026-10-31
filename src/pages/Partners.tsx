@@ -69,11 +69,11 @@ const Partners = () => {
     try {
       const photo_paths: string[] = [];
       for (const f of files.slice(0, 6)) {
-        const ext = (f.name.split(".").pop() || "jpg").toLowerCase().replace(/[^a-z0-9]/g, "");
-        const path = `${crypto.randomUUID()}.${ext}`;
-        const { error } = await supabase.storage.from("partner-photos").upload(path, f, { contentType: f.type });
-        if (error) throw error;
-        photo_paths.push(path);
+        const fd = new FormData();
+        fd.append("file", f);
+        const { data, error } = await supabase.functions.invoke("upload-partner-photo", { body: fd });
+        if (error || !data?.path) throw error ?? new Error("Upload failed");
+        photo_paths.push(data.path as string);
       }
       const cleanDetails = Object.fromEntries(Object.entries(details).filter(([k, v]) => v.trim() && EXTRA[r.data.category].some((x) => x.key === k)).map(([k, v]) => [k, v.trim().slice(0, 200)]));
       const { error } = await supabase.from("partner_applications").insert({
