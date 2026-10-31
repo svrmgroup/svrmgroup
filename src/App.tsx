@@ -26,6 +26,8 @@ const CustomExperiences = lazy(() => import("./pages/CustomExperiences.tsx"));
 const Blog = lazy(() => import("./pages/Blog.tsx"));
 const BlogPost = lazy(() => import("./pages/BlogPost.tsx"));
 const Contact = lazy(() => import("./pages/Contact.tsx"));
+const Partners = lazy(() => import("./pages/Partners.tsx"));
+const AdminPartners = lazy(() => import("./pages/admin/AdminPartners"));
 const Rentals = lazy(() => import("./pages/Rentals.tsx"));
 const Security = lazy(() => import("./pages/Security.tsx"));
 const AirportTransfers = lazy(() => import("./pages/AirportTransfers.tsx"));
@@ -109,6 +111,7 @@ const App = () => (
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:slug" element={<BlogPost />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/contact/partners" element={<Partners />} />
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/faq" element={<Navigate to="/contact#faq" replace />} />
                 <Route path="/admin/login" element={<AdminLogin />} />
@@ -120,6 +123,7 @@ const App = () => (
                   <Route path="change-requests" element={<AdminChangeRequests />} />
                   <Route path="clients" element={<AdminClients />} />
                   <Route path="contacts" element={<AdminContacts />} />
+                  <Route path="partners" element={<AdminPartners />} />
                   <Route path="leads" element={<AdminLeads />} />
                   <Route path="expenses" element={<AdminExpenses />} />
                   <Route path="pnl" element={<AdminPnL />} />

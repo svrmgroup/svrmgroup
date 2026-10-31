@@ -56,6 +56,7 @@ export const navCategories: Record<string, NavCategory[]> = {
     { label: "Enquiry Form", to: "/contact#enquiry" },
     { label: "FAQ", to: "/contact#faq" },
     { label: "TikTok", to: "/contact#tiktok" },
+    { label: "Become a Partner", to: "/contact/partners" },
   ],
 };
 
