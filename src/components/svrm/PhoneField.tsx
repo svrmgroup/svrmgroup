@@ -44,7 +44,7 @@ const PhoneField = ({ value, onChange, className = "", placeholder = "Phone numb
         aria-label="Country code"
         value={dial}
         onChange={(e) => push(e.target.value, local)}
-        className={cn(className, "w-24 max-w-full shrink-0")}
+        className={cn(className, "w-28 max-w-full shrink-0")}
       >
         {COUNTRIES.map((c) => (
           <option key={c.iso} value={c.dial}>{`${c.flag} ${c.dial}`}</option>

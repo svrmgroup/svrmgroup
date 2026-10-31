@@ -6,7 +6,7 @@
 # Admin customer entry
 - [x] Fix shared phone-control sizing and admin grid overflow.
 - [x] Give booking and quotation line-item fields usable space on narrow screens.
-- [ ] Verify signed-in customer entry in bookings, quotations and client forms across screen sizes.
+- [x] Verify signed-in customer entry in bookings, quotations and client forms across screen sizes.
 
 # Maybach V-Class
 - [x] Edit supplied photos and create optimised 4K gallery assets.
