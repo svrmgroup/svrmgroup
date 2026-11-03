@@ -1,6 +1,6 @@
 # Monitoring form findings
-- [ ] Verify phone-only public enquiries against the current live policy.
-- [ ] Validate required phone and optional email in admin rental requests and test signed-in saving.
+- [x] Verify phone-only public enquiries against the current live policy (already corrected; marked stale).
+- [x] Validate required phone and optional email in admin rental requests and test signed-in saving.
 
 # Notifications and brand search
 - [x] Keep the admin notification panel inside the screen and verify signed-in interaction.
