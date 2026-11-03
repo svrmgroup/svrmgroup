@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { Mail, ChevronDown, Trash2, Plus, FileText, FileSignature, X } from "lucide-react";
 import RentalAgreementDialog from "@/components/svrm/RentalAgreementDialog";
 import PdfEditorDialog from "@/components/svrm/PdfEditorDialog";
+import { requiredPhone, optionalEmail, emailOrNull } from "@/lib/contactValidation";
 
 type Status = "new" | "in_progress" | "done" | "archived";
 
@@ -16,7 +17,7 @@ interface Row {
   pickup_location: string;
   extras: string[];
   name: string;
-  email: string;
+  email: string | null;
   phone: string | null;
   message: string | null;
   currency: string;
@@ -123,9 +124,9 @@ const AdminBookings = () => {
                     </div>
 
                     <div className="flex flex-wrap gap-4 text-xs">
-                      <a href={`mailto:${r.email}?subject=Re: ${encodeURIComponent(r.vehicle_name)} booking`} className="flex items-center gap-2 text-gold hover:underline">
+                      {r.email && <a href={`mailto:${r.email}?subject=Re: ${encodeURIComponent(r.vehicle_name)} booking`} className="flex items-center gap-2 text-gold hover:underline">
                         <Mail className="h-3.5 w-3.5" /> {r.email}
-                      </a>
+                      </a>}
                       {r.phone && <span className="text-muted-foreground">{r.phone}</span>}
                     </div>
 
@@ -184,7 +185,7 @@ const AdminBookings = () => {
         <RentalAgreementDialog
           initial={{
             renter_name: agreementFor.name,
-            renter_email: agreementFor.email,
+            renter_email: agreementFor.email || "",
             renter_phone: agreementFor.phone || "",
             vehicle: agreementFor.vehicle_name,
             collection_at: agreementFor.pickup_date,
@@ -240,11 +241,15 @@ function NewRentalRequest({ onClose, onCreated }: { onClose: () => void; onCreat
 
   const save = async () => {
     if (!f.name.trim() || !f.vehicle_name.trim()) return toast.error("Client name and vehicle are required");
+    const phone = requiredPhone.safeParse(f.phone);
+    if (!phone.success) return toast.error("Please enter a phone / WhatsApp number with at least 7 digits.");
+    const email = optionalEmail.safeParse(f.email);
+    if (!email.success) return toast.error("Enter a valid email or leave it blank");
     setSaving(true);
     const { error } = await supabase.from("rental_requests").insert({
       name: f.name.trim(),
-      email: f.email.trim() || "manual@svrm.group",
-      phone: f.phone.trim() || null,
+      email: emailOrNull(email.data),
+      phone: phone.data,
       vehicle_name: f.vehicle_name.trim(),
       vehicle_slug: f.vehicle_name.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-"),
       pickup_date: f.pickup_date,
@@ -271,8 +276,8 @@ function NewRentalRequest({ onClose, onCreated }: { onClose: () => void; onCreat
         </div>
         <div className="p-5 grid md:grid-cols-2 gap-3 max-h-[70vh] overflow-y-auto">
           <In label="Client name" value={f.name} onChange={(v) => set("name", v)} />
-          <In label="Email" value={f.email} onChange={(v) => set("email", v)} />
-          <In label="Phone" value={f.phone} onChange={(v) => set("phone", v)} />
+          <In label="Email (optional)" type="email" value={f.email} onChange={(v) => set("email", v)} />
+          <In label="Phone / WhatsApp (required)" type="tel" value={f.phone} onChange={(v) => set("phone", v)} />
           <In label="Vehicle" value={f.vehicle_name} onChange={(v) => set("vehicle_name", v)} />
           <In label="Pickup date" type="date" value={f.pickup_date} onChange={(v) => set("pickup_date", v)} />
           <In label="Return date" type="date" value={f.return_date} onChange={(v) => set("return_date", v)} />
