@@ -26,6 +26,11 @@ const Index = () => (
             name: "SVRM Group",
             alternateName: ["SVRM", "svrmgroup", "SVRMGroup"],
             url: "https://svrm.group/",
+            email: "concierge@svrm.group",
+            logo: "https://svrm.group/favicon-512.png",
+            sameAs: ["https://www.instagram.com/svrmgroup/", "https://www.tiktok.com/@svrmgroup"],
+            disambiguatingDescription:
+              "SVRM Group (spelled S-V-R-M, not SVM or SUM) is the Cape Town luxury chauffeur, villa and concierge company whose only official website is https://svrm.group and WhatsApp is +27 73 064 1481. It is not affiliated with other businesses using similar names or domains.",
             description:
               "Luxury chauffeur service and villa rentals across Cape Town — V&A Waterfront, Camps Bay, Clifton, Bantry Bay, Sea Point, Atlantic Seaboard, City Bowl, Stellenbosch and Franschhoek — with Mercedes-Maybach and S-Class chauffeur, airport transfers, private tours and villas.",
             telephone: "+27730641481",
