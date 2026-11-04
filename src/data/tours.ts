@@ -16,7 +16,7 @@ import aquilaImg from "@/assets/tours/aquila-safari.jpg";
 import capePeninsulaImg from "@/assets/tours/cape-peninsula.jpg";
 import capePeninsulaSuvImg from "@/assets/tours/cape-peninsula-suv.jpg";
 import capePeninsulaMaybachImg from "@/assets/tours/cape-peninsula-maybach.jpg";
-import capePeninsulaWinelandsImg from "@/assets/tours/cape-peninsula-winelands.jpg";
+import capePeninsulaWinelandsImg from "@/assets/tours/cape-peninsula-winelands-vclass.jpg";
 import boKaapImg from "@/assets/tours/bo-kaap-cooking.jpg";
 import safariVid from "@/assets/videos/tour-safari.mp4.asset.json";
 import huntingVid from "@/assets/videos/tour-hunting.mp4.asset.json";
