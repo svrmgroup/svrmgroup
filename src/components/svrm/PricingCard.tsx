@@ -34,10 +34,10 @@ const PricingCard = ({ duration, title, inclusions, subject, fromZAR, slug, imag
             aria-hidden="true"
             className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-surface-deep via-surface-deep/80 to-surface-deep/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-surface-deep via-surface-deep/55 to-surface-deep/20" />
         </>
       ) : null}
-      <div className={image ? "relative flex flex-col flex-1" : "contents"}>
+      <div className={image ? "relative flex flex-col flex-1 [text-shadow:0_1px_8px_rgba(0,0,0,0.65),0_1px_3px_rgba(0,0,0,0.8)]" : "contents"}>
         <p className="eyebrow">{duration}</p>
       <h3 className="font-serif text-2xl md:text-3xl mt-4 text-foreground">{title}</h3>
       <div className="mt-6">
