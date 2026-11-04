@@ -13,6 +13,15 @@ export type FaqItem = {
 };
 export type FaqGroup = { id: string; title: string; items: FaqItem[] };
 
+/** Tour-specific FAQs for the Cape Peninsula tour, shown on its detail page and in site FAQ data. */
+export const capePeninsulaTourFaqItems: FaqItem[] = [
+  { q: "What is included in the Cape Peninsula private tour?", a: "Our Cape Peninsula private tour is a full chauffeured day from Cape Town: the Atlantic seaboard through Camps Bay, Clifton and Hout Bay, Chapman's Peak Drive, Cape Point and the Cape of Good Hope, then Boulders Beach and Simon's Town. Entry fees and a lunch reservation are arranged for you, and the route runs at your pace. Message the concierge on WhatsApp for availability and your written quotation.", keywords: ["cape peninsula tour", "cape point", "cape of good hope", "chapmans peak", "boulders beach", "penguins", "simons town", "what's included", "one day tour"] },
+  { q: "Can we stop at Boulders Beach to see the penguins?", a: "Yes — Boulders Beach and its African penguin colony is a standard stop on the Cape Peninsula tour, and entry fees are arranged as part of your day. Your chauffeur times the visit around crowds and lighting so you can enjoy it comfortably. Ask us on WhatsApp about adding it to your dates.", keywords: ["boulders beach", "penguins", "african penguin", "simons town", "wildlife", "see the penguins"] },
+  { q: "Can the Cape Peninsula tour be combined with the Winelands?", a: "Yes. The two-day Peninsula & Winelands tour runs the full Cape Peninsula route on day one and the Winelands estates — with tastings and dining arranged — on day two, with a private chauffeur throughout and restaurant reservations handled for you. Tell us your dates on WhatsApp and we will confirm the itinerary and quotation.", keywords: ["peninsula and winelands", "two day tour", "winelands", "stellenbosch", "franschhoek", "tasting", "multi day tour", "combine"] },
+  { q: "How much does the Cape Peninsula tour cost?", a: "The Cape Peninsula private tour starts from R8 500 per person as a rough guide, and the two-day Peninsula & Winelands option from R21 000 per person. Final pricing depends on your vehicle, dates, party size and any added experiences, and is confirmed in a written quotation — it is often lower on request. Enquire on WhatsApp for a quote for your dates.", keywords: ["cape peninsula price", "cost", "how much", "tour price", "quote", "r8500", "r21000", "budget"] },
+];
+
+
 const existingGroups: FaqGroup[] = [
   {
     id: "general",
@@ -55,10 +64,7 @@ const existingGroups: FaqGroup[] = [
       { q: "Are your tours private?", a: "Yes — every SVRM tour is private to your party. We do not run shared or group-with-strangers tours.", keywords: ["private tour", "group tour", "shared tour", "exclusive", "personal"] },
       { q: "Can you build a custom itinerary?", a: "Yes. Use the Tour Builder on the Tours page or message the concierge with dates, party size and the feeling you want from the trip. We return a first sketch within a day.", keywords: ["custom", "bespoke", "tailor made", "itinerary", "plan", "tour builder", "personalised"] },
       { q: "Do you offer wine tours?", a: "SVRM Group coordinates private Stellenbosch and Franschhoek Winelands visits, with scenic estates, dining and a chauffeur route tailored to your interests. Tasting appointments are requested through the estates and confirmed separately. Guests who prefer an alcohol-free experience can request vineyard scenery, food and cultural stops instead.", keywords: ["wine tour", "winelands", "vineyard", "alcohol", "culinary", "stellenbosch", "franschhoek"] },
-      { q: "What is included in the Cape Peninsula private tour?", a: "Our Cape Peninsula private tour is a full chauffeured day from Cape Town: the Atlantic seaboard through Camps Bay, Clifton and Hout Bay, Chapman's Peak Drive, Cape Point and the Cape of Good Hope, then Boulders Beach and Simon's Town. Entry fees and a lunch reservation are arranged for you, and the route runs at your pace. Message the concierge on WhatsApp for availability and your written quotation.", keywords: ["cape peninsula tour", "cape point", "cape of good hope", "chapmans peak", "boulders beach", "penguins", "simons town", "what's included", "one day tour"] },
-      { q: "Can we stop at Boulders Beach to see the penguins?", a: "Yes — Boulders Beach and its African penguin colony is a standard stop on the Cape Peninsula tour, and entry fees are arranged as part of your day. Your chauffeur times the visit around crowds and lighting so you can enjoy it comfortably. Ask us on WhatsApp about adding it to your dates.", keywords: ["boulders beach", "penguins", "african penguin", "simons town", "wildlife", "see the penguins"] },
-      { q: "Can the Cape Peninsula tour be combined with the Winelands?", a: "Yes. The two-day Peninsula & Winelands tour runs the full Cape Peninsula route on day one and the Winelands estates — with tastings and dining arranged — on day two, with a private chauffeur throughout and restaurant reservations handled for you. Tell us your dates on WhatsApp and we will confirm the itinerary and quotation.", keywords: ["peninsula and winelands", "two day tour", "winelands", "stellenbosch", "franschhoek", "tasting", "multi day tour", "combine"] },
-      { q: "How much does the Cape Peninsula tour cost?", a: "The Cape Peninsula private tour starts from R8 500 per person as a rough guide, and the two-day Peninsula & Winelands option from R21 000 per person. Final pricing depends on your vehicle, dates, party size and any added experiences, and is confirmed in a written quotation — it is often lower on request. Enquire on WhatsApp for a quote for your dates.", keywords: ["cape peninsula price", "cost", "how much", "tour price", "quote", "r8500", "r21000", "budget"] },
+      ...capePeninsulaTourFaqItems,
     ],
   },
   {
@@ -134,3 +140,8 @@ export const faqGroups: FaqGroup[] = [...expandedFaqGroups, ...existingGroups].m
 }));
 
 export const faqJsonLd = faqSchema(faqGroups.flatMap((group) => group.items));
+
+/** Enriched Cape Peninsula tour FAQs (with the tours link), for rendering on the tour page. */
+export const capePeninsulaTourFaqs = capePeninsulaTourFaqItems.map((item, index) =>
+  completeFaq({ ...item, link: { to: "/tours", label: "private tours" } }, index)
+);

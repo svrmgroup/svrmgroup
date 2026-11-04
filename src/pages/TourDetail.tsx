@@ -3,6 +3,8 @@ import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
 import PricingCard from "@/components/svrm/PricingCard";
 import EnquiryForm from "@/components/svrm/EnquiryForm";
+import ServiceFaq from "@/components/svrm/ServiceFaq";
+import { capePeninsulaTourFaqs } from "@/data/faq";
 import { Seo } from "@/components/Seo";
 import { findTour } from "@/data/tours";
 import SmartImage from "@/components/svrm/SmartImage";
@@ -166,6 +168,18 @@ const TourDetail = () => {
       </section>
 
       {tour.slug === "wellness" && <WellnessCustomBuilder datesSuffix={datesSuffix} />}
+
+      {tour.slug === "cape-peninsula" && (
+        <section className="pb-24 md:pb-28">
+          <div className="max-w-3xl mx-auto px-6">
+            <div className="text-center mb-8">
+              <p className="eyebrow">Good to know</p>
+              <h2 className="font-serif text-2xl md:text-3xl mt-3 text-foreground">Cape Peninsula tour questions</h2>
+            </div>
+            <ServiceFaq items={capePeninsulaTourFaqs} />
+          </div>
+        </section>
+      )}
 
       <section className="bg-surface-deep py-24 md:py-32 border-t border-border/40">
         <div className="max-w-3xl mx-auto px-6">
