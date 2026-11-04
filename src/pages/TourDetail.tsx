@@ -172,6 +172,18 @@ const TourDetail = () => {
       {tour.slug === "wellness" && <WellnessCustomBuilder datesSuffix={datesSuffix} />}
 
       {tour.slug === "cape-peninsula" && (
+        <section className="pb-16 md:pb-20">
+          <div className="max-w-5xl mx-auto px-6">
+            <div className="text-center mb-8">
+              <p className="eyebrow">The route</p>
+              <h2 className="font-serif text-2xl md:text-3xl mt-3 text-foreground">Your day around the Peninsula</h2>
+            </div>
+            <TourRouteMap />
+          </div>
+        </section>
+      )}
+
+      {tour.slug === "cape-peninsula" && (
         <section className="pb-24 md:pb-28">
           <div className="max-w-3xl mx-auto px-6">
             <div className="text-center mb-8">

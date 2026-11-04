@@ -14,6 +14,7 @@ import {
 } from "@/lib/itinerary";
 import { renderItineraryBlob, downloadItineraryPdf } from "@/lib/itineraryPdf";
 import { ImageStrip, inputCls } from "@/components/admin/itinerary/ItineraryImages";
+import { AddressInput, DriveTime } from "@/components/admin/AddressInput";
 
 interface Row {
   id: string; client_name: string; booking_code: string | null; booking_id: string | null;
@@ -417,8 +418,11 @@ const Editor = ({ id, onBack }: { id: string; onBack: () => void }) => {
                           <div className="grid sm:grid-cols-2 gap-2 mt-2">
                             {([["pickup", "Pick-up location"], ["dropoff", "Drop-off location"], ["venue", "Restaurant / venue"], ["accommodation", "Accommodation"],
                               ["vehicle", "Vehicle"], ["driver", "Driver / chauffeur"], ["confirmation", "Confirmation / flight / ref"], ["notes", "Notes"]] as [keyof ItActivity, string][]).map(([k, ph]) => (
-                              <input key={k} value={a[k] as string} onChange={(e) => setAct(di, ai, (x) => { (x as any)[k] = e.target.value; })} placeholder={ph} className={inputCls} />
+                              ["pickup", "dropoff", "venue", "accommodation"].includes(k as string)
+                                ? <AddressInput key={k} value={(a[k] as string) ?? ""} onChange={(v) => setAct(di, ai, (x) => { (x as any)[k] = v; })} placeholder={ph} className={inputCls} />
+                                : <input key={k} value={a[k] as string} onChange={(e) => setAct(di, ai, (x) => { (x as any)[k] = e.target.value; })} placeholder={ph} className={inputCls} />
                             ))}
+                            <DriveTime from={(a as any).pickup ?? ""} to={(a as any).dropoff ?? ""} />
                           </div>
                         </details>
                         <ImageStrip images={a.images} onChange={(imgs) => setAct(di, ai, (x) => { x.images = imgs; })} />
