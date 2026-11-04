@@ -9,3 +9,4 @@
 - Customer phone controls merge caller classes with explicit country/number sizing and wrap in narrow containers; admin grids use shrinkable tracks and scoped field sizing so entered details remain visible.
 - Admin notification panels use the shared portalled, collision-aware Popover with viewport-constrained height and a scrolling list so sidebar and mobile triggers cannot push alerts off-screen.
 - Keep Organization and WebSite brand aliases consistent in static head and homepage JSON-LD so crawlers and client rendering identify the same business.
+- Surface tokens (`surface-deep`, `surface-raised`) are registered in `tailwind.config.ts` with `<alpha-value>`; without registration their opacity and gradient utilities (`bg-surface-deep/70`, `from-surface-deep`) silently render nothing — keep new tokens registered there rather than as bare CSS classes.

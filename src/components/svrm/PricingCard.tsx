@@ -10,20 +10,35 @@ interface Props {
   title: string;
   inclusions: string[];
   subject: string;
+  /** Optional photo rendered behind the card content. */
+  image?: string;
   /** Slug for this tour package (used with source_page). */
   slug?: string;
   onEnquire?: () => void;
 }
 
-const PricingCard = ({ duration, title, inclusions, subject, fromZAR, slug, onEnquire }: Props) => {
+const PricingCard = ({ duration, title, inclusions, subject, fromZAR, slug, image, onEnquire }: Props) => {
   const [open, setOpen] = useState(false);
   const { format } = useCurrency();
 
   const bookable = fromZAR != null && fromZAR > 0;
 
   return (
-    <article className="bg-surface-raised border border-border/40 p-8 flex flex-col">
-      <p className="eyebrow">{duration}</p>
+    <article className="relative bg-surface-raised border border-border/40 p-8 flex flex-col overflow-hidden">
+      {image ? (
+        <>
+          <img
+            src={image}
+            alt=""
+            loading="lazy"
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-surface-deep via-surface-deep/80 to-surface-deep/60" />
+        </>
+      ) : null}
+      <div className={image ? "relative flex flex-col flex-1" : "contents"}>
+        <p className="eyebrow">{duration}</p>
       <h3 className="font-serif text-2xl md:text-3xl mt-4 text-foreground">{title}</h3>
       <div className="mt-6">
         <p className="text-xs uppercase tracking-[0.24em] text-muted-foreground">Pricing · guide</p>
@@ -83,6 +98,7 @@ const PricingCard = ({ duration, title, inclusions, subject, fromZAR, slug, onEn
           Book dates
         </a>
       )}
+      </div>
     </article>
   );
 };

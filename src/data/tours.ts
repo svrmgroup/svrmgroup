@@ -14,6 +14,7 @@ import groupTravelImg from "@/assets/tours/group-travel.jpg";
 import romanticImg from "@/assets/tours/romantic.jpg";
 import aquilaImg from "@/assets/tours/aquila-safari.jpg";
 import capePeninsulaImg from "@/assets/tours/cape-peninsula.jpg";
+import capePeninsulaSuvImg from "@/assets/tours/cape-peninsula-suv.jpg";
 import boKaapImg from "@/assets/tours/bo-kaap-cooking.jpg";
 import safariVid from "@/assets/videos/tour-safari.mp4.asset.json";
 import huntingVid from "@/assets/videos/tour-hunting.mp4.asset.json";
@@ -50,6 +51,8 @@ export interface TourPackage {
   /** ZAR per person. Use null for "On request". */
   fromZAR: number | null;
   inclusions: string[];
+  /** Optional photo rendered behind the package card. */
+  image?: string;
 }
 
 export interface TourCategory {
@@ -109,6 +112,7 @@ export const tours: TourCategory[] = [
         duration: "1 day",
         title: "Cape Peninsula private tour",
         fromZAR: 8500,
+        image: capePeninsulaSuvImg,
         inclusions: [
           "Private chauffeur & luxury sedan or SUV for the day",
           "Camps Bay, Clifton, Hout Bay & Chapman's Peak Drive",
