@@ -10,6 +10,8 @@ interface Props {
   title: string;
   inclusions: string[];
   subject: string;
+  /** Pricing unit label, e.g. "per person" or "group up to 4". Defaults to "per person". */
+  unit?: string;
   /** Optional photo rendered behind the card content. */
   image?: string;
   /** Slug for this tour package (used with source_page). */
@@ -17,7 +19,7 @@ interface Props {
   onEnquire?: () => void;
 }
 
-const PricingCard = ({ duration, title, inclusions, subject, fromZAR, slug, image, onEnquire }: Props) => {
+const PricingCard = ({ duration, title, inclusions, subject, fromZAR, slug, unit, image, onEnquire }: Props) => {
   const [open, setOpen] = useState(false);
   const { format } = useCurrency();
 
@@ -46,7 +48,7 @@ const PricingCard = ({ duration, title, inclusions, subject, fromZAR, slug, imag
           {bookable ? `From ${format(fromZAR)}` : "On request"}
         </p>
         <p className="text-xs text-muted-foreground/60 mt-1">
-          per person · rough guide · final quote often lower on request
+          {unit ?? "per person"} · rough guide · final quote often lower on request
         </p>
       </div>
 
@@ -84,7 +86,7 @@ const PricingCard = ({ duration, title, inclusions, subject, fromZAR, slug, imag
             name={`${title} (${duration})`}
             subtitle={subject}
             rateZAR={fromZAR}
-            unit="person"
+            unit={unit === "group up to 4" ? "group" : "person"}
             slug={slug ?? title.toLowerCase().replace(/\s+/g, "-")}
           />
         </>

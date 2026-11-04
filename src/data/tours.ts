@@ -55,6 +55,8 @@ export interface TourPackage {
   inclusions: string[];
   /** Optional photo rendered behind the package card. */
   image?: string;
+  /** Pricing unit label shown on the card, e.g. "per person" or "group up to 4". Defaults to "per person". */
+  unit?: string;
 }
 
 export interface TourCategory {
@@ -114,6 +116,7 @@ export const tours: TourCategory[] = [
         duration: "1 day",
         title: "Cape Peninsula private tour",
         fromZAR: 8500,
+        unit: "group up to 4",
         image: capePeninsulaSuvImg,
         inclusions: [
           "Private chauffeur & luxury sedan or SUV for the day",
@@ -127,6 +130,7 @@ export const tours: TourCategory[] = [
         duration: "1 day",
         title: "Cape Peninsula · Maybach flagship",
         fromZAR: 22000,
+        unit: "group up to 4",
         image: capePeninsulaMaybachImg,
         inclusions: [
           "Mercedes-Maybach S-Class with chauffeur, full day",
@@ -139,6 +143,7 @@ export const tours: TourCategory[] = [
         duration: "2 days",
         title: "Peninsula & Winelands",
         fromZAR: 21000,
+        unit: "group up to 4",
         image: capePeninsulaWinelandsImg,
         inclusions: [
           "Day one: full Cape Peninsula route",

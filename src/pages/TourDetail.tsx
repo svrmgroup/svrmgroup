@@ -154,6 +154,7 @@ const TourDetail = () => {
                 title={p.title}
                 fromZAR={p.fromZAR}
                 inclusions={p.inclusions}
+                unit={p.unit}
                 image={p.image}
                 subject={`${tour.label} — ${p.duration} ${p.title}${datesSuffix}`}
                 slug={`${tour.slug}-${p.duration.toLowerCase().replace(/\s+/g, "-")}`}
@@ -161,7 +162,8 @@ const TourDetail = () => {
             ))}
           </div>
           <p className="text-center text-xs text-muted-foreground/60 mt-10 max-w-2xl mx-auto">
-            Every itinerary is personalised. Pricing is on request — per person, excluding
+            Every itinerary is personalised. Pricing is on request —{" "}
+            {tour.slug === "cape-peninsula" ? "per group of up to 4" : "per person"}, excluding
             international flights.
           </p>
         </div>

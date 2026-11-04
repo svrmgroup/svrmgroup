@@ -40,7 +40,7 @@ interface Props {
   /** Rough starter rate in ZAR per unit. Adjust per item. */
   rateZAR: number;
   /** Unit label */
-  unit: "night" | "day" | "person";
+  unit: "night" | "day" | "person" | "group";
   /** Slug for the item, saved with the enquiry */
   slug: string;
 }
@@ -49,6 +49,7 @@ const unitCopy: Record<Props["unit"], string> = {
   night: "per night",
   day: "per day",
   person: "per person",
+  group: "per group (up to 4)",
 };
 
 const BookingSheet = ({
@@ -72,7 +73,7 @@ const BookingSheet = ({
       ? Math.max(1, differenceInCalendarDays(range.to, range.from))
       : 0;
 
-  const units = unit === "person" ? guests : days;
+  const units = unit === "person" ? guests : unit === "group" ? 1 : days;
   const estimate = rateZAR && units > 0 ? rateZAR * units : 0;
 
   const reset = () => {
