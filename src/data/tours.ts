@@ -115,7 +115,7 @@ export const tours: TourCategory[] = [
       {
         duration: "1 day",
         title: "Cape Peninsula private tour",
-        fromZAR: 8500,
+        fromZAR: 10500,
         unit: "group up to 4",
         image: capePeninsulaSuvImg,
         inclusions: [
