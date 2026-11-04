@@ -15,6 +15,7 @@ import romanticImg from "@/assets/tours/romantic.jpg";
 import aquilaImg from "@/assets/tours/aquila-safari.jpg";
 import capePeninsulaImg from "@/assets/tours/cape-peninsula.jpg";
 import capePeninsulaSuvImg from "@/assets/tours/cape-peninsula-suv.jpg";
+import capePeninsulaMaybachImg from "@/assets/tours/cape-peninsula-maybach.jpg";
 import boKaapImg from "@/assets/tours/bo-kaap-cooking.jpg";
 import safariVid from "@/assets/videos/tour-safari.mp4.asset.json";
 import huntingVid from "@/assets/videos/tour-hunting.mp4.asset.json";
@@ -125,6 +126,7 @@ export const tours: TourCategory[] = [
         duration: "1 day",
         title: "Cape Peninsula · Maybach flagship",
         fromZAR: 22000,
+        image: capePeninsulaMaybachImg,
         inclusions: [
           "Mercedes-Maybach S-Class with chauffeur, full day",
           "The complete Peninsula route at your pace",
