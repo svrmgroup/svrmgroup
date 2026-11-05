@@ -1,4 +1,5 @@
 import { Link, Navigate, useParams } from "react-router-dom";
+import { TourRouteMap } from "@/components/svrm/TourRouteMap";
 import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
 import PricingCard from "@/components/svrm/PricingCard";
