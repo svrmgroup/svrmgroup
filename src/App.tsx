@@ -42,6 +42,7 @@ const Anniversary = lazy(() => import("./pages/Anniversary.tsx"));
 
 // ---- Admin console: fully lazy — never ships to public visitors -----------
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
+const OAuthConsent = lazy(() => import("./pages/OAuthConsent"));
 const AdminLayout = lazy(() => import("./pages/admin/AdminLayout"));
 const AdminEnquiries = lazy(() => import("./pages/admin/AdminEnquiries"));
 const AdminBookings = lazy(() => import("./pages/admin/AdminBookings"));
@@ -115,6 +116,7 @@ const App = () => (
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/faq" element={<Navigate to="/contact#faq" replace />} />
                 <Route path="/admin/login" element={<AdminLogin />} />
+                <Route path="/.lovable/oauth/consent" element={<OAuthConsent />} />
                 <Route path="/admin" element={<AdminLayout />}>
                   <Route index element={<AdminAnalytics />} />
                   <Route path="enquiries" element={<AdminEnquiries />} />

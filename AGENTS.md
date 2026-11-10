@@ -1,4 +1,7 @@
 # Project rules
+- Remote assistant tools live in src/lib/mcp, require verified OAuth client tokens and the existing admin role, and use caller-scoped SELECT queries only; this preserves RLS and avoids privileged or public access.
+- MCP invoices expose stored booking invoice data, not browser-only PDF edits; financial summaries use the existing P&L accounting basis and reject truncated results.
+- OAuth consent reuses admin sign-in and validates local return paths once; keep both sign-in and signup return URLs intact.
 - Vehicle galleries are optional vehicle data and use the shared carousel; ordinary fleet cards retain their existing image presentation.
 - Persist CDN image URLs in CMS seed data only when stable; never persist build-hashed import URLs.
 - Keep FAQ answers in typed data with shared contact enrichment and rendering; generate FAQ schema from the same answers so visible content and search data cannot diverge.

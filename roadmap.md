@@ -1,4 +1,9 @@
 # Monitoring form findings
+## Secure ChatGPT integration
+- [ ] Add OAuth consent and read-only admin tools using existing permissions.
+- [ ] Verify access denial, reports, sign-in return, and manifest generation.
+- [ ] Publish and connect the owner's ChatGPT account (requires owner action).
+
 - [x] Verify phone-only public enquiries against the current live policy (already corrected; marked stale).
 - [x] Validate required phone and optional email in admin rental requests and test signed-in saving.
 

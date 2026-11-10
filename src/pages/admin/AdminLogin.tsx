@@ -1,6 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { useState, useEffect } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useNavigate, useSearchParams } from "react-router-dom";
+import { oauthReturnPath } from "@/lib/oauth-return-path";
 import { supabase } from "@/integrations/supabase/client";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { toast } from "sonner";
@@ -10,17 +11,19 @@ import Logo from "@/components/svrm/Logo";
 const AdminLogin = () => {
   const { session, isAdmin, loading } = useAdminAuth();
   const nav = useNavigate();
+  const [params] = useSearchParams();
+  const next = oauthReturnPath(params.get("next"));
   const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
-    if (!loading && session && isAdmin) nav("/admin", { replace: true });
-  }, [loading, session, isAdmin, nav]);
+    if (!loading && session && isAdmin) nav(next, { replace: true });
+  }, [loading, session, isAdmin, nav, next]);
 
   if (loading) return null;
-  if (session && isAdmin) return <Navigate to="/admin" replace />;
+  if (session && isAdmin) return <Navigate to={next} replace />;
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,7 +32,7 @@ const AdminLogin = () => {
       const { error } = await supabase.auth.signUp({
         email,
         password,
-        options: { emailRedirectTo: `${window.location.origin}/admin` },
+        options: { emailRedirectTo: new URL(next, window.location.origin).href },
       });
       setBusy(false);
       if (error) return toast.error(error.message);
