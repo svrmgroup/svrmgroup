@@ -1,7 +1,7 @@
 # Monitoring form findings
 ## Secure ChatGPT integration
-- [ ] Add OAuth consent and read-only admin tools using existing permissions.
-- [ ] Verify access denial, reports, sign-in return, and manifest generation.
+- [x] Add OAuth consent and six read-only admin tools using existing permissions; OAuth enabled and asymmetric signing already active.
+- [x] Verify access-denial/report unit tests, signed-in booking admin, real invalid/missing authorization errors, sign-in return, controlled approve/deny UI, and final manifest generation.
 - [ ] Publish and connect the owner's ChatGPT account (requires owner action).
 
 - [x] Verify phone-only public enquiries against the current live policy (already corrected; marked stale).
