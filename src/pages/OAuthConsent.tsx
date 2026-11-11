@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import Logo from '@/components/svrm/Logo';
-interface Details { client?: { name?: string }; redirect_uri?: string; scope?: string; scopes?: string[]; redirect_url?: string; redirect_to?: string }
+interface Details { client?: { id?: string; client_id?: string; name?: string }; client_id?: string; redirect_uri?: string; scope?: string; scopes?: string[]; redirect_url?: string; redirect_to?: string }
 interface Reply { data: Details | null; error: { message: string } | null }
 interface OAuthApi { getAuthorizationDetails(id: string): Promise<Reply>; approveAuthorization(id: string): Promise<Reply>; denyAuthorization(id: string): Promise<Reply> }
 const oauth = (supabase.auth as unknown as { oauth: OAuthApi }).oauth;
@@ -17,6 +17,7 @@ export default function OAuthConsent() {
  const [busy,setBusy]=useState(false);
  const [allowed,setAllowed]=useState(false);
  const [retry,setRetry]=useState(0);
+ const [manage,setManage]=useState(false);
  useEffect(()=>{
  let active=true;setError('');setDetails(null);setAllowed(false);
  (async()=>{
@@ -44,6 +45,14 @@ export default function OAuthConsent() {
  setBusy(true);setError('');
  try{
  if(approve&&!allowed)throw new Error('Admin permission is required.');
+ if(approve){
+ const clientId=details?.client?.id??details?.client?.client_id??details?.client_id;
+ if(manage&&!clientId)throw new Error('This assistant did not provide its connection identity. Reconnect it to enable management.');
+ const {data}=await supabase.auth.getUser();
+ if(!data.user)throw new Error('Please sign in again.');
+ const grant=clientId?(manage?await supabase.from('assistant_management_grants').upsert({user_id:data.user.id,client_id:clientId,approved_at:new Date().toISOString()}):await supabase.from('assistant_management_grants').delete().eq('user_id',data.user.id).eq('client_id',clientId)):null;
+ if(grant?.error)throw new Error('Assistant permission could not be saved. Please retry.');
+ }
  const reply=await (approve?oauth.approveAuthorization(id):oauth.denyAuthorization(id));
  if(reply.error)throw reply.error;
  const target=reply.data?.redirect_url??reply.data?.redirect_to;
@@ -62,13 +71,14 @@ export default function OAuthConsent() {
  {!details&&!error&&<p role="status" className="text-muted-foreground">Checking connection…</p>}
  {details&&<>
  <p className="text-sm text-muted-foreground break-all">Signed in as {email}</p>
- <p>This lets {client} read SVRM Group records as you.</p>
+ <p>This lets {client} {manage?'read, create and update':'read'} SVRM Group records as you.</p>
  {details.redirect_uri&&<p className="text-xs text-muted-foreground break-all">Connection destination: {details.redirect_uri}</p>}
  <ul className="text-sm space-y-2 list-disc pl-5"><li>Bookings and customer contact details</li><li>Stored invoices and recorded payment statuses</li><li>Supplier expenses and financial reports</li>
  {scopes.map(scope=><li key={scope}>{({openid:'Share your basic profile',profile:'Share your basic profile',email:'Share your email address'} as Record<string,string>)[scope]??`Additional permission requested: ${scope}`}</li>)}
  </ul>
- <p className="text-sm text-muted-foreground">Read-only. Your existing admin permissions still apply. No changes, payments or messages can be made.</p>
- <div className="flex flex-wrap gap-3"><Button disabled={busy||!allowed} onClick={()=>decide(true)}>Approve read-only access</Button><Button variant="outline" disabled={busy} onClick={()=>decide(false)}>Cancel connection</Button></div>
+ <label className="flex gap-3 items-start text-sm"><input type="checkbox" checked={manage} disabled={busy} onChange={e=>setManage(e.target.checked)} /><span>Allow creating and updating bookings, invoices, customers and expense records</span></label>
+ <p className="text-sm text-muted-foreground">Your existing admin permissions still apply. Deleting records, sending messages, making payments and changing access permissions are not allowed.</p>
+ <div className="flex flex-wrap gap-3"><Button disabled={busy||!allowed} onClick={()=>decide(true)}>Approve {manage?'management':'read-only'} access</Button><Button variant="outline" disabled={busy} onClick={()=>decide(false)}>Cancel connection</Button></div>
  </>}
  {error&&!details&&<Button variant="outline" onClick={()=>setRetry(v=>v+1)}>Try again</Button>}
  {email&&<Button variant="ghost" disabled={busy} onClick={async()=>{await supabase.auth.signOut();window.location.reload();}}>Switch account</Button>}

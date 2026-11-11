@@ -188,6 +188,24 @@ export type Database = {
         }
         Relationships: []
       }
+      assistant_management_grants: {
+        Row: {
+          approved_at: string
+          client_id: string
+          user_id: string
+        }
+        Insert: {
+          approved_at?: string
+          client_id: string
+          user_id: string
+        }
+        Update: {
+          approved_at?: string
+          client_id?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       b2b_leads: {
         Row: {
           address: string | null

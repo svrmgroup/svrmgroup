@@ -1,5 +1,6 @@
 # Project rules
-- Remote assistant tools live in src/lib/mcp, require verified OAuth client tokens and the existing admin role, and use caller-scoped SELECT queries only; this preserves RLS and avoids privileged or public access.
+- Remote assistant tools live in src/lib/mcp and require verified OAuth client tokens and the existing admin role; create/update tools additionally require per-user/client management consent and a token issued after consent, preserving RLS and prior read-only grants.
+- Assistant writes use strict field allowlists and optimistic concurrency for bookings/invoices, clients and expenses; never expose deletion, messaging, payment execution, role changes or website publishing.
 - MCP invoices expose stored booking invoice data, not browser-only PDF edits; financial summaries use the existing P&L accounting basis and reject truncated results.
 - OAuth consent reuses admin sign-in and validates local return paths once; keep both sign-in and signup return URLs intact.
 - Vehicle galleries are optional vehicle data and use the shared carousel; ordinary fleet cards retain their existing image presentation.

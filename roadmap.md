@@ -1,5 +1,8 @@
 # Monitoring form findings
 ## Secure ChatGPT integration
+- [x] Add explicitly consented create/update access for bookings/invoices, customers and expenses; exclude deletion, messaging and payment execution.
+- [x] Pass 16 access/validation tests, regenerate nine-tool catalog, and verify real admin consent storage and revocation with controlled OAuth responses.
+- [ ] Verify real ChatGPT create/update records end-to-end (requires republishing and owner connection approval).
 - [x] Add OAuth consent and six read-only admin tools using existing permissions; OAuth enabled and asymmetric signing already active.
 - [x] Verify access-denial/report unit tests, signed-in booking admin, real invalid/missing authorization errors, sign-in return, controlled approve/deny UI, and final manifest generation.
 - [ ] Publish and connect the owner's ChatGPT account (requires owner action).

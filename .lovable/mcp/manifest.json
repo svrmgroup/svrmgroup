@@ -13,7 +13,7 @@
   "mcp": {
     "server": {
       "name": "svrm-group",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "title": "SVRM Group"
     },
     "tools": [
@@ -158,8 +158,8 @@
       },
       {
         "name": "list_supplier_expenses",
-        "title": "Read supplier expenses",
-        "description": "Read expenses linked to the supplier directory or supplier payout obligations without combining them as duplicate expenses.",
+        "title": "Read expenses and supplier payouts",
+        "description": "Read recorded expenses or supplier payout obligations without combining them as duplicate expenses.",
         "annotations": {
           "readOnlyHint": true,
           "destructiveHint": false,
@@ -233,6 +233,347 @@
           "required": [
             "start_date",
             "end_date"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "save_booking_invoice",
+        "title": "Create or update booking and invoice",
+        "description": "Create a booking/invoice or replace editable fields after reading its updated_at. Stores invoice data and confirmation text; never sends it or initiates payment. Omitted editable fields use defaults; include existing values to preserve them.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "idempotentHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "expected_updated_at": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "client_name": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 255
+            },
+            "client_phone": {
+              "type": "string",
+              "maxLength": 40
+            },
+            "client_email": {
+              "anyOf": [
+                {
+                  "anyOf": [
+                    {
+                      "not": {}
+                    },
+                    {
+                      "type": "string",
+                      "maxLength": 255,
+                      "format": "email"
+                    }
+                  ]
+                },
+                {
+                  "type": "string",
+                  "const": ""
+                }
+              ]
+            },
+            "currency": {
+              "type": "string",
+              "enum": [
+                "ZAR",
+                "USD",
+                "EUR",
+                "GBP"
+              ]
+            },
+            "line_items": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "label": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 255
+                  },
+                  "qty": {
+                    "type": "number",
+                    "exclusiveMinimum": 0
+                  },
+                  "unit": {
+                    "type": "string",
+                    "maxLength": 40
+                  },
+                  "amount": {
+                    "type": "number",
+                    "minimum": 0,
+                    "maximum": 100000000
+                  }
+                },
+                "required": [
+                  "label",
+                  "amount"
+                ],
+                "additionalProperties": false
+              },
+              "minItems": 1,
+              "maxItems": 100
+            },
+            "subtotal": {
+              "$ref": "#/properties/line_items/items/properties/amount"
+            },
+            "quoted_total": {
+              "anyOf": [
+                {
+                  "$ref": "#/properties/line_items/items/properties/amount"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "deposit_amount": {
+              "$ref": "#/properties/line_items/items/properties/amount",
+              "default": 0
+            },
+            "amount_paid": {
+              "$ref": "#/properties/line_items/items/properties/amount",
+              "default": 0
+            },
+            "start_date": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "end_date": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "date"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "notes": {
+              "type": "string",
+              "maxLength": 5000
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "draft",
+                "confirmed",
+                "completed",
+                "cancelled"
+              ],
+              "default": "draft"
+            }
+          },
+          "required": [
+            "client_name",
+            "client_phone",
+            "currency",
+            "line_items",
+            "subtotal"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "save_customer",
+        "title": "Create or update customer",
+        "description": "Create a CRM client or replace editable details using expected_updated_at. Requires phone; email is optional. Include current values to preserve fields.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "idempotentHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "expected_updated_at": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "full_name": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 255
+            },
+            "phone": {
+              "type": "string",
+              "maxLength": 40
+            },
+            "email": {
+              "anyOf": [
+                {
+                  "anyOf": [
+                    {
+                      "not": {}
+                    },
+                    {
+                      "type": "string",
+                      "maxLength": 255,
+                      "format": "email"
+                    }
+                  ]
+                },
+                {
+                  "type": "string",
+                  "const": ""
+                }
+              ]
+            },
+            "whatsapp": {
+              "$ref": "#/properties/phone"
+            },
+            "country": {
+              "type": "string",
+              "maxLength": 100
+            },
+            "status": {
+              "type": "string",
+              "enum": [
+                "lead",
+                "client",
+                "vip",
+                "archived"
+              ],
+              "default": "client"
+            },
+            "vip": {
+              "type": "boolean",
+              "default": false
+            },
+            "notes": {
+              "type": "string",
+              "maxLength": 5000
+            }
+          },
+          "required": [
+            "full_name",
+            "phone"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "save_expense",
+        "title": "Create or update expense record",
+        "description": "Record or correct an expense, optionally linked to a booking or supplier. Never pays a supplier. Updates require expected_updated_at; include current values to preserve fields.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "idempotentHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "expected_updated_at": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "date": {
+              "type": "string",
+              "format": "date"
+            },
+            "category": {
+              "type": "string",
+              "enum": [
+                "fuel",
+                "cleaning",
+                "supplier",
+                "marketing",
+                "staff",
+                "commission",
+                "maintenance",
+                "utilities",
+                "software",
+                "insurance",
+                "other"
+              ]
+            },
+            "amount": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100000000,
+              "exclusiveMinimum": 0
+            },
+            "currency": {
+              "type": "string",
+              "enum": [
+                "ZAR",
+                "USD",
+                "EUR",
+                "GBP"
+              ]
+            },
+            "note": {
+              "type": "string",
+              "maxLength": 5000
+            },
+            "manual_booking_id": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "supplier_id": {
+              "anyOf": [
+                {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "date",
+            "category",
+            "amount",
+            "currency"
           ],
           "additionalProperties": false,
           "$schema": "http://json-schema.org/draft-07/schema#"

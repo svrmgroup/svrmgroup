@@ -43,6 +43,13 @@
       "when": 1793476980694,
       "tag": "0005_drop_anon_partner_photo_upload",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1794399376762,
+      "tag": "0006_assistant_management_consent",
+      "breakpoints": true
     }
   ]
 }
