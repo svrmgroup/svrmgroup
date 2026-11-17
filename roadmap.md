@@ -1,4 +1,6 @@
 # Vehicle photo and rate updates
+- [x] Add matching extra photos to X3, X5, Sprinter, Cullinan and Phantom galleries, retaining their current first photos and syncing saved galleries.
+- [x] Verify scrolling galleries on chauffeur and relevant rental cards, plus expanded photo viewing on phones; local CDN media substituted for layout checks.
 - [x] Update Autobiography and Urus chauffeur rates in website and CMS, with three passing price tests.
 - [x] Edit six supplied car photos to match the fleet style with verified SVRM GROUP plates and 3840px-wide upscaled versions.
 - [x] Verify chauffeur and rental presentation on desktop and phone; local CDN delivery substituted with saved asset files for layout checks.

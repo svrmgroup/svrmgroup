@@ -1,5 +1,6 @@
 import KenBurnsImage from "./KenBurnsImage";
 import { Vehicle } from "@/data/vehicles";
+import VehicleGallery from "./VehicleGallery";
 
 
 interface Props {
@@ -12,12 +13,12 @@ const RentalCard = ({ vehicle, index, onBook }: Props) => {
   return (
 
     <article className="group bg-surface-raised border border-border/40 flex flex-col">
-      <KenBurnsImage
+      {vehicle.gallery?.length ? <VehicleGallery vehicle={vehicle} /> : <KenBurnsImage
         src={vehicle.image}
         alt={vehicle.name}
         className="aspect-[16/10]"
         direction={(index % 4) as 0 | 1 | 2 | 3}
-      />
+      />}
       <div className="p-6 flex-1 flex flex-col">
         <p className="eyebrow">Self-drive · {vehicle.tier}</p>
         <h3 className="font-serif text-2xl mt-2 text-foreground">{vehicle.name}</h3>

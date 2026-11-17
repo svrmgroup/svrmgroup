@@ -39,7 +39,7 @@ const VehicleGallery = ({ vehicle }: { vehicle: Vehicle }) => {
       <Dialog open={expanded} onOpenChange={setExpanded}>
         <DialogContent className="h-[100dvh] max-w-none gap-0 border-0 p-0 sm:rounded-none [&>button]:z-10 [&>button]:bg-background/90 [&>button]:p-2">
           <DialogTitle className="sr-only">{vehicle.name} — {photo?.alt}</DialogTitle>
-          {photo && <SmartImage src={photo.fullSrc} alt={`${vehicle.name} — ${photo.alt}`} priority wrapperClassName="absolute inset-0 h-full w-full" className="absolute inset-0 w-full h-full object-cover" />}
+          {photo && <SmartImage src={photo.fullSrc} alt={`${vehicle.name} — ${photo.alt}`} priority wrapperClassName="absolute inset-0 h-full w-full" className="absolute inset-0 w-full h-full object-contain" />}
           <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between bg-background/90 p-3">
             <Button variant="outline" size="icon" title="Previous photo" aria-label="Previous photo" onClick={() => move(-1)}><ChevronLeft /></Button>
             <span className="text-sm text-muted-foreground">{selected + 1} / {photos.length}</span>

@@ -3,7 +3,7 @@
 - Assistant writes use strict field allowlists and optimistic concurrency for bookings/invoices, clients and expenses; never expose deletion, messaging, payment execution, role changes or website publishing.
 - MCP invoices expose stored booking invoice data, not browser-only PDF edits; financial summaries use the existing P&L accounting basis and reject truncated results.
 - OAuth consent reuses admin sign-in and validates local return paths once; keep both sign-in and signup return URLs intact.
-- Vehicle galleries are optional vehicle data and use the shared carousel; ordinary fleet cards retain their existing image presentation.
+- Vehicle galleries are optional vehicle data and use the shared carousel on chauffeur and rental cards, with uncropped expanded viewing; ordinary fleet cards retain their existing image presentation.
 - Persist CDN image URLs in CMS seed data only when stable; never persist build-hashed import URLs.
 - Vehicle seed images include stable asset-pointer URLs even without galleries, so CMS resync preserves refreshed fleet photos.
 - Keep FAQ answers in typed data with shared contact enrichment and rendering; generate FAQ schema from the same answers so visible content and search data cannot diverge.
