@@ -1,21 +1,14 @@
 import bmwx3Extra from "@/assets/vehicles/bmwx3-gallery-4k.jpg.asset.json";
-import bmwx3Original from "@/assets/vehicles/bmwx3-original.jpg.asset.json";
 import bmwx5Extra from "@/assets/vehicles/bmwx5-gallery-4k.jpg.asset.json";
-import bmwx5Original from "@/assets/vehicles/bmwx5-original.jpg.asset.json";
 import sprinterExtra from "@/assets/vehicles/sprinter-gallery-4k.jpg.asset.json";
-import sprinterOriginal from "@/assets/vehicles/sprinter16-original.jpg.asset.json";
 import cullinanExtra from "@/assets/vehicles/cullinan-gallery-4k.jpg.asset.json";
-import cullinanOriginal from "@/assets/vehicles/cullinan-original.jpg.asset.json";
 import phantomExtra from "@/assets/vehicles/phantom-gallery-4k.jpg.asset.json";
-import cullinan from "@/assets/vehicles/cullinan.jpg";
 import ghost from "@/assets/vehicles/ghost.jpg";
 import phantom from "@/assets/vehicles/phantom-refreshed-4k.jpg.asset.json";
 import g63 from "@/assets/vehicles/g63.jpg";
 import gls from "@/assets/vehicles/gls.jpg";
 import bmw7 from "@/assets/vehicles/bmw7-refreshed-4k.jpg.asset.json";
 import urus from "@/assets/vehicles/urus.jpg";
-import bmwx5 from "@/assets/vehicles/bmwx5.jpg";
-import bmwx3 from "@/assets/vehicles/bmwx3.jpg";
 import sclass from "@/assets/vehicles/sclass-svrm.jpg";
 import maybach from "@/assets/vehicles/maybach-refreshed-4k.jpg.asset.json";
 import vclass from "@/assets/vehicles/vclass.jpg";
@@ -31,7 +24,6 @@ import bmw5 from "@/assets/vehicles/bmw5-refreshed-4k.jpg.asset.json";
 import eclass from "@/assets/vehicles/eclass.jpg";
 import corolla from "@/assets/vehicles/corolla.jpg";
 import polo from "@/assets/vehicles/polo.jpg";
-import sprinter16 from "@/assets/vehicles/sprinter16.jpg";
 import midibus22 from "@/assets/vehicles/midibus22.jpg";
 import bus32 from "@/assets/vehicles/bus32.jpg";
 import coach from "@/assets/vehicles/coach.jpg";
@@ -69,7 +61,7 @@ export const vehicles: Vehicle[] = [
     ],
   },
   { slug: "rolls-royce-phantom", name: "Rolls-Royce Phantom", tagline: "The pinnacle of motoring, chauffeured.", fromZAR: 40000, image: phantom.url, tier: "Signature", selfDrive: false, gallery: [{ src: phantom.url, fullSrc: phantom.url, alt: "Current exterior photo" }, { src: phantomExtra.url, fullSrc: phantomExtra.url, alt: "Cream leather cabin with coach doors open" }] },
-  { slug: "rolls-royce-cullinan", name: "Rolls-Royce Cullinan", tagline: "The summit of the SVRM fleet.", fromZAR: 45000, image: cullinan, tier: "Signature", selfDrive: false, gallery: [{ src: cullinanOriginal.url, fullSrc: cullinanOriginal.url, alt: "Current exterior photo" }, { src: cullinanExtra.url, fullSrc: cullinanExtra.url, alt: "Orange leather cabin with coach doors open" }] },
+  { slug: "rolls-royce-cullinan", name: "Rolls-Royce Cullinan", tagline: "The summit of the SVRM fleet.", fromZAR: 45000, image: cullinanExtra.url, tier: "Signature", selfDrive: false },
   { slug: "rolls-royce-ghost", name: "Rolls-Royce Ghost", tagline: "Silent presence, chauffeured.", fromZAR: 30000, image: ghost, tier: "Signature", selfDrive: false },
   { slug: "bentley-bentayga", name: "Bentley Bentayga", tagline: "British craft, African horizon.", fromZAR: 25000, rentalZAR: 18500, image: bentayga, tier: "Signature", selfDrive: true },
   { slug: "lamborghini-urus", name: "Lamborghini Urus", tagline: "Performance, refined.", fromZAR: 37500, rentalZAR: 20500, image: urus, tier: "Signature", selfDrive: true },
@@ -80,7 +72,7 @@ export const vehicles: Vehicle[] = [
   { slug: "mercedes-gls", name: "Mercedes-Benz GLS", tagline: "Generous space, first-class everywhere.", fromZAR: 14000, image: gls, tier: "Premium SUV", selfDrive: false },
   { slug: "range-rover-sport", name: "Range Rover Sport", tagline: "Athletic Range, dynamic stance.", fromZAR: 10500, rentalZAR: 7800, image: rrsport.url, tier: "Premium SUV", selfDrive: true },
   { slug: "porsche-cayenne", name: "Porsche Cayenne", tagline: "Sport SUV with a Stuttgart accent.", fromZAR: 9500, rentalZAR: 8900, image: cayenne, tier: "Premium SUV", selfDrive: true },
-  { slug: "bmw-x5", name: "BMW X5", tagline: "Family-sized, executive-grade.", fromZAR: 8500, rentalZAR: 7500, image: bmwx5, tier: "Premium SUV", selfDrive: true, gallery: [{ src: bmwx5Original.url, fullSrc: bmwx5Original.url, alt: "Current exterior photo" }, { src: bmwx5Extra.url, fullSrc: bmwx5Extra.url, alt: "Coastal exterior with SVRM GROUP plate" }] },
+  { slug: "bmw-x5", name: "BMW X5", tagline: "Family-sized, executive-grade.", fromZAR: 8500, rentalZAR: 7500, image: bmwx5Extra.url, tier: "Premium SUV", selfDrive: true },
 
   // Executive
   { slug: "mercedes-s-class", name: "Mercedes-Benz S-Class", tagline: "The benchmark sedan, chauffeured.", fromZAR: 18000, image: sclass, tier: "Executive", selfDrive: false },
@@ -91,7 +83,7 @@ export const vehicles: Vehicle[] = [
   { slug: "bmw-5-series", name: "BMW 5 Series", tagline: "The dynamic executive.", fromZAR: 7200, rentalZAR: 3200, image: bmw5.url, tier: "Executive", selfDrive: true },
 
   // Everyday
-  { slug: "bmw-x3", name: "BMW X3", tagline: "Compact SUV, dialled in.", fromZAR: 4500, rentalZAR: 3000, image: bmwx3, tier: "Everyday", selfDrive: true, gallery: [{ src: bmwx3Original.url, fullSrc: bmwx3Original.url, alt: "Current exterior photo" }, { src: bmwx3Extra.url, fullSrc: bmwx3Extra.url, alt: "Coastal exterior with SVRM GROUP plate" }] },
+  { slug: "bmw-x3", name: "BMW X3", tagline: "Compact SUV, dialled in.", fromZAR: 4500, rentalZAR: 3000, image: bmwx3Extra.url, tier: "Everyday", selfDrive: true },
   { slug: "mercedes-c-class", name: "Mercedes C-Class", tagline: "Discreet daily driver.", fromZAR: 4000, rentalZAR: 3400, image: cclass, tier: "Everyday", selfDrive: true },
   { slug: "audi-q5", name: "Audi Q5", tagline: "Effortless, comfortable, current.", fromZAR: 6200, rentalZAR: 4600, image: audiq5, tier: "Everyday", selfDrive: true },
 
@@ -101,7 +93,7 @@ export const vehicles: Vehicle[] = [
   { slug: "vw-polo", name: "Volkswagen Polo", tagline: "Compact, nimble, easy to park.", fromZAR: 2200, rentalZAR: 1300, image: polo, tier: "Budget", selfDrive: true },
 
   // Group Travel
-  { slug: "sprinter-16", name: "Mercedes Sprinter · 16-seater", tagline: "Executive group transfer, lounge seating.", fromZAR: 9500, image: sprinter16, tier: "Group Travel", selfDrive: false, gallery: [{ src: sprinterOriginal.url, fullSrc: sprinterOriginal.url, alt: "Current exterior photo" }, { src: sprinterExtra.url, fullSrc: sprinterExtra.url, alt: "Coastal exterior with SVRM GROUP plate" }] },
+  { slug: "sprinter-16", name: "Mercedes Sprinter · 16-seater", tagline: "Executive group transfer, lounge seating.", fromZAR: 9500, image: sprinterExtra.url, tier: "Group Travel", selfDrive: false },
   { slug: "midibus-22", name: "Midibus · 22-seater", tagline: "Mid-size group days out and shuttles.", fromZAR: 13500, image: midibus22, tier: "Group Travel", selfDrive: false },
   { slug: "bus-32", name: "Touring Bus · 32-seater", tagline: "Larger parties, full-day tours, conferences.", fromZAR: 18500, image: bus32, tier: "Group Travel", selfDrive: false },
   { slug: "luxury-coach", name: "Luxury Coach · 50+ seater", tagline: "Long-haul touring coach with onboard amenities.", fromZAR: 26500, image: coach, tier: "Group Travel", selfDrive: false },
