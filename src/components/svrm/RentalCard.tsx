@@ -1,6 +1,7 @@
 import KenBurnsImage from "./KenBurnsImage";
 import { Vehicle } from "@/data/vehicles";
 import VehicleGallery from "./VehicleGallery";
+import { vehiclePhotoAlt } from "@/seo/vehicleImages";
 
 
 interface Props {
@@ -15,7 +16,7 @@ const RentalCard = ({ vehicle, index, onBook }: Props) => {
     <article className="group bg-surface-raised border border-border/40 flex flex-col">
       {vehicle.gallery?.length ? <VehicleGallery vehicle={vehicle} /> : <KenBurnsImage
         src={vehicle.image}
-        alt={vehicle.name}
+        alt={vehiclePhotoAlt(vehicle.name, true)}
         className="aspect-[16/10]"
         direction={(index % 4) as 0 | 1 | 2 | 3}
       />}

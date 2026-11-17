@@ -5,6 +5,7 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 import fs from "fs";
 import { PRERENDER_ROUTES, PRERENDER_CONTACT } from "./src/seo/prerenderRoutes.ts";
+import { fleetImageHtml, addFleetImagesToSitemap } from "./src/seo/vehicleImages.ts";
 
 const esc = (v: string) => v.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;");
 
@@ -29,11 +30,13 @@ function prerenderPlugin(): Plugin {
           .replace(/<meta property="og:title" content="[^"]*"\s*\/?>/, `<meta property="og:title" content="${esc(r.title)}" />`)
           .replace(/<meta property="og:description" content="[^"]*"\s*\/?>/, `<meta property="og:description" content="${esc(r.description)}" />`)
           .replace("</head>", `  <link rel="canonical" href="${url}" data-rh="true" />\n  <meta property="og:url" content="${url}" data-rh="true" />\n</head>`)
-          .replace('<div id="root"></div>', `<div id="root"><main><h1>${esc(r.heading)}</h1><p>${esc(r.summary)}</p><p>${esc(PRERENDER_CONTACT)}</p></main></div>`);
+          .replace('<div id="root"></div>', `<div id="root"><main><h1>${esc(r.heading)}</h1><p>${esc(r.summary)}</p><p>${esc(PRERENDER_CONTACT)}</p>${fleetImageHtml(r.path)}</main></div>`);
         const out = r.path === "/" ? file : path.join(dist, r.path.slice(1), "index.html");
         fs.mkdirSync(path.dirname(out), { recursive: true });
         fs.writeFileSync(out, html);
       }
+      const sitemap = path.join(dist, "sitemap.xml");
+      if (fs.existsSync(sitemap)) fs.writeFileSync(sitemap, addFleetImagesToSitemap(fs.readFileSync(sitemap, "utf8")));
     },
   };
 }

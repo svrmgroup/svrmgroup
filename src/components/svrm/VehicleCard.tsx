@@ -5,6 +5,7 @@ import BookingSheet from "./BookingSheet";
 import { useCurrency } from "@/lib/currency";
 import VehicleGallery from "./VehicleGallery";
 import { Button } from "@/components/ui/button";
+import { vehiclePhotoAlt } from "@/seo/vehicleImages";
 
 const VehicleCard = ({ vehicle, index }: { vehicle: Vehicle; index: number }) => {
   const [open, setOpen] = useState(false);
@@ -13,7 +14,7 @@ const VehicleCard = ({ vehicle, index }: { vehicle: Vehicle; index: number }) =>
     <article id={vehicle.slug} className="group bg-surface-raised border border-border/40 flex flex-col scroll-mt-28">
       {vehicle.gallery?.length ? <VehicleGallery vehicle={vehicle} /> : <KenBurnsImage
         src={vehicle.image}
-        alt={vehicle.name}
+        alt={vehiclePhotoAlt(vehicle.name)}
         className="aspect-[16/10]"
         direction={(index % 4) as 0 | 1 | 2 | 3}
       />}

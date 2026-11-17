@@ -1,4 +1,5 @@
 # Vehicle photo and rate updates
+- [x] Improve refreshed fleet image descriptions and static Google image discovery; seven tests passed, public image fetch verified, and Search Console confirms homepage indexed. New discovery changes require publication and Google's recrawl.
 - [x] Keep only the Phantom's new scrolling gallery; replace X3, X5, Sprinter and Cullinan with their single updated photos in website and CMS.
 - [x] Verify the Phantom scroll and four single-photo cards on desktop and phone, substituting local media for CDN layout checks.
 - [x] Update Autobiography and Urus chauffeur rates in website and CMS, with three passing price tests.
