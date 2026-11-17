@@ -1,3 +1,8 @@
+# Vehicle photo and rate updates
+- [ ] Update Autobiography and Urus chauffeur rates in website and CMS, with price tests.
+- [ ] Edit six supplied car photos to match the fleet style with SVRM GROUP plates and 4K-sized versions.
+- [ ] Verify chauffeur and rental presentation on desktop and phone.
+
 # Monitoring form findings
 ## Secure ChatGPT integration
 - [x] Add explicitly consented create/update access for bookings/invoices, customers and expenses; exclude deletion, messaging and payment execution.

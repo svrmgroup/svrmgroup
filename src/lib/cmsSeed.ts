@@ -107,7 +107,7 @@ function vehiclesSeed() {
     category: v.tier,
     published: true,
     sort_order: (i + 1) * 10,
-    ...(v.gallery ? { image_url: v.image } : {}),
+    ...(v.image.startsWith("/__l5e/assets-v1/") || v.gallery ? { image_url: v.image } : {}),
     data: { rentalZAR: v.rentalZAR ?? null, selfDrive: v.selfDrive, ...(v.gallery ? { gallery: v.gallery } : {}) },
   }));
 }
