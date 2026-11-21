@@ -114,7 +114,7 @@ const TourDetail = () => {
       <Nav />
       <section className="relative h-[60vh] min-h-[420px] w-full overflow-hidden">
         {tour.video ? (
-          <BackgroundVideo src={tour.video} poster={tour.image} />
+          <BackgroundVideo src={tour.video} poster={tour.image} priority />
 
         ) : (
           <SmartImage src={tour.image} alt={tour.label} priority wrapperClassName="absolute inset-0 w-full h-full" className="absolute inset-0 w-full h-full object-cover" />

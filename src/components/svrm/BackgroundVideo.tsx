@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { resolveVideoSource } from "@/lib/videoSources";
+import SmartImage from "./SmartImage";
 
 interface Props {
   src: string;
@@ -7,6 +8,7 @@ interface Props {
   className?: string;
   /** Rendered while video is disabled/loading (defaults to the poster image). */
   posterClassName?: string;
+  priority?: boolean;
 }
 
 /** Returns true when the user asked for reduced motion (live-updating). */
@@ -47,7 +49,7 @@ const isSaveData = () => {
  * - pauses when offscreen or when the tab is hidden (saves battery on mobile)
  * - fades in only once the first frame is decodable, so there is no flash
  */
-const BackgroundVideo = ({ src, poster, className = "", posterClassName }: Props) => {
+const BackgroundVideo = ({ src, poster, className = "", posterClassName, priority = false }: Props) => {
   const reduced = usePrefersReducedMotion();
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -64,6 +66,7 @@ const BackgroundVideo = ({ src, poster, className = "", posterClassName }: Props
 
   useEffect(() => {
     setResolvedSrc(resolveVideoSource(src));
+    setReady(false);
   }, [src]);
 
   const enabled = !reduced && !saveData;
@@ -77,7 +80,7 @@ const BackgroundVideo = ({ src, poster, className = "", posterClassName }: Props
         setInView(entry.isIntersecting);
         if (entry.isIntersecting) setShouldLoad(true);
       },
-      { rootMargin: "200px" }
+      { rootMargin: "0px" }
     );
     io.observe(el);
     return () => io.disconnect();
@@ -104,10 +107,13 @@ const BackgroundVideo = ({ src, poster, className = "", posterClassName }: Props
   return (
     <div ref={containerRef} className={`absolute inset-0 ${className}`} aria-hidden="true">
       {poster && (
-        <img
+        <SmartImage
           src={poster}
           alt=""
+          priority={priority}
+          sizes="100vw"
           aria-hidden="true"
+          wrapperClassName="absolute inset-0 w-full h-full"
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
             ready ? "opacity-0" : "opacity-100"
           } ${posterClassName ?? ""}`}
@@ -122,15 +128,14 @@ const BackgroundVideo = ({ src, poster, className = "", posterClassName }: Props
           muted
           loop
           playsInline
-          autoPlay
-          preload="auto"
-          poster={poster}
+          preload="metadata"
           disablePictureInPicture
           disableRemotePlayback
           tabIndex={-1}
           aria-hidden="true"
           onLoadedData={() => setReady(true)}
           onCanPlay={() => setReady(true)}
+          onError={() => setReady(false)}
           key={resolvedSrc}
         >
           <source src={resolvedSrc} type="video/mp4" />

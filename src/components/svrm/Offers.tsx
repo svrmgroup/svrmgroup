@@ -206,8 +206,7 @@ const Offers = () => {
                     <SmartImage
                       src={o.image}
                       alt={o.title}
-                      priority={i < 2}
-                      loading="eager"
+                      loading="lazy"
                       fallbackSrc={villa}
                       sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                       wrapperClassName="absolute inset-0 w-full h-full"

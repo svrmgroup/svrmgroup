@@ -15,6 +15,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { formatDate } from "@/lib/locale";
 import PhoneField from "@/components/svrm/PhoneField";
 import hero from "@/assets/airport-transfers-hero.jpg";
+import SmartImage from "@/components/svrm/SmartImage";
 
 
 // Common Cape Town pickup / drop-off points for autofill.
@@ -157,11 +158,14 @@ const AirportTransfers = () => {
 
       {/* Hero image */}
       <header className="relative w-full h-[52vh] min-h-[380px] max-h-[640px] overflow-hidden">
-        <img
+        <SmartImage
           src={hero}
           alt="Black Mercedes V-Class with luggage at Cape Town International Airport"
           width={1920}
           height={960}
+          priority
+          sizes="100vw"
+          wrapperClassName="absolute inset-0 w-full h-full"
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-background/10" />

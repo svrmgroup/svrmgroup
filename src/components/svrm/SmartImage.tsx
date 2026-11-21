@@ -1,5 +1,6 @@
-import { ImgHTMLAttributes, useEffect, useState } from "react";
+import { ImgHTMLAttributes, useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { resolveImageSource } from "@/lib/imageSources";
 
 type Props = ImgHTMLAttributes<HTMLImageElement> & {
   /** Wrapper className (applied to the shimmer container). */
@@ -8,6 +9,8 @@ type Props = ImgHTMLAttributes<HTMLImageElement> & {
   priority?: boolean;
   /** Shown when `src` fails to load (e.g. an unavailable CDN pointer). */
   fallbackSrc?: string;
+  /** Keep the original master for explicit expanded viewing. */
+  original?: boolean;
 };
 
 /**
@@ -25,9 +28,12 @@ const SmartImage = ({
   wrapperClassName,
   priority = false,
   fallbackSrc,
+  original = false,
   loading,
   fetchPriority,
   decoding,
+  sizes = "100vw",
+  srcSet,
   onLoad,
   onError,
   ...rest
@@ -35,6 +41,21 @@ const SmartImage = ({
   const [loaded, setLoaded] = useState(false);
   const [failed, setFailed] = useState(false);
   const [currentSrc, setCurrentSrc] = useState(src);
+  const wrapperRef = useRef<HTMLSpanElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
+  const [nearViewport, setNearViewport] = useState(priority || loading === "eager");
+
+  useEffect(() => {
+    if (priority || loading === "eager") { setNearViewport(true); return; }
+    const element = wrapperRef.current;
+    if (!element) return;
+    if (typeof IntersectionObserver === "undefined") { setNearViewport(true); return; }
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) { setNearViewport(true); observer.disconnect(); }
+    }, { rootMargin: "250px" });
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [priority, loading]);
 
   // Reset state when the source changes (carousels reuse the same node).
   useEffect(() => {
@@ -43,11 +64,18 @@ const SmartImage = ({
     setFailed(false);
   }, [src]);
 
+  useEffect(() => {
+    const image = imageRef.current;
+    if (image?.complete && image.naturalWidth > 0) setLoaded(true);
+  }, [currentSrc, nearViewport]);
+
   const hasSrc = typeof currentSrc === "string" && currentSrc.trim().length > 0;
   const showShimmer = !loaded && !failed;
+  const display = resolveImageSource(currentSrc, original);
 
   return (
     <span
+      ref={wrapperRef}
       className={cn(
         "relative block overflow-hidden bg-surface-raised/40",
         showShimmer &&
@@ -55,13 +83,16 @@ const SmartImage = ({
         wrapperClassName,
       )}
     >
-      {hasSrc && (
+      {hasSrc && (priority || loading === "eager" || nearViewport) && (
         <img
           {...rest}
-          src={currentSrc}
+          ref={imageRef}
+          src={display.src}
+          srcSet={srcSet ?? display.srcSet}
+          sizes={sizes}
           alt={alt}
           loading={priority ? "eager" : loading ?? "lazy"}
-          decoding={priority ? "sync" : decoding ?? "async"}
+          decoding={decoding ?? "async"}
           {...({ fetchpriority: priority ? "high" : fetchPriority } as Record<string, string | undefined>)}
           onLoad={(e) => {
             setLoaded(true);

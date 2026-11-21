@@ -17,6 +17,10 @@ const modules = {
   ...(import.meta.glob("@/assets/*-{480,720}.mp4.asset.json", {
     eager: true,
   }) as Record<string, { default: Pointer }>),
+  // Prefer newly compressed copies while retaining the original HD masters.
+  ...(import.meta.glob("@/assets/videos/optimized/*-{480,720}.mp4.asset.json", {
+    eager: true,
+  }) as Record<string, { default: Pointer }>),
 };
 
 type Renditions = { "480"?: string; "720"?: string };

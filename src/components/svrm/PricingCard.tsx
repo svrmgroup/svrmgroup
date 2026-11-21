@@ -2,6 +2,7 @@ import { useState } from "react";
 import BookingSheet from "./BookingSheet";
 import { useCurrency } from "@/lib/currency";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
+import SmartImage from "./SmartImage";
 
 interface Props {
   duration: string;
@@ -29,11 +30,13 @@ const PricingCard = ({ duration, title, inclusions, subject, fromZAR, slug, unit
     <article className="relative bg-surface-raised border border-border/40 p-8 flex flex-col overflow-hidden">
       {image ? (
         <>
-          <img
+          <SmartImage
             src={image}
             alt=""
             loading="lazy"
             aria-hidden="true"
+            sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+            wrapperClassName="absolute inset-0 w-full h-full"
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-surface-deep via-surface-deep/55 to-surface-deep/20" />

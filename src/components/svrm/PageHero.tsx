@@ -15,7 +15,7 @@ const PageHero = ({ eyebrow, title, subtitle, videoSrc, posterSrc, imageSrc, ima
   if (videoSrc) {
     return (
       <section className="relative pt-40 pb-20 md:pt-56 md:pb-32 overflow-hidden bg-surface-deep">
-        <BackgroundVideo src={videoSrc} poster={posterSrc} />
+        <BackgroundVideo src={videoSrc} poster={posterSrc} priority />
         <div
           className="absolute inset-0"
           style={{ background: "var(--gradient-hero-overlay)" }}
@@ -44,6 +44,8 @@ const PageHero = ({ eyebrow, title, subtitle, videoSrc, posterSrc, imageSrc, ima
         <div className="absolute inset-0 z-0">
           <SmartImage
             src={imageSrc}
+            priority
+            sizes="100vw"
             alt={imageAlt || title}
             wrapperClassName="absolute inset-0 w-full h-full"
             className="w-full h-full object-cover"

@@ -1,3 +1,8 @@
+# Media loading speed
+- [x] Create 640px/1280px WebP copies for 323 photos (phone copies 88.8% smaller in aggregate); preserve originals for full-size viewing and search.
+- [x] Compress heavier videos, add missing honeymoon phone/HD copies, and defer offscreen images/video while prioritising opening photos.
+- [x] Pass 13 tests and verify real CDN photo downloads, phone/desktop playback, offscreen pausing, original 4K Phantom gallery and single-photo X3 cards.
+
 # Vehicle photo and rate updates
 - [x] Improve refreshed fleet image descriptions and static Google image discovery; seven tests passed, public image fetch verified, and Search Console confirms homepage indexed. New discovery changes require publication and Google's recrawl.
 - [x] Keep only the Phantom's new scrolling gallery; replace X3, X5, Sprinter and Cullinan with their single updated photos in website and CMS.

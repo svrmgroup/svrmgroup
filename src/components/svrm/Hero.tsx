@@ -9,7 +9,7 @@ const Hero = () => {
       id="top"
       className="relative h-screen min-h-[640px] w-full overflow-hidden bg-surface-deep"
     >
-      <BackgroundVideo src={droneVideo.url} poster={heroPoster} />
+      <BackgroundVideo src={droneVideo.url} poster={heroPoster} priority />
 
 
       <div

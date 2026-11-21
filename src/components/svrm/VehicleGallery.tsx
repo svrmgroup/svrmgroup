@@ -28,7 +28,7 @@ const VehicleGallery = ({ vehicle }: { vehicle: Vehicle }) => {
         <CarouselContent className="ml-0">
           {photos.map((image, index) => (
             <CarouselItem key={image.src} className="pl-0">
-              <SmartImage src={image.src} alt={`${vehiclePhotoAlt(vehicle.name)} — ${image.alt}`} wrapperClassName="aspect-[16/10]" className="absolute inset-0 w-full h-full object-cover" loading={index === 0 ? "eager" : "lazy"} />
+              <SmartImage src={image.src} alt={`${vehiclePhotoAlt(vehicle.name)} — ${image.alt}`} wrapperClassName="aspect-[16/10]" className="absolute inset-0 w-full h-full object-cover" sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" loading="lazy" />
             </CarouselItem>
           ))}
         </CarouselContent>
@@ -40,7 +40,7 @@ const VehicleGallery = ({ vehicle }: { vehicle: Vehicle }) => {
       <Dialog open={expanded} onOpenChange={setExpanded}>
         <DialogContent className="h-[100dvh] max-w-none gap-0 border-0 p-0 sm:rounded-none [&>button]:z-10 [&>button]:bg-background/90 [&>button]:p-2">
           <DialogTitle className="sr-only">{vehicle.name} — {photo?.alt}</DialogTitle>
-          {photo && <SmartImage src={photo.fullSrc} alt={`${vehiclePhotoAlt(vehicle.name)} — ${photo.alt}`} priority wrapperClassName="absolute inset-0 h-full w-full" className="absolute inset-0 w-full h-full object-contain" />}
+          {photo && <SmartImage src={photo.fullSrc} alt={`${vehiclePhotoAlt(vehicle.name)} — ${photo.alt}`} original priority wrapperClassName="absolute inset-0 h-full w-full" className="absolute inset-0 w-full h-full object-contain" />}
           <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between bg-background/90 p-3">
             <Button variant="outline" size="icon" title="Previous photo" aria-label="Previous photo" onClick={() => move(-1)}><ChevronLeft /></Button>
             <span className="text-sm text-muted-foreground">{selected + 1} / {photos.length}</span>

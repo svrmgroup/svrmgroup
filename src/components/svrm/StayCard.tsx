@@ -5,6 +5,7 @@ import { Stay } from "@/data/stays";
 import { stayGalleries } from "@/data/stayGalleries";
 import { useCurrency } from "@/lib/currency";
 import BookingSheet from "./BookingSheet";
+import SmartImage from "./SmartImage";
 
 const StayCard = ({ stay }: { stay: Stay; index?: number }) => {
   const { format } = useCurrency();
@@ -64,10 +65,12 @@ const StayCard = ({ stay }: { stay: Stay; index?: number }) => {
           <div className="flex h-full">
             {images.map((src, i) => (
               <div key={i} className="relative flex-[0_0_100%] h-full">
-                <img
+                <SmartImage
                   src={src}
                   alt={`${stay.name} — photo ${i + 1}`}
-                  loading={i === 0 ? "eager" : "lazy"}
+                  loading="lazy"
+                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                  wrapperClassName="absolute inset-0 w-full h-full"
                   className="w-full h-full object-cover"
                 />
               </div>
