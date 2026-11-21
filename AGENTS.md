@@ -1,5 +1,6 @@
 # Project rules
 - Display media through shared responsive-image renditions and adaptive background-video sources; retain original URLs for CMS, image search and explicit full-size viewing so speed improvements cannot replace masters or alter business content.
+- Prefer HD background-video renditions on normal connections, including phones; reserve smaller copies for constrained networks to avoid unnecessary softness without downloading heavy masters.
 - Remote assistant tools live in src/lib/mcp and require verified OAuth client tokens and the existing admin role; create/update tools additionally require per-user/client management consent and a token issued after consent, preserving RLS and prior read-only grants.
 - Assistant writes use strict field allowlists and optimistic concurrency for bookings/invoices, clients and expenses; never expose deletion, messaging, payment execution, role changes or website publishing.
 - MCP invoices expose stored booking invoice data, not browser-only PDF edits; financial summaries use the existing P&L accounting basis and reject truncated results.

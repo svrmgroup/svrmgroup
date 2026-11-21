@@ -63,11 +63,9 @@ export const pickVideoTier = (): Tier => {
 
   if (slowNetwork) return "480";
 
-  const dpr = Math.min(window.devicePixelRatio || 1, 2);
-  // Background videos are cover-scaled, so the rendered pixel width is what matters.
-  const renderedWidth = window.innerWidth * dpr;
-
-  return renderedWidth <= 900 ? "480" : "720";
+  // Even narrow phones cover-scale landscape footage: prefer HD unless the
+  // connection explicitly needs a lighter copy, rather than softening phones.
+  return "720";
 };
 
 /**
