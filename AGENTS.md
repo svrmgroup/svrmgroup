@@ -22,3 +22,7 @@
 - Enquiry references, per-service WhatsApp prefills, consent-gated ad attribution and the Google Ads import sheet live in `src/lib/enquiryTracking.ts`; every enquiry insert spreads `trackingFields()` and a `newReference()` so ads can be judged on booked contribution, not taps.
 - Enquiry stage, money and flags are set only by admins: the `enquiries_prepare` trigger resets them for public inserts and drops click IDs without ad consent; import-sheet conversion names must match the Google Ads upload actions exactly.
 - Supplier/partner applications never report the Website Enquiry conversion, so guest-lead counts stay clean.
+- Listing detail pages (`/chauffeur/:slug`, `/rentals/:slug`, `/stays/:slug`, tours) derive content from `src/data/listings.ts`; unknown figures say "Your concierge will confirm" so nothing unverified is presented as fact.
+- After changing vehicles or stays, run `bun scripts/generate-listing-routes.ts` to refresh static heads and the sitemap; `src/seo/listingRoutes.test.ts` fails when they drift.
+- Item-aware WhatsApp enquiries are built in `src/lib/listingEnquiry.ts` (tested); links carry `data-wa-source` so the global tracker logs them once — never log message contents.
+- Admin listing photos live in `listing_photos` + private `listing-photos` bucket (public read via signed URLs, admin-only writes); they show before existing site photos and never replace them.

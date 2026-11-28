@@ -77,7 +77,7 @@ const AdminGalleries = () => {
   });
 
   const update = useMutation({
-    mutationFn: async ({ id, patch }: { id: string; patch: Record<string, unknown> }) => {
+    mutationFn: async ({ id, patch }: { id: string; patch: { caption?: string | null; alt_text?: string | null; sort_order?: number } }) => {
       const { error } = await supabase.from("listing_photos").update(patch).eq("id", id);
       if (error) throw error;
     },
