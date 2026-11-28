@@ -1,15 +1,8 @@
 {
  "bo-kaap": [
   {
-   "src": "/__l5e/assets-v1/603efee7-f0ac-4bb8-8245-334bf818a9cd/tour-bo-kaap-1.jpg",
-   "title": "65A Chiappini Street, Bo-Kaap (01)",
-   "artist": "",
-   "license": "CC0",
-   "source": ""
-  },
-  {
-   "src": "/__l5e/assets-v1/e592f8c5-eb24-4a81-992f-e9bad8457132/tour-bo-kaap-2.jpg",
-   "title": "Little Walk to Bo-Kaap",
+   "src": "/__l5e/assets-v1/ba9bf0e7-ead4-4bea-893a-2935e7d62a24/tour-bo-kaap-golden.jpg",
+   "title": "Bo-Kaap colourful houses and Table Mountain",
    "artist": "",
    "license": "CC0",
    "source": ""
@@ -17,15 +10,15 @@
  ],
  "cape-point": [
   {
-   "src": "/__l5e/assets-v1/00c82d96-84ff-4b76-be86-128038f8ccd9/tour-chapmans-peak-2.jpg",
-   "title": "File:Peninsula Granite Fynbos - Chapmans Peak Cape Town.JPG",
+   "src": "/__l5e/assets-v1/984fc0af-4b52-4ddb-adde-99fa29f3b8f7/tour-cape-point-golden.jpg",
+   "title": "Cape Point lighthouse and fynbos",
    "artist": "",
    "license": "CC0",
    "source": ""
   },
   {
-   "src": "/__l5e/assets-v1/fdef6564-096c-4a50-a852-802e6d6fc4f5/tour-chapmans-peak-1.jpg",
-   "title": "Chapmans Peak",
+   "src": "/__l5e/assets-v1/d3ebafc8-84fb-41a0-926e-d86060fd3ae7/tour-chapmans-peak-golden.jpg",
+   "title": "Chapman's Peak Drive at golden hour",
    "artist": "",
    "license": "CC0",
    "source": ""
@@ -33,15 +26,8 @@
  ],
  "chapmans-peak": [
   {
-   "src": "/__l5e/assets-v1/00c82d96-84ff-4b76-be86-128038f8ccd9/tour-chapmans-peak-2.jpg",
-   "title": "File:Peninsula Granite Fynbos - Chapmans Peak Cape Town.JPG",
-   "artist": "",
-   "license": "CC0",
-   "source": ""
-  },
-  {
-   "src": "/__l5e/assets-v1/fdef6564-096c-4a50-a852-802e6d6fc4f5/tour-chapmans-peak-1.jpg",
-   "title": "Chapmans Peak",
+   "src": "/__l5e/assets-v1/d3ebafc8-84fb-41a0-926e-d86060fd3ae7/tour-chapmans-peak-golden.jpg",
+   "title": "Chapman's Peak Drive at golden hour",
    "artist": "",
    "license": "CC0",
    "source": ""
@@ -49,15 +35,8 @@
  ],
  "kruger-elephant": [
   {
-   "src": "/__l5e/assets-v1/22ca5860-0a00-4562-a2c7-01005c285f10/tour-kruger-elephant-1.jpg",
-   "title": "Classic",
-   "artist": "",
-   "license": "Public domain",
-   "source": ""
-  },
-  {
-   "src": "/__l5e/assets-v1/53b52a77-7949-4b13-b45e-a99341a6eeaa/tour-kruger-elephant-2.jpg",
-   "title": "An Elephant at Kruger National Park",
+   "src": "/__l5e/assets-v1/ff87cf53-bfca-4a53-ae54-b66958b89388/tour-safari-elephants-golden.jpg",
+   "title": "Elephants at sunset",
    "artist": "",
    "license": "CC0",
    "source": ""
@@ -65,8 +44,8 @@
  ],
  "madikwe": [
   {
-   "src": "/__l5e/assets-v1/2869f986-2c92-4e3f-99e4-cf67e98ba1f8/tour-madikwe-1.jpg",
-   "title": "Madikwe Game Reserve, Madikwe, South",
+   "src": "/__l5e/assets-v1/ff87cf53-bfca-4a53-ae54-b66958b89388/tour-safari-elephants-golden.jpg",
+   "title": "Elephants at sunset",
    "artist": "",
    "license": "CC0",
    "source": ""
@@ -74,8 +53,8 @@
  ],
  "lion-kruger": [
   {
-   "src": "/__l5e/assets-v1/9524ba4b-24fd-4be9-ac69-b82a76e57d3a/tour-lion-kruger-1.jpg",
-   "title": "African lion, Kruger subspecies (Panterha leo krugeri)",
+   "src": "/__l5e/assets-v1/ff87cf53-bfca-4a53-ae54-b66958b89388/tour-safari-elephants-golden.jpg",
+   "title": "Elephants at sunset",
    "artist": "",
    "license": "CC0",
    "source": ""
@@ -83,15 +62,8 @@
  ],
  "table-mountain": [
   {
-   "src": "/__l5e/assets-v1/a01bc764-9b03-4f2d-8f3d-34b24b60b12e/tour-table-mountain-1.jpg",
-   "title": "Table Mountain, Cape town",
-   "artist": "",
-   "license": "Public domain",
-   "source": ""
-  },
-  {
-   "src": "/__l5e/assets-v1/8b6d1074-a195-4fd8-8446-4d7d1b6e79e7/tour-table-mountain-2.jpg",
-   "title": "Table Mountain, Cape Town, South",
+   "src": "/__l5e/assets-v1/3afdb227-709a-4ba5-b687-9d7bcb071f6e/tour-table-mountain-sunset-golden.jpg",
+   "title": "Table Mountain at sunset",
    "artist": "",
    "license": "CC0",
    "source": ""
@@ -99,8 +71,8 @@
  ],
  "boulders-penguins": [
   {
-   "src": "/__l5e/assets-v1/1976a254-c5d4-4e92-b38c-f189c974ba6b/tour-boulders-penguins-1.jpg",
-   "title": "2023, Boulders Beach, Penguin, South-Africa#5334.jpg",
+   "src": "/__l5e/assets-v1/5d9e5de1-d0d5-4f29-ae50-12dd9e27671b/tour-boulders-golden.jpg",
+   "title": "Penguins at Boulders Beach",
    "artist": "",
    "license": "CC0",
    "source": ""
@@ -108,15 +80,8 @@
  ],
  "hermanus-whale": [
   {
-   "src": "/__l5e/assets-v1/f0c07fd0-8a08-450e-bcac-8ebb6465a373/tour-cape-point-2.jpg",
-   "title": "Northern Right Whale mother and calf pair off of the South Beach Road area headed around Cape Point",
-   "artist": "",
-   "license": "Public domain",
-   "source": ""
-  },
-  {
-   "src": "/__l5e/assets-v1/e823bad6-39f0-4f3f-a2cb-e0e3a91952e3/tour-hermanus-whale-1.jpg",
-   "title": "Danger Point Light House",
+   "src": "/__l5e/assets-v1/4f0af9b1-4cc2-4280-8bcd-688c0daa9127/tour-hermanus-whale-golden.jpg",
+   "title": "Southern right whale breaching, Hermanus",
    "artist": "",
    "license": "CC0",
    "source": ""
@@ -124,26 +89,26 @@
  ],
  "knysna": [
   {
-   "src": "/__l5e/assets-v1/05477864-d7da-420c-8a29-f298a15d0a1d/tour-knysna-2.jpg",
-   "title": "Diep walle Knysna",
+   "src": "/__l5e/assets-v1/1d7021ea-20cd-44aa-a055-c088e64fefbc/tour-garden-route-golden.jpg",
+   "title": "Knysna Heads at golden hour",
    "artist": "",
-   "license": "Public domain",
+   "license": "CC0",
    "source": ""
   }
  ],
  "tsitsikamma": [
   {
-   "src": "/__l5e/assets-v1/82143b07-f11a-40fa-bf18-17addbf81611/tour-tsitsikamma-2.jpg",
-   "title": "DSC_0086",
+   "src": "/__l5e/assets-v1/1d7021ea-20cd-44aa-a055-c088e64fefbc/tour-garden-route-golden.jpg",
+   "title": "Garden Route coastline at golden hour",
    "artist": "",
-   "license": "Public domain",
+   "license": "CC0",
    "source": ""
   }
  ],
  "camps-bay": [
   {
-   "src": "/__l5e/assets-v1/7ecec734-9250-4f4f-85f0-d4f4267cd574/tour-camps-bay-1.jpg",
-   "title": "24-CapTown-Camps Bay",
+   "src": "/__l5e/assets-v1/969da06f-671f-483e-814c-d8ba3d16db80/tour-camps-bay-sunset-golden.jpg",
+   "title": "Camps Bay and the Twelve Apostles at sunset",
    "artist": "",
    "license": "CC0",
    "source": ""
@@ -160,8 +125,8 @@
  ],
  "spice-market": [
   {
-   "src": "/__l5e/assets-v1/5441abfb-4d2f-45c5-94d6-15231e4c5c25/tour-spice-market-2.jpg",
-   "title": "Free mix curry spices market",
+   "src": "/__l5e/assets-v1/25078306-991f-4ea9-b701-7d759e2dda87/tour-cape-malay-food-golden.jpg",
+   "title": "Cape Malay spices and dishes",
    "artist": "",
    "license": "CC0",
    "source": ""
@@ -187,8 +152,8 @@
  ],
  "lions-head": [
   {
-   "src": "/__l5e/assets-v1/5fe00816-0a0a-41fa-8c1a-f6a8e0b4ad0f/tour-lions-head-2.jpg",
-   "title": "The morning view from lion's head",
+   "src": "/__l5e/assets-v1/3afdb227-709a-4ba5-b687-9d7bcb071f6e/tour-table-mountain-sunset-golden.jpg",
+   "title": "Table Mountain and Lion's Head at sunset",
    "artist": "",
    "license": "CC0",
    "source": ""
@@ -196,10 +161,37 @@
  ],
  "clifton-sunset": [
   {
-   "src": "/__l5e/assets-v1/a01bc764-9b03-4f2d-8f3d-34b24b60b12e/tour-table-mountain-1.jpg",
-   "title": "Table Mountain, Cape town",
+   "src": "/__l5e/assets-v1/969da06f-671f-483e-814c-d8ba3d16db80/tour-camps-bay-sunset-golden.jpg",
+   "title": "Atlantic Seaboard at sunset",
    "artist": "",
-   "license": "Public domain",
+   "license": "CC0",
+   "source": ""
+  }
+ ],
+ "hout-bay": [
+  {
+   "src": "/__l5e/assets-v1/c365fb78-5110-44c0-a807-c3d414c63824/tour-hout-bay-sunset.jpg",
+   "title": "Hout Bay harbour at sunset",
+   "artist": "",
+   "license": "CC0",
+   "source": ""
+  }
+ ],
+ "sabi-sand-leopard": [
+  {
+   "src": "/__l5e/assets-v1/e3ba4c64-a654-4480-a13a-088455a666de/tour-safari-leopard-golden.jpg",
+   "title": "Leopard at golden hour, Sabi Sand",
+   "artist": "",
+   "license": "CC0",
+   "source": ""
+  }
+ ],
+ "cape-malay-food": [
+  {
+   "src": "/__l5e/assets-v1/25078306-991f-4ea9-b701-7d759e2dda87/tour-cape-malay-food-golden.jpg",
+   "title": "Cape Malay curry and samoosas",
+   "artist": "",
+   "license": "CC0",
    "source": ""
   }
  ]

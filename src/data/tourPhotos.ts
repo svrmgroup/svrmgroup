@@ -9,7 +9,7 @@ const lib = library as Record<string, Entry[]>;
 
 const byTour: Record<string, string[]> = {
   "bo-kaap-cooking-tour": ["bo-kaap", "cape-malay-food"],
-  "cape-peninsula": ["cape-point", "chapmans-peak", "boulders-penguins"],
+  "cape-peninsula": ["hout-bay", "chapmans-peak", "cape-point", "boulders-penguins", "camps-bay"],
   safari: ["kruger-elephant", "sabi-sand-leopard", "lion-kruger", "madikwe"],
   hunting: ["plains-game", "karoo"],
   cultural: ["robben-island", "bo-kaap", "table-mountain"],
@@ -58,8 +58,8 @@ export function tourPackagePhotos(tour: TourCategory, pkg: TourPackage): TourPho
     seen.add(e.src);
     out.push({ src: e.src, fullSrc: e.src, alt: `${pkg.title} — illustrative photograph: ${nice(e.title)}`, artist: e.artist, license: e.license, source: e.source });
   }
-  // Lead with SVRM's own polished tour/package imagery, then the real credit-free photos.
+  // Open with the best scenic photo, then SVRM's own tour/package imagery, then the rest.
   const lead = [pkg.image, tour.image].filter((src): src is string => !!src && !seen.has(src));
-  lead.reverse().forEach((src) => { seen.add(src); out.unshift({ src, fullSrc: src, alt: `${pkg.title} — ${tour.label}, Cape Town`, artist: "SVRM Group", license: "SVRM Group", source: "" }); });
+  lead.reverse().forEach((src) => { seen.add(src); out.splice(Math.min(1, out.length), 0, { src, fullSrc: src, alt: `${pkg.title} — ${tour.label}, Cape Town`, artist: "SVRM Group", license: "SVRM Group", source: "" }); });
   return out.slice(0, 6);
 }
