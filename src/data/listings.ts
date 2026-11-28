@@ -188,6 +188,43 @@ const A_LA_ALTS = [
   "second bedroom",
 ];
 
+const AREA_NOTES: Record<string, string> = {
+  "Camps Bay": "Camps Bay puts you near its palm-lined beach, sunset restaurants and the Twelve Apostles",
+  "Clifton": "Clifton is known for its sheltered beaches and calm Atlantic Seaboard setting",
+  "Llandudno": "Llandudno is a quiet coastal village with one of the Cape's most scenic beaches",
+  "Sea Point": "Sea Point offers the seaside promenade, cafés and restaurants within easy reach",
+  "Mouille Point": "Mouille Point sits on the Atlantic promenade, close to the V&A Waterfront",
+  "Green Point": "Green Point is close to the stadium, the urban park and the Atlantic promenade",
+  "V&A Waterfront": "The V&A Waterfront puts shopping, dining and harbour views on your doorstep",
+  "City Centre": "The City Centre keeps galleries, restaurants and Table Mountain close by",
+  "De Waterkant": "De Waterkant is a lively village quarter of cobbled streets and cafés",
+  "Higgovale": "Higgovale is a leafy residential pocket on the slopes of Table Mountain",
+};
+
+const seedOf = (str: string) => { let h = 2166136261; for (const c of str) h = Math.imul(h ^ c.charCodeAt(0), 16777619); return h >>> 0; };
+
+/** Picks a varied, stable set of fact-based questions per stay (same slug → same questions, so search data stays consistent). */
+function stayFaqPicks(s: Stay, o: { kind: string; maxGuests: string; amenities: string[]; bedroomsN?: number; guestsN?: number }): Faq[] {
+  const area = AREA_NOTES[s.area] ?? `${s.area} is one of Cape Town's sought-after neighbourhoods`;
+  const amen = o.amenities.length ? o.amenities.join(", ").toLowerCase() : "";
+  const beds = o.bedroomsN ?? 1; const guests = o.guestsN ?? 2;
+  const pool: Faq[] = [
+    { q: `Why do people stay at ${s.name}?`, a: `${s.blurb} ${area}, and SVRM can add a private chauffeur and concierge for the whole stay.` },
+    { q: `Is ${s.name} good for couples?`, a: beds <= 2 ? `Yes — with ${beds} bedroom${beds === 1 ? "" : "s"} it suits couples looking for a private Cape Town base. We can add romantic dinners, sunset drives or a spa day.` : `It can be, though with ${beds} bedrooms it is best suited to families or groups. For a couple, ask us about a smaller stay nearby.` },
+    { q: `Is ${s.name} suitable for families or groups?`, a: guests >= 6 ? `Yes — it sleeps ${o.maxGuests} across ${beds} bedrooms, so it works well for families and groups travelling together.` : `It sleeps ${o.maxGuests}, so it suits smaller parties. For a bigger group we can suggest a larger villa or a second unit.` },
+    { q: `How many guests can this ${o.kind} accommodate?`, a: `${o.maxGuests}. Tell us the adults and children in your party and your concierge will confirm the right set-up.` },
+    { q: `What is the area around ${s.name} like?`, a: `${area}. Your chauffeur can take you anywhere else in the city or the Winelands.` },
+    { q: "Is there a minimum stay?", a: "Minimum stays depend on the season and dates — usually longer over December and New Year. We'll confirm with your quote." },
+    ...(amen ? [{ q: `What stands out about this ${o.kind}?`, a: `Highlights include ${amen}. Tell us anything else you need and we'll arrange it.` }] : []),
+    { q: `Is ${s.name} good for a work trip?`, a: `Yes — SVRM can arrange airport collection and a chauffeur on call for meetings, so you can work from ${s.area} without worrying about transport.` },
+    { q: "Can SVRM plan things to do during my stay?", a: "Yes — your concierge can book restaurants, private tours, wine farms, boat trips and experiences around your dates." },
+    { q: "Can SVRM arrange airport collection?", a: "Yes — a private chauffeur can meet you at Cape Town International and bring you straight to the door." },
+  ];
+  let h = seedOf(s.slug);
+  const shuffled = pool.map((f) => { h = Math.imul(h ^ (h >>> 15), 2246822507) >>> 0; return { f, k: h }; }).sort((a, b) => a.k - b.k).map((x) => x.f);
+  return shuffled.slice(0, 5);
+}
+
 export function stayListing(s: Stay): StayListing {
   const tokens = s.beds.split("·").map((x) => x.trim()).filter(Boolean);
   const bed = /(\d+)\s*bed/i.exec(s.beds)?.[1];
@@ -231,12 +268,8 @@ export function stayListing(s: Stay): StayListing {
         { q: "How many guests can À La Penthouse accommodate?", a: "The main two-bedroom penthouse accommodates a maximum of four guests. Additional luxury accommodation on the lower level can be arranged on request for a larger group; ask your concierge for availability and a separate quote." },
         { q: "Which services and private facilities are included?", a: "The official listing includes daily breakfast, housekeeping from Monday to Saturday, concierge assistance, high-speed Wi-Fi, a private terrace with an outdoor jacuzzi, a private sauna and private lift access." },
         { q: "Is there a minimum stay?", a: "The official listing states a seven-night minimum stay. Your concierge will confirm the minimum and final rate for your requested dates." },
-      ] : [
-        { q: `How many guests can this ${kind} accommodate?`, a: facts ? `${maxGuests}. Tell us the adults and children in your party so your concierge can confirm the right configuration.` : `${CONFIRM} the maximum occupancy for your dates.` },
-        { q: "Is there a minimum stay?", a: "Minimum stays depend on the season and dates — usually longer over December and New Year. We'll confirm with your quote." },
-      ]),
-      { q: `Which amenities belong to this ${kind}?`, a: amenities.length ? `Listed for this ${kind}: ${amenities.join(", ")}. ${CONFIRM} anything else you need.` : `${CONFIRM} the full amenity list for your dates.` },
-      { q: "Can SVRM arrange airport collection?", a: "Yes — a private chauffeur can meet you at Cape Town International and bring you straight to the door." },
+        { q: "Is À La Penthouse good for couples?", a: "Yes — a private top-floor home with a terrace jacuzzi, sauna and sea views suits couples and honeymooners. We can add dinners, sunset drives or a spa day." },
+      ] : stayFaqPicks(s, { kind, maxGuests, amenities, bedroomsN: facts?.bedrooms, guestsN: facts?.maxGuests })),
     ],
     related: [
       { label: "Chauffeur airport transfer", to: "/airport-transfers" },
