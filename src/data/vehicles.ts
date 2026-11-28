@@ -54,7 +54,7 @@ export interface Vehicle {
 export const vehicles: Vehicle[] = [
   // Signature — flagship first
   { slug: "rolls-royce-phantom", name: "Rolls-Royce Phantom", tagline: PHANTOM_DESCRIPTION, fromZAR: 40000, image: phantom.url, tier: "Signature", selfDrive: false, gallery: [{ src: phantom.url, fullSrc: phantom.url, alt: "Current exterior photo" }, { src: phantomExtra.url, fullSrc: phantomExtra.url, alt: "Cream leather cabin with coach doors open" }] },
-  { slug: "mercedes-maybach-s-class", name: "Mercedes-Maybach S-Class", tagline: "Understated elegance, executive rear seating and a private chauffeur on your schedule.", fromZAR: 22000, image: maybach.url, tier: "Signature", selfDrive: false },
+  { slug: "mercedes-maybach-s-class", name: "Mercedes-Maybach S-Class", tagline: "Quiet luxury, generous rear-seat comfort and time to unwind — arrive refreshed with your private chauffeur.", fromZAR: 22000, image: maybach.url, tier: "Signature", selfDrive: false },
   { slug: "maybach-v-class", name: "Maybach V-Class", tagline: "Your private lounge across Cape Town — unwind in reclining massage seats, enjoy onboard TV and travel in quilted-leather comfort with your own chauffeur.", fromZAR: 20000, image: maybachVExterior.url, tier: "Signature", selfDrive: false,
     gallery: [
       { src: maybachVExterior.url, fullSrc: maybachVExterior4k.url, alt: "Two-tone exterior with SVRM number plate" },

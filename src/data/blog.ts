@@ -21,6 +21,7 @@ import capePeninsulaImg from "@/assets/tours/cape-peninsula.jpg";
 import wineImg from "@/assets/svc-exp-wine.jpg";
 import maybachVExterior from "@/assets/vehicles/maybach-vclass-exterior.webp.asset.json";
 import maybachVEntertainment from "@/assets/vehicles/maybach-vclass-entertainment.webp.asset.json";
+import { MAYBACH_DESCRIPTION } from "@/seo/vehicleServices";
 
 
 export type BlogCategory = "Travel" | "Tours" | "Lifestyle" | "Properties" | "Insights";
@@ -598,22 +599,22 @@ export const posts: BlogPost[] = [
     slug: "mercedes-maybach-s-class-chauffeur-cape-town",
     publishedISO: "2026-08-01",
     seoTitle: "Maybach S-Class Chauffeur Service in Cape Town | SVRM",
-    seoDescription: "Mercedes-Maybach S-Class private chauffeur hire in Cape Town: executive rear comfort for airport transfers, business travel, weddings and multi-day stays.",
+    seoDescription: "Quiet luxury and generous rear-seat comfort in the Mercedes-Maybach S-Class. Unwind with your private SVRM chauffeur in Cape Town and arrive refreshed.",
     seoKeywords: "Mercedes-Maybach S-Class Cape Town, Maybach chauffeur Cape Town, luxury chauffeur Cape Town, executive chauffeur South Africa, VIP chauffeur Cape Town, Maybach hire Cape Town, private chauffeur service Cape Town",
     title: "Mercedes-Maybach S-Class chauffeur service in Cape Town",
     excerpt:
-      "Understated elegance, executive rear comfort and a private chauffeur — a Signature choice for Cape Town arrivals, occasions and longer stays.",
+      "Leave the world outside, unwind in quiet rear-seat comfort and arrive refreshed — the Mercedes-Maybach S-Class with your private SVRM chauffeur.",
     category: "Travel",
     date: "August 2026",
     image: maybachImg,
     readTime: "7 min read",
     intro:
-      "The Mercedes-Maybach S-Class brings understated elegance to every journey: a calm cabin, executive rear seating and a private chauffeur attentive to your schedule. From Cape Town airport arrivals and business meetings to weddings, Peninsula days and multi-day stays, travel with space to unwind and every detail quietly handled. It remains a Signature choice alongside SVRM's flagship Rolls-Royce Phantom.",
+      `${MAYBACH_DESCRIPTION} It remains a Signature choice alongside SVRM's flagship Rolls-Royce Phantom.`,
     sections: [
       {
         heading: "Why the Maybach and not simply an S-Class",
         body:
-          "The Mercedes-Maybach S-Class is chosen for the experience in the rear: executive seating, a calm atmosphere and room to settle into the journey. Whether you are arriving after a long-haul flight, heading to a meeting or spending a day along the Cape coast, the emphasis is on comfort and discretion. Share your preferences before booking so we can confirm the details for your chosen vehicle.",
+          "The pleasure of the Mercedes-Maybach S-Class begins in the rear seat: room to settle in, a quiet cabin and the feeling of having nowhere else to be. After a long-haul flight or between special moments in the Cape, it offers space to exhale and enjoy the journey. Share your preferences before booking so we can confirm the details for your chosen vehicle.",
       },
       {
         heading: "Who we put in it",
@@ -653,7 +654,7 @@ export const posts: BlogPost[] = [
       {
         heading: "Vehicle classes",
         body:
-          "The Rolls-Royce Phantom is SVRM's flagship chauffeur vehicle. The Mercedes-Maybach S-Class remains a Signature choice for understated elegance and executive rear comfort. The S-Class and E-Class cover executive work; the V-Class and Staria handle families and small groups with luggage; the BMW X5 and Cayenne suit longer road days. For convoys and security work we offer G63s and armoured 7 Series.",
+          "The Rolls-Royce Phantom is SVRM's flagship chauffeur vehicle. The Mercedes-Maybach S-Class remains a Signature choice for quiet luxury, generous rear-seat comfort and arriving refreshed. The S-Class and E-Class cover executive work; the V-Class and Staria handle families and small groups with luggage; the BMW X5 and Cayenne suit longer road days. For convoys and security work we offer G63s and armoured 7 Series.",
       },
       {
         heading: "Hourly, daily and transfer rates",

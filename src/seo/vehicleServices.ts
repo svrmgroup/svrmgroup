@@ -1,6 +1,6 @@
 export const CHAUFFEUR_DESCRIPTION = "Cape Town private chauffeurs: Maybach, Rolls-Royce, Mercedes, Range Rover and BMW. Airport transfers, Cape Peninsula tours, full-day and multi-day hire.";
 export const FLAGSHIP_SLUG = "rolls-royce-phantom";
-export const MAYBACH_DESCRIPTION = "The Mercedes-Maybach S-Class brings understated elegance to every journey: a calm cabin, executive rear seating and a private chauffeur attentive to your schedule. From Cape Town airport arrivals and business meetings to weddings, Peninsula days and multi-day stays, travel with space to unwind and every detail quietly handled.";
+export const MAYBACH_DESCRIPTION = "Step into the Mercedes-Maybach S-Class and leave the world outside. Sink into generous rear-seat comfort, settle into the quiet of the cabin and let Cape Town unfold beyond your window. With your private SVRM chauffeur at the wheel, every journey becomes a moment to unwind — arriving refreshed, composed and ready for whatever awaits.";
 export const PHANTOM_DESCRIPTION = "SVRM's flagship chauffeur experience: the Rolls-Royce Phantom combines commanding presence with an unhurried, private journey. A dedicated chauffeur takes care of Cape Town airport arrivals, special occasions, full-day itineraries and multi-day stays.";
 
 const vehicleUses = {
