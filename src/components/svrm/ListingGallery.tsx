@@ -29,7 +29,7 @@ const ListingGallery = ({ photos, name }: { photos: Photo[]; name: string }) => 
         <CarouselContent className="ml-0">
           {photos.map((p, i) => (
             <CarouselItem key={p.src} className="pl-0">
-              <SmartImage src={p.src} alt={p.alt} wrapperClassName="aspect-[16/10] md:aspect-[16/9]" className="absolute inset-0 w-full h-full object-cover" sizes="(min-width: 1024px) 66vw, 100vw" priority={i === 0} loading={i === 0 ? "eager" : "lazy"} />
+              <SmartImage src={p.src} alt={p.alt} wrapperClassName={`aspect-[16/10] md:aspect-[16/9] ${p.fit === "contain" ? "bg-surface-deep" : ""}`} className={`absolute inset-0 w-full h-full ${p.fit === "contain" ? "object-contain" : "object-cover"}`} sizes="(min-width: 1024px) 66vw, 100vw" priority={i === 0} loading={i === 0 ? "eager" : "lazy"} />
               {p.caption && <p className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-background/85 px-3 py-1 text-xs text-foreground">{p.caption}</p>}
             </CarouselItem>
           ))}

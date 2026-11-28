@@ -14,7 +14,8 @@ export const CONFIRM = "Your concierge will confirm";
 
 export interface Faq { q: string; a: string }
 export interface RelatedLink { label: string; to: string }
-export interface Photo { src: string; fullSrc: string; alt: string; caption?: string }
+/** `fit: "contain"` shows the whole photo uncropped (used for vehicle shots). */
+export interface Photo { src: string; fullSrc: string; alt: string; caption?: string; fit?: "contain" }
 
 /* ------------------------------ Vehicles ------------------------------ */
 

@@ -3,7 +3,7 @@ import { tourPackagePhotoKey } from "./tourPackages";
 import library from "./tourPhotoLibrary.json";
 
 /** A real, credited photograph (Wikimedia Commons) used to illustrate a tour package. */
-export interface TourPhoto { src: string; fullSrc: string; alt: string; artist: string; license: string; source: string }
+export interface TourPhoto { src: string; fullSrc: string; fit?: "contain"; alt: string; artist: string; license: string; source: string }
 type Entry = { src: string; title: string; artist: string; license: string; source: string };
 const lib = library as Record<string, Entry[]>;
 
@@ -43,6 +43,7 @@ const byPackage: Record<string, string[]> = {
   "aquila-sunset-safari": ["karoo", "aquila"],
   "aquila-big-five-safari-midday": ["rhino", "aquila"],
 };
+const VEHICLE_SHOT = /suv|maybach|vclass|v-class|sprinter|vehicle|fleet/i;
 const NO_CREDIT = /public domain|cc0|^pd/i;
 const nice = (title: string) => title.replace(/^File:/, "").replace(/\.[a-z]+$/i, "").replace(/[_-]+/g, " ").trim();
 
@@ -58,6 +59,8 @@ export function tourPackagePhotos(tour: TourCategory, pkg: TourPackage): TourPho
     out.push({ src: e.src, fullSrc: e.src, alt: `${pkg.title} — illustrative photograph: ${nice(e.title)}`, artist: e.artist, license: e.license, source: e.source });
   }
   const own = pkg.image ?? tour.image;
+  // Existing SVRM vehicle photos are shown whole (uncropped) alongside the real tour photos.
+  if (pkg.image && VEHICLE_SHOT.test(pkg.image)) out.unshift({ src: pkg.image, fullSrc: pkg.image, fit: "contain", alt: `${pkg.title} — SVRM chauffeur vehicle, Cape Town`, artist: "SVRM Group", license: "SVRM Group", source: "" });
   if (!out.length && own) out.push({ src: own, fullSrc: own, alt: `${pkg.title} — ${tour.label}, Cape Town`, artist: "SVRM Group", license: "SVRM Group", source: "" });
   return out.slice(0, 5);
 }

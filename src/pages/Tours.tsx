@@ -5,7 +5,6 @@ import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
 import PageHero from "@/components/svrm/PageHero";
 import { tours } from "@/data/tours";
-import { tourPackagePath } from "@/data/tourPackages";
 import { Wand2 } from "lucide-react";
 import { Seo } from "@/components/Seo";
 import heroVideo from "@/assets/videos/tours.mp4.asset.json";
@@ -31,13 +30,13 @@ const Tours = () => (
           and marine excursions to see whales, sharks and the Boulders Beach penguins. All private, all
           chauffeured, all booked through one number.
         </p>
-        <div className="grid grid-cols-1 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
         {tours.map((t) => (
-          <div key={t.slug} className="grid gap-4 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
           <Link
+            key={t.slug}
             to={`/tours/${t.slug}`}
-            className="group relative block overflow-hidden aspect-[4/3] lg:self-start"
+            className="group relative block overflow-hidden aspect-[4/3]"
           >
             <SmartImage
               src={t.image}
@@ -55,27 +54,6 @@ const Tours = () => (
               </span>
             </div>
           </Link>
-          <ul aria-label={`${t.label} packages`} className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3 content-start">
-            {t.packages.map((p) => (
-              <li key={p.title}>
-                <Link to={tourPackagePath(t, p)} className="group flex h-full flex-col overflow-hidden border border-border/50 hover:border-primary/60 transition-colors">
-                  {p.image && (
-                    <SmartImage src={p.image} alt={`${p.title} — ${t.label}`} wrapperClassName="relative aspect-[3/2] w-full" className="absolute inset-0 h-full w-full object-cover" />
-                  )}
-                  <div className="flex flex-1 flex-col p-4">
-                    <p className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground">{p.duration}</p>
-                    <h3 className="font-serif text-lg mt-1 text-foreground">{p.title}</h3>
-                    <p className="mt-2 text-sm text-gold">{p.fromZAR ? `From R${p.fromZAR.toLocaleString("en-ZA")}${p.unit ? ` · ${p.unit}` : ""}` : "On enquiry"}</p>
-                    <ul className="mt-2 space-y-1 text-xs text-muted-foreground">
-                      {p.inclusions.slice(0, 3).map((i) => <li key={i}>· {i}</li>)}
-                    </ul>
-                    <span className="mt-auto pt-3 text-[11px] uppercase tracking-[0.24em] text-gold">View package →</span>
-                  </div>
-                </Link>
-              </li>
-            ))}
-          </ul>
-          </div>
         ))}
 
         <Link
