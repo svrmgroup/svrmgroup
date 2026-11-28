@@ -1,20 +1,206 @@
 {
- "franschhoek": [
+ "bo-kaap": [
   {
-   "src": "/__l5e/assets-v1/6ccdfcf3-dcc7-4593-be71-641135ec2248/franschhoek-2.jpg",
-   "title": "File:Franschhoek Valley.jpg",
-   "artist": "User:Da_Legend",
+   "src": "/__l5e/assets-v1/603efee7-f0ac-4bb8-8245-334bf818a9cd/tour-bo-kaap-1.jpg",
+   "title": "65A Chiappini Street, Bo-Kaap (01)",
+   "artist": "",
+   "license": "CC0",
+   "source": ""
+  },
+  {
+   "src": "/__l5e/assets-v1/e592f8c5-eb24-4a81-992f-e9bad8457132/tour-bo-kaap-2.jpg",
+   "title": "Little Walk to Bo-Kaap",
+   "artist": "",
+   "license": "CC0",
+   "source": ""
+  }
+ ],
+ "cape-point": [
+  {
+   "src": "/__l5e/assets-v1/00c82d96-84ff-4b76-be86-128038f8ccd9/tour-chapmans-peak-2.jpg",
+   "title": "File:Peninsula Granite Fynbos - Chapmans Peak Cape Town.JPG",
+   "artist": "",
+   "license": "CC0",
+   "source": ""
+  },
+  {
+   "src": "/__l5e/assets-v1/fdef6564-096c-4a50-a852-802e6d6fc4f5/tour-chapmans-peak-1.jpg",
+   "title": "Chapmans Peak",
+   "artist": "",
+   "license": "CC0",
+   "source": ""
+  }
+ ],
+ "chapmans-peak": [
+  {
+   "src": "/__l5e/assets-v1/00c82d96-84ff-4b76-be86-128038f8ccd9/tour-chapmans-peak-2.jpg",
+   "title": "File:Peninsula Granite Fynbos - Chapmans Peak Cape Town.JPG",
+   "artist": "",
+   "license": "CC0",
+   "source": ""
+  },
+  {
+   "src": "/__l5e/assets-v1/fdef6564-096c-4a50-a852-802e6d6fc4f5/tour-chapmans-peak-1.jpg",
+   "title": "Chapmans Peak",
+   "artist": "",
+   "license": "CC0",
+   "source": ""
+  }
+ ],
+ "kruger-elephant": [
+  {
+   "src": "/__l5e/assets-v1/22ca5860-0a00-4562-a2c7-01005c285f10/tour-kruger-elephant-1.jpg",
+   "title": "Classic",
+   "artist": "",
    "license": "Public domain",
-   "source": "https://commons.wikimedia.org/wiki/File:Franschhoek_Valley.jpg"
+   "source": ""
+  },
+  {
+   "src": "/__l5e/assets-v1/53b52a77-7949-4b13-b45e-a99341a6eeaa/tour-kruger-elephant-2.jpg",
+   "title": "An Elephant at Kruger National Park",
+   "artist": "",
+   "license": "CC0",
+   "source": ""
+  }
+ ],
+ "madikwe": [
+  {
+   "src": "/__l5e/assets-v1/2869f986-2c92-4e3f-99e4-cf67e98ba1f8/tour-madikwe-1.jpg",
+   "title": "Madikwe Game Reserve, Madikwe, South",
+   "artist": "",
+   "license": "CC0",
+   "source": ""
+  }
+ ],
+ "lion-kruger": [
+  {
+   "src": "/__l5e/assets-v1/9524ba4b-24fd-4be9-ac69-b82a76e57d3a/tour-lion-kruger-1.jpg",
+   "title": "African lion, Kruger subspecies (Panterha leo krugeri)",
+   "artist": "",
+   "license": "CC0",
+   "source": ""
+  }
+ ],
+ "table-mountain": [
+  {
+   "src": "/__l5e/assets-v1/a01bc764-9b03-4f2d-8f3d-34b24b60b12e/tour-table-mountain-1.jpg",
+   "title": "Table Mountain, Cape town",
+   "artist": "",
+   "license": "Public domain",
+   "source": ""
+  },
+  {
+   "src": "/__l5e/assets-v1/8b6d1074-a195-4fd8-8446-4d7d1b6e79e7/tour-table-mountain-2.jpg",
+   "title": "Table Mountain, Cape Town, South",
+   "artist": "",
+   "license": "CC0",
+   "source": ""
+  }
+ ],
+ "boulders-penguins": [
+  {
+   "src": "/__l5e/assets-v1/1976a254-c5d4-4e92-b38c-f189c974ba6b/tour-boulders-penguins-1.jpg",
+   "title": "2023, Boulders Beach, Penguin, South-Africa#5334.jpg",
+   "artist": "",
+   "license": "CC0",
+   "source": ""
+  }
+ ],
+ "hermanus-whale": [
+  {
+   "src": "/__l5e/assets-v1/f0c07fd0-8a08-450e-bcac-8ebb6465a373/tour-cape-point-2.jpg",
+   "title": "Northern Right Whale mother and calf pair off of the South Beach Road area headed around Cape Point",
+   "artist": "",
+   "license": "Public domain",
+   "source": ""
+  },
+  {
+   "src": "/__l5e/assets-v1/e823bad6-39f0-4f3f-a2cb-e0e3a91952e3/tour-hermanus-whale-1.jpg",
+   "title": "Danger Point Light House",
+   "artist": "",
+   "license": "CC0",
+   "source": ""
+  }
+ ],
+ "knysna": [
+  {
+   "src": "/__l5e/assets-v1/05477864-d7da-420c-8a29-f298a15d0a1d/tour-knysna-2.jpg",
+   "title": "Diep walle Knysna",
+   "artist": "",
+   "license": "Public domain",
+   "source": ""
+  }
+ ],
+ "tsitsikamma": [
+  {
+   "src": "/__l5e/assets-v1/82143b07-f11a-40fa-bf18-17addbf81611/tour-tsitsikamma-2.jpg",
+   "title": "DSC_0086",
+   "artist": "",
+   "license": "Public domain",
+   "source": ""
+  }
+ ],
+ "camps-bay": [
+  {
+   "src": "/__l5e/assets-v1/7ecec734-9250-4f4f-85f0-d4f4267cd574/tour-camps-bay-1.jpg",
+   "title": "24-CapTown-Camps Bay",
+   "artist": "",
+   "license": "CC0",
+   "source": ""
+  }
+ ],
+ "paragliding": [
+  {
+   "src": "/__l5e/assets-v1/54503268-7fac-4a6d-93a8-70d7ff62eef2/tour-camps-bay-2.jpg",
+   "title": "14-Camps Bay-Signal Hill-Hout Bay",
+   "artist": "",
+   "license": "CC0",
+   "source": ""
+  }
+ ],
+ "spice-market": [
+  {
+   "src": "/__l5e/assets-v1/5441abfb-4d2f-45c5-94d6-15231e4c5c25/tour-spice-market-2.jpg",
+   "title": "Free mix curry spices market",
+   "artist": "",
+   "license": "CC0",
+   "source": ""
+  }
+ ],
+ "karoo": [
+  {
+   "src": "/__l5e/assets-v1/f0bc3fed-c3b8-441e-979c-16294e190161/tour-karoo-1.jpg",
+   "title": "karoo landscape",
+   "artist": "",
+   "license": "CC0",
+   "source": ""
+  }
+ ],
+ "sunset-dinner": [
+  {
+   "src": "/__l5e/assets-v1/edfcc624-bea9-429d-883d-b946c1bfd484/tour-sunset-dinner-1.jpg",
+   "title": "Beautiful Dinner Setting",
+   "artist": "",
+   "license": "CC0",
+   "source": ""
+  }
+ ],
+ "lions-head": [
+  {
+   "src": "/__l5e/assets-v1/5fe00816-0a0a-41fa-8c1a-f6a8e0b4ad0f/tour-lions-head-2.jpg",
+   "title": "The morning view from lion's head",
+   "artist": "",
+   "license": "CC0",
+   "source": ""
   }
  ],
  "clifton-sunset": [
   {
-   "src": "/__l5e/assets-v1/adf13bf6-36fb-48ce-a07b-626df0701a0b/clifton-sunset-2.jpg",
-   "title": "File:Sunset in Clifton Beach (2669952400).jpg",
-   "artist": "cogdogblog",
-   "license": "CC0",
-   "source": "https://commons.wikimedia.org/wiki/File:Sunset_in_Clifton_Beach_(2669952400).jpg"
+   "src": "/__l5e/assets-v1/a01bc764-9b03-4f2d-8f3d-34b24b60b12e/tour-table-mountain-1.jpg",
+   "title": "Table Mountain, Cape town",
+   "artist": "",
+   "license": "Public domain",
+   "source": ""
   }
  ]
 }
