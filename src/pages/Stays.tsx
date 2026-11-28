@@ -23,7 +23,6 @@ import PropertyManagementSection from "@/components/svrm/PropertyManagementSecti
 
 const SUB_TYPES: StayType[] = ["villa", "apartment", "hotel"];
 type TopMode = "short" | "long" | "manage" | "buysell";
-type SortMode = "popular" | "asc" | "desc";
 
 const staysFaqs = [
   { q: "Do you manage luxury properties in Cape Town?", a: "SVRM Group coordinates property management across Cape Town, with maintenance, housekeeping and guest arrangements tailored to your home. Request a private proposal covering responsibilities, letting arrangements and owner reporting. Income depends on the agreed terms and occupancy rather than being guaranteed.", link: { to: "/stays?cat=manage", label: "property management" } },
@@ -35,7 +34,6 @@ const Stays = () => {
   const [params] = useSearchParams();
   const [mode, setMode] = useState<TopMode>("short");
   const [sub, setSub] = useState<StayType>("villa");
-  const [sort, setSort] = useState<SortMode>("popular");
 
   useEffect(() => {
     const cat = params.get("cat");
@@ -136,30 +134,12 @@ const Stays = () => {
                       </TabsTrigger>
                     ))}
                   </TabsList>
-                  <div className="flex items-center gap-3">
-                    <label htmlFor="stay-sort" className="text-[10px] uppercase tracking-[0.22em] text-muted-foreground/80">Sort</label>
-                    <select
-                      id="stay-sort"
-                      value={sort}
-                      onChange={(e) => setSort(e.target.value as SortMode)}
-                      className="bg-surface-raised border border-border/60 text-xs uppercase tracking-[0.18em] px-3 py-2 text-foreground focus:outline-none focus:border-primary"
-                    >
-                      <option value="popular">Popular</option>
-                      <option value="asc">Price: Low to High</option>
-                      <option value="desc">Price: High to Low</option>
-                    </select>
-                  </div>
+                  <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground/80">Date-specific rates confirmed on enquiry</p>
                 </div>
 
                 {SUB_TYPES.map((t) => {
                   const list = stays.filter((s) => s.type === t);
-                  const byPrice =
-                    sort === "asc"
-                      ? [...list].sort((a, b) => a.fromZAR - b.fromZAR)
-                      : sort === "desc"
-                        ? [...list].sort((a, b) => b.fromZAR - a.fromZAR)
-                        : list;
-                  const sorted = [...byPrice].sort((a, b) => Number(b.featured) - Number(a.featured));
+                  const sorted = [...list].sort((a, b) => Number(b.featured) - Number(a.featured));
                   return (
                     <TabsContent key={t} value={t} className="mt-0">
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">

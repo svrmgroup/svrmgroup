@@ -10,6 +10,7 @@ import { findStay, stayListing, stayUrlSlug, SITE_URL } from "@/data/listings";
 import { useListingPhotos } from "@/hooks/useListingPhotos";
 import { useCurrency } from "@/lib/currency";
 import type { Stay } from "@/data/stays";
+import { stayHasPublicRate } from "@/data/stayFacts";
 
 const StayDetailInner = ({ stay }: { stay: Stay }) => {
   const l = stayListing(stay);
@@ -18,8 +19,8 @@ const StayDetailInner = ({ stay }: { stay: Stay }) => {
   const enquiry = { id: `stay:${stay.slug}`, name: l.name, kind: "stay", url: l.url, path: l.path } as const;
   useListingPage(enquiry, "stay");
   const crumbs = [{ label: "Home", to: "/" }, { label: "Stays", to: "/stays" }, { label: l.name, to: l.path }];
-  const showPrice = stay.showPrice ?? stay.nox;
-  const price = showPrice ? `From ${format(stay.fromZAR)} / night` : "Request a quote";
+  const showPrice = stay.showPrice === true && stayHasPublicRate(stay.slug);
+  const price = showPrice ? `From ${format(stay.fromZAR)} / night` : "On enquiry";
   return (
     <main className="bg-background text-foreground min-h-screen pb-24 lg:pb-0">
       <Seo
@@ -62,9 +63,15 @@ const StayDetailInner = ({ stay }: { stay: Stay }) => {
               ["Bedrooms", l.bedrooms],
               ["Bathrooms", l.bathrooms],
               ["Maximum guests", l.maxGuests],
+              ["Pool", l.pool],
               ["Amenities", l.amenities.length ? l.amenities.join(" · ") : "Your concierge will confirm"],
               ["Price", price],
             ]} />
+            <div className="flex flex-wrap gap-x-5 gap-y-2 text-xs text-muted-foreground">
+              <a href={l.factsSource} target="_blank" rel="noopener noreferrer" className="hover:text-gold underline underline-offset-4">Property facts source ↗</a>
+              <a href={l.poolSource} target="_blank" rel="noopener noreferrer" className="hover:text-gold underline underline-offset-4">Pool source ↗</a>
+              <a href={l.rateSource} target="_blank" rel="noopener noreferrer" className="hover:text-gold underline underline-offset-4">Rate source ↗</a>
+            </div>
             <ListingFaqs faqs={l.faqs} title={`${l.name} — questions`} />
             <RelatedLinks links={l.related} />
           </div>

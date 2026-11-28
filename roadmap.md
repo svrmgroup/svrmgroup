@@ -1,3 +1,9 @@
+# Property pools, rates and complete tour packages
+- [ ] Verify pool availability and private/shared status for every published stay; Atlantic Villa is private, and unknowns must say so.
+- [ ] Research current public nightly rates for every hotel room, apartment and villa; retain sourced indicative rates and mark unavailable rates for enquiry.
+- [ ] Make every tour package individually clickable with a useful detail view, real/suitable photography and a specific description.
+- [ ] Test property facts, all package journeys, mobile/desktop layouts and enquiry handoffs; keep changes preview-only.
+
 # À La Penthouse and verified stay details
 - [x] Research À La Penthouse from real listings; add nine real photos, its permanent detail page and item-aware WhatsApp enquiry.
 - [x] Verify bathrooms and maximum guests for all 32 published stays from official or reliable property sources.

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { stays } from "./stays";
-import { guestLabel, stayFacts, stayFactSummary } from "./stayFacts";
+import { guestLabel, poolAnswer, stayFacts, stayFactSummary, stayHasPublicRate } from "./stayFacts";
 import { stayListing } from "./listings";
 
 describe("verified stay facts", () => {
@@ -52,5 +52,34 @@ describe("verified stay facts", () => {
 
   it("uses the official twenty-guest capacity for Buddha Retreat", () => {
     expect(stayFactSummary("nox-idyllic-camps-bay-villa-w-2-pools-buddha-retreat")).toBe("10 bed · 10 bath · 20 guests");
+  });
+
+  it("answers pool privacy on every property and marks the Atlantic Villa pool private", () => {
+    for (const stay of stays) {
+      const facts = stayFacts[stay.slug];
+      const listing = stayListing(stay);
+      expect(["private", "shared", "unknown"], stay.slug).toContain(facts.pool.status);
+      expect(facts.pool.source, stay.slug).toMatch(/^https:\/\//);
+      expect(listing.faqs[0].q, stay.slug).toBe("Is the pool private or shared?");
+      expect(listing.faqs[0].a, stay.slug).toBe(poolAnswer(facts));
+    }
+    const atlantic = stayFacts["camps-bay-5-bed-signature-villa"];
+    expect(atlantic.pool.status).toBe("private");
+    expect(poolAnswer(atlantic)).toContain("not a shared pool");
+  });
+
+  it("shows only the publicly supported penthouse rate and puts every other stay on enquiry", () => {
+    for (const stay of stays) {
+      const listing = stayListing(stay);
+      if (stay.slug === "a-la-penthouse") {
+        expect(stayHasPublicRate(stay.slug)).toBe(true);
+        expect(listing.priceLabel).toBe("From R26,200 / night");
+        expect(listing.priceNote).toContain("R26,200–R43,400");
+      } else {
+        expect(stayHasPublicRate(stay.slug), stay.slug).toBe(false);
+        expect(listing.priceLabel, stay.slug).toBe("On enquiry");
+        expect(listing.priceNote, stay.slug).not.toContain("often lower");
+      }
+    }
   });
 });

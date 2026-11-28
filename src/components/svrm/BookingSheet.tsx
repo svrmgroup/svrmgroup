@@ -255,7 +255,7 @@ const BookingSheet = ({
                 {estimate ? fmt(estimate) : "On request"}
               </p>
               <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground/70 mt-1">
-                {fmt(rateZAR)} {unitCopy[unit]}
+                {rateZAR > 0 ? `${fmt(rateZAR)} ${unitCopy[unit]}` : "Rate confirmed for your dates"}
               </p>
             </div>
             <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground/80 text-right max-w-[180px]">
@@ -263,7 +263,9 @@ const BookingSheet = ({
             </p>
           </div>
           <p className="text-[11px] leading-relaxed text-muted-foreground/80 -mt-1">
-            Rough guide only — not a final quote. Request the booking and we come back with a tailored figure that is often lower than the number shown here, based on your dates, party size and the finer details. Nothing is charged until you approve the final price in writing.
+            {rateZAR > 0
+              ? "This is a guide, not a final quote. Your tailored figure is confirmed for your dates, party size and requirements. Nothing is charged until you approve the final price in writing."
+              : "Your concierge will confirm availability and a tailored price for your dates. Nothing is charged until you approve the final price in writing."}
           </p>
 
 

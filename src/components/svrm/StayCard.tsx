@@ -8,11 +8,12 @@ import { stayPath } from "@/data/listings";
 import { useCurrency } from "@/lib/currency";
 import BookingSheet from "./BookingSheet";
 import SmartImage from "./SmartImage";
-import { stayFactSummary, stayFeatureSummary } from "@/data/stayFacts";
+import { poolLabel, stayFactSummary, stayFacts, stayFeatureSummary, stayHasPublicRate } from "@/data/stayFacts";
 
 const StayCard = ({ stay }: { stay: Stay; index?: number }) => {
   const { format } = useCurrency();
-  const showPrice = stay.showPrice ?? stay.nox;
+  const showPrice = stay.showPrice === true && stayHasPublicRate(stay.slug);
+  const facts = stayFacts[stay.slug];
   const [open, setOpen] = useState(false);
 
   const gallery = stayGalleries[stay.slug];
@@ -126,18 +127,19 @@ const StayCard = ({ stay }: { stay: Stay; index?: number }) => {
           {factsSummary}
         </p>
         {featureSummary && <p className="mt-1 text-[11px] uppercase tracking-[0.14em] text-muted-foreground/60">{featureSummary}</p>}
+        <p className="mt-2 text-[11px] uppercase tracking-[0.14em] text-foreground/75">Pool · {poolLabel(facts)}</p>
         <p className="text-sm text-muted-foreground mt-3 flex-1">{stay.blurb}</p>
         <Link to={stayPath(stay)} className="mt-4 text-[11px] uppercase tracking-[0.22em] text-gold hover:underline underline-offset-4">View details →</Link>
         <div className="mt-5 flex items-end justify-between gap-4">
           <div>
             <p className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground/70">
-              {showPrice ? "From / night · guide" : "Rates"}
+              {showPrice ? "Published from rate / night" : "Rates"}
             </p>
             <p className="font-serif text-xl text-gold">
-              {showPrice ? format(stay.fromZAR) : "On request"}
+              {showPrice ? format(stay.fromZAR) : "On enquiry"}
             </p>
             {showPrice && (
-              <p className="text-[10px] tracking-wide text-muted-foreground/60 mt-1">Rough guide — final quote often lower</p>
+              <p className="text-[10px] tracking-wide text-muted-foreground/60 mt-1">Final quote depends on your dates</p>
             )}
           </div>
 
@@ -157,7 +159,7 @@ const StayCard = ({ stay }: { stay: Stay; index?: number }) => {
         kind="stay"
         name={stay.name}
         subtitle={`${stay.area} · ${factsSummary}`}
-        rateZAR={stay.fromZAR}
+        rateZAR={showPrice ? stay.fromZAR : 0}
         unit="night"
         slug={stay.slug}
       />

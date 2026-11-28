@@ -43,7 +43,7 @@ export interface Stay {
   name: string;
   area: string;
   beds: string;
-  fromZAR: number; // indicative low-season nightly rate (ZAR)
+  fromZAR: number; // internal sorting/guide value; shown only when stayFacts confirms a published rate
   image: string;
   blurb: string;
   type: StayType;

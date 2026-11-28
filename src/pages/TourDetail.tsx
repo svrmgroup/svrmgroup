@@ -16,6 +16,8 @@ import ListingEnquiry from "@/components/svrm/ListingEnquiry";
 import { FactList, useListingPage } from "@/components/svrm/ListingSections";
 import { useListingPhotos } from "@/hooks/useListingPhotos";
 import type { TourCategory } from "@/data/tours";
+import { tourPackageDescription, tourPackagePath, tourPackageSlug } from "@/data/tourPackages";
+import { tourPackagePhotos } from "@/data/tourPhotos";
 
 const PENINSULA_FACTS: [string, string][] = [
   ["Typical duration", "Full day, about 8–10 hours"],
@@ -35,8 +37,8 @@ const PENINSULA_VEHICLES = [
 const TourEnquirySection = ({ tour }: { tour: TourCategory }) => {
   const path = `/tours/${tour.slug}`;
   const name = tour.slug === "cape-peninsula" ? "Cape Peninsula tour" : tour.label;
-  const fallback = [tour.image, ...tour.packages.map((p) => p.image)].filter((x, i, a): x is string => !!x && a.indexOf(x) === i)
-    .map((src, i) => ({ src, fullSrc: src, alt: `${tour.label} — photo ${i + 1}` }));
+  const fallback = tour.packages.flatMap((p) => tourPackagePhotos(tour, p))
+    .filter((photo, index, all) => all.findIndex((item) => item.src === photo.src) === index);
   const photos = useListingPhotos("tour", tour.slug, fallback, tour.label);
   const enquiry = { id: `tour:${tour.slug}`, name, kind: "tour", url: `https://svrm.group${path}`, path } as const;
   useListingPage(enquiry, "tour");
@@ -102,13 +104,13 @@ const TourDetail = () => {
   const offers = tour.packages.map((p) => ({
     "@type": "Offer",
     name: `${p.title} · ${p.duration}`,
-    url: tourUrl,
+    url: `${SITE}${tourPackagePath(tour, p)}`,
     priceCurrency: "ZAR",
     ...(typeof p.fromZAR === "number"
       ? { price: p.fromZAR, availability: "https://schema.org/InStock" }
       : { availability: "https://schema.org/PreOrder" }),
     category: p.duration,
-    description: p.inclusions.join(", "),
+    description: tourPackageDescription(tour, p),
     seller: provider,
   }));
 
@@ -130,7 +132,8 @@ const TourDetail = () => {
         "@type": "ListItem",
         position: i + 1,
         name: `${p.title} (${p.duration})`,
-        description: p.inclusions.join(", "),
+        description: tourPackageDescription(tour, p),
+        url: `${SITE}${tourPackagePath(tour, p)}`,
       })),
     },
     offers:
@@ -219,16 +222,16 @@ const TourDetail = () => {
                 fromZAR={p.fromZAR}
                 inclusions={p.inclusions}
                 unit={p.unit}
-                image={p.image}
+                image={tourPackagePhotos(tour, p)[0]?.src}
+                detailTo={tourPackagePath(tour, p)}
                 subject={`${tour.label} — ${p.duration} ${p.title}${datesSuffix}`}
-                slug={`${tour.slug}-${p.duration.toLowerCase().replace(/\s+/g, "-")}`}
+                slug={`${tour.slug}-${tourPackageSlug(p)}`}
               />
             ))}
           </div>
           <p className="text-center text-xs text-muted-foreground/60 mt-10 max-w-2xl mx-auto">
-            Every itinerary is personalised. Pricing is on request —{" "}
-            {tour.slug === "cape-peninsula" ? "per group of up to 4" : "per person"}, excluding
-            international flights.
+            Every itinerary is personalised. From rates are indicative guides; your final written quote confirms the price and inclusions.
+            International flights are excluded unless expressly listed.
           </p>
         </div>
       </section>
