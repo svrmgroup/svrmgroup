@@ -73,7 +73,7 @@ describe("verified stay facts", () => {
       const listing = stayListing(stay);
       if (stay.slug === "a-la-penthouse") {
         expect(stayHasPublicRate(stay.slug)).toBe(true);
-        expect(listing.priceLabel).toBe("From R25,000 per night");
+        expect(listing.priceLabel).toBe("From R42,000 per night");
         expect(listing.priceNote).toBe("Seasonal rates apply. Final pricing confirmed for your dates.");
       } else {
         expect(stayHasPublicRate(stay.slug), stay.slug).toBe(false);

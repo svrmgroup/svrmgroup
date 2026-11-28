@@ -350,7 +350,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
  {
   "path": "/stays/a-la-penthouse",
   "title": "À La Penthouse | Luxury Stay Cape Town — SVRM",
-  "description": "À La Penthouse in Camps Bay, Cape Town. 2 bedrooms, 2 bathrooms; 4 guests. From R25,000 per night. Check availability on WhatsApp.",
+  "description": "À La Penthouse in Camps Bay, Cape Town. 2 bedrooms, 2 bathrooms; 4 guests. From R42,000 per night. Check availability on WhatsApp.",
   "heading": "À La Penthouse",
   "summary": "A 240 m² top-floor Camps Bay residence for four guests, with two bedrooms, two bathrooms, a 55 m² private terrace, outdoor jacuzzi, private sauna and lift, panoramic sea and mountain views, daily breakfast and housekeeping from Monday to Saturday. Bedrooms: 2 bedrooms. Bathrooms: 2 bathrooms. Maximum guests: 4 guests. Pool: Not publicly confirmed. A private outdoor Jacuzzi is confirmed; swimming-pool access is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. The residence combines the privacy of a top-floor home with hotel-style service. Designer interiors, generous lounges, a private lift and panoramic views across the Atlantic, Lion's Head, Table Mountain and the Twelve Apostles make it as suited to a quiet retreat as to a special celebration or photo shoot.",
   "image": "https://svrm.group/__l5e/assets-v1/465d811c-c876-4da5-9029-96be0d1fd7bc/a-la-penthouse-01-hero.jpg"
