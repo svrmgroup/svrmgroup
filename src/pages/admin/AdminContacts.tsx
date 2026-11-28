@@ -98,7 +98,11 @@ const AdminContacts = () => {
       (r.notes || "").replace(/\n/g, " "),
     ]);
     const csv = [headers, ...lines]
-      .map((l) => l.map((c) => `"${String(c).replace(/"/g, '""')}"`).join(","))
+      .map((l) => l.map((c) => {
+        let v = String(c ?? "");
+        if (/^[=+\-@\t\r]/.test(v)) v = "'" + v;
+        return `"${v.replace(/"/g, '""')}"`;
+      }).join(","))
       .join("\n");
     const blob = new Blob([csv], { type: "text/csv" });
     const url = URL.createObjectURL(blob);
