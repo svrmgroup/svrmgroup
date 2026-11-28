@@ -37,6 +37,8 @@ type Offer = {
   image: string;
   /** Show the gold "Special Offer" badge and ribbon treatment. */
   special?: boolean;
+  /** Gold border with a soft glow, like the featured villa card. */
+  glow?: boolean;
 };
 
 const offers: Offer[] = [
@@ -45,6 +47,7 @@ const offers: Offer[] = [
     detail: PHANTOM_DESCRIPTION, priceZAR: 40000, priceSuffix: "/ day",
     cta: "Request Phantom", to: "/chauffeur?cat=cars&vehicle=rolls-royce-phantom#rolls-royce-phantom",
     image: vehicles.find(v => v.slug === "rolls-royce-phantom")?.image ?? maybach,
+    glow: true,
   },
   {
     eyebrow: "Signature · Chauffeur",
@@ -138,6 +141,7 @@ const Offers = () => {
     to: c.cta_href || "/contact",
     image: resolveImage(c.image_url, staticImageBySlug[c.slug] ?? villa) ?? villa,
     special: /special/i.test(c.eyebrow || ""),
+    glow: /flagship/i.test(c.eyebrow || ""),
   }));
   const base = cmsMapped.length > 0 ? cmsMapped : offers;
   const withVilla = base.some((o) => o.title === featuredVilla.title)
@@ -200,7 +204,7 @@ const Offers = () => {
                 <Link
                   to={o.to}
                   className={`group relative block h-full bg-background overflow-hidden transition-colors ${
-                    o.special
+                    o.special || o.glow
                       ? "border-2 border-primary/80 shadow-[0_0_0_1px_hsl(var(--primary)/0.15),0_20px_60px_-20px_hsl(var(--primary)/0.4)]"
                       : "border border-border/60 hover:border-primary/60"
                   }`}
@@ -220,7 +224,7 @@ const Offers = () => {
                       wrapperClassName="absolute inset-0 w-full h-full"
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute top-4 left-4 bg-background/90 backdrop-blur px-3 py-1.5 text-[10px] tracking-[0.15em] uppercase text-foreground/80 z-10 border border-primary/70 shadow-[0_0_0_1px_hsl(var(--primary)/0.18)]">
+                    <div className="absolute top-4 left-4 bg-background/90 backdrop-blur px-3 py-1.5 text-[10px] tracking-[0.15em] uppercase text-foreground/80 z-10 border border-primary/70 shadow-[0_0_0_1px_hsl(var(--primary)/0.18),0_0_18px_-2px_hsl(var(--primary)/0.6)]">
                       {o.eyebrow}
                     </div>
                   </div>
