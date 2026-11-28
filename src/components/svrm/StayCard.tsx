@@ -133,13 +133,13 @@ const StayCard = ({ stay }: { stay: Stay; index?: number }) => {
         <div className="mt-5 flex items-end justify-between gap-4">
           <div>
             <p className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground/70">
-              {showPrice ? "Published from rate / night" : "Rates"}
+              {showPrice ? (stay.type === "hotel" ? "From / room / night" : "From / property / night") : "Rates"}
             </p>
             <p className="font-serif text-xl text-gold">
-              {showPrice ? format(stay.fromZAR) : "On enquiry"}
+              {showPrice ? format(stay.fromZAR) : "Enquire for your dates"}
             </p>
             {showPrice && (
-              <p className="text-[10px] tracking-wide text-muted-foreground/60 mt-1">Final quote depends on your dates</p>
+              <p className="text-[10px] tracking-wide text-muted-foreground/60 mt-1">Seasonal rates apply. Final pricing confirmed for your dates.</p>
             )}
           </div>
 

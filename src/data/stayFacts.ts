@@ -18,6 +18,9 @@ export interface StayFacts {
     status: RateStatus;
     note: string;
     source: string;
+    /** Supplier-approved seasonal "from" rates; season dates are not published, so none are shown */
+    seasons?: { label: string; fromZAR: number }[];
+    inclusions?: string;
   };
 }
 
@@ -98,8 +101,14 @@ export const stayFacts: Record<string, StayFacts> = {
     },
     rate: {
       status: "published",
-      note: "Official listing: R26,200–R43,400 per night with a seven-night minimum. The final quote depends on your dates.",
-      source: "https://www.capevillas.co.za/properties/a-la-penthouse/",
+      note: "Seasonal rates apply. Final pricing confirmed for your dates.",
+      source: "Supplier-approved rates supplied by SVRM, 28 November 2026",
+      seasons: [
+        { label: "Low season", fromZAR: 25000 },
+        { label: "High season", fromZAR: 35000 },
+        { label: "Festive season", fromZAR: 42000 },
+      ],
+      inclusions: "Breakfast included",
     },
   },
   "nox-1bed-cape-town-apt-stonewood-at-the-granger": nox("1bed-cape-town-apt-stonewood-at-the-granger", 1, 1, 2),

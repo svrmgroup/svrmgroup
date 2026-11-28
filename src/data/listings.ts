@@ -219,7 +219,7 @@ export function stayListing(s: Stay): StayListing {
     amenities,
     pool: poolLabel(facts),
     poolAnswer: poolAnswer(facts),
-    priceLabel: showPrice ? `From ${rand(s.fromZAR)} / night` : "On enquiry",
+    priceLabel: showPrice ? `From ${rand(s.fromZAR)} per night` : "Enquire for your dates",
     priceNote: facts.rate.note,
     factsSource: facts.source,
     poolSource: facts.pool.source,

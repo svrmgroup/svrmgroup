@@ -10,7 +10,7 @@ import { findStay, stayListing, stayUrlSlug, SITE_URL } from "@/data/listings";
 import { useListingPhotos } from "@/hooks/useListingPhotos";
 import { useCurrency } from "@/lib/currency";
 import type { Stay } from "@/data/stays";
-import { stayHasPublicRate } from "@/data/stayFacts";
+import { stayFacts, stayHasPublicRate } from "@/data/stayFacts";
 
 const StayDetailInner = ({ stay }: { stay: Stay }) => {
   const l = stayListing(stay);
@@ -20,7 +20,12 @@ const StayDetailInner = ({ stay }: { stay: Stay }) => {
   useListingPage(enquiry, "stay");
   const crumbs = [{ label: "Home", to: "/" }, { label: "Stays", to: "/stays" }, { label: l.name, to: l.path }];
   const showPrice = stay.showPrice === true && stayHasPublicRate(stay.slug);
-  const price = showPrice ? `From ${format(stay.fromZAR)} / night` : "On enquiry";
+  const unit = stay.type === "hotel" ? "per room per night" : "per night";
+  const price = showPrice ? `From ${format(stay.fromZAR)} ${unit}` : "Enquire for your dates";
+  const rate = stayFacts[stay.slug]?.rate;
+  const seasonal = showPrice && rate?.seasons?.length
+    ? [...rate.seasons.map((x) => `${x.label}: from ${format(x.fromZAR)} ${unit}`), ...(rate.inclusions ? [rate.inclusions] : [])].join(" · ")
+    : null;
   return (
     <main className="bg-background text-foreground min-h-screen pb-24 lg:pb-0">
       <Seo
@@ -65,7 +70,7 @@ const StayDetailInner = ({ stay }: { stay: Stay }) => {
               ["Maximum guests", l.maxGuests],
               ["Pool", l.pool],
               ["Amenities", l.amenities.length ? l.amenities.join(" · ") : "Your concierge will confirm"],
-              ["Price", price],
+              ["Price", seasonal ?? price],
             ]} />
             <ListingFaqs faqs={l.faqs} title={`${l.name} — questions`} />
             <RelatedLinks links={l.related} />

@@ -73,7 +73,7 @@ export const stays: Stay[] = [
     name: "À La Penthouse",
     area: "Camps Bay",
     beds: "2 bed · 2 bath · 4 guests · jacuzzi · sauna · private lift",
-    fromZAR: 26200,
+    fromZAR: 25000,
     image: aLaPenthouseHero.url,
     blurb: "A 240 m² top-floor Camps Bay residence for four guests, with two bedrooms, two bathrooms, a 55 m² private terrace, outdoor jacuzzi, private sauna and lift, panoramic sea and mountain views, daily breakfast and housekeeping from Monday to Saturday.",
     type: "apartment",

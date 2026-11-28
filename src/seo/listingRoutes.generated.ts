@@ -343,14 +343,14 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
  {
   "path": "/stays/the-atlantic-villa-camps-bay",
   "title": "The Atlantic Villa, Camps Bay | Luxury Stay Cape Town — SVRM",
-  "description": "The Atlantic Villa, Camps Bay in Camps Bay, Cape Town. 5 bedrooms, 5 bathrooms; 10 guests. On enquiry. Check availability on WhatsApp.",
+  "description": "The Atlantic Villa, Camps Bay in Camps Bay, Cape Town. 5 bedrooms, 5 bathrooms; 10 guests. Enquire for your dates. Check availability on WhatsApp.",
   "heading": "The Atlantic Villa, Camps Bay",
   "summary": "A curated five-bedroom Camps Bay residence with panoramic Atlantic views, private pool and direct beach access moments away. Bedrooms: 5 bedrooms. Bathrooms: 5 bathrooms. Maximum guests: 10 guests. Pool: Private pool. Private infinity pool for the villa’s booked guests. It is not a shared pool. Stay in Camps Bay with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay."
  },
  {
   "path": "/stays/a-la-penthouse",
   "title": "À La Penthouse | Luxury Stay Cape Town — SVRM",
-  "description": "À La Penthouse in Camps Bay, Cape Town. 2 bedrooms, 2 bathrooms; 4 guests. From R26,200 / night. Check availability on WhatsApp.",
+  "description": "À La Penthouse in Camps Bay, Cape Town. 2 bedrooms, 2 bathrooms; 4 guests. From R25,000 per night. Check availability on WhatsApp.",
   "heading": "À La Penthouse",
   "summary": "A 240 m² top-floor Camps Bay residence for four guests, with two bedrooms, two bathrooms, a 55 m² private terrace, outdoor jacuzzi, private sauna and lift, panoramic sea and mountain views, daily breakfast and housekeeping from Monday to Saturday. Bedrooms: 2 bedrooms. Bathrooms: 2 bathrooms. Maximum guests: 4 guests. Pool: Not publicly confirmed. A private outdoor Jacuzzi is confirmed; swimming-pool access is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. The residence combines the privacy of a top-floor home with hotel-style service. Designer interiors, generous lounges, a private lift and panoramic views across the Atlantic, Lion's Head, Table Mountain and the Twelve Apostles make it as suited to a quiet retreat as to a special celebration or photo shoot.",
   "image": "https://svrm.group/__l5e/assets-v1/465d811c-c876-4da5-9029-96be0d1fd7bc/a-la-penthouse-01-hero.jpg"
@@ -358,7 +358,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
  {
   "path": "/stays/1bed-cape-town-apt-stonewood-at-the-granger",
   "title": "Stonewood at The Granger | Luxury Stay Cape Town — SVRM",
-  "description": "Stonewood at The Granger in City Centre, Cape Town. 1 bedroom, 1 bathroom; 2 guests. On enquiry. Check availability on WhatsApp.",
+  "description": "Stonewood at The Granger in City Centre, Cape Town. 1 bedroom, 1 bathroom; 2 guests. Enquire for your dates. Check availability on WhatsApp.",
   "heading": "Stonewood at The Granger",
   "summary": "Compact CBD studio at The Granger — walk to everywhere, budget entry. Bedrooms: 1 bedroom. Bathrooms: 1 bathroom. Maximum guests: 2 guests. Pool: Not publicly confirmed. Pool access is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. Stay in City Centre with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/9e5349df-3572-41ea-a55f-5b233be3d87b/1bed-cape-town-apt-stonewood-at-the-granger-00.jpg"
@@ -366,7 +366,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
  {
   "path": "/stays/beautifully-decorated-apartment-in-cape-town-urban-signature",
   "title": "Urban Signature Apartment | Luxury Stay Cape Town — SVRM",
-  "description": "Urban Signature Apartment in City Centre, Cape Town. 1 bedroom, 1 bathroom; 2 guests. On enquiry. Check availability on WhatsApp.",
+  "description": "Urban Signature Apartment in City Centre, Cape Town. 1 bedroom, 1 bathroom; 2 guests. Enquire for your dates. Check availability on WhatsApp.",
   "heading": "Urban Signature Apartment",
   "summary": "Beautifully styled 1-bed in the heart of the city. Bedrooms: 1 bedroom. Bathrooms: 1 bathroom. Maximum guests: 2 guests. Pool: Not publicly confirmed. Pool access is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. Stay in City Centre with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/6b8892c3-f6bf-416a-a4f8-7a2811b7b7e2/beautifully-decorated-apartment-in-cape-town-urban-signature-00.jpg"
@@ -374,7 +374,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
  {
   "path": "/stays/old-cape-quarter-1-bedroom-units",
   "title": "Old Cape Quarter Residences | Luxury Stay Cape Town — SVRM",
-  "description": "Old Cape Quarter Residences in De Waterkant, Cape Town. 1 bedroom, 1 bathroom; 2 guests. On enquiry. Check availability on WhatsApp.",
+  "description": "Old Cape Quarter Residences in De Waterkant, Cape Town. 1 bedroom, 1 bathroom; 2 guests. Enquire for your dates. Check availability on WhatsApp.",
   "heading": "Old Cape Quarter Residences",
   "summary": "Old Cape Quarter 1-bed with village cafés at your doorstep. Bedrooms: 1 bedroom. Bathrooms: 1 bathroom. Maximum guests: 2 guests. Pool: Not publicly confirmed. Pool access is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. Stay in De Waterkant with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/367811b4-010f-43bf-865b-b3f6b4165ae8/old-cape-quarter-1-bedroom-units-00.jpg"
@@ -382,7 +382,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
  {
   "path": "/stays/mouille-point-1-bed-w-sea-views-skyshore-apartment",
   "title": "Skyshore Apartment, Mouille Point | Luxury Stay Cape Town — SVRM",
-  "description": "Skyshore Apartment, Mouille Point in Mouille Point, Cape Town. 1 bedroom, 1 bathroom; 2 guests. On enquiry. Check availability on WhatsApp.",
+  "description": "Skyshore Apartment, Mouille Point in Mouille Point, Cape Town. 1 bedroom, 1 bathroom; 2 guests. Enquire for your dates. Check availability on WhatsApp.",
   "heading": "Skyshore Apartment, Mouille Point",
   "summary": "Sea-facing 1-bed on the Mouille Point promenade. Bedrooms: 1 bedroom. Bathrooms: 1 bathroom. Maximum guests: 2 guests. Pool: Not publicly confirmed. Pool access is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. Stay in Mouille Point with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/a60179d3-f8eb-41c4-aa89-aa1fe827696c/mouille-point-1-bed-w-sea-views-skyshore-apartment-00.jpg"
@@ -390,7 +390,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
  {
   "path": "/stays/beautiful-apartment-at-the-waterfront-marina-altmore-001",
   "title": "Altmore Marina Apartment | Luxury Stay Cape Town — SVRM",
-  "description": "Altmore Marina Apartment in V&A Waterfront, Cape Town. 1 bedroom, 1 bathroom; 2 guests. On enquiry. Check availability on WhatsApp.",
+  "description": "Altmore Marina Apartment in V&A Waterfront, Cape Town. 1 bedroom, 1 bathroom; 2 guests. Enquire for your dates. Check availability on WhatsApp.",
   "heading": "Altmore Marina Apartment",
   "summary": "1-bed marina apartment inside the V&A precinct. Bedrooms: 1 bedroom. Bathrooms: 1 bathroom. Maximum guests: 2 guests. Pool: Shared pool. Communal building pools. This is not an exclusive private pool. Stay in V&A Waterfront with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/17424054-6ba4-4ae4-8bf4-ab00851f5c68/beautiful-apartment-at-the-waterfront-marina-altmore-001-00.jpg"
@@ -398,7 +398,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
  {
   "path": "/stays/green-point-modern-2bed-apartment-azura-atlantic",
   "title": "Azura Atlantic, Green Point | Luxury Stay Cape Town — SVRM",
-  "description": "Azura Atlantic, Green Point in Green Point, Cape Town. 2 bedrooms, 2 bathrooms; 4 guests. On enquiry. Check availability on WhatsApp.",
+  "description": "Azura Atlantic, Green Point in Green Point, Cape Town. 2 bedrooms, 2 bathrooms; 4 guests. Enquire for your dates. Check availability on WhatsApp.",
   "heading": "Azura Atlantic, Green Point",
   "summary": "Modern 2-bed near the stadium and Atlantic promenade. Bedrooms: 2 bedrooms. Bathrooms: 2 bathrooms. Maximum guests: 4 guests. Pool: Not publicly confirmed. Pool access is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. Stay in Green Point with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/a6c5f78e-9978-46ba-aad6-4ae77e72bbca/green-point-modern-2bed-apartment-azura-atlantic-00.jpg"
@@ -406,7 +406,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
  {
   "path": "/stays/charming-central-apartment-aquene-bay",
   "title": "Aquene Bay Apartment | Luxury Stay Cape Town — SVRM",
-  "description": "Aquene Bay Apartment in City Centre, Cape Town. 2 bedrooms, 2 bathrooms; 4 guests. On enquiry. Check availability on WhatsApp.",
+  "description": "Aquene Bay Apartment in City Centre, Cape Town. 2 bedrooms, 2 bathrooms; 4 guests. Enquire for your dates. Check availability on WhatsApp.",
   "heading": "Aquene Bay Apartment",
   "summary": "Charming 2-bed in central Cape Town — near the Company Gardens. Bedrooms: 2 bedrooms. Bathrooms: 2 bathrooms. Maximum guests: 4 guests. Pool: Not publicly confirmed. Pool access is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. Stay in City Centre with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/725ea32e-dadb-412d-8578-d7fc59584cdb/charming-central-apartment-aquene-bay-00.jpg"
@@ -414,7 +414,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
  {
   "path": "/stays/modern-sea-point-apartment-w-sea-views-alpha-sunsets",
   "title": "Alpha Sunsets, Sea Point | Luxury Stay Cape Town — SVRM",
-  "description": "Alpha Sunsets, Sea Point in Sea Point, Cape Town. 2 bedrooms, 2 bathrooms; 4 guests. On enquiry. Check availability on WhatsApp.",
+  "description": "Alpha Sunsets, Sea Point in Sea Point, Cape Town. 2 bedrooms, 2 bathrooms; 4 guests. Enquire for your dates. Check availability on WhatsApp.",
   "heading": "Alpha Sunsets, Sea Point",
   "summary": "Modern 2-bed with sweeping Atlantic sunsets. Bedrooms: 2 bedrooms. Bathrooms: 2 bathrooms. Maximum guests: 4 guests. Pool: Shared pool. Communal outdoor swimming pool and entertainment area on the fourth floor. This is not an exclusive private pool. Stay in Sea Point with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/f167061c-a52a-4468-94a2-753a04785057/modern-sea-point-apartment-w-sea-views-alpha-sunsets-00.jpg"
@@ -422,7 +422,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
  {
   "path": "/stays/2bed-mouille-point-apartment-w-amazing-cape-views",
   "title": "Mouille Point Cape View Apartment | Luxury Stay Cape Town — SVRM",
-  "description": "Mouille Point Cape View Apartment in Mouille Point, Cape Town. 2 bedrooms, 1 bathroom; 4 guests. On enquiry. Check availability on WhatsApp.",
+  "description": "Mouille Point Cape View Apartment in Mouille Point, Cape Town. 2 bedrooms, 1 bathroom; 4 guests. Enquire for your dates. Check availability on WhatsApp.",
   "heading": "Mouille Point Cape View Apartment",
   "summary": "2-bed Mouille Point apartment with panoramic Cape views. Bedrooms: 2 bedrooms. Bathrooms: 1 bathroom. Maximum guests: 4 guests. Pool: Not publicly confirmed. Pool access is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. Stay in Mouille Point with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/452c3163-95e6-4ed3-8e9d-270ac0df4681/2bed-mouille-point-apartment-w-amazing-cape-views-00.jpg"
@@ -430,7 +430,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
  {
   "path": "/stays/clifton-apartment-w-direct-beach-access-marella",
   "title": "Marella, Clifton Beach | Luxury Stay Cape Town — SVRM",
-  "description": "Marella, Clifton Beach in Clifton, Cape Town. 2 bedrooms, 2 bathrooms; 4 guests. On enquiry. Check availability on WhatsApp.",
+  "description": "Marella, Clifton Beach in Clifton, Cape Town. 2 bedrooms, 2 bathrooms; 4 guests. Enquire for your dates. Check availability on WhatsApp.",
   "heading": "Marella, Clifton Beach",
   "summary": "Rare Clifton apartment with direct beach access. Bedrooms: 2 bedrooms. Bathrooms: 2 bathrooms. Maximum guests: 4 guests. Pool: Not publicly confirmed. Pool access is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. Stay in Clifton with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/9855626f-38c5-4483-97e1-d701f8e80147/clifton-apartment-w-direct-beach-access-marella-00.jpg"
@@ -438,7 +438,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
  {
   "path": "/stays/de-waterkant-townhouse-with-pool-access-116-dwp",
   "title": "116 De Waterkant Townhouse | Luxury Stay Cape Town — SVRM",
-  "description": "116 De Waterkant Townhouse in De Waterkant, Cape Town. 3 bedrooms, 2 bathrooms; 6 guests. On enquiry. Check availability on WhatsApp.",
+  "description": "116 De Waterkant Townhouse in De Waterkant, Cape Town. 3 bedrooms, 2 bathrooms; 6 guests. Enquire for your dates. Check availability on WhatsApp.",
   "heading": "116 De Waterkant Townhouse",
   "summary": "3-bed De Waterkant townhouse with shared pool. Bedrooms: 3 bedrooms. Bathrooms: 2 bathrooms. Maximum guests: 6 guests. Pool: Shared pool. Communal pool in the shared picnic and garden area. This is not an exclusive private pool. Stay in De Waterkant with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/e6e7ebb6-e800-4149-85a1-9d25dbcf0535/de-waterkant-townhouse-with-pool-access-116-dwp-00.jpg"
@@ -446,7 +446,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
  {
   "path": "/stays/aqua-views-at-the-waterclub-in-cape-town",
   "title": "Aqua Views at The Waterclub | Luxury Stay Cape Town — SVRM",
-  "description": "Aqua Views at The Waterclub in V&A Waterfront, Cape Town. 2 bedrooms, 2 bathrooms; 4 guests. On enquiry. Check availability on WhatsApp.",
+  "description": "Aqua Views at The Waterclub in V&A Waterfront, Cape Town. 2 bedrooms, 2 bathrooms; 4 guests. Enquire for your dates. Check availability on WhatsApp.",
   "heading": "Aqua Views at The Waterclub",
   "summary": "Waterclub 2-bed on the Atlantic seafront. Bedrooms: 2 bedrooms. Bathrooms: 2 bathrooms. Maximum guests: 4 guests. Pool: Shared pool. Communal Waterclub swimming pool. This is not an exclusive private pool. Stay in V&A Waterfront with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/580ed659-0eae-44c9-9064-3eb61ebb8540/aqua-views-at-the-waterclub-in-cape-town-00.jpg"
@@ -454,7 +454,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
  {
   "path": "/stays/clifton-3bed-penthouse-sea-views-dunmore-horizons",
   "title": "Dunmore Horizons Penthouse, Clifton | Luxury Stay Cape Town — SVRM",
-  "description": "Dunmore Horizons Penthouse, Clifton in Clifton, Cape Town. 3 bedrooms, 2 bathrooms; 6 guests. On enquiry. Check availability on WhatsApp.",
+  "description": "Dunmore Horizons Penthouse, Clifton in Clifton, Cape Town. 3 bedrooms, 2 bathrooms; 6 guests. Enquire for your dates. Check availability on WhatsApp.",
   "heading": "Dunmore Horizons Penthouse, Clifton",
   "summary": "Clifton penthouse with 180° Atlantic views. Bedrooms: 3 bedrooms. Bathrooms: 2 bathrooms. Maximum guests: 6 guests. Pool: Not publicly confirmed. Pool access is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. Stay in Clifton with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/f03978db-69b6-489a-9460-18700b22f306/clifton-3bed-penthouse-sea-views-dunmore-horizons-00.jpg"
@@ -462,7 +462,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
  {
   "path": "/stays/luxurious-penthouse-w-sweeping-views-sea-point-penthouse",
   "title": "Sea Point Penthouse | Luxury Stay Cape Town — SVRM",
-  "description": "Sea Point Penthouse in Sea Point, Cape Town. 3 bedrooms, 3 bathrooms; 6 guests. On enquiry. Check availability on WhatsApp.",
+  "description": "Sea Point Penthouse in Sea Point, Cape Town. 3 bedrooms, 3 bathrooms; 6 guests. Enquire for your dates. Check availability on WhatsApp.",
   "heading": "Sea Point Penthouse",
   "summary": "Luxurious Sea Point penthouse with sweeping views. Bedrooms: 3 bedrooms. Bathrooms: 3 bathrooms. Maximum guests: 6 guests. Pool: Private pool. Private pool, corroborated by a guest review on the official listing. It is not a shared pool. Stay in Sea Point with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/99e8c4b9-5bfe-4f4f-8f99-5ffa1b8a7edc/sea-point-penthouse-hero.jpg"
@@ -470,7 +470,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
  {
   "path": "/stays/camps-bay-family-holiday-home-sunset-sanctuary",
   "title": "Sunset Sanctuary, Camps Bay | Luxury Stay Cape Town — SVRM",
-  "description": "Sunset Sanctuary, Camps Bay in Camps Bay, Cape Town. 3 bedrooms, 3 bathrooms; 6 guests. On enquiry. Check availability on WhatsApp.",
+  "description": "Sunset Sanctuary, Camps Bay in Camps Bay, Cape Town. 3 bedrooms, 3 bathrooms; 6 guests. Enquire for your dates. Check availability on WhatsApp.",
   "heading": "Sunset Sanctuary, Camps Bay",
   "summary": "Serene 3-bed Camps Bay family home with pool and ocean views. Bedrooms: 3 bedrooms. Bathrooms: 3 bathrooms. Maximum guests: 6 guests. Pool: Private pool. Private pool at the holiday home. It is not a shared pool. Stay in Camps Bay with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/21a1f148-138d-4403-9566-8d50aacb3b1b/camps-bay-family-holiday-home-sunset-sanctuary-00.jpg"
@@ -478,7 +478,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
  {
   "path": "/stays/mountain-view-holiday-villa-w-garden-pool-iliwa",
   "title": "Iliwa Mountain View Villa | Luxury Stay Cape Town — SVRM",
-  "description": "Iliwa Mountain View Villa in Higgovale, Cape Town. 3 bedrooms, 3 bathrooms; 6 guests. On enquiry. Check availability on WhatsApp.",
+  "description": "Iliwa Mountain View Villa in Higgovale, Cape Town. 3 bedrooms, 3 bathrooms; 6 guests. Enquire for your dates. Check availability on WhatsApp.",
   "heading": "Iliwa Mountain View Villa",
   "summary": "3-bed villa under Table Mountain with garden and pool. Bedrooms: 3 bedrooms. Bathrooms: 3 bathrooms. Maximum guests: 6 guests. Pool: Private pool. Private garden pool at the villa. It is not a shared pool. Stay in Higgovale with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/36cfa680-bbbd-42b5-9ec4-efca66e3c208/mountain-view-holiday-villa-w-garden-pool-iliwa-00.jpg"
@@ -486,7 +486,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
  {
   "path": "/stays/4-bed-higgovale-mountain-views-sandstone-apartment",
   "title": "Higgovale Sandstone Residence | Luxury Stay Cape Town — SVRM",
-  "description": "Higgovale Sandstone Residence in Higgovale, Cape Town. 4 bedrooms, 4 bathrooms; 8 guests. On enquiry. Check availability on WhatsApp.",
+  "description": "Higgovale Sandstone Residence in Higgovale, Cape Town. 4 bedrooms, 4 bathrooms; 8 guests. Enquire for your dates. Check availability on WhatsApp.",
   "heading": "Higgovale Sandstone Residence",
   "summary": "4-bed sandstone home with mountain views above the CBD. Bedrooms: 4 bedrooms. Bathrooms: 4 bathrooms. Maximum guests: 8 guests. Pool: Shared pool. Two communal pools with sun loungers and seating areas. This is not an exclusive private pool. Stay in Higgovale with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/0c9c5940-2b61-40d8-9a7b-b4f824d4aeae/4-bed-higgovale-mountain-views-sandstone-apartment-00.jpg"
@@ -494,7 +494,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
  {
   "path": "/stays/4-bed-coastal-retreat-w-pool-views-llandudno-sands",
   "title": "Llandudno Sands Coastal Retreat | Luxury Stay Cape Town — SVRM",
-  "description": "Llandudno Sands Coastal Retreat in Llandudno, Cape Town. 4 bedrooms, 4 bathrooms; 8 guests. On enquiry. Check availability on WhatsApp.",
+  "description": "Llandudno Sands Coastal Retreat in Llandudno, Cape Town. 4 bedrooms, 4 bathrooms; 8 guests. Enquire for your dates. Check availability on WhatsApp.",
   "heading": "Llandudno Sands Coastal Retreat",
   "summary": "4-bed Llandudno coastal retreat with pool and sea views. Bedrooms: 4 bedrooms. Bathrooms: 4 bathrooms. Maximum guests: 8 guests. Pool: Not publicly confirmed. A terrace plunge pool is advertised; exclusive private use is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. Stay in Llandudno with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/d3268349-0777-4a03-92c9-255c66bae646/4-bed-coastal-retreat-w-pool-views-llandudno-sands-00.jpg"
@@ -502,7 +502,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
  {
   "path": "/stays/luxurious-villa-w-breathtaking-sea-mountain-views-hamaya",
   "title": "Hamaya Villa, Bantry Bay | Luxury Stay Cape Town — SVRM",
-  "description": "Hamaya Villa, Bantry Bay in Bantry Bay, Cape Town. 4 bedrooms, 4 bathrooms; 8 guests. On enquiry. Check availability on WhatsApp.",
+  "description": "Hamaya Villa, Bantry Bay in Bantry Bay, Cape Town. 4 bedrooms, 4 bathrooms; 8 guests. Enquire for your dates. Check availability on WhatsApp.",
   "heading": "Hamaya Villa, Bantry Bay",
   "summary": "Bantry Bay 4-bed with breathtaking sea and mountain vistas. Bedrooms: 4 bedrooms. Bathrooms: 4 bathrooms. Maximum guests: 8 guests. Pool: Private pool. Private swimming pool, with a plunge pool off the main living area. It is not a shared pool. Stay in Bantry Bay with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/bcd55461-125d-4557-9fe4-ef60683f9c91/luxurious-villa-w-breathtaking-sea-mountain-views-hamaya-01.jpg"
@@ -510,7 +510,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
  {
   "path": "/stays/camps-bay-luxury-5-star-5-bed-w-gym-majestic-villa",
   "title": "Majestic Villa, Camps Bay | Luxury Stay Cape Town — SVRM",
-  "description": "Majestic Villa, Camps Bay in Camps Bay, Cape Town. 5 bedrooms, 5 bathrooms; 10 guests. On enquiry. Check availability on WhatsApp.",
+  "description": "Majestic Villa, Camps Bay in Camps Bay, Cape Town. 5 bedrooms, 5 bathrooms; 10 guests. Enquire for your dates. Check availability on WhatsApp.",
   "heading": "Majestic Villa, Camps Bay",
   "summary": "5-star 5-bed Camps Bay villa with gym and pool. Bedrooms: 5 bedrooms. Bathrooms: 5 bathrooms. Maximum guests: 10 guests. Pool: Not publicly confirmed. A semi-circular pool is advertised; exclusive private use is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. Stay in Camps Bay with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/0192c8ef-7af2-4b6b-a9a7-3eff737d3b99/camps-bay-luxury-5-star-5-bed-w-gym-majestic-villa-00.jpg"
@@ -518,7 +518,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
  {
   "path": "/stays/beautiful-6bed-camps-bay-view-villa-w-pool-ithemba",
   "title": "Ithemba Villa, Camps Bay | Luxury Stay Cape Town — SVRM",
-  "description": "Ithemba Villa, Camps Bay in Camps Bay, Cape Town. 6 bedrooms, 6 bathrooms; 12 guests. On enquiry. Check availability on WhatsApp.",
+  "description": "Ithemba Villa, Camps Bay in Camps Bay, Cape Town. 6 bedrooms, 6 bathrooms; 12 guests. Enquire for your dates. Check availability on WhatsApp.",
   "heading": "Ithemba Villa, Camps Bay",
   "summary": "Iconic 6-bed Camps Bay view villa with pool — Ithemba. Bedrooms: 6 bedrooms. Bathrooms: 6 bathrooms. Maximum guests: 12 guests. Pool: Not publicly confirmed. A pool deck is advertised; exclusive private use is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. Stay in Camps Bay with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/88dbea0a-0184-48fe-82d5-549b18e63fc2/beautiful-6bed-camps-bay-view-villa-w-pool-ithemba-00.jpg"
@@ -526,7 +526,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
  {
   "path": "/stays/llandudno-beach-oasis-solmara-house",
   "title": "Solmara House, Llandudno | Luxury Stay Cape Town — SVRM",
-  "description": "Solmara House, Llandudno in Llandudno, Cape Town. 5 bedrooms, 4 bathrooms; 10 guests. On enquiry. Check availability on WhatsApp.",
+  "description": "Solmara House, Llandudno in Llandudno, Cape Town. 5 bedrooms, 4 bathrooms; 10 guests. Enquire for your dates. Check availability on WhatsApp.",
   "heading": "Solmara House, Llandudno",
   "summary": "Llandudno beach oasis — 5 beds moments from the sand. Bedrooms: 5 bedrooms. Bathrooms: 4 bathrooms. Maximum guests: 10 guests. Pool: Not publicly confirmed. An outdoor swimming pool is advertised; exclusive private use is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. Stay in Llandudno with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/da129305-9a5b-4048-92ae-dc15754e4fd6/llandudno-beach-oasis-solmara-house-00.jpg"
@@ -534,7 +534,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
  {
   "path": "/stays/luxurious-camps-bay-retreat-w-sea-views-rock-residence",
   "title": "Rock Residence, Camps Bay | Luxury Stay Cape Town — SVRM",
-  "description": "Rock Residence, Camps Bay in Camps Bay, Cape Town. 6 bedrooms, 4 bathrooms; 12 guests. On enquiry. Check availability on WhatsApp.",
+  "description": "Rock Residence, Camps Bay in Camps Bay, Cape Town. 6 bedrooms, 4 bathrooms; 12 guests. Enquire for your dates. Check availability on WhatsApp.",
   "heading": "Rock Residence, Camps Bay",
   "summary": "Rock Residence — 6-bed Camps Bay retreat with sea views. Bedrooms: 6 bedrooms. Bathrooms: 4 bathrooms. Maximum guests: 12 guests. Pool: Not publicly confirmed. A hot tub and a nearby tidal pool are advertised; an on-property swimming pool is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. Stay in Camps Bay with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/2172f729-7cdc-433a-8079-03a7d2e81eae/luxurious-camps-bay-retreat-w-sea-views-rock-residence-00.jpg"
@@ -542,7 +542,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
  {
   "path": "/stays/idyllic-camps-bay-villa-w-2-pools-buddha-retreat",
   "title": "Buddha Retreat, Camps Bay | Luxury Stay Cape Town — SVRM",
-  "description": "Buddha Retreat, Camps Bay in Camps Bay, Cape Town. 10 bedrooms, 10 bathrooms; 20 guests. On enquiry. Check availability on WhatsApp.",
+  "description": "Buddha Retreat, Camps Bay in Camps Bay, Cape Town. 10 bedrooms, 10 bathrooms; 20 guests. Enquire for your dates. Check availability on WhatsApp.",
   "heading": "Buddha Retreat, Camps Bay",
   "summary": "Buddha Retreat — flagship Camps Bay 10-bed with two pools. Bedrooms: 10 bedrooms. Bathrooms: 10 bathrooms. Maximum guests: 20 guests. Pool: Not publicly confirmed. Indoor and outdoor pools are advertised; exclusive private use is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. Stay in Camps Bay with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/13f0ec98-468e-4e9b-8ef5-334d9c90ea9a/idyllic-camps-bay-villa-w-2-pools-buddha-retreat-00.jpg"
@@ -550,42 +550,42 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
  {
   "path": "/stays/hotel-cape-grace",
   "title": "Cape Grace — Luxury Room | Luxury Stay Cape Town — SVRM",
-  "description": "Cape Grace — Luxury Room in V&A Waterfront, Cape Town. 1 bedroom, 1 bathroom; 2 adults + 1 child (4 or younger). On enquiry. Check availability on WhatsApp.",
+  "description": "Cape Grace — Luxury Room in V&A Waterfront, Cape Town. 1 bedroom, 1 bathroom; 2 adults + 1 child (4 or younger). Enquire for your dates. Check availability on WhatsApp.",
   "heading": "Cape Grace — Luxury Room",
   "summary": "Five-star landmark on its own private quay. Bedrooms: 1 bedroom. Bathrooms: 1 bathroom. Maximum guests: 2 adults + 1 child (4 or younger). Pool: Shared pool. Hotel guests share the swimming-pool facilities; the room does not have an exclusive private pool. This is not an exclusive private pool. Stay in V&A Waterfront with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay."
  },
  {
   "path": "/stays/hotel-one-and-only",
   "title": "One&Only — Marina Room | Luxury Stay Cape Town — SVRM",
-  "description": "One&Only — Marina Room in V&A Waterfront, Cape Town. 1 bedroom, 1 bathroom; 2 adults + 1 child. On enquiry. Check availability on WhatsApp.",
+  "description": "One&Only — Marina Room in V&A Waterfront, Cape Town. 1 bedroom, 1 bathroom; 2 adults + 1 child. Enquire for your dates. Check availability on WhatsApp.",
   "heading": "One&Only — Marina Room",
   "summary": "Resort-style city hotel with full-service spa. Bedrooms: 1 bedroom. Bathrooms: 1 bathroom. Maximum guests: 2 adults + 1 child. Pool: Shared pool. Hotel guests share the swimming-pool facilities; the room does not have an exclusive private pool. This is not an exclusive private pool. Stay in V&A Waterfront with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay."
  },
  {
   "path": "/stays/hotel-mount-nelson",
   "title": "Mount Nelson — Garden Suite | Luxury Stay Cape Town — SVRM",
-  "description": "Mount Nelson — Garden Suite in Gardens, Cape Town. 1 bedroom, 1 bathroom; 2 guests. On enquiry. Check availability on WhatsApp.",
+  "description": "Mount Nelson — Garden Suite in Gardens, Cape Town. 1 bedroom, 1 bathroom; 2 guests. Enquire for your dates. Check availability on WhatsApp.",
   "heading": "Mount Nelson — Garden Suite",
   "summary": "Iconic pink palace at the foot of Table Mountain. Bedrooms: 1 bedroom. Bathrooms: 1 bathroom. Maximum guests: 2 guests. Pool: Shared pool. Hotel guests share the swimming-pool facilities; the room does not have an exclusive private pool. This is not an exclusive private pool. Stay in Gardens with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay."
  },
  {
   "path": "/stays/hotel-silo",
   "title": "The Silo — Designer Room | Luxury Stay Cape Town — SVRM",
-  "description": "The Silo — Designer Room in V&A Silo District, Cape Town. 1 bedroom, 1 bathroom; 2 guests. On enquiry. Check availability on WhatsApp.",
+  "description": "The Silo — Designer Room in V&A Silo District, Cape Town. 1 bedroom, 1 bathroom; 2 guests. Enquire for your dates. Check availability on WhatsApp.",
   "heading": "The Silo — Designer Room",
   "summary": "Reimagined grain silo above the Zeitz MOCAA museum. Bedrooms: 1 bedroom. Bathrooms: 1 bathroom. Maximum guests: 2 guests. Pool: Shared pool. Hotel guests share the swimming-pool facilities; the room does not have an exclusive private pool. This is not an exclusive private pool. Stay in V&A Silo District with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay."
  },
  {
   "path": "/stays/hotel-table-bay",
   "title": "Table Bay — Marina Suite | Luxury Stay Cape Town — SVRM",
-  "description": "Table Bay — Marina Suite in V&A Waterfront, Cape Town. 1 bedroom, 1 bathroom; 2 guests. On enquiry. Check availability on WhatsApp.",
+  "description": "Table Bay — Marina Suite in V&A Waterfront, Cape Town. 1 bedroom, 1 bathroom; 2 guests. Enquire for your dates. Check availability on WhatsApp.",
   "heading": "Table Bay — Marina Suite",
   "summary": "Grand waterfront hotel with direct mall access. Bedrooms: 1 bedroom. Bathrooms: 1 bathroom. Maximum guests: 2 guests. Pool: Shared pool. Hotel guests share the swimming-pool facilities; the room does not have an exclusive private pool. This is not an exclusive private pool. Stay in V&A Waterfront with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay."
  },
  {
   "path": "/stays/hotel-bay-hotel",
   "title": "The Bay Hotel — Beach Room | Luxury Stay Cape Town — SVRM",
-  "description": "The Bay Hotel — Beach Room in Camps Bay, Cape Town. 1 bedroom, 1 bathroom; 2 adults + 1 child. On enquiry. Check availability on WhatsApp.",
+  "description": "The Bay Hotel — Beach Room in Camps Bay, Cape Town. 1 bedroom, 1 bathroom; 2 adults + 1 child. Enquire for your dates. Check availability on WhatsApp.",
   "heading": "The Bay Hotel — Beach Room",
   "summary": "Boutique five-star directly opposite Camps Bay beach. Bedrooms: 1 bedroom. Bathrooms: 1 bathroom. Maximum guests: 2 adults + 1 child. Pool: Shared pool. Hotel guests share the swimming-pool facilities; the room does not have an exclusive private pool. This is not an exclusive private pool. Stay in Camps Bay with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay."
  },
@@ -619,7 +619,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "description": "Experience the complete Peninsula route from the quiet rear seat of a Mercedes-Maybach S-Class. Your chauffeur shapes the day around your preferred stops and pace, while refreshments, entry arrangements, a lunch reservation and concierge support are coordinated for you. From R22,000 group up to 4. C",
   "heading": "Cape Peninsula · Maybach Signature · 1 day",
   "summary": "Experience the complete Peninsula route from the quiet rear seat of a Mercedes-Maybach S-Class. Your chauffeur shapes the day around your preferred stops and pace, while refreshments, entry arrangements, a lunch reservation and concierge support are coordinated for you. Included: Mercedes-Maybach S-Class with chauffeur, full day; The complete Peninsula route at your pace; Entry fees, refreshments and lunch reservation; 24/7 concierge on the day.",
-  "image": "https://svrm.group/__l5e/assets-v1/c365fb78-5110-44c0-a807-c3d414c63824/tour-hout-bay-sunset.jpg"
+  "image": "https://svrm.group/__l5e/assets-v1/d3ebafc8-84fb-41a0-926e-d86060fd3ae7/tour-chapmans-peak-golden.jpg"
  },
  {
   "path": "/tours/cape-peninsula/packages/peninsula-and-winelands",
@@ -659,7 +659,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "description": "A fully tailored two-week safari for travellers who want to combine regions, private villa stays and exceptional guiding. Your concierge builds the route around your interests, with options such as helicopter transfers and other privately arranged experiences. On request per person. Check availabili",
   "heading": "Bespoke grand safari · 14 days",
   "summary": "A fully tailored two-week safari for travellers who want to combine regions, private villa stays and exceptional guiding. Your concierge builds the route around your interests, with options such as helicopter transfers and other privately arranged experiences. Included: Multi-region itinerary; Private villa stays; Helicopter add-ons; Curated, end to end.",
-  "image": "https://svrm.group/__l5e/assets-v1/ff87cf53-bfca-4a53-ae54-b66958b89388/tour-safari-elephants-golden.jpg"
+  "image": "https://svrm.group/__l5e/assets-v1/e3ba4c64-a654-4480-a13a-088455a666de/tour-safari-leopard-golden.jpg"
  },
  {
   "path": "/tours/hunting/packages/5-star-plains-game-package",
@@ -699,7 +699,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "description": "Fit two very different Cape adventures into a polished three-day escape. A scenic helicopter flight and shark-cage diving provide the adrenaline, while boutique accommodation and private transfers keep the logistics straightforward. On request per person. Check availability on WhatsApp.",
   "heading": "Cape adventure short · 3 days",
   "summary": "Fit two very different Cape adventures into a polished three-day escape. A scenic helicopter flight and shark-cage diving provide the adrenaline, while boutique accommodation and private transfers keep the logistics straightforward. Included: Helicopter scenic flip; Shark-cage diving; Boutique accommodation; All transfers.",
-  "image": "https://svrm.group/__l5e/assets-v1/14824bab-9e76-46d7-a73c-7f98100beb64/tour-paragliding-scenic.jpg"
+  "image": "https://svrm.group/__l5e/assets-v1/d8954ca5-8557-4902-a383-32fc81758347/tour-helicopter-cape-town-scenic.jpg"
  },
  {
   "path": "/tours/adventure/packages/cape-and-bush",
@@ -707,7 +707,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "description": "Combine Cape adventure with a luxury safari over five days. Helicopter sightseeing, game drives, internal flights and hand-picked lodging are sequenced into one itinerary rather than booked as disconnected activities. On request per person. Check availability on WhatsApp.",
   "heading": "Cape & bush · 5 days",
   "summary": "Combine Cape adventure with a luxury safari over five days. Helicopter sightseeing, game drives, internal flights and hand-picked lodging are sequenced into one itinerary rather than booked as disconnected activities. Included: Cape adventure + safari; Helicopter + game drives; Internal flights; Luxury lodging.",
-  "image": "https://svrm.group/__l5e/assets-v1/14824bab-9e76-46d7-a73c-7f98100beb64/tour-paragliding-scenic.jpg"
+  "image": "https://svrm.group/__l5e/assets-v1/d8954ca5-8557-4902-a383-32fc81758347/tour-helicopter-cape-town-scenic.jpg"
  },
  {
   "path": "/tours/adventure/packages/land-sea-and-sky",
@@ -715,7 +715,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "description": "A seven-day journey built around contrasting perspectives: helicopter, yacht, safari and a horseback trail. Private guides and premium accommodation connect each experience, with enough structure to keep the week effortless. On request per person. Check availability on WhatsApp.",
   "heading": "Land, sea & sky · 7 days",
   "summary": "A seven-day journey built around contrasting perspectives: helicopter, yacht, safari and a horseback trail. Private guides and premium accommodation connect each experience, with enough structure to keep the week effortless. Included: Heli, yacht & safari; Horseback Winelands trail; Private guides throughout; Premium accommodation.",
-  "image": "https://svrm.group/__l5e/assets-v1/14824bab-9e76-46d7-a73c-7f98100beb64/tour-paragliding-scenic.jpg"
+  "image": "https://svrm.group/__l5e/assets-v1/d8954ca5-8557-4902-a383-32fc81758347/tour-helicopter-cape-town-scenic.jpg"
  },
  {
   "path": "/tours/marine/packages/boulders-penguins-and-cape-point",
@@ -739,7 +739,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "description": "A three-day marine itinerary combining whale watching, shark-cage diving and seal snorkelling with two nights of luxury accommodation. A private guide coordinates the ocean experiences and overland travel, subject to conditions and seasonal availability. On request per person. Check availability on ",
   "heading": "Marine grand circuit · 3 days",
   "summary": "A three-day marine itinerary combining whale watching, shark-cage diving and seal snorkelling with two nights of luxury accommodation. A private guide coordinates the ocean experiences and overland travel, subject to conditions and seasonal availability. Included: Whale watching + shark cage diving; Seal snorkelling at Duiker Island; 2 nights luxury accommodation; Private guide throughout.",
-  "image": "https://svrm.group/__l5e/assets-v1/5d9e5de1-d0d5-4f29-ae50-12dd9e27671b/tour-boulders-golden.jpg"
+  "image": "https://svrm.group/__l5e/assets-v1/4f0af9b1-4cc2-4280-8bcd-688c0daa9127/tour-hermanus-whale-golden.jpg"
  },
  {
   "path": "/tours/garden-route/packages/garden-route-essentials",
@@ -779,7 +779,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "description": "Take in Cape Point, the Cape of Good Hope, Hout Bay and Chapman’s Peak on a 45-minute aerial journey. Pilot narration adds context to the coastline below, while private transfers make the flight easy to fit into your day. On request per person. Check availability on WhatsApp.",
   "heading": "Two Oceans aerial tour · 45 min",
   "summary": "Take in Cape Point, the Cape of Good Hope, Hout Bay and Chapman’s Peak on a 45-minute aerial journey. Pilot narration adds context to the coastline below, while private transfers make the flight easy to fit into your day. Included: Cape Point & Cape of Good Hope; Hout Bay & Chapman's Peak; Pilot narration; Private transfers.",
-  "image": "https://svrm.group/__l5e/assets-v1/984fc0af-4b52-4ddb-adde-99fa29f3b8f7/tour-cape-point-golden.jpg"
+  "image": "https://svrm.group/__l5e/assets-v1/d8954ca5-8557-4902-a383-32fc81758347/tour-helicopter-cape-town-scenic.jpg"
  },
  {
   "path": "/tours/aerial/packages/sunrise-hot-air-balloon",
@@ -819,7 +819,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "description": "Set aside a full day for restorative spa time, two treatments and a healthy lunch. Private transfers remove the driving, making this a simple way to add genuine rest to a Cape Town stay. On request per person. Check availability on WhatsApp.",
   "heading": "Spa day signature · 1 day",
   "summary": "Set aside a full day for restorative spa time, two treatments and a healthy lunch. Private transfers remove the driving, making this a simple way to add genuine rest to a Cape Town stay. Included: Full-day spa access; Two treatments; Healthy lunch; Private transfers.",
-  "image": "https://svrm.group/__l5e/assets-v1/122511ec-5ed7-4552-95ef-7ff298e24a88/tour-spa-scenic.jpg"
+  "image": "https://svrm.group/__l5e/assets-v1/a2954fa4-43c0-4e45-8b82-bdd9265f3386/tour-spa-massage.jpg"
  },
  {
   "path": "/tours/wellness/packages/mountain-wellness-retreat",
@@ -827,7 +827,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "description": "Reconnect with a quieter rhythm during two nights at a mountain wellness lodge. Daily yoga and meditation, two spa treatments and plant-based dining create a structured but unhurried three-day retreat. On request per person. Check availability on WhatsApp.",
   "heading": "Mountain wellness retreat · 3 days",
   "summary": "Reconnect with a quieter rhythm during two nights at a mountain wellness lodge. Daily yoga and meditation, two spa treatments and plant-based dining create a structured but unhurried three-day retreat. Included: 2 nights wellness lodge; Daily yoga & meditation; Two spa treatments; Plant-based dining.",
-  "image": "https://svrm.group/__l5e/assets-v1/13d8dcb6-74f9-493f-9916-5cf6f2c2824f/tour-franschhoek-scenic.jpg"
+  "image": "https://svrm.group/__l5e/assets-v1/1d341304-0089-4928-a99f-c77a2fd39762/tour-retreat-suite.jpg"
  },
  {
   "path": "/tours/wellness/packages/cederberg-hot-springs",
@@ -835,7 +835,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "description": "Spend five days among the Cederberg’s dramatic landscapes with hot mineral spring soaks, guided hikes and stargazing. Four nights at a boutique lodge and the listed wellness experiences are arranged as one restorative escape. On request per person. Check availability on WhatsApp.",
   "heading": "Cederberg hot springs · 5 days",
   "summary": "Spend five days among the Cederberg’s dramatic landscapes with hot mineral spring soaks, guided hikes and stargazing. Four nights at a boutique lodge and the listed wellness experiences are arranged as one restorative escape. Included: Hot mineral spring soaks; Guided hikes & stargazing; 4 nights boutique lodge; All wellness inclusions.",
-  "image": "https://svrm.group/__l5e/assets-v1/ee6edfdc-fdb7-4868-9590-67c24581896b/tour-cederberg-scenic.jpg"
+  "image": "https://svrm.group/__l5e/assets-v1/a1f388fa-3d0e-4856-866a-400f15d36814/tour-hot-springs.jpg"
  },
  {
   "path": "/tours/photography/packages/sunrise-lions-head-shoot",
@@ -851,7 +851,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "description": "Photograph Bo-Kaap, the V&A Waterfront and Sea Point before finishing with sunset at Signal Hill. A private photographer guide helps with locations and technique, followed by a curated set of edits from your day. On request per person. Check availability on WhatsApp.",
   "heading": "Cape Town in a day · 1 day",
   "summary": "Photograph Bo-Kaap, the V&A Waterfront and Sea Point before finishing with sunset at Signal Hill. A private photographer guide helps with locations and technique, followed by a curated set of edits from your day. Included: Bo-Kaap, V&A, Sea Point; Sunset at Signal Hill; Private photographer guide; Curated edits.",
-  "image": "https://svrm.group/__l5e/assets-v1/3afdb227-709a-4ba5-b687-9d7bcb071f6e/tour-table-mountain-sunset-golden.jpg"
+  "image": "https://svrm.group/__l5e/assets-v1/ba9bf0e7-ead4-4bea-893a-2935e7d62a24/tour-bo-kaap-golden.jpg"
  },
  {
   "path": "/tours/photography/packages/cape-photographic-signature",
@@ -867,7 +867,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "description": "Move your group comfortably around Cape Town for up to five hours in a 16- or 22-seater vehicle. A chauffeur, fuel and bottled water are included, making this suitable for event shuttles, airport movements or a short city programme. On request per person. Check availability on WhatsApp.",
   "heading": "City group transfer · Half day",
   "summary": "Move your group comfortably around Cape Town for up to five hours in a 16- or 22-seater vehicle. A chauffeur, fuel and bottled water are included, making this suitable for event shuttles, airport movements or a short city programme. Included: 16 or 22-seater bus; Chauffeur & fuel; Bottled water onboard; Up to 5 hours.",
-  "image": "https://svrm.group/__l5e/assets-v1/3afdb227-709a-4ba5-b687-9d7bcb071f6e/tour-table-mountain-sunset-golden.jpg"
+  "image": "https://svrm.group/__l5e/assets-v1/d5e79d0a-2b54-4bd4-860b-ca5705f2a8c9/tour-v-and-a-scenic.jpg"
  },
  {
   "path": "/tours/group-travel/packages/cape-peninsula-group-tour",
@@ -875,7 +875,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "description": "Take a larger party around the Peninsula in a touring vehicle of up to 32 seats. A guide and chauffeur lead the day, with Boulders Beach, Cape Point and lunch arrangements coordinated for the whole group. On request per person. Check availability on WhatsApp.",
   "heading": "Cape Peninsula group tour · 1 day",
   "summary": "Take a larger party around the Peninsula in a touring vehicle of up to 32 seats. A guide and chauffeur lead the day, with Boulders Beach, Cape Point and lunch arrangements coordinated for the whole group. Included: Up to 32-seater bus; Guide + chauffeur; Boulders & Cape Point; Lunch arranged.",
-  "image": "https://svrm.group/__l5e/assets-v1/3afdb227-709a-4ba5-b687-9d7bcb071f6e/tour-table-mountain-sunset-golden.jpg"
+  "image": "https://svrm.group/__l5e/assets-v1/5d9e5de1-d0d5-4f29-ae50-12dd9e27671b/tour-boulders-golden.jpg"
  },
  {
   "path": "/tours/group-travel/packages/garden-route-group",
@@ -891,7 +891,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "description": "Custom transport and guest coordination for weddings, corporate retreats and incentive travel. Multi-vehicle fleets, airport meet-and-greet and an on-the-ground coordinator can be combined around your schedule and group size. On request per person. Check availability on WhatsApp.",
   "heading": "Weddings, corporate & incentive · Custom",
   "summary": "Custom transport and guest coordination for weddings, corporate retreats and incentive travel. Multi-vehicle fleets, airport meet-and-greet and an on-the-ground coordinator can be combined around your schedule and group size. Included: Multi-vehicle fleets; Airport meet & greet; Hostess & coordinator; Curated, end to end.",
-  "image": "https://svrm.group/__l5e/assets-v1/3afdb227-709a-4ba5-b687-9d7bcb071f6e/tour-table-mountain-sunset-golden.jpg"
+  "image": "https://svrm.group/__l5e/assets-v1/d5e79d0a-2b54-4bd4-860b-ca5705f2a8c9/tour-v-and-a-scenic.jpg"
  },
  {
   "path": "/tours/romantic/packages/the-proposal",
@@ -907,7 +907,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "description": "Celebrate with a night in a boutique suite, fresh flowers, a rose-petal turndown and a candlelit dinner prepared by a private chef. A couples spa treatment and chauffeur service complete this two-day anniversary escape. On request per person. Check availability on WhatsApp.",
   "heading": "Anniversary escape · 2 days",
   "summary": "Celebrate with a night in a boutique suite, fresh flowers, a rose-petal turndown and a candlelit dinner prepared by a private chef. A couples spa treatment and chauffeur service complete this two-day anniversary escape. Included: 1 night in a boutique suite with sea or vineyard view; Rose-petal turndown & fresh floral arrangement; Private candlelit chef's dinner; Couples spa treatment; Private chauffeur & 24/7 concierge.",
-  "image": "https://svrm.group/__l5e/assets-v1/969da06f-671f-483e-814c-d8ba3d16db80/tour-camps-bay-sunset-golden.jpg"
+  "image": "https://svrm.group/__l5e/assets-v1/6c0785d2-dac6-453b-8851-43bc41acaa35/tour-sunset-dinner-scenic.jpg"
  },
  {
   "path": "/tours/romantic/packages/cape-honeymoon-signature",
@@ -915,7 +915,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "description": "Begin married life with two nights in a luxury honeymoon suite and a sequence of memorable Cape experiences. A sunrise balloon flight, helicopter beach picnic, fresh flowers and private chauffeur service are arranged around the two of you. On request per person. Check availability on WhatsApp.",
   "heading": "Cape honeymoon signature · 3 days",
   "summary": "Begin married life with two nights in a luxury honeymoon suite and a sequence of memorable Cape experiences. A sunrise balloon flight, helicopter beach picnic, fresh flowers and private chauffeur service are arranged around the two of you. Included: 2 nights in a luxury honeymoon suite; Sunrise hot-air balloon over the Winelands; Private helicopter beach picnic; Daily florist-fresh bouquets & petal turndown; Private chauffeur & 24/7 concierge.",
-  "image": "https://svrm.group/__l5e/assets-v1/969da06f-671f-483e-814c-d8ba3d16db80/tour-camps-bay-sunset-golden.jpg"
+  "image": "https://svrm.group/__l5e/assets-v1/4cf4837a-635c-4afb-bb08-dd15274836a2/tour-hot-air-balloon-scenic.jpg"
  },
  {
   "path": "/tours/romantic/packages/grand-romantic-tour",
@@ -923,7 +923,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "description": "Combine Cape Town, the Winelands and a private safari lodge in a five-day celebration. Ballooning, helicopter and yacht experiences sit alongside private dining, spa time and an optional bespoke jewellery appointment. On request per person. Check availability on WhatsApp.",
   "heading": "Grand romantic tour · 5 days",
   "summary": "Combine Cape Town, the Winelands and a private safari lodge in a five-day celebration. Ballooning, helicopter and yacht experiences sit alongside private dining, spa time and an optional bespoke jewellery appointment. Included: Cape Town + Winelands + private safari lodge; Hot-air balloon, helicopter & yacht sunset cruise; Private jewellery atelier appointment (rings & bespoke pieces); Chef-led candlelit dinners & couples spa daily; Private chauffeur & 24/7 concierge.",
-  "image": "https://svrm.group/__l5e/assets-v1/969da06f-671f-483e-814c-d8ba3d16db80/tour-camps-bay-sunset-golden.jpg"
+  "image": "https://svrm.group/__l5e/assets-v1/13d8dcb6-74f9-493f-9916-5cf6f2c2824f/tour-franschhoek-scenic.jpg"
  },
  {
   "path": "/tours/romantic/packages/anniversary-grand-celebration",
@@ -931,7 +931,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "description": "Mark a major anniversary across ten days in Cape Town, the Winelands, Garden Route and safari country. Private chefs, florists, spa experiences and exceptional excursions are coordinated throughout, with an optional vow-renewal ceremony. On request per person. Check availability on WhatsApp.",
   "heading": "Anniversary grand celebration · 10 days",
   "summary": "Mark a major anniversary across ten days in Cape Town, the Winelands, Garden Route and safari country. Private chefs, florists, spa experiences and exceptional excursions are coordinated throughout, with an optional vow-renewal ceremony. Included: Cape Town, Winelands, Garden Route & private safari lodge; Hot-air balloon at sunrise + helicopter beach picnic; Private yacht sunset cruise with chef & florist; Bespoke jewellery atelier appointment & anniversary gift commission; Daily rose-petal turndown & fresh bouquets in every suite; Couples spa treatments & candlelit chef dinners throughout; Vow renewal ceremony option with private officiant & photographer; Private chauffeur & 24/7 concierge, dedicated to you end to end.",
-  "image": "https://svrm.group/__l5e/assets-v1/969da06f-671f-483e-814c-d8ba3d16db80/tour-camps-bay-sunset-golden.jpg"
+  "image": "https://svrm.group/__l5e/assets-v1/4cf4837a-635c-4afb-bb08-dd15274836a2/tour-hot-air-balloon-scenic.jpg"
  },
  {
   "path": "/tours/romantic/packages/bespoke-honeymoon-end-to-end",
@@ -939,7 +939,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "description": "A fully tailored honeymoon shaped around your preferred places, pace and style of stay. Private villas, dedicated concierge support, chauffeur travel and personal touches such as bespoke jewellery are brought together under one point of contact. On request per person. Check availability on WhatsApp.",
   "heading": "Bespoke honeymoon, end to end · 7+ days",
   "summary": "A fully tailored honeymoon shaped around your preferred places, pace and style of stay. Private villas, dedicated concierge support, chauffeur travel and personal touches such as bespoke jewellery are brought together under one point of contact. Included: Multi-region itinerary curated around you; Private villa stays with dedicated concierge; Fine jewellery sourcing & bespoke commissions; Private chauffeur & 24/7 concierge; Everything discreet, seamless, one point of contact.",
-  "image": "https://svrm.group/__l5e/assets-v1/969da06f-671f-483e-814c-d8ba3d16db80/tour-camps-bay-sunset-golden.jpg"
+  "image": "https://svrm.group/__l5e/assets-v1/6c0785d2-dac6-453b-8851-43bc41acaa35/tour-sunset-dinner-scenic.jpg"
  },
  {
   "path": "/tours/aquila-safari/packages/aquila-big-five-day-safari-morning",
@@ -963,6 +963,6 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "description": "Travel to Aquila in the afternoon for golden-hour and sunset game viewing, followed by dinner at the lodge. Your private chauffeur handles the late-evening return to Cape Town, removing the need to drive after the experience. On request per person. Check availability on WhatsApp.",
   "heading": "Aquila sunset safari · 1 day",
   "summary": "Travel to Aquila in the afternoon for golden-hour and sunset game viewing, followed by dinner at the lodge. Your private chauffeur handles the late-evening return to Cape Town, removing the need to drive after the experience. Included: Afternoon hotel pickup, late-evening return; Golden-hour & sunset game drive; Dinner at the lodge; Chauffeured private vehicle, end to end.",
-  "image": "https://svrm.group/__l5e/assets-v1/ad382249-6376-4d96-ad27-7c2ad3104cb2/tour-karoo-scenic.jpg"
+  "image": "https://svrm.group/__l5e/assets-v1/99230c69-b60e-4ffd-9625-01c78cab75d7/tour-aquila-scenic.jpg"
  }
 ];

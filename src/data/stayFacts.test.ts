@@ -73,11 +73,11 @@ describe("verified stay facts", () => {
       const listing = stayListing(stay);
       if (stay.slug === "a-la-penthouse") {
         expect(stayHasPublicRate(stay.slug)).toBe(true);
-        expect(listing.priceLabel).toBe("From R26,200 / night");
-        expect(listing.priceNote).toContain("R26,200–R43,400");
+        expect(listing.priceLabel).toBe("From R25,000 per night");
+        expect(listing.priceNote).toBe("Seasonal rates apply. Final pricing confirmed for your dates.");
       } else {
         expect(stayHasPublicRate(stay.slug), stay.slug).toBe(false);
-        expect(listing.priceLabel, stay.slug).toBe("On enquiry");
+        expect(listing.priceLabel, stay.slug).toBe("Enquire for your dates");
         expect(listing.priceNote, stay.slug).not.toContain("often lower");
       }
     }
