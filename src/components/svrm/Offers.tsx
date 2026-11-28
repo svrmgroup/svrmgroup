@@ -220,7 +220,7 @@ const Offers = () => {
                       wrapperClassName="absolute inset-0 w-full h-full"
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute top-4 left-4 bg-background/90 backdrop-blur px-3 py-1.5 text-[10px] tracking-[0.15em] uppercase text-foreground/80 z-10">
+                    <div className="absolute top-4 left-4 bg-background/90 backdrop-blur px-3 py-1.5 text-[10px] tracking-[0.15em] uppercase text-foreground/80 z-10 border border-primary/70 shadow-[0_0_0_1px_hsl(var(--primary)/0.18)]">
                       {o.eyebrow}
                     </div>
                   </div>
