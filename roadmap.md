@@ -1,3 +1,7 @@
+# Signature fleet and vehicle search
+- [x] Restore Maybach S-Class to the Signature grid; verify its booking control on desktop and its phone layout.
+- [x] Expand vehicle service descriptions, search keywords and static search summaries; six fleet/search tests passed.
+
 # December 2026 Google Search campaigns
 - [x] Launch review, brief, keyword research and ad copy saved to Files.
 - [x] Enquiry tracking: per-service WhatsApp messages with enquiry reference, captured ad attribution (consent-gated click IDs), travel date / guests / chauffeur days on forms.

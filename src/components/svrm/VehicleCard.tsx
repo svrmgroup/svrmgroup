@@ -6,6 +6,7 @@ import { useCurrency } from "@/lib/currency";
 import VehicleGallery from "./VehicleGallery";
 import { Button } from "@/components/ui/button";
 import { vehiclePhotoAlt } from "@/seo/vehicleImages";
+import { vehicleServiceDescription } from "@/seo/vehicleServices";
 
 const VehicleCard = ({ vehicle, index }: { vehicle: Vehicle; index: number }) => {
   const [open, setOpen] = useState(false);
@@ -21,7 +22,8 @@ const VehicleCard = ({ vehicle, index }: { vehicle: Vehicle; index: number }) =>
       <div className="p-6 flex-1 flex flex-col">
         <p className="eyebrow">Vehicle</p>
         <h3 className="font-serif text-2xl mt-2 text-foreground">{vehicle.name}</h3>
-        <p className="text-sm text-muted-foreground mt-2 flex-1">{vehicle.tagline}</p>
+        <p className="text-sm text-muted-foreground mt-2">{vehicle.tagline}</p>
+        <p className="text-sm text-muted-foreground mt-3 flex-1">{vehicleServiceDescription(vehicle)}</p>
         <div className="mt-5 flex items-end justify-between gap-4">
           <div>
             <p className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground/70">
