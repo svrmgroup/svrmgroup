@@ -1,3 +1,4 @@
+import { pickStable } from "@/lib/faqPicks";
 // Detail-page content for every published vehicle and stay, derived from the fleet and stay data
 // so a new published listing automatically gets its own page. Unknown figures stay "to confirm".
 import { vehicles, type Vehicle } from "@/data/vehicles";
@@ -121,18 +122,27 @@ export function vehicleListing(v: Vehicle, service: "chauffeur" | "self-drive" =
   const hireOptions = chauffeur
     ? ["Hourly", "Full day", "Multi-day", "Airport transfer", ...(v.tier === "Group Travel" ? ["Group tours & events"] : [])]
     : ["Daily", "Weekly", "Delivered to your address"];
-  const faqs: Faq[] = chauffeur ? [
+  const occasion = v.tier === "Signature" ? "anniversaries, honeymoons, proposals and weddings" : v.tier === "Group Travel" ? "group tours, weddings, corporate events and conference shuttles" : "business meetings, dinners and airport runs";
+  const faqs: Faq[] = chauffeur ? pickStable([
     { q: `How many passengers fit in the ${v.name}?`, a: `${passengers}, not counting your chauffeur. Tell us your group size and we'll confirm the best vehicle.` },
     { q: `How much luggage can the ${v.name} take?`, a: `${f.luggage ?? CONFIRM + " — send us your number of bags"}. For bigger groups we can add a luggage vehicle.` },
     { q: `Can I book the ${v.name} for several days?`, a: "Yes. Choose a start and end date in the enquiry and we'll quote a multi-day rate with the same chauffeur where possible." },
     { q: `Can the ${v.name} collect us from Cape Town International?`, a: "Yes — meet-and-greet inside the terminal, help with luggage and a direct drive to your hotel or villa. Share your flight number and we'll track it." },
-    ...(v.tier === "Signature" ? [{ q: `Is the ${v.name} suitable for a special occasion?`, a: "Yes — anniversaries, honeymoons, proposals and weddings. Tell us the occasion and we'll prepare the details." }] : []),
-  ] : [
+    { q: `What occasions is the ${v.name} best for?`, a: `It's a popular choice for ${occasion}. Tell us the occasion and we'll prepare the details.` },
+    { q: `Why do clients choose the ${v.name}?`, a: `${f.why ?? v.tagline} Every booking comes with a private SVRM chauffeur.` },
+    { q: `Can I take the ${v.name} on a Cape Peninsula or Winelands tour?`, a: "Yes — book it by the day and your chauffeur will drive the Peninsula, Chapman's Peak, Cape Point or the Winelands at your pace." },
+    { q: `Is the ${v.name} good for business travel?`, a: "Yes — your chauffeur waits between meetings, plans routes around traffic and keeps the day running on time." },
+    { q: `Can I hire the ${v.name} by the hour?`, a: "Yes — hourly, full-day and multi-day bookings are available. Tell us your plans and we'll quote." },
+    { q: `What is included with the ${v.name}?`, a: `${(f.features ?? ["Private chauffeur", "Bottled water", "Door-to-door service"]).join(", ")}. Your quote confirms everything in writing.` },
+  ], `chauffeur:${v.slug}`, 5) : pickStable([
     { q: `Is the ${v.name} self-drive rate shown online?`, a: "Self-drive rentals are priced on enquiry. Send your dates and we'll reply with a quote and the rental terms." },
     { q: "What do I need to rent?", a: "A valid driver's licence, ID or passport and a refundable deposit. Your concierge confirms the exact requirements with your quote." },
     { q: "Can you deliver the car?", a: "Yes — to your hotel, villa or the airport. Add the address in your enquiry." },
     { q: `Can I have the ${v.name} with a chauffeur instead?`, a: `Yes — see the chauffeured ${v.name} page for that service.` },
-  ];
+    { q: `Can I rent the ${v.name} for a week or longer?`, a: "Yes — daily, weekly and longer rentals are available. Longer stays are quoted on your dates." },
+    { q: `Is the ${v.name} good for a Garden Route or Winelands drive?`, a: "Yes — tell us your route and dates and we'll confirm mileage terms with your quote." },
+    { q: `Why rent the ${v.name} in Cape Town?`, a: `${v.tagline} It's delivered to your door so you can explore at your own pace.` },
+  ], `self:${v.slug}`, 4);
   const related = f.related ?? (chauffeur ? [AIRPORT, PENINSULA] : [AIRPORT]);
   return {
     vehicle: v, slug: v.slug, name: v.name, path, url: `${SITE_URL}${path}`, service,
@@ -201,7 +211,6 @@ const AREA_NOTES: Record<string, string> = {
   "Higgovale": "Higgovale is a leafy residential pocket on the slopes of Table Mountain",
 };
 
-const seedOf = (str: string) => { let h = 2166136261; for (const c of str) h = Math.imul(h ^ c.charCodeAt(0), 16777619); return h >>> 0; };
 
 /** Picks a varied, stable set of fact-based questions per stay (same slug → same questions, so search data stays consistent). */
 function stayFaqPicks(s: Stay, o: { kind: string; maxGuests: string; amenities: string[]; bedroomsN?: number; guestsN?: number }): Faq[] {
@@ -220,9 +229,7 @@ function stayFaqPicks(s: Stay, o: { kind: string; maxGuests: string; amenities: 
     { q: "Can SVRM plan things to do during my stay?", a: "Yes — your concierge can book restaurants, private tours, wine farms, boat trips and experiences around your dates." },
     { q: "Can SVRM arrange airport collection?", a: "Yes — a private chauffeur can meet you at Cape Town International and bring you straight to the door." },
   ];
-  let h = seedOf(s.slug);
-  const shuffled = pool.map((f) => { h = Math.imul(h ^ (h >>> 15), 2246822507) >>> 0; return { f, k: h }; }).sort((a, b) => a.k - b.k).map((x) => x.f);
-  return shuffled.slice(0, 5);
+  return pickStable(pool, s.slug, 5);
 }
 
 export function stayListing(s: Stay): StayListing {

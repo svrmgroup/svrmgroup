@@ -5,12 +5,13 @@ import NotFound from "./NotFound";
 import { Seo } from "@/components/Seo";
 import ListingGallery from "@/components/svrm/ListingGallery";
 import ListingEnquiry from "@/components/svrm/ListingEnquiry";
-import { Breadcrumbs, FactList, RelatedLinks, breadcrumbSchema, useListingPage } from "@/components/svrm/ListingSections";
+import { Breadcrumbs, FactList, ListingFaqs, RelatedLinks, breadcrumbSchema, listingFaqSchema, useListingPage } from "@/components/svrm/ListingSections";
 import { findTourPackage, tourPackageDescription, tourPackagePath, tourPackagePhotoKey, tourPackageSlug } from "@/data/tourPackages";
 import { tourPackagePhotos } from "@/data/tourPhotos";
 import { useListingPhotos } from "@/hooks/useListingPhotos";
 import { useCurrency } from "@/lib/currency";
 import { SITE_URL } from "@/data/listings";
+import { tourPackageFaqs, tourPackageKeywords } from "@/data/tourPackageFaqs";
 
 const TourPackageDetail = () => {
   const { slug, packageSlug } = useParams<{ slug: string; packageSlug: string }>();
@@ -32,6 +33,7 @@ const TourPackageDetailInner = ({ tour, pkg }: { tour: NonNullable<ReturnType<ty
   const crumbs = [{ label: "Home", to: "/" }, { label: "Tours", to: "/tours" }, { label: tour.label, to: `/tours/${tour.slug}` }, { label: pkg.title, to: path }];
   const price = pkg.fromZAR != null ? `From ${format(pkg.fromZAR)}` : "On request";
   const unit = pkg.unit ?? "per person";
+  const faqs = tourPackageFaqs(tour, pkg);
   const provider = { "@type": "Organization", name: "SVRM Group", url: `${SITE_URL}/` };
 
   return (
@@ -41,8 +43,10 @@ const TourPackageDetailInner = ({ tour, pkg }: { tour: NonNullable<ReturnType<ty
         description={`${description} ${price} ${unit}. Enquire on WhatsApp.`.slice(0, 300)}
         path={path}
         image={photos[0]?.src}
+        keywords={tourPackageKeywords(tour, pkg)}
         jsonLd={[
           breadcrumbSchema(crumbs),
+          listingFaqSchema(faqs),
           {
             "@context": "https://schema.org",
             "@type": ["TouristTrip", "Product"],
@@ -100,6 +104,7 @@ const TourPackageDetailInner = ({ tour, pkg }: { tour: NonNullable<ReturnType<ty
               <h2 className="font-serif text-xl">Good to know</h2>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">Every itinerary is personalised. Availability, weather, seasonal operations and your final route can affect the experience and price; your concierge confirms the details before you book.</p>
             </section>
+            <ListingFaqs faqs={faqs} title={`${pkg.title} — questions`} />
             <RelatedLinks links={[
               { label: `All ${tour.label} packages`, to: `/tours/${tour.slug}` },
               { label: "Build your own tour", to: "/tours/builder" },

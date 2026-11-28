@@ -32,6 +32,7 @@ const StayDetailInner = ({ stay }: { stay: Stay }) => {
         title={`${l.name} | Luxury Stay Cape Town — SVRM`}
         description={`${l.name} in ${l.neighbourhood}, Cape Town. ${l.bedrooms}, ${l.bathrooms}; ${l.maxGuests}. ${l.priceLabel}. Check availability on WhatsApp.`.slice(0, 300)}
         path={l.path}
+        keywords={[`${l.name} Cape Town`, `${l.neighbourhood} ${l.stay.type} rental`, `luxury ${l.stay.type} ${l.neighbourhood}`, `${l.neighbourhood} accommodation`, `${l.bedrooms} ${l.stay.type} Cape Town`, "luxury stay Cape Town with chauffeur", ...l.amenities.slice(0, 4).map((a) => `${l.neighbourhood} ${l.stay.type} with ${a.toLowerCase()}`)].join(", ")}
         image={photos[0]?.src}
         jsonLd={[
           breadcrumbSchema(crumbs),

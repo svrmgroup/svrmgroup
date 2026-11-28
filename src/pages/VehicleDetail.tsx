@@ -28,6 +28,7 @@ const VehicleDetailInner = ({ slug, service }: { slug: string; service: "chauffe
         title={title}
         description={description}
         path={l.path}
+        keywords={[`${l.name} Cape Town`, `${l.name} ${l.service === "chauffeur" ? "chauffeur" : "rental"} Cape Town`, `hire ${l.name} Cape Town`, `${l.name} airport transfer Cape Town`, `${l.name} wedding car Cape Town`, `luxury ${l.service === "chauffeur" ? "chauffeur" : "car rental"} Cape Town`, `${l.name} hire Western Cape`].join(", ")}
         image={photos[0]?.src}
         jsonLd={[
           breadcrumbSchema(crumbs),
