@@ -3,7 +3,7 @@ import { tourPackagePhotoKey } from "./tourPackages";
 import library from "./tourPhotoLibrary.json";
 
 /** A real, credited photograph (Wikimedia Commons) used to illustrate a tour package. */
-export interface TourPhoto { src: string; alt: string; artist: string; license: string; source: string }
+export interface TourPhoto { src: string; fullSrc: string; alt: string; artist: string; license: string; source: string }
 type Entry = { src: string; title: string; artist: string; license: string; source: string };
 const lib = library as Record<string, Entry[]>;
 
@@ -53,7 +53,7 @@ export function tourPackagePhotos(tour: TourCategory, pkg: TourPackage): TourPho
   for (const k of keys) for (const e of lib[k] ?? []) {
     if (seen.has(e.src)) continue;
     seen.add(e.src);
-    out.push({ src: e.src, alt: `${pkg.title} — illustrative photograph: ${nice(e.title)}`, artist: e.artist, license: e.license, source: e.source });
+    out.push({ src: e.src, fullSrc: e.src, alt: `${pkg.title} — illustrative photograph: ${nice(e.title)}`, artist: e.artist, license: e.license, source: e.source });
   }
   return out.slice(0, 5);
 }
