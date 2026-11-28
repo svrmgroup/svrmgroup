@@ -6,6 +6,7 @@ import { vehicles } from "@/data/vehicles";
 import { WHATSAPP_BASE } from "@/lib/whatsappMessages";
 import WhatsAppGlyph from "@/components/svrm/WhatsAppGlyph";
 import PhoneField from "@/components/svrm/PhoneField";
+import { newReference, trackingFields } from "@/lib/enquiryTracking";
 
 import { Loader2, Check } from "lucide-react";
 import { toast } from "sonner";
@@ -152,7 +153,15 @@ const AiItineraryPlanner = () => {
       ...briefLines(),
       ...(plan ? ["", "— DRAFT ITINERARY —", planText(plan)] : []),
     ].join("\n");
+    const tracking = await trackingFields("/chauffeur");
+    const group = Number.parseInt(groupSize, 10);
     const { error: dbError } = await supabase.from("enquiries").insert({
+      ...tracking,
+      service: "chauffeur",
+      reference: newReference(),
+      booking_date: /^\d{4}-\d{2}-\d{2}$/.test(startDate) ? startDate : null,
+      party_size: group >= 1 && group <= 200 ? group : null,
+      chauffeur_days: startDate && endDate ? Math.min(90, dayCount) : null,
       name: name.trim(),
       email: emailOrNull(email),
       phone: phone.trim(),

@@ -1,3 +1,12 @@
+# December 2026 Google Search campaigns
+- [x] Launch review, brief, keyword research and ad copy saved to Files.
+- [ ] Enquiry tracking: per-service WhatsApp messages with enquiry reference, captured ad attribution (consent-gated click IDs), travel date / guests / chauffeur days on forms.
+- [ ] Booking stages in admin (qualified, quote sent, deposit paid, completed, contribution), employment and duplicate flags, WhatsApp reference matching, Google Ads import sheet.
+- [ ] Google Ads: WhatsApp tap secondary, form counted once per click, offline stage conversion actions (needs approval card).
+- [ ] Germany campaign lands with German as the page language (?lang=de); German guide confirmed by owner.
+- [ ] Mobile test of form, WhatsApp handoff and duplicates; update launch review.
+- [ ] Waiting on owner: spend approval, then create campaigns paused, verify end date, enable.
+
 # Media loading speed
 - [x] Create 640px/1280px WebP copies for 323 photos (phone copies 88.8% smaller in aggregate); preserve originals for full-size viewing and search.
 - [x] Compress heavier videos, add missing honeymoon phone/HD copies, and defer offscreen images/video while prioritising opening photos.

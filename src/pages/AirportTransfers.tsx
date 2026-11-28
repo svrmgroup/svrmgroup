@@ -16,6 +16,7 @@ import { formatDate } from "@/lib/locale";
 import PhoneField from "@/components/svrm/PhoneField";
 import hero from "@/assets/airport-transfers-hero.jpg";
 import SmartImage from "@/components/svrm/SmartImage";
+import { newReference, trackingFields } from "@/lib/enquiryTracking";
 
 
 // Common Cape Town pickup / drop-off points for autofill.
@@ -104,7 +105,14 @@ const AirportTransfers = () => {
       from ? `From: ${from}` : null,
       to ? `To: ${to}` : null,
     ].filter(Boolean).join("\n");
+    const tracking = await trackingFields(location.pathname);
+    const paxNum = Number.parseInt(pax, 10);
     const { error } = await supabase.from("enquiries").insert({
+      ...tracking,
+      service: "airport_transfer",
+      reference: newReference(),
+      booking_date: when.match(/\d{4}-\d{2}-\d{2}/)?.[0] ?? null,
+      party_size: paxNum >= 1 && paxNum <= 200 ? paxNum : null,
       name: name.trim(),
       email: emailOrNull(email),
       phone: phone.trim(),

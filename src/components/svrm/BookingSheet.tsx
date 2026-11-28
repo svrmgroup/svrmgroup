@@ -1,6 +1,7 @@
 import { reportConversion } from "@/lib/adsConsent";
 import { requiredPhone, optionalEmail, emailOrNull, PHONE_REQUIRED_MSG } from "@/lib/contactValidation";
 import { useState } from "react";
+import { inclusiveDays, newReference, trackingFields } from "@/lib/enquiryTracking";
 import { format, differenceInCalendarDays } from "date-fns";
 import { z } from "zod";
 import { Users } from "lucide-react";
@@ -127,13 +128,21 @@ const BookingSheet = ({
       return;
     }
     setSubmitting(true);
+    const sourcePage = `/${kind}/${slug}`;
+    const tracking = await trackingFields(sourcePage);
     const { error } = await supabase.from("enquiries").insert({
+      ...tracking,
+      service: kind === "vehicle" ? "chauffeur" : kind === "stay" ? "stays" : "tours",
+      reference: newReference(),
+      booking_date: range.from.toISOString().slice(0, 10),
+      party_size: kind === "vehicle" ? null : guests,
+      chauffeur_days: kind === "vehicle" ? inclusiveDays(range.from, range.to) : null,
       name: parsed.data.name,
       email: emailOrNull(parsed.data.email),
       phone: parsed.data.phone,
       subject,
       message: composedMessage || summary || name,
-      source_page: `/${kind}/${slug}`,
+      source_page: sourcePage,
     });
     setSubmitting(false);
     if (error) {

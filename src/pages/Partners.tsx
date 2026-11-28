@@ -9,7 +9,6 @@ import PhoneField from "@/components/svrm/PhoneField";
 import { Seo } from "@/components/Seo";
 import { supabase } from "@/integrations/supabase/client";
 import { requiredPhone } from "@/lib/contactValidation";
-import { reportConversion } from "@/lib/adsConsent";
 
 type Cat = "vehicle" | "property" | "experience" | "professional";
 
@@ -83,7 +82,6 @@ const Partners = () => {
         photo_paths,
       });
       if (error) throw error;
-      void reportConversion("enquiry");
       setDone(true);
       setForm(empty); setDetails({}); setFiles([]);
     } catch (err) {

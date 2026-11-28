@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import ExtrasPicker from "./ExtrasPicker";
 import PhoneField from "./PhoneField";
+import { newReference, serviceFromPath, trackingFields } from "@/lib/enquiryTracking";
 
 import { Extra } from "@/data/extras";
 
@@ -16,6 +17,9 @@ const schema = z.object({
   email: optionalEmail,
   phone: requiredPhone,
   message: z.string().trim().min(1, "Required").max(2000),
+  travelDate: z.string().optional(),
+  guests: z.string().optional().refine((v) => !v || (/^\d+$/.test(v) && +v >= 1 && +v <= 200), "Enter 1–200"),
+  days: z.string().optional().refine((v) => !v || (/^\d+$/.test(v) && +v >= 1 && +v <= 90), "Enter 1–90"),
 });
 
 interface Props {
@@ -28,7 +32,9 @@ interface Props {
 
 const EnquiryForm = ({ subject, defaultMessage = "", compact = false, extras, extrasLabel }: Props) => {
   const location = useLocation();
-  const [form, setForm] = useState({ name: "", email: "", phone: "", message: defaultMessage });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", message: defaultMessage, travelDate: "", guests: "", days: "" });
+  const [reference, setReference] = useState<string | null>(null);
+  const isChauffeur = serviceFromPath(location.pathname) === "chauffeur" || /chauffeur|driver/i.test(subject);
   const [selectedExtras, setSelectedExtras] = useState<string[]>([]);
   const [errors, setErrors] = useState<Partial<Record<keyof typeof form, string>>>({});
   const [submitting, setSubmitting] = useState(false);
@@ -62,7 +68,15 @@ const EnquiryForm = ({ subject, defaultMessage = "", compact = false, extras, ex
     setErrors({});
     setSubmitting(true);
     const fullMessage = parsed.data.message + extrasSummary();
+    const ref = newReference();
+    const tracking = await trackingFields(location.pathname);
     const { error } = await supabase.from("enquiries").insert({
+      ...tracking,
+      service: isChauffeur ? "chauffeur" : tracking.service,
+      reference: ref,
+      booking_date: parsed.data.travelDate || null,
+      party_size: parsed.data.guests ? Number(parsed.data.guests) : null,
+      chauffeur_days: isChauffeur && parsed.data.days ? Number(parsed.data.days) : null,
       name: parsed.data.name,
       email: emailOrNull(parsed.data.email),
       phone: parsed.data.phone,
@@ -75,6 +89,7 @@ const EnquiryForm = ({ subject, defaultMessage = "", compact = false, extras, ex
       toast.error("Couldn't send. Please try again or use WhatsApp.");
       return;
     }
+    setReference(ref);
     setDone(true);
     toast.success("Enquiry received. We'll respond personally, within hours.");
     void reportConversion("enquiry");
@@ -88,6 +103,11 @@ const EnquiryForm = ({ subject, defaultMessage = "", compact = false, extras, ex
         <p className="mt-3 text-sm text-muted-foreground">
           A member of the concierge team will be in touch personally, within hours.
         </p>
+        {reference && (
+          <p className="mt-4 text-xs uppercase tracking-[0.24em] text-gold">
+            Your reference: <span className="notranslate" translate="no">{reference}</span>
+          </p>
+        )}
       </div>
     );
   }
@@ -119,6 +139,31 @@ const EnquiryForm = ({ subject, defaultMessage = "", compact = false, extras, ex
           placeholder="Phone / WhatsApp (required)"
         />
         {errors.phone && <p className="mt-1 text-xs text-destructive">{errors.phone}</p>}
+      </div>
+
+      <div className={`grid grid-cols-1 gap-6 ${isChauffeur ? "sm:grid-cols-3" : "sm:grid-cols-2"}`}>
+        <div>
+          <label className="block text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+            Travel date
+            <input className={inputBase} type="date" value={form.travelDate} onChange={update("travelDate")} aria-label="Travel date" />
+          </label>
+        </div>
+        <div>
+          <label className="block text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+            Guests
+            <input className={inputBase} type="number" inputMode="numeric" min={1} max={200} value={form.guests} onChange={update("guests")} aria-label="Guests" />
+          </label>
+          {errors.guests && <p className="mt-1 text-xs text-destructive">{errors.guests}</p>}
+        </div>
+        {isChauffeur && (
+          <div>
+            <label className="block text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
+              Chauffeur days
+              <input className={inputBase} type="number" inputMode="numeric" min={1} max={90} value={form.days} onChange={update("days")} aria-label="Chauffeur days" />
+            </label>
+            {errors.days && <p className="mt-1 text-xs text-destructive">{errors.days}</p>}
+          </div>
+        )}
       </div>
 
       <div>

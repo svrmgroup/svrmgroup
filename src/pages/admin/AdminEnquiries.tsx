@@ -3,23 +3,14 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Mail, Phone, ChevronDown, Trash2 } from "lucide-react";
 import { countryLabel } from "@/lib/countryCodes";
+import EnquiryPipeline, { type EnquiryRow } from "@/components/admin/EnquiryPipeline";
+import WhatsAppReferences from "@/components/admin/WhatsAppReferences";
+import { buildImportCsv } from "@/lib/enquiryTracking";
 
 
 type Status = "new" | "in_progress" | "done" | "archived";
 
-interface Row {
-  id: string;
-  name: string;
-  email: string;
-  phone: string | null;
-  subject: string;
-  message: string;
-  source_page: string | null;
-  status: Status;
-  admin_notes: string | null;
-  booking_date: string | null;
-  created_at: string;
-}
+type Row = EnquiryRow;
 
 const STATUS_META: Record<Status, { label: string; className: string }> = {
   new: { label: "New", className: "bg-primary/20 text-gold border-primary/40" },
@@ -66,9 +57,22 @@ const AdminEnquiries = () => {
   }, []);
 
   const update = async (id: string, patch: Partial<Row>) => {
-    const { error } = await supabase.from("enquiries").update(patch).eq("id", id);
+    const { data, error } = await supabase.from("enquiries").update(patch).eq("id", id).select("*").single();
     if (error) return toast.error(error.message);
-    setRows((r) => r.map((x) => (x.id === id ? { ...x, ...patch } : x)));
+    setRows((r) => r.map((x) => (x.id === id ? (data as Row) : x)));
+  };
+
+  const exportImport = () => {
+    const csv = buildImportCsv(rows);
+    const count = csv.split("\n").length - 2;
+    if (count <= 0) return toast.info("No ad-click stages to import yet.");
+    const url = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `svrm-google-ads-import-${new Date().toISOString().slice(0, 10)}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success(`${count} conversion${count === 1 ? "" : "s"} ready to upload in Google Ads.`);
   };
 
   const remove = async (id: string) => {
@@ -91,8 +95,15 @@ const AdminEnquiries = () => {
           <p className="eyebrow">Inbox</p>
           <h1 className="font-serif text-3xl md:text-4xl mt-2">Enquiries</h1>
         </div>
-        <p className="text-xs text-muted-foreground">{rows.length} total</p>
+        <div className="flex items-center gap-4">
+          <button onClick={exportImport} className="px-3 py-2 border border-primary/50 text-gold text-[10px] uppercase tracking-[0.22em] hover:bg-primary hover:text-primary-foreground">
+            Google Ads import sheet
+          </button>
+          <p className="text-xs text-muted-foreground">{rows.length} total</p>
+        </div>
       </div>
+
+      <WhatsAppReferences onLogged={load} />
 
       <div className="flex gap-2 flex-wrap mb-6">
         {(["all", "new", "in_progress", "done", "archived"] as const).map((s) => (
@@ -132,6 +143,11 @@ const AdminEnquiries = () => {
                   </span>
                   <div className="flex-1 min-w-0">
                     <p className="font-serif text-lg truncate">{r.subject}</p>
+                    {(r.reference || r.stage !== "new") && (
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-gold truncate">
+                        {r.reference ?? ""}{r.stage !== "new" ? ` · ${r.stage.replace("_", " ")}` : ""}{r.is_duplicate ? " · repeat" : ""}{r.is_employment ? " · job seeker" : ""}
+                      </p>
+                    )}
                     <p className="text-xs text-muted-foreground truncate">
                       {r.name} · {r.email} {r.phone ? `· ${r.phone}` : ""}
                       {countryLabel(r.phone) ? ` · ${countryLabel(r.phone)}` : ""}
@@ -171,6 +187,8 @@ const AdminEnquiries = () => {
                         <span className="text-muted-foreground">From: {r.source_page}</span>
                       )}
                     </div>
+
+                    <EnquiryPipeline row={r} onUpdate={(patch) => update(r.id, patch)} />
 
                     <div>
                       <p className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground mb-2">Message</p>

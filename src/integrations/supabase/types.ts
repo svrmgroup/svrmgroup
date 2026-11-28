@@ -885,48 +885,134 @@ export type Database = {
       }
       enquiries: {
         Row: {
+          ad_consent: boolean
           admin_notes: string | null
           booking_date: string | null
+          booking_value: number | null
+          channel: string
+          chauffeur_days: number | null
+          completed_at: string | null
+          contribution: number | null
           created_at: string
+          deposit_paid_at: string | null
+          direct_costs: number | null
+          duplicate_of: string | null
           email: string | null
+          gbraid: string | null
+          gclid: string | null
           id: string
+          is_duplicate: boolean
+          is_employment: boolean
+          landing_path: string | null
           message: string
           name: string
+          party_size: number | null
           phone: string | null
+          qualified_at: string | null
+          quote_amount: number | null
+          quote_sent_at: string | null
+          reference: string | null
+          service: string | null
           source_page: string | null
+          stage: string
           status: Database["public"]["Enums"]["enquiry_status"]
           subject: string
           updated_at: string
+          utm_campaign: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+          wbraid: string | null
         }
         Insert: {
+          ad_consent?: boolean
           admin_notes?: string | null
           booking_date?: string | null
+          booking_value?: number | null
+          channel?: string
+          chauffeur_days?: number | null
+          completed_at?: string | null
+          contribution?: number | null
           created_at?: string
+          deposit_paid_at?: string | null
+          direct_costs?: number | null
+          duplicate_of?: string | null
           email?: string | null
+          gbraid?: string | null
+          gclid?: string | null
           id?: string
+          is_duplicate?: boolean
+          is_employment?: boolean
+          landing_path?: string | null
           message: string
           name: string
+          party_size?: number | null
           phone?: string | null
+          qualified_at?: string | null
+          quote_amount?: number | null
+          quote_sent_at?: string | null
+          reference?: string | null
+          service?: string | null
           source_page?: string | null
+          stage?: string
           status?: Database["public"]["Enums"]["enquiry_status"]
           subject: string
           updated_at?: string
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+          wbraid?: string | null
         }
         Update: {
+          ad_consent?: boolean
           admin_notes?: string | null
           booking_date?: string | null
+          booking_value?: number | null
+          channel?: string
+          chauffeur_days?: number | null
+          completed_at?: string | null
+          contribution?: number | null
           created_at?: string
+          deposit_paid_at?: string | null
+          direct_costs?: number | null
+          duplicate_of?: string | null
           email?: string | null
+          gbraid?: string | null
+          gclid?: string | null
           id?: string
+          is_duplicate?: boolean
+          is_employment?: boolean
+          landing_path?: string | null
           message?: string
           name?: string
+          party_size?: number | null
           phone?: string | null
+          qualified_at?: string | null
+          quote_amount?: number | null
+          quote_sent_at?: string | null
+          reference?: string | null
+          service?: string | null
           source_page?: string | null
+          stage?: string
           status?: Database["public"]["Enums"]["enquiry_status"]
           subject?: string
           updated_at?: string
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+          wbraid?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "enquiries_duplicate_of_fkey"
+            columns: ["duplicate_of"]
+            isOneToOne: false
+            referencedRelation: "enquiries"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       expenses: {
         Row: {
@@ -1547,30 +1633,74 @@ export type Database = {
       }
       whatsapp_clicks: {
         Row: {
+          ad_consent: boolean
           created_at: string
+          enquiry_id: string | null
+          gbraid: string | null
+          gclid: string | null
           id: string
+          landing_path: string | null
           path: string | null
+          reference: string | null
           referrer: string | null
+          service: string | null
           source_label: string | null
           user_agent: string | null
+          utm_campaign: string | null
+          utm_medium: string | null
+          utm_source: string | null
+          utm_term: string | null
+          wbraid: string | null
         }
         Insert: {
+          ad_consent?: boolean
           created_at?: string
+          enquiry_id?: string | null
+          gbraid?: string | null
+          gclid?: string | null
           id?: string
+          landing_path?: string | null
           path?: string | null
+          reference?: string | null
           referrer?: string | null
+          service?: string | null
           source_label?: string | null
           user_agent?: string | null
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+          wbraid?: string | null
         }
         Update: {
+          ad_consent?: boolean
           created_at?: string
+          enquiry_id?: string | null
+          gbraid?: string | null
+          gclid?: string | null
           id?: string
+          landing_path?: string | null
           path?: string | null
+          reference?: string | null
           referrer?: string | null
+          service?: string | null
           source_label?: string | null
           user_agent?: string | null
+          utm_campaign?: string | null
+          utm_medium?: string | null
+          utm_source?: string | null
+          utm_term?: string | null
+          wbraid?: string | null
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "whatsapp_clicks_enquiry_id_fkey"
+            columns: ["enquiry_id"]
+            isOneToOne: false
+            referencedRelation: "enquiries"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
