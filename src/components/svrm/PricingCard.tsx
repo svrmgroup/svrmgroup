@@ -3,6 +3,7 @@ import BookingSheet from "./BookingSheet";
 import { useCurrency } from "@/lib/currency";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import SmartImage from "./SmartImage";
+import { Link } from "react-router-dom";
 
 interface Props {
   duration: string;
@@ -18,9 +19,11 @@ interface Props {
   /** Slug for this tour package (used with source_page). */
   slug?: string;
   onEnquire?: () => void;
+  /** Package detail page; when set the card links there instead of booking. */
+  detailTo?: string;
 }
 
-const PricingCard = ({ duration, title, inclusions, subject, fromZAR, slug, unit, image, onEnquire }: Props) => {
+const PricingCard = ({ duration, title, inclusions, subject, fromZAR, slug, unit, image, onEnquire, detailTo }: Props) => {
   const [open, setOpen] = useState(false);
   const { format } = useCurrency();
 
@@ -65,7 +68,11 @@ const PricingCard = ({ duration, title, inclusions, subject, fromZAR, slug, unit
         ))}
       </ul>
 
-      {onEnquire ? (
+      {detailTo ? (
+        <Link to={detailTo} className="mt-8 text-center px-6 py-3 border border-primary/60 text-gold text-xs uppercase tracking-[0.28em] hover:bg-primary hover:text-primary-foreground transition-colors duration-500">
+          View package
+        </Link>
+      ) : onEnquire ? (
         <button
           type="button"
           onClick={onEnquire}

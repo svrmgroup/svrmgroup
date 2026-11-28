@@ -1,3 +1,4 @@
+import { tourPackagePath } from "@/data/tourPackages";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { TourRouteMap } from "@/components/svrm/TourRouteMap";
 import Nav from "@/components/svrm/Nav";
@@ -159,6 +160,7 @@ const TourDetail = () => {
                 image={p.image}
                 subject={`${tour.label} — ${p.duration} ${p.title}${datesSuffix}`}
                 slug={`${tour.slug}-${p.duration.toLowerCase().replace(/\s+/g, "-")}`}
+                detailTo={tourPackagePath(tour, p)}
               />
             ))}
           </div>
