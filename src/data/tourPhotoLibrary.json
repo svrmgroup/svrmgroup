@@ -1,1 +1,20 @@
-{}
+{
+ "franschhoek": [
+  {
+   "src": "/__l5e/assets-v1/6ccdfcf3-dcc7-4593-be71-641135ec2248/franschhoek-2.jpg",
+   "title": "File:Franschhoek Valley.jpg",
+   "artist": "User:Da_Legend",
+   "license": "Public domain",
+   "source": "https://commons.wikimedia.org/wiki/File:Franschhoek_Valley.jpg"
+  }
+ ],
+ "clifton-sunset": [
+  {
+   "src": "/__l5e/assets-v1/adf13bf6-36fb-48ce-a07b-626df0701a0b/clifton-sunset-2.jpg",
+   "title": "File:Sunset in Clifton Beach (2669952400).jpg",
+   "artist": "cogdogblog",
+   "license": "CC0",
+   "source": "https://commons.wikimedia.org/wiki/File:Sunset_in_Clifton_Beach_(2669952400).jpg"
+  }
+ ]
+}
