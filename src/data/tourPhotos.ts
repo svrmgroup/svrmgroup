@@ -58,9 +58,8 @@ export function tourPackagePhotos(tour: TourCategory, pkg: TourPackage): TourPho
     seen.add(e.src);
     out.push({ src: e.src, fullSrc: e.src, alt: `${pkg.title} — illustrative photograph: ${nice(e.title)}`, artist: e.artist, license: e.license, source: e.source });
   }
-  const own = pkg.image ?? tour.image;
-  // Existing SVRM vehicle photos are shown whole (uncropped) alongside the real tour photos.
-  if (pkg.image && VEHICLE_SHOT.test(pkg.image)) out.unshift({ src: pkg.image, fullSrc: pkg.image, fit: "contain", alt: `${pkg.title} — SVRM chauffeur vehicle, Cape Town`, artist: "SVRM Group", license: "SVRM Group", source: "" });
-  if (!out.length && own) out.push({ src: own, fullSrc: own, alt: `${pkg.title} — ${tour.label}, Cape Town`, artist: "SVRM Group", license: "SVRM Group", source: "" });
-  return out.slice(0, 5);
+  // Lead with SVRM's own polished tour/package imagery, then the real credit-free photos.
+  const lead = [pkg.image, tour.image].filter((src): src is string => !!src && !seen.has(src));
+  lead.reverse().forEach((src) => { seen.add(src); out.unshift({ src, fullSrc: src, alt: `${pkg.title} — ${tour.label}, Cape Town`, artist: "SVRM Group", license: "SVRM Group", source: "" }); });
+  return out.slice(0, 6);
 }

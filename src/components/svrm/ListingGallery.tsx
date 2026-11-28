@@ -7,7 +7,7 @@ import SmartImage from "./SmartImage";
 import type { Photo } from "@/data/listings";
 
 /** Swipeable photo gallery with full-screen viewing; one photo renders without carousel controls. */
-const ListingGallery = ({ photos, name }: { photos: Photo[]; name: string }) => {
+const ListingGallery = ({ photos, name, fill = false }: { photos: Photo[]; name: string; fill?: boolean }) => {
   const [api, setApi] = useState<CarouselApi>();
   const [selected, setSelected] = useState(0);
   const [expanded, setExpanded] = useState(false);
@@ -29,7 +29,7 @@ const ListingGallery = ({ photos, name }: { photos: Photo[]; name: string }) => 
         <CarouselContent className="ml-0">
           {photos.map((p, i) => (
             <CarouselItem key={p.src} className="pl-0">
-              <SmartImage src={p.src} alt={p.alt} wrapperClassName={`aspect-[16/10] md:aspect-[16/9] ${p.fit === "contain" ? "bg-surface-deep" : ""}`} className={`absolute inset-0 w-full h-full ${p.fit === "contain" ? "object-contain" : "object-cover"}`} sizes="(min-width: 1024px) 66vw, 100vw" priority={i === 0} loading={i === 0 ? "eager" : "lazy"} />
+              <SmartImage src={p.src} alt={p.alt} wrapperClassName={fill ? "aspect-[4/3] md:aspect-[16/9] h-full" : `aspect-[16/10] md:aspect-[16/9] ${p.fit === "contain" ? "bg-surface-deep" : ""}`} className={`absolute inset-0 w-full h-full ${p.fit === "contain" && !fill ? "object-contain" : "object-cover"}`} sizes="(min-width: 1024px) 66vw, 100vw" priority={i === 0} loading={i === 0 ? "eager" : "lazy"} />
               {p.caption && <p className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-background/85 px-3 py-1 text-xs text-foreground">{p.caption}</p>}
             </CarouselItem>
           ))}
@@ -42,7 +42,7 @@ const ListingGallery = ({ photos, name }: { photos: Photo[]; name: string }) => 
       <Dialog open={expanded} onOpenChange={setExpanded}>
         <DialogContent className="h-[100dvh] max-w-none gap-0 border-0 p-0 sm:rounded-none [&>button]:z-10 [&>button]:bg-background/90 [&>button]:p-2">
           <DialogTitle className="sr-only">{photo.alt}</DialogTitle>
-          <SmartImage src={photo.fullSrc} alt={photo.alt} original priority wrapperClassName="absolute inset-0 h-full w-full" className="absolute inset-0 w-full h-full object-contain" />
+          <SmartImage src={photo.fullSrc} alt={photo.alt} original priority wrapperClassName="absolute inset-0 h-full w-full" className={`absolute inset-0 w-full h-full ${fill ? "object-cover" : "object-contain"}`} />
           {many && (
             <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between bg-background/90 p-3">
               <Button variant="outline" size="icon" aria-label="Previous photo" onClick={() => move(-1)}><ChevronLeft /></Button>

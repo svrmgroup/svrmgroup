@@ -594,196 +594,224 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "title": "Bo-Kaap cultural & cooking experience | Bo-Kaap Cultural & Cooking Tour — SVRM",
   "description": "Spend a relaxed half-day discovering Bo-Kaap through its streets, spices and home cooking. Walk with a local host, learn the blends behind Cape Malay dishes, then prepare and share a meal in a family home, with private chauffeur transport throughout. On request per person. Check availability on What",
   "heading": "Bo-Kaap cultural & cooking experience · Half day",
-  "summary": "Spend a relaxed half-day discovering Bo-Kaap through its streets, spices and home cooking. Walk with a local host, learn the blends behind Cape Malay dishes, then prepare and share a meal in a family home, with private chauffeur transport throughout. Included: Private chauffeur & vehicle, hotel pick-up and drop-off; Guided walk of the Bo-Kaap with a local host; Spice merchant visit & Cape Malay spice tasting; Hands-on cooking class in a Cape Malay family home; Sit-down lunch of the dishes you prepared; Halal and vegetarian options on request."
+  "summary": "Spend a relaxed half-day discovering Bo-Kaap through its streets, spices and home cooking. Walk with a local host, learn the blends behind Cape Malay dishes, then prepare and share a meal in a family home, with private chauffeur transport throughout. Included: Private chauffeur & vehicle, hotel pick-up and drop-off; Guided walk of the Bo-Kaap with a local host; Spice merchant visit & Cape Malay spice tasting; Hands-on cooking class in a Cape Malay family home; Sit-down lunch of the dishes you prepared; Halal and vegetarian options on request.",
+  "image": "https://svrm.group/__l5e/assets-v1/603efee7-f0ac-4bb8-8245-334bf818a9cd/tour-bo-kaap-1.jpg"
  },
  {
   "path": "/tours/bo-kaap-cooking-tour/packages/bo-kaap-and-cape-town-heritage-day",
   "title": "Bo-Kaap & Cape Town heritage day | Bo-Kaap Cultural & Cooking Tour — SVRM",
   "description": "Combine a Bo-Kaap cooking experience with a wider exploration of Cape Town’s heritage. Your private chauffeur connects the neighbourhood walk and cooking class with the Company’s Garden, Castle of Good Hope and other city landmarks at a comfortable pace. On request per person. Check availability on ",
   "heading": "Bo-Kaap & Cape Town heritage day · 1 day",
-  "summary": "Combine a Bo-Kaap cooking experience with a wider exploration of Cape Town’s heritage. Your private chauffeur connects the neighbourhood walk and cooking class with the Company’s Garden, Castle of Good Hope and other city landmarks at a comfortable pace. Included: Bo-Kaap walk, spice tasting and cooking class; Company's Garden, Castle of Good Hope & city heritage stops; Private chauffeur for the full day; Entry fees and reservations arranged."
+  "summary": "Combine a Bo-Kaap cooking experience with a wider exploration of Cape Town’s heritage. Your private chauffeur connects the neighbourhood walk and cooking class with the Company’s Garden, Castle of Good Hope and other city landmarks at a comfortable pace. Included: Bo-Kaap walk, spice tasting and cooking class; Company's Garden, Castle of Good Hope & city heritage stops; Private chauffeur for the full day; Entry fees and reservations arranged.",
+  "image": "https://svrm.group/__l5e/assets-v1/603efee7-f0ac-4bb8-8245-334bf818a9cd/tour-bo-kaap-1.jpg"
  },
  {
   "path": "/tours/cape-peninsula/packages/cape-peninsula-private-tour",
   "title": "Cape Peninsula private tour | Cape Peninsula — One Day Private Tour — SVRM",
   "description": "Travel around the Peninsula in a private luxury sedan or SUV with your own chauffeur. This full-day journey links the Atlantic Seaboard, Hout Bay, Chapman’s Peak, Cape Point and Boulders Beach, with time to enjoy each stop rather than follow a group timetable. From R10,500 group up to 4. Check avail",
   "heading": "Cape Peninsula private tour · 1 day",
-  "summary": "Travel around the Peninsula in a private luxury sedan or SUV with your own chauffeur. This full-day journey links the Atlantic Seaboard, Hout Bay, Chapman’s Peak, Cape Point and Boulders Beach, with time to enjoy each stop rather than follow a group timetable. Included: Private chauffeur & luxury sedan or SUV for the day; Camps Bay, Clifton, Hout Bay & Chapman's Peak Drive; Cape Point, Cape of Good Hope & Noordhoek; Boulders Beach penguins & Simon's Town; Entry fees and lunch reservation arranged."
+  "summary": "Travel around the Peninsula in a private luxury sedan or SUV with your own chauffeur. This full-day journey links the Atlantic Seaboard, Hout Bay, Chapman’s Peak, Cape Point and Boulders Beach, with time to enjoy each stop rather than follow a group timetable. Included: Private chauffeur & luxury sedan or SUV for the day; Camps Bay, Clifton, Hout Bay & Chapman's Peak Drive; Cape Point, Cape of Good Hope & Noordhoek; Boulders Beach penguins & Simon's Town; Entry fees and lunch reservation arranged.",
+  "image": "https://svrm.group/__l5e/assets-v1/00c82d96-84ff-4b76-be86-128038f8ccd9/tour-chapmans-peak-2.jpg"
  },
  {
   "path": "/tours/cape-peninsula/packages/cape-peninsula-maybach-signature",
   "title": "Cape Peninsula · Maybach Signature | Cape Peninsula — One Day Private Tour — SVRM",
   "description": "Experience the complete Peninsula route from the quiet rear seat of a Mercedes-Maybach S-Class. Your chauffeur shapes the day around your preferred stops and pace, while refreshments, entry arrangements, a lunch reservation and concierge support are coordinated for you. From R22,000 group up to 4. C",
   "heading": "Cape Peninsula · Maybach Signature · 1 day",
-  "summary": "Experience the complete Peninsula route from the quiet rear seat of a Mercedes-Maybach S-Class. Your chauffeur shapes the day around your preferred stops and pace, while refreshments, entry arrangements, a lunch reservation and concierge support are coordinated for you. Included: Mercedes-Maybach S-Class with chauffeur, full day; The complete Peninsula route at your pace; Entry fees, refreshments and lunch reservation; 24/7 concierge on the day."
+  "summary": "Experience the complete Peninsula route from the quiet rear seat of a Mercedes-Maybach S-Class. Your chauffeur shapes the day around your preferred stops and pace, while refreshments, entry arrangements, a lunch reservation and concierge support are coordinated for you. Included: Mercedes-Maybach S-Class with chauffeur, full day; The complete Peninsula route at your pace; Entry fees, refreshments and lunch reservation; 24/7 concierge on the day.",
+  "image": "https://svrm.group/__l5e/assets-v1/00c82d96-84ff-4b76-be86-128038f8ccd9/tour-chapmans-peak-2.jpg"
  },
  {
   "path": "/tours/cape-peninsula/packages/peninsula-and-winelands",
   "title": "Peninsula & Winelands | Cape Peninsula — One Day Private Tour — SVRM",
   "description": "Take two unhurried days to see two distinct sides of the Cape. Day one follows the Peninsula’s coastal landmarks; day two continues to selected Winelands estates and tastings, with the same private chauffeur service and restaurant arrangements throughout. From R21,000 group up to 4. Check availabili",
   "heading": "Peninsula & Winelands · 2 days",
-  "summary": "Take two unhurried days to see two distinct sides of the Cape. Day one follows the Peninsula’s coastal landmarks; day two continues to selected Winelands estates and tastings, with the same private chauffeur service and restaurant arrangements throughout. Included: Day one: full Cape Peninsula route; Day two: Winelands estates & tastings; Private chauffeur throughout; Restaurant reservations arranged."
+  "summary": "Take two unhurried days to see two distinct sides of the Cape. Day one follows the Peninsula’s coastal landmarks; day two continues to selected Winelands estates and tastings, with the same private chauffeur service and restaurant arrangements throughout. Included: Day one: full Cape Peninsula route; Day two: Winelands estates & tastings; Private chauffeur throughout; Restaurant reservations arranged.",
+  "image": "https://svrm.group/__l5e/assets-v1/00c82d96-84ff-4b76-be86-128038f8ccd9/tour-chapmans-peak-2.jpg"
  },
  {
   "path": "/tours/safari/packages/kruger-essentials",
   "title": "Kruger essentials | Safari Experiences — SVRM",
   "description": "A concise three-day Kruger escape built around two nights at a luxury lodge and twice-daily game drives. Meals and private transfers are included, leaving you free to focus on the bush, guiding and time between drives. From R19,000 per person. Check availability on WhatsApp.",
   "heading": "Kruger essentials · 3 days",
-  "summary": "A concise three-day Kruger escape built around two nights at a luxury lodge and twice-daily game drives. Meals and private transfers are included, leaving you free to focus on the bush, guiding and time between drives. Included: 2 nights luxury lodge; Twice-daily game drives; All meals; Private transfers."
+  "summary": "A concise three-day Kruger escape built around two nights at a luxury lodge and twice-daily game drives. Meals and private transfers are included, leaving you free to focus on the bush, guiding and time between drives. Included: 2 nights luxury lodge; Twice-daily game drives; All meals; Private transfers.",
+  "image": "https://svrm.group/__l5e/assets-v1/22ca5860-0a00-4562-a2c7-01005c285f10/tour-kruger-elephant-1.jpg"
  },
  {
   "path": "/tours/safari/packages/sabi-sand-signature",
   "title": "Sabi Sand signature | Safari Experiences — SVRM",
   "description": "Settle into four nights at a premium Sabi Sand lodge with twice-daily game drives in one of South Africa’s celebrated wildlife regions. Meals, house drinks and internal flights are coordinated as one seamless five-day itinerary. From R28,000 per person. Check availability on WhatsApp.",
   "heading": "Sabi Sand signature · 5 days",
-  "summary": "Settle into four nights at a premium Sabi Sand lodge with twice-daily game drives in one of South Africa’s celebrated wildlife regions. Meals, house drinks and internal flights are coordinated as one seamless five-day itinerary. Included: 4 nights premium lodge; Twice-daily game drives; All meals & house drinks; Internal flights."
+  "summary": "Settle into four nights at a premium Sabi Sand lodge with twice-daily game drives in one of South Africa’s celebrated wildlife regions. Meals, house drinks and internal flights are coordinated as one seamless five-day itinerary. Included: 4 nights premium lodge; Twice-daily game drives; All meals & house drinks; Internal flights.",
+  "image": "https://svrm.group/__l5e/assets-v1/22ca5860-0a00-4562-a2c7-01005c285f10/tour-kruger-elephant-1.jpg"
  },
  {
   "path": "/tours/safari/packages/madikwe-and-kruger",
   "title": "Madikwe & Kruger | Safari Experiences — SVRM",
   "description": "Contrast Madikwe and Kruger on a seven-day, two-lodge safari with a private guide and vehicle. Flights, transfers, accommodation and spa time are arranged together so the journey between reserves feels as considered as the game viewing. From R55,000 per person. Check availability on WhatsApp.",
   "heading": "Madikwe & Kruger · 7 days",
-  "summary": "Contrast Madikwe and Kruger on a seven-day, two-lodge safari with a private guide and vehicle. Flights, transfers, accommodation and spa time are arranged together so the journey between reserves feels as considered as the game viewing. Included: Two-lodge itinerary; Private guide & vehicle; All flights & transfers; Spa treatments."
+  "summary": "Contrast Madikwe and Kruger on a seven-day, two-lodge safari with a private guide and vehicle. Flights, transfers, accommodation and spa time are arranged together so the journey between reserves feels as considered as the game viewing. Included: Two-lodge itinerary; Private guide & vehicle; All flights & transfers; Spa treatments.",
+  "image": "https://svrm.group/__l5e/assets-v1/2869f986-2c92-4e3f-99e4-cf67e98ba1f8/tour-madikwe-1.jpg"
  },
  {
   "path": "/tours/safari/packages/bespoke-grand-safari",
   "title": "Bespoke grand safari | Safari Experiences — SVRM",
   "description": "A fully tailored two-week safari for travellers who want to combine regions, private villa stays and exceptional guiding. Your concierge builds the route around your interests, with options such as helicopter transfers and other privately arranged experiences. On request per person. Check availabili",
   "heading": "Bespoke grand safari · 14 days",
-  "summary": "A fully tailored two-week safari for travellers who want to combine regions, private villa stays and exceptional guiding. Your concierge builds the route around your interests, with options such as helicopter transfers and other privately arranged experiences. Included: Multi-region itinerary; Private villa stays; Helicopter add-ons; Curated, end to end."
+  "summary": "A fully tailored two-week safari for travellers who want to combine regions, private villa stays and exceptional guiding. Your concierge builds the route around your interests, with options such as helicopter transfers and other privately arranged experiences. Included: Multi-region itinerary; Private villa stays; Helicopter add-ons; Curated, end to end.",
+  "image": "https://svrm.group/__l5e/assets-v1/22ca5860-0a00-4562-a2c7-01005c285f10/tour-kruger-elephant-1.jpg"
  },
  {
   "path": "/tours/hunting/packages/5-star-plains-game-package",
   "title": "5-star plains game package | Hunting Tours — SVRM",
   "description": "A seven-day conducted plains-game itinerary with five-star lodge accommodation, a professional hunter and tracker. Trophy fees, preparation and the practical arrangements are addressed within one coordinated package for the hunter. From R97,000 per person. Check availability on WhatsApp.",
   "heading": "5-star plains game package · 7 days",
-  "summary": "A seven-day conducted plains-game itinerary with five-star lodge accommodation, a professional hunter and tracker. Trophy fees, preparation and the practical arrangements are addressed within one coordinated package for the hunter. Included: Per hunter, all-inclusive; 5-star lodge accommodation; Professional hunter & tracker; Trophy fees & preparation."
+  "summary": "A seven-day conducted plains-game itinerary with five-star lodge accommodation, a professional hunter and tracker. Trophy fees, preparation and the practical arrangements are addressed within one coordinated package for the hunter. Included: Per hunter, all-inclusive; 5-star lodge accommodation; Professional hunter & tracker; Trophy fees & preparation.",
+  "image": "https://svrm.group/__l5e/assets-v1/f0bc3fed-c3b8-441e-979c-16294e190161/tour-karoo-1.jpg"
  },
  {
   "path": "/tours/cultural/packages/cape-heritage",
   "title": "Cape heritage | Historical & Cultural — SVRM",
   "description": "Explore Cape Town’s layered history over three days, from Robben Island and Table Mountain to District Six and the city’s historic streets. A private guide and boutique stay give you context, comfort and time for questions. From R28,000 per person. Check availability on WhatsApp.",
   "heading": "Cape heritage · 3 days",
-  "summary": "Explore Cape Town’s layered history over three days, from Robben Island and Table Mountain to District Six and the city’s historic streets. A private guide and boutique stay give you context, comfort and time for questions. Included: Robben Island & Table Mountain; District Six & city tour; Private guide; Boutique stay."
+  "summary": "Explore Cape Town’s layered history over three days, from Robben Island and Table Mountain to District Six and the city’s historic streets. A private guide and boutique stay give you context, comfort and time for questions. Included: Robben Island & Table Mountain; District Six & city tour; Private guide; Boutique stay.",
+  "image": "https://svrm.group/__l5e/assets-v1/603efee7-f0ac-4bb8-8245-334bf818a9cd/tour-bo-kaap-1.jpg"
  },
  {
   "path": "/tours/cultural/packages/cape-and-national-parks",
   "title": "Cape & national parks | Historical & Cultural — SVRM",
   "description": "Pair Cape Town’s heritage with its remarkable protected landscapes on a five-day private itinerary. City history, Cape Point, Boulders Beach and national-park visits are connected by arranged transfers and a measured daily pace. From R44,000 per person. Check availability on WhatsApp.",
   "heading": "Cape & national parks · 5 days",
-  "summary": "Pair Cape Town’s heritage with its remarkable protected landscapes on a five-day private itinerary. City history, Cape Point, Boulders Beach and national-park visits are connected by arranged transfers and a measured daily pace. Included: Cape Town heritage; Cape Point & Boulders; National park visits; All transfers."
+  "summary": "Pair Cape Town’s heritage with its remarkable protected landscapes on a five-day private itinerary. City history, Cape Point, Boulders Beach and national-park visits are connected by arranged transfers and a measured daily pace. Included: Cape Town heritage; Cape Point & Boulders; National park visits; All transfers.",
+  "image": "https://svrm.group/__l5e/assets-v1/22ca5860-0a00-4562-a2c7-01005c285f10/tour-kruger-elephant-1.jpg"
  },
  {
   "path": "/tours/cultural/packages/heritage-grand-tour",
   "title": "Heritage grand tour | Historical & Cultural — SVRM",
   "description": "Follow a seven-day cultural journey from Cape Town into the Garden Route. Museums, heritage sites and regional stories are brought together by a private historian guide, with premium accommodation and transport arranged throughout. From R65,000 per person. Check availability on WhatsApp.",
   "heading": "Heritage grand tour · 7 days",
-  "summary": "Follow a seven-day cultural journey from Cape Town into the Garden Route. Museums, heritage sites and regional stories are brought together by a private historian guide, with premium accommodation and transport arranged throughout. Included: Cape Town + Garden Route; Museums & heritage sites; Private historian guide; Premium accommodation."
+  "summary": "Follow a seven-day cultural journey from Cape Town into the Garden Route. Museums, heritage sites and regional stories are brought together by a private historian guide, with premium accommodation and transport arranged throughout. Included: Cape Town + Garden Route; Museums & heritage sites; Private historian guide; Premium accommodation.",
+  "image": "https://svrm.group/__l5e/assets-v1/603efee7-f0ac-4bb8-8245-334bf818a9cd/tour-bo-kaap-1.jpg"
  },
  {
   "path": "/tours/adventure/packages/cape-adventure-short",
   "title": "Cape adventure short | Adventure & Safaris — SVRM",
   "description": "Fit two very different Cape adventures into a polished three-day escape. A scenic helicopter flight and shark-cage diving provide the adrenaline, while boutique accommodation and private transfers keep the logistics straightforward. From R33,000 per person. Check availability on WhatsApp.",
   "heading": "Cape adventure short · 3 days",
-  "summary": "Fit two very different Cape adventures into a polished three-day escape. A scenic helicopter flight and shark-cage diving provide the adrenaline, while boutique accommodation and private transfers keep the logistics straightforward. Included: Helicopter scenic flip; Shark-cage diving; Boutique accommodation; All transfers."
+  "summary": "Fit two very different Cape adventures into a polished three-day escape. A scenic helicopter flight and shark-cage diving provide the adrenaline, while boutique accommodation and private transfers keep the logistics straightforward. Included: Helicopter scenic flip; Shark-cage diving; Boutique accommodation; All transfers.",
+  "image": "https://svrm.group/__l5e/assets-v1/54503268-7fac-4a6d-93a8-70d7ff62eef2/tour-camps-bay-2.jpg"
  },
  {
   "path": "/tours/adventure/packages/cape-and-bush",
   "title": "Cape & bush | Adventure & Safaris — SVRM",
   "description": "Combine Cape adventure with a luxury safari over five days. Helicopter sightseeing, game drives, internal flights and hand-picked lodging are sequenced into one itinerary rather than booked as disconnected activities. From R59,000 per person. Check availability on WhatsApp.",
   "heading": "Cape & bush · 5 days",
-  "summary": "Combine Cape adventure with a luxury safari over five days. Helicopter sightseeing, game drives, internal flights and hand-picked lodging are sequenced into one itinerary rather than booked as disconnected activities. Included: Cape adventure + safari; Helicopter + game drives; Internal flights; Luxury lodging."
+  "summary": "Combine Cape adventure with a luxury safari over five days. Helicopter sightseeing, game drives, internal flights and hand-picked lodging are sequenced into one itinerary rather than booked as disconnected activities. Included: Cape adventure + safari; Helicopter + game drives; Internal flights; Luxury lodging.",
+  "image": "https://svrm.group/__l5e/assets-v1/54503268-7fac-4a6d-93a8-70d7ff62eef2/tour-camps-bay-2.jpg"
  },
  {
   "path": "/tours/adventure/packages/land-sea-and-sky",
   "title": "Land, sea & sky | Adventure & Safaris — SVRM",
   "description": "A seven-day journey built around contrasting perspectives: helicopter, yacht, safari and a horseback trail. Private guides and premium accommodation connect each experience, with enough structure to keep the week effortless. From R89,000 per person. Check availability on WhatsApp.",
   "heading": "Land, sea & sky · 7 days",
-  "summary": "A seven-day journey built around contrasting perspectives: helicopter, yacht, safari and a horseback trail. Private guides and premium accommodation connect each experience, with enough structure to keep the week effortless. Included: Heli, yacht & safari; Horseback Winelands trail; Private guides throughout; Premium accommodation."
+  "summary": "A seven-day journey built around contrasting perspectives: helicopter, yacht, safari and a horseback trail. Private guides and premium accommodation connect each experience, with enough structure to keep the week effortless. Included: Heli, yacht & safari; Horseback Winelands trail; Private guides throughout; Premium accommodation.",
+  "image": "https://svrm.group/__l5e/assets-v1/54503268-7fac-4a6d-93a8-70d7ff62eef2/tour-camps-bay-2.jpg"
  },
  {
   "path": "/tours/marine/packages/boulders-penguins-and-cape-point",
   "title": "Boulders penguins & Cape Point | Marine & Wildlife — SVRM",
   "description": "Meet the African penguins at Boulders Beach and continue to Cape Point on a private coastal day out. Chauffeur transport, Boulders entry, the Cape Point funicular and a picnic lunch are brought together in one easy arrangement. From R6,500 per person. Check availability on WhatsApp.",
   "heading": "Boulders penguins & Cape Point · 1 day",
-  "summary": "Meet the African penguins at Boulders Beach and continue to Cape Point on a private coastal day out. Chauffeur transport, Boulders entry, the Cape Point funicular and a picnic lunch are brought together in one easy arrangement. Included: Private chauffeur; Boulders Beach entry; Cape Point funicular; Picnic lunch."
+  "summary": "Meet the African penguins at Boulders Beach and continue to Cape Point on a private coastal day out. Chauffeur transport, Boulders entry, the Cape Point funicular and a picnic lunch are brought together in one easy arrangement. Included: Private chauffeur; Boulders Beach entry; Cape Point funicular; Picnic lunch.",
+  "image": "https://svrm.group/__l5e/assets-v1/1976a254-c5d4-4e92-b38c-f189c974ba6b/tour-boulders-penguins-1.jpg"
  },
  {
   "path": "/tours/marine/packages/hermanus-whale-weekend",
   "title": "Hermanus whale weekend | Marine & Wildlife — SVRM",
   "description": "Spend two days on the Whale Coast with boat-based whale watching, a coastal cliff walk and a night in a boutique property. Transfers from Cape Town and between activities are arranged for you; sightings remain subject to nature and season. From R18,500 per person. Check availability on WhatsApp.",
   "heading": "Hermanus whale weekend · 2 days",
-  "summary": "Spend two days on the Whale Coast with boat-based whale watching, a coastal cliff walk and a night in a boutique property. Transfers from Cape Town and between activities are arranged for you; sightings remain subject to nature and season. Included: Boat-based whale watching; Coastal cliff walk; 1 night boutique stay; All transfers."
+  "summary": "Spend two days on the Whale Coast with boat-based whale watching, a coastal cliff walk and a night in a boutique property. Transfers from Cape Town and between activities are arranged for you; sightings remain subject to nature and season. Included: Boat-based whale watching; Coastal cliff walk; 1 night boutique stay; All transfers.",
+  "image": "https://svrm.group/__l5e/assets-v1/f0c07fd0-8a08-450e-bcac-8ebb6465a373/tour-cape-point-2.jpg"
  },
  {
   "path": "/tours/marine/packages/marine-grand-circuit",
   "title": "Marine grand circuit | Marine & Wildlife — SVRM",
   "description": "A three-day marine itinerary combining whale watching, shark-cage diving and seal snorkelling with two nights of luxury accommodation. A private guide coordinates the ocean experiences and overland travel, subject to conditions and seasonal availability. From R32,000 per person. Check availability o",
   "heading": "Marine grand circuit · 3 days",
-  "summary": "A three-day marine itinerary combining whale watching, shark-cage diving and seal snorkelling with two nights of luxury accommodation. A private guide coordinates the ocean experiences and overland travel, subject to conditions and seasonal availability. Included: Whale watching + shark cage diving; Seal snorkelling at Duiker Island; 2 nights luxury accommodation; Private guide throughout."
+  "summary": "A three-day marine itinerary combining whale watching, shark-cage diving and seal snorkelling with two nights of luxury accommodation. A private guide coordinates the ocean experiences and overland travel, subject to conditions and seasonal availability. Included: Whale watching + shark cage diving; Seal snorkelling at Duiker Island; 2 nights luxury accommodation; Private guide throughout.",
+  "image": "https://svrm.group/__l5e/assets-v1/1976a254-c5d4-4e92-b38c-f189c974ba6b/tour-boulders-penguins-1.jpg"
  },
  {
   "path": "/tours/garden-route/packages/garden-route-essentials",
   "title": "Garden Route essentials | Garden Route Road Trip — SVRM",
   "description": "Travel from Cape Town into the Garden Route over four days with either a private chauffeur or a rental car. Boutique stays, Tsitsikamma’s suspension bridge and a Knysna lagoon cruise provide a balanced introduction to the coast and forest. From R38,000 per person. Check availability on WhatsApp.",
   "heading": "Garden Route essentials · 4 days",
-  "summary": "Travel from Cape Town into the Garden Route over four days with either a private chauffeur or a rental car. Boutique stays, Tsitsikamma’s suspension bridge and a Knysna lagoon cruise provide a balanced introduction to the coast and forest. Included: Private chauffeur or rental car; 3 nights boutique stays; Tsitsikamma suspension bridge; Knysna lagoon cruise."
+  "summary": "Travel from Cape Town into the Garden Route over four days with either a private chauffeur or a rental car. Boutique stays, Tsitsikamma’s suspension bridge and a Knysna lagoon cruise provide a balanced introduction to the coast and forest. Included: Private chauffeur or rental car; 3 nights boutique stays; Tsitsikamma suspension bridge; Knysna lagoon cruise.",
+  "image": "https://svrm.group/__l5e/assets-v1/05477864-d7da-420c-8a29-f298a15d0a1d/tour-knysna-2.jpg"
  },
  {
   "path": "/tours/garden-route/packages/coast-and-forest-signature",
   "title": "Coast & forest signature | Garden Route Road Trip — SVRM",
   "description": "Slow down for six days along the Garden Route, with additional time for Robberg’s coastal trails and Plettenberg Bay’s beaches. Meals, transfers and an extended route are arranged so you can enjoy both forest and shoreline without rushing. From R62,000 per person. Check availability on WhatsApp.",
   "heading": "Coast & forest signature · 6 days",
-  "summary": "Slow down for six days along the Garden Route, with additional time for Robberg’s coastal trails and Plettenberg Bay’s beaches. Meals, transfers and an extended route are arranged so you can enjoy both forest and shoreline without rushing. Included: Extended coastal itinerary; Robberg nature reserve hike; Plettenberg Bay beach time; All meals & transfers."
+  "summary": "Slow down for six days along the Garden Route, with additional time for Robberg’s coastal trails and Plettenberg Bay’s beaches. Meals, transfers and an extended route are arranged so you can enjoy both forest and shoreline without rushing. Included: Extended coastal itinerary; Robberg nature reserve hike; Plettenberg Bay beach time; All meals & transfers.",
+  "image": "https://svrm.group/__l5e/assets-v1/82143b07-f11a-40fa-bf18-17addbf81611/tour-tsitsikamma-2.jpg"
  },
  {
   "path": "/tours/garden-route/packages/cape-to-addo-grand-tour",
   "title": "Cape to Addo grand tour | Garden Route Road Trip — SVRM",
   "description": "Link the Garden Route with Addo Elephant Park on a privately guided ten-day journey. Premium lodging, a dedicated vehicle and a tailored sequence of coastal, forest and wildlife stops create one continuous Cape-to-Addo experience. On request per person. Check availability on WhatsApp.",
   "heading": "Cape to Addo grand tour · 10 days",
-  "summary": "Link the Garden Route with Addo Elephant Park on a privately guided ten-day journey. Premium lodging, a dedicated vehicle and a tailored sequence of coastal, forest and wildlife stops create one continuous Cape-to-Addo experience. Included: Garden Route + Addo Elephant Park; Private guide & vehicle; Premium lodging throughout; Curated, end to end."
+  "summary": "Link the Garden Route with Addo Elephant Park on a privately guided ten-day journey. Premium lodging, a dedicated vehicle and a tailored sequence of coastal, forest and wildlife stops create one continuous Cape-to-Addo experience. Included: Garden Route + Addo Elephant Park; Private guide & vehicle; Premium lodging throughout; Curated, end to end.",
+  "image": "https://svrm.group/__l5e/assets-v1/05477864-d7da-420c-8a29-f298a15d0a1d/tour-knysna-2.jpg"
  },
  {
   "path": "/tours/aerial/packages/atlantic-seaboard-heli-flip",
   "title": "Atlantic seaboard heli flip | Aerial & Scenic Flights — SVRM",
   "description": "See Camps Bay and the Twelve Apostles from above on a 30-minute helicopter flight departing from the V&A Waterfront. Private transfers connect your accommodation with the departure point for a compact, memorable scenic experience. From R4,500 per person. Check availability on WhatsApp.",
   "heading": "Atlantic seaboard heli flip · 30 min",
-  "summary": "See Camps Bay and the Twelve Apostles from above on a 30-minute helicopter flight departing from the V&A Waterfront. Private transfers connect your accommodation with the departure point for a compact, memorable scenic experience. Included: Helicopter scenic flight; Camps Bay & Twelve Apostles; V&A Waterfront departure; Private transfers."
+  "summary": "See Camps Bay and the Twelve Apostles from above on a 30-minute helicopter flight departing from the V&A Waterfront. Private transfers connect your accommodation with the departure point for a compact, memorable scenic experience. Included: Helicopter scenic flight; Camps Bay & Twelve Apostles; V&A Waterfront departure; Private transfers.",
+  "image": "https://svrm.group/__l5e/assets-v1/7ecec734-9250-4f4f-85f0-d4f4267cd574/tour-camps-bay-1.jpg"
  },
  {
   "path": "/tours/aerial/packages/two-oceans-aerial-tour",
   "title": "Two Oceans aerial tour | Aerial & Scenic Flights — SVRM",
   "description": "Take in Cape Point, the Cape of Good Hope, Hout Bay and Chapman’s Peak on a 45-minute aerial journey. Pilot narration adds context to the coastline below, while private transfers make the flight easy to fit into your day. From R7,200 per person. Check availability on WhatsApp.",
   "heading": "Two Oceans aerial tour · 45 min",
-  "summary": "Take in Cape Point, the Cape of Good Hope, Hout Bay and Chapman’s Peak on a 45-minute aerial journey. Pilot narration adds context to the coastline below, while private transfers make the flight easy to fit into your day. Included: Cape Point & Cape of Good Hope; Hout Bay & Chapman's Peak; Pilot narration; Private transfers."
+  "summary": "Take in Cape Point, the Cape of Good Hope, Hout Bay and Chapman’s Peak on a 45-minute aerial journey. Pilot narration adds context to the coastline below, while private transfers make the flight easy to fit into your day. Included: Cape Point & Cape of Good Hope; Hout Bay & Chapman's Peak; Pilot narration; Private transfers.",
+  "image": "https://svrm.group/__l5e/assets-v1/00c82d96-84ff-4b76-be86-128038f8ccd9/tour-chapmans-peak-2.jpg"
  },
  {
   "path": "/tours/aerial/packages/sunrise-hot-air-balloon",
   "title": "Sunrise hot-air balloon | Aerial & Scenic Flights — SVRM",
   "description": "Begin before dawn for a peaceful hot-air balloon flight above the Winelands. Private pickup, a light breakfast after landing and an optional photographer turn the early start into a carefully arranged half-day experience. From R8,900 per person. Check availability on WhatsApp.",
   "heading": "Sunrise hot-air balloon · Half day",
-  "summary": "Begin before dawn for a peaceful hot-air balloon flight above the Winelands. Private pickup, a light breakfast after landing and an optional photographer turn the early start into a carefully arranged half-day experience. Included: Hot-air balloon flight; Light breakfast on landing; Private pickup; Photographer on request."
+  "summary": "Begin before dawn for a peaceful hot-air balloon flight above the Winelands. Private pickup, a light breakfast after landing and an optional photographer turn the early start into a carefully arranged half-day experience. Included: Hot-air balloon flight; Light breakfast on landing; Private pickup; Photographer on request.",
+  "image": "https://svrm.group/__l5e/assets-v1/7ecec734-9250-4f4f-85f0-d4f4267cd574/tour-camps-bay-1.jpg"
  },
  {
   "path": "/tours/culinary/packages/bo-kaap-cooking-class",
   "title": "Bo-Kaap cooking class | Culinary Experiences — SVRM",
   "description": "Learn Cape Malay cooking in Bo-Kaap during a private half-day class, then share the dishes you have prepared. A heritage walk and private transfers add neighbourhood context and make the experience easy to reach. From R3,200 per person. Check availability on WhatsApp.",
   "heading": "Bo-Kaap cooking class · Half day",
-  "summary": "Learn Cape Malay cooking in Bo-Kaap during a private half-day class, then share the dishes you have prepared. A heritage walk and private transfers add neighbourhood context and make the experience easy to reach. Included: Private Cape Malay cooking class; Heritage walk through Bo-Kaap; Shared lunch; Private transfers."
+  "summary": "Learn Cape Malay cooking in Bo-Kaap during a private half-day class, then share the dishes you have prepared. A heritage walk and private transfers add neighbourhood context and make the experience easy to reach. Included: Private Cape Malay cooking class; Heritage walk through Bo-Kaap; Shared lunch; Private transfers.",
+  "image": "https://svrm.group/__l5e/assets-v1/5441abfb-4d2f-45c5-94d6-15231e4c5c25/tour-spice-market-2.jpg"
  },
  {
   "path": "/tours/culinary/packages/markets-coffee-and-spice",
   "title": "Markets, coffee & spice | Culinary Experiences — SVRM",
   "description": "Taste your way through Cape Town’s artisan food culture with two market visits, a specialty coffee roastery and a spice-focused walking route. A private guide shapes the day around quality producers rather than a fixed group schedule. From R5,800 per person. Check availability on WhatsApp.",
   "heading": "Markets, coffee & spice · 1 day",
-  "summary": "Taste your way through Cape Town’s artisan food culture with two market visits, a specialty coffee roastery and a spice-focused walking route. A private guide shapes the day around quality producers rather than a fixed group schedule. Included: Two artisan markets; Specialty coffee roastery; Spice route walking tour; Private guide."
+  "summary": "Taste your way through Cape Town’s artisan food culture with two market visits, a specialty coffee roastery and a spice-focused walking route. A private guide shapes the day around quality producers rather than a fixed group schedule. Included: Two artisan markets; Specialty coffee roastery; Spice route walking tour; Private guide.",
+  "image": "https://svrm.group/__l5e/assets-v1/5441abfb-4d2f-45c5-94d6-15231e4c5c25/tour-spice-market-2.jpg"
  },
  {
   "path": "/tours/culinary/packages/cape-culinary-signature",
   "title": "Cape culinary signature | Culinary Experiences — SVRM",
   "description": "Spend three days exploring the Cape through cooking, markets, tea and chef-led tastings. Two nights in boutique accommodation are included, creating a relaxed culinary break with time to enjoy each experience properly. From R22,000 per person. Check availability on WhatsApp.",
   "heading": "Cape culinary signature · 3 days",
-  "summary": "Spend three days exploring the Cape through cooking, markets, tea and chef-led tastings. Two nights in boutique accommodation are included, creating a relaxed culinary break with time to enjoy each experience properly. Included: Cooking class + market tours; Heritage tea ceremony; Chef-led tastings; 2 nights boutique accommodation."
+  "summary": "Spend three days exploring the Cape through cooking, markets, tea and chef-led tastings. Two nights in boutique accommodation are included, creating a relaxed culinary break with time to enjoy each experience properly. Included: Cooking class + market tours; Heritage tea ceremony; Chef-led tastings; 2 nights boutique accommodation.",
+  "image": "https://svrm.group/__l5e/assets-v1/5441abfb-4d2f-45c5-94d6-15231e4c5c25/tour-spice-market-2.jpg"
  },
  {
   "path": "/tours/wellness/packages/spa-day-signature",
@@ -811,111 +839,127 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "title": "Sunrise Lion's Head shoot | Photography Tours — SVRM",
   "description": "Climb Lion’s Head before dawn with a photographer mentor and shoot as the city wakes below you. Coffee on the summit and delivered edits complete a private half-day designed around light, guidance and your own skill level. From R3,800 per person. Check availability on WhatsApp.",
   "heading": "Sunrise Lion's Head shoot · Half day",
-  "summary": "Climb Lion’s Head before dawn with a photographer mentor and shoot as the city wakes below you. Coffee on the summit and delivered edits complete a private half-day designed around light, guidance and your own skill level. Included: Pre-dawn private hike; Photographer mentor; Coffee on summit; Edits delivered."
+  "summary": "Climb Lion’s Head before dawn with a photographer mentor and shoot as the city wakes below you. Coffee on the summit and delivered edits complete a private half-day designed around light, guidance and your own skill level. Included: Pre-dawn private hike; Photographer mentor; Coffee on summit; Edits delivered.",
+  "image": "https://svrm.group/__l5e/assets-v1/5fe00816-0a0a-41fa-8c1a-f6a8e0b4ad0f/tour-lions-head-2.jpg"
  },
  {
   "path": "/tours/photography/packages/cape-town-in-a-day",
   "title": "Cape Town in a day | Photography Tours — SVRM",
   "description": "Photograph Bo-Kaap, the V&A Waterfront and Sea Point before finishing with sunset at Signal Hill. A private photographer guide helps with locations and technique, followed by a curated set of edits from your day. From R6,800 per person. Check availability on WhatsApp.",
   "heading": "Cape Town in a day · 1 day",
-  "summary": "Photograph Bo-Kaap, the V&A Waterfront and Sea Point before finishing with sunset at Signal Hill. A private photographer guide helps with locations and technique, followed by a curated set of edits from your day. Included: Bo-Kaap, V&A, Sea Point; Sunset at Signal Hill; Private photographer guide; Curated edits."
+  "summary": "Photograph Bo-Kaap, the V&A Waterfront and Sea Point before finishing with sunset at Signal Hill. A private photographer guide helps with locations and technique, followed by a curated set of edits from your day. Included: Bo-Kaap, V&A, Sea Point; Sunset at Signal Hill; Private photographer guide; Curated edits.",
+  "image": "https://svrm.group/__l5e/assets-v1/5fe00816-0a0a-41fa-8c1a-f6a8e0b4ad0f/tour-lions-head-2.jpg"
  },
  {
   "path": "/tours/photography/packages/cape-photographic-signature",
   "title": "Cape photographic signature | Photography Tours — SVRM",
   "description": "Build a varied Cape portfolio over three days, from city colour to Cape Point and Boulders Beach. Sunrise and sunset sessions, private guiding, transport and boutique accommodation give you time to work in changing light. From R28,000 per person. Check availability on WhatsApp.",
   "heading": "Cape photographic signature · 3 days",
-  "summary": "Build a varied Cape portfolio over three days, from city colour to Cape Point and Boulders Beach. Sunrise and sunset sessions, private guiding, transport and boutique accommodation give you time to work in changing light. Included: City + Cape Point + Boulders; Sunrise & sunset shoots; Private guide & transport; Boutique accommodation."
+  "summary": "Build a varied Cape portfolio over three days, from city colour to Cape Point and Boulders Beach. Sunrise and sunset sessions, private guiding, transport and boutique accommodation give you time to work in changing light. Included: City + Cape Point + Boulders; Sunrise & sunset shoots; Private guide & transport; Boutique accommodation.",
+  "image": "https://svrm.group/__l5e/assets-v1/5fe00816-0a0a-41fa-8c1a-f6a8e0b4ad0f/tour-lions-head-2.jpg"
  },
  {
   "path": "/tours/group-travel/packages/city-group-transfer",
   "title": "City group transfer | Group Travel — SVRM",
   "description": "Move your group comfortably around Cape Town for up to five hours in a 16- or 22-seater vehicle. A chauffeur, fuel and bottled water are included, making this suitable for event shuttles, airport movements or a short city programme. From R6,500 per person. Check availability on WhatsApp.",
   "heading": "City group transfer · Half day",
-  "summary": "Move your group comfortably around Cape Town for up to five hours in a 16- or 22-seater vehicle. A chauffeur, fuel and bottled water are included, making this suitable for event shuttles, airport movements or a short city programme. Included: 16 or 22-seater bus; Chauffeur & fuel; Bottled water onboard; Up to 5 hours."
+  "summary": "Move your group comfortably around Cape Town for up to five hours in a 16- or 22-seater vehicle. A chauffeur, fuel and bottled water are included, making this suitable for event shuttles, airport movements or a short city programme. Included: 16 or 22-seater bus; Chauffeur & fuel; Bottled water onboard; Up to 5 hours.",
+  "image": "https://svrm.group/__l5e/assets-v1/a01bc764-9b03-4f2d-8f3d-34b24b60b12e/tour-table-mountain-1.jpg"
  },
  {
   "path": "/tours/group-travel/packages/cape-peninsula-group-tour",
   "title": "Cape Peninsula group tour | Group Travel — SVRM",
   "description": "Take a larger party around the Peninsula in a touring vehicle of up to 32 seats. A guide and chauffeur lead the day, with Boulders Beach, Cape Point and lunch arrangements coordinated for the whole group. From R14,500 per person. Check availability on WhatsApp.",
   "heading": "Cape Peninsula group tour · 1 day",
-  "summary": "Take a larger party around the Peninsula in a touring vehicle of up to 32 seats. A guide and chauffeur lead the day, with Boulders Beach, Cape Point and lunch arrangements coordinated for the whole group. Included: Up to 32-seater bus; Guide + chauffeur; Boulders & Cape Point; Lunch arranged."
+  "summary": "Take a larger party around the Peninsula in a touring vehicle of up to 32 seats. A guide and chauffeur lead the day, with Boulders Beach, Cape Point and lunch arrangements coordinated for the whole group. Included: Up to 32-seater bus; Guide + chauffeur; Boulders & Cape Point; Lunch arranged.",
+  "image": "https://svrm.group/__l5e/assets-v1/a01bc764-9b03-4f2d-8f3d-34b24b60b12e/tour-table-mountain-1.jpg"
  },
  {
   "path": "/tours/group-travel/packages/garden-route-group",
   "title": "Garden Route group | Group Travel — SVRM",
   "description": "Bring a group through the Garden Route over three days with a luxury touring coach, accommodation, guided stops and meals. Transfers and daily logistics are managed centrally so organisers have one clear point of coordination. From R65,000 per person. Check availability on WhatsApp.",
   "heading": "Garden Route group · 3 days",
-  "summary": "Bring a group through the Garden Route over three days with a luxury touring coach, accommodation, guided stops and meals. Transfers and daily logistics are managed centrally so organisers have one clear point of coordination. Included: Luxury touring coach; All accommodation; Guided stops & meals; All transfers."
+  "summary": "Bring a group through the Garden Route over three days with a luxury touring coach, accommodation, guided stops and meals. Transfers and daily logistics are managed centrally so organisers have one clear point of coordination. Included: Luxury touring coach; All accommodation; Guided stops & meals; All transfers.",
+  "image": "https://svrm.group/__l5e/assets-v1/05477864-d7da-420c-8a29-f298a15d0a1d/tour-knysna-2.jpg"
  },
  {
   "path": "/tours/group-travel/packages/weddings-corporate-and-incentive",
   "title": "Weddings, corporate & incentive | Group Travel — SVRM",
   "description": "Custom transport and guest coordination for weddings, corporate retreats and incentive travel. Multi-vehicle fleets, airport meet-and-greet and an on-the-ground coordinator can be combined around your schedule and group size. On request per person. Check availability on WhatsApp.",
   "heading": "Weddings, corporate & incentive · Custom",
-  "summary": "Custom transport and guest coordination for weddings, corporate retreats and incentive travel. Multi-vehicle fleets, airport meet-and-greet and an on-the-ground coordinator can be combined around your schedule and group size. Included: Multi-vehicle fleets; Airport meet & greet; Hostess & coordinator; Curated, end to end."
+  "summary": "Custom transport and guest coordination for weddings, corporate retreats and incentive travel. Multi-vehicle fleets, airport meet-and-greet and an on-the-ground coordinator can be combined around your schedule and group size. Included: Multi-vehicle fleets; Airport meet & greet; Hostess & coordinator; Curated, end to end.",
+  "image": "https://svrm.group/__l5e/assets-v1/a01bc764-9b03-4f2d-8f3d-34b24b60b12e/tour-table-mountain-1.jpg"
  },
  {
   "path": "/tours/romantic/packages/the-proposal",
   "title": "The Proposal | Romantic Packages — SVRM",
   "description": "Create a private proposal setting at a beach, vineyard or villa with considered floral styling and a photographer ready for the moment. A chauffeur and concierge coordinate the details discreetly so your attention stays on the occasion. From R12,500 per person. Check availability on WhatsApp.",
   "heading": "The Proposal · Half day",
-  "summary": "Create a private proposal setting at a beach, vineyard or villa with considered floral styling and a photographer ready for the moment. A chauffeur and concierge coordinate the details discreetly so your attention stays on the occasion. Included: Private venue styling (beach, vineyard or villa); Signature bouquet & rose-petal setup on the bed; Photographer to capture the moment; Private chauffeur & 24/7 concierge."
+  "summary": "Create a private proposal setting at a beach, vineyard or villa with considered floral styling and a photographer ready for the moment. A chauffeur and concierge coordinate the details discreetly so your attention stays on the occasion. Included: Private venue styling (beach, vineyard or villa); Signature bouquet & rose-petal setup on the bed; Photographer to capture the moment; Private chauffeur & 24/7 concierge.",
+  "image": "https://svrm.group/__l5e/assets-v1/a01bc764-9b03-4f2d-8f3d-34b24b60b12e/tour-table-mountain-1.jpg"
  },
  {
   "path": "/tours/romantic/packages/anniversary-escape",
   "title": "Anniversary escape | Romantic Packages — SVRM",
   "description": "Celebrate with a night in a boutique suite, fresh flowers, a rose-petal turndown and a candlelit dinner prepared by a private chef. A couples spa treatment and chauffeur service complete this two-day anniversary escape. From R24,000 per person. Check availability on WhatsApp.",
   "heading": "Anniversary escape · 2 days",
-  "summary": "Celebrate with a night in a boutique suite, fresh flowers, a rose-petal turndown and a candlelit dinner prepared by a private chef. A couples spa treatment and chauffeur service complete this two-day anniversary escape. Included: 1 night in a boutique suite with sea or vineyard view; Rose-petal turndown & fresh floral arrangement; Private candlelit chef's dinner; Couples spa treatment; Private chauffeur & 24/7 concierge."
+  "summary": "Celebrate with a night in a boutique suite, fresh flowers, a rose-petal turndown and a candlelit dinner prepared by a private chef. A couples spa treatment and chauffeur service complete this two-day anniversary escape. Included: 1 night in a boutique suite with sea or vineyard view; Rose-petal turndown & fresh floral arrangement; Private candlelit chef's dinner; Couples spa treatment; Private chauffeur & 24/7 concierge.",
+  "image": "https://svrm.group/__l5e/assets-v1/a01bc764-9b03-4f2d-8f3d-34b24b60b12e/tour-table-mountain-1.jpg"
  },
  {
   "path": "/tours/romantic/packages/cape-honeymoon-signature",
   "title": "Cape honeymoon signature | Romantic Packages — SVRM",
   "description": "Begin married life with two nights in a luxury honeymoon suite and a sequence of memorable Cape experiences. A sunrise balloon flight, helicopter beach picnic, fresh flowers and private chauffeur service are arranged around the two of you. From R48,000 per person. Check availability on WhatsApp.",
   "heading": "Cape honeymoon signature · 3 days",
-  "summary": "Begin married life with two nights in a luxury honeymoon suite and a sequence of memorable Cape experiences. A sunrise balloon flight, helicopter beach picnic, fresh flowers and private chauffeur service are arranged around the two of you. Included: 2 nights in a luxury honeymoon suite; Sunrise hot-air balloon over the Winelands; Private helicopter beach picnic; Daily florist-fresh bouquets & petal turndown; Private chauffeur & 24/7 concierge."
+  "summary": "Begin married life with two nights in a luxury honeymoon suite and a sequence of memorable Cape experiences. A sunrise balloon flight, helicopter beach picnic, fresh flowers and private chauffeur service are arranged around the two of you. Included: 2 nights in a luxury honeymoon suite; Sunrise hot-air balloon over the Winelands; Private helicopter beach picnic; Daily florist-fresh bouquets & petal turndown; Private chauffeur & 24/7 concierge.",
+  "image": "https://svrm.group/__l5e/assets-v1/a01bc764-9b03-4f2d-8f3d-34b24b60b12e/tour-table-mountain-1.jpg"
  },
  {
   "path": "/tours/romantic/packages/grand-romantic-tour",
   "title": "Grand romantic tour | Romantic Packages — SVRM",
   "description": "Combine Cape Town, the Winelands and a private safari lodge in a five-day celebration. Ballooning, helicopter and yacht experiences sit alongside private dining, spa time and an optional bespoke jewellery appointment. From R92,000 per person. Check availability on WhatsApp.",
   "heading": "Grand romantic tour · 5 days",
-  "summary": "Combine Cape Town, the Winelands and a private safari lodge in a five-day celebration. Ballooning, helicopter and yacht experiences sit alongside private dining, spa time and an optional bespoke jewellery appointment. Included: Cape Town + Winelands + private safari lodge; Hot-air balloon, helicopter & yacht sunset cruise; Private jewellery atelier appointment (rings & bespoke pieces); Chef-led candlelit dinners & couples spa daily; Private chauffeur & 24/7 concierge."
+  "summary": "Combine Cape Town, the Winelands and a private safari lodge in a five-day celebration. Ballooning, helicopter and yacht experiences sit alongside private dining, spa time and an optional bespoke jewellery appointment. Included: Cape Town + Winelands + private safari lodge; Hot-air balloon, helicopter & yacht sunset cruise; Private jewellery atelier appointment (rings & bespoke pieces); Chef-led candlelit dinners & couples spa daily; Private chauffeur & 24/7 concierge.",
+  "image": "https://svrm.group/__l5e/assets-v1/a01bc764-9b03-4f2d-8f3d-34b24b60b12e/tour-table-mountain-1.jpg"
  },
  {
   "path": "/tours/romantic/packages/anniversary-grand-celebration",
   "title": "Anniversary grand celebration | Romantic Packages — SVRM",
   "description": "Mark a major anniversary across ten days in Cape Town, the Winelands, Garden Route and safari country. Private chefs, florists, spa experiences and exceptional excursions are coordinated throughout, with an optional vow-renewal ceremony. From R178,000 per person. Check availability on WhatsApp.",
   "heading": "Anniversary grand celebration · 10 days",
-  "summary": "Mark a major anniversary across ten days in Cape Town, the Winelands, Garden Route and safari country. Private chefs, florists, spa experiences and exceptional excursions are coordinated throughout, with an optional vow-renewal ceremony. Included: Cape Town, Winelands, Garden Route & private safari lodge; Hot-air balloon at sunrise + helicopter beach picnic; Private yacht sunset cruise with chef & florist; Bespoke jewellery atelier appointment & anniversary gift commission; Daily rose-petal turndown & fresh bouquets in every suite; Couples spa treatments & candlelit chef dinners throughout; Vow renewal ceremony option with private officiant & photographer; Private chauffeur & 24/7 concierge, dedicated to you end to end."
+  "summary": "Mark a major anniversary across ten days in Cape Town, the Winelands, Garden Route and safari country. Private chefs, florists, spa experiences and exceptional excursions are coordinated throughout, with an optional vow-renewal ceremony. Included: Cape Town, Winelands, Garden Route & private safari lodge; Hot-air balloon at sunrise + helicopter beach picnic; Private yacht sunset cruise with chef & florist; Bespoke jewellery atelier appointment & anniversary gift commission; Daily rose-petal turndown & fresh bouquets in every suite; Couples spa treatments & candlelit chef dinners throughout; Vow renewal ceremony option with private officiant & photographer; Private chauffeur & 24/7 concierge, dedicated to you end to end.",
+  "image": "https://svrm.group/__l5e/assets-v1/a01bc764-9b03-4f2d-8f3d-34b24b60b12e/tour-table-mountain-1.jpg"
  },
  {
   "path": "/tours/romantic/packages/bespoke-honeymoon-end-to-end",
   "title": "Bespoke honeymoon, end to end | Romantic Packages — SVRM",
   "description": "A fully tailored honeymoon shaped around your preferred places, pace and style of stay. Private villas, dedicated concierge support, chauffeur travel and personal touches such as bespoke jewellery are brought together under one point of contact. On request per person. Check availability on WhatsApp.",
   "heading": "Bespoke honeymoon, end to end · 7+ days",
-  "summary": "A fully tailored honeymoon shaped around your preferred places, pace and style of stay. Private villas, dedicated concierge support, chauffeur travel and personal touches such as bespoke jewellery are brought together under one point of contact. Included: Multi-region itinerary curated around you; Private villa stays with dedicated concierge; Fine jewellery sourcing & bespoke commissions; Private chauffeur & 24/7 concierge; Everything discreet, seamless, one point of contact."
+  "summary": "A fully tailored honeymoon shaped around your preferred places, pace and style of stay. Private villas, dedicated concierge support, chauffeur travel and personal touches such as bespoke jewellery are brought together under one point of contact. Included: Multi-region itinerary curated around you; Private villa stays with dedicated concierge; Fine jewellery sourcing & bespoke commissions; Private chauffeur & 24/7 concierge; Everything discreet, seamless, one point of contact.",
+  "image": "https://svrm.group/__l5e/assets-v1/a01bc764-9b03-4f2d-8f3d-34b24b60b12e/tour-table-mountain-1.jpg"
  },
  {
   "path": "/tours/aquila-safari/packages/aquila-big-five-day-safari-morning",
   "title": "Aquila Big Five day safari (morning) | Aquila Safari — Day Trip — SVRM",
   "description": "Leave Cape Town at dawn for Aquila’s morning game drive in an open 4x4, followed by buffet lunch at the lodge. Private chauffeur pickup and return make this a straightforward full-day safari without an overnight stay. On request per person. Check availability on WhatsApp.",
   "heading": "Aquila Big Five day safari (morning) · 1 day",
-  "summary": "Leave Cape Town at dawn for Aquila’s morning game drive in an open 4x4, followed by buffet lunch at the lodge. Private chauffeur pickup and return make this a straightforward full-day safari without an overnight stay. Included: Private hotel pickup at dawn & return early afternoon; Morning game drive at Aquila Private Game Reserve; Buffet lunch at the lodge; Chauffeured private vehicle, end to end."
+  "summary": "Leave Cape Town at dawn for Aquila’s morning game drive in an open 4x4, followed by buffet lunch at the lodge. Private chauffeur pickup and return make this a straightforward full-day safari without an overnight stay. Included: Private hotel pickup at dawn & return early afternoon; Morning game drive at Aquila Private Game Reserve; Buffet lunch at the lodge; Chauffeured private vehicle, end to end.",
+  "image": "https://svrm.group/__l5e/assets-v1/f0bc3fed-c3b8-441e-979c-16294e190161/tour-karoo-1.jpg"
  },
  {
   "path": "/tours/aquila-safari/packages/aquila-big-five-safari-midday",
   "title": "Aquila Big Five safari (midday) | Aquila Safari — Day Trip — SVRM",
   "description": "Choose a later start with private late-morning collection from your accommodation and a midday open-vehicle game drive at Aquila. Buffet lunch and the return chauffeur journey are coordinated as one day trip. On request per person. Check availability on WhatsApp.",
   "heading": "Aquila Big Five safari (midday) · 1 day",
-  "summary": "Choose a later start with private late-morning collection from your accommodation and a midday open-vehicle game drive at Aquila. Buffet lunch and the return chauffeur journey are coordinated as one day trip. Included: Late-morning hotel pickup, mid-afternoon return; Midday game drive in an open 4x4; Buffet lunch at the lodge; Chauffeured private vehicle, end to end."
+  "summary": "Choose a later start with private late-morning collection from your accommodation and a midday open-vehicle game drive at Aquila. Buffet lunch and the return chauffeur journey are coordinated as one day trip. Included: Late-morning hotel pickup, mid-afternoon return; Midday game drive in an open 4x4; Buffet lunch at the lodge; Chauffeured private vehicle, end to end.",
+  "image": "https://svrm.group/__l5e/assets-v1/f0bc3fed-c3b8-441e-979c-16294e190161/tour-karoo-1.jpg"
  },
  {
   "path": "/tours/aquila-safari/packages/aquila-sunset-safari",
   "title": "Aquila sunset safari | Aquila Safari — Day Trip — SVRM",
   "description": "Travel to Aquila in the afternoon for golden-hour and sunset game viewing, followed by dinner at the lodge. Your private chauffeur handles the late-evening return to Cape Town, removing the need to drive after the experience. On request per person. Check availability on WhatsApp.",
   "heading": "Aquila sunset safari · 1 day",
-  "summary": "Travel to Aquila in the afternoon for golden-hour and sunset game viewing, followed by dinner at the lodge. Your private chauffeur handles the late-evening return to Cape Town, removing the need to drive after the experience. Included: Afternoon hotel pickup, late-evening return; Golden-hour & sunset game drive; Dinner at the lodge; Chauffeured private vehicle, end to end."
+  "summary": "Travel to Aquila in the afternoon for golden-hour and sunset game viewing, followed by dinner at the lodge. Your private chauffeur handles the late-evening return to Cape Town, removing the need to drive after the experience. Included: Afternoon hotel pickup, late-evening return; Golden-hour & sunset game drive; Dinner at the lodge; Chauffeured private vehicle, end to end.",
+  "image": "https://svrm.group/__l5e/assets-v1/f0bc3fed-c3b8-441e-979c-16294e190161/tour-karoo-1.jpg"
  }
 ];

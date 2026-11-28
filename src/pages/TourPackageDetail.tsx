@@ -75,7 +75,7 @@ const TourPackageDetailInner = ({ tour, pkg }: { tour: NonNullable<ReturnType<ty
               <p className="mt-3 font-serif text-2xl text-gold">{price}</p>
               <p className="text-xs text-muted-foreground mt-1">{unit} · indicative guide; your written quote is final.</p>
             </header>
-            <ListingGallery photos={photos} name={name} />
+            <ListingGallery photos={photos} name={name} fill />
             <section aria-labelledby="package-description">
               <h2 id="package-description" className="font-serif text-2xl">About this package</h2>
               <p className="mt-3 text-base leading-relaxed text-muted-foreground">{description}</p>
