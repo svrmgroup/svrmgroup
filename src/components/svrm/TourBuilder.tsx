@@ -31,7 +31,23 @@ const TIERS: { id: Tier; label: string; perDay: number }[] = [
   { id: "ultra", label: "Ultra", perDay: 20400 },
 ];
 
-const DURATIONS = [3, 5, 7, 10, 14];
+const DURATIONS = [1, 2, 3, 5, 7, 10, 14, 21];
+
+// Extra preferences go into the brief only; they are priced in the written quote, not the rough estimate.
+const EXTRAS = [
+  "Cape Peninsula & penguins", "Winelands & wine tasting", "Bo-Kaap cooking class", "Table Mountain",
+  "Whale watching", "Hot-air balloon", "Golf", "Photography session", "Shopping & stylist",
+  "Beach & Clifton day", "Garden Route", "Big Five day safari",
+];
+const PREFS: { key: string; label: string; options: string[] }[] = [
+  { key: "Stay", label: "Where you'd like to stay", options: ["Private villa", "5-star hotel", "Safari lodge", "Mix", "Already booked"] },
+  { key: "Vehicle", label: "Vehicle", options: ["Luxury sedan", "Luxury SUV", "Maybach", "V-Class van", "Sprinter / group"] },
+  { key: "Pace", label: "Pace", options: ["Relaxed", "Balanced", "Packed"] },
+  { key: "Occasion", label: "Occasion", options: ["Holiday", "Honeymoon", "Anniversary", "Birthday", "Proposal", "Business", "Family"] },
+  { key: "Guide language", label: "Guide language", options: ["English", "German", "French", "Other"] },
+  { key: "Dining", label: "Dining", options: ["No preference", "Halal", "Vegetarian", "Kosher", "Fine dining"] },
+];
+const ADDONS = ["Airport meet & greet", "Close protection", "Private chef dinner", "Flowers & décor", "Kids' seats", "Wheelchair-friendly"];
 
 const TourBuilder = () => {
   const { format } = useCurrency();
@@ -39,6 +55,15 @@ const TourBuilder = () => {
   const [duration, setDuration] = useState(5);
   const [travellers, setTravellers] = useState(2);
   const [tier, setTier] = useState<Tier>("luxury");
+  const [extras, setExtras] = useState<Set<string>>(new Set());
+  const [addons, setAddons] = useState<Set<string>>(new Set());
+  const [prefs, setPrefs] = useState<Record<string, string>>({});
+  const flip = (set: React.Dispatch<React.SetStateAction<Set<string>>>, v: string) =>
+    set((s) => { const n = new Set(s); n.has(v) ? n.delete(v) : n.add(v); return n; });
+  const chip = (active: boolean) =>
+    `px-4 py-2.5 border text-[11px] uppercase tracking-[0.18em] transition-colors ${
+      active ? "border-primary bg-primary/10 text-foreground" : "border-border/50 text-muted-foreground hover:border-primary/50 hover:text-foreground"
+    }`;
 
   const toggle = (id: ActivityId) => {
     setSelected((s) => {
@@ -60,9 +85,14 @@ const TourBuilder = () => {
     const low = Math.round((perPerson * 0.85) / 500) * 500;
     const high = Math.round((perPerson * 1.15) / 500) * 500;
     const activityLabels = Array.from(selected).map((id) => ACTIVITIES.find((a) => a.id === id)!.label);
-    const summary = `${duration}-day ${tierData.label.toLowerCase()} tour for ${travellers} traveller${travellers > 1 ? "s" : ""} including ${activityLabels.join(", ") || "no activities selected yet"}.`;
-    return { low, high, summary };
-  }, [selected, duration, travellers, tier]);
+    const lines = [
+      `${duration}-day ${tierData.label.toLowerCase()} tour for ${travellers} traveller${travellers > 1 ? "s" : ""} including ${activityLabels.join(", ") || "no activities selected yet"}.`,
+      extras.size ? `Experiences: ${Array.from(extras).join(", ")}.` : "",
+      ...Object.entries(prefs).map(([k, v]) => `${k}: ${v}.`),
+      addons.size ? `Extras: ${Array.from(addons).join(", ")}.` : "",
+    ].filter(Boolean);
+    return { low, high, summary: lines.join(" ") };
+  }, [selected, duration, travellers, tier, extras, prefs, addons]);
 
   const fmt = (n: number) => format(n);
 
@@ -110,7 +140,7 @@ const TourBuilder = () => {
                     : "border-border/50 text-muted-foreground hover:border-primary/50 hover:text-foreground"
                 }`}
               >
-                {d} days
+                {d} {d === 1 ? "day" : "days"}
               </button>
             ))}
           </div>
@@ -157,6 +187,46 @@ const TourBuilder = () => {
             </div>
           </div>
         </div>
+
+        <div>
+          <p className="eyebrow">Step 05 · Experiences</p>
+          <p className="text-sm text-muted-foreground mt-2">Add the moments you don't want to miss — priced in your quote.</p>
+          <div className="mt-6 flex flex-wrap gap-2.5">
+            {EXTRAS.map((x) => (
+              <button key={x} type="button" aria-pressed={extras.has(x)} onClick={() => flip(setExtras, x)} className={chip(extras.has(x))}>{x}</button>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <p className="eyebrow">Step 06 · Your preferences</p>
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+            {PREFS.map((p) => (
+              <div key={p.key}>
+                <p className="text-xs uppercase tracking-[0.22em] text-foreground/80">{p.label}</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {p.options.map((o) => {
+                    const active = prefs[p.key] === o;
+                    return (
+                      <button key={o} type="button" aria-pressed={active}
+                        onClick={() => setPrefs((s) => { const n = { ...s }; active ? delete n[p.key] : (n[p.key] = o); return n; })}
+                        className={chip(active)}>{o}</button>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <p className="eyebrow">Step 07 · Finishing touches</p>
+          <div className="mt-6 flex flex-wrap gap-2.5">
+            {ADDONS.map((x) => (
+              <button key={x} type="button" aria-pressed={addons.has(x)} onClick={() => flip(setAddons, x)} className={chip(addons.has(x))}>{x}</button>
+            ))}
+          </div>
+        </div>
       </div>
 
       <aside className="lg:sticky lg:top-32 self-start bg-surface-raised border border-border/40 p-8">
@@ -164,7 +234,7 @@ const TourBuilder = () => {
         <p className="font-serif text-3xl md:text-4xl text-gold mt-4 leading-tight">
           {fmt(low)}<span className="text-muted-foreground/70 mx-2">–</span>{fmt(high)}
         </p>
-        <p className="text-xs text-muted-foreground/70 mt-2 tracking-wide">per person, excl. international flights · rough only</p>
+        <p className="text-xs text-muted-foreground/70 mt-2 tracking-wide">per person, excl. international flights · rough only · experiences & extras quoted separately</p>
         <p className="text-sm text-foreground/85 mt-6 leading-relaxed">{summary}</p>
         <p className="text-xs text-muted-foreground/60 mt-4 italic">
           A rough guide — the final price is on request and personalised to your brief.

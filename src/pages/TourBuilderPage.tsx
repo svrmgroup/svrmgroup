@@ -2,6 +2,7 @@ import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
 import PageHero from "@/components/svrm/PageHero";
 import TourBuilder from "@/components/svrm/TourBuilder";
+import builderHero from "@/assets/tours/builder-hero.jpg";
 import { Seo } from "@/components/Seo";
 
 const TourBuilderPage = () => (
@@ -12,8 +13,10 @@ const TourBuilderPage = () => (
       eyebrow="Create your own"
       title="Build your tour."
       subtitle="Choose what matters. We'll quietly arrange the rest — and quote you against the exact brief."
+      imageSrc={builderHero}
+      imageAlt="Black Maybach with SVRM GROUP plate at a Cape Town coastal lookout at sunset, Table Mountain behind"
     />
-    <section className="pb-28 md:pb-40">
+    <section className="pt-16 md:pt-20 pb-28 md:pb-40">
       <div className="max-w-7xl mx-auto px-6">
         <TourBuilder />
       </div>

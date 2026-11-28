@@ -1,6 +1,6 @@
 import { reportConversion } from "@/lib/adsConsent";
 import { requiredPhone, optionalEmail, emailOrNull, PHONE_REQUIRED_MSG } from "@/lib/contactValidation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
 import { useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -33,6 +33,12 @@ interface Props {
 const EnquiryForm = ({ subject, defaultMessage = "", compact = false, extras, extrasLabel }: Props) => {
   const location = useLocation();
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: defaultMessage, travelDate: "", guests: "", days: "" });
+  // Keep the prefilled message in step with builder choices until the guest edits it.
+  const lastDefault = useRef(defaultMessage);
+  useEffect(() => {
+    setForm((f) => (f.message === lastDefault.current ? { ...f, message: defaultMessage } : f));
+    lastDefault.current = defaultMessage;
+  }, [defaultMessage]);
   const [reference, setReference] = useState<string | null>(null);
   const isChauffeur = serviceFromPath(location.pathname) === "chauffeur" || /chauffeur|driver/i.test(subject);
   const [selectedExtras, setSelectedExtras] = useState<string[]>([]);
