@@ -18,3 +18,6 @@
 - Admin notification panels use the shared portalled, collision-aware Popover with viewport-constrained height and a scrolling list so sidebar and mobile triggers cannot push alerts off-screen.
 - Keep Organization and WebSite brand aliases consistent in static head and homepage JSON-LD so crawlers and client rendering identify the same business.
 - Surface tokens (`surface-deep`, `surface-raised`) are registered in `tailwind.config.ts` with `<alpha-value>`; without registration their opacity and gradient utilities (`bg-surface-deep/70`, `from-surface-deep`) silently render nothing — keep new tokens registered there rather than as bare CSS classes.
+- Enquiry references, per-service WhatsApp prefills, consent-gated ad attribution and the Google Ads import sheet live in `src/lib/enquiryTracking.ts`; every enquiry insert spreads `trackingFields()` and a `newReference()` so ads can be judged on booked contribution, not taps.
+- Enquiry stage, money and flags are set only by admins: the `enquiries_prepare` trigger resets them for public inserts and drops click IDs without ad consent; import-sheet conversion names must match the Google Ads upload actions exactly.
+- Supplier/partner applications never report the Website Enquiry conversion, so guest-lead counts stay clean.
