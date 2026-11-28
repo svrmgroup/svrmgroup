@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Compass, Landmark, Mountain, Ship, Plane, Sparkles, ChefHat, Wine, Fish, Camera, Heart, Car, Wind, Trees, UtensilsCrossed } from "lucide-react";
+import { Compass, Landmark, Mountain, Ship, Plane, Sparkles, ChefHat, Fish, Camera, Heart, Car, Wind, Trees, UtensilsCrossed } from "lucide-react";
 import SmartImage from "./SmartImage";
 import safariImg from "@/assets/svc-exp-safari.jpg";
 import culturalImg from "@/assets/svc-tours-cultural.jpg";
@@ -8,7 +8,6 @@ import yachtImg from "@/assets/svc-exp-yacht.jpg";
 import heliImg from "@/assets/svc-transport-heli.jpg";
 import spaImg from "@/assets/svc-lifestyle-wellness.jpg";
 import chefImg from "@/assets/svc-lifestyle-chef.jpg";
-import wineImg from "@/assets/tours/wine-farms.jpg";
 import marineImg from "@/assets/tours/marine.jpg";
 import photoImg from "@/assets/tours/photography.jpg";
 import romanticImg from "@/assets/tours/romantic.jpg";
@@ -21,7 +20,7 @@ import { useCurrency } from "@/lib/currency";
 
 
 type ActivityId = "safari" | "cultural" | "adventure" | "yacht" | "helicopter" | "spa" | "chef"
-  | "wine" | "marine" | "photo" | "romance" | "peninsula" | "balloon" | "garden" | "cooking";
+  | "marine" | "photo" | "romance" | "peninsula" | "balloon" | "garden" | "cooking";
 
 interface Activity {
   id: ActivityId;
@@ -40,7 +39,6 @@ const ACTIVITIES: Activity[] = [
   { id: "helicopter", label: "Helicopter", icon: Plane, perDay: 0, oneOff: 16650, image: heliImg },
   { id: "spa", label: "Spa & wellness", icon: Sparkles, perDay: 1500, oneOff: 0, image: spaImg },
   { id: "chef", label: "Private chef", icon: ChefHat, perDay: 4100, oneOff: 0, image: chefImg },
-  { id: "wine", label: "Wine tasting", icon: Wine, perDay: 0, oneOff: 0, image: wineImg },
   { id: "marine", label: "Whales & marine", icon: Fish, perDay: 0, oneOff: 0, image: marineImg },
   { id: "photo", label: "Photography", icon: Camera, perDay: 0, oneOff: 0, image: photoImg },
   { id: "romance", label: "Romance", icon: Heart, perDay: 0, oneOff: 0, image: romanticImg },
@@ -61,7 +59,7 @@ const DURATIONS = [1, 2, 3, 5, 7, 10, 14, 21];
 
 // Extra preferences go into the brief only; they are priced in the written quote, not the rough estimate.
 const EXTRAS = [
-  "Cape Peninsula & penguins", "Winelands & wine tasting", "Bo-Kaap cooking class", "Table Mountain",
+  "Cape Peninsula & penguins", "Bo-Kaap cooking class", "Table Mountain",
   "Golf", "Photography session", "Shopping & stylist",
   "Beach & Clifton day", "Big Five day safari", "Sandboarding", "Shark cage diving", "Robben Island", "Stargazing",
 ];
