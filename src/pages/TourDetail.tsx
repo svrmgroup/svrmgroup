@@ -11,6 +11,67 @@ import { findTour } from "@/data/tours";
 import SmartImage from "@/components/svrm/SmartImage";
 import WellnessCustomBuilder from "@/components/svrm/WellnessCustomBuilder";
 import BackgroundVideo from "@/components/svrm/BackgroundVideo";
+import ListingGallery from "@/components/svrm/ListingGallery";
+import ListingEnquiry from "@/components/svrm/ListingEnquiry";
+import { FactList, useListingPage } from "@/components/svrm/ListingSections";
+import { useListingPhotos } from "@/hooks/useListingPhotos";
+import type { TourCategory } from "@/data/tours";
+
+const PENINSULA_FACTS: [string, string][] = [
+  ["Typical duration", "Full day, about 8–10 hours"],
+  ["Pickup areas", "Your hotel, villa or apartment — City Bowl, V&A Waterfront, Atlantic Seaboard and Southern Suburbs; other areas on request"],
+  ["Route", "Camps Bay & Clifton → Hout Bay → Chapman's Peak Drive → Noordhoek → Cape Point & Cape of Good Hope → Boulders Beach & Simon's Town → back to Cape Town"],
+  ["Included", "Private chauffeur and vehicle for the day, the full route at your pace, lunch reservation arranged"],
+  ["Tickets & extras", "Cape Point (Table Mountain National Park) and Boulders Beach entry are arranged for you — your quote confirms whether they are included. Lunch, drinks and optional extras are paid separately."],
+  ["Subject to conditions", "Chapman's Peak Drive can close in bad weather or for rockfall — we reroute via Ou Kaapse Weg. Cape Point, Boulders Beach and Chapman's Peak are standard stops when open."],
+];
+const PENINSULA_VEHICLES = [
+  { label: "Luxury sedan or SUV (up to 4)", to: "/chauffeur" },
+  { label: "Mercedes-Maybach S-Class (Maybach Signature)", to: "/chauffeur/mercedes-maybach-s-class" },
+  { label: "Mercedes V-Class (larger groups, on request)", to: "/chauffeur/mercedes-v-class" },
+  { label: "Maybach V-Class (on request)", to: "/chauffeur/maybach-v-class" },
+];
+
+const TourEnquirySection = ({ tour }: { tour: TourCategory }) => {
+  const path = `/tours/${tour.slug}`;
+  const name = tour.slug === "cape-peninsula" ? "Cape Peninsula tour" : tour.label;
+  const fallback = [tour.image, ...tour.packages.map((p) => p.image)].filter((x, i, a): x is string => !!x && a.indexOf(x) === i)
+    .map((src, i) => ({ src, fullSrc: src, alt: `${tour.label} — photo ${i + 1}` }));
+  const photos = useListingPhotos("tour", tour.slug, fallback, tour.label);
+  const enquiry = { id: `tour:${tour.slug}`, name, kind: "tour", url: `https://svrm.group${path}`, path } as const;
+  useListingPage(enquiry, "tour");
+  const peninsula = tour.slug === "cape-peninsula";
+  return (
+    <section className="pb-20 md:pb-24">
+      <div className="max-w-7xl mx-auto px-6 grid gap-10 lg:grid-cols-[minmax(0,1fr)_380px]">
+        <div className="min-w-0 space-y-8">
+          <ListingGallery photos={photos} name={tour.label} />
+          {peninsula && (
+            <>
+              <div>
+                <p className="eyebrow">At a glance</p>
+                <h2 className="font-serif text-2xl md:text-3xl mt-3">What your Peninsula day includes</h2>
+              </div>
+              <FactList facts={PENINSULA_FACTS} />
+              <div>
+                <h3 className="font-serif text-xl">Vehicle options</h3>
+                <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+                  {PENINSULA_VEHICLES.map((v) => (
+                    <li key={v.label}><Link to={v.to} className="block border border-border/50 p-3 text-sm hover:border-primary/60 hover:text-gold">{v.label} →</Link></li>
+                  ))}
+                </ul>
+              </div>
+            </>
+          )}
+        </div>
+        <aside className="lg:sticky lg:top-28 self-start">
+          <ListingEnquiry listing={enquiry} category="tour" vehicleOptions={peninsula ? ["Luxury sedan or SUV", "Mercedes-Maybach S-Class", "Mercedes V-Class", "Maybach V-Class"] : undefined} />
+        </aside>
+      </div>
+    </section>
+  );
+};
+
 
 
 const TourDetail = () => {
@@ -102,7 +163,7 @@ const TourDetail = () => {
   };
 
   return (
-    <main className="bg-background text-foreground min-h-screen">
+    <main className="bg-background text-foreground min-h-screen pb-24 lg:pb-0">
       <Seo
         title={title.length > 60 ? `${tour.label} | SVRM` : title}
         description={String(description).slice(0, 158)}
@@ -139,6 +200,8 @@ const TourDetail = () => {
           <p className="mt-8 text-muted-foreground leading-relaxed">{tour.description}</p>
         </div>
       </section>
+
+      <TourEnquirySection key={tour.slug} tour={tour} />
 
 
       <section className="pb-24 md:pb-32">

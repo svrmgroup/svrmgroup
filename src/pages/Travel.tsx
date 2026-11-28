@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { completeFaq, faqSchema } from "@/lib/faq";
 import ServiceFaq from "@/components/svrm/ServiceFaq";
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams, Link, Navigate } from "react-router-dom";
 import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
 import RelatedLinks from "@/components/svrm/RelatedLinks";
@@ -111,14 +111,15 @@ const Travel = () => {
     }
   }, [params]);
 
-  useEffect(() => {
-    const slug = params.get("vehicle");
-    if (!slug || !vehicles.some((v) => v.slug === slug)) return;
-    setMode("cars");
-    setCarTier("All");
-    const timer = window.setTimeout(() => document.getElementById(slug)?.scrollIntoView({ block: "start" }), 200);
-    return () => window.clearTimeout(timer);
-  }, [params]);
+  const legacyVehicle = params.get("vehicle");
+  if (legacyVehicle && vehicles.some((v) => v.slug === legacyVehicle)) {
+    // Old vehicle-selection links open the vehicle's own page; ad tracking parameters are kept.
+    const keep = new URLSearchParams(params);
+    keep.delete("vehicle");
+    keep.delete("cat");
+    const qs = keep.toString();
+    return <Navigate to={`/chauffeur/${legacyVehicle}${qs ? `?${qs}` : ""}`} replace />;
+  }
 
   return (
     <main className="bg-background text-foreground min-h-screen">
@@ -145,7 +146,7 @@ const Travel = () => {
                 name: "Maybach V-Class chauffeur hire — daily guide rate",
                 price: 20000,
                 priceCurrency: "ZAR",
-                url: "https://svrm.group/chauffeur?cat=cars&vehicle=maybach-v-class#maybach-v-class",
+                url: "https://svrm.group/chauffeur/maybach-v-class",
                 description: "R20,000 per day guide rate; final quote confirmed on enquiry for your dates, hours and route.",
                 itemOffered: {
                   "@type": "Service",
@@ -498,7 +499,7 @@ const Travel = () => {
             <p className="mt-4 text-sm text-muted-foreground">
               From {format(20000)} per day. Your final quote is confirmed on enquiry for your dates, hours and route.
             </p>
-            <Link to="/chauffeur?cat=cars&vehicle=maybach-v-class#maybach-v-class" className="inline-flex mt-5 text-gold underline underline-offset-4">
+            <Link to="/chauffeur/maybach-v-class" className="inline-flex mt-5 text-gold underline underline-offset-4">
               Explore the Maybach V-Class
             </Link>
           </div>

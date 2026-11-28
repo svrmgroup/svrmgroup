@@ -1,3 +1,4 @@
+import ServiceEnquirySection from "@/components/svrm/ServiceEnquirySection";
 import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
 import PageHero from "@/components/svrm/PageHero";
@@ -72,6 +73,7 @@ const Lifestyle = () => (
       </div>
     </section>
 
+    <ServiceEnquirySection id="yacht-charter" name="a private yacht charter" kind="charter" />
     <Footer />
   </main>
 );

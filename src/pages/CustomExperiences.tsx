@@ -1,3 +1,4 @@
+import ServiceEnquirySection from "@/components/svrm/ServiceEnquirySection";
 import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
 import PageHero from "@/components/svrm/PageHero";
@@ -67,6 +68,7 @@ const CustomExperiences = () => (
       </div>
     </section>
 
+    <ServiceEnquirySection id="proposal-celebration" name="a bespoke celebration" kind="occasion" detail="Proposal" />
     <Footer />
   </main>
 );

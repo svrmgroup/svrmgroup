@@ -1,6 +1,7 @@
 // Static head + readable summary written into dist/<route>/index.html at build time,
 // so crawlers that don't run JavaScript still see each main page's real information.
 // Keep titles/descriptions in sync with each page's <Seo> props.
+import { LISTING_ROUTES } from "./listingRoutes.generated";
 import { CHAUFFEUR_DESCRIPTION, MAYBACH_DESCRIPTION, PHANTOM_DESCRIPTION } from "./vehicleServices";
 export interface PrerenderRoute {
   path: string;
@@ -8,6 +9,8 @@ export interface PrerenderRoute {
   description: string;
   heading: string;
   summary: string;
+  /** Absolute share image for this page. */
+  image?: string;
 }
 
 const CONTACT = "WhatsApp +27 73 064 1481 (https://wa.me/27730641481) · concierge@svrm.group";
@@ -29,6 +32,6 @@ export const PRERENDER_ROUTES: PrerenderRoute[] = [
   { path: "/lifestyle", title: "Lifestyle Management & Yachting Cape Town | SVRM", description: "Private yachting, day charters and luxury lifestyle management along the Cape Town coast — curated with the discretion that defines SVRM Group.", heading: "Lifestyle Management & Yachting", summary: "Private yacht charters and lifestyle management along the Cape Town coast." },
 ].map(route => route.path === "/" || route.path === "/chauffeur"
   ? { ...route, summary: `${route.summary} ${PHANTOM_DESCRIPTION} ${MAYBACH_DESCRIPTION}` }
-  : route);
+  : route).concat(LISTING_ROUTES);
 
 export const PRERENDER_CONTACT = CONTACT;

@@ -163,13 +163,13 @@ function offersSeed() {
       eyebrow: "Flagship · Chauffeur", summary: PHANTOM_DESCRIPTION,
       price_zar: 40000, price_suffix: "/ day",
       image_url: vehicles.find(v => v.slug === "rolls-royce-phantom")?.image,
-      cta_label: "Request Phantom", cta_href: "/chauffeur?cat=cars&vehicle=rolls-royce-phantom#rolls-royce-phantom",
+      cta_label: "Request Phantom", cta_href: "/chauffeur/rolls-royce-phantom",
     },
     ...(maybachV ? [{
       slug: "maybach-v-class-chauffeur", title: maybachV.name,
       eyebrow: "Signature · Chauffeur", summary: maybachV.tagline,
       price_zar: maybachV.fromZAR, price_suffix: "/ day", image_url: maybachV.image,
-      cta_label: "View Maybach V-Class", cta_href: "/chauffeur?cat=cars&vehicle=maybach-v-class#maybach-v-class",
+      cta_label: "View Maybach V-Class", cta_href: "/chauffeur/maybach-v-class",
       gallery_urls: maybachV.gallery?.map((photo) => photo.fullSrc),
     }] : []),
     {
@@ -180,7 +180,7 @@ function offersSeed() {
       price_zar: 22000,
       price_suffix: "/ day",
       cta_label: "Request Maybach",
-      cta_href: "/chauffeur?cat=cars&vehicle=mercedes-maybach-s-class#mercedes-maybach-s-class",
+      cta_href: "/chauffeur/mercedes-maybach-s-class",
     },
     {
       slug: "luxury-honeymoon-cape-town",

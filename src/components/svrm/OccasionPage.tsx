@@ -1,3 +1,4 @@
+import ServiceEnquirySection from "@/components/svrm/ServiceEnquirySection";
 import { Link } from "react-router-dom";
 import { MessageCircle } from "lucide-react";
 import Nav from "@/components/svrm/Nav";
@@ -168,6 +169,7 @@ const OccasionPage = ({
       </div>
     </section>
 
+    <ServiceEnquirySection id={`occasion-${eyebrow.split(" ")[0].toLowerCase()}`} name={`your ${eyebrow.split(" ")[0].toLowerCase()}`} kind="occasion" detail={eyebrow.split(" ")[0]} />
     <Footer />
   </>
 );

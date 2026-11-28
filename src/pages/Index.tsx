@@ -101,7 +101,7 @@ const Index = () => (
             price: "40000",
             priceCurrency: "ZAR",
             priceSpecification: { "@type": "UnitPriceSpecification", price: "40000", priceCurrency: "ZAR", unitCode: "DAY" },
-            url: "https://svrm.group/chauffeur?cat=cars&vehicle=rolls-royce-phantom#rolls-royce-phantom",
+            url: "https://svrm.group/chauffeur/rolls-royce-phantom",
             seller: { "@id": "https://svrm.group/#organization" },
           },
           {

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Maximize2, ChevronLeft, ChevronRight } from "lucide-react";
 import { Vehicle } from "@/data/vehicles";
 import { Button } from "@/components/ui/button";
@@ -7,7 +8,7 @@ import { Carousel, CarouselApi, CarouselContent, CarouselItem, CarouselNext, Car
 import SmartImage from "./SmartImage";
 import { vehiclePhotoAlt } from "@/seo/vehicleImages";
 
-const VehicleGallery = ({ vehicle }: { vehicle: Vehicle }) => {
+const VehicleGallery = ({ vehicle, to }: { vehicle: Vehicle; to?: string }) => {
   const [api, setApi] = useState<CarouselApi>();
   const [selected, setSelected] = useState(0);
   const [expanded, setExpanded] = useState(false);
@@ -28,7 +29,8 @@ const VehicleGallery = ({ vehicle }: { vehicle: Vehicle }) => {
         <CarouselContent className="ml-0">
           {photos.map((image, index) => (
             <CarouselItem key={image.src} className="pl-0">
-              <SmartImage src={image.src} alt={`${vehiclePhotoAlt(vehicle.name)} — ${image.alt}`} wrapperClassName="aspect-[16/10]" className="absolute inset-0 w-full h-full object-cover" sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" loading="lazy" />
+              {(() => { const img = <SmartImage src={image.src} alt={`${vehiclePhotoAlt(vehicle.name)} — ${image.alt}`} wrapperClassName="aspect-[16/10]" className="absolute inset-0 w-full h-full object-cover" sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" loading="lazy" />;
+                return to ? <Link to={to} aria-label={`View ${vehicle.name} details`} className="block">{img}</Link> : img; })()}
             </CarouselItem>
           ))}
         </CarouselContent>

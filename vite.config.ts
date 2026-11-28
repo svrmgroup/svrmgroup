@@ -29,6 +29,8 @@ function prerenderPlugin(): Plugin {
           .replace(/<meta name="description" content="[^"]*"\s*\/?>/, `<meta name="description" content="${esc(r.description)}" />`)
           .replace(/<meta property="og:title" content="[^"]*"\s*\/?>/, `<meta property="og:title" content="${esc(r.title)}" />`)
           .replace(/<meta property="og:description" content="[^"]*"\s*\/?>/, `<meta property="og:description" content="${esc(r.description)}" />`)
+          .replace(/<meta property="og:image" content="[^"]*"\s*\/?>/, r.image ? `<meta property="og:image" content="${esc(r.image)}" />` : "$&")
+          .replace(/<meta name="twitter:image" content="[^"]*"\s*\/?>/, r.image ? `<meta name="twitter:image" content="${esc(r.image)}" />` : "$&")
           .replace("</head>", `  <link rel="canonical" href="${url}" data-rh="true" />\n  <meta property="og:url" content="${url}" data-rh="true" />\n</head>`)
           .replace('<div id="root"></div>', `<div id="root"><main><h1>${esc(r.heading)}</h1><p>${esc(r.summary)}</p><p>${esc(PRERENDER_CONTACT)}</p>${fleetImageHtml(r.path)}</main></div>`);
         const out = r.path === "/" ? file : path.join(dist, r.path.slice(1), "index.html");

@@ -17,7 +17,7 @@ describe("chauffeur fleet search data", () => {
     expect(offers).toHaveLength(vehicles.length);
     for (const vehicle of vehicles) {
       expect(offers.find(offer => offer.itemOffered.name === `${vehicle.name} chauffeur service Cape Town`)?.url)
-        .toBe(`https://svrm.group/chauffeur?cat=cars&vehicle=${vehicle.slug}#${vehicle.slug}`);
+        .toBe(`https://svrm.group/chauffeur/${vehicle.slug}`);
     }
   });
 });

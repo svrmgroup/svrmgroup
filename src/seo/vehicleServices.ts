@@ -35,7 +35,7 @@ export function vehicleSearchKeywords(fleet: SearchVehicle[]) {
 export function vehicleServiceOffers(fleet: SearchVehicle[]) {
   return fleet.map(vehicle => ({
     "@type": "Offer",
-    url: `https://svrm.group/chauffeur?cat=cars&vehicle=${vehicle.slug}#${vehicle.slug}`,
+    url: `https://svrm.group/chauffeur/${vehicle.slug}`,
     itemOffered: {
       "@type": "Service",
       name: `${vehicle.name} chauffeur service Cape Town`,

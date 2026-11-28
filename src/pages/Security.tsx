@@ -1,3 +1,4 @@
+import ServiceEnquirySection from "@/components/svrm/ServiceEnquirySection";
 import Nav from "@/components/svrm/Nav";
 import Footer from "@/components/svrm/Footer";
 import RelatedLinks from "@/components/svrm/RelatedLinks";
@@ -110,6 +111,7 @@ const Security = () => {
         ]}
       />
 
+      <ServiceEnquirySection id="secure-transport" name="secure transport in Cape Town" kind="security" intro="Share only general details here — we discuss sensitive itinerary details privately." />
       <Footer />
     </main>
   );

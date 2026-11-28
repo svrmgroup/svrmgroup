@@ -3,6 +3,8 @@ import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Stay } from "@/data/stays";
 import { stayGalleries } from "@/data/stayGalleries";
+import { Link } from "react-router-dom";
+import { stayPath } from "@/data/listings";
 import { useCurrency } from "@/lib/currency";
 import BookingSheet from "./BookingSheet";
 import SmartImage from "./SmartImage";
@@ -65,6 +67,7 @@ const StayCard = ({ stay }: { stay: Stay; index?: number }) => {
           <div className="flex h-full">
             {images.map((src, i) => (
               <div key={i} className="relative flex-[0_0_100%] h-full">
+                <Link to={stayPath(stay)} aria-label={`View ${stay.name} details`} className="absolute inset-0 block">
                 <SmartImage
                   src={src}
                   alt={`${stay.name} — photo ${i + 1}`}
@@ -73,6 +76,7 @@ const StayCard = ({ stay }: { stay: Stay; index?: number }) => {
                   wrapperClassName="absolute inset-0 w-full h-full"
                   className="w-full h-full object-cover"
                 />
+                </Link>
               </div>
             ))}
           </div>
@@ -113,12 +117,13 @@ const StayCard = ({ stay }: { stay: Stay; index?: number }) => {
       <div className="p-6 flex-1 flex flex-col">
         <p className="eyebrow">{stay.area}</p>
         <h3 className="font-serif text-xl md:text-2xl mt-2 text-foreground leading-snug break-words">
-          {stay.name}
+          <Link to={stayPath(stay)} className="hover:text-gold transition-colors">{stay.name}</Link>
         </h3>
         <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground/80 mt-2">
           {stay.beds}
         </p>
         <p className="text-sm text-muted-foreground mt-3 flex-1">{stay.blurb}</p>
+        <Link to={stayPath(stay)} className="mt-4 text-[11px] uppercase tracking-[0.22em] text-gold hover:underline underline-offset-4">View details →</Link>
         <div className="mt-5 flex items-end justify-between gap-4">
           <div>
             <p className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground/70">

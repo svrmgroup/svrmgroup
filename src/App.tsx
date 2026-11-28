@@ -29,6 +29,8 @@ const Contact = lazy(() => import("./pages/Contact.tsx"));
 const Partners = lazy(() => import("./pages/Partners.tsx"));
 const AdminPartners = lazy(() => import("./pages/admin/AdminPartners"));
 const Rentals = lazy(() => import("./pages/Rentals.tsx"));
+const VehicleDetail = lazy(() => import("./pages/VehicleDetail.tsx"));
+const StayDetail = lazy(() => import("./pages/StayDetail.tsx"));
 const Security = lazy(() => import("./pages/Security.tsx"));
 const AirportTransfers = lazy(() => import("./pages/AirportTransfers.tsx"));
 const Honeymoon = lazy(() => import("./pages/Honeymoon.tsx"));
@@ -68,6 +70,7 @@ const AdminCMS = lazy(() => import("./pages/admin/AdminCMS"));
 const AdminChangeRequests = lazy(() => import("./pages/admin/AdminChangeRequests"));
 const AdminItineraries = lazy(() => import("./pages/admin/AdminItineraries"));
 const AdminMedia = lazy(() => import("./pages/admin/AdminMedia"));
+const AdminGalleries = lazy(() => import("./pages/admin/AdminGalleries"));
 
 const queryClient = new QueryClient();
 
@@ -93,9 +96,11 @@ const App = () => (
                 <Route path="/travel" element={<TravelRedirect />} />
                 <Route path="/travel/*" element={<TravelRedirect />} />
                 <Route path="/rentals" element={<Rentals />} />
+                <Route path="/rentals/:slug" element={<VehicleDetail service="self-drive" />} />
                 <Route path="/security" element={<Security />} />
                 <Route path="/lifestyle" element={<Lifestyle />} />
                 <Route path="/stays" element={<Stays />} />
+                <Route path="/stays/:slug" element={<StayDetail />} />
                 <Route path="/tours" element={<Tours />} />
                 <Route path="/tours/builder" element={<TourBuilderPage />} />
                 <Route path="/tours/:slug" element={<TourDetail />} />
@@ -103,6 +108,7 @@ const App = () => (
                 <Route path="/custom" element={<Navigate to="/experiences" replace />} />
                 <Route path="/airport-transfers" element={<AirportTransfers />} />
                 <Route path="/chauffeur" element={<Travel />} />
+                <Route path="/chauffeur/:slug" element={<VehicleDetail service="chauffeur" />} />
                 <Route path="/chauffeur-service-cape-town" element={<Navigate to="/chauffeur" replace />} />
                 <Route path="/aquila-safari" element={<Navigate to="/tours/aquila-safari" replace />} />
                 <Route path="/honeymoon-cape-town" element={<Honeymoon />} />
@@ -138,6 +144,7 @@ const App = () => (
                   <Route path="whatsapp" element={<AdminWhatsApp />} />
                   <Route path="cms" element={<AdminCMS />} />
                   <Route path="media" element={<AdminMedia />} />
+                  <Route path="galleries" element={<AdminGalleries />} />
                   <Route path="itineraries" element={<AdminItineraries />} />
                   <Route path="email-templates" element={<AdminEmailTemplates />} />
                   <Route path="activity" element={<AdminActivity />} />

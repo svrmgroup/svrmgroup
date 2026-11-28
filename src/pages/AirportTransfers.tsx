@@ -1,3 +1,4 @@
+import ServiceEnquirySection from "@/components/svrm/ServiceEnquirySection";
 import { reportConversion } from "@/lib/adsConsent";
 import { requiredPhone, optionalEmail, emailOrNull, PHONE_REQUIRED_MSG } from "@/lib/contactValidation";
 import { useMemo, useState } from "react";
@@ -395,6 +396,7 @@ const AirportTransfers = () => {
         )}
       </main>
 
+      <ServiceEnquirySection id="airport-transfer" name="Cape Town airport transfer" kind="airport" intro="Arrival or departure — tell us the date, time and where you're going." />
       <Footer />
     </>
   );

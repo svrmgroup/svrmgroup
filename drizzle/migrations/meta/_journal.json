@@ -71,6 +71,13 @@
       "when": 1795867035236,
       "tag": "0009_booking_token_expiry",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1795873984703,
+      "tag": "0010_listing_photos",
+      "breakpoints": true
     }
   ]
 }

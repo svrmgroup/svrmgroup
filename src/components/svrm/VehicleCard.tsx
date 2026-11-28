@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import KenBurnsImage from "./KenBurnsImage";
 import { Vehicle } from "@/data/vehicles";
 import BookingSheet from "./BookingSheet";
@@ -13,17 +14,18 @@ const VehicleCard = ({ vehicle, index }: { vehicle: Vehicle; index: number }) =>
   const { format } = useCurrency();
   return (
     <article id={vehicle.slug} className="group bg-surface-raised flex flex-col scroll-mt-28 border border-border/40">
-      {vehicle.gallery?.length ? <VehicleGallery vehicle={vehicle} /> : <KenBurnsImage
+      {vehicle.gallery?.length ? <VehicleGallery vehicle={vehicle} to={`/chauffeur/${vehicle.slug}`} /> : <Link to={`/chauffeur/${vehicle.slug}`} aria-label={`View ${vehicle.name} details`} className="block"><KenBurnsImage
         src={vehicle.image}
         alt={vehiclePhotoAlt(vehicle.name)}
         className="aspect-[16/10]"
         direction={(index % 4) as 0 | 1 | 2 | 3}
-      />}
+      /></Link>}
       <div className="p-6 flex-1 flex flex-col">
         <p className="eyebrow">{vehicle.slug === FLAGSHIP_SLUG ? "Flagship · Chauffeur" : "Vehicle"}</p>
-        <h3 className="font-serif text-2xl mt-2 text-foreground">{vehicle.name}</h3>
+        <h3 className="font-serif text-2xl mt-2 text-foreground"><Link to={`/chauffeur/${vehicle.slug}`} className="hover:text-gold transition-colors">{vehicle.name}</Link></h3>
         {vehicle.slug !== FLAGSHIP_SLUG && <p className="text-sm text-muted-foreground mt-2">{vehicle.tagline}</p>}
         <p className="text-sm text-muted-foreground mt-3 flex-1">{vehicleServiceDescription(vehicle)}</p>
+        <Link to={`/chauffeur/${vehicle.slug}`} className="mt-4 text-[11px] uppercase tracking-[0.22em] text-gold hover:underline underline-offset-4">View details →</Link>
         <div className="mt-5 flex items-end justify-between gap-4">
           <div>
             <p className="text-[10px] uppercase tracking-[0.24em] text-muted-foreground/70">

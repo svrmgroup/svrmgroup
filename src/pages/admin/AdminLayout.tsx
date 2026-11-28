@@ -88,6 +88,7 @@ const AdminLayout = () => {
       <p className={groupLabel}>Content</p>
       <NavLink to="/admin/cms" className={linkClass} onClick={close}><ImagePlus className="h-4 w-4" /> CMS</NavLink>
       <NavLink to="/admin/media" className={linkClass} onClick={close}><ImageIcon className="h-4 w-4" /> Media library</NavLink>
+      <NavLink to="/admin/galleries" className={linkClass} onClick={close}><ImageIcon className="h-4 w-4" /> Listing photos</NavLink>
 
       <p className={groupLabel}>Settings</p>
       <NavLink to="/admin/email-templates" className={linkClass} onClick={close}><Mail className="h-4 w-4" /> Email templates</NavLink>

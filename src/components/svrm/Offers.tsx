@@ -45,7 +45,7 @@ const offers: Offer[] = [
   {
     eyebrow: "Flagship · Chauffeur", title: "Rolls-Royce Phantom",
     detail: PHANTOM_DESCRIPTION, priceZAR: 40000, priceSuffix: "/ day",
-    cta: "Request Phantom", to: "/chauffeur?cat=cars&vehicle=rolls-royce-phantom#rolls-royce-phantom",
+    cta: "Request Phantom", to: "/chauffeur/rolls-royce-phantom",
     image: vehicles.find(v => v.slug === "rolls-royce-phantom")?.image ?? maybach,
     glow: true,
   },
@@ -56,7 +56,7 @@ const offers: Offer[] = [
     priceZAR: 22000,
     priceSuffix: "/ day",
     cta: "Request Maybach",
-    to: "/chauffeur?cat=cars&vehicle=mercedes-maybach-s-class#mercedes-maybach-s-class",
+    to: "/chauffeur/mercedes-maybach-s-class",
     image: vehicles.find(v => v.slug === "mercedes-maybach-s-class")?.image ?? maybach,
     special: true,
   },
@@ -108,7 +108,7 @@ const featuredVilla: Offer = {
   pricePrefix: "From ",
   priceSuffix: "/ night",
   cta: "View Villa",
-  to: "/stays",
+  to: "/stays/the-atlantic-villa-camps-bay",
   image: campsBayVilla,
   special: true,
 };
@@ -152,7 +152,7 @@ const Offers = () => {
     ? [...withVilla.slice(0, 1), {
         eyebrow: "Signature · Chauffeur", title: maybachV.name, detail: maybachV.tagline,
         priceZAR: maybachV.fromZAR, priceSuffix: "/ day", cta: "View Maybach V-Class",
-        to: "/chauffeur?cat=cars&vehicle=maybach-v-class#maybach-v-class", image: maybachV.image,
+        to: "/chauffeur/maybach-v-class", image: maybachV.image,
       }, ...withVilla.slice(1)]
     : withVilla;
 

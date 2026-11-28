@@ -1151,6 +1151,45 @@ export type Database = {
         }
         Relationships: []
       }
+      listing_photos: {
+        Row: {
+          alt_text: string | null
+          caption: string | null
+          created_at: string
+          id: string
+          is_cover: boolean
+          listing_kind: string
+          listing_slug: string
+          sort_order: number
+          storage_path: string
+          updated_at: string
+        }
+        Insert: {
+          alt_text?: string | null
+          caption?: string | null
+          created_at?: string
+          id?: string
+          is_cover?: boolean
+          listing_kind: string
+          listing_slug: string
+          sort_order?: number
+          storage_path: string
+          updated_at?: string
+        }
+        Update: {
+          alt_text?: string | null
+          caption?: string | null
+          created_at?: string
+          id?: string
+          is_cover?: boolean
+          listing_kind?: string
+          listing_slug?: string
+          sort_order?: number
+          storage_path?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       manual_bookings: {
         Row: {
           amount_paid: number
