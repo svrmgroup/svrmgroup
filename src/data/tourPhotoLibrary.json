@@ -379,5 +379,23 @@
       "license": "CC0",
       "source": ""
     }
+  ],
+  "tsitsikamma-bridge": [
+    {
+      "src": "/__l5e/assets-v1/be9aec4f-06b5-46a8-9ac5-c0350576d243/tour-tsitsikamma-bridge.jpg",
+      "title": "Storms River suspension bridge, Tsitsikamma",
+      "artist": "",
+      "license": "CC0",
+      "source": ""
+    }
+  ],
+  "hermanus-cliff": [
+    {
+      "src": "/__l5e/assets-v1/ca33041e-b882-4cbc-af0d-fef6fc7a424a/tour-hermanus-cliff.jpg",
+      "title": "Hermanus cliff path at golden hour",
+      "artist": "",
+      "license": "CC0",
+      "source": ""
+    }
   ]
 }
