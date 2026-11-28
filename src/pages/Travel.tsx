@@ -13,6 +13,7 @@ import CategoryCard from "@/components/svrm/CategoryCard";
 import KenBurnsImage from "@/components/svrm/KenBurnsImage";
 import WhatsAppGlyph from "@/components/svrm/WhatsAppGlyph";
 import AiItineraryPlanner from "@/components/svrm/AiItineraryPlanner";
+import { useAdminAuth } from "@/hooks/useAdminAuth";
 import { vehicles, vehicleTiers } from "@/data/vehicles";
 import { jets, helicopters } from "@/data/aviation";
 import { yachts } from "@/data/yachts";
@@ -83,6 +84,7 @@ const chauffeurFaqs = [
             ].map((item, index) => completeFaq(item, index));
 
 const Travel = () => {
+  const { isAdmin } = useAdminAuth();
   const [params] = useSearchParams();
   const [mode, setMode] = useState<Mode>("cars");
   const [carTier, setCarTier] = useState<string>("All");
@@ -223,12 +225,12 @@ const Travel = () => {
               >
                 7-Day Itinerary · 10% Off
               </TabsTrigger>
-              <TabsTrigger
+              {isAdmin && <TabsTrigger
                 value="planner"
                 className="text-[11px] uppercase tracking-[0.24em] px-4 py-2 border border-border/60 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary rounded-none"
               >
                 Plan My Itinerary
-              </TabsTrigger>
+              </TabsTrigger>}
             </TabsList>
 
             <TabsContent value="cars" className="mt-0">
@@ -440,9 +442,9 @@ const Travel = () => {
             </TabsContent>
 
             {/* ---------------- AI planner ---------------- */}
-            <TabsContent value="planner" className="mt-0">
+            {isAdmin && <TabsContent value="planner" className="mt-0">
               <AiItineraryPlanner />
-            </TabsContent>
+            </TabsContent>}
           </Tabs>
         </div>
       </section>

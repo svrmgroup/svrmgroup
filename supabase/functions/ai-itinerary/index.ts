@@ -1,5 +1,6 @@
 // Generates a personalised chauffeured Cape Town itinerary + vehicle recommendation.
-// Public function (no auth) — used by the /chauffeur planner on the website.
+// Admin-only: requires a signed-in admin so visitors cannot spend AI credits.
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -59,6 +60,20 @@ Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
   try {
+    const deny = (status: number) =>
+      new Response(JSON.stringify({ error: status === 401 ? "unauthorized" : "forbidden" }), {
+        status, headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    const authHeader = req.headers.get("Authorization");
+    if (!authHeader?.startsWith("Bearer ")) return deny(401);
+    const sb = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_ANON_KEY")!, {
+      global: { headers: { Authorization: authHeader } },
+    });
+    const { data: u } = await sb.auth.getUser();
+    if (!u.user) return deny(401);
+    const { data: role } = await sb.from("user_roles").select("role").eq("user_id", u.user.id).eq("role", "admin").maybeSingle();
+    if (!role) return deny(403);
+
     const apiKey = Deno.env.get("LOVABLE_API_KEY");
     if (!apiKey) throw new Error("Missing LOVABLE_API_KEY");
 
