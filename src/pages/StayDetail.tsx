@@ -68,10 +68,10 @@ const StayDetailInner = ({ stay }: { stay: Stay }) => {
               ["Bedrooms", l.bedrooms],
               ["Bathrooms", l.bathrooms],
               ["Maximum guests", l.maxGuests],
-              ["Pool", l.pool],
+              ...(l.pool ? [["Pool", l.pool] as [string, string]] : []),
               ["Amenities", l.amenities.length ? l.amenities.join(" · ") : "Your concierge will confirm"],
               ["Price", seasonal ?? price],
-            ]} />
+            ] as [string, string][]} />
             <ListingFaqs faqs={l.faqs} title={`${l.name} — questions`} />
             <RelatedLinks links={l.related} />
           </div>

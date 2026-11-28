@@ -78,6 +78,7 @@ export const stays: Stay[] = [
     blurb: "A 240 m² top-floor Camps Bay residence for four guests, with two bedrooms, two bathrooms, a 55 m² private terrace, outdoor jacuzzi, private sauna and lift, panoramic sea and mountain views, daily breakfast and housekeeping from Monday to Saturday.",
     type: "apartment",
     showPrice: true,
+    featured: true,
   },
   { slug: "nox-1bed-cape-town-apt-stonewood-at-the-granger", name: "Stonewood at The Granger", area: "City Centre", beds: "1 bed \u00b7 CBD", fromZAR: 1800, image: nx_1bed_cape_town_apt_stonewood_at_the_granger.url, blurb: "Compact CBD studio at The Granger \u2014 walk to everywhere, budget entry.", type: "apartment", nox: true },
   { slug: "nox-beautifully-decorated-apartment-in-cape-town-urban-signature", name: "Urban Signature Apartment", area: "City Centre", beds: "1 bed \u00b7 designer", fromZAR: 2100, image: nx_beautifully_decorated_apartment_in_cape_town_urban_signature.url, blurb: "Beautifully styled 1-bed in the heart of the city.", type: "apartment", nox: true },

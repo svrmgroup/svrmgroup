@@ -15,6 +15,7 @@ import maybach from "@/assets/vehicles/maybach.jpg";
 import capePeninsula from "@/assets/tours/cape-peninsula.jpg";
 import securityImg from "@/assets/security/bmw7-armored.jpg";
 import villa from "@/assets/svc-stays-villa.jpg";
+import aLaPenthouseHero from "@/assets/stays/a-la-penthouse/01-hero.jpg.asset.json";
 import campsBayVilla from "@/assets/stays/villa-camps-bay/Living_room_1.webp";
 import { useCurrency } from "@/lib/currency";
 import { useCmsItems } from "@/hooks/useCmsItems";
@@ -113,6 +114,20 @@ const featuredVilla: Offer = {
   special: true,
 };
 
+/** Always shown next to The Atlantic Villa, with the same gold glow. */
+const featuredPenthouse: Offer = {
+  eyebrow: "Featured Penthouse",
+  title: "À La Penthouse, Camps Bay",
+  detail: "Two bedrooms, private jacuzzi, sauna and lift, with panoramic sea and mountain views. Breakfast included.",
+  priceZAR: 42000,
+  pricePrefix: "From ",
+  priceSuffix: "/ night",
+  cta: "View Penthouse",
+  to: "/stays/a-la-penthouse",
+  image: aLaPenthouseHero.url,
+  special: true,
+};
+
 const Offers = () => {
   const autoplay = useRef(
     Autoplay({ delay: 5000, stopOnInteraction: false, stopOnMouseEnter: true }),
@@ -144,16 +159,18 @@ const Offers = () => {
     glow: c.slug === "maybach-flagship-chauffeur" || /flagship/i.test(c.eyebrow || ""),
   }));
   const base = cmsMapped.length > 0 ? cmsMapped : offers;
-  const withVilla = base.some((o) => o.title === featuredVilla.title)
-    ? base
-    : [featuredVilla, ...base];
+  const withVilla = [
+    ...(base.some((o) => o.title === featuredVilla.title) ? [] : [featuredVilla]),
+    ...(base.some((o) => o.title === featuredPenthouse.title) ? [] : [featuredPenthouse]),
+    ...base,
+  ];
   const maybachV = vehicles.find((v) => v.slug === "maybach-v-class");
   const displayOffers: Offer[] = maybachV && !withVilla.some((o) => o.title === maybachV.name)
-    ? [...withVilla.slice(0, 1), {
+    ? [...withVilla.slice(0, 2), {
         eyebrow: "Signature · Chauffeur", title: maybachV.name, detail: maybachV.tagline,
         priceZAR: maybachV.fromZAR, priceSuffix: "/ day", cta: "View Maybach V-Class",
         to: "/chauffeur/maybach-v-class", image: maybachV.image,
-      }, ...withVilla.slice(1)]
+      }, ...withVilla.slice(2)]
     : withVilla;
 
 

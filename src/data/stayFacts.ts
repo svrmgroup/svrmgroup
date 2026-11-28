@@ -11,6 +11,8 @@ export interface StayFacts {
   source: string;
   pool: {
     status: PoolStatus;
+    /** Short public label, e.g. "Private jacuzzi"; when absent and status is unknown, no pool line is shown */
+    label?: string;
     note: string;
     source: string;
   };
@@ -25,7 +27,7 @@ export interface StayFacts {
 }
 
 const ON_ENQUIRY = "The official listing shows ‘Inquire now’ without a numerical nightly tariff. Your concierge will confirm the rate for your dates.";
-const POOL_UNKNOWN = "Pool access is not publicly confirmed";
+const POOL_UNKNOWN = "";
 
 const nox = (
   slug: string,
@@ -96,7 +98,8 @@ export const stayFacts: Record<string, StayFacts> = {
     source: "https://www.capevillas.co.za/properties/a-la-penthouse/",
     pool: {
       status: "unknown",
-      note: "A private outdoor Jacuzzi is confirmed; swimming-pool access is not publicly confirmed",
+      label: "Private jacuzzi",
+      note: "The penthouse has a private outdoor jacuzzi on its terrace. A swimming pool is only included when the whole villa is booked",
       source: "https://www.capevillas.co.za/properties/a-la-penthouse/",
     },
     rate: {
@@ -135,13 +138,13 @@ export const stayFacts: Record<string, StayFacts> = {
   "nox-camps-bay-family-holiday-home-sunset-sanctuary": nox("camps-bay-family-holiday-home-sunset-sanctuary", 3, 3, 6, "private", "Private pool at the holiday home", "https://www.vrbo.com/11676381ha"),
   "nox-mountain-view-holiday-villa-w-garden-pool-iliwa": nox("mountain-view-holiday-villa-w-garden-pool-iliwa", 3, 3, 6, "private", "Private garden pool at the villa", "https://www.vrbo.com/en-gb/p11712493"),
   "nox-4-bed-higgovale-mountain-views-sandstone-apartment": nox("4-bed-higgovale-mountain-views-sandstone-apartment", 4, 4, 8, "shared", "Two communal pools with sun loungers and seating areas"),
-  "nox-4-bed-coastal-retreat-w-pool-views-llandudno-sands": nox("4-bed-coastal-retreat-w-pool-views-llandudno-sands", 4, 4, 8, "unknown", "A terrace plunge pool is advertised; exclusive private use is not publicly confirmed"),
+  "nox-4-bed-coastal-retreat-w-pool-views-llandudno-sands": nox("4-bed-coastal-retreat-w-pool-views-llandudno-sands", 4, 4, 8, "unknown", "Terrace plunge pool"),
   "nox-luxurious-villa-w-breathtaking-sea-mountain-views-hamaya": nox("luxurious-villa-w-breathtaking-sea-mountain-views-hamaya", 4, 4, 8, "private", "Private swimming pool, with a plunge pool off the main living area"),
-  "nox-camps-bay-luxury-5-star-5-bed-w-gym-majestic-villa": nox("camps-bay-luxury-5-star-5-bed-w-gym-majestic-villa", 5, 5, 10, "unknown", "A semi-circular pool is advertised; exclusive private use is not publicly confirmed"),
-  "nox-beautiful-6bed-camps-bay-view-villa-w-pool-ithemba": nox("beautiful-6bed-camps-bay-view-villa-w-pool-ithemba", 6, 6, 12, "unknown", "A pool deck is advertised; exclusive private use is not publicly confirmed"),
-  "nox-llandudno-beach-oasis-solmara-house": nox("llandudno-beach-oasis-solmara-house", 5, 4, 10, "unknown", "An outdoor swimming pool is advertised; exclusive private use is not publicly confirmed"),
-  "nox-luxurious-camps-bay-retreat-w-sea-views-rock-residence": nox("luxurious-camps-bay-retreat-w-sea-views-rock-residence", 6, 4, 12, "unknown", "A hot tub and a nearby tidal pool are advertised; an on-property swimming pool is not publicly confirmed"),
-  "nox-idyllic-camps-bay-villa-w-2-pools-buddha-retreat": nox("idyllic-camps-bay-villa-w-2-pools-buddha-retreat", 10, 10, 20, "unknown", "Indoor and outdoor pools are advertised; exclusive private use is not publicly confirmed"),
+  "nox-camps-bay-luxury-5-star-5-bed-w-gym-majestic-villa": nox("camps-bay-luxury-5-star-5-bed-w-gym-majestic-villa", 5, 5, 10, "unknown", "Semi-circular pool"),
+  "nox-beautiful-6bed-camps-bay-view-villa-w-pool-ithemba": nox("beautiful-6bed-camps-bay-view-villa-w-pool-ithemba", 6, 6, 12, "unknown", "Pool deck"),
+  "nox-llandudno-beach-oasis-solmara-house": nox("llandudno-beach-oasis-solmara-house", 5, 4, 10, "unknown", "Outdoor swimming pool"),
+  "nox-luxurious-camps-bay-retreat-w-sea-views-rock-residence": nox("luxurious-camps-bay-retreat-w-sea-views-rock-residence", 6, 4, 12, "unknown", "Hot tub, with a tidal pool nearby"),
+  "nox-idyllic-camps-bay-villa-w-2-pools-buddha-retreat": nox("idyllic-camps-bay-villa-w-2-pools-buddha-retreat", 10, 10, 20, "unknown", "Indoor and outdoor pools"),
   "hotel-cape-grace": hotel(1, 1, 3, "https://www.cometocapetown.com/property/cape-grace/", "https://www.capegrace.com/restaurant/pool-bar/", "2 adults + 1 child (4 or younger)"),
   "hotel-one-and-only": hotel(1, 1, 3, "https://www.oneandonlyresorts.com/cape-town/stays/rooms/marina-room", "https://www.oneandonlyresorts.com/cape-town/dining/isola", "2 adults + 1 child"),
   "hotel-mount-nelson": hotel(1, 1, 2, "https://www.belmond.com/en/booking/select-accommodation?filterRoomCategory=SPLTYSTE&productId=MNH", "https://guide.michelin.com/us/en/hotels-stays/cape-town/mount-nelson-a-belmond-hotel-cape-town-5950"),
@@ -152,16 +155,19 @@ export const stayFacts: Record<string, StayFacts> = {
 
 export const guestLabel = (facts: StayFacts) => facts.occupancyLabel ?? `${facts.maxGuests} guests`;
 
-export const poolLabel = (facts: StayFacts) => {
+/** Public pool label; null when nothing about a pool should be shown. */
+export const poolLabel = (facts: StayFacts): string | null => {
+  if (facts.pool.label) return facts.pool.label;
   if (facts.pool.status === "private") return "Private pool";
   if (facts.pool.status === "shared") return "Shared pool";
-  return "Not publicly confirmed";
+  return facts.pool.note || null;
 };
 
-export const poolAnswer = (facts: StayFacts) => {
+/** Public pool answer; null when no pool question should be shown. */
+export const poolAnswer = (facts: StayFacts): string | null => {
   if (facts.pool.status === "private") return `${facts.pool.note}. It is not a shared pool.`;
   if (facts.pool.status === "shared") return `${facts.pool.note}. This is not an exclusive private pool.`;
-  return `${facts.pool.note}. Your concierge will confirm availability and whether any pool is private or shared before you book.`;
+  return facts.pool.note ? `${facts.pool.note}.` : null;
 };
 
 export const stayHasPublicRate = (slug: string) => stayFacts[slug]?.rate.status === "published";

@@ -60,11 +60,14 @@ describe("verified stay facts", () => {
       const listing = stayListing(stay);
       expect(["private", "shared", "unknown"], stay.slug).toContain(facts.pool.status);
       expect(facts.pool.source, stay.slug).toMatch(/^https:\/\//);
-      expect(listing.faqs[0].q, stay.slug).toBe("Is the pool private or shared?");
-      expect(listing.faqs[0].a, stay.slug).toBe(poolAnswer(facts));
+      const answer = poolAnswer(facts);
+      if (answer) expect(listing.faqs[0].a, stay.slug).toBe(answer);
+      else expect(listing.faqs.some((f) => /pool/i.test(f.q)), stay.slug).toBe(false);
+      expect(JSON.stringify(listing), stay.slug).not.toMatch(/not publicly confirmed|publicly confirmed/i);
     }
     const atlantic = stayFacts["camps-bay-5-bed-signature-villa"];
     expect(atlantic.pool.status).toBe("private");
+    expect(poolAnswer(stayFacts["a-la-penthouse"])).toMatch(/jacuzzi.*whole villa/i);
     expect(poolAnswer(atlantic)).toContain("not a shared pool");
   });
 

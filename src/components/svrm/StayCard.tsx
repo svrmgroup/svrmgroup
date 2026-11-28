@@ -127,7 +127,7 @@ const StayCard = ({ stay }: { stay: Stay; index?: number }) => {
           {factsSummary}
         </p>
         {featureSummary && <p className="mt-1 text-[11px] uppercase tracking-[0.14em] text-muted-foreground/60">{featureSummary}</p>}
-        <p className="mt-2 text-[11px] uppercase tracking-[0.14em] text-foreground/75">Pool · {poolLabel(facts)}</p>
+        {poolLabel(facts) && <p className="mt-2 text-[11px] uppercase tracking-[0.14em] text-foreground/75">{facts.pool.label ? poolLabel(facts) : `Pool · ${poolLabel(facts)}`}</p>}
         <p className="text-sm text-muted-foreground mt-3 flex-1">{stay.blurb}</p>
         <Link to={stayPath(stay)} className="mt-4 text-[11px] uppercase tracking-[0.22em] text-gold hover:underline underline-offset-4">View details →</Link>
         <div className="mt-5 flex items-end justify-between gap-4">

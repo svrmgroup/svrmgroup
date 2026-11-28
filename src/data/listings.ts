@@ -171,7 +171,7 @@ export interface StayListing {
   stay: Stay; slug: string; name: string; path: string; url: string; neighbourhood: string;
   description: string; why: string; bedrooms: string; bathrooms: string; maxGuests: string;
   bedroomCount?: number; bathroomCount?: number; guestCapacity?: number;
-  amenities: string[]; pool: string; poolAnswer: string; priceLabel: string; priceNote: string;
+  amenities: string[]; pool: string | null; poolAnswer: string | null; priceLabel: string; priceNote: string;
   factsSource: string; poolSource: string; rateSource: string;
   photos: Photo[]; faqs: Faq[]; related: RelatedLink[];
 }
@@ -226,7 +226,7 @@ export function stayListing(s: Stay): StayListing {
     rateSource: facts.rate.source,
     photos,
     faqs: [
-      { q: "Is the pool private or shared?", a: poolAnswer(facts) },
+      ...(poolAnswer(facts) ? [{ q: isALa ? "Is there a pool or jacuzzi?" : "Is the pool private or shared?", a: poolAnswer(facts) as string }] : []),
       ...(isALa ? [
         { q: "How many guests can À La Penthouse accommodate?", a: "The main two-bedroom penthouse accommodates a maximum of four guests. Additional luxury accommodation on the lower level can be arranged on request for a larger group; ask your concierge for availability and a separate quote." },
         { q: "Which services and private facilities are included?", a: "The official listing includes daily breakfast, housekeeping from Monday to Saturday, concierge assistance, high-speed Wi-Fi, a private terrace with an outdoor jacuzzi, a private sauna and private lift access." },
@@ -267,7 +267,7 @@ export function allListingPaths(): { path: string; title: string; description: s
     title: `${l.name} | Luxury Stay Cape Town — SVRM`,
     description: `${l.name} in ${l.neighbourhood}, Cape Town. ${l.bedrooms}, ${l.bathrooms}; ${l.maxGuests}. ${l.priceLabel}. Check availability on WhatsApp.`.slice(0, 300),
     heading: l.name,
-    summary: `${l.description} Bedrooms: ${l.bedrooms}. Bathrooms: ${l.bathrooms}. Maximum guests: ${l.maxGuests}. Pool: ${l.pool}. ${l.poolAnswer} ${l.why}`, 
+    summary: `${l.description} Bedrooms: ${l.bedrooms}. Bathrooms: ${l.bathrooms}. Maximum guests: ${l.maxGuests}. ${l.pool ? `Pool: ${l.pool}. ${l.poolAnswer ?? ""} ` : ""}${l.why}`, 
     image: shareImage(l.photos),
   }));
   const t = allTourPackages().map(({ tour, pkg, path, description }) => {

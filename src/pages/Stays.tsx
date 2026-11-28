@@ -34,6 +34,7 @@ const Stays = () => {
   const [params] = useSearchParams();
   const [mode, setMode] = useState<TopMode>("short");
   const [sub, setSub] = useState<StayType>("villa");
+  const [sortBy, setSortBy] = useState<"popular" | "high" | "low">("popular");
 
   useEffect(() => {
     const cat = params.get("cat");
@@ -134,12 +135,28 @@ const Stays = () => {
                       </TabsTrigger>
                     ))}
                   </TabsList>
-                  <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground/80">Date-specific rates confirmed on enquiry</p>
+                  <div className="flex items-center gap-2" role="group" aria-label="Sort stays">
+                    <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground/80">Sort</span>
+                    {([["popular", "Popular"], ["high", "Price: high to low"], ["low", "Price: low to high"]] as const).map(([k, label]) => (
+                      <button
+                        key={k}
+                        type="button"
+                        onClick={() => setSortBy(k)}
+                        aria-pressed={sortBy === k}
+                        className={`text-[10px] uppercase tracking-[0.18em] px-3 py-2 border transition-colors ${sortBy === k ? "bg-primary text-primary-foreground border-primary" : "border-border/60 text-muted-foreground hover:text-foreground"}`}
+                      >
+                        {label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
                 {SUB_TYPES.map((t) => {
                   const list = stays.filter((s) => s.type === t);
-                  const sorted = [...list].sort((a, b) => Number(b.featured) - Number(a.featured));
+                  const sorted = [...list].sort((a, b) =>
+                    sortBy === "high" ? b.fromZAR - a.fromZAR
+                    : sortBy === "low" ? a.fromZAR - b.fromZAR
+                    : Number(b.featured) - Number(a.featured));
                   return (
                     <TabsContent key={t} value={t} className="mt-0">
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">

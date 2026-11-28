@@ -352,7 +352,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "title": "À La Penthouse | Luxury Stay Cape Town — SVRM",
   "description": "À La Penthouse in Camps Bay, Cape Town. 2 bedrooms, 2 bathrooms; 4 guests. From R42,000 per night, depending on season. Check availability on WhatsApp.",
   "heading": "À La Penthouse",
-  "summary": "A 240 m² top-floor Camps Bay residence for four guests, with two bedrooms, two bathrooms, a 55 m² private terrace, outdoor jacuzzi, private sauna and lift, panoramic sea and mountain views, daily breakfast and housekeeping from Monday to Saturday. Bedrooms: 2 bedrooms. Bathrooms: 2 bathrooms. Maximum guests: 4 guests. Pool: Not publicly confirmed. A private outdoor Jacuzzi is confirmed; swimming-pool access is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. The residence combines the privacy of a top-floor home with hotel-style service. Designer interiors, generous lounges, a private lift and panoramic views across the Atlantic, Lion's Head, Table Mountain and the Twelve Apostles make it as suited to a quiet retreat as to a special celebration or photo shoot.",
+  "summary": "A 240 m² top-floor Camps Bay residence for four guests, with two bedrooms, two bathrooms, a 55 m² private terrace, outdoor jacuzzi, private sauna and lift, panoramic sea and mountain views, daily breakfast and housekeeping from Monday to Saturday. Bedrooms: 2 bedrooms. Bathrooms: 2 bathrooms. Maximum guests: 4 guests. Pool: Private jacuzzi. The penthouse has a private outdoor jacuzzi on its terrace. A swimming pool is only included when the whole villa is booked. The residence combines the privacy of a top-floor home with hotel-style service. Designer interiors, generous lounges, a private lift and panoramic views across the Atlantic, Lion's Head, Table Mountain and the Twelve Apostles make it as suited to a quiet retreat as to a special celebration or photo shoot.",
   "image": "https://svrm.group/__l5e/assets-v1/465d811c-c876-4da5-9029-96be0d1fd7bc/a-la-penthouse-01-hero.jpg"
  },
  {
@@ -360,7 +360,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "title": "Stonewood at The Granger | Luxury Stay Cape Town — SVRM",
   "description": "Stonewood at The Granger in City Centre, Cape Town. 1 bedroom, 1 bathroom; 2 guests. From R1,800 per night, depending on season. Check availability on WhatsApp.",
   "heading": "Stonewood at The Granger",
-  "summary": "Compact CBD studio at The Granger — walk to everywhere, budget entry. Bedrooms: 1 bedroom. Bathrooms: 1 bathroom. Maximum guests: 2 guests. Pool: Not publicly confirmed. Pool access is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. Stay in City Centre with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
+  "summary": "Compact CBD studio at The Granger — walk to everywhere, budget entry. Bedrooms: 1 bedroom. Bathrooms: 1 bathroom. Maximum guests: 2 guests. Stay in City Centre with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/9e5349df-3572-41ea-a55f-5b233be3d87b/1bed-cape-town-apt-stonewood-at-the-granger-00.jpg"
  },
  {
@@ -368,7 +368,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "title": "Urban Signature Apartment | Luxury Stay Cape Town — SVRM",
   "description": "Urban Signature Apartment in City Centre, Cape Town. 1 bedroom, 1 bathroom; 2 guests. From R2,100 per night, depending on season. Check availability on WhatsApp.",
   "heading": "Urban Signature Apartment",
-  "summary": "Beautifully styled 1-bed in the heart of the city. Bedrooms: 1 bedroom. Bathrooms: 1 bathroom. Maximum guests: 2 guests. Pool: Not publicly confirmed. Pool access is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. Stay in City Centre with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
+  "summary": "Beautifully styled 1-bed in the heart of the city. Bedrooms: 1 bedroom. Bathrooms: 1 bathroom. Maximum guests: 2 guests. Stay in City Centre with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/6b8892c3-f6bf-416a-a4f8-7a2811b7b7e2/beautifully-decorated-apartment-in-cape-town-urban-signature-00.jpg"
  },
  {
@@ -376,7 +376,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "title": "Old Cape Quarter Residences | Luxury Stay Cape Town — SVRM",
   "description": "Old Cape Quarter Residences in De Waterkant, Cape Town. 1 bedroom, 1 bathroom; 2 guests. From R2,400 per night, depending on season. Check availability on WhatsApp.",
   "heading": "Old Cape Quarter Residences",
-  "summary": "Old Cape Quarter 1-bed with village cafés at your doorstep. Bedrooms: 1 bedroom. Bathrooms: 1 bathroom. Maximum guests: 2 guests. Pool: Not publicly confirmed. Pool access is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. Stay in De Waterkant with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
+  "summary": "Old Cape Quarter 1-bed with village cafés at your doorstep. Bedrooms: 1 bedroom. Bathrooms: 1 bathroom. Maximum guests: 2 guests. Stay in De Waterkant with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/367811b4-010f-43bf-865b-b3f6b4165ae8/old-cape-quarter-1-bedroom-units-00.jpg"
  },
  {
@@ -384,7 +384,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "title": "Skyshore Apartment, Mouille Point | Luxury Stay Cape Town — SVRM",
   "description": "Skyshore Apartment, Mouille Point in Mouille Point, Cape Town. 1 bedroom, 1 bathroom; 2 guests. From R2,800 per night, depending on season. Check availability on WhatsApp.",
   "heading": "Skyshore Apartment, Mouille Point",
-  "summary": "Sea-facing 1-bed on the Mouille Point promenade. Bedrooms: 1 bedroom. Bathrooms: 1 bathroom. Maximum guests: 2 guests. Pool: Not publicly confirmed. Pool access is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. Stay in Mouille Point with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
+  "summary": "Sea-facing 1-bed on the Mouille Point promenade. Bedrooms: 1 bedroom. Bathrooms: 1 bathroom. Maximum guests: 2 guests. Stay in Mouille Point with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/a60179d3-f8eb-41c4-aa89-aa1fe827696c/mouille-point-1-bed-w-sea-views-skyshore-apartment-00.jpg"
  },
  {
@@ -400,7 +400,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "title": "Azura Atlantic, Green Point | Luxury Stay Cape Town — SVRM",
   "description": "Azura Atlantic, Green Point in Green Point, Cape Town. 2 bedrooms, 2 bathrooms; 4 guests. From R3,600 per night, depending on season. Check availability on WhatsApp.",
   "heading": "Azura Atlantic, Green Point",
-  "summary": "Modern 2-bed near the stadium and Atlantic promenade. Bedrooms: 2 bedrooms. Bathrooms: 2 bathrooms. Maximum guests: 4 guests. Pool: Not publicly confirmed. Pool access is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. Stay in Green Point with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
+  "summary": "Modern 2-bed near the stadium and Atlantic promenade. Bedrooms: 2 bedrooms. Bathrooms: 2 bathrooms. Maximum guests: 4 guests. Stay in Green Point with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/a6c5f78e-9978-46ba-aad6-4ae77e72bbca/green-point-modern-2bed-apartment-azura-atlantic-00.jpg"
  },
  {
@@ -408,7 +408,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "title": "Aquene Bay Apartment | Luxury Stay Cape Town — SVRM",
   "description": "Aquene Bay Apartment in City Centre, Cape Town. 2 bedrooms, 2 bathrooms; 4 guests. From R3,900 per night, depending on season. Check availability on WhatsApp.",
   "heading": "Aquene Bay Apartment",
-  "summary": "Charming 2-bed in central Cape Town — near the Company Gardens. Bedrooms: 2 bedrooms. Bathrooms: 2 bathrooms. Maximum guests: 4 guests. Pool: Not publicly confirmed. Pool access is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. Stay in City Centre with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
+  "summary": "Charming 2-bed in central Cape Town — near the Company Gardens. Bedrooms: 2 bedrooms. Bathrooms: 2 bathrooms. Maximum guests: 4 guests. Stay in City Centre with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/725ea32e-dadb-412d-8578-d7fc59584cdb/charming-central-apartment-aquene-bay-00.jpg"
  },
  {
@@ -424,7 +424,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "title": "Mouille Point Cape View Apartment | Luxury Stay Cape Town — SVRM",
   "description": "Mouille Point Cape View Apartment in Mouille Point, Cape Town. 2 bedrooms, 1 bathroom; 4 guests. From R4,800 per night, depending on season. Check availability on WhatsApp.",
   "heading": "Mouille Point Cape View Apartment",
-  "summary": "2-bed Mouille Point apartment with panoramic Cape views. Bedrooms: 2 bedrooms. Bathrooms: 1 bathroom. Maximum guests: 4 guests. Pool: Not publicly confirmed. Pool access is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. Stay in Mouille Point with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
+  "summary": "2-bed Mouille Point apartment with panoramic Cape views. Bedrooms: 2 bedrooms. Bathrooms: 1 bathroom. Maximum guests: 4 guests. Stay in Mouille Point with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/452c3163-95e6-4ed3-8e9d-270ac0df4681/2bed-mouille-point-apartment-w-amazing-cape-views-00.jpg"
  },
  {
@@ -432,7 +432,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "title": "Marella, Clifton Beach | Luxury Stay Cape Town — SVRM",
   "description": "Marella, Clifton Beach in Clifton, Cape Town. 2 bedrooms, 2 bathrooms; 4 guests. From R6,500 per night, depending on season. Check availability on WhatsApp.",
   "heading": "Marella, Clifton Beach",
-  "summary": "Rare Clifton apartment with direct beach access. Bedrooms: 2 bedrooms. Bathrooms: 2 bathrooms. Maximum guests: 4 guests. Pool: Not publicly confirmed. Pool access is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. Stay in Clifton with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
+  "summary": "Rare Clifton apartment with direct beach access. Bedrooms: 2 bedrooms. Bathrooms: 2 bathrooms. Maximum guests: 4 guests. Stay in Clifton with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/9855626f-38c5-4483-97e1-d701f8e80147/clifton-apartment-w-direct-beach-access-marella-00.jpg"
  },
  {
@@ -456,7 +456,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "title": "Dunmore Horizons Penthouse, Clifton | Luxury Stay Cape Town — SVRM",
   "description": "Dunmore Horizons Penthouse, Clifton in Clifton, Cape Town. 3 bedrooms, 2 bathrooms; 6 guests. From R12,500 per night, depending on season. Check availability on WhatsApp.",
   "heading": "Dunmore Horizons Penthouse, Clifton",
-  "summary": "Clifton penthouse with 180° Atlantic views. Bedrooms: 3 bedrooms. Bathrooms: 2 bathrooms. Maximum guests: 6 guests. Pool: Not publicly confirmed. Pool access is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. Stay in Clifton with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
+  "summary": "Clifton penthouse with 180° Atlantic views. Bedrooms: 3 bedrooms. Bathrooms: 2 bathrooms. Maximum guests: 6 guests. Stay in Clifton with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/f03978db-69b6-489a-9460-18700b22f306/clifton-3bed-penthouse-sea-views-dunmore-horizons-00.jpg"
  },
  {
@@ -496,7 +496,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "title": "Llandudno Sands Coastal Retreat | Luxury Stay Cape Town — SVRM",
   "description": "Llandudno Sands Coastal Retreat in Llandudno, Cape Town. 4 bedrooms, 4 bathrooms; 8 guests. From R18,000 per night, depending on season. Check availability on WhatsApp.",
   "heading": "Llandudno Sands Coastal Retreat",
-  "summary": "4-bed Llandudno coastal retreat with pool and sea views. Bedrooms: 4 bedrooms. Bathrooms: 4 bathrooms. Maximum guests: 8 guests. Pool: Not publicly confirmed. A terrace plunge pool is advertised; exclusive private use is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. Stay in Llandudno with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
+  "summary": "4-bed Llandudno coastal retreat with pool and sea views. Bedrooms: 4 bedrooms. Bathrooms: 4 bathrooms. Maximum guests: 8 guests. Pool: Terrace plunge pool. Terrace plunge pool. Stay in Llandudno with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/d3268349-0777-4a03-92c9-255c66bae646/4-bed-coastal-retreat-w-pool-views-llandudno-sands-00.jpg"
  },
  {
@@ -512,7 +512,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "title": "Majestic Villa, Camps Bay | Luxury Stay Cape Town — SVRM",
   "description": "Majestic Villa, Camps Bay in Camps Bay, Cape Town. 5 bedrooms, 5 bathrooms; 10 guests. From R32,000 per night, depending on season. Check availability on WhatsApp.",
   "heading": "Majestic Villa, Camps Bay",
-  "summary": "5-star 5-bed Camps Bay villa with gym and pool. Bedrooms: 5 bedrooms. Bathrooms: 5 bathrooms. Maximum guests: 10 guests. Pool: Not publicly confirmed. A semi-circular pool is advertised; exclusive private use is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. Stay in Camps Bay with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
+  "summary": "5-star 5-bed Camps Bay villa with gym and pool. Bedrooms: 5 bedrooms. Bathrooms: 5 bathrooms. Maximum guests: 10 guests. Pool: Semi-circular pool. Semi-circular pool. Stay in Camps Bay with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/0192c8ef-7af2-4b6b-a9a7-3eff737d3b99/camps-bay-luxury-5-star-5-bed-w-gym-majestic-villa-00.jpg"
  },
  {
@@ -520,7 +520,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "title": "Ithemba Villa, Camps Bay | Luxury Stay Cape Town — SVRM",
   "description": "Ithemba Villa, Camps Bay in Camps Bay, Cape Town. 6 bedrooms, 6 bathrooms; 12 guests. From R42,000 per night, depending on season. Check availability on WhatsApp.",
   "heading": "Ithemba Villa, Camps Bay",
-  "summary": "Iconic 6-bed Camps Bay view villa with pool — Ithemba. Bedrooms: 6 bedrooms. Bathrooms: 6 bathrooms. Maximum guests: 12 guests. Pool: Not publicly confirmed. A pool deck is advertised; exclusive private use is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. Stay in Camps Bay with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
+  "summary": "Iconic 6-bed Camps Bay view villa with pool — Ithemba. Bedrooms: 6 bedrooms. Bathrooms: 6 bathrooms. Maximum guests: 12 guests. Pool: Pool deck. Pool deck. Stay in Camps Bay with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/88dbea0a-0184-48fe-82d5-549b18e63fc2/beautiful-6bed-camps-bay-view-villa-w-pool-ithemba-00.jpg"
  },
  {
@@ -528,7 +528,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "title": "Solmara House, Llandudno | Luxury Stay Cape Town — SVRM",
   "description": "Solmara House, Llandudno in Llandudno, Cape Town. 5 bedrooms, 4 bathrooms; 10 guests. From R48,000 per night, depending on season. Check availability on WhatsApp.",
   "heading": "Solmara House, Llandudno",
-  "summary": "Llandudno beach oasis — 5 beds moments from the sand. Bedrooms: 5 bedrooms. Bathrooms: 4 bathrooms. Maximum guests: 10 guests. Pool: Not publicly confirmed. An outdoor swimming pool is advertised; exclusive private use is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. Stay in Llandudno with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
+  "summary": "Llandudno beach oasis — 5 beds moments from the sand. Bedrooms: 5 bedrooms. Bathrooms: 4 bathrooms. Maximum guests: 10 guests. Pool: Outdoor swimming pool. Outdoor swimming pool. Stay in Llandudno with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/da129305-9a5b-4048-92ae-dc15754e4fd6/llandudno-beach-oasis-solmara-house-00.jpg"
  },
  {
@@ -536,7 +536,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "title": "Rock Residence, Camps Bay | Luxury Stay Cape Town — SVRM",
   "description": "Rock Residence, Camps Bay in Camps Bay, Cape Town. 6 bedrooms, 4 bathrooms; 12 guests. From R58,000 per night, depending on season. Check availability on WhatsApp.",
   "heading": "Rock Residence, Camps Bay",
-  "summary": "Rock Residence — 6-bed Camps Bay retreat with sea views. Bedrooms: 6 bedrooms. Bathrooms: 4 bathrooms. Maximum guests: 12 guests. Pool: Not publicly confirmed. A hot tub and a nearby tidal pool are advertised; an on-property swimming pool is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. Stay in Camps Bay with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
+  "summary": "Rock Residence — 6-bed Camps Bay retreat with sea views. Bedrooms: 6 bedrooms. Bathrooms: 4 bathrooms. Maximum guests: 12 guests. Pool: Hot tub, with a tidal pool nearby. Hot tub, with a tidal pool nearby. Stay in Camps Bay with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/2172f729-7cdc-433a-8079-03a7d2e81eae/luxurious-camps-bay-retreat-w-sea-views-rock-residence-00.jpg"
  },
  {
@@ -544,7 +544,7 @@ export const LISTING_ROUTES: { path: string; title: string; description: string;
   "title": "Buddha Retreat, Camps Bay | Luxury Stay Cape Town — SVRM",
   "description": "Buddha Retreat, Camps Bay in Camps Bay, Cape Town. 10 bedrooms, 10 bathrooms; 20 guests. From R95,000 per night, depending on season. Check availability on WhatsApp.",
   "heading": "Buddha Retreat, Camps Bay",
-  "summary": "Buddha Retreat — flagship Camps Bay 10-bed with two pools. Bedrooms: 10 bedrooms. Bathrooms: 10 bathrooms. Maximum guests: 20 guests. Pool: Not publicly confirmed. Indoor and outdoor pools are advertised; exclusive private use is not publicly confirmed. Your concierge will confirm availability and whether any pool is private or shared before you book. Stay in Camps Bay with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
+  "summary": "Buddha Retreat — flagship Camps Bay 10-bed with two pools. Bedrooms: 10 bedrooms. Bathrooms: 10 bathrooms. Maximum guests: 20 guests. Pool: Indoor and outdoor pools. Indoor and outdoor pools. Stay in Camps Bay with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.",
   "image": "https://svrm.group/__l5e/assets-v1/13f0ec98-468e-4e9b-8ef5-334d9c90ea9a/idyllic-camps-bay-villa-w-2-pools-buddha-retreat-00.jpg"
  },
  {
