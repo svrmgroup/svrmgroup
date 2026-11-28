@@ -8,6 +8,7 @@ import { stayPath } from "@/data/listings";
 import { useCurrency } from "@/lib/currency";
 import BookingSheet from "./BookingSheet";
 import SmartImage from "./SmartImage";
+import { stayFactSummary, stayFeatureSummary } from "@/data/stayFacts";
 
 const StayCard = ({ stay }: { stay: Stay; index?: number }) => {
   const { format } = useCurrency();
@@ -16,6 +17,8 @@ const StayCard = ({ stay }: { stay: Stay; index?: number }) => {
 
   const gallery = stayGalleries[stay.slug];
   const images = gallery && gallery.length ? gallery : [stay.image];
+  const factsSummary = stayFactSummary(stay.slug) || stay.beds;
+  const featureSummary = stayFeatureSummary(stay.beds);
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" });
   const [selected, setSelected] = useState(0);
@@ -120,8 +123,9 @@ const StayCard = ({ stay }: { stay: Stay; index?: number }) => {
           <Link to={stayPath(stay)} className="hover:text-gold transition-colors">{stay.name}</Link>
         </h3>
         <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground/80 mt-2">
-          {stay.beds}
+          {factsSummary}
         </p>
+        {featureSummary && <p className="mt-1 text-[11px] uppercase tracking-[0.14em] text-muted-foreground/60">{featureSummary}</p>}
         <p className="text-sm text-muted-foreground mt-3 flex-1">{stay.blurb}</p>
         <Link to={stayPath(stay)} className="mt-4 text-[11px] uppercase tracking-[0.22em] text-gold hover:underline underline-offset-4">View details →</Link>
         <div className="mt-5 flex items-end justify-between gap-4">
@@ -152,7 +156,7 @@ const StayCard = ({ stay }: { stay: Stay; index?: number }) => {
         onOpenChange={setOpen}
         kind="stay"
         name={stay.name}
-        subtitle={`${stay.area} · ${stay.beds}`}
+        subtitle={`${stay.area} · ${factsSummary}`}
         rateZAR={stay.fromZAR}
         unit="night"
         slug={stay.slug}

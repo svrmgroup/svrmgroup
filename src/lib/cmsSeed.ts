@@ -6,6 +6,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { tours } from "@/data/tours";
 import { vehicles } from "@/data/vehicles";
 import { stays } from "@/data/stays";
+import { guestLabel, stayFacts } from "@/data/stayFacts";
 import { posts as blogPosts } from "@/data/blog";
 import { securityOfferings } from "@/data/security";
 import { yachts } from "@/data/yachts";
@@ -114,18 +115,30 @@ function vehiclesSeed() {
 }
 
 function staysSeed() {
-  return stays.map((s, i) => ({
-    slug: s.slug,
-    title: s.name,
-    summary: s.blurb,
-    price_per_night: s.fromZAR,
-    currency: "ZAR",
-    bedrooms: parseInt((s.beds.match(/\d+/) || ["0"])[0], 10) || null,
-    location: s.area,
-    published: true,
-    sort_order: (i + 1) * 10,
-    data: { type: s.type, nox: !!s.nox, beds: s.beds },
-  }));
+  return stays.map((s, i) => {
+    const facts = stayFacts[s.slug];
+    return {
+      slug: s.slug,
+      title: s.name,
+      summary: s.blurb,
+      price_per_night: s.fromZAR,
+      currency: "ZAR",
+      bedrooms: (facts?.bedrooms ?? parseInt((s.beds.match(/\d+/) || ["0"])[0], 10)) || null,
+      location: s.area,
+      published: true,
+      sort_order: (i + 1) * 10,
+      ...(s.image.startsWith("/__l5e/assets-v1/") ? { image_url: s.image } : {}),
+      data: {
+        type: s.type,
+        nox: !!s.nox,
+        beds: s.beds,
+        bathrooms: facts?.bathrooms ?? null,
+        maxGuests: facts?.maxGuests ?? null,
+        occupancyLabel: facts ? guestLabel(facts) : null,
+        factsSource: facts?.source ?? null,
+      },
+    };
+  });
 }
 
 function blogsSeed() {

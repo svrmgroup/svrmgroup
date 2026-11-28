@@ -168,8 +168,18 @@ import g_old_cape_quarter_1_bedroom_units_04 from "@/assets/stays/nox/old-cape-q
 import g_old_cape_quarter_1_bedroom_units_05 from "@/assets/stays/nox/old-cape-quarter-1-bedroom-units/05.jpg.asset.json";
 import g_old_cape_quarter_1_bedroom_units_06 from "@/assets/stays/nox/old-cape-quarter-1-bedroom-units/06.jpg.asset.json";
 import g_old_cape_quarter_1_bedroom_units_07 from "@/assets/stays/nox/old-cape-quarter-1-bedroom-units/07.jpg.asset.json";
+import ala_hero from "@/assets/stays/a-la-penthouse/01-hero.jpg.asset.json";
+import ala_living_lions_head from "@/assets/stays/a-la-penthouse/02-living-lions-head.jpeg.asset.json";
+import ala_balcony from "@/assets/stays/a-la-penthouse/03-balcony.jpeg.asset.json";
+import ala_balcony_loungers from "@/assets/stays/a-la-penthouse/04-balcony-loungers.jpg.asset.json";
+import ala_living_sea from "@/assets/stays/a-la-penthouse/05-living-sea.jpg.asset.json";
+import ala_kitchen from "@/assets/stays/a-la-penthouse/06-kitchen.jpeg.asset.json";
+import ala_master_bedroom from "@/assets/stays/a-la-penthouse/07-master-bedroom.jpeg.asset.json";
+import ala_master_bathroom from "@/assets/stays/a-la-penthouse/08-master-bathroom.jpg.asset.json";
+import ala_second_bedroom from "@/assets/stays/a-la-penthouse/09-second-bedroom.jpg.asset.json";
 
 export const stayGalleries: Record<string, string[]> = {
+  "a-la-penthouse": [ala_hero.url, ala_living_sea.url, ala_living_lions_head.url, ala_balcony.url, ala_balcony_loungers.url, ala_kitchen.url, ala_master_bedroom.url, ala_master_bathroom.url, ala_second_bedroom.url],
   "nox-1bed-cape-town-apt-stonewood-at-the-granger": [g_1bed_cape_town_apt_stonewood_at_the_granger_00.url, g_1bed_cape_town_apt_stonewood_at_the_granger_01.url, g_1bed_cape_town_apt_stonewood_at_the_granger_03.url, g_1bed_cape_town_apt_stonewood_at_the_granger_04.url, g_1bed_cape_town_apt_stonewood_at_the_granger_05.url, g_1bed_cape_town_apt_stonewood_at_the_granger_06.url, g_1bed_cape_town_apt_stonewood_at_the_granger_07.url],
   "nox-2bed-mouille-point-apartment-w-amazing-cape-views": [g_2bed_mouille_point_apartment_w_amazing_cape_views_00.url, g_2bed_mouille_point_apartment_w_amazing_cape_views_01.url, g_2bed_mouille_point_apartment_w_amazing_cape_views_03.url, g_2bed_mouille_point_apartment_w_amazing_cape_views_04.url, g_2bed_mouille_point_apartment_w_amazing_cape_views_05.url, g_2bed_mouille_point_apartment_w_amazing_cape_views_06.url, g_2bed_mouille_point_apartment_w_amazing_cape_views_07.url],
   "nox-4-bed-coastal-retreat-w-pool-views-llandudno-sands": [g_4_bed_coastal_retreat_w_pool_views_llandudno_sands_00.url, g_4_bed_coastal_retreat_w_pool_views_llandudno_sands_01.url, g_4_bed_coastal_retreat_w_pool_views_llandudno_sands_03.url, g_4_bed_coastal_retreat_w_pool_views_llandudno_sands_04.url, g_4_bed_coastal_retreat_w_pool_views_llandudno_sands_05.url, g_4_bed_coastal_retreat_w_pool_views_llandudno_sands_06.url, g_4_bed_coastal_retreat_w_pool_views_llandudno_sands_07.url],

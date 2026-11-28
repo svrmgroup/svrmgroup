@@ -1,3 +1,9 @@
+# À La Penthouse and verified stay details
+- [x] Research À La Penthouse from real listings; add nine real photos, its permanent detail page and item-aware WhatsApp enquiry.
+- [x] Verify bathrooms and maximum guests for all 32 published stays from official or reliable property sources.
+- [x] Add structured stay facts, update cards/detail pages/search data, regenerate 78 listing routes and the sitemap.
+- [x] Test facts, all nine gallery photos and WhatsApp enquiries on desktop and mobile; keep all changes preview-only.
+
 # Signature fleet and vehicle search
 - [x] Give Maybach S-Class the villa-style gold glow on chauffeur/homepage cards and remove Phantom flagship comparisons from Maybach descriptions; keep Phantom's own flagship status.
 - [x] Refresh Maybach S-Class with luxurious, emotive wording across the website and saved admin offer; three fleet tests passed and fleet/homepage/journal verified without page errors, with price and Phantom flagship unchanged.

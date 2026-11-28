@@ -24,7 +24,7 @@ const StayDetailInner = ({ stay }: { stay: Stay }) => {
     <main className="bg-background text-foreground min-h-screen pb-24 lg:pb-0">
       <Seo
         title={`${l.name} | Luxury Stay Cape Town — SVRM`}
-        description={`${l.name} in ${l.neighbourhood}, Cape Town. ${l.bedrooms}. ${l.priceLabel}. Check availability on WhatsApp.`.slice(0, 300)}
+        description={`${l.name} in ${l.neighbourhood}, Cape Town. ${l.bedrooms}, ${l.bathrooms}; ${l.maxGuests}. ${l.priceLabel}. Check availability on WhatsApp.`.slice(0, 300)}
         path={l.path}
         image={photos[0]?.src}
         jsonLd={[
@@ -34,6 +34,9 @@ const StayDetailInner = ({ stay }: { stay: Stay }) => {
             "@context": "https://schema.org", "@type": "Accommodation", name: l.name, url: l.url, description: l.description,
             address: { "@type": "PostalAddress", addressLocality: `${l.neighbourhood}, Cape Town`, addressCountry: "ZA" },
             image: photos.slice(0, 4).map((p) => new URL(p.src, SITE_URL).toString()),
+            ...(l.bedroomCount ? { numberOfBedrooms: l.bedroomCount } : {}),
+            ...(l.bathroomCount ? { numberOfBathroomsTotal: l.bathroomCount } : {}),
+            ...(l.guestCapacity ? { occupancy: { "@type": "QuantitativeValue", maxValue: l.guestCapacity } } : {}),
           },
         ]}
       />

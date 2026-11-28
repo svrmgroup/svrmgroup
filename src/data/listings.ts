@@ -3,6 +3,7 @@
 import { vehicles, type Vehicle } from "@/data/vehicles";
 import { stays, type Stay } from "@/data/stays";
 import { stayGalleries } from "@/data/stayGalleries";
+import { guestLabel, stayFacts } from "@/data/stayFacts";
 import { MAYBACH_DESCRIPTION, PHANTOM_DESCRIPTION, FLAGSHIP_SLUG } from "@/seo/vehicleServices";
 
 export const SITE_URL = "https://svrm.group";
@@ -166,36 +167,66 @@ export const findStay = (urlSlug?: string) => stays.find((s) => stayUrlSlug(s) =
 export interface StayListing {
   stay: Stay; slug: string; name: string; path: string; url: string; neighbourhood: string;
   description: string; why: string; bedrooms: string; bathrooms: string; maxGuests: string;
+  bedroomCount?: number; bathroomCount?: number; guestCapacity?: number;
   amenities: string[]; priceLabel: string; priceNote: string; photos: Photo[]; faqs: Faq[]; related: RelatedLink[];
 }
+
+const A_LA_ALTS = [
+  "private terrace with hanging chair and Lion's Head view",
+  "open-plan lounge with Atlantic Ocean views",
+  "living room opening onto the panoramic terrace",
+  "private terrace and mountain views",
+  "terrace loungers overlooking the Atlantic",
+  "designer kitchen with sea views",
+  "main bedroom with ocean views",
+  "main bathroom with marble vanity and walk-in shower",
+  "second bedroom",
+];
 
 export function stayListing(s: Stay): StayListing {
   const tokens = s.beds.split("·").map((x) => x.trim()).filter(Boolean);
   const bed = /(\d+)\s*bed/i.exec(s.beds)?.[1];
   const bath = /(\d+)\s*bath/i.exec(s.beds)?.[1];
-  const amenities = tokens.filter((x) => !/^\d+\s*(bed|bath)/i.test(x) && !/^1 king$/i.test(x)).map((x) => x[0].toUpperCase() + x.slice(1));
+  const facts = stayFacts[s.slug];
+  const bedrooms = facts ? `${facts.bedrooms} bedroom${facts.bedrooms === 1 ? "" : "s"}` : s.type === "hotel" ? tokens[0] ?? CONFIRM : bed ? `${bed} bedroom${bed === "1" ? "" : "s"}` : CONFIRM;
+  const bathrooms = facts ? `${facts.bathrooms} bathroom${facts.bathrooms === 1 ? "" : "s"}` : bath ? `${bath} bathroom${bath === "1" ? "" : "s"}` : CONFIRM;
+  const maxGuests = facts ? guestLabel(facts) : CONFIRM;
+  const amenities = tokens.filter((x) => !/^\d+\s*(bed|bath|guest)/i.test(x) && !/^1 king$/i.test(x)).map((x) => x[0].toUpperCase() + x.slice(1));
   const hasPool = /pool/i.test(s.beds);
   const showPrice = s.showPrice ?? s.nox;
   const path = stayPath(s);
   const gallery = stayGalleries[s.slug] ?? [];
-  const photos: Photo[] = (gallery.length ? gallery : [s.image]).map((src, i) => ({ src, fullSrc: src, alt: `${s.name} — photo ${i + 1}` }));
+  const photos: Photo[] = (gallery.length ? gallery : [s.image]).map((src, i) => ({ src, fullSrc: src, alt: s.slug === "a-la-penthouse" ? `${s.name} — ${A_LA_ALTS[i] ?? `photo ${i + 1}`}` : `${s.name} — photo ${i + 1}` }));
   const alt = stays.filter((x) => x.slug !== s.slug && x.type === s.type).sort((a, b) => Math.abs(a.fromZAR - s.fromZAR) - Math.abs(b.fromZAR - s.fromZAR))[0];
   const kind = s.type === "hotel" ? "room" : s.type;
+  const isALa = s.slug === "a-la-penthouse";
   return {
     stay: s, slug: stayUrlSlug(s), name: s.name, path, url: `${SITE_URL}${path}`, neighbourhood: s.area,
     description: s.blurb,
-    why: `Stay in ${s.area} with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.`,
-    bedrooms: s.type === "hotel" ? tokens[0] ?? CONFIRM : bed ? `${bed} bedroom${bed === "1" ? "" : "s"}` : CONFIRM,
-    bathrooms: bath ? `${bath} bathroom${bath === "1" ? "" : "s"}` : CONFIRM,
-    maxGuests: CONFIRM,
+    why: isALa
+      ? "The residence combines the privacy of a top-floor home with hotel-style service. Designer interiors, generous lounges, a private lift and panoramic views across the Atlantic, Lion's Head, Table Mountain and the Twelve Apostles make it as suited to a quiet retreat as to a special celebration or photo shoot."
+      : `Stay in ${s.area} with SVRM handling the details — airport collection, a private chauffeur and concierge for restaurants, tours and experiences throughout your stay.`,
+    bedrooms,
+    bathrooms,
+    maxGuests,
+    bedroomCount: facts?.bedrooms,
+    bathroomCount: facts?.bathrooms,
+    guestCapacity: facts?.maxGuests,
     amenities,
     priceLabel: showPrice ? `From ${rand(s.fromZAR)} / night` : "Request a quote",
     priceNote: showPrice ? "Indicative low-season rate — dates and season affect the total." : "Rates depend on dates and season.",
     photos,
     faqs: [
-      ...(hasPool ? [{ q: "Is the pool private or shared?", a: /shared|pool access/i.test(s.beds + s.blurb) ? "This listing has pool access that may be shared with other residents. Your concierge will confirm." : `${CONFIRM} whether the pool is private to this ${kind} before you book.` }] : []),
+      ...(isALa ? [
+        { q: "How many guests can À La Penthouse accommodate?", a: "The main two-bedroom penthouse accommodates a maximum of four guests. Additional luxury accommodation on the lower level can be arranged on request for a larger group; ask your concierge for availability and a separate quote." },
+        { q: "Which services and private facilities are included?", a: "The official listing includes daily breakfast, housekeeping from Monday to Saturday, concierge assistance, high-speed Wi-Fi, a private terrace with an outdoor jacuzzi, a private sauna and private lift access." },
+        { q: "Is there a minimum stay?", a: "The official listing states a seven-night minimum stay. Your concierge will confirm the minimum and final rate for your requested dates." },
+      ] : [
+        ...(hasPool ? [{ q: "Is the pool private or shared?", a: /shared|pool access/i.test(s.beds + s.blurb) ? "This listing has pool access that may be shared with other residents. Your concierge will confirm." : `${CONFIRM} whether the pool is private to this ${kind} before you book.` }] : []),
+        { q: `How many guests can this ${kind} accommodate?`, a: facts ? `${maxGuests}. Tell us the adults and children in your party so your concierge can confirm the right configuration.` : `${CONFIRM} the maximum occupancy for your dates.` },
+        { q: "Is there a minimum stay?", a: "Minimum stays depend on the season and dates — usually longer over December and New Year. We'll confirm with your quote." },
+      ]),
       { q: `Which amenities belong to this ${kind}?`, a: amenities.length ? `Listed for this ${kind}: ${amenities.join(", ")}. ${CONFIRM} anything else you need.` : `${CONFIRM} the full amenity list for your dates.` },
-      { q: "Is there a minimum stay?", a: "Minimum stays depend on the season and dates — usually longer over December and New Year. We'll confirm with your quote." },
       { q: "Can SVRM arrange airport collection?", a: "Yes — a private chauffeur can meet you at Cape Town International and bring you straight to the door." },
     ],
     related: [
@@ -225,9 +256,9 @@ export function allListingPaths(): { path: string; title: string; description: s
   const s = stays.map(stayListing).map((l) => ({
     path: l.path,
     title: `${l.name} | Luxury Stay Cape Town — SVRM`,
-    description: `${l.name} in ${l.neighbourhood}, Cape Town. ${l.bedrooms}. ${l.priceLabel}. Check availability on WhatsApp.`.slice(0, 300),
+    description: `${l.name} in ${l.neighbourhood}, Cape Town. ${l.bedrooms}, ${l.bathrooms}; ${l.maxGuests}. ${l.priceLabel}. Check availability on WhatsApp.`.slice(0, 300),
     heading: l.name,
-    summary: `${l.description} ${l.why}`,
+    summary: `${l.description} Bedrooms: ${l.bedrooms}. Bathrooms: ${l.bathrooms}. Maximum guests: ${l.maxGuests}. ${l.why}`,
     image: shareImage(l.photos),
   }));
   return [...v, ...s];

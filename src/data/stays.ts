@@ -34,6 +34,7 @@ import nx_beautiful_6bed_camps_bay_view_villa_w_pool_ithemba from "@/assets/stay
 import nx_llandudno_beach_oasis_solmara_house from "@/assets/stays/nox/llandudno-beach-oasis-solmara-house.jpg.asset.json";
 import nx_luxurious_camps_bay_retreat_w_sea_views_rock_residence from "@/assets/stays/nox/luxurious-camps-bay-retreat-w-sea-views-rock-residence.jpg.asset.json";
 import nx_idyllic_camps_bay_villa_w_2_pools_buddha_retreat from "@/assets/stays/nox/idyllic-camps-bay-villa-w-2-pools-buddha-retreat.jpg.asset.json";
+import aLaPenthouseHero from "@/assets/stays/a-la-penthouse/01-hero.jpg.asset.json";
 
 export type StayType = "villa" | "apartment" | "hotel";
 
@@ -65,6 +66,17 @@ export const stays: Stay[] = [
     blurb: "A curated five-bedroom Camps Bay residence with panoramic Atlantic views, private pool and direct beach access moments away.",
     type: "villa",
     featured: true,
+    showPrice: true,
+  },
+  {
+    slug: "a-la-penthouse",
+    name: "À La Penthouse",
+    area: "Camps Bay",
+    beds: "2 bed · 2 bath · 4 guests · jacuzzi · sauna · private lift",
+    fromZAR: 26200,
+    image: aLaPenthouseHero.url,
+    blurb: "A 240 m² top-floor Camps Bay residence for four guests, with two bedrooms, two bathrooms, a 55 m² private terrace, outdoor jacuzzi, private sauna and lift, panoramic sea and mountain views, daily breakfast and housekeeping from Monday to Saturday.",
+    type: "apartment",
     showPrice: true,
   },
   { slug: "nox-1bed-cape-town-apt-stonewood-at-the-granger", name: "Stonewood at The Granger", area: "City Centre", beds: "1 bed \u00b7 CBD", fromZAR: 1800, image: nx_1bed_cape_town_apt_stonewood_at_the_granger.url, blurb: "Compact CBD studio at The Granger \u2014 walk to everywhere, budget entry.", type: "apartment", nox: true },
