@@ -9,6 +9,7 @@ import pkgWeddings from "@/assets/tours/pkg-weddings.jpg";
 import pkgHoneymoonYacht from "@/assets/tours/pkg-honeymoon-yacht.jpg";
 import pkgAquilaMorning from "@/assets/tours/pkg-aquila-morning.jpg";
 import pkgAquilaMidday from "@/assets/tours/pkg-aquila-midday.jpg";
+import pkgSabiSand from "@/assets/tours/pkg-sabi-sand.jpg";
 import heliImg from "@/assets/svc-transport-heli.jpg";
 import spaImg from "@/assets/svc-lifestyle-wellness.jpg";
 import airportImg from "@/assets/airport-transfers-hero.jpg";
@@ -182,7 +183,7 @@ export const tours: TourCategory[] = [
     video: safariVid.url,
     packages: [
       { duration: "3 days", title: "Kruger essentials", image: safariImg, fromZAR: 19000, inclusions: ["2 nights luxury lodge", "Twice-daily game drives", "All meals", "Private transfers"] },
-      { duration: "5 days", title: "Sabi Sand signature", image: safariImg, fromZAR: 28000, inclusions: ["4 nights premium lodge", "Twice-daily game drives", "All meals & house drinks", "Internal flights"] },
+      { duration: "5 days", title: "Sabi Sand signature", image: pkgSabiSand, fromZAR: 28000, inclusions: ["4 nights premium lodge", "Twice-daily game drives", "All meals & house drinks", "Internal flights"] },
       { duration: "7 days", title: "Madikwe & Kruger", image: aquilaImg, fromZAR: 55000, inclusions: ["Two-lodge itinerary", "Private guide & vehicle", "All flights & transfers", "Spa treatments"] },
       { duration: "14 days", title: "Bespoke grand safari", image: pkgSafariGrand, fromZAR: null, inclusions: ["Multi-region itinerary", "Private villa stays", "Helicopter add-ons", "Curated, end to end"] },
     ],
