@@ -1,10 +1,27 @@
 import { useMemo, useState } from "react";
-import { Compass, Landmark, Mountain, Ship, Plane, Sparkles, ChefHat } from "lucide-react";
+import { Compass, Landmark, Mountain, Ship, Plane, Sparkles, ChefHat, Wine, Fish, Camera, Heart, Car, Wind, Trees, UtensilsCrossed } from "lucide-react";
+import SmartImage from "./SmartImage";
+import safariImg from "@/assets/svc-exp-safari.jpg";
+import culturalImg from "@/assets/svc-tours-cultural.jpg";
+import adventureImg from "@/assets/svc-tours-adventure.jpg";
+import yachtImg from "@/assets/svc-exp-yacht.jpg";
+import heliImg from "@/assets/svc-transport-heli.jpg";
+import spaImg from "@/assets/svc-lifestyle-wellness.jpg";
+import chefImg from "@/assets/svc-lifestyle-chef.jpg";
+import wineImg from "@/assets/tours/wine-farms.jpg";
+import marineImg from "@/assets/tours/marine.jpg";
+import photoImg from "@/assets/tours/photography.jpg";
+import romanticImg from "@/assets/tours/romantic.jpg";
+import peninsulaImg from "@/assets/tours/cape-peninsula-maybach.jpg";
+import balloonImg from "@/assets/tours/pkg-balloon.jpg";
+import gardenImg from "@/assets/tours/garden-route.jpg";
+import cookingImg from "@/assets/tours/bo-kaap-cooking.jpg";
 import EnquiryForm from "./EnquiryForm";
 import { useCurrency } from "@/lib/currency";
 
 
-type ActivityId = "safari" | "cultural" | "adventure" | "yacht" | "helicopter" | "spa" | "chef";
+type ActivityId = "safari" | "cultural" | "adventure" | "yacht" | "helicopter" | "spa" | "chef"
+  | "wine" | "marine" | "photo" | "romance" | "peninsula" | "balloon" | "garden" | "cooking";
 
 interface Activity {
   id: ActivityId;
@@ -12,16 +29,25 @@ interface Activity {
   icon: React.ComponentType<{ className?: string }>;
   perDay: number;
   oneOff: number;
+  image: string;
 }
 
 const ACTIVITIES: Activity[] = [
-  { id: "safari", label: "Safari", icon: Compass, perDay: 7400, oneOff: 0 },
-  { id: "cultural", label: "Cultural", icon: Landmark, perDay: 2200, oneOff: 0 },
-  { id: "adventure", label: "Adventure", icon: Mountain, perDay: 3300, oneOff: 0 },
-  { id: "yacht", label: "Yacht day", icon: Ship, perDay: 0, oneOff: 14800 },
-  { id: "helicopter", label: "Helicopter", icon: Plane, perDay: 0, oneOff: 16650 },
-  { id: "spa", label: "Spa & wellness", icon: Sparkles, perDay: 1500, oneOff: 0 },
-  { id: "chef", label: "Private chef", icon: ChefHat, perDay: 4100, oneOff: 0 },
+  { id: "safari", label: "Safari", icon: Compass, perDay: 7400, oneOff: 0, image: safariImg },
+  { id: "cultural", label: "Cultural", icon: Landmark, perDay: 2200, oneOff: 0, image: culturalImg },
+  { id: "adventure", label: "Adventure", icon: Mountain, perDay: 3300, oneOff: 0, image: adventureImg },
+  { id: "yacht", label: "Yacht day", icon: Ship, perDay: 0, oneOff: 14800, image: yachtImg },
+  { id: "helicopter", label: "Helicopter", icon: Plane, perDay: 0, oneOff: 16650, image: heliImg },
+  { id: "spa", label: "Spa & wellness", icon: Sparkles, perDay: 1500, oneOff: 0, image: spaImg },
+  { id: "chef", label: "Private chef", icon: ChefHat, perDay: 4100, oneOff: 0, image: chefImg },
+  { id: "wine", label: "Wine tasting", icon: Wine, perDay: 0, oneOff: 0, image: wineImg },
+  { id: "marine", label: "Whales & marine", icon: Fish, perDay: 0, oneOff: 0, image: marineImg },
+  { id: "photo", label: "Photography", icon: Camera, perDay: 0, oneOff: 0, image: photoImg },
+  { id: "romance", label: "Romance", icon: Heart, perDay: 0, oneOff: 0, image: romanticImg },
+  { id: "peninsula", label: "Scenic drives", icon: Car, perDay: 0, oneOff: 0, image: peninsulaImg },
+  { id: "balloon", label: "Hot-air balloon", icon: Wind, perDay: 0, oneOff: 0, image: balloonImg },
+  { id: "garden", label: "Garden Route", icon: Trees, perDay: 0, oneOff: 0, image: gardenImg },
+  { id: "cooking", label: "Cooking class", icon: UtensilsCrossed, perDay: 0, oneOff: 0, image: cookingImg },
 ];
 
 type Tier = "premium" | "luxury" | "ultra";
@@ -36,8 +62,8 @@ const DURATIONS = [1, 2, 3, 5, 7, 10, 14, 21];
 // Extra preferences go into the brief only; they are priced in the written quote, not the rough estimate.
 const EXTRAS = [
   "Cape Peninsula & penguins", "Winelands & wine tasting", "Bo-Kaap cooking class", "Table Mountain",
-  "Whale watching", "Hot-air balloon", "Golf", "Photography session", "Shopping & stylist",
-  "Beach & Clifton day", "Garden Route", "Big Five day safari",
+  "Golf", "Photography session", "Shopping & stylist",
+  "Beach & Clifton day", "Big Five day safari", "Sandboarding", "Shark cage diving", "Robben Island", "Stargazing",
 ];
 const PREFS: { key: string; label: string; options: string[] }[] = [
   { key: "Stay", label: "Where you'd like to stay", options: ["Private villa", "5-star hotel", "Safari lodge", "Mix", "Already booked"] },
@@ -112,14 +138,27 @@ const TourBuilder = () => {
                   key={a.id}
                   type="button"
                   onClick={() => toggle(a.id)}
-                  className={`group flex flex-col items-center gap-3 p-5 border transition-all duration-300 ${
+                  aria-pressed={active}
+                  className={`group relative overflow-hidden flex flex-col items-center justify-end gap-3 p-5 min-h-[130px] border transition-all duration-300 ${
                     active
-                      ? "border-primary bg-primary/10 text-foreground"
-                      : "border-border/50 text-muted-foreground hover:border-primary/50 hover:text-foreground"
+                      ? "border-primary text-foreground"
+                      : "border-border/50 text-foreground/85 hover:border-primary/50 hover:text-foreground"
                   }`}
                 >
-                  <Icon className={`h-7 w-7 ${active ? "text-gold" : ""}`} />
-                  <span className="text-xs uppercase tracking-[0.2em]">{a.label}</span>
+                  <SmartImage
+                    src={a.image}
+                    alt=""
+                    aria-hidden="true"
+                    loading="lazy"
+                    sizes="(min-width: 768px) 200px, 50vw"
+                    wrapperClassName="absolute inset-0 w-full h-full"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className={`absolute inset-0 transition-colors ${active ? "bg-surface-deep/45" : "bg-surface-deep/65 group-hover:bg-surface-deep/50"}`} />
+                  <div className="relative flex flex-col items-center gap-3 [text-shadow:0_1px_6px_rgba(0,0,0,0.8)]">
+                    <Icon className={`h-7 w-7 ${active ? "text-gold" : ""}`} />
+                    <span className="text-xs uppercase tracking-[0.2em] text-center">{a.label}</span>
+                  </div>
                 </button>
               );
             })}
