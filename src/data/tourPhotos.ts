@@ -43,6 +43,7 @@ const byPackage: Record<string, string[]> = {
   "aquila-sunset-safari": ["karoo", "aquila"],
   "aquila-big-five-safari-midday": ["rhino", "aquila"],
 };
+const FALLBACK = ["camps-bay", "table-mountain", "clifton-sunset", "franschhoek", "v-and-a", "chapmans-peak", "cape-point", "lions-head"];
 const VEHICLE_SHOT = /suv|maybach|vclass|v-class|sprinter|vehicle|fleet/i;
 const NO_CREDIT = /public domain|cc0|^pd/i;
 const nice = (title: string) => title.replace(/^File:/, "").replace(/\.[a-z]+$/i, "").replace(/[_-]+/g, " ").trim();
@@ -59,7 +60,15 @@ export function tourPackagePhotos(tour: TourCategory, pkg: TourPackage): TourPho
     out.push({ src: e.src, fullSrc: e.src, alt: `${pkg.title} — illustrative photograph: ${nice(e.title)}`, artist: e.artist, license: e.license, source: e.source });
   }
   // Open with the best scenic photo, then SVRM's own tour/package imagery, then the rest.
-  const lead = [pkg.image, tour.image].filter((src): src is string => !!src && !seen.has(src));
+  const lead = [...new Set([pkg.image, tour.image])].filter((src): src is string => !!src && !seen.has(src));
   lead.reverse().forEach((src) => { seen.add(src); out.splice(Math.min(1, out.length), 0, { src, fullSrc: src, alt: `${pkg.title} — ${tour.label}, Cape Town`, artist: "SVRM Group", license: "SVRM Group", source: "" }); });
+  // Guarantee at least 4 distinct photos, topping up from bright Cape scenes.
+  for (const k of FALLBACK) {
+    if (out.length >= 4) break;
+    const e = lib[k]?.[0];
+    if (!e || seen.has(e.src)) continue;
+    seen.add(e.src);
+    out.push({ src: e.src, fullSrc: e.src, alt: `${pkg.title} — illustrative photograph: ${nice(e.title)}`, artist: e.artist, license: e.license, source: e.source });
+  }
   return out.slice(0, 6);
 }
