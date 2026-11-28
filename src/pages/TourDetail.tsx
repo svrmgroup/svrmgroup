@@ -199,77 +199,30 @@ const TourDetail = () => {
       </section>
 
       <section className="py-16 md:py-24">
-        <div className="max-w-3xl mx-auto px-6 text-center">
-          <p className="font-serif text-2xl md:text-3xl text-foreground leading-[1.3]">{tour.blurb}</p>
-          <p className="mt-8 text-muted-foreground leading-relaxed">{tour.description}</p>
-        </div>
-      </section>
-
-      <TourEnquirySection key={tour.slug} tour={tour} />
-
-
-      <section className="pb-24 md:pb-32">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12">
             <p className="eyebrow">Packages</p>
-            <h2 className="font-serif text-3xl md:text-4xl mt-4 text-foreground">From one day to bespoke.</h2>
+            <h2 className="font-serif text-3xl md:text-4xl mt-4 text-foreground">Choose your package</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {tour.packages.map((p) => (
-              <PricingCard
-                key={p.duration + p.title}
-                duration={p.duration}
-                title={p.title}
-                fromZAR={p.fromZAR}
-                inclusions={p.inclusions}
-                unit={p.unit}
-                image={tourPackagePhotos(tour, p)[0]?.src}
-                detailTo={tourPackagePath(tour, p)}
-                subject={`${tour.label} — ${p.duration} ${p.title}${datesSuffix}`}
-                slug={`${tour.slug}-${tourPackageSlug(p)}`}
-              />
-            ))}
-          </div>
-          <p className="text-center text-xs text-muted-foreground/60 mt-10 max-w-2xl mx-auto">
-            Every itinerary is personalised. From rates are indicative guides; your final written quote confirms the price and inclusions.
-            International flights are excluded unless expressly listed.
-          </p>
-        </div>
-      </section>
-
-      {tour.slug === "wellness" && <WellnessCustomBuilder datesSuffix={datesSuffix} />}
-
-      {tour.slug === "cape-peninsula" && (
-        <section className="pb-16 md:pb-20">
-          <div className="max-w-5xl mx-auto px-6">
-            <div className="text-center mb-8">
-              <p className="eyebrow">The route</p>
-              <h2 className="font-serif text-2xl md:text-3xl mt-3 text-foreground">Your day around the Peninsula</h2>
-            </div>
-            <TourRouteMap />
-          </div>
-        </section>
-      )}
-
-      {tour.slug === "cape-peninsula" && (
-        <section className="pb-24 md:pb-28">
-          <div className="max-w-3xl mx-auto px-6">
-            <div className="text-center mb-8">
-              <p className="eyebrow">Good to know</p>
-              <h2 className="font-serif text-2xl md:text-3xl mt-3 text-foreground">Cape Peninsula tour questions</h2>
-            </div>
-            <ServiceFaq items={capePeninsulaTourFaqs} />
-          </div>
-        </section>
-      )}
-
-      <section className="bg-surface-deep py-24 md:py-32 border-t border-border/40">
-        <div className="max-w-3xl mx-auto px-6">
-          <div className="text-center mb-12">
-            <p className="eyebrow">Enquire · {tour.label}</p>
-            <h2 className="font-serif text-4xl md:text-5xl mt-6 text-foreground">Send us the brief.</h2>
-          </div>
-          <EnquiryForm subject={`${tour.label}${datesSuffix}`} />
+          <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {tour.packages.map((p) => {
+              const photo = tourPackagePhotos(tour, p)[0];
+              return (
+                <li key={p.duration + p.title}>
+                  <Link to={tourPackagePath(tour, p)} className="group flex h-full flex-col overflow-hidden border border-border/50 hover:border-primary/60 transition-colors">
+                    {photo && (
+                      <SmartImage src={photo.src} alt={photo.alt} wrapperClassName={`relative aspect-[4/3] w-full ${photo.fit === "contain" ? "bg-surface-deep" : ""}`} className={`absolute inset-0 h-full w-full ${photo.fit === "contain" ? "object-contain" : "object-cover"}`} />
+                    )}
+                    <div className="flex flex-1 flex-col p-6">
+                      <p className="eyebrow">{p.duration}</p>
+                      <h3 className="font-serif text-2xl mt-2 text-foreground">{p.title}</h3>
+                      <span className="mt-6 inline-flex items-center justify-center bg-primary px-5 py-3 text-xs uppercase tracking-[0.28em] text-primary-foreground">View package</span>
+                    </div>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </section>
 
