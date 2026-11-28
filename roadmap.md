@@ -5,7 +5,8 @@
 - [x] Google Ads: WhatsApp tap secondary, form counted once per click, offline stage conversion actions (needs approval card).
 - [x] Germany campaign lands with German as the page language (?lang=de); German guide confirmed by owner.
 - [x] Mobile test of form, WhatsApp handoff and duplicates; update launch review.
-- [ ] Waiting on owner: publish site, turn off auto-apply recommendations, spend approval, then create campaigns paused, verify end date, enable.
+- [x] Combined chauffeur + tours (+airport) into one live campaign at R400/day; originals paused.
+- [ ] Owner: turn off auto-apply recommendations in Google Ads.
 
 # Media loading speed
 - [x] Create 640px/1280px WebP copies for 323 photos (phone copies 88.8% smaller in aggregate); preserve originals for full-size viewing and search.
