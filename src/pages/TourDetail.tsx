@@ -27,11 +27,12 @@ const PENINSULA_FACTS: [string, string][] = [
   ["Tickets & extras", "Cape Point (Table Mountain National Park) and Boulders Beach entry are arranged for you — your quote confirms whether they are included. Lunch, drinks and optional extras are paid separately."],
   ["Subject to conditions", "Chapman's Peak Drive can close in bad weather or for rockfall — we reroute via Ou Kaapse Weg. Cape Point, Boulders Beach and Chapman's Peak are standard stops when open."],
 ];
+const VEHICLE_CATEGORIES = ["Classic", "Executive", "Luxury", "Group"];
 const PENINSULA_VEHICLES = [
-  { label: "Luxury sedan or SUV (up to 4)", to: "/chauffeur" },
-  { label: "Mercedes-Maybach S-Class (Maybach Signature)", to: "/chauffeur/mercedes-maybach-s-class" },
-  { label: "Mercedes V-Class (larger groups, on request)", to: "/chauffeur/mercedes-v-class" },
-  { label: "Maybach V-Class (on request)", to: "/chauffeur/maybach-v-class" },
+  { label: "Classic — refined sedan or SUV (up to 4)", to: "/chauffeur" },
+  { label: "Executive — business-class comfort", to: "/chauffeur" },
+  { label: "Luxury — our most indulgent rear seats", to: "/chauffeur" },
+  { label: "Group — spacious vans for larger parties", to: "/chauffeur" },
 ];
 
 const TourEnquirySection = ({ tour }: { tour: TourCategory }) => {
@@ -67,7 +68,7 @@ const TourEnquirySection = ({ tour }: { tour: TourCategory }) => {
           )}
         </div>
         <aside className="lg:sticky lg:top-28 self-start">
-          <ListingEnquiry listing={enquiry} category="tour" vehicleOptions={peninsula ? ["Luxury sedan or SUV", "Mercedes-Maybach S-Class", "Mercedes V-Class", "Maybach V-Class"] : undefined} />
+          <ListingEnquiry listing={enquiry} category="tour" vehicleOptions={peninsula ? VEHICLE_CATEGORIES : undefined} />
         </aside>
       </div>
     </section>

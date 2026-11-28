@@ -65,7 +65,7 @@ const EXTRAS = [
 ];
 const PREFS: { key: string; label: string; options: string[] }[] = [
   { key: "Stay", label: "Where you'd like to stay", options: ["Private villa", "5-star hotel", "Safari lodge", "Mix", "Already booked"] },
-  { key: "Vehicle", label: "Vehicle", options: ["Luxury sedan", "Luxury SUV", "Maybach", "V-Class van", "Sprinter / group"] },
+  { key: "Vehicle", label: "Vehicle", options: ["Classic", "Executive", "Luxury", "Group"] },
   { key: "Pace", label: "Pace", options: ["Relaxed", "Balanced", "Packed"] },
   { key: "Occasion", label: "Occasion", options: ["Holiday", "Honeymoon", "Anniversary", "Birthday", "Proposal", "Business", "Family"] },
   { key: "Guide language", label: "Guide language", options: ["English", "German", "French", "Other"] },

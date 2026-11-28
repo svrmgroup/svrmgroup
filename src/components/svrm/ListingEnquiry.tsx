@@ -122,7 +122,7 @@ function EnquiryFormBody({ listing, category, vehicleOptions, idPrefix }: Props 
         <Field id={id("veh")} label="Vehicle preference (optional)">
           <select id={id("veh")} value={input.vehiclePreference ?? ""} onChange={set("vehiclePreference")} className="h-10 w-full border border-input bg-background px-3 text-sm">
             <option value="">No preference</option>
-            {(vehicleOptions ?? ["Mercedes V-Class", "Maybach V-Class", "Mercedes-Maybach S-Class", "Range Rover Autobiography", "Mercedes Sprinter"]).map((v) => <option key={v}>{v}</option>)}
+            {(vehicleOptions ?? ["Classic", "Executive", "Luxury", "Group"]).map((v) => <option key={v}>{v}</option>)}
           </select>
         </Field>
       )}
