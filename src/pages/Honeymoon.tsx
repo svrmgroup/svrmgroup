@@ -35,7 +35,7 @@ const Honeymoon = () => (
       pillars={[
         {
           title: "Private chauffeur",
-          body: "A dedicated chauffeur for your stay — including our flagship Mercedes-Maybach S-Class — so neither of you ever thinks about a car, a route or an airport queue.",
+          body: "A dedicated chauffeur for your stay — choose the Mercedes-Maybach S-Class for understated elegance and executive rear comfort, or our flagship Rolls-Royce Phantom for a grand arrival. Neither of you needs to think about routes or airport queues.",
         },
         {
           title: "Private accommodation",

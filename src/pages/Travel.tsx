@@ -21,12 +21,12 @@ import { useCurrency } from "@/lib/currency";
 import { WHATSAPP_BASE, whatsappUrlFor } from "@/lib/whatsappMessages";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Seo } from "@/components/Seo";
-import { CHAUFFEUR_DESCRIPTION, vehicleSearchKeywords, vehicleServiceOffers } from "@/seo/vehicleServices";
+import { CHAUFFEUR_DESCRIPTION, FLAGSHIP_SLUG, vehicleSearchKeywords, vehicleServiceOffers } from "@/seo/vehicleServices";
 import heroVideo from "@/assets/videos/chauffeur-sunset.mp4.asset.json";
 import travelOg from "@/assets/svc-travel-fleet.jpg";
 
 const tierBlurbs: Record<string, string> = {
-  "Signature": "Mercedes-Maybach S-Class, Maybach V-Class, Rolls-Royce, Bentley and Lamborghini. Chauffeur-led.",
+  "Signature": "Led by our flagship Rolls-Royce Phantom, alongside Mercedes-Maybach S-Class, Maybach V-Class, Rolls-Royce, Bentley and Lamborghini. Chauffeur-led.",
   "Premium SUV": "Off-the-grid capability without compromise. Range Rover, AMG G-Class, Porsche, BMW.",
   "Executive": "Discreet sedans and lounge vans for transfers, meetings and small parties.",
   "Everyday": "Smart everyday vehicles for longer stays — budget-friendly, fully insured.",
@@ -89,7 +89,7 @@ const Travel = () => {
   const [mode, setMode] = useState<Mode>("cars");
   const [carTier, setCarTier] = useState<string>("All");
   const { format } = useCurrency();
-  const [pickSlug, setPickSlug] = useState("mercedes-maybach-s-class");
+  const [pickSlug, setPickSlug] = useState(FLAGSHIP_SLUG);
   const picked = vehicles.find((v) => v.slug === pickSlug) ?? vehicles[0];
 
   const sevenDay = picked.fromZAR * 7;

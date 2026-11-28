@@ -33,6 +33,7 @@ import maybachVEntertainment from "@/assets/vehicles/maybach-vclass-entertainmen
 import maybachVExterior4k from "@/assets/vehicles/maybach-vclass-exterior-4k.jpg.asset.json";
 import maybachVSeating4k from "@/assets/vehicles/maybach-vclass-seating-4k.jpg.asset.json";
 import maybachVEntertainment4k from "@/assets/vehicles/maybach-vclass-entertainment-4k.jpg.asset.json";
+import { PHANTOM_DESCRIPTION } from "@/seo/vehicleServices";
 
 export type VehicleTier = "Signature" | "Premium SUV" | "Executive" | "Everyday" | "Budget" | "Group Travel";
 
@@ -52,7 +53,8 @@ export interface Vehicle {
 
 export const vehicles: Vehicle[] = [
   // Signature — flagship first
-  { slug: "mercedes-maybach-s-class", name: "Mercedes-Maybach S-Class", tagline: "SVRM's flagship chauffeur experience.", fromZAR: 22000, image: maybach.url, tier: "Signature", selfDrive: false },
+  { slug: "rolls-royce-phantom", name: "Rolls-Royce Phantom", tagline: PHANTOM_DESCRIPTION, fromZAR: 40000, image: phantom.url, tier: "Signature", selfDrive: false, gallery: [{ src: phantom.url, fullSrc: phantom.url, alt: "Current exterior photo" }, { src: phantomExtra.url, fullSrc: phantomExtra.url, alt: "Cream leather cabin with coach doors open" }] },
+  { slug: "mercedes-maybach-s-class", name: "Mercedes-Maybach S-Class", tagline: "Understated elegance, executive rear seating and a private chauffeur on your schedule.", fromZAR: 22000, image: maybach.url, tier: "Signature", selfDrive: false },
   { slug: "maybach-v-class", name: "Maybach V-Class", tagline: "Your private lounge across Cape Town — unwind in reclining massage seats, enjoy onboard TV and travel in quilted-leather comfort with your own chauffeur.", fromZAR: 20000, image: maybachVExterior.url, tier: "Signature", selfDrive: false,
     gallery: [
       { src: maybachVExterior.url, fullSrc: maybachVExterior4k.url, alt: "Two-tone exterior with SVRM number plate" },
@@ -60,7 +62,6 @@ export const vehicles: Vehicle[] = [
       { src: maybachVEntertainment.url, fullSrc: maybachVEntertainment4k.url, alt: "Onboard TV in the private chauffeur lounge" },
     ],
   },
-  { slug: "rolls-royce-phantom", name: "Rolls-Royce Phantom", tagline: "The pinnacle of motoring, chauffeured.", fromZAR: 40000, image: phantom.url, tier: "Signature", selfDrive: false, gallery: [{ src: phantom.url, fullSrc: phantom.url, alt: "Current exterior photo" }, { src: phantomExtra.url, fullSrc: phantomExtra.url, alt: "Cream leather cabin with coach doors open" }] },
   { slug: "rolls-royce-cullinan", name: "Rolls-Royce Cullinan", tagline: "The summit of the SVRM fleet.", fromZAR: 45000, image: cullinanExtra.url, tier: "Signature", selfDrive: false },
   { slug: "rolls-royce-ghost", name: "Rolls-Royce Ghost", tagline: "Silent presence, chauffeured.", fromZAR: 30000, image: ghost, tier: "Signature", selfDrive: false },
   { slug: "bentley-bentayga", name: "Bentley Bentayga", tagline: "British craft, African horizon.", fromZAR: 25000, rentalZAR: 18500, image: bentayga, tier: "Signature", selfDrive: true },

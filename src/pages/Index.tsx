@@ -8,6 +8,7 @@ import Testimonials from "@/components/svrm/Testimonials";
 import ClosingCTA from "@/components/svrm/ClosingCTA";
 import Footer from "@/components/svrm/Footer";
 import { Seo } from "@/components/Seo";
+import { MAYBACH_DESCRIPTION, PHANTOM_DESCRIPTION } from "@/seo/vehicleServices";
 
 const Index = () => (
   <main className="bg-background text-foreground">
@@ -79,9 +80,8 @@ const Index = () => (
           },
           {
             "@type": "Offer",
-            name: "Mercedes-Maybach S-Class chauffeur — SVRM flagship",
-            description:
-              "SVRM's flagship chauffeur experience: Mercedes-Maybach S-Class with a private chauffeur in Cape Town, for executives, airport transfers, weddings and honeymoons.",
+            name: "Mercedes-Maybach S-Class chauffeur — Signature",
+            description: MAYBACH_DESCRIPTION,
             price: "22000",
             priceCurrency: "ZAR",
             priceSpecification: {
@@ -92,6 +92,16 @@ const Index = () => (
             },
             availability: "https://schema.org/InStock",
             url: "https://svrm.group/chauffeur",
+            seller: { "@id": "https://svrm.group/#organization" },
+          },
+          {
+            "@type": "Offer",
+            name: "Rolls-Royce Phantom chauffeur — SVRM flagship",
+            description: PHANTOM_DESCRIPTION,
+            price: "40000",
+            priceCurrency: "ZAR",
+            priceSpecification: { "@type": "UnitPriceSpecification", price: "40000", priceCurrency: "ZAR", unitCode: "DAY" },
+            url: "https://svrm.group/chauffeur?cat=cars&vehicle=rolls-royce-phantom#rolls-royce-phantom",
             seller: { "@id": "https://svrm.group/#organization" },
           },
           {

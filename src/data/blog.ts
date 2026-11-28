@@ -598,22 +598,22 @@ export const posts: BlogPost[] = [
     slug: "mercedes-maybach-s-class-chauffeur-cape-town",
     publishedISO: "2026-08-01",
     seoTitle: "Maybach S-Class Chauffeur Service in Cape Town | SVRM",
-    seoDescription: "SVRM's flagship Mercedes-Maybach S-Class with a private chauffeur in Cape Town — airport transfers, executive travel, weddings and honeymoons. WhatsApp +27 73 064 1481.",
+    seoDescription: "Mercedes-Maybach S-Class private chauffeur hire in Cape Town: executive rear comfort for airport transfers, business travel, weddings and multi-day stays.",
     seoKeywords: "Mercedes-Maybach S-Class Cape Town, Maybach chauffeur Cape Town, luxury chauffeur Cape Town, executive chauffeur South Africa, VIP chauffeur Cape Town, Maybach hire Cape Town, private chauffeur service Cape Town",
     title: "Mercedes-Maybach S-Class chauffeur service in Cape Town",
     excerpt:
-      "The flagship of the SVRM fleet, and why it is the car we put in front of our most demanding briefs.",
+      "Understated elegance, executive rear comfort and a private chauffeur — a Signature choice for Cape Town arrivals, occasions and longer stays.",
     category: "Travel",
     date: "August 2026",
     image: maybachImg,
     readTime: "7 min read",
     intro:
-      "There are cars that move people and cars that change the shape of a day. The Mercedes-Maybach S-Class is the second kind, and it is the vehicle we place at the head of the SVRM fleet in Cape Town. Chauffeured, it is the quietest way we know to make travel disappear as a problem.",
+      "The Mercedes-Maybach S-Class brings understated elegance to every journey: a calm cabin, executive rear seating and a private chauffeur attentive to your schedule. From Cape Town airport arrivals and business meetings to weddings, Peninsula days and multi-day stays, travel with space to unwind and every detail quietly handled. It remains a Signature choice alongside SVRM's flagship Rolls-Royce Phantom.",
     sections: [
       {
         heading: "Why the Maybach and not simply an S-Class",
         body:
-          "The standard S-Class is already an exceptional car. The Maybach is a different proposition: a longer wheelbase, executive rear seating that reclines properly, near-silent cabin isolation, a separated rear climate zone and rear-seat refreshments. On a two-hour Winelands run or a late-night airport arrival, the difference is not cosmetic — it is the difference between travelling and resting.",
+          "The Mercedes-Maybach S-Class is chosen for the experience in the rear: executive seating, a calm atmosphere and room to settle into the journey. Whether you are arriving after a long-haul flight, heading to a meeting or spending a day along the Cape coast, the emphasis is on comfort and discretion. Share your preferences before booking so we can confirm the details for your chosen vehicle.",
       },
       {
         heading: "Who we put in it",
@@ -653,7 +653,7 @@ export const posts: BlogPost[] = [
       {
         heading: "Vehicle classes",
         body:
-          "At the top sits the Mercedes-Maybach S-Class, our flagship. Below it, the S-Class and E-Class cover executive work; the V-Class and Staria handle families and small groups with luggage; the BMW X5 and Cayenne suit longer road days and gravel approaches. For convoys and security work we run G63s and armoured 7 Series.",
+          "The Rolls-Royce Phantom is SVRM's flagship chauffeur vehicle. The Mercedes-Maybach S-Class remains a Signature choice for understated elegance and executive rear comfort. The S-Class and E-Class cover executive work; the V-Class and Staria handle families and small groups with luggage; the BMW X5 and Cayenne suit longer road days. For convoys and security work we offer G63s and armoured 7 Series.",
       },
       {
         heading: "Hourly, daily and transfer rates",

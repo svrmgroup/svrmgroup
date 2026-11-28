@@ -35,7 +35,7 @@ const Anniversary = () => (
       pillars={[
         {
           title: "Maybach chauffeur",
-          body: "Our flagship Mercedes-Maybach S-Class with a chauffeur for the evening or the full stay — the simplest way to make an ordinary date feel deliberate.",
+          body: "The Mercedes-Maybach S-Class pairs a calm cabin and executive rear seating with your private chauffeur for the evening or the full stay. For a statement arrival, request our flagship Rolls-Royce Phantom.",
         },
         {
           title: "Luxury accommodation",

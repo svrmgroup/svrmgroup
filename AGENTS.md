@@ -10,7 +10,7 @@
 - Vehicle seed images include stable asset-pointer URLs even without galleries, so CMS resync preserves refreshed fleet photos.
 - Keep FAQ answers in typed data with shared contact enrichment and rendering; generate FAQ schema from the same answers so visible content and search data cannot diverge.
 - Main public routes get static head + summary HTML at build via `src/seo/prerenderRoutes.ts` and the Vite plugin; keep that table in sync with each page's `<Seo>` so non-JS crawlers see the same metadata.
-- Vehicle chauffeur descriptions, keyword generation and service offers share `src/seo/vehicleServices.ts` and consume fleet data so visible and crawler-facing vehicle coverage stays aligned.
+- Vehicle chauffeur descriptions, flagship slug, keyword generation and service offers share `src/seo/vehicleServices.ts`; fleet data, CMS seeds and static summaries reuse these to keep vehicle positioning aligned.
 - Refreshed fleet image discovery lives in `src/seo/vehicleImages.ts`; keep its stable pointers and self-drive eligibility aligned with vehicle photos so static service HTML and image sitemap reference the displayed fleet.
 - Business contact constants live in `src/lib/whatsapp.ts`; reuse them instead of re-typing contact details.
 - Cancellation tiers and FAQ/document terms share `src/lib/cancellationPolicy.ts`; invoices, confirmation PDFs and freshly generated admin confirmation messages consume it so terms cannot drift. Keep thank-you PDFs unchanged.

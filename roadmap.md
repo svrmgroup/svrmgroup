@@ -1,4 +1,5 @@
 # Signature fleet and vehicle search
+- [x] Refresh Maybach S-Class descriptions across pages and CMS; promote Phantom as flagship. Seven tests passed; verified Signature ordering, booking, homepage link and phone layout without page errors.
 - [x] Restore Maybach S-Class to the Signature grid; verify its booking control on desktop and its phone layout.
 - [x] Expand vehicle service descriptions, search keywords and static search summaries; six fleet/search tests passed.
 

@@ -20,6 +20,7 @@ import { useCurrency } from "@/lib/currency";
 import { useCmsItems } from "@/hooks/useCmsItems";
 import { resolveImage } from "@/lib/cmsImages";
 import { vehicles } from "@/data/vehicles";
+import { MAYBACH_DESCRIPTION, PHANTOM_DESCRIPTION } from "@/seo/vehicleServices";
 
 type Offer = {
   eyebrow: string;
@@ -40,14 +41,20 @@ type Offer = {
 
 const offers: Offer[] = [
   {
-    eyebrow: "Flagship · Chauffeur",
+    eyebrow: "Flagship · Chauffeur", title: "Rolls-Royce Phantom",
+    detail: PHANTOM_DESCRIPTION, priceZAR: 40000, priceSuffix: "/ day",
+    cta: "Request Phantom", to: "/chauffeur?cat=cars&vehicle=rolls-royce-phantom#rolls-royce-phantom",
+    image: vehicles.find(v => v.slug === "rolls-royce-phantom")?.image ?? maybach,
+  },
+  {
+    eyebrow: "Signature · Chauffeur",
     title: "Mercedes-Maybach S-Class",
-    detail: "SVRM's flagship chauffeur experience — VIP transfers, events and full days.",
+    detail: MAYBACH_DESCRIPTION,
     priceZAR: 22000,
     priceSuffix: "/ day",
     cta: "Request Maybach",
-    to: "/chauffeur?cat=cars",
-    image: maybach,
+    to: "/chauffeur?cat=cars&vehicle=mercedes-maybach-s-class#mercedes-maybach-s-class",
+    image: vehicles.find(v => v.slug === "mercedes-maybach-s-class")?.image ?? maybach,
     special: true,
   },
   {
@@ -112,7 +119,8 @@ const Offers = () => {
 
   const staticImageBySlug: Record<string, string> = {
     "maybach-v-class-chauffeur": vehicles.find((v) => v.slug === "maybach-v-class")?.image ?? maybach,
-    "maybach-flagship-chauffeur": maybach,
+    "maybach-flagship-chauffeur": vehicles.find(v => v.slug === "mercedes-maybach-s-class")?.image ?? maybach,
+    "phantom-flagship-chauffeur": vehicles.find(v => v.slug === "rolls-royce-phantom")?.image ?? maybach,
     "luxury-honeymoon-cape-town": romantic,
     "luxury-anniversary-experience": villa,
     "cape-peninsula-one-day-private-tour": capePeninsula,

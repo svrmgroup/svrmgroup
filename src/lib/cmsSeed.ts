@@ -10,6 +10,7 @@ import { posts as blogPosts } from "@/data/blog";
 import { securityOfferings } from "@/data/security";
 import { yachts } from "@/data/yachts";
 import { jets, helicopters } from "@/data/aviation";
+import { MAYBACH_DESCRIPTION, PHANTOM_DESCRIPTION } from "@/seo/vehicleServices";
 
 // Note: seed rows intentionally omit `image_url` when the source is a
 // Vite-imported binary (e.g. `import img from "@/assets/foo.jpg"`). Those
@@ -157,6 +158,13 @@ function blogsSeed() {
 function offersSeed() {
   const maybachV = vehicles.find((v) => v.slug === "maybach-v-class");
   const rows = [
+    {
+      slug: "phantom-flagship-chauffeur", title: "Rolls-Royce Phantom",
+      eyebrow: "Flagship · Chauffeur", summary: PHANTOM_DESCRIPTION,
+      price_zar: 40000, price_suffix: "/ day",
+      image_url: vehicles.find(v => v.slug === "rolls-royce-phantom")?.image,
+      cta_label: "Request Phantom", cta_href: "/chauffeur?cat=cars&vehicle=rolls-royce-phantom#rolls-royce-phantom",
+    },
     ...(maybachV ? [{
       slug: "maybach-v-class-chauffeur", title: maybachV.name,
       eyebrow: "Signature · Chauffeur", summary: maybachV.tagline,
@@ -167,12 +175,12 @@ function offersSeed() {
     {
       slug: "maybach-flagship-chauffeur",
       title: "Mercedes-Maybach S-Class",
-      eyebrow: "Flagship · Chauffeur",
-      summary: "SVRM's flagship chauffeur experience — VIP transfers, events and full days.",
+      eyebrow: "Signature · Chauffeur",
+      summary: MAYBACH_DESCRIPTION,
       price_zar: 22000,
       price_suffix: "/ day",
       cta_label: "Request Maybach",
-      cta_href: "/chauffeur?cat=cars",
+      cta_href: "/chauffeur?cat=cars&vehicle=mercedes-maybach-s-class#mercedes-maybach-s-class",
     },
     {
       slug: "luxury-honeymoon-cape-town",

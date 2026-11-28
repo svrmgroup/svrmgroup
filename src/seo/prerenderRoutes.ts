@@ -1,7 +1,7 @@
 // Static head + readable summary written into dist/<route>/index.html at build time,
 // so crawlers that don't run JavaScript still see each main page's real information.
 // Keep titles/descriptions in sync with each page's <Seo> props.
-import { CHAUFFEUR_DESCRIPTION } from "./vehicleServices";
+import { CHAUFFEUR_DESCRIPTION, MAYBACH_DESCRIPTION, PHANTOM_DESCRIPTION } from "./vehicleServices";
 export interface PrerenderRoute {
   path: string;
   title: string;
@@ -27,6 +27,8 @@ export const PRERENDER_ROUTES: PrerenderRoute[] = [
   { path: "/anniversary-cape-town", title: "Luxury Anniversary Cape Town | Bespoke Experiences — SVRM", description: "Bespoke luxury anniversary experiences in Cape Town by SVRM — Maybach chauffeur, private villas, yacht days and quietly handled romantic details.", heading: "Luxury Anniversary in Cape Town", summary: "Anniversary experiences with a Maybach chauffeur, private villas and yacht days." },
   { path: "/experiences", title: "Bespoke Luxury Experiences Cape Town — SVRM Concierge", description: "Bespoke concierge in Cape Town — private chefs, cleaners, events, proposals, sourcing and last-minute requests. If it can be arranged, SVRM arranges it.", heading: "Bespoke Experiences in Cape Town", summary: "Private chefs, events, proposals, sourcing and last-minute requests handled by SVRM's concierge." },
   { path: "/lifestyle", title: "Lifestyle Management & Yachting Cape Town | SVRM", description: "Private yachting, day charters and luxury lifestyle management along the Cape Town coast — curated with the discretion that defines SVRM Group.", heading: "Lifestyle Management & Yachting", summary: "Private yacht charters and lifestyle management along the Cape Town coast." },
-];
+].map(route => route.path === "/" || route.path === "/chauffeur"
+  ? { ...route, summary: `${route.summary} ${PHANTOM_DESCRIPTION} ${MAYBACH_DESCRIPTION}` }
+  : route);
 
 export const PRERENDER_CONTACT = CONTACT;

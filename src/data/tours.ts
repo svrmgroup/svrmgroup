@@ -148,7 +148,7 @@ export const tours: TourCategory[] = [
       },
       {
         duration: "1 day",
-        title: "Cape Peninsula · Maybach flagship",
+        title: "Cape Peninsula · Maybach Signature",
         fromZAR: 22000,
         unit: "group up to 4",
         image: capePeninsulaMaybachImg,
