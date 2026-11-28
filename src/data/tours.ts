@@ -19,6 +19,7 @@ import rosesImg from "@/assets/anniversary-villa-roses.jpg";
 import villaImg from "@/assets/svc-stays-villa.jpg";
 import safariImg from "@/assets/svc-exp-safari.jpg";
 import wineImg from "@/assets/svc-exp-wine.jpg";
+import chefImg from "@/assets/svc-lifestyle-chef.jpg";
 import yachtImg from "@/assets/svc-exp-yacht.jpg";
 import culturalImg from "@/assets/svc-tours-cultural.jpg";
 import adventureImg from "@/assets/svc-tours-adventure.jpg";
@@ -273,7 +274,7 @@ export const tours: TourCategory[] = [
   {
     slug: "culinary",
     label: "Culinary Experiences",
-    blurb: "Cape flavours, no alcohol required.",
+    blurb: "Cooking classes, markets & chef-led days.",
     description:
       "Cape Malay cooking classes in Bo-Kaap, private chef-led market walks through Neighbourgoods and Oranjezicht, specialty coffee roastery tours, biltong & dried-fruit tastings, and tea ceremonies at heritage estates — all alcohol-free.",
     image: culinaryImg,
@@ -281,7 +282,7 @@ export const tours: TourCategory[] = [
     packages: [
       { duration: "Half day", title: "Bo-Kaap cooking class", image: boKaapImg, fromZAR: 3200, inclusions: ["Private Cape Malay cooking class", "Heritage walk through Bo-Kaap", "Shared lunch", "Private transfers"] },
       { duration: "1 day", title: "Markets, coffee & spice", image: culinaryImg, fromZAR: 5800, inclusions: ["Two artisan markets", "Specialty coffee roastery", "Spice route walking tour", "Private guide"] },
-      { duration: "3 days", title: "Cape culinary signature", image: wineImg, fromZAR: 22000, inclusions: ["Cooking class + market tours", "Heritage tea ceremony", "Chef-led tastings", "2 nights boutique accommodation"] },
+      { duration: "3 days", title: "Cape culinary signature", image: chefImg, fromZAR: 22000, inclusions: ["Cooking class + market tours", "Heritage tea ceremony", "Chef-led tastings", "2 nights boutique accommodation"] },
     ],
   },
   {
