@@ -186,7 +186,7 @@ const sast = (iso: string) => {
 export function buildImportCsv(rows: StageRow[]): string {
   const lines = ["Parameters:TimeZone=Africa/Johannesburg", "Google Click ID,Conversion Name,Conversion Time,Conversion Value,Conversion Currency"];
   for (const r of rows) {
-    if (!r.gclid || !r.ad_consent || r.is_employment || r.is_duplicate) continue;
+    if (!r.gclid || !/^[A-Za-z0-9_-]+$/.test(r.gclid) || !r.ad_consent || r.is_employment || r.is_duplicate) continue;
     for (const key of Object.keys(IMPORT_ACTIONS) as (keyof typeof IMPORT_ACTIONS)[]) {
       const at = r[key];
       if (!at) continue;
