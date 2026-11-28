@@ -12,7 +12,7 @@ import { poolLabel, stayFactSummary, stayFacts, stayFeatureSummary, stayHasPubli
 
 const StayCard = ({ stay }: { stay: Stay; index?: number }) => {
   const { format } = useCurrency();
-  const showPrice = stay.showPrice === true && stayHasPublicRate(stay.slug);
+  const showPrice = stay.fromZAR > 0;
   const facts = stayFacts[stay.slug];
   const [open, setOpen] = useState(false);
 
@@ -139,7 +139,7 @@ const StayCard = ({ stay }: { stay: Stay; index?: number }) => {
               {showPrice ? format(stay.fromZAR) : "Enquire for your dates"}
             </p>
             {showPrice && (
-              <p className="text-[10px] tracking-wide text-muted-foreground/60 mt-1">Seasonal rates apply. Final pricing confirmed for your dates.</p>
+              <p className="text-[10px] tracking-wide text-muted-foreground/60 mt-1">Depending on season. Final pricing confirmed for your dates.</p>
             )}
           </div>
 

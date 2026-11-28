@@ -68,16 +68,16 @@ describe("verified stay facts", () => {
     expect(poolAnswer(atlantic)).toContain("not a shared pool");
   });
 
-  it("shows only the publicly supported penthouse rate and puts every other stay on enquiry", () => {
+  it("shows a seasonal from-price on every stay", () => {
     for (const stay of stays) {
       const listing = stayListing(stay);
       if (stay.slug === "a-la-penthouse") {
         expect(stayHasPublicRate(stay.slug)).toBe(true);
-        expect(listing.priceLabel).toBe("From R42,000 per night");
+        expect(listing.priceLabel).toBe("From R42,000 per night, depending on season");
         expect(listing.priceNote).toBe("Seasonal rates apply. Final pricing confirmed for your dates.");
       } else {
         expect(stayHasPublicRate(stay.slug), stay.slug).toBe(false);
-        expect(listing.priceLabel, stay.slug).toBe("Enquire for your dates");
+        expect(listing.priceLabel, stay.slug).toMatch(/^From R[\d,]+ (per room )?per night, depending on season$/);
         expect(listing.priceNote, stay.slug).not.toContain("often lower");
       }
     }

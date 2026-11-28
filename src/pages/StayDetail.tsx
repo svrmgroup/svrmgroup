@@ -19,9 +19,9 @@ const StayDetailInner = ({ stay }: { stay: Stay }) => {
   const enquiry = { id: `stay:${stay.slug}`, name: l.name, kind: "stay", url: l.url, path: l.path } as const;
   useListingPage(enquiry, "stay");
   const crumbs = [{ label: "Home", to: "/" }, { label: "Stays", to: "/stays" }, { label: l.name, to: l.path }];
-  const showPrice = stay.showPrice === true && stayHasPublicRate(stay.slug);
+  const showPrice = stay.fromZAR > 0;
   const unit = stay.type === "hotel" ? "per room per night" : "per night";
-  const price = showPrice ? `From ${format(stay.fromZAR)} ${unit}` : "Enquire for your dates";
+  const price = showPrice ? `From ${format(stay.fromZAR)} ${unit}, depending on season` : "Enquire for your dates";
   const rate = stayFacts[stay.slug]?.rate;
   const seasonal = showPrice && rate?.seasons?.length
     ? [...rate.seasons.map((x) => `${x.label}: from ${format(x.fromZAR)} ${unit}`), ...(rate.inclusions ? [rate.inclusions] : [])].join(" · ")

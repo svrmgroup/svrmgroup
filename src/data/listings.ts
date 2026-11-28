@@ -197,7 +197,7 @@ export function stayListing(s: Stay): StayListing {
   const bathrooms = facts ? `${facts.bathrooms} bathroom${facts.bathrooms === 1 ? "" : "s"}` : bath ? `${bath} bathroom${bath === "1" ? "" : "s"}` : CONFIRM;
   const maxGuests = facts ? guestLabel(facts) : CONFIRM;
   const amenities = tokens.filter((x) => !/^\d+\s*(bed|bath|guest)/i.test(x) && !/^1 king$/i.test(x)).map((x) => x[0].toUpperCase() + x.slice(1));
-  const showPrice = s.showPrice === true && stayHasPublicRate(s.slug);
+  const showPrice = s.fromZAR > 0;
   const path = stayPath(s);
   const gallery = stayGalleries[s.slug] ?? [];
   const photos: Photo[] = (gallery.length ? gallery : [s.image]).map((src, i) => ({ src, fullSrc: src, alt: s.slug === "a-la-penthouse" ? `${s.name} — ${A_LA_ALTS[i] ?? `photo ${i + 1}`}` : `${s.name} — photo ${i + 1}` }));
@@ -219,8 +219,8 @@ export function stayListing(s: Stay): StayListing {
     amenities,
     pool: poolLabel(facts),
     poolAnswer: poolAnswer(facts),
-    priceLabel: showPrice ? `From ${rand(s.fromZAR)} per night` : "Enquire for your dates",
-    priceNote: facts.rate.note,
+    priceLabel: showPrice ? `From ${rand(s.fromZAR)} ${s.type === "hotel" ? "per room " : ""}per night, depending on season` : "Enquire for your dates",
+    priceNote: stayHasPublicRate(s.slug) ? facts.rate.note : "Price depends on season. Final pricing confirmed for your dates.",
     factsSource: facts.source,
     poolSource: facts.pool.source,
     rateSource: facts.rate.source,
