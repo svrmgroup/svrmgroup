@@ -609,7 +609,7 @@ export const posts: BlogPost[] = [
     image: maybachImg,
     readTime: "7 min read",
     intro:
-      `${MAYBACH_DESCRIPTION} It remains a Signature choice alongside SVRM's flagship Rolls-Royce Phantom.`,
+      MAYBACH_DESCRIPTION,
     sections: [
       {
         heading: "Why the Maybach and not simply an S-Class",

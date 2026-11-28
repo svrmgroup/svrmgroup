@@ -1,4 +1,5 @@
 # Signature fleet and vehicle search
+- [x] Give Maybach S-Class the villa-style gold glow on chauffeur/homepage cards and remove Phantom flagship comparisons from Maybach descriptions; keep Phantom's own flagship status.
 - [x] Refresh Maybach S-Class with luxurious, emotive wording across the website and saved admin offer; three fleet tests passed and fleet/homepage/journal verified without page errors, with price and Phantom flagship unchanged.
 - [x] Refresh Maybach S-Class descriptions across pages and CMS; promote Phantom as flagship. Seven tests passed; verified Signature ordering, booking, homepage link and phone layout without page errors.
 - [x] Restore Maybach S-Class to the Signature grid; verify its booking control on desktop and its phone layout.

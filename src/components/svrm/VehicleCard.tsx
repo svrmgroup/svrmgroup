@@ -12,7 +12,7 @@ const VehicleCard = ({ vehicle, index }: { vehicle: Vehicle; index: number }) =>
   const [open, setOpen] = useState(false);
   const { format } = useCurrency();
   return (
-    <article id={vehicle.slug} className="group bg-surface-raised border border-border/40 flex flex-col scroll-mt-28">
+    <article id={vehicle.slug} className={`group bg-surface-raised flex flex-col scroll-mt-28 ${vehicle.slug === "mercedes-maybach-s-class" ? "border-2 border-primary/80 shadow-[0_0_0_1px_hsl(var(--primary)/0.15),0_20px_60px_-20px_hsl(var(--primary)/0.4)]" : "border border-border/40"}`}>
       {vehicle.gallery?.length ? <VehicleGallery vehicle={vehicle} /> : <KenBurnsImage
         src={vehicle.image}
         alt={vehiclePhotoAlt(vehicle.name)}

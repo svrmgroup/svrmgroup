@@ -141,7 +141,7 @@ const Offers = () => {
     to: c.cta_href || "/contact",
     image: resolveImage(c.image_url, staticImageBySlug[c.slug] ?? villa) ?? villa,
     special: /special/i.test(c.eyebrow || ""),
-    glow: /flagship/i.test(c.eyebrow || ""),
+    glow: c.slug === "maybach-flagship-chauffeur" || /flagship/i.test(c.eyebrow || ""),
   }));
   const base = cmsMapped.length > 0 ? cmsMapped : offers;
   const withVilla = base.some((o) => o.title === featuredVilla.title)
