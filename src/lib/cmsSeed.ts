@@ -12,8 +12,6 @@ import { securityOfferings } from "@/data/security";
 import { yachts } from "@/data/yachts";
 import { jets, helicopters } from "@/data/aviation";
 import { MAYBACH_DESCRIPTION, PHANTOM_DESCRIPTION } from "@/seo/vehicleServices";
-import { tourPackageDescription, tourPackageSlug } from "@/data/tourPackages";
-import { tourPackagePhotos } from "@/data/tourPhotos";
 
 // Note: seed rows intentionally omit `image_url` when the source is a
 // Vite-imported binary (e.g. `import img from "@/assets/foo.jpg"`). Those
@@ -95,16 +93,7 @@ function toursSeed() {
       duration: t.packages[0]?.duration ?? null,
       published: true,
       sort_order: (i + 1) * 10,
-      data: {
-        packages: t.packages.map((p) => ({
-          ...p,
-          slug: tourPackageSlug(p),
-          description: tourPackageDescription(t, p),
-          image: tourPackagePhotos(t, p)[0]?.src,
-          photos: tourPackagePhotos(t, p),
-        })),
-        video: t.video ?? null,
-      },
+      data: { packages: t.packages, video: t.video ?? null },
     };
   });
 }

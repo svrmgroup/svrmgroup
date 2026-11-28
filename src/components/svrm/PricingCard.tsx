@@ -3,7 +3,6 @@ import BookingSheet from "./BookingSheet";
 import { useCurrency } from "@/lib/currency";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 import SmartImage from "./SmartImage";
-import { Link } from "react-router-dom";
 
 interface Props {
   duration: string;
@@ -19,11 +18,9 @@ interface Props {
   /** Slug for this tour package (used with source_page). */
   slug?: string;
   onEnquire?: () => void;
-  /** Permanent package detail page, independent of whether the package has a public price. */
-  detailTo?: string;
 }
 
-const PricingCard = ({ duration, title, inclusions, subject, fromZAR, slug, unit, image, onEnquire, detailTo }: Props) => {
+const PricingCard = ({ duration, title, inclusions, subject, fromZAR, slug, unit, image, onEnquire }: Props) => {
   const [open, setOpen] = useState(false);
   const { format } = useCurrency();
 
@@ -47,7 +44,7 @@ const PricingCard = ({ duration, title, inclusions, subject, fromZAR, slug, unit
       ) : null}
       <div className={image ? "relative flex flex-col flex-1 [text-shadow:0_1px_8px_rgba(0,0,0,0.65),0_1px_3px_rgba(0,0,0,0.8)]" : "contents"}>
         <p className="eyebrow">{duration}</p>
-      <h3 className="font-serif text-2xl md:text-3xl mt-4 text-foreground">{detailTo ? <Link to={detailTo} className="hover:text-gold transition-colors">{title}</Link> : title}</h3>
+      <h3 className="font-serif text-2xl md:text-3xl mt-4 text-foreground">{title}</h3>
       <div className="mt-6">
         <p className="text-xs uppercase tracking-[0.24em] text-muted-foreground">Pricing · guide</p>
         <p className="font-serif text-3xl text-gold mt-2">
@@ -68,17 +65,11 @@ const PricingCard = ({ duration, title, inclusions, subject, fromZAR, slug, unit
         ))}
       </ul>
 
-      {detailTo && (
-        <Link to={detailTo} className="mt-8 text-center px-6 py-3 bg-primary text-primary-foreground text-xs uppercase tracking-[0.28em] hover:bg-primary-glow transition-colors duration-500">
-          View package
-        </Link>
-      )}
-
       {onEnquire ? (
         <button
           type="button"
           onClick={onEnquire}
-          className={`${detailTo ? "mt-3" : "mt-8"} text-center px-6 py-3 border border-primary/60 text-gold text-xs uppercase tracking-[0.28em] hover:bg-primary hover:text-primary-foreground transition-colors duration-500`}
+          className="mt-8 text-center px-6 py-3 border border-primary/60 text-gold text-xs uppercase tracking-[0.28em] hover:bg-primary hover:text-primary-foreground transition-colors duration-500"
         >
           Book dates
         </button>
@@ -87,7 +78,7 @@ const PricingCard = ({ duration, title, inclusions, subject, fromZAR, slug, unit
           <button
             type="button"
             onClick={() => setOpen(true)}
-            className={`${detailTo ? "mt-3" : "mt-8"} text-center px-6 py-3 border border-primary/60 text-gold text-xs uppercase tracking-[0.28em] hover:bg-primary hover:text-primary-foreground transition-colors duration-500`}
+            className="mt-8 text-center px-6 py-3 border border-primary/60 text-gold text-xs uppercase tracking-[0.28em] hover:bg-primary hover:text-primary-foreground transition-colors duration-500"
           >
             Book dates
           </button>
@@ -107,7 +98,7 @@ const PricingCard = ({ duration, title, inclusions, subject, fromZAR, slug, unit
           href={buildWhatsAppUrl(subject)}
           target="_blank"
           rel="noopener noreferrer"
-          className={`${detailTo ? "mt-3" : "mt-8"} text-center px-6 py-3 border border-primary/60 text-gold text-xs uppercase tracking-[0.28em] hover:bg-primary hover:text-primary-foreground transition-colors duration-500`}
+          className="mt-8 text-center px-6 py-3 border border-primary/60 text-gold text-xs uppercase tracking-[0.28em] hover:bg-primary hover:text-primary-foreground transition-colors duration-500"
         >
           Book dates
         </a>

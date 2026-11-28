@@ -21,7 +21,6 @@ const Lifestyle = lazy(() => import("./pages/Lifestyle.tsx"));
 const Stays = lazy(() => import("./pages/Stays.tsx"));
 const Tours = lazy(() => import("./pages/Tours.tsx"));
 const TourDetail = lazy(() => import("./pages/TourDetail.tsx"));
-const TourPackageDetail = lazy(() => import("./pages/TourPackageDetail.tsx"));
 const TourBuilderPage = lazy(() => import("./pages/TourBuilderPage.tsx"));
 const CustomExperiences = lazy(() => import("./pages/CustomExperiences.tsx"));
 const Blog = lazy(() => import("./pages/Blog.tsx"));
@@ -104,7 +103,6 @@ const App = () => (
                 <Route path="/stays/:slug" element={<StayDetail />} />
                 <Route path="/tours" element={<Tours />} />
                 <Route path="/tours/builder" element={<TourBuilderPage />} />
-                <Route path="/tours/:slug/packages/:packageSlug" element={<TourPackageDetail />} />
                 <Route path="/tours/:slug" element={<TourDetail />} />
                 <Route path="/experiences" element={<CustomExperiences />} />
                 <Route path="/custom" element={<Navigate to="/experiences" replace />} />

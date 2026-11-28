@@ -11,8 +11,6 @@ import { stays } from "@/data/stays";
 import { tours } from "@/data/tours";
 import { stayListing, vehicleListing, stayPath, vehiclePath } from "@/data/listings";
 import { LISTING_PHOTO_BUCKET, useListingPhotoRows, type ListingKind } from "@/hooks/useListingPhotos";
-import { allTourPackages, tourPackagePhotoKey } from "@/data/tourPackages";
-import { tourPackagePhotos } from "@/data/tourPhotos";
 
 type Option = { kind: ListingKind; slug: string; name: string; path: string; existing: number };
 
@@ -25,8 +23,7 @@ const SERVICES: Option[] = [
 const options: Option[] = [
   ...vehicles.map((v) => ({ kind: "vehicle" as const, slug: v.slug, name: v.name, path: vehiclePath(v.slug), existing: vehicleListing(v).photos.length })),
   ...stays.map((s) => ({ kind: "stay" as const, slug: s.slug, name: s.name, path: stayPath(s), existing: stayListing(s).photos.length })),
-  ...tours.filter((t) => t.slug !== "builder").map((t) => ({ kind: "tour" as const, slug: t.slug, name: t.label, path: `/tours/${t.slug}`, existing: t.packages.reduce((sum, p) => sum + tourPackagePhotos(t, p).length, 0) })),
-  ...allTourPackages().map(({ tour, pkg, path }) => ({ kind: "tour" as const, slug: tourPackagePhotoKey(tour, pkg), name: `${tour.label} — ${pkg.title}`, path, existing: tourPackagePhotos(tour, pkg).length })),
+  ...tours.filter((t) => t.slug !== "builder").map((t) => ({ kind: "tour" as const, slug: t.slug, name: t.label, path: `/tours/${t.slug}`, existing: 0 })),
   ...SERVICES,
 ];
 

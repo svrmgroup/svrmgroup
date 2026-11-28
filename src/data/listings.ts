@@ -5,8 +5,6 @@ import { stays, type Stay } from "@/data/stays";
 import { stayGalleries } from "@/data/stayGalleries";
 import { guestLabel, poolAnswer, poolLabel, stayFacts, stayHasPublicRate } from "@/data/stayFacts";
 import { MAYBACH_DESCRIPTION, PHANTOM_DESCRIPTION, FLAGSHIP_SLUG } from "@/seo/vehicleServices";
-import { allTourPackages } from "@/data/tourPackages";
-import { tourPackagePhotos } from "@/data/tourPhotos";
 
 export const SITE_URL = "https://svrm.group";
 const rand = (n: number) => `R${String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
@@ -270,16 +268,5 @@ export function allListingPaths(): { path: string; title: string; description: s
     summary: `${l.description} Bedrooms: ${l.bedrooms}. Bathrooms: ${l.bathrooms}. Maximum guests: ${l.maxGuests}. Pool: ${l.pool}. ${l.poolAnswer} ${l.why}`, 
     image: shareImage(l.photos),
   }));
-  const t = allTourPackages().map(({ tour, pkg, path, description }) => {
-    const photos = tourPackagePhotos(tour, pkg);
-    return {
-      path,
-      title: `${pkg.title} | ${tour.label} — SVRM`,
-      description: `${description} ${pkg.fromZAR != null ? `From ${rand(pkg.fromZAR)}` : "On request"} ${pkg.unit ?? "per person"}. Check availability on WhatsApp.`.slice(0, 300),
-      heading: `${pkg.title} · ${pkg.duration}`,
-      summary: `${description} Included: ${pkg.inclusions.join("; ")}.`,
-      image: shareImage(photos),
-    };
-  });
-  return [...v, ...s, ...t];
+  return [...v, ...s];
 }

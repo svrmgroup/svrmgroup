@@ -146,52 +146,5 @@
   <url><loc>https://svrm.group/stays/hotel-silo</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://svrm.group/stays/hotel-table-bay</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://svrm.group/stays/hotel-bay-hotel</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/bo-kaap-cooking-tour/packages/bo-kaap-cultural-and-cooking-experience</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/bo-kaap-cooking-tour/packages/bo-kaap-and-cape-town-heritage-day</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/cape-peninsula/packages/cape-peninsula-private-tour</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/cape-peninsula/packages/cape-peninsula-maybach-signature</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/cape-peninsula/packages/peninsula-and-winelands</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/safari/packages/kruger-essentials</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/safari/packages/sabi-sand-signature</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/safari/packages/madikwe-and-kruger</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/safari/packages/bespoke-grand-safari</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/hunting/packages/5-star-plains-game-package</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/cultural/packages/cape-heritage</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/cultural/packages/cape-and-national-parks</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/cultural/packages/heritage-grand-tour</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/adventure/packages/cape-adventure-short</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/adventure/packages/cape-and-bush</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/adventure/packages/land-sea-and-sky</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/marine/packages/boulders-penguins-and-cape-point</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/marine/packages/hermanus-whale-weekend</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/marine/packages/marine-grand-circuit</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/garden-route/packages/garden-route-essentials</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/garden-route/packages/coast-and-forest-signature</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/garden-route/packages/cape-to-addo-grand-tour</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/aerial/packages/atlantic-seaboard-heli-flip</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/aerial/packages/two-oceans-aerial-tour</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/aerial/packages/sunrise-hot-air-balloon</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/culinary/packages/bo-kaap-cooking-class</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/culinary/packages/markets-coffee-and-spice</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/culinary/packages/cape-culinary-signature</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/wellness/packages/spa-day-signature</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/wellness/packages/mountain-wellness-retreat</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/wellness/packages/cederberg-hot-springs</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/photography/packages/sunrise-lions-head-shoot</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/photography/packages/cape-town-in-a-day</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/photography/packages/cape-photographic-signature</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/group-travel/packages/city-group-transfer</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/group-travel/packages/cape-peninsula-group-tour</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/group-travel/packages/garden-route-group</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/group-travel/packages/weddings-corporate-and-incentive</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/romantic/packages/the-proposal</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/romantic/packages/anniversary-escape</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/romantic/packages/cape-honeymoon-signature</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/romantic/packages/grand-romantic-tour</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/romantic/packages/anniversary-grand-celebration</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/romantic/packages/bespoke-honeymoon-end-to-end</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/aquila-safari/packages/aquila-big-five-day-safari-morning</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/aquila-safari/packages/aquila-big-five-safari-midday</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://svrm.group/tours/aquila-safari/packages/aquila-sunset-safari</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <!-- listings:end -->
 </urlset>
