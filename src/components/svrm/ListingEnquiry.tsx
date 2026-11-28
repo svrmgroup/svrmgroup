@@ -54,7 +54,7 @@ function EnquiryFormBody({ listing, category, vehicleOptions, idPrefix }: Props 
   };
   const mailHref = `mailto:${CONCIERGE_EMAIL}?subject=${encodeURIComponent(`Enquiry: ${listing.name}`)}&body=${encodeURIComponent(message)}`;
   const startLabel = listing.kind === "stay" ? "Check-in" : listing.kind === "airport" ? "Date" : f.range ? "Start date" : listing.kind === "tour" ? "Tour date" : "Preferred date";
-  const endLabel = listing.kind === "stay" ? "Check-out" : "End date (multi-day, optional)";
+  const endLabel = listing.kind === "stay" ? "Check-out" : "End date";
   const guestLabel = listing.kind === "stay" ? "Adults" : listing.kind === "security" ? "Party size" : f.luggage ? "Passengers" : "Guests";
 
   return (
