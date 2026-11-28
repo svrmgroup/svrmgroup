@@ -325,5 +325,59 @@
       "license": "CC0",
       "source": ""
     }
+  ],
+  "spa-massage": [
+    {
+      "src": "/__l5e/assets-v1/a2954fa4-43c0-4e45-8b82-bdd9265f3386/tour-spa-massage.jpg",
+      "title": "Couples massage beds at a Cape Town spa",
+      "artist": "",
+      "license": "CC0",
+      "source": ""
+    }
+  ],
+  "spa-lounge": [
+    {
+      "src": "/__l5e/assets-v1/ecbf07eb-3733-493c-aede-15883974bd67/tour-spa-lounge.jpg",
+      "title": "Spa relaxation lounge",
+      "artist": "",
+      "license": "CC0",
+      "source": ""
+    }
+  ],
+  "retreat-suite": [
+    {
+      "src": "/__l5e/assets-v1/1d341304-0089-4928-a99f-c77a2fd39762/tour-retreat-suite.jpg",
+      "title": "Mountain retreat suite at golden hour",
+      "artist": "",
+      "license": "CC0",
+      "source": ""
+    }
+  ],
+  "retreat-meditation": [
+    {
+      "src": "/__l5e/assets-v1/e7c556b9-7f66-42f9-84bd-b2c682efa8d9/tour-retreat-meditation.jpg",
+      "title": "Sunrise meditation deck in the mountains",
+      "artist": "",
+      "license": "CC0",
+      "source": ""
+    }
+  ],
+  "hot-springs": [
+    {
+      "src": "/__l5e/assets-v1/a1f388fa-3d0e-4856-866a-400f15d36814/tour-hot-springs.jpg",
+      "title": "Hot springs pool among sandstone peaks",
+      "artist": "",
+      "license": "CC0",
+      "source": ""
+    }
+  ],
+  "cederberg-stars": [
+    {
+      "src": "/__l5e/assets-v1/32ec649c-09a3-4d41-81f9-67e16eff28d7/tour-cederberg-stars.jpg",
+      "title": "Milky Way over the Cederberg",
+      "artist": "",
+      "license": "CC0",
+      "source": ""
+    }
   ]
 }
