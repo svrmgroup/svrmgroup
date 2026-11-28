@@ -89,7 +89,7 @@ export interface TourCategory {
   packages: TourPackage[];
 }
 
-export const tours: TourCategory[] = [
+const allTours: TourCategory[] = [
   {
     slug: "bo-kaap-cooking-tour",
     label: "Bo-Kaap Cultural & Cooking Tour",
@@ -456,6 +456,12 @@ export const tours: TourCategory[] = [
     ],
   },
 ];
+
+/** Only Cape Peninsula shows prices; every other tour package is priced on request. */
+const PRICED_TOURS = new Set(["cape-peninsula"]);
+export const tours: TourCategory[] = allTours.map((t) =>
+  PRICED_TOURS.has(t.slug) ? t : { ...t, packages: t.packages.map((p) => ({ ...p, fromZAR: null })) },
+);
 
 // ---- Ordering ---------------------------------------------------------------
 
