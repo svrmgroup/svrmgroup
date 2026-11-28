@@ -67,11 +67,6 @@ const StayDetailInner = ({ stay }: { stay: Stay }) => {
               ["Amenities", l.amenities.length ? l.amenities.join(" · ") : "Your concierge will confirm"],
               ["Price", price],
             ]} />
-            <div className="flex flex-wrap gap-x-5 gap-y-2 text-xs text-muted-foreground">
-              <a href={l.factsSource} target="_blank" rel="noopener noreferrer" className="hover:text-gold underline underline-offset-4">Property facts source ↗</a>
-              <a href={l.poolSource} target="_blank" rel="noopener noreferrer" className="hover:text-gold underline underline-offset-4">Pool source ↗</a>
-              <a href={l.rateSource} target="_blank" rel="noopener noreferrer" className="hover:text-gold underline underline-offset-4">Rate source ↗</a>
-            </div>
             <ListingFaqs faqs={l.faqs} title={`${l.name} — questions`} />
             <RelatedLinks links={l.related} />
           </div>

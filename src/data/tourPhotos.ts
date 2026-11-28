@@ -43,6 +43,7 @@ const byPackage: Record<string, string[]> = {
   "aquila-sunset-safari": ["karoo", "aquila"],
   "aquila-big-five-safari-midday": ["rhino", "aquila"],
 };
+const NO_CREDIT = /public domain|cc0|^pd/i;
 const nice = (title: string) => title.replace(/^File:/, "").replace(/\.[a-z]+$/i, "").replace(/[_-]+/g, " ").trim();
 
 export function tourPackagePhotos(tour: TourCategory, pkg: TourPackage): TourPhoto[] {
@@ -51,9 +52,12 @@ export function tourPackagePhotos(tour: TourCategory, pkg: TourPackage): TourPho
   const seen = new Set<string>();
   const out: TourPhoto[] = [];
   for (const k of keys) for (const e of lib[k] ?? []) {
-    if (seen.has(e.src)) continue;
+    // Only photos free to use without a visible credit (public domain / CC0).
+    if (seen.has(e.src) || !NO_CREDIT.test(e.license)) continue;
     seen.add(e.src);
     out.push({ src: e.src, fullSrc: e.src, alt: `${pkg.title} — illustrative photograph: ${nice(e.title)}`, artist: e.artist, license: e.license, source: e.source });
   }
+  const own = pkg.image ?? tour.image;
+  if (!out.length && own) out.push({ src: own, fullSrc: own, alt: `${pkg.title} — ${tour.label}, Cape Town`, artist: "SVRM Group", license: "SVRM Group", source: "" });
   return out.slice(0, 5);
 }

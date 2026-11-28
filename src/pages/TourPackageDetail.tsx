@@ -76,13 +76,6 @@ const TourPackageDetailInner = ({ tour, pkg }: { tour: NonNullable<ReturnType<ty
               <p className="text-xs text-muted-foreground mt-1">{unit} · indicative guide; your written quote is final.</p>
             </header>
             <ListingGallery photos={photos} name={name} />
-            <div className="flex flex-wrap gap-x-5 gap-y-2 text-xs text-muted-foreground">
-              {fallback.map((photo) => (
-                <a key={photo.source} href={photo.source} target="_blank" rel="noopener noreferrer" className="hover:text-gold underline underline-offset-4">
-                  Photo: {photo.artist} · {photo.license} ↗
-                </a>
-              ))}
-            </div>
             <section aria-labelledby="package-description">
               <h2 id="package-description" className="font-serif text-2xl">About this package</h2>
               <p className="mt-3 text-base leading-relaxed text-muted-foreground">{description}</p>
