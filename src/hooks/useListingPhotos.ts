@@ -23,8 +23,7 @@ export function useListingPhotoRows(kind: ListingKind, slug: string) {
   return useQuery({
     queryKey: ["listing-photos", kind, slug],
     queryFn: async () => {
-      const { data, error } = await supabase.from("listing_photos").select("*")
-        .eq("listing_kind", kind).eq("listing_slug", slug).order("sort_order").order("created_at");
+      const { data, error } = await supabase.rpc("get_listing_photos", { _kind: kind, _slug: slug });
       if (error) throw error;
       const rows = (data ?? []) as ListingPhotoRow[];
       const urls = await signPhotoPaths(rows.map((r) => r.storage_path));

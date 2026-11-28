@@ -1822,6 +1822,19 @@ export type Database = {
           website: string
         }[]
       }
+      get_listing_photos: {
+        Args: { _kind: string; _slug: string }
+        Returns: {
+          alt_text: string
+          caption: string
+          id: string
+          is_cover: boolean
+          listing_kind: string
+          listing_slug: string
+          sort_order: number
+          storage_path: string
+        }[]
+      }
       get_public_settings: {
         Args: never
         Returns: {
@@ -1851,6 +1864,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      is_listed_photo_path: { Args: { _path: string }; Returns: boolean }
       move_to_dlq: {
         Args: {
           dlq_name: string
